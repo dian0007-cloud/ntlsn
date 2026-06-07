@@ -1,0 +1,15 @@
+/*
+  # ── Security Headers ──
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-src https://www.youtube.com https://youtu.be https://player.vimeo.com; media-src 'self' https:; object-src 'none'; base-uri 'self'
+
+  # ── Caching ──
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/index.html
+  Cache-Control: public, max-age=300, stale-while-revalidate=3600
