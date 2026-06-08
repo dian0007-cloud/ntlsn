@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 120" role="img" aria-label="UNE L&amp;T Symposium">
+  <text x="12" y="90" font-family="'Arial Rounded MT Bold','Varela Round','Quicksand',system-ui,-apple-system,sans-serif" font-weight="800" font-size="96" fill="#8CC63F" letter-spacing="-4">une</text>
+  <rect x="226" y="30" width="3" height="60" rx="1.5" fill="#9aa3ad" opacity="0.55"/>
+  <text x="250" y="78" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="50" letter-spacing="-1"><tspan fill="#8CC63F">L&amp;T </tspan><tspan fill="#ffffff">Symposium</tspan></text>
+</svg>
