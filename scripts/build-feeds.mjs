@@ -72,7 +72,7 @@ fs.writeFileSync(path.join(OUT, 'feed.xml'),
 const ld = {
   '@context': 'https://schema.org', '@type': 'ItemList',
   name: 'Upcoming Australian Higher Education Teaching & Learning Events',
-  itemListElement: upcoming.slice(0, 40).map((e, i) => {
+  itemListElement: upcoming.map((e, i) => {
     const u = uniMap[e.uni] || {};
     return { '@type': 'ListItem', position: i + 1, item: {
       '@type': 'Event', name: e.title, startDate: e.date, endDate: e.endDate || e.date,
@@ -91,4 +91,4 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   '  <url><loc>https://www.ntlsn.com/</loc><lastmod>' + TODAY + '</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>\n</urlset>\n');
 
-console.log('build-feeds: ' + events.length + ' events → events.ics | ' + upcoming.length + ' upcoming → feed.xml | ' + Math.min(40, upcoming.length) + ' → JSON-LD | sitemap refreshed');
+console.log('build-feeds: ' + events.length + ' events → events.ics | ' + upcoming.length + ' upcoming → feed.xml | ' + upcoming.length + ' → JSON-LD | sitemap refreshed');

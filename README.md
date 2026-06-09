@@ -30,6 +30,7 @@ NTLSN is an index, not a walled garden. Everything is CORS-open:
 - **Subscribe to the sector calendar:** `https://www.ntlsn.com/events.ics` (works in Google/Apple/Outlook — `webcal://www.ntlsn.com/events.ics`)
 - **RSS:** `https://www.ntlsn.com/feed.xml`
 - **JSON API:** `https://www.ntlsn.com/data/events.json` and `/data/universities.json`
+- **Weekly email digest:** a Monday "what's on this fortnight" email, rendered by `scripts/build-digest.mjs` and sent by `.github/workflows/digest.yml`. To activate sending, create a free [Buttondown](https://buttondown.email) account, add a `BUTTONDOWN_API_KEY` repo secret, and set your Buttondown username in the `ntlsn-digest-card` patch script to show the on-site signup form. Without setup, the Action still runs weekly and uploads the digest HTML as a preview artifact.
 
 ### Embed NTLSN on your site
 
