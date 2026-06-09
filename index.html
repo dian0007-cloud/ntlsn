@@ -385,7 +385,7 @@ function decorate(){
  if(!MAP)return;
  var links=document.querySelectorAll('a[href^="http"]:not([data-ntcal])');
  for(var i=0;i<links.length;i++){
-  var a=links[i];var e=MAP[norm(a.href)];a.setAttribute("data-ntcal",e?"1":"0");
+  var a=links[i];if(!a.closest("#events,#conferences")){a.setAttribute("data-ntcal","0");continue;}var e=MAP[norm(a.href)];a.setAttribute("data-ntcal",e?"1":"0");
   if(!e)continue;
   var wrap=document.createElement("span");wrap.setAttribute("data-ntcal-ui","1");wrap.style.cssText="display:inline-flex;flex-wrap:wrap;align-items:center;";
   var g=document.createElement("a");g.href=gcal(e);g.target="_blank";g.rel="noopener";g.style.cssText=PILL;g.textContent="📅 Add to Google";g.title="Add "+e.title+" to Google Calendar";
