@@ -11,7 +11,8 @@ You don't need to run any build tools to *propose* an event.
 1. Open [`data/events.json`](data/events.json).
 2. Add an object following the schema in **[DATA.md](DATA.md)**. Copy an existing entry as a template.
 3. Set `"verified": false`. A maintainer will confirm the URL and dates before it goes live.
-4. Open a pull request with a one-line summary (e.g. *"Add: ACODE Workshop 91, Sep 2026"*) and a link to the official event page in the PR description.
+4. *(optional but nice)* Run `node scripts/validate-data.mjs` to check your entry. CI runs it automatically on your PR — a red check means something's off (bad date, unknown `uni`, duplicate id, malformed url).
+5. Open a pull request with a one-line summary (e.g. *"Add: ACODE Workshop 91, Sep 2026"*) and a link to the official event page in the PR description.
 
 **Good event entries:**
 - Point `url` at the **official** organiser/registration page, not a news article or a PDF.

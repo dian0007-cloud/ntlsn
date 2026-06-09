@@ -12,13 +12,15 @@ An array of event objects.
 |---|---|---|---|
 | `id` | number | ✅ | Unique. There are 94 events; the highest current id is 99 — use `100` or higher for new entries. |
 | `title` | string | ✅ | The event's public name. Australian English. |
-| `uni` | string | ✅ | Host institution `id` — **must exist** in `universities.json` (e.g. `usq`, `unimelb`, `curtin`). Use the cross-institution host, or the most relevant institution for sector-wide events. |
+| `uni` | string | ✅ | Host institution `id` — **must exist** in `universities.json` (e.g. `usq`, `unimelb`, `curtin`). For sector-wide events with no single host, use the special value `national`. |
 | `date` | string | ✅ | Start date, `YYYY-MM-DD`. |
-| `endDate` | string | ✅ | End date, `YYYY-MM-DD`. Single-day events: set equal to `date`. Must be ≥ `date`. |
-| `type` | string | ✅ | One of: `conference`, `symposium`, `workshop`, `webinar`, `seminar`, `forum`, `summit`, `masterclass`, `roundtable`. |
+| `endDate` | string | optional | End date, `YYYY-MM-DD`. Omit for single-day events (it defaults to `date`). If present, must be ≥ `date`. |
+| `type` | string | ✅ | One of: `conference`, `symposium`, `workshop`, `webinar`, `seminar`, `forum`, `summit`, `masterclass`, `roundtable`, `showcase`, `week`. |
 | `desc` | string | ✅ | One or two sentences. What it is, who it's for, the theme. No marketing fluff. |
-| `url` | string | ✅ | The official event/registration page (https). This is what the "Details →" link and "Add to calendar" buttons point at. |
+| `url` | string | optional | The official event/registration page (https). Powers the "Details →" link and "Add to calendar" buttons. |
 | `verified` | boolean | ✅ | `true` only after a maintainer has confirmed the URL resolves and the dates match the organiser's page. **New submissions should be `false`.** |
+
+> **Validation:** `node scripts/validate-data.mjs` checks every entry (and runs automatically in CI on each PR, and inside `build-feeds`). It fails on missing required fields, unknown `uni` ids, duplicate ids, bad dates, `endDate < date`, or malformed urls. Machine-readable schemas live in [`schemas/`](schemas/).
 
 ### Example
 
@@ -59,9 +61,9 @@ An array of institution objects.
 ## Validation checklist (before opening a PR)
 
 - [ ] `id` is unique and is the next integer up.
-- [ ] `uni` matches an existing institution `id`.
-- [ ] `date` ≤ `endDate`, both `YYYY-MM-DD`.
+- [ ] `uni` matches an existing institution `id` (or is `national`).
+- [ ] `date` is `YYYY-MM-DD`; if `endDate` is present it is ≥ `date`.
 - [ ] `type` is from the allowed list.
-- [ ] `url` is a working `https://` link to the official page.
+- [ ] `url`, if present, is a working `https://` link to the official page.
 - [ ] `verified` is `false` (a maintainer flips it to `true`).
-- [ ] JSON still parses (no trailing commas, valid quotes).
+- [ ] `node scripts/validate-data.mjs` passes (CI runs this on your PR anyway).

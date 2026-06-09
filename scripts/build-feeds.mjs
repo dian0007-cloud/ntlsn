@@ -8,8 +8,18 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { validate } from './validate-data.mjs';
+
+// Pre-flight: never build feeds from invalid data.
+const _v = validate();
+if (_v.errors.length) {
+  _v.errors.forEach(e => console.error('❌ ' + e));
+  console.error(`build-feeds aborted: ${_v.errors.length} data error(s). Run scripts/validate-data.mjs.`);
+  process.exit(1);
+}
 
 const OUT = process.argv.includes('--out') ? process.argv[process.argv.indexOf('--out') + 1] : '.';
+fs.mkdirSync(OUT, { recursive: true });
 const unis = JSON.parse(fs.readFileSync('data/universities.json', 'utf8'));
 const events = JSON.parse(fs.readFileSync('data/events.json', 'utf8'));
 const uniMap = Object.fromEntries(unis.map(u => [u.id, u]));

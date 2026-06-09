@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NTLSN University",
+  "type": "object",
+  "required": ["id", "name", "abbr", "city", "state", "lat", "lng", "group", "tlUrl", "traditionalCountry"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "description": "Short lowercase id, e.g. usq, anu, unimelb." },
+    "name": { "type": "string" },
+    "abbr": { "type": "string" },
+    "city": { "type": "string" },
+    "state": { "type": "string", "enum": ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"] },
+    "lat": { "type": "number" },
+    "lng": { "type": "number" },
+    "group": { "type": "string", "enum": ["Go8", "ATN", "IRU", "RUN", "Unaligned"] },
+    "tlUrl": { "type": "string" },
+    "traditionalCountry": { "type": "string", "description": "Traditional Country/Countries of the campus. Never strip or abbreviate for layout." }
+  }
+}

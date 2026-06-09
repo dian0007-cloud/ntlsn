@@ -1,0 +1,27 @@
+name: CI — validate data & build feeds
+
+# Runs on every push and PR. A PR that breaks the data layer (bad date, unknown
+# uni id, duplicate id, malformed url, missing required field) fails here before
+# it can reach the live feeds.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Validate data
+        run: node scripts/validate-data.mjs
+      - name: Build feeds (also re-validates)
+        run: node scripts/build-feeds.mjs --out /tmp/build-check
+      - name: Confirm feeds generated
+        run: |
+          for f in events.ics feed.xml sitemap.xml events-ld.json; do
+            test -s "/tmp/build-check/$f" && echo "ok: $f" || (echo "MISSING: $f" && exit 1)
+          done
