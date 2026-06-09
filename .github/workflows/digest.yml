@@ -13,6 +13,10 @@ on:
 jobs:
   digest:
     runs-on: ubuntu-latest
+    env:
+      # Job-level env so it can be read in the step `if` (the `secrets` context
+      # is not allowed directly in `if`). Empty when the secret isn't set.
+      BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,9 +29,7 @@ jobs:
           name: ntlsn-weekly-digest
           path: digest.html
       - name: Send via Buttondown (only if secret is set)
-        if: ${{ secrets.BUTTONDOWN_API_KEY != '' }}
-        env:
-          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        if: ${{ env.BUTTONDOWN_API_KEY != '' }}
         run: |
           SUBJECT="NTLSN — what's on across the sector this fortnight"
           # Buttondown sends to all subscribers when an email is created (non-draft).
