@@ -61,9 +61,11 @@ var FEED_SOURCES = [
   { type:'news',  name:'The Conversation — Education (AU)', url:'https://theconversation.com/au/education/articles.atom' },
   { type:'news',  name:'TEQSA (Regulator)',               url:'https://www.teqsa.gov.au/rss.xml' },
   { type:'news',  name:'Advance HE (UK)',                 url:'https://www.advance-he.ac.uk/rss.xml' },
+  { type:'news',  name:'Campus Review',                   url:'https://www.campusreview.com.au/feed/' },
 
   // ── MORE ASSOCIATIONS & SCHOLARLY BLOGS (added 10 Jun 2026, all verified) ──
   { type:'blog',  name:'ACODE',                           url:'https://www.acode.edu.au/feed/' },
+  { type:'blog',  name:'ANTF (Nat. Teaching Fellows, UK)', url:'https://ntf-association.com/feed/' },
   { type:'blog',  name:'AARE — EduResearch Matters',      url:'https://blog.aare.edu.au/feed/' },
   { type:'blog',  name:'Tony Bates (Online Learning)',    url:'https://www.tonybates.ca/feed/' },
   { type:'blog',  name:'e-Literate',                      url:'https://eliterate.us/feed/' },
