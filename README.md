@@ -1,20 +1,70 @@
 # NTLSN — National Teaching & Learning Sector Navigator
 
-Australia's **free, open-source** hub mapping the higher education teaching & learning sector — every symposium, workshop, PD opportunity, framework, grant and conference across all 42 universities.
+Australia's **free, open-source** hub mapping the higher education teaching & learning sector — every symposium, workshop, PD opportunity, framework, grant and conference across all 42 universities. One page, one portal.
 
 🔗 **Live:** https://www.ntlsn.com
 
+> **Acknowledgement of Country.** NTLSN is built and used on the unceded lands of First Nations peoples across Australia. We pay respect to Elders past and present, and recognise that teaching and learning have been practised on this continent for tens of thousands of years.
+
+---
+
 ## What's in this repo
-The deployable site: a single-file build (`index.html`) plus assets, security headers (`_headers`), SPA redirects (`_redirects`), favicons, social card, sitemap and robots.
+
+| Path | What it is |
+|---|---|
+| `index.html` | The deployable site — a single-file build (compiled React + a set of small, documented patch scripts). |
+| `data/events.json` | **Canonical event data** (94 events). The source of truth for the calendar feeds. |
+| `data/universities.json` | **Canonical institution data** (43 institutions). |
+| `scripts/build-feeds.mjs` | Regenerates `events.ics`, `feed.xml`, `sitemap.xml` and the Event JSON-LD from the data files. |
+| `events.ics` · `feed.xml` | Subscribable calendar + RSS, generated from the data. |
+| `widget.js` | Embeddable "what's on" widget any institution can drop on its own site (see below). |
+| `_headers` · `_redirects` | Security/CSP headers + SPA fallback. Applied automatically by the host. |
+| `CLAUDE.md` · `TASKS.md` | Architecture notes and the maintenance backlog. |
+
+---
+
+## Open data & feeds (use these freely)
+
+NTLSN is an index, not a walled garden. Everything is CORS-open:
+
+- **Subscribe to the sector calendar:** `https://www.ntlsn.com/events.ics` (works in Google/Apple/Outlook — `webcal://www.ntlsn.com/events.ics`)
+- **RSS:** `https://www.ntlsn.com/feed.xml`
+- **JSON API:** `https://www.ntlsn.com/data/events.json` and `/data/universities.json`
+
+### Embed NTLSN on your site
+
+Drop this on any university L&T page to show the sector's next events:
+
+```html
+<script src="https://www.ntlsn.com/widget.js" data-limit="5"></script>
+```
+
+Add `data-uni="usq"` (any institution `id` from `data/universities.json`) to filter to one institution. The widget renders in a scoped shadow root (no CSS clashes), is ~5KB, and links back to NTLSN.
+
+---
+
+## Contributing an event
+
+The whole point of the open data layer: **anyone can add an event with a small PR.** No build tools required to propose one.
+
+1. Add an entry to [`data/events.json`](data/events.json) following the schema in **[DATA.md](DATA.md)**.
+2. Leave `"verified": false` — a maintainer confirms the URL and dates before it goes live.
+3. Open a PR. See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the full guide.
+
+---
 
 ## Deploy
+
 - **Quick:** drag this folder onto your site's **Deploys** tab in Netlify.
-- **Continuous:** connect this repo to Netlify for auto-deploy on push.
+- **Continuous:** connect this repo to Netlify/Cloudflare Pages for auto-deploy on push.
+- After any data edit, regenerate the feeds: `node scripts/build-feeds.mjs`
 
-`_headers` (CSP + security) and `_redirects` (`/* /index.html 200`) apply automatically.
+---
 
-## Built for open educational practice
-Free. Open. No logins. No paywalls. Content licensed **CC BY-NC-SA 4.0**; external resources remain the property of their respective organisations.
+## Licence
+
+Content and data are licensed **CC BY-NC-SA 4.0** (see [LICENSE](LICENSE)) — free to share and adapt for non-commercial purposes, with attribution, under the same licence. External resources linked from NTLSN remain the property of their respective organisations.
 
 ## Team
+
 Founder: **A/Prof Dr Seb Dianati** (UniSQ) · Co-Founder: **Dr Kashmira Davé** (UNE)
