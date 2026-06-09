@@ -1,0 +1,94 @@
+#!/usr/bin/env node
+/**
+ * NTLSN build-feeds — regenerates events.ics, feed.xml, sitemap.xml and the
+ * schema.org Event JSON-LD from /data/events.json + /data/universities.json.
+ *
+ * Usage:  node scripts/build-feeds.mjs [--out dist]
+ * Run on every data change and in CI before deploy.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+
+const OUT = process.argv.includes('--out') ? process.argv[process.argv.indexOf('--out') + 1] : '.';
+const unis = JSON.parse(fs.readFileSync('data/universities.json', 'utf8'));
+const events = JSON.parse(fs.readFileSync('data/events.json', 'utf8'));
+const uniMap = Object.fromEntries(unis.map(u => [u.id, u]));
+const TODAY = new Date().toISOString().slice(0, 10);
+const STAMP = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+
+// ---------- ICS ----------
+const icsDate = d => d.replace(/-/g, '');
+const plusOne = d => { const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10).replace(/-/g, ''); };
+const esc = s => String(s ?? '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+function fold(line) {
+  const out = []; let s = line;
+  while (Buffer.byteLength(s, 'utf8') > 73) {
+    let cut = 73; while (Buffer.byteLength(s.slice(0, cut), 'utf8') > 73) cut--;
+    out.push(s.slice(0, cut)); s = ' ' + s.slice(cut);
+  }
+  out.push(s); return out.join('\r\n');
+}
+const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//NTLSN//Sector Events//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+  fold('X-WR-CALNAME:NTLSN — Australian HE Teaching & Learning Events'),
+  fold('X-WR-CALDESC:Every symposium\\, workshop & PD opportunity across all 42 Australian universities. ntlsn.com'),
+  'X-WR-TIMEZONE:Australia/Brisbane', 'REFRESH-INTERVAL;VALUE=DURATION:P1D'];
+for (const e of events) {
+  const u = uniMap[e.uni] || {};
+  const loc = u.name ? u.name + (u.city ? ' — ' + u.city + ', ' + u.state : '') : '';
+  ics.push('BEGIN:VEVENT',
+    'UID:ntlsn-' + e.id + '@ntlsn.com',
+    'DTSTAMP:' + STAMP,
+    'DTSTART;VALUE=DATE:' + icsDate(e.date),
+    'DTEND;VALUE=DATE:' + plusOne(e.endDate || e.date),
+    fold('SUMMARY:' + esc(e.title)),
+    fold('DESCRIPTION:' + esc((e.desc || '') + (e.url ? '\n' + e.url : ''))),
+    fold('LOCATION:' + esc(loc)),
+    e.url ? fold('URL:' + e.url) : null,
+    'CATEGORIES:' + esc((e.type || 'event').toUpperCase()),
+    'TRANSP:TRANSPARENT', 'END:VEVENT');
+}
+ics.push('END:VCALENDAR');
+fs.writeFileSync(path.join(OUT, 'events.ics'), ics.filter(Boolean).join('\r\n') + '\r\n');
+
+// ---------- RSS ----------
+const upcoming = events.filter(e => (e.endDate || e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
+const x = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const items = upcoming.map(e => {
+  const u = uniMap[e.uni] || {};
+  return '  <item>\n    <title>' + x(e.title) + ' (' + x(e.date) + (e.endDate && e.endDate !== e.date ? ' – ' + x(e.endDate) : '') + ')</title>\n' +
+    '    <link>' + x(e.url || 'https://www.ntlsn.com/') + '</link>\n' +
+    '    <guid isPermaLink="false">ntlsn-' + e.id + '</guid>\n' +
+    '    <category>' + x(e.type) + '</category>\n' +
+    '    <description>' + x((u.abbr ? u.abbr + ' · ' : '') + (e.desc || '')) + '</description>\n  </item>';
+}).join('\n');
+fs.writeFileSync(path.join(OUT, 'feed.xml'),
+  '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n' +
+  '  <title>NTLSN — Australian HE Teaching &amp; Learning Events</title>\n  <link>https://www.ntlsn.com/</link>\n' +
+  '  <atom:link href="https://www.ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>\n' +
+  '  <description>Upcoming symposiums, workshops and PD across all 42 Australian universities.</description>\n' +
+  '  <language>en-au</language>\n  <lastBuildDate>' + new Date().toUTCString() + '</lastBuildDate>\n' + items + '\n</channel>\n</rss>\n');
+
+// ---------- JSON-LD ----------
+const ld = {
+  '@context': 'https://schema.org', '@type': 'ItemList',
+  name: 'Upcoming Australian Higher Education Teaching & Learning Events',
+  itemListElement: upcoming.slice(0, 40).map((e, i) => {
+    const u = uniMap[e.uni] || {};
+    return { '@type': 'ListItem', position: i + 1, item: {
+      '@type': 'Event', name: e.title, startDate: e.date, endDate: e.endDate || e.date,
+      eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
+      eventStatus: 'https://schema.org/EventScheduled',
+      description: e.desc || undefined, url: e.url || 'https://www.ntlsn.com/',
+      location: { '@type': 'Place', name: u.name || 'Australia', address: { '@type': 'PostalAddress', addressLocality: u.city, addressRegion: u.state, addressCountry: 'AU' } },
+      organizer: { '@type': 'CollegeOrUniversity', name: u.name || 'NTLSN', url: u.tlUrl }
+    } };
+  })
+};
+fs.writeFileSync(path.join(OUT, 'events-ld.json'), JSON.stringify(ld));
+
+// ---------- Sitemap ----------
+fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
+  '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  '  <url><loc>https://www.ntlsn.com/</loc><lastmod>' + TODAY + '</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>\n</urlset>\n');
+
+console.log('build-feeds: ' + events.length + ' events → events.ics | ' + upcoming.length + ' upcoming → feed.xml | ' + Math.min(40, upcoming.length) + ' → JSON-LD | sitemap refreshed');
