@@ -1,0 +1,20 @@
+name: Weekly link check
+
+# Pings every event URL in data/events.json each Monday. Goes RED (and writes a
+# table to the run summary) if any link is confirmed dead (404/410/DNS failure).
+# Bot-blocks (403/405/429) and timeouts are treated as alive to avoid false alarms.
+
+on:
+  schedule:
+    - cron: '0 19 * * 1'   # Mondays 19:00 UTC
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Check event links
+        run: node scripts/check-links.mjs
