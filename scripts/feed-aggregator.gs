@@ -69,7 +69,15 @@ var FEED_SOURCES = [
   { type:'blog',  name:'AARE — EduResearch Matters',      url:'https://blog.aare.edu.au/feed/' },
   { type:'blog',  name:'Tony Bates (Online Learning)',    url:'https://www.tonybates.ca/feed/' },
   { type:'blog',  name:'e-Literate',                      url:'https://eliterate.us/feed/' },
-  { type:'blog',  name:'EDUCAUSE Review',                 url:'https://er.educause.edu/rss' }
+  { type:'blog',  name:'EDUCAUSE Review',                 url:'https://er.educause.edu/rss' },
+
+  // ── PODCASTS (added 10 Jun 2026, all verified via iTunes feedUrl) ──
+  { type:'podcast', name:'Teaching in Higher Ed',          url:'https://feeds.podcastmirror.com/teaching-in-higher-ed' },
+  { type:'podcast', name:'HigherEd Heroes (UQ)',           url:'https://rss.buzzsprout.com/813707.rss' },
+  { type:'podcast', name:'HEDx',                           url:'https://anchor.fm/s/afaf6f54/podcast/rss' },
+  { type:'podcast', name:'Campus Talks (Times Higher Ed)', url:'https://feed.podbean.com/timeshighered/feed.xml' },
+  { type:'podcast', name:'Shaping Higher Education (ADCET)', url:'https://rss.buzzsprout.com/956332.rss' },
+  { type:'podcast', name:'Learning to Teach',              url:'https://media.rss.com/learning-to-teach/feed.xml' }
 
   // NOTE: CRADLE *blog* & Taylor&Francis HERD journal block bots (CAPTCHA/403) — not pullable.
   //       CRADLE is covered above via its YouTube channel instead.
