@@ -104,19 +104,21 @@ function pullFeeds() {
   var t0 = Date.now();
   var props = PropertiesService.getScriptProperties();
   var start = Number(props.getProperty('cursor') || 0);          // resume point from a previous run
-  var batch = FEED_SOURCES.slice(start);
+  var CHUNK = 8;                                                  // small bites: each run stays well under the 6-min cap
+  var batch = FEED_SOURCES.slice(start, start + CHUNK);
 
-  // (1) Fetch ALL remaining feeds IN PARALLEL (the big speed-up vs one-by-one)
+  // (1) Fetch this chunk IN PARALLEL (bounded, so one slow site can't sink the run)
   var reqs = batch.map(function (src) { return { url: src.url, muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'Mozilla/5.0 (NTLSN feed reader)' } }; });
   var resps = [];
   try { resps = UrlFetchApp.fetchAll(reqs); } catch (e) { resps = []; }
 
   var added = 0, done = start, newRows = [];
   for (var k = 0; k < batch.length; k++) {
-    if (Date.now() - t0 > 240000) break;  // (3) stop safely at ~4 min, resume via cursor
+    if (Date.now() - t0 > 280000) break;  // (3) belt-and-braces guard; chunking makes this rare
     var src = batch[k];
     try {
       var xml = (resps[k] ? resps[k] : UrlFetchApp.fetch(src.url, reqs[k])).getContentText();
+      xml = _slim(xml);                    // (4) trim multi-MB podcast feeds to newest ~30 items before parsing
       var root = XmlService.parse(xml).getRootElement();
       var items = [];
       var channel = root.getChild('channel');
@@ -150,11 +152,11 @@ function pullFeeds() {
   if (done >= FEED_SOURCES.length) {
     props.deleteProperty('cursor');
     _prune(sh);
-    Logger.log('[OK] All ' + FEED_SOURCES.length + ' sources processed, ' + added + ' new item(s).');
+    Logger.log('[OK] All ' + FEED_SOURCES.length + ' sources processed. ' + added + ' new item(s) this run. DONE.');
   } else {
     props.setProperty('cursor', String(done));
-    ScriptApp.newTrigger('pullFeedsContinue').timeBased().after(60 * 1000).create(); // self-resume in 1 min
-    Logger.log('[...] Processed sources 1-' + done + ' of ' + FEED_SOURCES.length + ' (' + added + ' new). Auto-continuing in 1 minute - nothing to do.');
+    ScriptApp.newTrigger('pullFeedsContinue').timeBased().after(45 * 1000).create(); // self-resume shortly
+    Logger.log('[...] Sources ' + (start + 1) + '-' + done + ' of ' + FEED_SOURCES.length + ' done (' + added + ' new). Auto-continuing shortly - nothing to do.');
   }
   return added; // shows in the execution log
 }
@@ -163,6 +165,17 @@ function pullFeeds() {
 function pullFeedsContinue() { pullFeeds(); }
 function _clearContinuations() {
   ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'pullFeedsContinue') ScriptApp.deleteTrigger(t); });
+}
+
+/** Trim huge feeds (multi-MB podcast archives) to their newest ~30 entries before XML parsing. */
+function _slim(xml) {
+  if (!xml || xml.length < 200000) return xml;
+  var endTag = xml.indexOf('</item>') > -1 ? '</item>' : (xml.indexOf('</entry>') > -1 ? '</entry>' : '');
+  if (!endTag) return xml;
+  var pos = -1, count = 0;
+  while (count < 30) { var p = xml.indexOf(endTag, pos + 1); if (p < 0) break; pos = p; count++; }
+  if (pos < 0) return xml;
+  return xml.slice(0, pos + endTag.length) + (endTag === '</item>' ? '</channel></rss>' : '</feed>');
 }
 
 function _t(el, tag) {
