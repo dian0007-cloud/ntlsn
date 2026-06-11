@@ -32,6 +32,10 @@ NTLSN is an index, not a walled garden. Everything is CORS-open:
 - **JSON API:** `https://www.ntlsn.com/data/events.json` and `/data/universities.json`
 - **Weekly email digest:** a Monday "what's on this fortnight" email, rendered by `scripts/build-digest.mjs` and sent by `.github/workflows/digest.yml`. To activate sending, create a free [Buttondown](https://buttondown.email) account, add a `BUTTONDOWN_API_KEY` repo secret, and set your Buttondown username in the `ntlsn-digest-card` patch script to show the on-site signup form. Without setup, the Action still runs weekly and uploads the digest HTML as a preview artifact.
 
+### Query NTLSN from your AI assistant (MCP)
+
+NTLSN ships an [MCP server](mcp/README.md) — point Claude Desktop/Claude Code (or any MCP client) at `mcp/ntlsn-mcp.mjs` and ask things like *"what's on in QLD next month?"* or *"whose Country does UniSQ stand on?"* directly from the live data.
+
 ### Embed NTLSN on your site
 
 Drop this on any university L&T page to show the sector's next events:
