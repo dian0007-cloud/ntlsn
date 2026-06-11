@@ -92,6 +92,7 @@ var SERVE_LIMIT    = 60;   // items returned to the website
 
 // ───────────────────────── THE PULLER (runs daily) ─────────────────────────
 function pullFeeds() {
+  _clearContinuations();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sh = ss.getSheetByName(SHEET_TAB) || ss.insertSheet(SHEET_TAB);
   if (sh.getLastRow() === 0) sh.appendRow(['Date','Type','Source','Title','Link','Summary']);
@@ -100,10 +101,22 @@ function pullFeeds() {
   var rows = sh.getDataRange().getValues();
   for (var i = 1; i < rows.length; i++) seen[rows[i][4]] = true; // dedupe by Link (col 5)
 
-  var added = 0;
-  FEED_SOURCES.forEach(function (src) {
+  var t0 = Date.now();
+  var props = PropertiesService.getScriptProperties();
+  var start = Number(props.getProperty('cursor') || 0);          // resume point from a previous run
+  var batch = FEED_SOURCES.slice(start);
+
+  // ① Fetch ALL remaining feeds IN PARALLEL (the big speed-up vs one-by-one)
+  var reqs = batch.map(function (src) { return { url: src.url, muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'Mozilla/5.0 (NTLSN feed reader)' } }; });
+  var resps = [];
+  try { resps = UrlFetchApp.fetchAll(reqs); } catch (e) { resps = []; }
+
+  var added = 0, done = start, newRows = [];
+  for (var k = 0; k < batch.length; k++) {
+    if (Date.now() - t0 > 240000) break;  // ③ stop safely at ~4 min, resume via cursor
+    var src = batch[k];
     try {
-      var xml = UrlFetchApp.fetch(src.url, { muteHttpExceptions:true, followRedirects:true, headers:{'User-Agent':'Mozilla/5.0 (NTLSN feed reader)'} }).getContentText();
+      var xml = (resps[k] ? resps[k] : UrlFetchApp.fetch(src.url, reqs[k])).getContentText();
       var root = XmlService.parse(xml).getRootElement();
       var items = [];
       var channel = root.getChild('channel');
@@ -124,14 +137,32 @@ function pullFeeds() {
         var date  = _t(it,'pubDate') || _t(it,'published') || _t(it,'updated') || '';
         var summ  = (_t(it,'description') || _t(it,'summary') || '').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim().slice(0,240);
         if (!link || seen[link]) continue;
-        sh.appendRow([ _d(date), src.type, src.name, title, link, summ ]);
+        newRows.push([ _d(date), src.type, src.name, title, link, summ ]);
         seen[link] = true; n++; added++;
       }
     } catch (e) { /* skip a broken feed, keep going */ }
-  });
+    done = start + k + 1;
+  }
 
-  _prune(sh);
+  // ② ONE batched write instead of hundreds of appendRow calls
+  if (newRows.length) sh.getRange(sh.getLastRow() + 1, 1, newRows.length, 6).setValues(newRows);
+
+  if (done >= FEED_SOURCES.length) {
+    props.deleteProperty('cursor');
+    _prune(sh);
+    Logger.log('✅ All ' + FEED_SOURCES.length + ' sources processed, ' + added + ' new item(s).');
+  } else {
+    props.setProperty('cursor', String(done));
+    ScriptApp.newTrigger('pullFeedsContinue').timeBased().after(60 * 1000).create(); // self-resume in 1 min
+    Logger.log('⏳ Processed sources 1–' + done + ' of ' + FEED_SOURCES.length + ' (' + added + ' new). Auto-continuing in 1 minute — nothing to do.');
+  }
   return added; // shows in the execution log
+}
+
+/** One-off continuation trigger target — chains pullFeeds until all sources are done. */
+function pullFeedsContinue() { pullFeeds(); }
+function _clearContinuations() {
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'pullFeedsContinue') ScriptApp.deleteTrigger(t); });
 }
 
 function _t(el, tag) {
