@@ -316,7 +316,7 @@ place(sec);
 }
 fetch(EP).then(function(r){return r.json();}).then(function(d){if(Array.isArray(d)&&d.length){DATA=d;build();}}).catch(function(){});
 new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-sap'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
+})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
 var CARD="background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:18px;padding:28px;";
 var BTN="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#4ECDC4;border:none;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer;";
 var GHOST="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:9px 13px;text-decoration:none;cursor:pointer;";
@@ -580,6 +580,62 @@ function wire(sec){
  }).catch(function(){});}
 }
 function ensure(){var hero=document.getElementById("hero");if(!hero)return;if(document.getElementById("ntlsn-sap"))return;var sec=build();hero.parentNode.appendChild(sec);wire(sec);}
+ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
+})();</script><script id="ntlsn-calibrate-script">(function(){
+var CAL_ENDPOINT="";/* backend connecting tonight - paste /exec here to go live */
+var INPUT='width:100%;background:#0A1628;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:11px 12px;color:#fff;font:400 14px -apple-system,Segoe UI,Roboto,sans-serif;box-sizing:border-box;',BTN='display:inline-flex;align-items:center;gap:6px;font:600 14px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#C9A962;border:none;border-radius:9px;padding:12px 18px;cursor:pointer;';
+var P=[
+ ["🎯","The Calibration Circle","Do we all call the same work a Distinction?","Each month, one de-identified student artefact + rubric. Academics across the country grade it blind — NTLSN reveals the national marking spread, then hosts the consensus conversation.","Evidences HESF 1.4 external referencing","#4ECDC4"],
+ ["🔁","The Assessment Design Exchange","Swap a task. Review one, get reviewed.","Submit an assessment brief + rubric before it runs. A peer at another university reviews it against a shared checklist — alignment, inclusion, AI-resilience — and you review theirs.","Builds on CAULLT’s External Peer Review of Assessment guide","#C57BFF"],
+ ["📚","The Rubric Commons","The sector’s shared assessment genome.","An open, CC-licensed library of peer-reviewed rubrics and task designs — tagged by discipline, AQF level and type, with remix lineage. Search it, adapt it, feed it back.","Open API · every entry peer-reviewed","#8b9cff"],
+ ["👯","Course Twins · National Moderation Week","Same course, two universities, one standard.","NTLSN matches twin courses across institutions. Coordinators exchange marked samples post-semester and benchmark grade standards — one coordinated week, sector-wide, every year.","Earns a public ‘externally referenced ✓’ course badge","#FFB448"],
+ ["🛡️","The AI Red-Team Clinic","Try to break my assessment.","A cross-institution peer stress-tests your task with a structured GenAI protocol — can it be done by a machine? — and returns a vulnerability report with redesign moves. Reciprocal, of course.","Maps to TEQSA’s assessment-reform principles","#FF6B6B"]
+];
+function build(){
+ var sec=document.createElement("section");sec.id="ntlsn-calibrate";
+ sec.style.cssText="max-width:1100px;margin:0 auto;padding:24px 24px 72px;";
+ var cards=P.map(function(p){
+  return '<div style="background:#0f1f38;border:1px solid '+p[5]+'33;border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:10px;">'
+   +'<div style="display:flex;align-items:center;gap:10px;"><span style="font-size:24px;">'+p[0]+'</span><div><div style="font:800 17px/1.2 -apple-system,Segoe UI,Roboto,sans-serif;color:#fff;">'+p[1]+'</div><div style="font:600 12px/1.3 -apple-system,Segoe UI,Roboto,sans-serif;color:'+p[5]+';">“'+p[2]+'”</div></div></div>'
+   +'<p style="font:400 13px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:#9fb3c8;margin:0;">'+p[3]+'</p>'
+   +'<div style="margin-top:auto;display:flex;align-items:center;gap:8px;"><span style="width:7px;height:7px;border-radius:50%;background:'+p[5]+';flex:0 0 auto;"></span><span style="font:600 11px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;color:#cfe9e5;">'+p[4]+'</span></div>'
+   +'<span style="align-self:flex-start;font:700 10px/1 -apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:1.2px;text-transform:uppercase;color:#C9A962;background:#C9A96218;border:1px solid #C9A96245;border-radius:6px;padding:5px 9px;">Pilot · 2026–27</span>'
+  +'</div>';
+ }).join("");
+ sec.innerHTML=''
+ +'<div style="text-align:center;color:#C9A962;font:700 12px/1 sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9678; The National Calibration Suite</div>'
+ +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 -apple-system,Segoe UI,Roboto,sans-serif;color:#fff;margin:0 0 12px;">One sector. One standard. Five ways in.</h2>'
+ +'<p style="text-align:center;color:#9fb3c8;max-width:680px;margin:0 auto 14px;font:400 16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;">Regulators ask every university to externally reference its standards — and GenAI just rewrote the rules of task design. Five reciprocal programs, brokered by NTLSN across all 42 universities: <b style="color:#cfe9e5;">do one, get one, keep the evidence.</b></p>'
+ +'<p style="text-align:center;color:#6b7e90;max-width:640px;margin:0 auto 36px;font:400 12px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;">Protocols build on published sector work, including CAULLT’s External Peer Review of Assessment guide and TEQSA’s assessment-reform principles.</p>'
+ +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:26px;">'+cards+'</div>'
+ +'<div style="background:#0f1f38;border:1px solid rgba(201,169,98,.25);border-radius:18px;padding:26px;max-width:760px;margin:0 auto;">'
+   +'<div style="font:700 17px/1.2 -apple-system,Segoe UI,Roboto,sans-serif;color:#fff;margin-bottom:5px;">Be a founding participant</div>'
+   +'<p style="font:400 13px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:#9fb3c8;margin:0 0 14px;">Tell us which programs your institution wants in on — founding participants co-shape the protocols.</p>'
+   +'<form id="ntlsn-cal-form" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">'
+     +'<input name="name" required placeholder="Your name" style="'+INPUT+'">'
+     +'<input name="email" type="email" required placeholder="you@university.edu.au" style="'+INPUT+'">'
+     +'<input name="institution" required placeholder="Institution" style="'+INPUT+'">'
+     +'<select name="program" style="'+INPUT+'"><option>All five</option><option>Calibration Circle</option><option>Assessment Design Exchange</option><option>Rubric Commons</option><option>Course Twins / Moderation Week</option><option>AI Red-Team Clinic</option></select>'
+     +'<input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-5000px;" aria-hidden="true">'
+     +'<div style="grid-column:1/-1;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">'
+       +(CAL_ENDPOINT?'<button type="submit" style="'+BTN+'">Register interest &rarr;</button>':'<button type="button" disabled style="'+BTN+'opacity:.45;cursor:default;">Registrations open shortly</button>')
+       +'<span id="ntlsn-cal-msg" style="font:400 13px -apple-system,Segoe UI,Roboto,sans-serif;color:#9fb3c8;">'+(CAL_ENDPOINT?'Free · reciprocal · your details stay private.':'Pilots are being wired up now — check back within days.')+'</span>'
+     +'</div>'
+   +'</form>'
+ +'</div>';
+ return sec;
+}
+function wire(sec){
+ var f=sec.querySelector("#ntlsn-cal-form");if(!f||f.dataset.wired)return;f.dataset.wired="1";
+ f.addEventListener("submit",function(ev){ev.preventDefault();if(!CAL_ENDPOINT)return;
+  var d={kind:"cal"};["name","email","institution","program","website"].forEach(function(k){d[k]=(f.elements[k]||{}).value||"";});
+  var msg=sec.querySelector("#ntlsn-cal-msg");msg.textContent="Sending…";
+  fetch(CAL_ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(d)})
+   .then(function(){msg.textContent="✓ You’re on the founders list.";msg.style.color="#34d399";f.reset();})
+   .catch(function(){msg.textContent="Something went wrong — please try again.";});
+ });
+}
+function ensure(){var hero=document.getElementById("hero");if(!hero)return;if(document.getElementById("ntlsn-calibrate"))return;var sec=build();hero.parentNode.appendChild(sec);wire(sec);}
 ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script></body>
 </html>

@@ -19,7 +19,7 @@
  * You email the pairs to introduce them; nothing is sent automatically.
  */
 
-var PRX_TAB = 'PRX', SAP_TAB = 'SaP', PAIR_TAB = 'Pairings';
+var PRX_TAB = 'PRX', SAP_TAB = 'SaP', PAIR_TAB = 'Pairings', CAL_TAB = 'Interest';
 
 function setup() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -29,6 +29,8 @@ function setup() {
   if (sap.getLastRow() === 0) sap.appendRow(['Timestamp','Status','Institution','Program','SpectrumLevel','URL','ContactName','ContactEmail','Notes']);
   var p = ss.getSheetByName(PAIR_TAB) || ss.insertSheet(PAIR_TAB);
   if (p.getLastRow() === 0) p.appendRow(['Generated','A name','A email','A institution','A discipline','B name','B email','B institution','B discipline','Mode']);
+  var c = ss.getSheetByName(CAL_TAB) || ss.insertSheet(CAL_TAB);
+  if (c.getLastRow() === 0) c.appendRow(['Timestamp','Status','Name','Email','Institution','Program','Notes']);
 }
 
 function doPost(e) {
@@ -42,6 +44,10 @@ function doPost(e) {
       ss.getSheetByName(PRX_TAB).appendRow([new Date(),'Pending', String(d.name||'').slice(0,120), String(d.email||'').slice(0,160),
         String(d.institution||'').slice(0,120), String(d.discipline||'').slice(0,120), String(d.mode||'formative').slice(0,20),
         String(d.dimensions||'').slice(0,300), String(d.notes||'').slice(0,500), '']);
+      out.ok = true;
+    } else if (d.kind === 'cal') {
+      ss.getSheetByName(CAL_TAB).appendRow([new Date(),'New', String(d.name||'').slice(0,120), String(d.email||'').slice(0,160),
+        String(d.institution||'').slice(0,120), String(d.program||'').slice(0,80), String(d.notes||'').slice(0,500)]);
       out.ok = true;
     } else if (d.kind === 'sap') {
       ss.getSheetByName(SAP_TAB).appendRow([new Date(),'Pending', String(d.institution||'').slice(0,120), String(d.program||'').slice(0,200),
@@ -63,6 +69,11 @@ function doGet(e) {
     for (var i = 1; i < rows.length; i++) if (String(rows[i][1]).toLowerCase() === 'approved')
       out.push({ institution: rows[i][2], program: rows[i][3], level: rows[i][4], url: rows[i][5] });
     return _json(out);
+  }
+  if (kind === 'cal') {
+    var crows = ss.getSheetByName(CAL_TAB).getDataRange().getValues(), cu = {}, cn = 0;
+    for (var c2 = 1; c2 < crows.length; c2++) { cn++; cu[String(crows[c2][4]).toLowerCase()] = 1; }
+    return _json({ registered: cn, institutions: Object.keys(cu).filter(String).length });
   }
   // PRX: privacy-first — aggregate stats only, never individual registrants
   var rows = ss.getSheetByName(PRX_TAB).getDataRange().getValues();
