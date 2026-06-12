@@ -200,7 +200,18 @@ function doGet(e) {
     var rows = sh.getDataRange().getValues();
     for (var i = 1; i < rows.length; i++) out.push({ date:rows[i][0], type:rows[i][1], source:rows[i][2], title:rows[i][3], link:rows[i][4], summary:rows[i][5] });
     out.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
-    out = out.slice(0, SERVE_LIMIT);
+    var head = out.slice(0, SERVE_LIMIT);
+    // Type-diversity guarantee: if a whole content type (e.g. podcasts) is crowded
+    // out of the newest N by high-volume news, append its newest items anyway.
+    var have = {};
+    for (var h = 0; h < head.length; h++) have[head[h].type] = 1;
+    var extras = {};
+    for (var x = 0; x < out.length; x++) {
+      var t = out[x].type;
+      if (!have[t]) { if (!extras[t]) extras[t] = []; if (extras[t].length < 8) extras[t].push(out[x]); }
+    }
+    for (var key in extras) head = head.concat(extras[key]);
+    out = head;
   }
   return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
 }
