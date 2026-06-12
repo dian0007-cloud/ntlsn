@@ -104,21 +104,24 @@ function pullFeeds() {
   var t0 = Date.now();
   var props = PropertiesService.getScriptProperties();
   var start = Number(props.getProperty('cursor') || 0);          // resume point from a previous run
-  var CHUNK = 8;                                                  // small bites: each run stays well under the 6-min cap
-  var batch = FEED_SOURCES.slice(start, start + CHUNK);
 
-  // (1) Fetch this chunk IN PARALLEL (bounded, so one slow site can't sink the run)
-  var reqs = batch.map(function (src) { return { url: src.url, muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'Mozilla/5.0 (NTLSN feed reader)' } }; });
-  var resps = [];
-  try { resps = UrlFetchApp.fetchAll(reqs); } catch (e) { resps = []; }
+  // SELF-HEALING: if the previous run was killed mid-source, that source is poison - skip it.
+  var lastTried = props.getProperty('lastTried');
+  if (lastTried !== null && Number(lastTried) === start && FEED_SOURCES[start]) {
+    Logger.log('[SKIP] "' + FEED_SOURCES[start].name + '" killed the previous run - skipping it permanently this cycle.');
+    start++;
+    props.setProperty('cursor', String(start));
+  }
 
-  var added = 0, done = start, newRows = [];
-  for (var k = 0; k < batch.length; k++) {
-    if (Date.now() - t0 > 280000) break;  // (3) belt-and-braces guard; chunking makes this rare
-    var src = batch[k];
+  var added = 0, done = start;
+  for (var k = start; k < FEED_SOURCES.length; k++) {
+    if (Date.now() - t0 > 200000) break;                          // generous headroom under the 6-min cap
+    var src = FEED_SOURCES[k];
+    props.setProperty('lastTried', String(k));                     // breadcrumb: if we die here, next run skips this feed
+    var newRows = [];
     try {
-      var xml = (resps[k] ? resps[k] : UrlFetchApp.fetch(src.url, reqs[k])).getContentText();
-      xml = _slim(xml);                    // (4) trim multi-MB podcast feeds to newest ~30 items before parsing
+      var xml = UrlFetchApp.fetch(src.url, { muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'Mozilla/5.0 (NTLSN feed reader)' } }).getContentText();
+      xml = _slim(xml);                                            // trim multi-MB podcast feeds to newest ~30 items
       var root = XmlService.parse(xml).getRootElement();
       var items = [];
       var channel = root.getChild('channel');
@@ -142,12 +145,12 @@ function pullFeeds() {
         newRows.push([ _d(date), src.type, src.name, title, link, summ ]);
         seen[link] = true; n++; added++;
       }
-    } catch (e) { /* skip a broken feed, keep going */ }
-    done = start + k + 1;
+    } catch (e) { /* broken feed - skip, keep going */ }
+    // write THIS source's rows immediately (a later crash can never lose them)
+    if (newRows.length) sh.getRange(sh.getLastRow() + 1, 1, newRows.length, 6).setValues(newRows);
+    done = k + 1;
+    props.setProperty('cursor', String(done));                     // progress saved after EVERY feed
   }
-
-  // (2) ONE batched write instead of hundreds of appendRow calls
-  if (newRows.length) sh.getRange(sh.getLastRow() + 1, 1, newRows.length, 6).setValues(newRows);
 
   if (done >= FEED_SOURCES.length) {
     props.deleteProperty('cursor');
