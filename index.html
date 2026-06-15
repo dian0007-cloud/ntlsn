@@ -885,8 +885,8 @@ function build(){
   +'<div style="font:700 11px '+F+';letter-spacing:2px;color:#4ECDC4;text-transform:uppercase;margin-bottom:10px;">&#9679; Free · the whole sector, open</div>'
   +'<div style="font:800 clamp(36px,7vw,56px)/1 '+F+';color:#fff;margin-bottom:6px;">$0 <span style="font-size:.4em;color:#9fb3c8;font-weight:600;">forever</span></div>'
   +'<div style="font:600 16px '+F+';color:#cfe9e5;margin-bottom:18px;">Everything on this site — for everyone, no account.</div>'
-  +'<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:760px;margin:0 auto 16px;">'
-   +['Watch every university’s conferences','2,000+ resources','Sector archive · 1,431 works','Events calendar + ICS','The national map','Frameworks &amp; grants'].map(chip).join('')
+  +'<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:940px;margin:0 auto 18px;">'
+   +['42 universities mapped','94 sector events','23 conferences','Watch every university’s conferences','369 sector videos','59 PD opportunities','320 SoTL resources','184 university resources','280 frameworks','43 grants &amp; fellowships','126 career pathways','78 international SoTL','80 best-practice guides','1,431-work sector archive','25 benchmarks','41 UDL resources','Peer-Review Exchange','Students-as-Partners Registry','Calibration Suite','Weekly digest + ICS feed','Embeddable widgets','Acknowledgement-of-Country widget','Open MCP / API'].map(chip).join('')
   +'</div>'
   +'<div style="font:600 13px '+F+';color:#6b7e90;">No paywall. No login. The commons stays free — always.</div>'
  +'</div>';
@@ -900,7 +900,7 @@ function build(){
   +'<div id="pricing-uni-cta" style="margin-top:16px;"></div>'
  +'</div>';
  var opts='<div style="display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 4px;">'+'<div style="flex:1;min-width:260px;background:#0f1f38;border:1px solid rgba(78,205,196,.28);border-radius:14px;padding:18px;">'+'<div style="font:800 18px '+F+';color:#4ECDC4;">$5k <span style="font-size:12px;color:#6b7e90;font-weight:400;">/yr</span></div>'+'<div style="font:700 14px '+F+';color:#fff;margin:2px 0 4px;">Peak bodies &amp; regulators</div>'+'<div style="font:400 12px/1.5 '+F+';color:#9fb3c8;">ASCILITE · HERDSA · ATEC · TEQSA — partners, not competitors. The bodies we build with get the lowest rate.</div>'+'</div>'+'<div style="flex:1;min-width:260px;background:#0f1f38;border:1px solid rgba(201,169,98,.28);border-radius:14px;padding:18px;">'+'<div style="font:800 18px '+F+';color:#C9A962;">Save 25%</div>'+'<div style="font:700 14px '+F+';color:#fff;margin:2px 0 4px;">3-year contract</div>'+'<div style="font:400 12px/1.5 '+F+';color:#9fb3c8;">Lock the founding rate for three years — one signature, not three. e.g. DVCA $20k → $15k/yr.</div>'+'</div></div>';
-var incl='<div style="text-align:center;font:400 12px/1.7 '+F+';color:#6b7e90;margin:12px auto 0;max-width:790px;">Every paid tier also includes: embeddable widgets · ICS calendar sync · weekly sector digest · MCP / API access · Acknowledgement-of-Country widget · priority listing in the national calendar.</div>';
+var incl='<div style="text-align:center;font:400 12px/1.7 '+F+';color:#6b7e90;margin:12px auto 0;max-width:790px;">Every paid tier also includes: white-label styling · an analytics dashboard · priority support · early access to new tools · priority listing in the national calendar · a co-design voice in the roadmap.</div>';
  sec.innerHTML=head+free+paidlabel+paid+opts+incl+note+run;
  return sec;
 }
