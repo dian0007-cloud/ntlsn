@@ -1,2 +1,18 @@
-# SPA fallback — all routes serve index.html so deep links and refreshes work
+# Bot / vulnerability-scanner hygiene — junk paths return a real 404 (keeps
+# Web Analytics clean and stops scanners showing up as "top pages"). No exposure
+# either way: the site is static and none of these files exist.
+/.git/*                   /404.html   404
+/.env                     /404.html   404
+/.env.*                   /404.html   404
+/wp-admin/*               /404.html   404
+/wp-login.php             /404.html   404
+/wp-json/*                /404.html   404
+/xmlrpc.php               /404.html   404
+/secrets.json             /404.html   404
+/config.json              /404.html   404
+/service-account.json     /404.html   404
+/firebase-adminsdk.json   /404.html   404
+/gcp-credentials.json     /404.html   404
+
+# SPA fallback — real routes serve index.html so deep links and refreshes work
 /*    /index.html   200
