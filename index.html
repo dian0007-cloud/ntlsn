@@ -316,7 +316,7 @@ place(sec);
 }
 fetch(EP).then(function(r){return r.json();}).then(function(d){if(Array.isArray(d)&&d.length){DATA=d;build();}}).catch(function(){});
 new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-archive'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
+})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-archive'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'ntlsn-pipeline'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
 var CARD="background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:18px;padding:28px;";
 var BTN="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#4ECDC4;border:none;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer;";
 var GHOST="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:9px 13px;text-decoration:none;cursor:pointer;";
@@ -749,6 +749,100 @@ function wire(sec){
  inp.addEventListener("input",function(){clearTimeout(t);t=setTimeout(function(){load(function(){render(sec,inp.value);});},200);});
 }
 function ensure(){var hero=document.getElementById("hero");if(!hero)return;if(document.getElementById("ntlsn-bestpractice"))return;var sec=build();hero.parentNode.appendChild(sec);wire(sec);}
+ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
+})();</script><script id="ntlsn-pipeline-script">(function(){
+var A={teal:'#4ECDC4',blue:'#7C9CFF',purple:'#C57BFF',gold:'#C9A962',coral:'#FF8A6B',green:'#4FD1A5'};
+var F='-apple-system,Segoe UI,Roboto,sans-serif';
+var LIVE=[
+ {n:'Peer-Review Exchange',t:'Review one. Get reviewed.',h:'#ntlsn-prx'},
+ {n:'Students-as-Partners Registry',t:'Put your partnership on the map.',h:'#ntlsn-sap'},
+ {n:'National Calibration Suite',t:'One sector. One standard.',h:'#ntlsn-calibrate'}
+];
+var COH=[
+ {y:'2027',l:'Industry steps in',it:[
+  {ic:'🤝',n:'The Placement Commons',t:'One employer. Every university’s students.',c:A.teal,how:'An employer posts a work-integrated-learning placement once — NTLSN brokers it to matched students sector-wide, instead of 42 universities cold-calling the same firms.',conn:['🏢 Industry hosts','🎓 Universities','🤝 ACEN'],when:'2027'},
+  {ic:'🎙️',n:'The Expert Exchange',t:'Book the expert. The whole sector watches.',c:A.blue,how:'Industry leaders and academics offer masterclasses any university can stream live — then recorded into the shared national video library.',conn:['🏢 Industry experts','🎓 Universities'],when:'2027'},
+  {ic:'🧩',n:'Borrow a Problem',t:'Industry’s questions. The sector’s researchers.',c:A.purple,how:'Higher-degree research students are matched to real industry research problems nationally — one brokered front door instead of ad-hoc deals.',conn:['🏢 Industry R&D','🎓 HDR students'],when:'2027'}
+ ]},
+ {y:'2027–28',l:'Credentials that travel',it:[
+  {ic:'🏅',n:'The Stackable Sector',t:'Earn it once. Count it everywhere.',c:A.gold,how:'A mutual-recognition registry so a micro-credential from one institution — or an industry body — stacks toward a credential at another. Micros stop being dead-ends.',conn:['🏅 Professional bodies','🎓 Universities','🏢 Industry skills'],when:'2027–28'},
+  {ic:'🗺️',n:'The Accreditation Atlas',t:'Every accreditor, every program, one map.',c:A.coral,how:'A living map linking each discipline’s accreditation body — Engineers Australia, CPA, ACS, AHPRA — to the programs and standards it governs, so accreditation prep is shared, not reinvented.',conn:['🏅 Accreditors','🎓 University programs'],when:'2027–28'}
+ ]},
+ {y:'2028',l:'Closing the loops',it:[
+  {ic:'🔄',n:'Close the Loop',t:'Employers tell the sector what graduates need.',c:A.green,how:'Structured, comparable graduate-readiness feedback flows from industry back to course teams nationally — paired with QILT/GOS. The feedback loop the sector is missing.',conn:['🏢 Employers','🎓 Universities','📊 QILT/GOS'],when:'2028'},
+  {ic:'🪑',n:'One Table',t:'Same discipline, one shared advisory board.',c:A.teal,how:'Instead of every university exhausting the same employers on separate advisory boards, NTLSN convenes shared discipline boards — universities, industry and the peak body at one table.',conn:['🏢 Industry','🎓 Universities','🤝 Association'],when:'2028'}
+ ]},
+ {y:'2028–29',l:'The human & governance mesh',it:[
+  {ic:'🧠',n:'Borrow a Brain',t:'Move the people, move the practice.',c:A.blue,how:'A brokered secondment and visiting-fellow exchange — academic to industry, practitioner to classroom, association to campus. The human mesh that carries practice across boundaries.',conn:['🎓 Academics','🏢 Practitioners','🤝 Associations'],when:'2028–29'},
+  {ic:'📜',n:'The Partnership Ledger',t:'Who’s partnered with whom — finally visible.',c:A.purple,how:'A shared registry of sector MOUs and partnerships — including the peak-body agreements that anchor NTLSN — so collaboration is legible, not buried in inboxes.',conn:['🤝 Associations','🎓 Universities'],when:'2028–29'},
+  {ic:'🏛️',n:'The Accord Tracker',t:'Are we actually doing it?',c:A.gold,how:'A shared accountability dashboard tracking who is implementing which Universities Accord recommendation — across universities, associations and government.',conn:['🏛️ Government','🎓 Universities','🤝 Associations'],when:'2028–29'}
+ ]}
+];
+var VIS={n:'The National Mesh',t:'Forty-two universities. Every association. Industry. One connected sector.',how:'Every program above interlocks — a learner’s credential, a course’s calibration, an employer’s feedback and an academic’s secondment all moving through one shared fabric. Sharing stops being a campaign and becomes the sector’s default.'};
+
+function chip(x){return '<span style="font:600 11px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:3px 9px;border-radius:999px;white-space:nowrap;">'+x+'</span>';}
+function card(p){
+ return '<div style="background:#0f1f38;border:1px solid rgba(255,255,255,.08);border-left:3px solid '+p.c+';border-radius:14px;padding:20px;">'
+  +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span style="font-size:22px;line-height:1;">'+p.ic+'</span><span style="font:800 17px '+F+';color:#fff;">'+p.n+'</span></div>'
+  +'<div style="font:600 13px '+F+';color:'+p.c+';font-style:italic;margin-bottom:10px;">“'+p.t+'”</div>'
+  +'<div style="font:400 13px/1.55 '+F+';color:#9fb3c8;margin-bottom:14px;">'+p.how+'</div>'
+  +'<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">'+p.conn.map(chip).join('')+'</div>'
+  +'<div style="font:700 10px '+F+';letter-spacing:1px;color:'+p.c+';border:1px solid '+p.c+'55;border-radius:6px;padding:4px 8px;display:inline-block;">PLANNED · '+p.when+'</div>'
+ +'</div>';
+}
+function liveCard(p){
+ return '<a href="'+p.h+'" style="display:block;text-decoration:none;background:#0f1f38;border:1px solid rgba(78,205,196,.22);border-left:3px solid '+A.teal+';border-radius:14px;padding:18px;">'
+  +'<div style="font:700 10px '+F+';letter-spacing:1px;color:'+A.teal+';margin-bottom:8px;">● LIVE NOW</div>'
+  +'<div style="font:800 16px '+F+';color:#fff;margin-bottom:4px;">'+p.n+'</div>'
+  +'<div style="font:600 12px '+F+';color:'+A.teal+';font-style:italic;margin-bottom:10px;">“'+p.t+'”</div>'
+  +'<div style="font:600 12px '+F+';color:'+A.teal+';">→ jump to it</div>'
+ +'</a>';
+}
+function node(y,l,c){
+ return '<div style="display:flex;flex-direction:column;align-items:center;gap:7px;min-width:62px;">'
+  +'<div style="width:16px;height:16px;border-radius:50%;background:'+c+';box-shadow:0 0 0 5px '+c+'22;"></div>'
+  +'<div style="font:800 15px '+F+';color:#fff;">'+y+'</div>'
+  +'<div style="font:600 10px '+F+';color:#8aa0b6;text-transform:uppercase;letter-spacing:1px;text-align:center;">'+l+'</div>'
+ +'</div>';
+}
+function link2(a,b){return '<div style="flex:1;min-width:14px;height:3px;background:linear-gradient(90deg,'+a+','+b+');border-radius:2px;margin-top:8px;"></div>';}
+function chead(y,l){
+ return '<div style="display:flex;align-items:center;gap:12px;margin:0 0 18px;flex-wrap:wrap;">'
+  +'<span style="font:800 13px '+F+';letter-spacing:1px;color:#fff;background:rgba(124,156,255,.16);border:1px solid rgba(124,156,255,.32);padding:5px 12px;border-radius:999px;">'+y+'</span>'
+  +'<span style="font:700 16px '+F+';color:#cbd8e6;">'+l+'</span>'
+  +'<span style="flex:1;min-width:40px;height:1px;background:linear-gradient(90deg,rgba(124,156,255,.3),transparent);"></span>'
+ +'</div>';
+}
+function grid(inner){return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">'+inner+'</div>';}
+
+function build(){
+ var sec=document.createElement('section');sec.id='ntlsn-pipeline';
+ sec.style.cssText='max-width:1140px;margin:0 auto;padding:64px 24px;';
+ var head=''
+  +'<div style="text-align:center;color:#8FA7FF;font:700 12px/1 '+F+';letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9671; The Interconnection Pipeline</div>'
+  +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 '+F+';color:#fff;margin:0 0 12px;">The whole sector, wiring itself together.</h2>'
+  +'<p style="text-align:center;color:#9fb3c8;max-width:720px;margin:0 auto 8px;font:400 16px/1.6 '+F+';">We already broker university&nbsp;&harr;&nbsp;university — peer review, partnership, calibration. The next build phase brings in the bodies that complete the mesh: <b style="color:#cfe9e5;">industry, professional associations, and government.</b> This is the order we&rsquo;ll build it in — <b style="color:#cfe9e5;">do one, get one, keep the evidence.</b></p>'
+  +'<p style="text-align:center;color:#6b7e90;max-width:640px;margin:0 auto 36px;font:400 12px/1.6 '+F+';">A roadmap, not a promise — sequencing follows the sector. Founding partners and peak bodies help decide what comes first.</p>';
+ var spine='<div style="display:flex;align-items:flex-start;justify-content:center;gap:6px;max-width:720px;margin:0 auto 48px;">'
+  +node('NOW','Live today',A.teal)+link2(A.teal,A.blue)
+  +node('2027','Industry enters',A.blue)+link2(A.blue,A.green)
+  +node('2028','Loops close',A.green)+link2(A.green,A.purple)
+  +node('2029','The mesh',A.purple)
+ +'</div>';
+ var live='<div>'+chead('NOW','Live today — already brokering university ↔ university')+grid(LIVE.map(liveCard).join(''))+'</div>';
+ var body=COH.map(function(g){return '<div style="margin-top:40px;">'+chead(g.y,g.l)+grid(g.it.map(card).join(''))+'</div>';}).join('');
+ var vision='<div style="margin-top:44px;border-radius:16px;padding:2px;background:linear-gradient(120deg,#4ECDC4,#7C9CFF,#C57BFF);">'
+  +'<div style="background:#0b1a30;border-radius:14px;padding:30px 24px;text-align:center;">'
+   +'<div style="font:800 12px '+F+';letter-spacing:2px;color:#C57BFF;text-transform:uppercase;margin-bottom:8px;">&#9671; 2029 · The vision</div>'
+   +'<div style="font:800 clamp(22px,3vw,28px) '+F+';color:#fff;margin-bottom:10px;">'+VIS.n+'</div>'
+   +'<div style="font:600 15px '+F+';color:#9fb3c8;font-style:italic;margin:0 auto 12px;max-width:680px;">“'+VIS.t+'”</div>'
+   +'<div style="font:400 14px/1.6 '+F+';color:#8aa0b6;max-width:680px;margin:0 auto;">'+VIS.how+'</div>'
+  +'</div>'
+ +'</div>';
+ sec.innerHTML=head+spine+live+body+vision;
+ return sec;
+}
+function ensure(){var hero=document.getElementById('hero');if(!hero)return;if(document.getElementById('ntlsn-pipeline'))return;var sec=build();hero.parentNode.appendChild(sec);}
 ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script></body>
 </html>
