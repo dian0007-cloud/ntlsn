@@ -316,7 +316,7 @@ place(sec);
 }
 fetch(EP).then(function(r){return r.json();}).then(function(d){if(Array.isArray(d)&&d.length){DATA=d;build();}}).catch(function(){});
 new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-archive'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
+})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-archive'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
 var CARD="background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:18px;padding:28px;";
 var BTN="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#4ECDC4;border:none;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer;";
 var GHOST="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:9px 13px;text-decoration:none;cursor:pointer;";
@@ -692,6 +692,63 @@ function wire(sec){
  inp.addEventListener("input",function(){clearTimeout(t);t=setTimeout(function(){load(function(){render(sec,inp.value);});},200);});
 }
 function ensure(){var hero=document.getElementById("hero");if(!hero)return;if(document.getElementById("ntlsn-archive"))return;var sec=build();hero.parentNode.appendChild(sec);wire(sec);}
+ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
+})();</script><script id="ntlsn-bestpractice-script">(function(){
+var DATA=null,LOADING=false;
+var INPUT='width:100%;background:#0A1628;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:14px 16px;color:#fff;font:400 16px -apple-system,Segoe UI,Roboto,sans-serif;box-sizing:border-box;';
+function load(cb){
+ if(DATA)return cb();
+ if(LOADING)return;LOADING=true;
+ fetch("/data/ltr-bestpractice.json").then(function(r){return r.json();}).then(function(d){DATA=d;LOADING=false;cb();}).catch(function(){LOADING=false;});
+}
+function search(q){
+ if(!DATA)return [];
+ var terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+ if(!terms.length)return DATA.slice();
+ var out=[];
+ for(var i=0;i<DATA.length;i++){
+  var hay=(DATA[i].t+" "+DATA[i].a).toLowerCase();
+  var ok=true;
+  for(var j=0;j<terms.length;j++){if(hay.indexOf(terms[j])<0){ok=false;break;}}
+  if(ok)out.push(DATA[i]);
+ }
+ return out;
+}
+function build(){
+ var sec=document.createElement("section");sec.id="ntlsn-bestpractice";
+ sec.style.cssText="max-width:1100px;margin:0 auto;padding:64px 24px;";
+ sec.innerHTML=''
+ +'<div style="text-align:center;color:#4FD1A5;font:700 12px/1 sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9678; Best Practice Guides</div>'
+ +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 -apple-system,Segoe UI,Roboto,sans-serif;color:#fff;margin:0 0 12px;">The sector&rsquo;s proven playbooks &mdash; in one place.</h2>'
+ +'<p style="text-align:center;color:#9fb3c8;max-width:680px;margin:0 auto 8px;font:400 16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;">Two decades of national funding produced something rare: expert teams distilling what actually works into Good Practice Reports and best-practice guides &mdash; academic integrity, work-integrated learning, assessment, curriculum design, student transition and more. <b style="color:#cfe9e5;">80 curated guides, 2006&ndash;2024, searchable right here.</b> Adopt what&rsquo;s proven instead of starting from scratch.</p>'
+ +'<p style="text-align:center;color:#6b7e90;max-width:620px;margin:0 auto 30px;font:400 12px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;">A curated lens on the <a href="#ntlsn-archive" style="color:#9fb3c8;">Sector Archive</a> &mdash; everything tagged <i>&ldquo;best practice&rdquo;</i> in the <a href="https://ltr.edu.au" target="_blank" rel="noopener" style="color:#9fb3c8;">Learning &amp; Teaching Repository</a>, Australian Government Department of Education (CC). NTLSN indexes titles &amp; authors only &mdash; every result links to the full text at the Repository.</p>'
+ +'<div style="max-width:760px;margin:0 auto;">'
+   +'<input id="ntlsn-bp-q" placeholder="Search 80 best-practice guides&hellip; try &ldquo;assessment&rdquo;, &ldquo;academic integrity&rdquo;, &ldquo;work integrated&rdquo;, &ldquo;curriculum&rdquo;" style="'+INPUT+'" autocomplete="off">'
+   +'<div id="ntlsn-bp-meta" style="font:600 12px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;color:#6b7e90;margin:10px 2px;">80 guides &middot; 2006&ndash;2024 &middot; type to search, or browse below</div>'
+   +'<div id="ntlsn-bp-out"></div>'
+ +'</div>';
+ return sec;
+}
+function card(r){
+ return '<a href="'+r.u+'" target="_blank" rel="noopener" style="display:block;background:#0f1f38;border:1px solid rgba(79,209,165,.18);border-radius:12px;padding:14px 16px;margin-bottom:8px;text-decoration:none;">'
+  +'<div style="font:600 14px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;color:#fff;">'+r.t+'</div>'
+  +'<div style="font:400 12px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;color:#9fb3c8;margin-top:4px;">'+(r.a||"")+(r.a&&r.y?" · ":"")+(r.y||"")+' <span style="color:#4FD1A5;">&rarr; full text at LTR</span></div>'
+ +'</a>';
+}
+function render(sec,q){
+ var out=sec.querySelector("#ntlsn-bp-out"),meta=sec.querySelector("#ntlsn-bp-meta");
+ var res=search(q);
+ if(!q.trim()){meta.textContent="80 guides · 2006–2024 · showing all";out.innerHTML=res.slice(0,30).map(card).join("")+(res.length>30?'<div style="font:400 12px sans-serif;color:#6b7e90;text-align:center;padding:8px;">Showing 30 of '+res.length+' — search to narrow</div>':'');return;}
+ meta.textContent=res.length+" result(s) for “"+q+"”";
+ out.innerHTML=res.length?res.slice(0,30).map(card).join("")+(res.length>30?'<div style="font:400 12px sans-serif;color:#6b7e90;text-align:center;padding:8px;">Showing 30 of '+res.length+' — refine your search</div>':''):'<div style="font:400 14px sans-serif;color:#6b7e90;text-align:center;padding:16px;">No guides match “'+q+'” — try a broader term, or search the full <a href="#ntlsn-archive" style="color:#4FD1A5;">Sector Archive</a>.</div>';
+}
+function wire(sec){
+ var inp=sec.querySelector("#ntlsn-bp-q");if(!inp||inp.dataset.wired)return;inp.dataset.wired="1";
+ var t=null;
+ inp.addEventListener("focus",function(){load(function(){if(!inp.value.trim())render(sec,"");});});
+ inp.addEventListener("input",function(){clearTimeout(t);t=setTimeout(function(){load(function(){render(sec,inp.value);});},200);});
+}
+function ensure(){var hero=document.getElementById("hero");if(!hero)return;if(document.getElementById("ntlsn-bestpractice"))return;var sec=build();hero.parentNode.appendChild(sec);wire(sec);}
 ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script></body>
 </html>
