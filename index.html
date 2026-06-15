@@ -862,8 +862,8 @@ var TALKS=[];
 function esc(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 var T=[
  {n:'School',b:'Head of School',p:'$10k',c:'#378ADD',mult:'The foundation',u:['Peer review of teaching portal','Calibration exercises','Symposium sharing','Staff badging & micro-credentials','School-vs-sector benchmarking','Abstract peer-review workflow','Shared rubric library','Run your school symposium']},
- {n:'DVCA · portfolio',b:'DVC Academic',p:'$20k',c:'#7C9CFF',mult:'2× · portfolio-wide',u:['Everything in School','Conference submission previews','Adobe + SharePoint embeds','Curriculum mapping (TEQSA/AQF)','API access','Agentic AI assistant (beta)','Cross-faculty benchmarking','White-label branding','Portfolio analytics']},
- {n:'Enterprise',b:'Whole institution',p:'$30k',c:'#C9A962',mult:'4× · whole institution',u:['Everything in DVCA','Calibration & national moderation','Agentic AI — full','Full SDK + API','SSO + data sovereignty','On-prem AI box + updates','Unlimited staff, all faculties','Contextualised services','Dedicated support & SLA']}
+ {n:'DVCA · portfolio',b:'DVC Academic',p:'$20k',c:'#7C9CFF',mult:'2× · portfolio-wide',u:['Everything in School','Conference submission previews','Adobe + SharePoint embeds','Curriculum mapping (TEQSA/AQF)','LMS & calendar integrations','Agentic AI assistant (beta)','Cross-faculty benchmarking','White-label branding','Portfolio analytics']},
+ {n:'Enterprise',b:'Whole institution',p:'$30k',c:'#C9A962',mult:'4× · whole institution',u:['Everything in DVCA','Calibration & national moderation','Agentic AI — full','Developer API','SSO + data sovereignty','On-prem AI box + updates','Unlimited staff, all faculties','Contextualised services','Dedicated support & SLA']}
 ];
 function chip(x){return '<span style="font:600 12px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:4px 10px;border-radius:999px;">'+x+'</span>';}
 function tierCard(t){
@@ -881,7 +881,7 @@ function build(){
  sec.style.cssText='max-width:1140px;margin:0 auto;padding:64px 24px;';
  var head='<div style="text-align:center;color:#4ECDC4;font:700 12px/1 '+F+';letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9678; Pricing</div>'
   +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 '+F+';color:#fff;margin:0 0 12px;">Free for everyone. Paid only if you run your own.</h2>'
-  +'<p style="text-align:center;color:#9fb3c8;max-width:720px;margin:0 auto 30px;font:400 16px/1.6 '+F+';">The whole navigator — every event, the map, 2,000+ resources, the sector archive — is <b style="color:#cfe9e5;">free, forever, no login.</b> Universities pay only if they want to <i>run their own</i> symposiums, calibration and benchmarking on top.</p>';
+  +'<p style="text-align:center;color:#9fb3c8;max-width:720px;margin:0 auto 30px;font:400 16px/1.6 '+F+';">The whole navigator — every event, the map, 2,000+ resources, the sector archive — is <b style="color:#cfe9e5;">free, forever, no login.</b> Universities pay only to <i>run their own</i> — symposia, calibration, national peer review, registrations and expression-of-interest (EOI) submissions.</p>';
  var free='<div style="background:linear-gradient(135deg,rgba(78,205,196,.12),rgba(124,156,255,.05));border:1px solid rgba(78,205,196,.32);border-radius:18px;padding:34px 28px;text-align:center;margin-bottom:30px;">'
   +'<div style="font:700 11px '+F+';letter-spacing:2px;color:#4ECDC4;text-transform:uppercase;margin-bottom:10px;">&#9679; Free · the whole sector, open</div>'
   +'<div style="font:800 clamp(36px,7vw,56px)/1 '+F+';color:#fff;margin-bottom:6px;">$0 <span style="font-size:.4em;color:#9fb3c8;font-weight:600;">forever</span></div>'
