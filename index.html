@@ -793,7 +793,7 @@ function gcol(g,max){
   +'<div style="font:600 11px '+F+';color:#8aa0b6;text-transform:uppercase;letter-spacing:1px;text-align:center;">'+g.lab+'</div>'
  +'</div>';
 }
-function chip(y){return '<span style="font:800 14px '+F+';letter-spacing:1px;color:#fff;background:rgba(124,156,255,.16);border:1px solid rgba(124,156,255,.32);padding:5px 12px;border-radius:999px;">'+y+'</span>';}
+function chip(y){return '<span style="font:800 16px '+F+';letter-spacing:1px;color:#fff;background:rgba(124,156,255,.16);border:1px solid rgba(124,156,255,.32);padding:7px 15px;border-radius:999px;">'+y+'</span>';}
 function chead(y,l){
  return '<div style="display:flex;align-items:center;gap:12px;margin:0 0 18px;flex-wrap:wrap;">'+chip(y)
   +'<span style="font:700 17px '+F+';color:#cbd8e6;">'+l+'</span>'
@@ -886,7 +886,7 @@ var T=[
   {t:'SSO, white-label and dedicated support',h:'#ntlsn-capabilities',s:1,d:'Single sign-on, your brand, a named contact and SLA.'}
  ]}
 ];
-function chip(x){return '<span style="font:600 13px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:4px 10px;border-radius:999px;">'+x+'</span>';}
+function chip(x){return '<span style="font:700 15px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:8px 15px;border-radius:999px;">'+x+'</span>';}
 function tierCard(t){
  return '<div style="background:#0f1f38;border:1px solid rgba(255,255,255,.08);border-top:3px solid '+t.c+';border-radius:14px;padding:20px;">'
   +'<div style="font:800 19px '+F+';color:#fff;">'+t.n+'</div>'
@@ -957,7 +957,7 @@ var assocP='<div id="pt-assoc" class="pt-panel" style="display:none;">'
  +'</div>'
  +'</div>';
  var note='<div style="text-align:center;font:400 13px '+F+';color:#6b7e90;margin:18px auto 0;max-width:680px;">Prices are founding-cohort rates for the 2026&ndash;27 pilots &mdash; we&rsquo;re signing partners now, not charging yet. <a href="#ntlsn-pipeline" style="color:#4ECDC4;">See the roadmap &rarr;</a></div>';
- var RR=[['&#127891;','Academic / educator','r-acad'],['&#127979;','Head of School','r-hos'],['&#128101;','Associate Head &middot; Faculty','r-fac'],['&#127963;','DVC Academic','r-dvc'],['&#127913;','Dean','r-dean'],['&#9878;','Peak body &middot; Association','r-assoc']];var router='<div style="text-align:center;margin:0 0 30px;"><div style="font:700 12px '+F+';letter-spacing:2px;color:#8FA7FF;text-transform:uppercase;margin-bottom:8px;">&#9678; Where would you like to start?</div><div style="font:400 15px '+F+';color:#9fb3c8;margin-bottom:16px;">Tell us who you are &mdash; we&rsquo;ll take you to the right place. Everything stays free unless you run your own.</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:780px;margin:0 auto;">'+RR.map(function(r){return '<button class="pt-role" data-role="'+r[2]+'" type="button" style="font:700 14px '+F+';padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);color:#cbd8e6;cursor:pointer;transition:all .2s;">'+r[0]+' '+r[1]+'</button>';}).join('')+'</div></div>';sec.innerHTML=head+router+oep+tabbar+uniP+sympP+assocP+note;
+ var RR=[['&#127891;','Academic / educator','r-acad'],['&#127979;','Head of School','r-hos'],['&#128101;','Associate Head &middot; Faculty','r-fac'],['&#127963;','DVC Academic','r-dvc'],['&#127913;','Dean','r-dean'],['&#9878;','Peak body &middot; Association','r-assoc']];var router='<div style="text-align:center;margin:0 0 30px;"><div style="font:700 12px '+F+';letter-spacing:2px;color:#8FA7FF;text-transform:uppercase;margin-bottom:8px;">&#9678; Where would you like to start?</div><div style="font:400 15px '+F+';color:#9fb3c8;margin-bottom:16px;">Tell us who you are &mdash; we&rsquo;ll take you to the right place. Everything stays free unless you run your own.</div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:780px;margin:0 auto;">'+RR.map(function(r){return '<button class="pt-role" data-role="'+r[2]+'" type="button" style="font:700 15px '+F+';padding:11px 19px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.03);color:#cbd8e6;cursor:pointer;transition:all .2s;">'+r[0]+' '+r[1]+'</button>';}).join('')+'</div></div>';sec.innerHTML=head+router+oep+tabbar+uniP+sympP+assocP+note;
  return sec;
 }
 function wireTabs(sec){if(sec.dataset.tw)return;sec.dataset.tw='1';var tabs=sec.querySelectorAll('.pt-tab'),panels=sec.querySelectorAll('.pt-panel');function act(id){for(var i=0;i<panels.length;i++)panels[i].style.display=(panels[i].id===id)?'':'none';for(var j=0;j<tabs.length;j++){var on=tabs[j].dataset.pt===id;tabs[j].style.background=on?'rgba(78,205,196,.16)':'transparent';tabs[j].style.color=on?'#fff':'#9fb3c8';tabs[j].style.borderColor=on?'#4ECDC4':'rgba(255,255,255,.15)';}}for(var k=0;k<tabs.length;k++){(function(t){t.addEventListener('click',function(){act(t.dataset.pt);});})(tabs[k]);}var RM={'r-hos':'pt-uni','r-fac':'pt-uni','r-dvc':'pt-uni','r-dean':'pt-uni','r-assoc':'pt-assoc'};function pulse(el){if(!el)return;var o=el.style.boxShadow;el.style.boxShadow='0 0 0 2px #4ECDC4,0 18px 40px -12px rgba(78,205,196,.45)';setTimeout(function(){el.style.boxShadow=o;},2400);}function tierByName(nm){var cs=sec.querySelectorAll('#pt-uni [style*="border-top:3px solid"]');for(var i=0;i<cs.length;i++){if(cs[i].textContent.replace(/\s+/g,' ').trim().indexOf(nm)===0)return cs[i];}return null;}var roles=sec.querySelectorAll('.pt-role');for(var m=0;m<roles.length;m++){(function(rb){rb.addEventListener('click',function(){var role=rb.dataset.role;for(var z=0;z<roles.length;z++){var on=roles[z]===rb;roles[z].style.borderColor=on?'#4ECDC4':'rgba(255,255,255,.15)';roles[z].style.background=on?'rgba(78,205,196,.14)':'rgba(255,255,255,.03)';roles[z].style.color=on?'#fff':'#cbd8e6';}var tgt=RM[role],dest;if(tgt){act(tgt);dest=sec.querySelector('.pt-tab');if(tgt==='pt-uni'){var tn=(role==='r-dvc'||role==='r-dean')?'Institution':'School';setTimeout(function(){pulse(tierByName(tn));},150);}}else{dest=document.getElementById('pt-oep');}if(dest)dest.scrollIntoView({behavior:'smooth',block:'center'});});})(roles[m]);}act('pt-uni');}
@@ -1286,7 +1286,7 @@ var ORGS=['HERDSA','ASCILITE','Advance HE','CAULLT','WIL Australia','CAUL OER','
 var EXTRA=[['All',''],['Early career','early career'],['First Nations','Indigenous']];
 function style(){if(document.getElementById('ntlsn-gb-style'))return;var st=document.createElement('style');st.id='ntlsn-gb-style';
  st.textContent='#sotl-grants input{font-size:17px!important;padding:15px 18px!important;border-color:rgba(78,205,196,.35)!important;box-shadow:0 10px 34px -12px rgba(78,205,196,.28)!important}'
- +'.ntlsn-gb{font:700 12px '+F+';padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#cbd8e6;cursor:pointer;transition:background .15s,border-color .15s,color .15s;white-space:nowrap}'
+ +'.ntlsn-gb{font:700 14px '+F+';padding:9px 17px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#cbd8e6;cursor:pointer;transition:background .15s,border-color .15s,color .15s;white-space:nowrap}'
  +'.ntlsn-gb:hover{border-color:rgba(78,205,196,.6);color:#fff;background:rgba(78,205,196,.12)}'
  +'.ntlsn-gb.on{border-color:#4ECDC4;background:rgba(78,205,196,.18);color:#fff}';
  document.head.appendChild(st);}
@@ -1324,5 +1324,17 @@ function build(){
 }
 build();setTimeout(build,1000);setTimeout(build,2500);
 new MutationObserver(function(){if(!document.getElementById('ntlsn-positionality'))build();}).observe(document.body,{childList:true,subtree:true});
+})();</script><script id="ntlsn-archtopics-script">(function(){
+var F="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
+var TOPICS=['Assessment','Feedback','Curriculum','Students as Partners','Work-integrated learning','Academic integrity','First year','Indigenous','Online learning','Blended learning','Peer review','Employability','Inclusive education','Internationalisation','Leadership','Academic development','Reflective practice','Evaluation','Graduate outcomes','Threshold concepts'];
+function style(){if(document.getElementById('ntlsn-at-style'))return;var st=document.createElement('style');st.id='ntlsn-at-style';st.textContent='.ntlsn-at{font:700 14px '+F+';padding:9px 16px;border-radius:999px;border:1px solid rgba(124,156,255,.28);background:rgba(124,156,255,.06);color:#cbd8e6;cursor:pointer;transition:background .15s,border-color .15s,color .15s;white-space:nowrap}.ntlsn-at:hover{border-color:rgba(124,156,255,.7);color:#fff;background:rgba(124,156,255,.16)}';document.head.appendChild(st);}
+function build(){var inp=document.getElementById('ntlsn-arch-q');if(!inp)return;if(document.getElementById('ntlsn-archtopics'))return;style();
+ var out=document.getElementById('ntlsn-arch-out');
+ var wrap=document.createElement('div');wrap.id='ntlsn-archtopics';wrap.style.cssText='display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:760px;margin:14px auto;';
+ var lab=document.createElement('div');lab.textContent='Browse by theme';lab.style.cssText='width:100%;text-align:center;font:700 11px '+F+';letter-spacing:1.5px;text-transform:uppercase;color:#6b7e90;margin-bottom:2px';wrap.appendChild(lab);
+ TOPICS.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='ntlsn-at';b.textContent=t;b.addEventListener('click',function(){inp.value=t;inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('keyup',{bubbles:true}));inp.scrollIntoView({behavior:'smooth',block:'center'});});wrap.appendChild(b);});
+ if(out&&out.parentNode){out.parentNode.insertBefore(wrap,out);}else{inp.parentNode.insertBefore(wrap,inp.nextSibling);}}
+build();setTimeout(build,1000);setTimeout(build,2500);
+new MutationObserver(function(){if(!document.getElementById('ntlsn-archtopics'))build();}).observe(document.body,{childList:true,subtree:true});
 })();</script></body>
 </html>
