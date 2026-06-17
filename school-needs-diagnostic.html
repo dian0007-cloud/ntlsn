@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTLSN — School Needs Diagnostic (prototype)</title>
+<style>
+ *{margin:0;padding:0;box-sizing:border-box}
+ body{background:#0A1628;color:#eaf2fb;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+ button{font-family:inherit}
+ button:hover{filter:brightness(1.08)}
+ ::selection{background:#2DD4BF44}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+if(!window.storage){window.storage={async get(k,s){const p=s?"shared:":"local:";const v=localStorage.getItem(p+k);if(v===null)throw new Error("nf");return{key:k,value:v}},async set(k,v,s){localStorage.setItem((s?"shared:":"local:")+k,v);return{key:k}},async delete(k,s){localStorage.removeItem((s?"shared:":"local:")+k)},async list(pre,s){const sp=s?"shared:":"local:";const fp=sp+(pre||"");const keys=[];for(let i=0;i<localStorage.length;i++){const kk=localStorage.key(i);if(kk.startsWith(fp))keys.push(kk.slice(sp.length))}return{keys}}}}
+const {useState,useEffect}=React;
+
+const C={bg:"#0A1628",card:"#0f1f3a",ink:"#eaf2fb",mut:"#9fb3c8",line:"rgba(255,255,255,.10)",teal:"#2DD4BF",gold:"#FFB448",blue:"#7C9CFF",coral:"#FF6B6B",purple:"#C57BFF",green:"#4FD1A5"};
+const THEMES={
+ foundations:{name:"Foundations",color:C.blue},
+ assessment:{name:"Assessment",color:C.coral},
+ inclusion:{name:"Inclusion",color:C.gold},
+ innovation:{name:"Innovation",color:C.teal},
+ leadership:{name:"Leadership",color:C.purple},
+ studentSuccess:{name:"Student Success",color:C.green},
+};
+// status of each NTLSN destination — honest badges
+const ST={free:{t:"Free commons",c:C.teal},school:{t:"School package",c:C.gold},design:{t:"In design",c:C.mut},proto:{t:"Prototype",c:C.blue}};
+
+// Sector-generic capability areas — each maps to NTLSN destinations
+const CAPS=[
+ {id:"design",name:"Course design & constructive alignment",theme:"foundations",desc:"Aligning learning outcomes, activities and assessment into coherent course design.",ntlsn:[{f:"Curriculum Auditor — PLO→CLO→ULO mapping",s:"design"},{f:"SoTL archive (1,431 works)",s:"free"},{f:"Best Practices library",s:"free"}],tags:["alignment","accreditation","outcomes"]},
+ {id:"assessment",name:"Assessment, rubrics & moderation",theme:"assessment",desc:"Rubrics, calibration, grading consistency, authentic & AI-resilient assessment.",ntlsn:[{f:"Calibration Suite",s:"free"},{f:"Best Practices library",s:"free"}],tags:["rubrics","moderation","grading","ai_integrity","accreditation"]},
+ {id:"feedback",name:"Feedback for learning",theme:"assessment",desc:"Feedback that builds student agency and closes the loop.",ntlsn:[{f:"Best Practices library",s:"free"},{f:"SoTL archive",s:"free"}],tags:["feedback","satisfaction"]},
+ {id:"inclusive",name:"Inclusive & culturally-safe curriculum",theme:"inclusion",desc:"UDL, accessibility, and First Nations perspectives — celebrated and embedded.",ntlsn:[{f:"SoTL archive",s:"free"},{f:"First Nations resources (celebrated, never ranked)",s:"free"}],tags:["diversity","inclusion","fn","udl","accessibility"]},
+ {id:"digital",name:"Digital pedagogy & AI",theme:"innovation",desc:"Using ed-tech and generative AI purposefully and with integrity.",ntlsn:[{f:"Reflective Coach",s:"proto"},{f:"Resource Hub (2,000+)",s:"free"}],tags:["ai","tech","digital","online","ai_use","ai_integrity"]},
+ {id:"peer",name:"Peer review & scholarly practice",theme:"leadership",desc:"Peer observation, teaching philosophy, SoTL and mentoring.",ntlsn:[{f:"Pair Review (2-person)",s:"design"},{f:"Peer-Review Exchange",s:"free"},{f:"SoTL archive",s:"free"}],tags:["peer","sotl","career","philosophy"]},
+ {id:"fye",name:"Transition, retention & first-year experience",theme:"studentSuccess",desc:"Transition pedagogy, belonging, early intervention, retention.",ntlsn:[{f:"Best Practices library",s:"free"},{f:"Sector events & resources",s:"free"}],tags:["retention","fye","belonging","regional"]},
+];
+
+const DISCIPLINES=["Business","Education","Engineering & IT","Health & Medical Sciences","Humanities & Communication","Law & Justice","Nursing & Midwifery","Psychology & Wellbeing","Sciences","Creative Arts","Other / Prefer not to say"];
+
+const questions=[
+ {id:"exp",section:"About You",q:"How long have you been teaching in higher education?",type:"single",options:[{label:"Less than 2 years (new to HE)",value:"new"},{label:"2–5 years",value:"early"},{label:"6–15 years",value:"mid"},{label:"More than 15 years",value:"senior"}]},
+ {id:"role",section:"About You",q:"Which best describes your current role?",type:"single",options:[{label:"Sessional / casual academic",value:"sessional"},{label:"Tutor / teaching-focused lecturer",value:"tutor"},{label:"Lecturer / course coordinator",value:"lecturer"},{label:"Senior lecturer / program director",value:"senior_lec"},{label:"Associate professor or above",value:"prof"},{label:"Professional staff (teaching support)",value:"professional"}]},
+ {id:"discipline",section:"About You",q:"Which discipline area is your school in?",type:"single",options:DISCIPLINES.map(s=>({label:s,value:s}))},
+ {id:"mode",section:"About You",q:"What is your primary teaching mode?",type:"single",options:[{label:"Fully online / distance",value:"online"},{label:"Blended",value:"blended"},{label:"Primarily face-to-face",value:"f2f"},{label:"Intensive / block mode",value:"intensive"}]},
+ {id:"cohort",section:"About You",q:"Which cohorts do you primarily teach? Select all that apply.",type:"multi",options:[{label:"First-year / transition",value:"fy"},{label:"Postgraduate coursework",value:"pg"},{label:"Regional / distance",value:"regional"},{label:"International",value:"intl"},{label:"First-in-family",value:"fif"},{label:"First Nations",value:"fn"},{label:"Placement / WIL",value:"wil"},{label:"Large cohorts (200+)",value:"large"}]},
+ {id:"challenge_top",section:"Current Challenges",q:"What is your single biggest teaching challenge right now?",type:"single",options:[{label:"Designing AI-resilient, authentic assessment",value:"ai_assess"},{label:"Student engagement and motivation",value:"engagement"},{label:"Managing diverse needs and inclusivity",value:"diversity"},{label:"Keeping up with technology and AI",value:"tech"},{label:"Moderation and grading consistency",value:"moderation"},{label:"Evidencing teaching quality / scholarly identity",value:"career"},{label:"Designing meaningful WIL",value:"wil"},{label:"Retention and first-year experience",value:"retention"}]},
+ {id:"challenge_multi",section:"Current Challenges",q:"Which of these are you currently dealing with? Select all that apply.",type:"multi",options:[{label:"Students submitting AI-generated work",value:"ai_integrity"},{label:"Unclear or misaligned learning outcomes",value:"alignment"},{label:"Feedback students don't use",value:"feedback"},{label:"Rubrics that don't differentiate",value:"rubrics"},{label:"Integrating industry partners",value:"wil"},{label:"Unsure how to use AI constructively",value:"ai_use"},{label:"No time for scholarly reflection",value:"sotl"},{label:"Assessment redesign for accreditation",value:"accreditation"},{label:"Supporting at-risk students",value:"retention"},{label:"Accessible, culturally-safe curriculum",value:"inclusion"},{label:"Low satisfaction / engagement scores",value:"satisfaction"}]},
+ {id:"conf_design",section:"How Confident Are You?",q:"Course design and constructive alignment",sub:"Aligning outcomes, activities and assessment into a coherent course.",type:"scale"},
+ {id:"conf_assess",section:"How Confident Are You?",q:"Assessment quality and moderation",sub:"Rubrics, calibrating standards, authentic assessment.",type:"scale"},
+ {id:"conf_feedback",section:"How Confident Are You?",q:"Feedback for student learning",sub:"Feedback that builds agency and closes the loop.",type:"scale"},
+ {id:"conf_inclusive",section:"How Confident Are You?",q:"Inclusive curriculum and cultural safety",sub:"First Nations perspectives, UDL, accessibility.",type:"scale"},
+ {id:"conf_digital",section:"How Confident Are You?",q:"Digital pedagogy and AI integration",sub:"Using generative AI and ed-tech purposefully.",type:"scale"},
+ {id:"conf_peer",section:"How Confident Are You?",q:"Peer review and scholarly practice",sub:"Peer observation, teaching philosophy, SoTL, mentoring.",type:"scale"},
+ {id:"conf_fye",section:"How Confident Are You?",q:"First-year experience and retention",sub:"Transition pedagogy, early intervention, belonging.",type:"scale"},
+ {id:"interests",section:"Interests & Goals",q:"Which topics interest you most? Select up to 5.",type:"multi",maxSelect:5,options:[{label:"Constructive alignment & course design",value:"alignment"},{label:"Rubrics, calibration & moderation",value:"rubrics"},{label:"Feedback & evaluative judgement",value:"feedback"},{label:"First Nations perspectives",value:"fn"},{label:"Universal Design for Learning",value:"udl"},{label:"Work-integrated learning",value:"wil"},{label:"Generative AI in teaching",value:"ai"},{label:"Learning analytics",value:"analytics"},{label:"Peer review of teaching",value:"peer"},{label:"Teaching philosophy & identity",value:"philosophy"},{label:"SoTL & evidence-based practice",value:"sotl"},{label:"Transition, retention & belonging",value:"fye"},{label:"Online & blended design",value:"online"}]},
+ {id:"motivation",section:"Your Approach",q:"What would most motivate you to engage with development?",type:"single",options:[{label:"Solving an immediate teaching problem",value:"problem"},{label:"Gaining recognition for work I already do",value:"recognition"},{label:"Connecting with peers who share my challenges",value:"community"},{label:"Staying ahead of sector change (AI, policy)",value:"currency"}]},
+ {id:"time",section:"Your Approach",q:"How much time can you realistically commit per week?",type:"single",options:[{label:"30 minutes or less",value:"minimal"},{label:"1–2 hours",value:"moderate"},{label:"3–5 hours",value:"substantial"},{label:"Intensive blocks, not weekly",value:"intensive"}]},
+];
+const scaleLabels=["Not confident","Slightly","Somewhat","Confident","Very confident"];
+
+function computeResults(answers){
+ const scores={}; CAPS.forEach(c=>scores[c.id]=0);
+ const confMap={conf_design:"design",conf_assess:"assessment",conf_feedback:"feedback",conf_inclusive:"inclusive",conf_digital:"digital",conf_peer:"peer",conf_fye:"fye"};
+ Object.entries(confMap).forEach(([k,cid])=>{const need=4-(answers[k]??2); scores[cid]+=need*3;});
+ const challengeMap={ai_assess:{digital:4,assessment:3},engagement:{feedback:4,fye:3},diversity:{inclusive:4,fye:2},tech:{digital:4},moderation:{assessment:4,feedback:2},career:{peer:4},wil:{design:3,fye:1},retention:{fye:4,inclusive:2}};
+ if(answers.challenge_top&&challengeMap[answers.challenge_top]) Object.entries(challengeMap[answers.challenge_top]).forEach(([c,w])=>scores[c]+=w);
+ (answers.challenge_multi||[]).forEach(tag=>{CAPS.forEach(c=>{if(c.tags.includes(tag))scores[c.id]+=2;});});
+ const interestMap={alignment:"design",rubrics:"assessment",feedback:"feedback",fn:"inclusive",udl:"inclusive",ai:"digital",analytics:"digital",peer:"peer",philosophy:"peer",sotl:"peer",fye:"fye",online:"digital",wil:"design"};
+ (answers.interests||[]).forEach(i=>{if(interestMap[i])scores[interestMap[i]]+=3;});
+ const cohortMap={fy:{fye:3},regional:{fye:2,inclusive:1},fn:{inclusive:3},wil:{design:3},intl:{inclusive:2},large:{digital:2},fif:{fye:2}};
+ (answers.cohort||[]).forEach(c=>{Object.entries(cohortMap[c]||{}).forEach(([cc,w])=>scores[cc]+=w);});
+ if(answers.exp==="new"||answers.exp==="early"){scores.design+=3;scores.assessment+=2;scores.feedback+=2;}
+ if(answers.exp==="mid"||answers.exp==="senior"){scores.peer+=3;scores.fye+=1;}
+ if(answers.mode==="online")scores.digital+=2;
+ const ranked=CAPS.map(c=>({...c,score:Math.max(scores[c.id],0)})).sort((a,b)=>b.score-a.score);
+ const themeScores={}; Object.keys(THEMES).forEach(t=>themeScores[t]=0); ranked.forEach(c=>themeScores[c.theme]+=c.score);
+ const confProfile={"Course design":answers.conf_design??2,"Assessment":answers.conf_assess??2,"Feedback":answers.conf_feedback??2,"Inclusion":answers.conf_inclusive??2,"Digital / AI":answers.conf_digital??2,"Peer / scholarly":answers.conf_peer??2,"FYE":answers.conf_fye??2};
+ return {ranked,themeScores,confProfile,answers};
+}
+
+function Tag({s}){const x=ST[s];return <span style={{fontSize:"9px",fontWeight:700,letterSpacing:"0.5px",textTransform:"uppercase",color:x.c,border:`1px solid ${x.c}55`,borderRadius:"6px",padding:"1px 6px",whiteSpace:"nowrap"}}>{x.t}</span>;}
+
+function ConfBar({label,value}){const pct=(value/4)*100;const cols=["#FF6B6B","#FF8A6B","#FFB448","#7CCf9f","#4FD1A5"];return(<div style={{display:"flex",alignItems:"center",gap:"8px",marginBottom:"7px"}}><div style={{width:"110px",fontSize:"11px",fontWeight:600,color:C.mut,textAlign:"right"}}>{label}</div><div style={{flex:1,maxWidth:220,height:"12px",background:"#0b1c34",borderRadius:"6px",overflow:"hidden"}}><div style={{width:`${pct}%`,height:"100%",background:cols[value]||cols[2],borderRadius:"6px",transition:"width .5s"}}/></div><div style={{fontSize:"11px",color:C.mut,width:"22px"}}>{value}/4</div></div>);}
+
+function CapCard({cap,rank,expanded,onToggle}){const t=THEMES[cap.theme];return(
+ <div style={{background:C.card,borderRadius:"10px",border:`1px solid ${C.line}`,borderLeft:`4px solid ${t.color}`,marginBottom:"8px",overflow:"hidden"}}>
+  <div onClick={onToggle} style={{padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:"12px"}}>
+   {rank&&<span style={{width:"24px",height:"24px",borderRadius:"50%",background:t.color,color:"#06121f",display:"inline-flex",alignItems:"center",justifyContent:"center",fontSize:"12px",fontWeight:800,flexShrink:0}}>{rank}</span>}
+   <div style={{flex:1}}>
+    <div style={{fontSize:"14px",fontWeight:700,color:C.ink}}>{cap.name}</div>
+    <div style={{fontSize:"10px",color:t.color,fontWeight:600,textTransform:"uppercase",letterSpacing:"0.5px",marginTop:"3px"}}>{t.name}</div>
+   </div>
+   <span style={{fontSize:"14px",color:C.mut,transform:expanded?"rotate(180deg)":"rotate(0)",transition:"transform .2s"}}>▼</span>
+  </div>
+  {expanded&&<div style={{padding:"0 16px 16px",borderTop:`1px solid ${C.line}`}}>
+   <p style={{fontSize:"13px",color:C.mut,lineHeight:1.5,margin:"12px 0"}}>{cap.desc}</p>
+   <div style={{fontSize:"11px",fontWeight:700,color:C.teal,marginBottom:"6px"}}>ON NTLSN →</div>
+   {cap.ntlsn.map((d,i)=><div key={i} style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"8px",padding:"7px 10px",background:"#0b1c34",borderRadius:"7px",marginBottom:"5px"}}><span style={{fontSize:"12.5px",color:C.ink}}>{d.f}</span><Tag s={d.s}/></div>)}
+  </div>}
+ </div>);}
+
+function SchoolView({onBack}){
+ const [subs,setSubs]=useState([]);const [loading,setLoading]=useState(true);
+ useEffect(()=>{(async()=>{try{const r=await window.storage.list("ndiag:");if(r&&r.keys){const all=[];for(const k of r.keys){try{const g=await window.storage.get(k,true);if(g&&g.value)all.push(JSON.parse(g.value));}catch(e){}}setSubs(all);}}catch(e){}setLoading(false);})();},[]);
+ const n=subs.length;
+ const demand={};CAPS.forEach(c=>demand[c.id]={top1:0,top3:0});
+ subs.forEach(s=>(s.ranked||[]).forEach((c,i)=>{if(demand[c.id]){if(i===0)demand[c.id].top1++;if(i<3)demand[c.id].top3++;}}));
+ const confKeys=["conf_design","conf_assess","conf_feedback","conf_inclusive","conf_digital","conf_peer","conf_fye"];
+ const confLab={conf_design:"Course design",conf_assess:"Assessment",conf_feedback:"Feedback",conf_inclusive:"Inclusion",conf_digital:"Digital / AI",conf_peer:"Peer / scholarly",conf_fye:"FYE"};
+ const confAvg={};confKeys.forEach(k=>{const v=subs.map(s=>s.answers&&s.answers[k]).filter(x=>x!=null);confAvg[k]=v.length?v.reduce((a,b)=>a+b,0)/v.length:0;});
+ const chFreq={};subs.forEach(s=>{const c=s.answers&&s.answers.challenge_top;if(c)chFreq[c]=(chFreq[c]||0)+1;});
+ const chLab={ai_assess:"AI-resilient assessment",engagement:"Engagement",diversity:"Diverse needs",tech:"Tech / AI currency",moderation:"Moderation",career:"Teaching-quality evidence",wil:"WIL design",retention:"Retention / FYE"};
+ const topGaps=CAPS.slice().sort((a,b)=>(demand[b.id].top3)-(demand[a.id].top3)).slice(0,3);
+ const exportCSV=()=>{if(!n)return;const ids=CAPS.map(c=>c.id);const head=["Timestamp","Discipline","Role","Experience","Mode","Top_Challenge","Top_Need",...ids.map(i=>i+"_score"),...confKeys];
+  const esc=v=>{const s=String(v==null?"":v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+  const rows=subs.map(s=>{const a=s.answers||{};const sm={};(s.ranked||[]).forEach(c=>sm[c.id]=c.score);return [s.timestamp,a.discipline,a.role,a.exp,a.mode,a.challenge_top,(s.ranked&&s.ranked[0]&&s.ranked[0].id)||"",...ids.map(i=>sm[i]??0),...confKeys.map(k=>a[k]??"")].map(esc).join(",");});
+  const csv=[head.join(","),...rows].join("\n");const b=new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8;"});const u=URL.createObjectURL(b);const a=document.createElement("a");a.href=u;a.download="NTLSN_School_Needs_"+new Date().toISOString().slice(0,10)+".csv";a.click();URL.revokeObjectURL(u);};
+ if(loading)return <div style={{padding:"60px",textAlign:"center",color:C.mut}}>Loading…</div>;
+ return(<div style={{minHeight:"100vh",padding:"24px",maxWidth:"760px",margin:"0 auto"}}>
+  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"18px"}}>
+   <div><div style={{fontSize:"11px",fontWeight:700,color:C.gold,letterSpacing:"2px",textTransform:"uppercase"}}>Head of School view</div><h1 style={{fontSize:"21px",fontWeight:800,color:C.ink}}>Your school's needs map</h1></div>
+   <div style={{display:"flex",gap:"8px"}}>{n>0&&<button onClick={exportCSV} style={{background:C.teal,color:"#06121f",border:"none",padding:"8px 14px",borderRadius:"999px",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>Export CSV</button>}<button onClick={onBack} style={{background:"transparent",color:C.ink,border:`1px solid ${C.line}`,padding:"8px 14px",borderRadius:"999px",fontSize:"12px",fontWeight:600,cursor:"pointer"}}>Back</button></div>
+  </div>
+  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",marginBottom:"20px"}}>
+   <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"16px",textAlign:"center"}}><div style={{fontSize:"28px",fontWeight:800,color:C.teal}}>{n}</div><div style={{fontSize:"11px",color:C.mut,textTransform:"uppercase"}}>Staff responses</div></div>
+   <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"16px",textAlign:"center"}}><div style={{fontSize:"15px",fontWeight:800,color:C.gold,marginTop:"6px"}}>{n?(chLab[Object.entries(chFreq).sort((a,b)=>b[1]-a[1])[0][0]]||"—"):"—"}</div><div style={{fontSize:"11px",color:C.mut,textTransform:"uppercase",marginTop:"4px"}}>#1 challenge</div></div>
+  </div>
+  {n===0?(<div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"30px",textAlign:"center"}}><div style={{fontSize:"15px",fontWeight:700,color:C.ink,marginBottom:"6px"}}>No responses yet</div><p style={{fontSize:"13px",color:C.mut}}>Ask your staff to complete the diagnostic and hit “Save &amp; share”. Their results aggregate here into your school's needs map.</p></div>):(<>
+   <div style={{background:"linear-gradient(120deg,#0f2942,#13294a)",border:`1px solid ${C.teal}33`,borderRadius:"12px",padding:"18px",marginBottom:"22px"}}>
+    <div style={{fontSize:"12px",fontWeight:700,color:C.teal,marginBottom:"10px"}}>★ YOUR SCHOOL PACKAGE PRIORITIES — top 3 gaps &amp; what NTLSN gives you</div>
+    {topGaps.map((c,i)=><div key={c.id} style={{marginBottom:"12px"}}><div style={{fontSize:"13.5px",fontWeight:700,color:C.ink}}>{i+1}. {c.name}</div><div style={{display:"flex",gap:"6px",flexWrap:"wrap",marginTop:"5px"}}>{c.ntlsn.map((d,j)=><span key={j} style={{display:"inline-flex",alignItems:"center",gap:"6px",fontSize:"11.5px",color:C.mut,background:"#0b1c34",borderRadius:"6px",padding:"3px 8px"}}>{d.f} <Tag s={d.s}/></span>)}</div></div>)}
+   </div>
+   <h3 style={{fontSize:"14px",fontWeight:700,color:C.ink,marginBottom:"10px"}}>Capability demand (ranked a top-3 need)</h3>
+   {CAPS.slice().sort((a,b)=>demand[b.id].top3-demand[a.id].top3).map(c=>{const t=THEMES[c.theme];const pct=n?demand[c.id].top3/n*100:0;return(<div key={c.id} style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}><div style={{width:"150px",fontSize:"11px",color:C.mut,textAlign:"right"}}>{c.name.split(" ").slice(0,2).join(" ")}</div><div style={{flex:1,height:"16px",background:"#0b1c34",borderRadius:"4px",overflow:"hidden",position:"relative"}}><div style={{width:`${pct}%`,height:"100%",background:t.color,borderRadius:"4px"}}/></div><div style={{fontSize:"11px",color:C.mut,width:"70px"}}>{demand[c.id].top1}×#1</div></div>);})}
+   <h3 style={{fontSize:"14px",fontWeight:700,color:C.ink,margin:"24px 0 10px"}}>Average confidence (lower = bigger school gap)</h3>
+   {confKeys.slice().sort((a,b)=>confAvg[a]-confAvg[b]).map(k=>{const avg=confAvg[k];const pct=avg/4*100;return(<div key={k} style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"6px"}}><div style={{width:"110px",fontSize:"11px",color:C.mut,textAlign:"right"}}>{confLab[k]}</div><div style={{flex:1,height:"14px",background:"#0b1c34",borderRadius:"4px",overflow:"hidden"}}><div style={{width:`${pct}%`,height:"100%",background:avg<2?C.coral:avg<3?C.gold:C.green,borderRadius:"4px"}}/></div><div style={{fontSize:"11px",color:C.mut,width:"34px"}}>{avg.toFixed(1)}</div></div>);})}
+  </>)}
+  <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"16px",marginTop:"26px"}}>
+   <div style={{fontSize:"12px",fontWeight:700,color:C.gold,marginBottom:"6px"}}>Prototype note — honest scope</div>
+   <p style={{fontSize:"11.5px",color:C.mut,lineHeight:1.6,margin:0}}>This view aggregates responses saved <b>in this browser</b> (or shared storage on claude.ai). A real school-wide rollout — many staff submitting from their own devices into one dashboard — needs the NTLSN back-end (the 6-month build). Interim: each person exports, or everyone uses one shared link. Recommendations point to live NTLSN commons features plus School-package and in-design tools, badged honestly.</p>
+  </div>
+ </div>);
+}
+
+function App(){
+ const [phase,setPhase]=useState("welcome");
+ const [qi,setQi]=useState(0);
+ const [answers,setAnswers]=useState({});
+ const [multiSel,setMultiSel]=useState([]);
+ const [scaleVal,setScaleVal]=useState(null);
+ const [results,setResults]=useState(null);
+ const [expanded,setExpanded]=useState(null);
+ const [saved,setSaved]=useState(false);
+ const [admin,setAdmin]=useState(false);
+ const q=questions[qi];
+ const sections=[...new Set(questions.map(x=>x.section))];
+ const progress=(qi/questions.length)*100;
+ const advance=na=>{if(qi<questions.length-1)setQi(qi+1);else{setResults(computeResults(na));setPhase("results");}};
+ const single=v=>{const na={...answers,[q.id]:v};setAnswers(na);advance(na);};
+ const scale=()=>{if(scaleVal==null)return;const na={...answers,[q.id]:scaleVal};setAnswers(na);setScaleVal(null);advance(na);};
+ const multi=()=>{if(!multiSel.length)return;const na={...answers,[q.id]:multiSel.map(i=>q.options[i].value)};setAnswers(na);setMultiSel([]);advance(na);};
+ const save=async()=>{if(!results)return;try{await window.storage.set("ndiag:"+Date.now()+"-"+Math.random().toString(36).slice(2,7),JSON.stringify({timestamp:new Date().toISOString(),answers:results.answers,ranked:results.ranked.map(c=>({id:c.id,name:c.name,score:c.score,theme:c.theme}))}),true);setSaved(true);}catch(e){alert("Save needs shared storage (claude.ai) or the NTLSN back-end.");}};
+ const btn=a=>({background:a?C.teal:C.card,color:a?"#06121f":C.ink,border:`1.5px solid ${a?C.teal:C.line}`,borderRadius:"9px",padding:"12px 16px",fontSize:"14px",cursor:"pointer",textAlign:"left",lineHeight:1.4,fontWeight:a?700:500,width:"100%"});
+
+ if(admin)return <SchoolView onBack={()=>setAdmin(false)}/>;
+
+ if(phase==="welcome")return(<div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px"}}><div style={{maxWidth:"580px",textAlign:"center"}}>
+  <div style={{fontSize:"12px",fontWeight:700,color:C.teal,letterSpacing:"3px",textTransform:"uppercase",marginBottom:"14px"}}>◇ NTLSN · School package</div>
+  <h1 style={{fontSize:"30px",fontWeight:800,lineHeight:1.15,marginBottom:"16px"}}>School Needs Diagnostic</h1>
+  <p style={{fontSize:"15px",color:C.mut,lineHeight:1.6,marginBottom:"10px"}}>Map your teaching context, challenges and confidence to a personalised set of priorities — each linked to the NTLSN resources and tools that address it. Every response also feeds your <b style={{color:C.ink}}>Head of School's needs map</b>.</p>
+  <p style={{fontSize:"13px",color:"#5f7388",marginBottom:"26px"}}>17 questions · ~4 minutes · nothing leaves your browser unless you choose “Save &amp; share”.</p>
+  <button onClick={()=>setPhase("quiz")} style={{background:C.teal,color:"#06121f",border:"none",padding:"14px 46px",borderRadius:"999px",fontSize:"16px",fontWeight:800,cursor:"pointer"}}>Begin diagnostic</button>
+  <div style={{marginTop:"22px"}}><button onClick={()=>setAdmin(true)} style={{background:"none",border:"none",fontSize:"12px",color:C.mut,cursor:"pointer",textDecoration:"underline"}}>Head of School dashboard</button></div>
+  <div style={{marginTop:"30px",fontSize:"11px",color:"#5f7388"}}>Prototype · part of the proposed NTLSN School package · ntlsn.com</div>
+ </div></div>);
+
+ if(phase==="quiz")return(<div style={{minHeight:"100vh",padding:"24px",maxWidth:"640px",margin:"0 auto"}}>
+  <div style={{marginBottom:"26px"}}>
+   <div style={{fontSize:"11px",fontWeight:700,color:C.teal,letterSpacing:"2px",textTransform:"uppercase",marginBottom:"12px"}}>◇ School Needs Diagnostic</div>
+   <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"8px"}}><div style={{flex:1,height:"5px",background:"#0b1c34",borderRadius:"4px",overflow:"hidden"}}><div style={{width:`${progress}%`,height:"100%",background:`linear-gradient(90deg,${C.blue},${C.teal},${C.gold})`,borderRadius:"4px",transition:"width .4s"}}/></div><span style={{fontSize:"12px",color:C.mut,fontWeight:600}}>{qi+1}/{questions.length}</span></div>
+   <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>{sections.map(s=><span key={s} style={{fontSize:"10.5px",padding:"3px 9px",borderRadius:"16px",fontWeight:600,background:s===q.section?C.teal:"#0b1c34",color:s===q.section?"#06121f":C.mut}}>{s}</span>)}</div>
+  </div>
+  <h2 style={{fontSize:"20px",fontWeight:700,lineHeight:1.4,marginBottom:q.sub?"6px":"22px"}}>{q.q}</h2>
+  {q.sub&&<p style={{fontSize:"13px",color:C.mut,fontStyle:"italic",marginBottom:"20px"}}>{q.sub}</p>}
+  {q.maxSelect&&<p style={{fontSize:"12px",color:C.gold,fontWeight:600,marginBottom:"14px"}}>Select up to {q.maxSelect}</p>}
+  {q.type==="single"&&<div style={{display:"flex",flexDirection:"column",gap:"8px"}}>{q.options.map((o,i)=><button key={i} onClick={()=>single(o.value)} style={btn(false)}>{o.label}</button>)}</div>}
+  {q.type==="scale"&&<div><div style={{display:"flex",gap:"6px",marginBottom:"18px",flexWrap:"wrap"}}>{scaleLabels.map((l,i)=><button key={i} onClick={()=>setScaleVal(i)} style={{...btn(scaleVal===i),flex:"1 1 auto",minWidth:"92px",textAlign:"center",fontSize:"12px"}}>{l}</button>)}</div><button onClick={scale} disabled={scaleVal==null} style={{background:scaleVal!=null?C.teal:"#24364f",color:scaleVal!=null?"#06121f":C.mut,border:"none",padding:"11px 30px",borderRadius:"999px",fontSize:"14px",fontWeight:700,cursor:scaleVal!=null?"pointer":"default"}}>Continue</button></div>}
+  {q.type==="multi"&&<div><div style={{display:"flex",flexDirection:"column",gap:"6px",marginBottom:"16px"}}>{q.options.map((o,i)=>{const sel=multiSel.includes(i);const dis=!sel&&q.maxSelect&&multiSel.length>=q.maxSelect;return <button key={i} onClick={()=>{if(dis)return;setMultiSel(sel?multiSel.filter(x=>x!==i):[...multiSel,i]);}} style={{...btn(sel),opacity:dis?0.4:1,display:"flex",alignItems:"center",gap:"10px"}}><span style={{width:"17px",height:"17px",borderRadius:"4px",flexShrink:0,border:`2px solid ${sel?"#06121f":C.mut}`,background:sel?"#06121f":"transparent",color:C.teal,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",fontWeight:800}}>{sel?"✓":""}</span>{o.label}</button>;})}</div><button onClick={multi} disabled={!multiSel.length} style={{background:multiSel.length?C.teal:"#24364f",color:multiSel.length?"#06121f":C.mut,border:"none",padding:"11px 30px",borderRadius:"999px",fontSize:"14px",fontWeight:700,cursor:multiSel.length?"pointer":"default"}}>Continue</button></div>}
+ </div>);
+
+ if(phase==="results"&&results){const{ranked,themeScores,confProfile}=results;const topTheme=Object.entries(themeScores).sort((a,b)=>b[1]-a[1])[0];const ti=THEMES[topTheme[0]];const freeCount=[...new Set(ranked.slice(0,4).flatMap(c=>c.ntlsn.filter(d=>d.s==="free").map(d=>d.f)))].length;
+  return(<div style={{minHeight:"100vh",padding:"24px",maxWidth:"760px",margin:"0 auto"}}>
+   <div style={{textAlign:"center",marginBottom:"18px"}}><div style={{fontSize:"11px",fontWeight:700,color:C.gold,letterSpacing:"3px",textTransform:"uppercase",marginBottom:"6px"}}>Your development profile</div><h1 style={{fontSize:"24px",fontWeight:800}}>What you need — and where it lives on NTLSN</h1></div>
+   <div style={{background:saved?"#0f2a22":"#16243f",borderRadius:"10px",padding:"12px 16px",marginBottom:"16px",display:"flex",justifyContent:"space-between",alignItems:"center",gap:"10px",border:`1px solid ${saved?C.green+"55":C.gold+"44"}`}}>{saved?<span style={{fontSize:"13px",color:C.green,fontWeight:600}}>✓ Saved — added to your school's needs map</span>:<><span style={{fontSize:"13px",color:C.mut}}>Save your results so your Head of School sees the school's aggregate needs.</span><button onClick={save} style={{background:C.teal,color:"#06121f",border:"none",padding:"8px 18px",borderRadius:"999px",fontSize:"12px",fontWeight:700,cursor:"pointer",whiteSpace:"nowrap"}}>Save &amp; share</button></>}</div>
+   <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:"10px",marginBottom:"20px"}}>
+    <div style={{background:C.card,border:`1px solid ${ti.color}40`,borderRadius:"10px",padding:"12px",textAlign:"center"}}><div style={{fontSize:"10px",color:C.mut,textTransform:"uppercase"}}>Primary focus</div><div style={{fontSize:"14px",fontWeight:800,color:ti.color,marginTop:"4px"}}>{ti.name}</div></div>
+    <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"12px",textAlign:"center"}}><div style={{fontSize:"10px",color:C.mut,textTransform:"uppercase"}}>Start with</div><div style={{fontSize:"13px",fontWeight:700,color:C.ink,marginTop:"4px"}}>{ranked[0].name.split(" ").slice(0,2).join(" ")}</div></div>
+    <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"12px",textAlign:"center"}}><div style={{fontSize:"10px",color:C.mut,textTransform:"uppercase"}}>Free tools ready</div><div style={{fontSize:"18px",fontWeight:800,color:C.teal,marginTop:"2px"}}>{freeCount}</div></div>
+   </div>
+   <p style={{fontSize:"13px",color:C.mut,marginBottom:"14px"}}>Your priorities, ranked by your challenges, confidence gaps and interests. Tap each to see the NTLSN resources that address it.</p>
+   {ranked.map((c,i)=><CapCard key={c.id} cap={c} rank={i+1} expanded={expanded===c.id} onToggle={()=>setExpanded(expanded===c.id?null:c.id)}/>)}
+   <h3 style={{fontSize:"14px",fontWeight:700,margin:"22px 0 12px"}}>Your confidence profile</h3>
+   {Object.entries(confProfile).map(([l,v])=><ConfBar key={l} label={l} value={v}/>)}
+   <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"16px",marginTop:"22px"}}><div style={{fontSize:"12px",fontWeight:700,color:C.teal,marginBottom:"6px"}}>What happens next?</div><p style={{fontSize:"12.5px",color:C.mut,lineHeight:1.6,margin:0}}>Free items are on the NTLSN commons today (no login). “School package” and “in design” items are part of the proposed NTLSN School subscription. Save your results so your school can see where the whole team needs support — that aggregate is the case for the School package.</p></div>
+   <div style={{textAlign:"center",marginTop:"18px",paddingBottom:"30px",display:"flex",gap:"12px",justifyContent:"center"}}><button onClick={()=>{setPhase("welcome");setQi(0);setAnswers({});setResults(null);setExpanded(null);setSaved(false);}} style={{background:"transparent",color:C.ink,border:`1.5px solid ${C.line}`,padding:"10px 28px",borderRadius:"999px",fontSize:"14px",fontWeight:600,cursor:"pointer"}}>Retake</button><button onClick={()=>setAdmin(true)} style={{background:"transparent",color:C.mut,border:`1.5px solid ${C.line}`,padding:"10px 22px",borderRadius:"999px",fontSize:"13px",fontWeight:600,cursor:"pointer"}}>Head of School view</button></div>
+  </div>);
+ }
+ return null;
+}
+ReactDOM.render(React.createElement(App),document.getElementById("root"));
+</script>
+</body>
+</html>
