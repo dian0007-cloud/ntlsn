@@ -316,7 +316,7 @@ place(sec);
 }
 fetch(EP).then(function(r){return r.json();}).then(function(d){if(Array.isArray(d)&&d.length){DATA=d;build();}}).catch(function(){});
 new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{id:'pricing'},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-archive'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-ethos'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'ntlsn-pipeline'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
+})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{tag:'SECTION',head:1,re:/Where would you like to start/},{id:'pricing'},{tag:'DIV',re:/^Due Soon/},{id:'yearview'},{id:'events'},{id:'conferences'},{id:'sotl-grants'},{id:'pd'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-archive'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'pathways'},{id:'benchmarks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-pairreview'},{id:'ntlsn-ethos'},{id:'ntlsn-sap'},{id:'ntlsn-calibrate'},{id:'ntlsn-pipeline'},{id:'frameworks'},{id:'architecture'},{id:'map'},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'directory'},{id:'network'},{id:'about'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{id:'ntlsn-aim'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
 var CARD="background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:18px;padding:28px;";
 var BTN="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#4ECDC4;border:none;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer;";
 var GHOST="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:9px 13px;text-decoration:none;cursor:pointer;";
@@ -992,5 +992,57 @@ function build(){var sec=document.createElement('section');sec.id='ntlsn-ethos';
 function ensure(){var hero=document.getElementById('hero');if(!hero)return;if(document.getElementById('ntlsn-ethos'))return;var sec=build();hero.parentNode.appendChild(sec);}
 ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script>
-</body>
+<script id="ntlsn-pairreview-script">(function(){
+var A={teal:'#4ECDC4',blue:'#7C9CFF',purple:'#C57BFF',gold:'#C9A962',coral:'#FF8A6B',green:'#4FD1A5'};
+var F='-apple-system,Segoe UI,Roboto,sans-serif';
+var STEPS=[
+ {ic:'\u{1F91D}',n:'Invite',t:'Invite one colleague you trust.',c:A.teal},
+ {ic:'\u{1F4CB}',n:'Shared rubric',t:'Agree the lens before you start.',c:A.blue},
+ {ic:'\u{1F440}',n:'Observation',t:'Sit in — live or recorded.',c:A.purple},
+ {ic:'\u{1F4AC}',n:'Structured feedback',t:'Trade evidence, not impressions.',c:A.coral},
+ {ic:'\u{1F3C5}',n:'Recorded outcome',t:'A record for promotion or PPR.',c:A.gold}
+];
+var WHY=[
+ {ic:'\u{1F465}',n:'Two, not a committee',t:'The smallest, highest-trust unit of peer review — one reviewer, one reviewee, one honest conversation.',c:A.teal},
+ {ic:'\u{1F517}',n:'Built on the Exchange',t:'The live Peer-Review Exchange finds you a reviewer; Pair Review is the structured flow you run together.',c:A.blue},
+ {ic:'\u{1F4DC}',n:'Evidence that travels',t:'Every review leaves a portable record — ready for promotion, PPR and teaching-recognition.',c:A.gold}
+];
+
+function step(p,i,last){
+ var node='<div style="display:flex;flex-direction:column;align-items:center;gap:9px;min-width:110px;max-width:150px;flex:1;">'
+  +'<div style="width:54px;height:54px;border-radius:50%;background:#0f1f38;border:1px solid '+p.c+'66;box-shadow:0 0 0 5px '+p.c+'18;display:flex;align-items:center;justify-content:center;font-size:24px;line-height:1;">'+p.ic+'</div>'
+  +'<div style="font:700 10px '+F+';letter-spacing:1px;color:'+p.c+';">STEP '+(i+1)+'</div>'
+  +'<div style="font:800 15px '+F+';color:#fff;text-align:center;">'+p.n+'</div>'
+  +'<div style="font:400 12px/1.5 '+F+';color:#9fb3c8;text-align:center;">'+p.t+'</div>'
+ +'</div>';
+ var arrow=last?'':'<div style="align-self:flex-start;margin-top:18px;color:#5a6f86;font:800 20px '+F+';flex:0 0 auto;">→</div>';
+ return node+arrow;
+}
+function whyCard(p){
+ return '<div style="background:#0f1f38;border:1px solid rgba(255,255,255,.08);border-left:3px solid '+p.c+';border-radius:14px;padding:20px;">'
+  +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:20px;line-height:1;">'+p.ic+'</span><span style="font:800 16px '+F+';color:#fff;">'+p.n+'</span></div>'
+  +'<div style="font:400 13px/1.55 '+F+';color:#9fb3c8;">'+p.t+'</div>'
+ +'</div>';
+}
+
+function build(){
+ var sec=document.createElement('section');sec.id='ntlsn-pairreview';
+ sec.style.cssText='max-width:1140px;margin:0 auto;padding:64px 24px;';
+ var head=''
+  +'<div style="text-align:center;color:#4ECDC4;font:700 12px/1 '+F+';letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9671; Pair Review</div>'
+  +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 '+F+';color:#fff;margin:0 0 12px;">Two colleagues. One structured review.</h2>'
+  +'<p style="text-align:center;color:#9fb3c8;max-width:720px;margin:0 auto 14px;font:400 16px/1.6 '+F+';">A focused, one-to-one peer review of teaching — the Peer-Review Exchange, scoped to a pair. The same connective DNA as the symposium engine, distilled to the smallest unit that matters: <b style="color:#cfe9e5;">you and one trusted colleague.</b></p>'
+  +'<div style="text-align:center;margin:0 auto 40px;"><span style="display:inline-block;font:700 11px '+F+';letter-spacing:1px;color:#C9A962;border:1px solid #C9A96255;border-radius:999px;padding:5px 14px;">IN DESIGN &middot; the next build for the live Peer-Review Exchange</span></div>';
+ var flow='<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:30px 22px;margin:0 auto 18px;">'
+  +'<div style="display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:8px;">'+STEPS.map(function(p,i){return step(p,i,i===STEPS.length-1);}).join('')+'</div>'
+ +'</div>';
+ var sub='<p style="text-align:center;color:#6b7e90;max-width:640px;margin:0 auto 40px;font:400 12px/1.6 '+F+';">A method, not a committee — designed to be low-stakes, high-trust and evidence-leaving. Sequencing follows the sector; founding partners help decide what comes first.</p>';
+ var grid='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">'+WHY.map(whyCard).join('')+'</div>';
+ var cta='<div style="margin-top:30px;text-align:center;"><a href="#ntlsn-prx" style="display:inline-block;text-decoration:none;font:700 14px '+F+';color:#0a1628;background:#4ECDC4;border-radius:999px;padding:12px 26px;">See the live Peer-Review Exchange &rarr;</a></div>';
+ sec.innerHTML=head+flow+sub+grid+cta;
+ return sec;
+}
+function ensure(){var hero=document.getElementById('hero');if(!hero)return;if(document.getElementById('ntlsn-pairreview'))return;var sec=build();hero.parentNode.appendChild(sec);}
+ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
+})();</script></body>
 </html>
