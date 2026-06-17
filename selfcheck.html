@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Course Quality Self-Check (TELAS &amp; UDL)</title>
+<style>
+ :root{--bg:#0A1628;--card:#0f1f3a;--ink:#eaf2fb;--mut:#9fb3c8;--line:rgba(255,255,255,.10);--teal:#2DD4BF;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--coral:#FF6B6B;--green:#4FD1A5;--F:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+ *{margin:0;padding:0;box-sizing:border-box}
+ body{background:radial-gradient(1100px 520px at 50% -8%,#13294a 0%,var(--bg) 55%);color:var(--ink);font-family:var(--F);line-height:1.5;min-height:100vh}
+ .wrap{max-width:860px;margin:0 auto;padding:26px 18px 70px}
+ button{font-family:var(--F);cursor:pointer;border:none;border-radius:999px;font-weight:700}
+ ::selection{background:#2DD4BF44}
+ .ey{color:var(--teal);font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+ .pill{display:inline-block;font:700 11px var(--F);letter-spacing:1px;border-radius:999px;padding:5px 13px}
+ .tabs{display:flex;gap:8px;margin:18px 0 6px;flex-wrap:wrap}
+ .tab{background:transparent;border:1px solid var(--line);color:var(--ink);padding:9px 18px;font-size:13.5px;font-weight:700}
+ .tab.on{background:var(--card)}
+ .qcard{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:7px}
+ .opts{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+ .opt{border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:8px;padding:5px 11px;font-size:11.5px;font-weight:600;cursor:pointer}
+ .grphd{margin:18px 0 7px;font:800 13px var(--F);color:var(--teal);letter-spacing:.3px}
+ .btn{background:var(--teal);color:#06121f;padding:12px 24px;font-size:14px}
+ .btn2{background:transparent;border:1px solid var(--line);color:var(--ink);padding:9px 16px;font-size:12.5px;font-weight:600}
+ .btn2:hover{border-color:var(--teal);color:var(--teal)}
+ #result{display:none}
+ @media print{.noprint{display:none!important}body{background:#fff;color:#000}}
+ a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div style="text-align:center"><span class="ey">◇ NTLSN · quality assurance</span></div>
+ <h1 style="text-align:center;font:800 clamp(25px,5vw,38px)/1.05 var(--F);margin:3px 0 8px">Course Quality Self-Check</h1>
+ <p style="text-align:center;color:var(--mut);max-width:660px;margin:0 auto 8px;font-size:15px">Rate your course against two trusted frameworks and get a <b style="color:#cfe9e5">spider profile</b> you can screenshot — see your strengths and gaps at a glance.</p>
+ <div style="text-align:center;margin:0 auto 6px"><span class="pill" style="color:var(--gold);border:1px solid #FFB44855">IN DESIGN · prototype · nothing leaves your browser</span></div>
+
+ <div class="tabs noprint" id="tabs"></div>
+ <p id="intro" style="color:var(--mut);font-size:13px;margin:6px 0 4px"></p>
+ <div id="questions"></div>
+ <div class="noprint" style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+  <button class="btn" id="gen">Generate my spider →</button>
+  <span id="coverage" style="font-size:12px;color:var(--mut)"></span>
+ </div>
+
+ <div id="result">
+  <h2 style="text-align:center;font:800 22px var(--F);margin:26px 0 4px" id="rtitle"></h2>
+  <div style="text-align:center;color:var(--mut);font-size:13px;margin-bottom:6px" id="roverall"></div>
+  <div style="display:flex;justify-content:center"><div id="radar"></div></div>
+  <div id="breakdown" style="max-width:560px;margin:8px auto 0"></div>
+  <div class="noprint" style="text-align:center;margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+   <button class="btn2" id="print">🖨 Save / screenshot</button>
+   <button class="btn2" id="redo">Edit answers</button>
+  </div>
+ </div>
+
+ <div style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:26px">
+  <div style="font:700 12px var(--F);color:var(--gold);margin-bottom:5px">What this is — honestly</div>
+  <p style="font-size:12px;color:var(--mut);line-height:1.6;margin:0"><b style="color:#cfe9e5">TELAS</b> is ACODE's Technology Enhanced Learning Accreditation Standards; this self-check uses its 8 standards but is <b>not</b> a formal TELAS review or accreditation (that's a peer-reviewed process at <a href="https://www.telas.edu.au" target="_blank" rel="noopener">telas.edu.au</a>). <b style="color:#cfe9e5">UDL</b> is CAST's Universal Design for Learning. Both run entirely in your browser — nothing is sent anywhere. On the NTLSN roadmap this becomes the <b>quality-assurance layer</b> (a TELAS API/SDK), complementary to ACODE — adds the self-check, never replaces the formal review. Part of the proposed NTLSN platform · ntlsn.com</p>
+ </div>
+</div>
+
+<script>
+var TELAS={
+ title:"TELAS — course quality",
+ intro:"Rate each TELAS performance criterion for your course. Yes · Yes but (mostly) · No but (partly) · No. → an 8-standard spider.",
+ scale:[["Yes",100],["Yes but",67],["No but",33],["No",0]],
+ dims:[["S1","Environment"],["S2","Experience"],["S3","Support"],["S4","Interaction"],["S5","Tasks"],["S6","Digital"],["S7","Resources"],["S8","Relevance"]],
+ dimFull:{S1:"S1 · Environment supports learning",S2:"S2 · Positive learner experience",S3:"S3 · Admin/technical/learning support",S4:"S4 · Learner & teacher interaction",S5:"S5 · Tasks engage with feedback",S6:"S6 · Digital tech & literacies",S7:"S7 · Resources available & inclusive",S8:"S8 · Resources relevant & engaging"},
+ groups:[
+  ["Online Learning Environment",[
+   ["S1","Navigation & layout are functional, consistent and intuitive"],
+   ["S1","The environment is logically sequenced and organised"],
+   ["S2","The environment is inclusive (tone, voice, diverse perspectives)"],
+   ["S2","It functions across contemporary devices and platforms"],
+   ["S2","It meets appropriate accessibility standards (contrast, alt text, captions)"],
+   ["S2","Learners have opportunities to provide feedback"]]],
+  ["Learner Support",[
+   ["S3","Links to relevant services, information and policies are provided"],
+   ["S3","Clear instructions for accessing technical support are provided"],
+   ["S3","Clear, consistent guides for using the technology are provided"],
+   ["S3","Support to answer learner questions is available (FAQ, contacts, timeframes)"],
+   ["S3","Learning analytics are available to learners"],
+   ["S4","Learner-to-learner interaction opportunities are provided"],
+   ["S4","Learner-to-teacher interaction opportunities are provided"],
+   ["S4","Activities foster the learning community (welcome, introductions, team bios)"]]],
+  ["Learning & Assessment Tasks",[
+   ["S5","Aims, outcomes, schedule and participation expectations are provided"],
+   ["S5","Assessment details, criteria (rubrics) and feedback are provided"],
+   ["S5","Engagement expectations & outcomes for tasks are clear"],
+   ["S5","A variety of active learning & assessment tasks is offered"],
+   ["S5","Formative and summative feedback opportunities are provided"],
+   ["S6","Tasks are supported by relevant digital technology with guidance"],
+   ["S6","Opportunities to develop & demonstrate digital literacies are scaffolded"]]],
+  ["Learning Resources",[
+   ["S7","Resources are available and functional on contemporary devices"],
+   ["S7","Resources are copyright-compliant and appropriately attributed"],
+   ["S7","Resources reflect diversity and are culturally considerate"],
+   ["S8","Resources are relevant, with context for why they matter"],
+   ["S8","Resources are provided in a range of modalities"]]]
+ ]
+};
+var UDL={
+ title:"UDL — inclusive design",
+ intro:"How well does your course design reflect each UDL consideration? 1 (not yet) → 5 (exemplary). 15 questions → a 9-point UDL spider.",
+ scale:[["1 · Not yet",0],["2 · Emerging",25],["3 · Developing",50],["4 · Embedded",75],["5 · Exemplary",100]],
+ dims:[["IN","Interest"],["PE","Persistence"],["SR","Self-reg"],["PC","Perception"],["LS","Language"],["CO","Comprehension"],["PA","Physical"],["EX","Expression"],["EF","Executive"]],
+ dimFull:{IN:"Engagement · Recruiting interest",PE:"Engagement · Sustaining effort & persistence",SR:"Engagement · Self-regulation",PC:"Representation · Perception",LS:"Representation · Language & symbols",CO:"Representation · Comprehension",PA:"Action · Physical action & interaction",EX:"Action · Expression & communication",EF:"Action · Executive function & strategy"},
+ groups:[
+  ["Engagement — the WHY of learning",[
+   ["IN","Learners have genuine choices in how they engage (topics, tools, contexts)"],
+   ["PE","The goals, relevance and value of tasks are made explicit"],
+   ["PE","Collaboration, community and belonging are deliberately fostered"],
+   ["SR","Learners are supported to set goals, self-assess and reflect"]]],
+  ["Representation — the WHAT of learning",[
+   ["PC","Information is offered in multiple formats (text, audio, visual)"],
+   ["PC","The display is customisable (size, contrast, playback speed)"],
+   ["LS","Vocabulary, symbols and notation are clarified and defined"],
+   ["LS","Content is accessible across languages and abilities"],
+   ["CO","Big ideas, patterns and connections are highlighted; prior knowledge activated"],
+   ["CO","Learning supports transfer and generalisation to new contexts"]]],
+  ["Action & Expression — the HOW of learning",[
+   ["PA","Learners can navigate and interact in multiple ways (devices, assistive tech)"],
+   ["EX","Learners can express understanding in multiple media (write, present, build)"],
+   ["EX","Tools and scaffolds for composition and communication are provided"],
+   ["EF","Learners are supported to set goals and plan their approach"],
+   ["EF","Learners are supported to manage information and monitor their progress"]]]
+ ]
+};
+var MODES={telas:TELAS,udl:UDL};
+var KEY='ntlsn_selfcheck';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}}
+var STORE=load();
+var cur='telas';
+var $=function(id){return document.getElementById(id)};
+function save(){localStorage.setItem(KEY,JSON.stringify(STORE));}
+function ans(mode){STORE[mode]=STORE[mode]||{};return STORE[mode];}
+
+// tabs
+['telas','udl'].forEach(function(m){
+ var b=document.createElement('button');b.className='tab'+(m===cur?' on':'');b.textContent=MODES[m].title;b.onclick=function(){cur=m;$('result').style.display='none';renderTabs();renderQ();};b.dataset.m=m;$('tabs').appendChild(b);
+});
+function renderTabs(){[].slice.call($('tabs').children).forEach(function(b){b.className='tab'+(b.dataset.m===cur?' on':'');});}
+
+function renderQ(){
+ var M=MODES[cur];$('intro').textContent=M.intro;
+ var a=ans(cur);var box=$('questions');box.innerHTML='';var qi=0;
+ M.groups.forEach(function(g){
+  var h=document.createElement('div');h.className='grphd';h.textContent=g[0];box.appendChild(h);
+  g[1].forEach(function(q){
+   var idx=qi++; var dim=q[0],text=q[1];
+   var d=document.createElement('div');d.className='qcard';
+   var opts=M.scale.map(function(s,si){var sel=a[idx]===si;return '<button class="opt" data-q="'+idx+'" data-v="'+si+'" style="'+(sel?'background:'+colorFor(s[1])+';color:#06121f;border-color:transparent;':'')+'">'+s[0]+'</button>';}).join('');
+   d.innerHTML='<div style="font-size:13.5px;color:#dce6f0">'+text+'</div><div class="opts">'+opts+'</div>';
+   box.appendChild(d);
+  });
+ });
+ [].slice.call(box.querySelectorAll('.opt')).forEach(function(b){b.onclick=function(){ans(cur)[+b.dataset.q]=+b.dataset.v;save();renderQ();updateCoverage();};});
+ updateCoverage();
+}
+function totalQ(M){var n=0;M.groups.forEach(function(g){n+=g[1].length;});return n;}
+function updateCoverage(){var M=MODES[cur];var a=ans(cur);var done=Object.keys(a).length;$('coverage').textContent=done+'/'+totalQ(M)+' rated';}
+function colorFor(v){return v>=75?'#4FD1A5':v>=50?'#2DD4BF':v>=33?'#FFB448':'#FF6B6B';}
+
+// flatten questions to dims, compute per-dim score
+function compute(){
+ var M=MODES[cur];var a=ans(cur);var qi=0;var byDim={};
+ M.dims.forEach(function(d){byDim[d[0]]={sum:0,n:0};});
+ M.groups.forEach(function(g){g[1].forEach(function(q){var dim=q[0];if(a[qi]!==undefined){byDim[dim].sum+=M.scale[a[qi]][1];byDim[dim].n++;}qi++;});});
+ var labels=[],vals=[],full=[];
+ M.dims.forEach(function(d){var b=byDim[d[0]];var v=b.n?Math.round(b.sum/b.n):0;labels.push(d[1]);vals.push(v);full.push([M.dimFull[d[0]],v,b.n]);});
+ var rated=Object.keys(a).length;var overall=rated?Math.round(M.groups.reduce(function(ac,g){return ac;},0)||(Object.keys(a).reduce(function(s,k){return s+M.scale[a[k]][1];},0)/rated)):0;
+ return {labels:labels,vals:vals,full:full,overall:overall,rated:rated,total:totalQ(M)};
+}
+
+function radarSVG(labels,vals){
+ var n=labels.length,cx=210,cy=205,R=135;var P=[];
+ function pt(i,r){var ang=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(ang),cy+r*Math.sin(ang)];}
+ var s=['<svg width="420" height="410" viewBox="0 0 420 410" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto">'];
+ // grid rings
+ [0.25,0.5,0.75,1].forEach(function(f){var poly=[];for(var i=0;i<n;i++){var p=pt(i,R*f);poly.push(p[0].toFixed(1)+','+p[1].toFixed(1));}s.push('<polygon points="'+poly.join(' ')+'" fill="none" stroke="rgba(255,255,255,.10)"/>');});
+ // axes + labels
+ for(var i=0;i<n;i++){var e=pt(i,R);s.push('<line x1="'+cx+'" y1="'+cy+'" x2="'+e[0].toFixed(1)+'" y2="'+e[1].toFixed(1)+'" stroke="rgba(255,255,255,.10)"/>');
+  var l=pt(i,R+20);var ang=-Math.PI/2+i*2*Math.PI/n;var anch=Math.cos(ang)>0.3?'start':(Math.cos(ang)<-0.3?'end':'middle');var dy=Math.sin(ang)>0.3?10:(Math.sin(ang)<-0.3?-3:4);
+  s.push('<text x="'+l[0].toFixed(1)+'" y="'+(l[1]+dy).toFixed(1)+'" fill="#9fb3c8" font-size="11.5" font-family="Arial" font-weight="700" text-anchor="'+anch+'">'+labels[i]+'</text>');}
+ // data polygon
+ var dp=[];for(var i=0;i<n;i++){var p=pt(i,R*(vals[i]/100));dp.push(p[0].toFixed(1)+','+p[1].toFixed(1));}
+ s.push('<polygon points="'+dp.join(' ')+'" fill="rgba(45,212,191,.22)" stroke="#2DD4BF" stroke-width="2.4" stroke-linejoin="round"/>');
+ for(var i=0;i<n;i++){var p=pt(i,R*(vals[i]/100));s.push('<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.4" fill="#2DD4BF"/>');}
+ s.push('</svg>');return s.join('');
+}
+
+$('gen').onclick=function(){
+ var r=compute();var M=MODES[cur];
+ $('rtitle').textContent=M.title.split('—')[0].trim()+' profile';
+ $('roverall').innerHTML='Overall '+r.overall+'% · '+r.rated+'/'+r.total+' rated'+(r.rated<r.total?' <span style="color:#FFB448">(unrated count as 0)</span>':'');
+ $('radar').innerHTML=radarSVG(r.labels,r.vals);
+ var bd=r.full.slice().sort(function(a,b){return a[1]-b[1];}).map(function(f){var c=colorFor(f[1]);return '<div style="display:flex;align-items:center;gap:9px;margin-bottom:5px"><div style="width:210px;font-size:11.5px;color:#cbd8e6;text-align:right">'+f[0]+'</div><div style="flex:1;height:12px;background:#0b1c34;border-radius:6px;overflow:hidden"><div style="width:'+f[1]+'%;height:100%;background:'+c+'"></div></div><div style="width:34px;font-size:11px;color:#9fb3c8">'+f[1]+'%</div></div>';}).join('');
+ $('breakdown').innerHTML='<div style="font:700 12px var(--F);color:#9fb3c8;margin:14px 0 7px;text-align:center">Lowest first — where to focus</div>'+bd;
+ $('result').style.display='block';$('result').scrollIntoView({behavior:'smooth',block:'start'});
+};
+$('print').onclick=function(){window.print();};
+$('redo').onclick=function(){$('result').style.display='none';$('questions').scrollIntoView({behavior:'smooth',block:'start'});};
+renderQ();
+</script>
+</body>
+</html>
