@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTLSN — TEQSA Gen AI Readiness (self-assessment prototype)</title>
+<style>
+ *{margin:0;padding:0;box-sizing:border-box}
+ body{background:#0A1628;color:#eaf2fb;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+ button{font-family:inherit}
+ ::selection{background:#2DD4BF44}
+ @media print{ .noprint{display:none!important} body{background:#fff;color:#000} }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect}=React;
+const C={bg:"#0A1628",card:"#0f1f3a",ink:"#eaf2fb",mut:"#9fb3c8",line:"rgba(255,255,255,.10)",teal:"#2DD4BF",gold:"#FFB448",blue:"#7C9CFF",red:"#FF6B6B",green:"#4FD1A5"};
+// RAG: 1 = Missing (red), 2 = In plan, not well conceptualised (amber), 3 = In plan & well conceptualised (green)
+const RAG={1:{t:"Missing",c:C.red,ic:"✕"},2:{t:"Partial",c:C.gold,ic:"◐"},3:{t:"Embedded",c:C.green,ic:"✓"}};
+
+const DOMAINS=[
+ {id:"he_process",group:"Higher Education",name:"Process",blurb:"Governance: strategy, risk, oversight, working groups.",sections:[
+  {name:"Gen AI strategy & action plan — short-term",items:["Align the gen AI action plan with broader institutional strategic objectives and principles.","Have the institutional governing body review and endorse the gen AI action plan.","Establish clear oversight mechanisms at the appropriate level of governance.","Review and update impacted policies, procedures and guidelines.","Make the institutional gen AI strategy accessible to all staff and students."]},
+  {name:"Gen AI strategy & action plan — medium/long-term",items:["Embed gen AI mitigation strategies into existing governance, QA frameworks and planning activities.","Schedule regular progress updates to the governing body and relevant boards/committees.","Periodically review, evaluate and document the efficacy of the institutional gen AI strategy."]},
+  {name:"Risk assessment — short-term",items:["Include a gen AI-specific item in the risk register.","Conduct a risk assessment of all course offerings.","Triage risk mitigation to prioritise assessment reform for the highest-risk courses.","Evaluate course admission practices vulnerable to gen AI-generated submissions.","Identify and remediate equity, diversity or inclusion issues from assessment changes."]},
+  {name:"Risk assessment — medium/long-term",items:["Continue transforming course offerings to integrate gen AI into teaching, learning and assessment.","Implement reformed risk-mitigation strategies and admissions processes.","Establish ongoing review checkpoints for risk-mitigation effectiveness.","Benchmark institutional initiatives and progress against similar providers.","Arrange an institutional licence/subscription for vetted, approved gen AI tools."]},
+  {name:"Working groups — short-term",items:["Develop clear objectives for gen AI working groups.","Specify the terms of reference / charter for formal working groups.","Establish reporting structures for working groups.","Appoint and document group membership.","Gain endorsement of formal groups from an institutional decision-maker."]},
+  {name:"Working groups — medium/long-term",items:["Regularly update the governing body and Academic Board on working-group advice.","Establish ongoing monitoring and oversight mechanisms.","Periodically evaluate the working group's terms of reference, schedule and membership."]}
+ ]},
+ {id:"he_people",group:"Higher Education",name:"People",blurb:"Students, staff, and external/accreditation partners.",sections:[
+  {name:"Students — short-term",items:["Update the student welcome email, handbooks and guidance with the institutional approach to gen AI.","Update the academic integrity module to cover the ethical use of gen AI.","Provide access to a gen AI training module to build student capability.","Evaluate purchasing an institutional licence for an approved gen AI tool.","Add gen AI questions to student evaluation surveys to gather impact feedback."]},
+  {name:"Students — medium/long-term",items:["Monitor completion and effectiveness of the academic integrity module.","Support students to co-create gen AI strategies (representation in working groups).","Periodically review institutional gen AI use re student safety, privacy and IP."]},
+  {name:"Staff — short-term",items:["Take a pulse check of staff gen AI knowledge, use, barriers and training needs.","Create a central staff resource hub.","Update onboarding to induct new staff in gen AI policies and procedures.","Communicate institutional and discipline-specific policy changes and their rationale.","Align staff and student understanding via shared academic-integrity materials.","Provide access to a gen AI training module for staff."]},
+  {name:"Staff — medium/long-term",items:["Create gen AI training modules and resources tailored to your institution and courses.","Integrate staff feedback when reviewing policies and procedures.","Offer staff paid participation in specialised short courses.","Establish a mentorship program for gen AI skills."]},
+  {name:"External & accreditation — short-term",items:["Engage regularly with professional accreditation bodies on updated competency standards.","Consult industry representatives on the relevance of course content and learning outcomes.","Monitor communication from relevant regulatory authorities."]},
+  {name:"External & accreditation — medium/long-term",items:["Support faculties and schools on gen AI considerations for professional accreditation.","Survey industry and alumni on current practice and suggestions."]}
+ ]},
+ {id:"he_practice",group:"Higher Education",name:"Practice",blurb:"Assessment security, systems, communication, QA.",sections:[
+  {name:"Assessment security & transformation",items:["Conduct a risk analysis of assessment methods to identify units/courses needing enhanced security.","Evaluate the impact of different delivery modes on assessment security.","Prioritise securing high-risk key assessments.","Provide guidance for teaching staff on assessment-security strategies.","Ensure course reviews consider gen AI impact and literacy opportunities.","Adopt an institutional perspective on holistic assessment cost implications.","Evaluate the relevance and currency of unit/course/program learning outcomes.","Align the use of AI in assessments with learning outcomes and graduate capabilities."]},
+  {name:"System changes",items:["Update learning management systems to reflect institutional AI processes.","Review course management systems for program-level AI consideration prompts.","Update academic misconduct systems to record gen AI misuse.","Update templates (assessment coversheets, rubrics, unit reviews).","Provide course-delivery material templates for staff messaging.","Engage external developers for system limitations.","Conduct ongoing review of systems and templates for continuous improvement."]},
+  {name:"Communication",items:["Include AI directives in student information packs, welcome emails and orientation.","Provide policy notifications through regular communication channels.","Update student handbooks and guidance materials.","Update staff induction materials and information sessions.","Deliver targeted messaging about responsible AI use near assessment periods.","Include diverse voices (students, staff, industry) in communication development.","Create a dedicated AI webpage with regular audits and updates.","Develop and regularly refresh a comprehensive institutional communications strategy."]},
+  {name:"Governance & quality assurance",items:["Establish governance mechanisms for AI oversight.","Ensure academic integrity training includes AI components.","Develop student support mechanisms for AI-related academic misconduct.","Review admissions processes for AI-generated content risks.","Develop a resource-allocation framework for AI implementation costs.","Ensure research integrity includes AI considerations.","Plan for external system integration challenges."]}
+ ]},
+ {id:"rt_guidance",group:"Research Training",name:"Guidance & training",blurb:"Build gen AI literacy for HDR candidates and supervisors.",sections:[
+  {name:"Introduction, guidance & training",items:["Provide clear, accessible guidance on gen AI use in research, tailored for HDR students.","Develop a training module for staff and students on the ethical and responsible use of gen AI in research.","Ensure all supervision staff receive clear guidance on the institutional position on gen AI in research.","Establish a formal gen AI use agreement signed by HDR candidates and supervisors at the start of candidature."]}
+ ]},
+ {id:"rt_process",group:"Research Training",name:"Research process",blurb:"Authorship, data governance and IP in the research process.",sections:[
+  {name:"Research process",items:["Clearly communicate the ethical and legal obligations of using gen AI tools to conduct research.","Provide instructions on what data can and cannot be uploaded to third-party gen AI platforms.","Develop resources, case studies and guidance on appropriate and inappropriate gen AI use.","Provide information on gen AI tools that adhere to ethically sound data-management practices.","Update the LMS and HDR webpages with clear gen AI instructions, guidelines and resources."]}
+ ]},
+ {id:"rt_assessment",group:"Research Training",name:"Assessment & thesis exam",blurb:"Permissible gen AI use in thesis prep, submission and examination.",sections:[
+  {name:"Assessment & thesis examination",items:["Review existing assessment and examination requirements for assurance of learning.","Implement system changes to confirm submitted work is appropriately prepared and gen AI use declared.","Distribute formal guidance to external examiners on institutional expectations around gen AI in graduate research."]}
+ ]},
+ {id:"rt_publications",group:"Research Training",name:"Publications & grants",blurb:"Publisher and funder requirements for gen AI use.",sections:[
+  {name:"Publications & grant applications",items:["Provide information for HDR students on gen AI use in publications and grant applications.","Inform candidates to check publisher policies and journal submission guidelines on gen AI.","Provide guidance and training on gen AI obligations under legislation, codes of conduct and policies."]}
+ ]}
+];
+
+function load(){try{return JSON.parse(localStorage.getItem("teqsa_rag")||"{}")}catch(e){return{}}}
+function save(m){localStorage.setItem("teqsa_rag",JSON.stringify(m))}
+
+function domainStats(dom,rag){
+ let total=0,r=0,a=0,g=0;
+ dom.sections.forEach((sec,si)=>sec.items.forEach((it,ii)=>{total++;const v=rag[dom.id+":"+si+":"+ii];if(v===1)r++;else if(v===2)a++;else if(v===3)g++;}));
+ const rated=r+a+g; const readiness=total?Math.round((g+0.5*a)/total*100):0;
+ return {total,r,a,g,rated,readiness};
+}
+
+function App(){
+ const [phase,setPhase]=useState("welcome");
+ const [tab,setTab]=useState("he_process");
+ const [rag,setRag]=useState(load());
+ useEffect(()=>save(rag),[rag]);
+ const setItem=(id,v)=>setRag(p=>({...p,[id]:p[id]===v?0:v}));
+
+ const groups=[...new Set(DOMAINS.map(d=>d.group))];
+ const overall=(()=>{let t=0,s=0;DOMAINS.forEach(d=>{const st=domainStats(d,rag);t+=st.total;s+=st.g+0.5*st.a;});return t?Math.round(s/t*100):0;})();
+ const totalRated=DOMAINS.reduce((n,d)=>n+domainStats(d,rag).rated,0);
+ const totalItems=DOMAINS.reduce((n,d)=>n+domainStats(d,rag).total,0);
+
+ const exportCSV=()=>{
+  const esc=v=>{const s=String(v==null?"":v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;};
+  const rows=[["Group","Domain","Section","Item","Rating"].join(",")];
+  DOMAINS.forEach(d=>d.sections.forEach((sec,si)=>sec.items.forEach((it,ii)=>{const v=rag[d.id+":"+si+":"+ii];rows.push([d.group,d.name,sec.name,it,v?RAG[v].t:"Not rated"].map(esc).join(","));})));
+  const blob=new Blob(["﻿"+rows.join("\n")],{type:"text/csv;charset=utf-8;"});const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download="NTLSN_TEQSA_Readiness_"+new Date().toISOString().slice(0,10)+".csv";a.click();URL.revokeObjectURL(u);
+ };
+
+ if(phase==="welcome")return(<div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px"}}><div style={{maxWidth:"640px",textAlign:"center"}}>
+  <div style={{fontSize:"12px",fontWeight:700,color:C.teal,letterSpacing:"3px",textTransform:"uppercase",marginBottom:"14px"}}>◇ NTLSN · Institution package</div>
+  <h1 style={{fontSize:"30px",fontWeight:800,lineHeight:1.15,marginBottom:"16px"}}>TEQSA Gen AI Readiness</h1>
+  <p style={{fontSize:"15px",color:C.mut,lineHeight:1.6,marginBottom:"12px"}}>A self-assessment against TEQSA's public self-guided gen AI checklists (Nov 2024 + June 2025). RAG-rate your institution across every domain, see your readiness, and export a gap report for your Institutional Action Plan.</p>
+  <div style={{display:"flex",gap:"10px",justifyContent:"center",flexWrap:"wrap",margin:"18px 0 8px"}}>
+   {[{ic:"✕",t:"Missing",c:C.red},{ic:"◐",t:"In plan, not well conceptualised",c:C.gold},{ic:"✓",t:"In plan & well conceptualised",c:C.green}].map((x,i)=><span key={i} style={{fontSize:"12px",color:x.c,border:`1px solid ${x.c}55`,borderRadius:"999px",padding:"5px 12px"}}>{x.ic} {x.t}</span>)}
+  </div>
+  <p style={{fontSize:"13px",color:"#5f7388",margin:"18px 0 26px"}}>{totalItems} checklist items · ~10–15 minutes · nothing leaves your browser.</p>
+  <button onClick={()=>setPhase("tool")} style={{background:C.teal,color:"#06121f",border:"none",padding:"14px 46px",borderRadius:"999px",fontSize:"16px",fontWeight:800,cursor:"pointer"}}>{totalRated>0?"Resume assessment":"Begin assessment"}</button>
+  <div style={{marginTop:"28px",fontSize:"11px",color:"#5f7388",lineHeight:1.6,maxWidth:"520px",marginLeft:"auto",marginRight:"auto"}}>A self-assessment <b>aid</b> for internal use — complementary to TEQSA, not a TEQSA product and not certification. Prototype · part of the proposed NTLSN Institution package · ntlsn.com</div>
+ </div></div>);
+
+ const dom=DOMAINS.find(d=>d.id===tab);
+ return(<div style={{minHeight:"100vh",maxWidth:"920px",margin:"0 auto",padding:"22px 18px 60px"}}>
+  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:"12px",marginBottom:"16px",flexWrap:"wrap"}}>
+   <div><div style={{fontSize:"11px",fontWeight:700,color:C.teal,letterSpacing:"2px",textTransform:"uppercase"}}>◇ TEQSA Gen AI Readiness</div><h1 style={{fontSize:"22px",fontWeight:800}}>Self-assessment</h1></div>
+   <div className="noprint" style={{textAlign:"right"}}><div style={{fontSize:"30px",fontWeight:800,color:overall<34?C.red:overall<67?C.gold:C.green}}>{overall}%</div><div style={{fontSize:"11px",color:C.mut}}>overall readiness · {totalRated}/{totalItems} rated</div></div>
+  </div>
+  {/* tabs */}
+  <div className="noprint" style={{marginBottom:"18px"}}>
+   {groups.map(g=>(<div key={g} style={{marginBottom:"6px"}}>
+    <div style={{fontSize:"10px",fontWeight:700,color:C.mut,textTransform:"uppercase",letterSpacing:"1px",margin:"4px 0"}}>{g}</div>
+    <div style={{display:"flex",gap:"6px",flexWrap:"wrap"}}>
+     {DOMAINS.filter(d=>d.group===g).map(d=>{const st=domainStats(d,rag);const active=tab===d.id;return <button key={d.id} onClick={()=>setTab(d.id)} style={{background:active?C.card:"transparent",border:`1px solid ${active?C.teal:C.line}`,color:active?C.teal:C.ink,borderRadius:"999px",padding:"7px 13px",fontSize:"12.5px",fontWeight:600,cursor:"pointer"}}>{d.name} <span style={{color:C.mut,fontWeight:400}}>{st.readiness}%</span></button>;})}
+    </div>
+   </div>))}
+   <div style={{marginTop:"8px"}}><button onClick={()=>setTab("dashboard")} style={{background:tab==="dashboard"?C.card:"transparent",border:`1px solid ${tab==="dashboard"?C.gold:C.line}`,color:tab==="dashboard"?C.gold:C.ink,borderRadius:"999px",padding:"8px 18px",fontSize:"12.5px",fontWeight:700,cursor:"pointer"}}>★ Readiness dashboard</button></div>
+  </div>
+
+  {tab==="dashboard"?(
+   <Dashboard rag={rag} exportCSV={exportCSV} overall={overall}/>
+  ):(
+   <div>
+    <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"12px 16px",marginBottom:"14px"}}><div style={{fontSize:"13px",fontWeight:700,color:C.ink}}>{dom.group} · {dom.name}</div><div style={{fontSize:"12px",color:C.mut,marginTop:"2px"}}>{dom.blurb}</div></div>
+    {dom.sections.map((sec,si)=>(<div key={si} style={{marginBottom:"16px"}}>
+     <div style={{fontSize:"12px",fontWeight:700,color:C.teal,margin:"10px 0 6px"}}>{sec.name}</div>
+     {sec.items.map((it,ii)=>{const id=dom.id+":"+si+":"+ii;const v=rag[id]||0;return(
+      <div key={ii} style={{display:"flex",gap:"10px",alignItems:"flex-start",padding:"10px 12px",background:C.card,border:`1px solid ${v?RAG[v].c+"55":C.line}`,borderLeft:`3px solid ${v?RAG[v].c:C.line}`,borderRadius:"9px",marginBottom:"6px"}}>
+       <div style={{flex:1,fontSize:"13px",color:C.ink,lineHeight:1.45}}>{it}</div>
+       <div className="noprint" style={{display:"flex",gap:"4px",flexShrink:0}}>{[1,2,3].map(k=>{const sel=v===k;return <button key={k} title={RAG[k].t} onClick={()=>setItem(id,k)} style={{width:"30px",height:"30px",borderRadius:"7px",border:`1px solid ${sel?RAG[k].c:C.line}`,background:sel?RAG[k].c:"transparent",color:sel?"#06121f":RAG[k].c,fontSize:"14px",fontWeight:800,cursor:"pointer"}}>{RAG[k].ic}</button>;})}</div>
+      </div>);})}
+    </div>))}
+   </div>
+  )}
+
+  <div style={{background:C.card,border:`1px solid ${C.line}`,borderRadius:"10px",padding:"14px 16px",marginTop:"22px"}}>
+   <div style={{fontSize:"11px",fontWeight:700,color:C.gold,marginBottom:"5px"}}>Honest scope</div>
+   <p style={{fontSize:"11.5px",color:C.mut,lineHeight:1.6,margin:0}}>Built on TEQSA's <b>public</b> self-guided checklists (Nov 2024 + June 2025). A self-assessment aid for internal use — <b>complementary to TEQSA, not certification</b>. Ratings stay in this browser (localStorage); use Export for a shareable gap report. The "AI auto-assessment" of your plan is a future, opt-in feature — this prototype is human-rated only.</p>
+  </div>
+ </div>);
+}
+
+function Dashboard({rag,exportCSV,overall}){
+ const gaps=[];
+ DOMAINS.forEach(d=>d.sections.forEach((sec,si)=>sec.items.forEach((it,ii)=>{const v=rag[d.id+":"+si+":"+ii];if(v===1||v===2)gaps.push({d:d.name,g:d.group,sec:sec.name,it,v});})));
+ return(<div>
+  <div style={{display:"flex",gap:"10px",marginBottom:"18px",flexWrap:"wrap"}} className="noprint">
+   <button onClick={exportCSV} style={{background:C.teal,color:"#06121f",border:"none",padding:"9px 16px",borderRadius:"999px",fontSize:"12px",fontWeight:700,cursor:"pointer"}}>Export gap report (CSV)</button>
+   <button onClick={()=>window.print()} style={{background:"transparent",color:C.ink,border:`1px solid ${C.line}`,padding:"9px 16px",borderRadius:"999px",fontSize:"12px",fontWeight:600,cursor:"pointer"}}>Print / PDF</button>
+  </div>
+  <h3 style={{fontSize:"15px",fontWeight:800,marginBottom:"10px"}}>Readiness by domain</h3>
+  {DOMAINS.map(d=>{const st=domainStats(d,rag);return(
+   <div key={d.id} style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"7px"}}>
+    <div style={{width:"150px",fontSize:"11.5px",color:C.mut,textAlign:"right"}}>{d.group.includes("Research")?"RT · ":""}{d.name}</div>
+    <div style={{flex:1,height:"18px",background:"#0b1c34",borderRadius:"5px",overflow:"hidden",display:"flex"}}>
+     <div style={{width:`${st.g/st.total*100}%`,background:C.green}}/><div style={{width:`${st.a/st.total*100}%`,background:C.gold}}/><div style={{width:`${st.r/st.total*100}%`,background:C.red}}/>
+    </div>
+    <div style={{fontSize:"11px",color:C.mut,width:"96px"}}>{st.readiness}% · {st.rated}/{st.total}</div>
+   </div>);})}
+  <div style={{fontSize:"11px",color:C.mut,marginTop:"8px"}}><span style={{color:C.green}}>■</span> Embedded &nbsp; <span style={{color:C.gold}}>■</span> Partial &nbsp; <span style={{color:C.red}}>■</span> Missing &nbsp; · unrated shown as empty</div>
+
+  <h3 style={{fontSize:"15px",fontWeight:800,margin:"24px 0 10px"}}>Priority gaps ({gaps.length})</h3>
+  {gaps.length===0?<p style={{fontSize:"13px",color:C.mut}}>No gaps rated yet — rate items in each domain to populate this list.</p>:
+   gaps.sort((a,b)=>a.v-b.v).map((x,i)=>(<div key={i} style={{display:"flex",gap:"10px",alignItems:"flex-start",padding:"8px 12px",background:C.card,border:`1px solid ${RAG[x.v].c}40`,borderLeft:`3px solid ${RAG[x.v].c}`,borderRadius:"8px",marginBottom:"5px"}}>
+    <span style={{fontSize:"10px",fontWeight:700,color:RAG[x.v].c,whiteSpace:"nowrap",marginTop:"2px"}}>{RAG[x.v].ic} {RAG[x.v].t}</span>
+    <div style={{flex:1}}><div style={{fontSize:"12.5px",color:C.ink}}>{x.it}</div><div style={{fontSize:"10.5px",color:C.mut,marginTop:"2px"}}>{x.g} · {x.d} · {x.sec}</div></div>
+   </div>))}
+ </div>);
+}
+ReactDOM.render(React.createElement(App),document.getElementById("root"));
+</script>
+</body>
+</html>

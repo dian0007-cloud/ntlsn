@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aletheia · Reflective Coach (prototype)</title>
+<style>
+ :root{
+  --bg:#0A1628; --card:#0f1f3a; --ink:#eaf2fb; --mut:#9fb3c8; --line:rgba(255,255,255,.09);
+  --teal:#2DD4BF; --gold:#FFB448; --blue:#7C9CFF; --coral:#FF6B6B;
+  --F:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+ }
+ *{box-sizing:border-box}
+ body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#102a4d 0%,var(--bg) 55%);color:var(--ink);font-family:var(--F);line-height:1.5;min-height:100vh}
+ .wrap{max-width:820px;margin:0 auto;padding:28px 18px 70px}
+ .ey{color:var(--teal);font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+ h1{font-size:clamp(26px,4vw,38px);margin:6px 0 6px;font-weight:800}
+ .sub{color:var(--mut);max-width:640px;margin:0 0 6px}
+ .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:1px;color:var(--gold);border:1px solid #FFB44855;border-radius:999px;padding:4px 11px;margin:8px 0}
+ .ethos{font-size:12.5px;color:var(--mut);border-left:3px solid var(--teal);background:rgba(45,212,191,.06);padding:8px 12px;border-radius:8px;margin:10px 0 20px}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+ .memory{border-left:3px solid var(--gold);background:rgba(255,180,72,.06);font-size:13px;margin-bottom:16px}
+ .memory b{color:var(--gold)}
+ .pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:18px}
+ .fw{cursor:pointer;text-align:left;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:14px;padding:16px;transition:.15s;color:inherit}
+ .fw:hover{border-color:var(--teal);transform:translateY(-2px)}
+ .fw h3{margin:0 0 4px;font-size:16px}
+ .fw p{margin:0;color:var(--mut);font-size:12.5px}
+ #chat{display:none}
+ .row{display:flex;gap:10px;margin:14px 0;align-items:flex-start}
+ .row.me{flex-direction:row-reverse}
+ .av{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800}
+ .av.ai{background:linear-gradient(135deg,var(--teal),var(--blue));color:#06121f}
+ .av.me{background:#24364f;color:var(--ink)}
+ .bub{max-width:78%;padding:11px 14px;border-radius:14px;font-size:14.5px;white-space:pre-wrap}
+ .ai .bub{background:#13294a;border:1px solid var(--line);border-top-left-radius:4px}
+ .me .bub{background:#1d3b5e;border-top-right-radius:4px}
+ .stagetag{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:3px}
+ .compose{display:flex;gap:10px;margin-top:14px}
+ textarea#in{flex:1;background:#0b1c34;border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px 14px;font-family:var(--F);font-size:14.5px;resize:vertical;min-height:54px}
+ button{font-family:var(--F);cursor:pointer;border:none;border-radius:999px;font-weight:700}
+ .send{background:var(--teal);color:#06121f;padding:0 22px;font-size:14px}
+ .send:disabled{opacity:.4;cursor:default}
+ .bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+ .btn2{background:transparent;border:1px solid var(--line);color:var(--ink);padding:9px 16px;font-size:13px}
+ .btn2:hover{border-color:var(--teal);color:var(--teal)}
+ .btn2.gold:hover{border-color:var(--gold);color:var(--gold)}
+ .prog{height:5px;background:#0b1c34;border-radius:99px;overflow:hidden;margin:8px 0 4px}
+ .prog>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width .4s}
+ .progtxt{font-size:11px;color:var(--mut);margin-bottom:6px}
+ details.adv{margin-top:22px;border:1px dashed var(--line);border-radius:12px;padding:0 14px}
+ details.adv summary{cursor:pointer;padding:12px 0;font-size:13px;color:var(--mut);font-weight:600}
+ details.adv[open]{padding-bottom:14px}
+ .adv label{display:block;font-size:12px;color:var(--mut);margin:8px 0 3px}
+ .adv input{width:100%;background:#0b1c34;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px;font-size:13px}
+ .adv .note{font-size:11.5px;color:var(--mut);margin-top:10px;line-height:1.5}
+ .adv .warn{color:var(--coral)}
+ .out{display:none;margin-top:20px}
+ .out textarea{width:100%;min-height:300px;background:#0b1c34;border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:14px;font-size:13.5px;font-family:ui-monospace,Menlo,monospace}
+ .foot{margin-top:34px;font-size:11px;color:#5f7388;text-align:center;line-height:1.6}
+ .toggle{font-size:12px;color:var(--teal)}
+ a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="ey">&#9671; Aletheia</div>
+ <h1>Reflective Coach</h1>
+ <div class="badge">PROTOTYPE &middot; runs in your browser &middot; nothing is sent anywhere</div>
+ <p class="sub">A coach that asks the questions so you do the thinking. It walks you through your choice of seven leading reflective models, remembers your past sessions, and hands you back <b>your own words, organised</b> — ready for a teaching portfolio, an HEA claim, or just clearer practice.</p>
+ <div class="ethos"><b>Coach, never ghostwriter.</b> Aletheia will not write your reflection for you. It mirrors, prompts and connects — the words, and the insight, stay yours.</div>
+
+ <div id="memory" class="card memory" style="display:none"></div>
+
+ <div id="picker">
+  <p class="ey" style="color:var(--mut)">Choose a reflective lens</p>
+  <div class="pick" id="pick"></div>
+ </div>
+
+ <div id="chat" class="card">
+  <div class="progtxt" id="progtxt"></div>
+  <div class="prog"><i id="progbar"></i></div>
+  <div id="log"></div>
+  <div class="compose">
+   <textarea id="in" placeholder="Type your reflection…  (Shift+Enter for a new line)"></textarea>
+   <button class="send" id="send">Send</button>
+  </div>
+  <div class="bar">
+   <button class="btn2 gold" id="build">Build my reflection &darr;</button>
+   <button class="btn2" id="fresh">Start fresh</button>
+   <button class="btn2" id="switch">Switch lens</button>
+  </div>
+  <div class="out" id="out">
+   <p class="ey" style="color:var(--gold)">Your reflection — your words, organised</p>
+   <textarea id="outtext" readonly></textarea>
+   <div class="bar">
+    <button class="btn2" id="copy">Copy</button>
+    <button class="btn2" id="download">Download .md</button>
+   </div>
+  </div>
+
+  <details class="adv">
+   <summary>&#9881; Advanced — connect your own AI model (optional, off by default)</summary>
+   <p class="note">By default this coach uses a <b>scripted Socratic engine</b> — no AI, no internet, everything stays in this browser. If you turn this on, your typed text is sent <b>only</b> to the model endpoint <b>you</b> specify (your own key) to generate richer follow-up questions. This demonstrates Aletheia's model-agnostic design — DeepSeek, a local model, OpenAI, Anthropic, whatever you point it at.</p>
+   <label>Use my model for follow-up questions</label>
+   <input type="checkbox" id="m_on" style="width:auto"> <span class="toggle" id="m_state">off</span>
+   <label>OpenAI-compatible base URL (e.g. https://api.openai.com/v1)</label>
+   <input id="m_url" placeholder="https://…/v1" autocomplete="off">
+   <label>API key (stored only in this browser)</label>
+   <input id="m_key" type="password" placeholder="sk-…" autocomplete="off">
+   <label>Model name</label>
+   <input id="m_model" placeholder="gpt-4o-mini / deepseek-chat / …" autocomplete="off">
+   <p class="note warn">Privacy: with this ON, your reflection text leaves your browser for the endpoint above. With it OFF (default), nothing is ever sent. Never paste student-identifying data into any AI tool.</p>
+  </details>
+ </div>
+
+ <div class="foot">
+  Aletheia Reflective Coach — prototype for NTLSN. Scripted scaffold spanning seven of the most-used reflective models — Gibbs, Schön, Kolb, Brookfield, Rolfe, Community of Inquiry and Mezirow — plus applied lenses (HEA/PSF, course feedback). Verify PSF descriptors against the current Advance HE framework. A prototype, not a production tool: no accounts, no institutional storage, the AI layer is bring-your-own and unevaluated. Your reflections live in this browser's localStorage until you clear them.
+ </div>
+</div>
+
+<script>
+const FRAMEWORKS = {
+ gibbs:{
+  name:'Gibbs Reflective Cycle', icon:'\u{1F501}',
+  blurb:'Reflect on one specific teaching moment, end to end.',
+  stages:[
+   {key:'Description', q:"Let's start with what happened. Describe the teaching moment you want to reflect on — what were you doing, and what occurred?"},
+   {key:'Feelings', q:"How did you feel during and after it — and how do you think your students felt?"},
+   {key:'Evaluation', q:"Looking back, what went well, and what didn't go so well?"},
+   {key:'Analysis', q:"Why do you think it unfolded that way? What might explain it?"},
+   {key:'Conclusion', q:"What have you taken from this — what does it tell you about your teaching?"},
+   {key:'Action plan', q:"What is one concrete thing you'll try differently next time?"}
+  ]
+ },
+ schon:{
+  name:'Schön — Reflection in & on action', icon:'\u{1F441}',
+  blurb:'Surface what you do in the moment vs what you believe — the reflective practitioner.',
+  stages:[
+   {key:'The situation', q:"Describe a teaching moment where you had to think on your feet. What was happening?"},
+   {key:'Reflection-in-action', q:"In the moment, what did you notice — and how did you adjust as it unfolded?"},
+   {key:'Reflection-on-action', q:"Looking back now, what do you understand about that moment that you couldn't see at the time?"},
+   {key:'Espoused vs enacted', q:"Did you act in line with how you believe you teach, or did your 'theory-in-use' differ from your espoused values?"},
+   {key:'Reframe', q:"How would you reframe the situation — and what would you do differently next time?"}
+  ]
+ },
+ kolb:{
+  name:'Kolb — Experiential Learning Cycle', icon:'\u{1F300}',
+  blurb:'Turn one experience into a tested change, around the four-stage cycle.',
+  stages:[
+   {key:'Concrete experience', q:"Describe the concrete teaching experience — what actually happened?"},
+   {key:'Reflective observation', q:"Step back and observe: what did you notice about how it went, for you and your students?"},
+   {key:'Abstract conceptualisation', q:"What general principle does this point to? What does theory or your experience suggest is going on?"},
+   {key:'Active experimentation', q:"What concrete change will you test next time to act on that idea?"}
+  ]
+ },
+ brookfield:{
+  name:'Brookfield — Four Lenses', icon:'\u{1F50D}',
+  blurb:'Examine your teaching through four critical lenses to expose assumptions.',
+  stages:[
+   {key:'The focus', q:"What aspect of your teaching do you want to examine critically?"},
+   {key:'Your own eyes', q:"Lens 1 — autobiographical: what is your own experience and gut read of it?"},
+   {key:"Students' eyes", q:"Lens 2 — your students' eyes: how might they be experiencing this; what would they say?"},
+   {key:"Colleagues' eyes", q:"Lens 3 — colleagues' perceptions: what might a trusted peer observe or challenge?"},
+   {key:'Theory & literature', q:"Lens 4 — scholarly literature: what does research or SoTL say about this?"},
+   {key:'Synthesis & action', q:"Where do the four lenses agree or clash — and what assumption will you act on?"}
+  ]
+ },
+ rolfe:{
+  name:'Rolfe — What? So what? Now what?', icon:'\u{2753}',
+  blurb:'The simplest powerful cycle — three questions, increasing depth.',
+  stages:[
+   {key:'What?', q:"WHAT happened? Describe the situation plainly — the facts, your role, the outcome."},
+   {key:'So what?', q:"SO WHAT does it mean? What did you learn, feel or realise — and why does it matter?"},
+   {key:'Now what?', q:"NOW WHAT will you do? The concrete next step — and what do you still need to learn?"}
+  ]
+ },
+ coi:{
+  name:'Community of Inquiry (Garrison et al.)', icon:'\u{1F465}',
+  blurb:'Reflect through the three presences — ideal for online & blended teaching.',
+  stages:[
+   {key:'The learning episode', q:"Describe a learning episode — a class, a discussion, an online module — you want to reflect on."},
+   {key:'Teaching Presence', q:"Teaching Presence — how well did your design, facilitation and direct instruction guide the learning?"},
+   {key:'Social Presence', q:"Social Presence — how safe and connected did students feel to communicate openly and belong?"},
+   {key:'Cognitive Presence', q:"Cognitive Presence — did students move from a triggering question through exploration to integration and resolution?"},
+   {key:'Strengthen the weakest', q:"Which presence was weakest — and what is one change to strengthen it next time?"}
+  ]
+ },
+ mezirow:{
+  name:'Mezirow — Critical / Transformative', icon:'\u{1F98B}',
+  blurb:'Surface and question a deep assumption — reflection that can transform practice.',
+  stages:[
+   {key:'Disorienting moment', q:"Describe a moment in your teaching that unsettled you or didn't fit your expectations."},
+   {key:'Surface the assumption', q:"What belief about teaching, students or yourself did that moment rest on?"},
+   {key:'Question its origin', q:"Where did that assumption come from — and is it still serving you and your students?"},
+   {key:'Alternative perspectives', q:"What other ways of seeing this are possible? How might someone different from you read it?"},
+   {key:'New meaning & action', q:"What new understanding will you act on — and what will you do differently?"}
+  ]
+ },
+ psf:{
+  name:'HEA Fellowship (PSF)', icon:'\u{1F396}',
+  blurb:'Evidence an experience against the Advance HE PSF dimensions.',
+  stages:[
+   {key:'The experience', q:"Describe a piece of your practice you'd like to evidence for your fellowship claim. What did you do, and in what context?"},
+   {key:'Areas of Activity', q:"Which Area of Activity does this best evidence — designing learning, teaching/supporting learning, assessment & feedback, inclusive environments, or scholarship/CPD? What did you actually do?"},
+   {key:'Core Knowledge', q:"What knowledge informed your choices here — of your subject, of how students learn, of methods, technologies, or quality assurance?"},
+   {key:'Professional Values', q:"Which Professional Value comes through — respect for diverse learners, promoting engagement & equity, using evidence-informed approaches, or acknowledging the wider context?"},
+   {key:'Impact & evidence', q:"How do you know it made a difference? What evidence (student feedback, outcomes, peer observation) could you point to?"},
+   {key:'Action plan', q:"What will you develop next in your practice as a result?"}
+  ]
+ },
+ feedback:{
+  name:'Course-feedback reflection', icon:'\u{1F4CA}',
+  blurb:'Make sense of student feedback and turn it into change.',
+  stages:[
+   {key:'The feedback', q:"What is the student feedback telling you? Summarise the main messages — the warm and the cool."},
+   {key:'First reaction', q:"What surprised, pleased or stung? Be honest — naming the reaction helps you get past it."},
+   {key:'The pattern', q:"Look beneath individual comments — what is the one pattern or theme that matters most?"},
+   {key:'Your reading', q:"Why might students be experiencing it that way? What's your interpretation?"},
+   {key:'The change', q:"What is one change you'll make next time in response?"},
+   {key:'Knowing it worked', q:"How will you know the change worked — what would you look for next round?"}
+  ]
+ }
+};
+
+const NEG = /(frustrat|fail|stuck|struggl|hard|difficult|disappoint|worried|worry|anxious|overwhelm|exhaust|stress|lost|confus|nervous|upset|bad)/i;
+const POS = /(proud|great|well|worked|success|pleased|happy|excited|love|enjoy|brilliant|good|delight|rewarding)/i;
+const DEPTH = ["Say a little more — what makes you say that?","Can you give a specific example?","And why do you think that is?","What's underneath that, for you?"];
+
+let S = null; // session state
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function buildPicker(){
+ const p = $('pick'); p.innerHTML='';
+ Object.entries(FRAMEWORKS).forEach(([k,f])=>{
+  const b=document.createElement('button'); b.className='fw';
+  b.innerHTML='<h3>'+f.icon+' '+f.name+'</h3><p>'+f.blurb+'</p>';
+  b.onclick=()=>start(k);
+  p.appendChild(b);
+ });
+ // memory banner across all frameworks
+ const all = Object.keys(FRAMEWORKS).flatMap(k=>load(k).map(s=>({k,...s})));
+ if(all.length){
+  all.sort((a,b)=>b.t-a.t);
+  const last=all[0]; const f=FRAMEWORKS[last.k];
+  const firstAns=Object.values(last.answers)[0]||'';
+  $('memory').style.display='block';
+  $('memory').innerHTML='<b>Welcome back.</b> Last time ('+new Date(last.t).toLocaleDateString()+') you used the '+f.name+' to reflect on: <i>"'+esc(firstAns.slice(0,120))+(firstAns.length>120?'…':'')+'"</i>  You have '+all.length+' saved reflection'+(all.length>1?'s':'')+' in this browser.';
+ }
+}
+
+function load(k){ try{return JSON.parse(localStorage.getItem('aletheia_'+k)||'[]')}catch(e){return[]} }
+function save(k,arr){ localStorage.setItem('aletheia_'+k,JSON.stringify(arr)); }
+
+function start(k){
+ const f=FRAMEWORKS[k];
+ const prior=load(k);
+ S={k,f,stage:0,depthUsed:false,answers:{},prior};
+ $('picker').style.display='none';
+ $('chat').style.display='block';
+ $('out').style.display='none';
+ $('log').innerHTML='';
+ const hi = prior.length
+  ? "Good to see you back. We'll use the "+f.name+" again. "
+  : "Welcome — we'll use the "+f.name+". There are no wrong answers here; take your time. ";
+ ai(hi+"\n\n"+f.stages[0].q, f.stages[0].key);
+ updateProg();
+ $('in').focus();
+}
+
+function ai(text,tag){
+ const r=document.createElement('div'); r.className='row ai';
+ r.innerHTML='<div class="av ai">A</div><div class="bub">'+(tag?'<div class="stagetag">'+esc(tag)+'</div>':'')+esc(text)+'</div>';
+ $('log').appendChild(r); r.scrollIntoView({behavior:'smooth',block:'end'});
+}
+function me(text){
+ const r=document.createElement('div'); r.className='row me';
+ r.innerHTML='<div class="av me">You</div><div class="bub">'+esc(text)+'</div>';
+ $('log').appendChild(r); r.scrollIntoView({behavior:'smooth',block:'end'});
+}
+function updateProg(){
+ const n=S.f.stages.length, done=S.stage;
+ $('progbar').style.width=Math.round(done/n*100)+'%';
+ $('progtxt').textContent='Step '+Math.min(done+1,n)+' of '+n+' · '+(S.f.stages[Math.min(done,n-1)].key);
+}
+
+function empathy(t){
+ if(NEG.test(t)) return "That sounds genuinely hard — thank you for being honest about it. ";
+ if(POS.test(t)) return "That's good to hear. ";
+ return "";
+}
+
+async function followUp(stageKey,answer){
+ const m=getModel();
+ if(m.enabled && m.url && m.key && m.model){
+  try{
+   const q=await modelQuestion(m,stageKey,answer);
+   if(q) return q;
+  }catch(e){ /* fall through to scripted */ }
+ }
+ return DEPTH[Math.floor((S.stage+answer.length)%DEPTH.length)];
+}
+
+async function submit(){
+ const t=$('in').value.trim(); if(!t) return;
+ me(t); $('in').value=''; $('send').disabled=true;
+ const stage=S.f.stages[S.stage];
+ S.answers[stage.key]=(S.answers[stage.key]?S.answers[stage.key]+'\n\n':'')+t;
+
+ // one depth nudge per stage if the answer is brief or shallow
+ if(!S.depthUsed && t.length<90 && S.stage<S.f.stages.length){
+  S.depthUsed=true;
+  const fu=await followUp(stage.key,t);
+  ai(empathy(t)+fu);
+  $('send').disabled=false; $('in').focus(); return;
+ }
+
+ // advance
+ S.depthUsed=false; S.stage++;
+ if(S.stage>=S.f.stages.length){
+  finish();
+ } else {
+  const next=S.f.stages[S.stage];
+  let lead=empathy(t);
+  // continuity: reference a prior action plan when arriving at the action stage
+  if(next.key==='Action plan' && S.prior.length){
+   const lastPlan=S.prior[S.prior.length-1].answers['Action plan'];
+   if(lastPlan) lead+="Last time you planned to: “"+lastPlan.slice(0,120)+"” — keep that in mind. ";
+  }
+  ai(lead+next.q,next.key);
+  updateProg();
+ }
+ $('send').disabled=false; $('in').focus();
+}
+
+function finish(){
+ updateProg();
+ ai("That's a full cycle — really well done. When you're ready, hit “Build my reflection” and I'll lay your own words out under each heading. Nothing here was written for you; you did the thinking.");
+ // persist the session
+ const arr=load(S.k); arr.push({t:Date.now(),answers:S.answers}); save(S.k,arr);
+}
+
+function buildReflection(){
+ if(!S){return;}
+ const f=S.f; const d=new Date();
+ let md='# Reflection — '+f.name+'\n'+d.toLocaleDateString()+'\n\n';
+ f.stages.forEach(s=>{ if(S.answers[s.key]){ md+='## '+s.key+'\n'+S.answers[s.key]+'\n\n'; } });
+ md+='---\n_Drafted by you, with the Aletheia Reflective Coach — your words, organised by the '+f.name+'. The coach asked the questions; the thinking is yours._\n';
+ $('outtext').value=md;
+ $('out').style.display='block';
+ $('out').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* optional BYO model */
+function getModel(){ try{return JSON.parse(localStorage.getItem('aletheia_model')||'{}')}catch(e){return{}} }
+function setModel(m){ localStorage.setItem('aletheia_model',JSON.stringify(m)); }
+async function modelQuestion(m,stageKey,answer){
+ const sys="You are a warm, Socratic reflective coach for university educators. You NEVER give solutions and you NEVER write the reflection for the user. You ask exactly ONE short, open follow-up question to deepen their thinking. Keep it under 30 words.";
+ const ctx="Reflective stage: "+stageKey+". The educator just wrote: \""+answer+"\". Ask one short Socratic follow-up question.";
+ const res=await fetch(m.url.replace(/\/$/,'')+'/chat/completions',{
+  method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+m.key},
+  body:JSON.stringify({model:m.model,messages:[{role:'system',content:sys},{role:'user',content:ctx}],max_tokens:60,temperature:0.7})
+ });
+ const j=await res.json();
+ return j.choices&&j.choices[0]&&j.choices[0].message.content.trim();
+}
+
+/* wire up */
+$('send').onclick=submit;
+$('in').addEventListener('keydown',e=>{ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();} });
+$('build').onclick=buildReflection;
+$('switch').onclick=()=>{$('chat').style.display='none';$('picker').style.display='block';buildPicker();};
+$('fresh').onclick=()=>{ if(confirm('Clear this conversation and start this lens again? (Saved past reflections are kept.)')) start(S.k); };
+$('copy').onclick=()=>{$('outtext').select();document.execCommand('copy');};
+$('download').onclick=()=>{
+ const blob=new Blob([$('outtext').value],{type:'text/markdown'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download='reflection-'+S.k+'-'+new Date().toISOString().slice(0,10)+'.md';a.click();
+};
+// model panel state
+const m0=getModel();
+$('m_on').checked=!!m0.enabled; $('m_url').value=m0.url||''; $('m_key').value=m0.key||''; $('m_model').value=m0.model||'';
+$('m_state').textContent=m0.enabled?'on':'off';
+function syncModel(){ const m={enabled:$('m_on').checked,url:$('m_url').value.trim(),key:$('m_key').value.trim(),model:$('m_model').value.trim()}; setModel(m); $('m_state').textContent=m.enabled?'on':'off'; }
+['m_on','m_url','m_key','m_model'].forEach(id=>$(id).addEventListener('change',syncModel));
+
+buildPicker();
+</script>
+</body>
+</html>
