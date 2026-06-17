@@ -872,25 +872,16 @@ var T=[
   {t:'Teaching-recognition passport',h:'trp.html',d:'A portable teaching record your staff keep for life.'},
   {t:'Symposium hosting and abstracts',h:'#ntlsn-capabilities',s:1,d:'Run your own Teaching and Learning Week on the Portal.'}
  ]},
- {n:'DVCA · portfolio',b:'DVC Academic',p:'$20k',c:'#7C9CFF',mult:'2× · portfolio-wide',u:[
-  {t:'Everything in School, portfolio-wide',meta:1,d:'Every School feature, across all your faculties.'},
-  {t:'Conference and symposium management',h:'#ntlsn-capabilities',s:1,d:'Run portfolio-wide events: abstracts, reviews, programs.'},
+ {n:'Institution',b:'DVC Academic · whole-of-institution',p:'$20k',c:'#7C9CFF',mult:'Portfolio → whole institution',u:[
+  {t:'Everything in School, institution-wide',meta:1,d:'Every School feature, across all faculties and campuses.'},
   {t:'TEQSA and AQF readiness',h:'teqsa-readiness.html',d:'RAG-rate against TEQSA checklists; export a gap report.'},
+  {t:'National moderation and calibration',h:'#ntlsn-calibrate',d:'Calibrate across the sector, not just in-house.'},
+  {t:'Conference and symposium management',h:'#ntlsn-capabilities',s:1,d:'Run portfolio-wide events: abstracts, reviews, programs.'},
   {t:'Calendar sync and embeddable widgets',h:'#ntlsn-capabilities',d:'ICS feed plus drop-in widgets for your own site.'},
   {t:'Sector data and comparison',h:'#benchmarks',d:'See where your institution sits in the national picture.'},
   {t:'Curriculum and assessment mapping',h:'#ntlsn-capabilities',s:1,d:'Map PLO to CLO to ULO against TELAS, portfolio-wide.'},
-  {t:'White-label styling',h:'#ntlsn-capabilities',s:1,d:'Your brand, colours and domain.'},
-  {t:'Portfolio analytics dashboard',h:'#ntlsn-capabilities',s:1,d:'Engagement across your portfolio at a glance.'}
- ]},
- {n:'Enterprise',b:'Whole institution',p:'$30k',c:'#C9A962',mult:'4× · whole institution',u:[
-  {t:'Everything in DVCA, institution-wide',meta:1,d:'The full platform for every faculty and campus.'},
-  {t:'Host a full national conference',h:'#ntlsn-capabilities',s:1,d:'Multi-stream conferences, abstracts through to proceedings.'},
-  {t:'National moderation and calibration',h:'#ntlsn-calibrate',d:'Calibrate across the sector, not just in-house.'},
   {t:'Open data export and API',h:'#ntlsn-capabilities',d:'Your data out anytime via open MCP/API. No lock-in.'},
-  {t:'Contextualised services',h:'#network',d:'Inductions, workshops and mapping with your team.'},
-  {t:'Unlimited staff, all faculties',meta:1,d:'No per-seat caps. The whole institution is in.'},
-  {t:'Single sign-on (SSO)',h:'#ntlsn-capabilities',s:1,d:'One login via your identity provider.'},
-  {t:'Dedicated support and service agreement',h:'#network',d:'A named contact and a service-level agreement.'}
+  {t:'SSO, white-label and dedicated support',h:'#ntlsn-capabilities',s:1,d:'Single sign-on, your brand, a named contact and SLA.'}
  ]}
 ];
 function chip(x){return '<span style="font:600 13px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:4px 10px;border-radius:999px;">'+x+'</span>';}
@@ -917,30 +908,46 @@ function build(){
  sec.style.cssText='max-width:1140px;margin:0 auto;padding:64px 24px;';
  var head='<div style="text-align:center;color:#4ECDC4;font:700 13px/1 '+F+';letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9678; Pricing</div>'
   +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 '+F+';color:#fff;margin:0 0 12px;">Free for everyone. Paid only if you run your own.</h2>'
-  +'<p style="text-align:center;color:#9fb3c8;max-width:720px;margin:0 auto 30px;font:400 17px/1.6 '+F+';">The whole navigator — every event, the map, 2,000+ resources, the sector archive — is <b style="color:#cfe9e5;">free, forever, no login.</b> Universities pay only to <i>run their own</i> — complete symposium &amp; conference portals: registration and EOI/abstract submission systems, national peer-review workflows, calibration and cross-institution benchmarking.</p>';
- var free='<div style="background:linear-gradient(135deg,rgba(78,205,196,.12),rgba(124,156,255,.05));border:1px solid rgba(78,205,196,.32);border-radius:18px;padding:34px 28px;text-align:center;margin-bottom:30px;">'
-  +'<div style="font:700 12px '+F+';letter-spacing:2px;color:#4ECDC4;text-transform:uppercase;margin-bottom:10px;">&#9679; Free · the whole sector, open</div>'
+  +'<p style="text-align:center;color:#9fb3c8;max-width:740px;margin:0 auto 30px;font:400 17px/1.6 '+F+';">The whole navigator &mdash; every event, the map, 2,000+ resources, the sector archive &mdash; is <b style="color:#cfe9e5;">free, forever, no login</b>, as Open Educational Practice. Universities, symposiums and associations pay only to <i>run their own</i>. An open API/MCP is there for anyone who wants to build on it &mdash; second to the commons, never the price of entry.</p>';
+ var CHIPS=['42 universities mapped','94 sector events','23 conferences','Watch every university&rsquo;s conferences','369 sector videos','59 PD opportunities','320 SoTL resources','184 university resources','280 frameworks','43 grants &amp; fellowships','126 career pathways','78 international SoTL','80 best-practice guides','1,431-work sector archive','25 benchmarks','41 UDL resources','Peer-Review Exchange','Students-as-Partners Registry','Calibration Suite','Teaching Recognition Passport','Course Quality Self-Check','Reflective Coach','School Needs Diagnostic','TEQSA Gen AI Readiness','Interactive sector map','University directory','National T&L network','Year-at-a-glance calendar','3-year capability roadmap','Weekly digest + ICS feed','Embeddable widgets','Acknowledgement-of-Country widget','Open MCP / API'];
+ var oep='<div style="background:linear-gradient(135deg,rgba(78,205,196,.12),rgba(124,156,255,.05));border:1px solid rgba(78,205,196,.32);border-radius:18px;padding:34px 28px;text-align:center;margin-bottom:34px;">'
+  +'<div style="font:700 12px '+F+';letter-spacing:2px;color:#4ECDC4;text-transform:uppercase;margin-bottom:10px;">&#9825; OEP &middot; Open Educational Practices &middot; free, open, forever</div>'
   +'<div style="font:800 clamp(36px,7vw,56px)/1 '+F+';color:#fff;margin-bottom:6px;">$0 <span style="font-size:.4em;color:#9fb3c8;font-weight:600;">forever</span></div>'
-  +'<div style="font:600 17px '+F+';color:#cfe9e5;margin-bottom:18px;">Everything on this site — for everyone, no account.</div>'
-  +'<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:1280px;margin:0 auto 18px;">'
-   +['42 universities mapped','94 sector events','23 conferences','Watch every university’s conferences','369 sector videos','59 PD opportunities','320 SoTL resources','184 university resources','280 frameworks','43 grants &amp; fellowships','126 career pathways','78 international SoTL','80 best-practice guides','1,431-work sector archive','25 benchmarks','41 UDL resources','Peer-Review Exchange','Students-as-Partners Registry','Calibration Suite','Weekly digest + ICS feed','Embeddable widgets','Acknowledgement-of-Country widget','Open MCP / API','Interactive sector map','University directory','National T&L network','Year-at-a-glance calendar','Teaching Recognition Passport','Course Quality Self-Check','Reflective Coach','School Needs Diagnostic','TEQSA Gen AI Readiness','3-year capability roadmap'].map(chip).join('')
-  +'</div>'
-  +'<div style="font:600 14px '+F+';color:#6b7e90;">No paywall. No login. The commons stays free — always.</div>'
+  +'<div style="font:600 17px '+F+';color:#cfe9e5;margin-bottom:18px;">Everything on this site &mdash; for everyone, no account. Open by default, CC&nbsp;BY-NC-SA.</div>'
+  +'<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:1080px;margin:0 auto 18px;">'+CHIPS.map(chip).join('')+'</div>'
+  +'<div style="font:600 14px '+F+';color:#6b7e90;">No paywall. No login. The commons stays free &mdash; always. <a href="#ntlsn-ethos" style="color:#4ECDC4;text-decoration:none;">Why OEP &rarr;</a></div>'
  +'</div>';
- var paidlabel='<div style="text-align:center;margin:0 0 16px;"><span style="font:700 12px '+F+';letter-spacing:2px;color:#8FA7FF;text-transform:uppercase;">For institutions that want to run their own</span></div>';
- var paid='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">'+T.map(tierCard).join('')+'</div>';
- var note='<div style="text-align:center;font:400 13px '+F+';color:#6b7e90;margin:14px auto 0;max-width:680px;">Prices are founding-cohort rates for the 2026–27 pilots — we’re signing partners now, not charging yet. <a href="#ntlsn-pipeline" style="color:#4ECDC4;">See the roadmap →</a></div>';
- var run='<div style="margin-top:34px;background:#0f1f38;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;">'
+ function tab(id,label){return '<button class="pt-tab" data-pt="'+id+'" type="button" style="font:700 15px '+F+';padding:10px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#9fb3c8;cursor:pointer;transition:all .2s;">'+label+'</button>';}
+ var tabbar='<div style="text-align:center;margin:0 0 8px;"><span style="font:700 12px '+F+';letter-spacing:2px;color:#8FA7FF;text-transform:uppercase;">Paid only if you run your own &mdash; pick your path</span></div>'
+  +'<div style="display:flex;gap:8px;justify-content:center;margin:0 0 24px;flex-wrap:wrap;">'+tab('pt-uni','Universities')+tab('pt-symp','Symposiums')+tab('pt-assoc','Associations')+'</div>';
+ var paid='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">'+T.map(tierCard).join('')+'</div>';
+ var offers='<div style="display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 4px;">'
+  +'<div style="flex:1;min-width:240px;background:#0f1f38;border:1px solid rgba(255,138,107,.3);border-radius:14px;padding:18px;"><div style="font:800 20px '+F+';color:#FF8A6B;">50% off</div><div style="font:700 15px '+F+';color:#fff;margin:2px 0 4px;">First 10 universities</div><div style="font:400 13px/1.5 '+F+';color:#9fb3c8;">Held for the life of membership &middot; <b style="color:#cbd8e6;">representative by design</b>: capped at three per network (Go8 &middot; ATN &middot; IRU &middot; RUN), every state and territory represented, and no single faculty, role or group exceeding half the cohort.</div></div>'
+  +'<div style="flex:1;min-width:240px;background:#0f1f38;border:1px solid rgba(201,169,98,.28);border-radius:14px;padding:18px;"><div style="font:800 20px '+F+';color:#C9A962;">Save 33%</div><div style="font:700 15px '+F+';color:#fff;margin:2px 0 4px;">3-year contract</div><div style="font:400 13px/1.5 '+F+';color:#9fb3c8;">Equivalent to your third year at no charge, on a three-year agreement (standard pricing). Founding-cohort members retain their 50% rate; the offers are not combined.</div></div>'
+ +'</div>';
+ var incl='<div style="text-align:center;font:400 13px/1.7 '+F+';color:#6b7e90;margin:12px auto 0;max-width:790px;">Every paid tier also includes: white-label styling &middot; an analytics dashboard &middot; priority support &middot; early access to new tools &middot; priority listing in the national calendar &middot; a co-design voice in the roadmap.</div>';
+ var uniP='<div id="pt-uni" class="pt-panel" style="display:block;">'+paid+offers+incl+'</div>';
+ var sympVal='<div style="background:rgba(124,156,255,.06);border:1px solid rgba(124,156,255,.22);border-radius:14px;padding:20px;margin-bottom:18px;"><div style="font:800 18px '+F+';color:#fff;margin-bottom:6px;">Run unlimited events &mdash; no per-event fee</div><div style="font:400 14px/1.6 '+F+';color:#9fb3c8;">Host every symposium, conference and Learning &amp; Teaching Week on your School or Institution plan &mdash; flat annual, unlimited. Organisers elsewhere pay roughly <b style="color:#cbd8e6;">$1.5k&ndash;8k per event</b> (EasyChair, Fourwaves). Or share a one-off symposium with the sector, <a href="#architecture" style="color:#4ECDC4;">free</a>.</div></div>';
+ var run='<div style="background:#0f1f38;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;">'
   +'<div style="font:800 22px '+F+';color:#fff;margin-bottom:4px;">Run your symposium on NTLSN</div>'
-  +'<div style="font:400 15px/1.6 '+F+';color:#9fb3c8;margin-bottom:18px;max-width:640px;">We already map all 42 universities. Pick yours to reach its Learning &amp; Teaching team now, and see how the Portal — abstract submission, registration, your own Teaching &amp; Learning Week — would work for you. Founding institutions shape it.</div>'
-  +'<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;max-width:680px;">'+'<select id="pricing-uni" style="flex:1;min-width:220px;background:#0A1628;border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:11px 13px;color:#fff;font:400 16px '+F+';"><option value="">Find your university…</option></select>'+'<button id="pricing-preview" type="button" style="background:transparent;color:#4ECDC4;font:800 15px '+F+';border:1px solid #4ECDC4;border-radius:10px;padding:12px 18px;cursor:pointer;">Preview the 2027 Portal &rarr;</button>'+'</div>'+'<div style="font:400 13px '+F+';color:#6b7e90;margin-top:10px;">Preview — the Portal opens to founding institutions in 2027.</div>'
+  +'<div style="font:400 15px/1.6 '+F+';color:#9fb3c8;margin-bottom:18px;max-width:640px;">We map all 42 universities and link each to its Learning &amp; Teaching team. Pick yours to reach its team now, and preview how the Portal &mdash; abstract submission, registration, your own Teaching &amp; Learning Week &mdash; would work for you. Founding institutions shape it.</div>'
+  +'<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;max-width:680px;"><select id="pricing-uni" style="flex:1;min-width:220px;background:#0A1628;border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:11px 13px;color:#fff;font:400 16px '+F+';"><option value="">Find your university&hellip;</option></select><button id="pricing-preview" type="button" style="background:transparent;color:#4ECDC4;font:800 15px '+F+';border:1px solid #4ECDC4;border-radius:10px;padding:12px 18px;cursor:pointer;">Preview the 2027 Portal &rarr;</button></div>'
+  +'<div style="font:400 13px '+F+';color:#6b7e90;margin-top:10px;">Preview &mdash; the Portal opens to founding institutions in 2027.</div>'
   +'<div id="pricing-uni-cta" style="margin-top:16px;"></div>'
  +'</div>';
- var opts='<div style="display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 4px;">'+'<div style="flex:1;min-width:240px;background:#0f1f38;border:1px solid rgba(78,205,196,.28);border-radius:14px;padding:18px;"><div style="font:800 20px '+F+';color:#4ECDC4;">Free <span style="font-size:13px;color:#6b7e90;font-weight:400;">year 1</span></div><div style="font:700 15px '+F+';color:#fff;margin:2px 0 4px;">Peak bodies & regulators</div><div style="font:400 13px/1.5 '+F+';color:#9fb3c8;"><b style="color:#cbd8e6;">Tier 1</b> regulators (TEQSA · ATEC) &amp; <b style="color:#cbd8e6;">Tier 2</b> peak bodies (CAULLT · ASCILITE · HERDSA · ACODE) — free in year one (no obligation), then $5k/yr under a standard memorandum of understanding with defined deliverables. A complement to the sector’s peak bodies, never a competitor. <a href="#architecture" style="color:#4ECDC4;">See where they sit →</a></div></div>'+'<div style="flex:1;min-width:240px;background:#0f1f38;border:1px solid rgba(255,138,107,.3);border-radius:14px;padding:18px;"><div style="font:800 20px '+F+';color:#FF8A6B;">50% off</div><div style="font:700 15px '+F+';color:#fff;margin:2px 0 4px;">First 10 universities</div><div style="font:400 13px/1.5 '+F+';color:#9fb3c8;">Held for the life of membership · <b style="color:#cbd8e6;">representative by design</b>: capped at three per network (Go8 · ATN · IRU · RUN), every state and territory represented, and no single faculty, role or group exceeding half the cohort.</div></div>'+'<div style="flex:1;min-width:240px;background:#0f1f38;border:1px solid rgba(201,169,98,.28);border-radius:14px;padding:18px;"><div style="font:800 20px '+F+';color:#C9A962;">Save 33%</div><div style="font:700 15px '+F+';color:#fff;margin:2px 0 4px;">3-year contract</div><div style="font:400 13px/1.5 '+F+';color:#9fb3c8;">Equivalent to your third year at no charge, on a three-year agreement (standard pricing). Founding-cohort members retain their 50% rate; the offers are not combined.</div></div>'+'</div>';
- var incl='<div style="text-align:center;font:400 13px/1.7 '+F+';color:#6b7e90;margin:12px auto 0;max-width:790px;">Every paid tier also includes: white-label styling · an analytics dashboard · priority support · early access to new tools · priority listing in the national calendar · a co-design voice in the roadmap.</div>';
- sec.innerHTML=head+free+paidlabel+paid+opts+incl+note+run;
+ var sympP='<div id="pt-symp" class="pt-panel" style="display:none;">'+sympVal+run+'</div>';
+ var assocP='<div id="pt-assoc" class="pt-panel" style="display:none;">'
+  +'<div style="background:#0f1f38;border:1px solid rgba(78,205,196,.28);border-radius:16px;padding:24px;max-width:760px;margin:0 auto;">'
+   +'<div style="font:800 20px '+F+';color:#4ECDC4;">Free <span style="font-size:13px;color:#6b7e90;font-weight:400;">year 1</span></div>'
+   +'<div style="font:700 16px '+F+';color:#fff;margin:2px 0 8px;">Peak bodies, scholarly associations &amp; regulators</div>'
+   +'<div style="font:400 14px/1.6 '+F+';color:#9fb3c8;"><b style="color:#cbd8e6;">Tier 1</b> regulators (TEQSA &middot; ATEC) &amp; <b style="color:#cbd8e6;">Tier 2</b> peak bodies (CAULLT &middot; ASCILITE &middot; HERDSA &middot; ACODE) &mdash; free in year one (no obligation), then <b style="color:#cbd8e6;">$5k/yr</b> under a standard memorandum of understanding with defined deliverables. A <b style="color:#cbd8e6;">complement</b> to the sector&rsquo;s peak bodies, never a competitor. <a href="#architecture" style="color:#4ECDC4;">See where they sit &rarr;</a></div>'
+  +'</div>'
+ +'</div>';
+ var note='<div style="text-align:center;font:400 13px '+F+';color:#6b7e90;margin:18px auto 0;max-width:680px;">Prices are founding-cohort rates for the 2026&ndash;27 pilots &mdash; we&rsquo;re signing partners now, not charging yet. <a href="#ntlsn-pipeline" style="color:#4ECDC4;">See the roadmap &rarr;</a></div>';
+ sec.innerHTML=head+oep+tabbar+uniP+sympP+assocP+note;
  return sec;
 }
+function wireTabs(sec){if(sec.dataset.tw)return;sec.dataset.tw='1';var tabs=sec.querySelectorAll('.pt-tab'),panels=sec.querySelectorAll('.pt-panel');function act(id){for(var i=0;i<panels.length;i++)panels[i].style.display=(panels[i].id===id)?'':'none';for(var j=0;j<tabs.length;j++){var on=tabs[j].dataset.pt===id;tabs[j].style.background=on?'rgba(78,205,196,.16)':'transparent';tabs[j].style.color=on?'#fff':'#9fb3c8';tabs[j].style.borderColor=on?'#4ECDC4':'rgba(255,255,255,.15)';}}for(var k=0;k<tabs.length;k++){(function(t){t.addEventListener('click',function(){act(t.dataset.pt);});})(tabs[k]);}act('pt-uni');}
 function fillUnis(sec){
  var sel=sec.querySelector('#pricing-uni');if(!sel||sel.dataset.filled)return;sel.dataset.filled='1';
  fetch('/data/universities.json').then(function(r){return r.json();}).then(function(d){
@@ -1006,7 +1013,7 @@ function injectNav(){
   bar.appendChild(mkb('Pricing',function(){var el=document.getElementById('pricing');if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});}));
   bar.appendChild(mkb('Portal',function(){openPortal('submit');}));}
 }
-function ensure(){var hero=document.getElementById('hero');if(!hero)return;injectNav();if(document.getElementById('pricing'))return;var sec=build();hero.parentNode.appendChild(sec);fillUnis(sec);}
+function ensure(){var hero=document.getElementById('hero');if(!hero)return;injectNav();if(document.getElementById('pricing'))return;var sec=build();hero.parentNode.appendChild(sec);fillUnis(sec);wireTabs(sec);}
 ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script><script id="ntlsn-fnmap-script">(function(){
 var F='-apple-system,Segoe UI,Roboto,sans-serif';
