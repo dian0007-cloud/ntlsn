@@ -1186,5 +1186,47 @@ function stray(){
 }
 function run(){try{chips();}catch(e){} try{stray();}catch(e){}}
 run(); new MutationObserver(run).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-evidencefix-script">(function(){function findSec(){var hs=document.querySelectorAll('h2,h3');for(var i=0;i<hs.length;i++){var t=hs[i].textContent||'';if(/What the data shows/.test(t)||/SoTL Infrastructure Across/.test(t)){var el=hs[i];while(el&&el.tagName!=='SECTION')el=el.parentNode;return el;}}return null;}function css(){if(document.getElementById('ntlsn-evidence-css'))return;var st=document.createElement('style');st.id='ntlsn-evidence-css';st.textContent='#ntlsn-evidence{padding-top:42px!important;padding-bottom:42px!important}'+'#ntlsn-evidence [class~="mb-16"]{margin-bottom:22px!important}'+'#ntlsn-evidence [class~="mb-20"]{margin-bottom:6px!important}'+'#ntlsn-evidence [class~="mb-8"]{margin-bottom:8px!important}'+'#ntlsn-evidence [class~="mb-6"]{margin-bottom:8px!important}'+'#ntlsn-evidence [class~="text-4xl"],#ntlsn-evidence [class~="text-5xl"]{font-size:33px!important;line-height:1.05!important}'+'#ntlsn-evidence [class~="text-3xl"]{font-size:28px!important}'+'#ntlsn-evidence [class~="p-6"]{padding:14px!important}'+'#ntlsn-evidence [class~="h-5"]{height:11px!important}'+'#ntlsn-evidence [class~="space-y-2.5"]>div+div{margin-top:3px!important}'+'#ntlsn-evidence [class~="space-y-2.5"]>div{line-height:1!important}'+'#ntlsn-evidence [class~="space-y-2.5"] [class~="text-xs"]{font-size:11px!important;line-height:1!important}';document.head.appendChild(st);}function ensure(){var sec=findSec();if(sec&&!sec.id)sec.id='ntlsn-evidence';if(sec&&sec.id==='ntlsn-evidence'){css();var eh=sec.querySelectorAll('h2,h3');for(var ei=0;ei<eh.length;ei++){if(/Strengths & Opportunities/.test(eh[ei].textContent||'')){var eb=eh[ei];while(eb&&eb.parentNode!==sec.firstElementChild)eb=eb.parentNode;if(eb)eb.style.display='none';break;}}}}ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});})();</script></body>
+})();</script><script id="ntlsn-evidencefix-script">(function(){function findSec(){var hs=document.querySelectorAll('h2,h3');for(var i=0;i<hs.length;i++){var t=hs[i].textContent||'';if(/What the data shows/.test(t)||/SoTL Infrastructure Across/.test(t)){var el=hs[i];while(el&&el.tagName!=='SECTION')el=el.parentNode;return el;}}return null;}function css(){if(document.getElementById('ntlsn-evidence-css'))return;var st=document.createElement('style');st.id='ntlsn-evidence-css';st.textContent='#ntlsn-evidence{padding-top:42px!important;padding-bottom:42px!important}'+'#ntlsn-evidence [class~="mb-16"]{margin-bottom:22px!important}'+'#ntlsn-evidence [class~="mb-20"]{margin-bottom:6px!important}'+'#ntlsn-evidence [class~="mb-8"]{margin-bottom:8px!important}'+'#ntlsn-evidence [class~="mb-6"]{margin-bottom:8px!important}'+'#ntlsn-evidence [class~="text-4xl"],#ntlsn-evidence [class~="text-5xl"]{font-size:33px!important;line-height:1.05!important}'+'#ntlsn-evidence [class~="text-3xl"]{font-size:28px!important}'+'#ntlsn-evidence [class~="p-6"]{padding:14px!important}'+'#ntlsn-evidence [class~="h-5"]{height:11px!important}'+'#ntlsn-evidence [class~="space-y-2.5"]>div+div{margin-top:3px!important}'+'#ntlsn-evidence [class~="space-y-2.5"]>div{line-height:1!important}'+'#ntlsn-evidence [class~="space-y-2.5"] [class~="text-xs"]{font-size:11px!important;line-height:1!important}';document.head.appendChild(st);}function ensure(){var sec=findSec();if(sec&&!sec.id)sec.id='ntlsn-evidence';if(sec&&sec.id==='ntlsn-evidence'){css();var eh=sec.querySelectorAll('h2,h3');for(var ei=0;ei<eh.length;ei++){if(/Strengths & Opportunities/.test(eh[ei].textContent||'')){var eb=eh[ei];while(eb&&eb.parentNode!==sec.firstElementChild)eb=eb.parentNode;if(eb)eb.style.display='none';break;}}}}ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-premium-script">(function(){
+var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var st=document.createElement('style');st.id='ntlsn-premium-style';
+st.textContent=
+ '.ntlsn-num{font-variant-numeric:tabular-nums}'
++'#ntlsn-capabilities [class*="rounded-2"],#pricing [class*="rounded-2"],#teaching-resources [class*="rounded-2"],#ntlsn-calibrate [class*="rounded-2"]{transition:transform .35s cubic-bezier(.16,.84,.44,1),box-shadow .35s ease,border-color .35s ease}'
++'@media (prefers-reduced-motion: no-preference){'
++'.ntlsn-reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1)}'
++'.ntlsn-reveal.ntlsn-in{opacity:1;transform:none}'
++'#ntlsn-capabilities [class*="rounded-2"]:hover,#pricing [class*="rounded-2"]:hover,#teaching-resources [class*="rounded-2"]:hover,#ntlsn-calibrate [class*="rounded-2"]:hover{transform:translateY(-5px);box-shadow:0 20px 44px -14px rgba(78,205,196,.30);border-color:rgba(78,205,196,.45)}'
++'}';
+document.head.appendChild(st);
+
+// ---- count-up (bulletproof: each element self-restores to final value) ----
+function parse(t){var m=t.replace(/,/g,'').match(/^(\$?)(\d+(?:\.\d+)?)(\+?%?)$/);if(!m)return null;return{pre:m[1],n:parseFloat(m[2]),suf:m[3],dec:(m[2].split('.')[1]||'').length};}
+function fmt(v,d){return (d?v.toFixed(d):Math.round(v)).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function up(el){
+ if(el.dataset.ntlsnup)return;var t=el.textContent.trim();var p=parse(t);if(!p||p.n<=0)return;
+ el.dataset.ntlsnup='1';el.classList.add('ntlsn-num');
+ if(RM)return;
+ var dur=1100,t0=null;
+ setTimeout(function(){el.textContent=t;},dur+700); // safety: never stuck
+ function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);el.textContent=p.pre+fmt(p.n*e,p.dec)+p.suf;if(k<1)requestAnimationFrame(step);else el.textContent=t;}
+ el.textContent=p.pre+'0'+p.suf;requestAnimationFrame(step);
+}
+var numIO=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){up(en.target);numIO.unobserve(en.target);}});},{threshold:.6});
+function scanNums(){var root=document.getElementById('ntlsn-evidence');if(!root)return;
+ [].slice.call(root.querySelectorAll('div,span,p,h2,h3')).forEach(function(e){
+  if(e.children.length||e.dataset.ntlsnup)return;
+  var t=e.textContent.trim();if(!/^[\d,]{1,6}%?$/.test(t)||!/\d/.test(t))return;
+  if(parseFloat(getComputedStyle(e).fontSize)<24)return;numIO.observe(e);});}
+
+// ---- reveal-on-scroll (content-safe: JS adds the hide, 5s net guarantees reveal) ----
+var revIO=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('ntlsn-in');revIO.unobserve(en.target);}});},{threshold:.1});
+function scanReveal(){if(RM)return;[].slice.call(document.querySelectorAll('section')).forEach(function(sec){
+ if(sec.id==='hero')return;var inner=sec.firstElementChild;if(!inner||inner.dataset.rev||inner.tagName!=='DIV')return;
+ inner.dataset.rev='1';inner.classList.add('ntlsn-reveal');revIO.observe(inner);});}
+
+function run(){scanNums();scanReveal();}
+run();setTimeout(run,1000);setTimeout(run,2600);
+// safety net: nothing ever stays hidden
+setTimeout(function(){[].slice.call(document.querySelectorAll('.ntlsn-reveal:not(.ntlsn-in)')).forEach(function(e){e.classList.add('ntlsn-in');});},5000);
+})();</script></body>
 </html>
