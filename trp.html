@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRP — Teaching Recognition Passport (NTLSN)</title>
+<style>
+ :root{--bg:#0A1628;--card:#0f1f3a;--ink:#eaf2fb;--mut:#9fb3c8;--line:rgba(255,255,255,.10);--teal:#2DD4BF;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#4FD1A5;--coral:#FF6B6B;--F:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+ *{margin:0;padding:0;box-sizing:border-box}
+ body{background:radial-gradient(1100px 520px at 50% -8%,#13294a 0%,var(--bg) 55%);color:var(--ink);font-family:var(--F);line-height:1.5;min-height:100vh}
+ .wrap{max-width:880px;margin:0 auto;padding:26px 18px 70px}
+ input,textarea,select{font-family:var(--F);background:#0b1c34;border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:9px 11px;font-size:13.5px;width:100%}
+ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--teal)}
+ button{font-family:var(--F);cursor:pointer;border:none;border-radius:999px;font-weight:700}
+ ::selection{background:#FFB44844}
+ label{font-size:11px;color:var(--mut);display:block;margin:0 0 3px}
+ @media print{body{background:#fff;color:#000} .noprint{display:none!important} .stamp{border-color:#bbb!important}}
+ /* passport cover */
+ .cover{position:relative;border:2px solid var(--gold);border-radius:18px;background:linear-gradient(135deg,#0f2236,#0c1a30);padding:26px 26px 22px;overflow:hidden}
+ .cover:before{content:"";position:absolute;inset:7px;border:1px solid #FFB44844;border-radius:13px;pointer-events:none}
+ .crest{width:54px;height:54px;flex:0 0 auto}
+ .ttl{font:800 13px/1 var(--F);letter-spacing:3px;color:var(--gold);text-transform:uppercase}
+ .big{font:800 clamp(24px,4vw,34px)/1.05 var(--F);margin:4px 0 2px}
+ .stamp{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:11px;padding:12px 14px;margin-bottom:8px;position:relative}
+ .pill{display:inline-block;font:700 9.5px var(--F);letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+ .del{position:absolute;top:9px;right:10px;background:transparent;border:none;color:var(--mut);font-size:16px;cursor:pointer;line-height:1}
+ .grp{margin:22px 0 8px;display:flex;align-items:center;gap:9px}
+ .grp h3{font:800 15px var(--F)}
+ .btn{background:var(--teal);color:#06121f;padding:10px 18px;font-size:13px}
+ .btn2{background:transparent;border:1px solid var(--line);color:var(--ink);padding:9px 15px;font-size:12.5px;font-weight:600}
+ .btn2:hover{border-color:var(--teal);color:var(--teal)}
+ .row{display:grid;gap:9px}
+ a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div style="text-align:center;margin-bottom:6px"><span class="ttl">◇ NTLSN · portable credential</span></div>
+ <h1 style="text-align:center;font:800 clamp(26px,5vw,40px)/1.05 var(--F);margin:2px 0 8px">The Teaching Recognition Passport</h1>
+ <p style="text-align:center;color:var(--mut);max-width:660px;margin:0 auto 8px;font-size:15px">Change institutions and your recognition rarely travels with you — fellowships, your Grad Cert, the induction and PD you completed, the peer reviews you gave. <b style="color:#cfe9e5">The TRP is your teaching record, in one place, that goes where you go.</b></p>
+ <div style="text-align:center;margin:0 auto 22px"><span class="pill" style="color:var(--gold);border:1px solid #FFB44855">IN DESIGN · prototype · nothing leaves your browser</span></div>
+
+ <!-- COVER -->
+ <div class="cover">
+  <div style="display:flex;align-items:center;gap:16px">
+   <svg class="crest" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB448"/><stop offset="1" stop-color="#FF8A6B"/></linearGradient></defs><circle cx="50" cy="50" r="46" fill="none" stroke="url(#cg)" stroke-width="3"/><circle cx="50" cy="50" r="30" fill="none" stroke="#2DD4BF" stroke-width="2" opacity=".8"/><ellipse cx="50" cy="50" rx="30" ry="12" fill="none" stroke="#2DD4BF" stroke-width="1.4" opacity=".55"/><line x1="20" y1="50" x2="80" y2="50" stroke="#2DD4BF" stroke-width="1.4" opacity=".55"/><circle cx="50" cy="50" r="5" fill="#FFB448"/><text x="50" y="84" text-anchor="middle" font-family="Arial" font-weight="800" font-size="13" fill="#FFB448">TRP</text></svg>
+   <div style="flex:1">
+    <div class="ttl">Teaching Recognition Passport</div>
+    <div class="big" id="cv-name">Your name</div>
+    <div style="color:var(--mut);font-size:13px" id="cv-sub">Add your details below</div>
+   </div>
+   <div style="text-align:right;font-size:11px;color:var(--mut);white-space:nowrap">
+    <div>No. <span id="cv-no" style="color:var(--gold);font-weight:700">—</span></div>
+    <div id="cv-issued"></div>
+    <div><span id="cv-count" style="color:var(--teal);font-weight:700">0</span> recognitions</div>
+   </div>
+  </div>
+ </div>
+
+ <!-- IDENTITY -->
+ <div class="grp"><span style="font-size:18px">🪪</span><h3>Holder</h3></div>
+ <div class="row" style="grid-template-columns:1fr 1fr">
+  <div><label>Full name</label><input id="f-name" placeholder="A/Prof Jane Smith"></div>
+  <div><label>Current institution</label><input id="f-inst" placeholder="University of …"></div>
+  <div><label>Discipline(s)</label><input id="f-disc" placeholder="Nursing · Health"></div>
+  <div><label>ORCID / profile (optional)</label><input id="f-orcid" placeholder="0000-0000-0000-0000"></div>
+ </div>
+
+ <!-- ADD A STAMP -->
+ <div class="grp"><span style="font-size:18px">➕</span><h3>Add a recognition</h3></div>
+ <div class="row" style="grid-template-columns:1fr 1fr">
+  <div><label>Category</label><select id="e-cat"></select></div>
+  <div><label>What is it? (title)</label><input id="e-title" placeholder="Senior Fellowship (SFHEA)"></div>
+  <div><label>Issuer / institution</label><input id="e-issuer" placeholder="Advance HE / your university"></div>
+  <div><label>Year</label><input id="e-year" placeholder="2024"></div>
+  <div style="grid-column:1/-1"><label>Evidence link (optional)</label><input id="e-url" placeholder="https://… (certificate, badge, profile)"></div>
+  <div style="grid-column:1/-1"><label>Note (optional)</label><input id="e-note" placeholder="e.g. completed institutional induction + 6 PD modules"></div>
+ </div>
+ <div style="margin-top:10px"><button class="btn" id="add">Add to passport →</button></div>
+
+ <!-- PASSPORT BODY -->
+ <div id="passport" style="margin-top:8px"></div>
+
+ <!-- PHILOSOPHY -->
+ <div class="grp"><span style="font-size:18px">✍️</span><h3>Teaching philosophy <span style="font-weight:400;color:var(--mut);font-size:12px">(optional, travels with you)</span></h3></div>
+ <textarea id="f-phil" rows="3" placeholder="A few lines on how you teach and why…"></textarea>
+
+ <!-- ACTIONS -->
+ <div class="noprint" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px">
+  <button class="btn2" id="dl">⬇ Download passport (.md)</button>
+  <button class="btn2" id="json">⬇ Export data (.json)</button>
+  <button class="btn2" id="imp">⬆ Import (.json)</button>
+  <button class="btn2" id="prnt">🖨 Print / PDF</button>
+  <button class="btn2" id="clr" style="border-color:#FF6B6B55;color:#FF6B6B">Clear</button>
+  <input id="impfile" type="file" accept="application/json" style="display:none">
+ </div>
+
+ <div class="card" style="background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:24px">
+  <div style="font:700 12px var(--F);color:var(--gold);margin-bottom:5px">Why a passport — and what's real here</div>
+  <p style="font-size:12px;color:var(--mut);line-height:1.6;margin:0">Most teaching recognition is institution-locked: a Grad Cert, an induction, PD modules, internal awards — they often aren't re-credited when you move. The TRP keeps <b style="color:#cfe9e5">your</b> record with <b style="color:#cfe9e5">you</b>. This prototype holds self-entered records in your browser (nothing is sent anywhere). The full version issues <b style="color:#cfe9e5">verifiable, issuer-signed credentials</b> (Open Badges / Verifiable Credentials) so a record from one university is trusted at another — recognition that finally travels across the 42. Part of the proposed NTLSN platform · ntlsn.com</p>
+ </div>
+</div>
+
+<script>
+var CATS=[
+ {id:'recognition',name:'Fellowships & Awards',ic:'🏅',c:'#FFB448',eg:'AFHEA · FHEA · SFHEA · PFHEA · AAUT Award/Citation · teaching excellence award'},
+ {id:'qualification',name:'Qualifications',ic:'🎓',c:'#7C9CFF',eg:'Grad Cert / Grad Dip / Masters in L&T or HE · PhD'},
+ {id:'pd',name:'Professional development',ic:'📘',c:'#2DD4BF',eg:'Induction · PD modules · CPD · short courses (the records that rarely travel)'},
+ {id:'peer',name:'Peer review & calibration',ic:'🤝',c:'#C57BFF',eg:'Peer reviews given/received · moderation & calibration · Pair Review'},
+ {id:'scholarship',name:'Scholarship & contribution',ic:'📚',c:'#4FD1A5',eg:'SoTL publications · symposium/conference presentations · mentoring'}
+];
+function catOf(id){return CATS.filter(function(c){return c.id===id})[0]||CATS[0];}
+var KEY='ntlsn_trp';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||null}catch(e){return null}}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+var S=load()||{no:('TRP-'+Math.random().toString(36).slice(2,7).toUpperCase()),issued:new Date().toISOString().slice(0,10),name:'',inst:'',disc:'',orcid:'',phil:'',entries:[]};
+
+var $=function(id){return document.getElementById(id)};
+// populate category dropdown + identity fields
+CATS.forEach(function(c){var o=document.createElement('option');o.value=c.id;o.textContent=c.ic+' '+c.name;$('e-cat').appendChild(o);});
+$('f-name').value=S.name;$('f-inst').value=S.inst;$('f-disc').value=S.disc;$('f-orcid').value=S.orcid;$('f-phil').value=S.phil;
+['name','inst','disc','orcid','phil'].forEach(function(k){$('f-'+k).addEventListener('input',function(){S[k]=$('f-'+k).value;save();renderCover();});});
+
+function esc(s){return String(s==null?'':s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function renderCover(){
+ $('cv-name').textContent=S.name||'Your name';
+ $('cv-sub').textContent=[S.inst,S.disc].filter(Boolean).join(' · ')||'Add your details below';
+ $('cv-no').textContent=S.no; $('cv-issued').textContent='Issued '+S.issued; $('cv-count').textContent=S.entries.length;
+}
+function render(){
+ renderCover();
+ var box=$('passport'); box.innerHTML='';
+ CATS.forEach(function(c){
+  var items=S.entries.filter(function(e){return e.cat===c.id});
+  if(!items.length)return;
+  var g=document.createElement('div'); g.className='grp'; g.style.marginTop='20px';
+  g.innerHTML='<span style="font-size:18px">'+c.ic+'</span><h3>'+c.name+' <span style="font-weight:400;color:var(--mut);font-size:12px">('+items.length+')</span></h3>';
+  box.appendChild(g);
+  items.forEach(function(e){
+   var i=S.entries.indexOf(e);
+   var d=document.createElement('div'); d.className='stamp'; d.style.borderLeftColor=c.c;
+   d.innerHTML='<button class="del" title="Remove" data-i="'+i+'">×</button>'
+    +'<div style="font:700 14px var(--F);color:#fff;padding-right:18px">'+esc(e.title)+'</div>'
+    +'<div style="font-size:12px;color:var(--mut);margin-top:2px">'+[esc(e.issuer),esc(e.year)].filter(Boolean).join(' · ')+'</div>'
+    +(e.note?'<div style="font-size:12px;color:#cbd8e6;margin-top:5px">'+esc(e.note)+'</div>':'')
+    +(e.url?'<a href="'+esc(e.url)+'" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;display:inline-block;margin-top:6px">evidence ↗</a>':'')
+    +'<span class="pill" style="position:absolute;bottom:11px;right:12px;color:'+c.c+';border:1px solid '+c.c+'55">self-asserted</span>';
+   box.appendChild(d);
+  });
+ });
+ if(!S.entries.length){box.innerHTML='<div style="background:var(--card);border:1px dashed var(--line);border-radius:11px;padding:22px;text-align:center;color:var(--mut);font-size:13px">No recognitions yet — add your first above. Tip: '+catOf('pd').eg+'.</div>';}
+ [].slice.call(box.querySelectorAll('.del')).forEach(function(b){b.onclick=function(){S.entries.splice(+b.dataset.i,1);save();render();};});
+}
+$('add').onclick=function(){
+ var t=$('e-title').value.trim(); if(!t){$('e-title').focus();return;}
+ S.entries.unshift({cat:$('e-cat').value,title:t,issuer:$('e-issuer').value.trim(),year:$('e-year').value.trim(),url:$('e-url').value.trim(),note:$('e-note').value.trim()});
+ ['title','issuer','year','url','note'].forEach(function(k){$('e-'+k).value='';});
+ save();render();$('e-title').focus();
+};
+function mdOut(){
+ var L=['# Teaching Recognition Passport','','**'+(S.name||'—')+'**  ',(S.inst||'')+(S.disc?(' · '+S.disc):'')+'  ',(S.orcid?('ORCID '+S.orcid+'  '):''),'Passport '+S.no+' · issued '+S.issued+' · '+S.entries.length+' recognitions',''];
+ CATS.forEach(function(c){var items=S.entries.filter(function(e){return e.cat===c.id});if(!items.length)return;L.push('## '+c.name);items.forEach(function(e){L.push('- **'+e.title+'**'+(e.issuer?(' — '+e.issuer):'')+(e.year?(' ('+e.year+')'):'')+(e.note?('  \n  '+e.note):'')+(e.url?('  \n  '+e.url):''));});L.push('');});
+ if(S.phil){L.push('## Teaching philosophy',S.phil,'');}
+ L.push('---','_Carried via the NTLSN Teaching Recognition Passport (prototype). Records self-asserted; the full version issues verifiable, issuer-signed credentials._');
+ return L.join('\n');
+}
+function dl(name,text,type){var b=new Blob([text],{type:type});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u);}
+$('dl').onclick=function(){dl('TRP-'+(S.name||'passport').replace(/\W+/g,'-')+'.md',mdOut(),'text/markdown');};
+$('json').onclick=function(){dl('TRP-'+S.no+'.json',JSON.stringify(S,null,2),'application/json');};
+$('imp').onclick=function(){$('impfile').click();};
+$('impfile').onchange=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(d&&d.entries){S=d;save();['name','inst','disc','orcid','phil'].forEach(function(k){$('f-'+k).value=S[k]||'';});render();}}catch(err){alert('Could not read that file.');}};r.readAsText(f);};
+$('prnt').onclick=function(){window.print();};
+$('clr').onclick=function(){if(confirm('Clear this passport? (This only clears your browser copy.)')){localStorage.removeItem(KEY);location.reload();}};
+render();
+</script>
+</body>
+</html>
