@@ -1,0 +1,22 @@
+# NTLSN — National Teaching and Learning Support Network
+
+> A free, open commons connecting Australia's higher-education teaching and learning sector: every conference, showcase, workshop and professional-development opportunity across all 42 universities, plus a rescued 31-year archive of nationally funded teaching scholarship. No logins, no paywalls. Licensed CC BY-NC-SA 4.0. Founded by A/Prof Seb Dianati (University of Southern Queensland).
+
+## Core
+- [NTLSN home](https://www.ntlsn.com): the full platform — interactive sector map, events calendar, resources, and recognition tools across all 42 Australian universities.
+- [Sector Archive](https://www.ntlsn.com/#ntlsn-archive): 1,431 ALTC- and OLT-funded learning and teaching works, 1994–2025. NTLSN indexes titles and authors; full text lives at the Australian Government Learning & Teaching Repository.
+- [Best Practice guides](https://www.ntlsn.com/#ntlsn-bestpractice): 80 curated Good Practice Reports and guides, 2006–2024 (academic integrity, work-integrated learning, assessment, curriculum design, student transition).
+
+## Free in-browser tools
+- [Course Quality Self-Check](https://www.ntlsn.com/selfcheck.html): rate a course against the TELAS standards and UDL guidelines; produces a readiness profile.
+- [TEQSA GenAI Readiness](https://www.ntlsn.com/teqsa-readiness.html): self-assess a course or program against TEQSA generative-AI guidance.
+- [Teaching Recognition Passport](https://www.ntlsn.com/trp.html): a portable, self-asserted record of teaching contribution.
+- [Reflective Coach](https://www.ntlsn.com/reflective-coach.html): a Socratic scaffold across established reflective-practice models.
+- [Students-as-Partners Certificate](https://www.ntlsn.com/cert.html): generate a printable student-staff partnership certificate as portfolio evidence.
+
+## What the sector can find here
+- Teaching and learning events, conferences, grants and fellowships, frameworks and policy documents, career pathways, and curated sector and international SoTL talks, all aggregated across Australian higher education.
+
+## About and licensing
+- NTLSN is a free, open Open Educational Practice commons. Paid services exist only to sustain the commons and never gate it. Curation and original benchmarking are licensed CC BY-NC-SA 4.0; linked third-party works remain the property of their authors and institutions.
+- NTLSN does not claim endorsement by the universities, peak bodies, or regulators it catalogues.

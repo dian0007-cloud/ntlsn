@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Students-as-Partners Certificate</title>
+<meta name="description" content="Generate a verifiable-style Students-as-Partners certificate and save it as a PDF. Free, in-browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--teal:#2DD4BF;--gold:#FFB448;--ink:#1f2a37;--mut:#667085;--line:#e6e9ee;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef2f6;color:var(--ink);font-family:var(--F);padding:24px}
+  .wrap{max-width:1000px;margin:0 auto}
+  .controls{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:24px}
+  .controls h1{font-size:20px;margin:0 0 4px}
+  .controls p{font-size:13px;color:var(--mut);margin:0 0 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  label{display:block;font-size:12px;font-weight:600;color:var(--mut);margin-bottom:5px}
+  input,select{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:400 14px var(--F);color:var(--ink)}
+  .btn{margin-top:16px;background:var(--navy);color:#fff;border:0;border-radius:999px;padding:11px 22px;font:700 14px var(--F);cursor:pointer}
+  .btn:hover{background:#13243d}
+  .note{font-size:11px;color:var(--mut);margin-top:10px}
+  /* Certificate */
+  .cert{background:#fff;border-radius:6px;padding:6px;background:linear-gradient(135deg,var(--teal),#7C9CFF,#C57BFF);box-shadow:0 8px 30px rgba(10,22,40,.12)}
+  .cert-in{background:#fff;border-radius:4px;padding:54px 60px;text-align:center;position:relative;overflow:hidden}
+  .crest{font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--teal)}
+  .crest b{color:var(--navy)}
+  .kicker{margin-top:30px;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--mut)}
+  .title{font-size:34px;font-weight:800;color:var(--navy);margin:6px 0 2px;line-height:1.15}
+  .sub{font-size:14px;color:var(--mut);margin-bottom:26px}
+  .names{font-size:15px;color:var(--ink);line-height:1.7}
+  .names .who{font-size:22px;font-weight:800;color:var(--navy)}
+  .proj{font-size:18px;font-weight:700;color:var(--navy);margin:18px auto 6px;max-width:680px}
+  .level{display:inline-block;margin-top:10px;font:800 12px var(--F);letter-spacing:1px;text-transform:uppercase;color:#06243a;background:var(--teal);border-radius:999px;padding:6px 16px}
+  .leveldesc{font-size:13px;color:var(--mut);max-width:620px;margin:12px auto 0}
+  .footer{margin-top:36px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;font-size:12px;color:var(--mut)}
+  .footer .line{border-top:1.5px solid var(--navy);padding-top:6px;min-width:200px;text-align:center;color:var(--navy);font-weight:600}
+  .fineprint{font-size:10.5px;color:#9aa3af;margin-top:22px;line-height:1.5}
+  @media print{
+    body{background:#fff;padding:0}
+    .controls,.printhide{display:none!important}
+    .cert{box-shadow:none;padding:3px}
+    @page{size:A4 landscape;margin:12mm}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="controls printhide">
+    <h1>Students-as-Partners certificate</h1>
+    <p>Fill the fields, then “Save as PDF”. Everything runs in your browser. Nothing is stored or sent. A free recognition tool from NTLSN.</p>
+    <div class="grid">
+      <div><label for="proj">Project / initiative title</label><input id="proj" value="Co-designing first-year assessment"></div>
+      <div><label for="acad">Lead academic</label><input id="acad" value="Dr Alex Rivera"></div>
+      <div><label for="stud">Student partner(s)</label><input id="stud" value="Jordan Lee"></div>
+      <div><label for="inst">University</label><input id="inst" value="Your University"></div>
+      <div><label for="level">Partnership level</label><select id="level">
+        <option>Sounding board</option><option>Influencer</option><option selected>Mentor</option><option>Co-creator</option><option>Decision-maker</option>
+      </select></div>
+      <div><label for="date">Date</label><input id="date" type="date"></div>
+    </div>
+    <button class="btn" onclick="window.print()">Save as PDF / Print</button>
+    <div class="note">Tip: in the print dialog choose “Save as PDF”, A4 landscape.</div>
+  </div>
+
+  <div class="cert">
+    <div class="cert-in">
+      <div class="crest">NTLSN<b> ·</b> National Teaching &amp; Learning</div>
+      <div class="kicker">Certificate of Partnership</div>
+      <div class="title">Students as Partners</div>
+      <div class="sub">in recognition of genuine co-creation in teaching and learning</div>
+      <div class="names">
+        This certifies that <span class="who" id="o-acad">Dr Alex Rivera</span><br>
+        and <span class="who" id="o-stud">Jordan Lee</span><br>
+        partnered on
+      </div>
+      <div class="proj" id="o-proj">Co-designing first-year assessment</div>
+      <div class="level" id="o-level">Mentor</div>
+      <div class="leveldesc" id="o-leveldesc"></div>
+      <div class="footer">
+        <div class="line" id="o-inst">Your University</div>
+        <div class="line" id="o-date">—</div>
+      </div>
+      <div class="fineprint">A record of student-staff partnership, suitable as evidence for portfolios, promotion and Advance HE Fellowship. NTLSN issues this record of demonstrated partnership; your institution awards any credit. Generated in-browser; not a live credential. Verifiable Open Badge issuance is on the 2027 roadmap.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var LD={
+    'Sounding board':'Students consulted through surveys, focus groups and student voice.',
+    'Influencer':'Students on advisory boards or committees, shaping decisions.',
+    'Mentor':'Students leading peer programs and student-led support.',
+    'Co-creator':'Students co-designing curriculum, assessment and resources.',
+    'Decision-maker':'Students holding genuine governance power and shared authority.'
+  };
+  function $(id){return document.getElementById(id);}
+  function render(){
+    $('o-acad').textContent=$('acad').value||'—';
+    $('o-stud').textContent=$('stud').value||'—';
+    $('o-proj').textContent=$('proj').value||'—';
+    var lv=$('level').value; $('o-level').textContent=lv; $('o-leveldesc').textContent=LD[lv]||'';
+    $('o-inst').textContent=$('inst').value||'—';
+    var d=$('date').value;
+    $('o-date').textContent=d?new Date(d+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'long',year:'numeric'}):'—';
+  }
+  var t=new Date(); $('date').value=t.toISOString().slice(0,10);
+  ['proj','acad','stud','inst','level','date'].forEach(function(id){$(id).addEventListener('input',render);});
+  render();
+})();
+</script>
+</body>
+</html>

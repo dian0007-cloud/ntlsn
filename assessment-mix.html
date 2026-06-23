@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Assessment Mix & AI-Resilience Check</title>
+<meta name="description" content="Enter a unit's assessments and see the balance of types, over-reliance on any one form, and how exposed the marks are to generative AI. A design prompt for varied, authentic, AI-resilient assessment. Runs entirely in your browser; nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:980px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(23px,3.3vw,33px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:720px}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+  @media(max-width:780px){.grid{grid-template-columns:1fr}}
+  fieldset{border:1px solid var(--line);border-radius:13px;padding:14px 16px 16px;margin:0}
+  legend{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);padding:0 6px}
+  .arow{display:flex;gap:8px;margin:8px 0}
+  select,input[type=number]{background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:600 13.5px var(--F)}
+  select{flex:1;min-width:0} input[type=number]{width:78px;text-align:right}
+  select:focus,input:focus{outline:none;border-color:var(--teal)}
+  .pct{display:flex;align-items:center;color:var(--mut);font:600 12.5px var(--F)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:sticky;top:18px}
+  .big{display:flex;align-items:baseline;gap:10px}
+  .big b{font-size:32px;font-weight:800;line-height:1.05;letter-spacing:-.01em}
+  .vsub{color:var(--mut);font-size:12.5px;margin:8px 0 16px}
+  .meter{height:12px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.06);display:flex;margin:0 0 6px}
+  .meter span{display:block;height:100%}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 16px;font:600 11.5px var(--F);color:var(--mut)}
+  .legend i{display:inline-flex;align-items:center;gap:5px;font-style:normal}.legend i b{width:9px;height:9px;border-radius:2px}
+  h2{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 10px}
+  .note{font-size:13px;color:var(--mut);margin:0 0 8px;display:flex;gap:8px}
+  .note .dot{width:9px;height:9px;border-radius:50%;flex:none;margin-top:5px}
+  .brk{list-style:none;padding:0;margin:0}
+  .brk li{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;padding:7px 0;border-top:1px solid var(--line)}
+  .brk li:first-child{border-top:0}
+  .tg{font:800 9.5px var(--F);text-transform:uppercase;letter-spacing:.4px;padding:2px 7px;border-radius:5px;color:#06251f}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Assessment Mix &amp; AI-Resilience Check</h1>
+  <p class="lead">Enter a unit&rsquo;s assessments and weights. You&rsquo;ll see the balance of types, any over-reliance on one form, and how exposed the marks are to generative AI — a quick design prompt for varied, authentic, AI-resilient assessment. Nothing is stored or sent.</p>
+  <div class="grid">
+    <div>
+      <fieldset>
+        <legend>Assessments &middot; type &amp; weight</legend>
+        <div id="rowbox"></div>
+      </fieldset>
+    </div>
+    <div><div class="panel" id="out"></div></div>
+  </div>
+  <div class="foot">
+    The generative-AI exposure rating is a <b>heuristic by task type</b> — unsupervised text tasks (essays, reports, online quizzes) are generally easier to complete with AI than supervised, oral, practical or process-based tasks. It is a design prompt, not a verdict, and good task <i>design</i> can make any type more resilient. Aligns with NTLSN&rsquo;s Calibration Suite and TEQSA&rsquo;s assessment-reform principles. Everything runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var TYPES=[
+    ['',''],
+    ['Supervised exam','low'],['In-class task / test','low'],
+    ['Oral presentation','low'],['Viva / interview','low'],
+    ['Practical / lab / performance','low'],
+    ['Project','med'],['Group project','med'],['Portfolio','med'],
+    ['Case analysis','med'],['Annotated bibliography','med'],
+    ['Take-home essay','high'],['Report','high'],
+    ['Online quiz (unsupervised)','high'],['Written reflection','high'],['Discussion posts','high']
+  ];
+  var COL={low:'#9DD649',med:'#FFB448',high:'#FF8A8A'};
+  var VMAP={}; TYPES.forEach(function(t){VMAP[t[0]]=t[1];});
+  var box=document.getElementById('rowbox'), N=5;
+  var opts=TYPES.map(function(t){return '<option value="'+t[0]+'">'+(t[0]||'— select type —')+'</option>';}).join('');
+  var html='';
+  for(var i=0;i<N;i++){
+    html+='<div class="arow"><select id="t'+i+'">'+opts+'</select><input type="number" id="w'+i+'" min="0" max="100" placeholder="0"><span class="pct">%</span></div>';
+  }
+  box.innerHTML=html;
+  function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?0:v;}
+  function calc(){
+    var rows=[];
+    for(var i=0;i<N;i++){var ty=document.getElementById('t'+i).value, w=num('w'+i); if(ty&&w>0) rows.push({ty:ty,w:w,v:VMAP[ty]});}
+    var out=document.getElementById('out');
+    if(!rows.length){out.innerHTML='<p style="color:var(--mut);font-size:14px;font-style:italic;margin:0">Pick assessment types and weights to see the analysis.</p>';return;}
+    var total=rows.reduce(function(a,r){return a+r.w;},0);
+    var byV={low:0,med:0,high:0}; rows.forEach(function(r){byV[r.v]+=r.w;});
+    var highShare=total?byV.high/total:0;
+    var band,bcol;
+    if(highShare>0.6){band='Exposed to AI';bcol='var(--bad)';}
+    else if(highShare>0.3){band='Mixed';bcol='var(--warn)';}
+    else{band='AI-resilient';bcol='var(--good)';}
+    // variety
+    var types={}; rows.forEach(function(r){types[r.ty]=(types[r.ty]||0)+r.w;});
+    var distinct=Object.keys(types).length;
+    var maxShare=0; for(var k in types){if(types[k]/total>maxShare)maxShare=types[k]/total;}
+    var meter=['low','med','high'].map(function(v){return byV[v]>0?'<span style="background:'+COL[v]+';flex:'+byV[v]+'"></span>':'';}).join('');
+    var notes=[];
+    notes.push({c:total===100?'var(--good)':'var(--warn)',t:'Weights total <b>'+total+'%</b>'+(total===100?'.':' — '+(total<100?'under':'over')+' 100%, check your figures.')});
+    notes.push({c:distinct>=3?'var(--good)':'var(--warn)',t:'<b>'+distinct+'</b> distinct assessment type'+(distinct===1?'':'s')+(distinct>=3?' — good variety.':' — consider a wider range of ways to show learning.')});
+    if(maxShare>0.6) notes.push({c:'var(--warn)',t:'One type carries <b>'+Math.round(maxShare*100)+'%</b> of the marks — spread the load to reduce risk and broaden access.'});
+    out.innerHTML=
+      '<div class="big"><b style="color:'+bcol+'">'+band+'</b></div>'+
+      '<div class="vsub"><b style="color:'+bcol+'">'+Math.round(highShare*100)+'%</b> of marks sit on AI-exposed task types</div>'+
+      '<div class="meter">'+(meter||'<span style="flex:1"></span>')+'</div>'+
+      '<div class="legend"><i><b style="background:'+COL.low+'"></b>Lower exposure</i><i><b style="background:'+COL.med+'"></b>Medium</i><i><b style="background:'+COL.high+'"></b>Higher exposure</i></div>'+
+      notes.map(function(n){return '<div class="note"><span class="dot" style="background:'+n.c+'"></span><span>'+n.t+'</span></div>';}).join('')+
+      '<h2 style="margin-top:16px">Your assessments</h2><ul class="brk">'+rows.map(function(r){return '<li><span>'+r.ty+'</span><span style="display:flex;gap:9px;align-items:center"><span style="color:var(--mut)">'+r.w+'%</span><span class="tg" style="background:'+COL[r.v]+'">'+r.v+'</span></span></li>';}).join('')+'</ul>';
+  }
+  for(var i=0;i<N;i++){document.getElementById('t'+i).addEventListener('change',calc);document.getElementById('w'+i).addEventListener('input',calc);}
+  // example
+  document.getElementById('t0').value='Take-home essay';document.getElementById('w0').value='40';
+  document.getElementById('t1').value='Report';document.getElementById('w1').value='30';
+  document.getElementById('t2').value='Supervised exam';document.getElementById('w2').value='30';
+  calc();
+})();
+</script>
+</body>
+</html>

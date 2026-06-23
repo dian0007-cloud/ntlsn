@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Recognition Points Calculator</title>
+<meta name="description" content="An illustrative self-assessment that maps your teaching, scholarship, recognition and service contributions to a points-based recognition score and tier. Runs entirely in your browser; nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:700px}
+  .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:start}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .cat{margin:0 0 18px}
+  .cat:last-child{margin-bottom:0}
+  .cat h2{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);margin:0 0 6px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
+  .row:first-of-type{border-top:0}
+  .lab{font-size:13.5px;color:var(--ink)}
+  .lab small{display:block;color:var(--mut);font-size:11px;margin-top:1px}
+  .step{display:flex;align-items:center;gap:8px;flex:none}
+  .step button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 16px var(--F);cursor:pointer;line-height:1}
+  .step button:hover{border-color:var(--teal);color:var(--teal)}
+  .step .v{min-width:22px;text-align:center;font:700 15px var(--F)}
+  select{background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:600 12.5px var(--F);max-width:170px}
+  select:focus{outline:none;border-color:var(--teal)}
+  .res{position:sticky;top:20px}
+  .score{display:flex;align-items:baseline;gap:10px;margin:0 0 2px}
+  .score b{font-size:52px;font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--teal)}
+  .score .pts{color:var(--mut);font-size:13px}
+  .band{font:700 13px var(--F);padding:5px 12px;border-radius:999px;display:inline-block;margin:8px 0 16px;background:rgba(255,255,255,.06)}
+  .bar{margin:0 0 9px}
+  .bar .bl{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin:0 0 4px}
+  .bar .track{height:8px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:999px;transition:width .25s ease}
+  .tiers{margin:14px 0 0;font-size:11.5px;color:var(--mut);line-height:1.8}
+  .reset{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer;margin-top:14px}
+  .reset:hover{color:var(--ink);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Recognition Points Calculator</h1>
+  <p class="lead">A simple, illustrative way to see how a <b>points-based recognition model</b> could value the full breadth of academic teaching work — across teaching, scholarship, recognition and service. Adjust the counts to your own contributions; your score and tier update live. Nothing is stored or sent.</p>
+  <div class="grid">
+    <div class="panel" id="form"></div>
+    <div class="panel res">
+      <div class="score"><b id="total">0</b><span class="pts">points</span></div>
+      <span class="band" id="band">—</span>
+      <div id="bars"></div>
+      <div class="tiers" id="tiers"></div>
+      <button class="reset" id="reset">Reset</button>
+    </div>
+  </div>
+  <div class="foot">
+    <b>Illustrative only.</b> A self-assessment aid showing how a points-based recognition model could work — it is <b>not</b> an official HEA, AAUT or institutional score, and the weightings are indicative. Everything runs in your browser; nothing is stored, logged or transmitted. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var MODEL=[
+    {cat:'Teaching', items:[
+      {id:'t1', lab:'Courses coordinated or taught', sub:'this year', pts:10},
+      {id:'t2', lab:'Curriculum or program (re)design led', pts:20},
+      {id:'t3', lab:'Documented teaching innovation', pts:15}
+    ]},
+    {cat:'Scholarship of Teaching &amp; Learning', items:[
+      {id:'s1', lab:'Peer-reviewed SoTL publication', pts:25},
+      {id:'s2', lab:'Conference paper or presentation', pts:10},
+      {id:'s3', lab:'SoTL grant secured', pts:20}
+    ]},
+    {cat:'Recognition &amp; Fellowship', items:[
+      {id:'r0', lab:'HEA / Advance HE fellowship', type:'select', opts:[['None',0],['Associate Fellow (AFHEA)',20],['Fellow (FHEA)',30],['Senior Fellow (SFHEA)',50]]},
+      {id:'r1', lab:'Teaching award — institutional', pts:20},
+      {id:'r2', lab:'Teaching award — national (e.g. AAUT)', pts:40}
+    ]},
+    {cat:'Leadership &amp; Service', items:[
+      {id:'l1', lab:'Colleagues mentored', pts:8},
+      {id:'l2', lab:'Peer reviews of teaching completed', pts:5},
+      {id:'l3', lab:'L&amp;T committee or panel role', pts:12}
+    ]}
+  ];
+  var TIERS=[[0,'Emerging','var(--mut)'],[61,'Established','var(--warn)'],[141,'Leading','var(--teal)'],[261,'Distinguished','var(--gold)']];
+  var CATCOL=['var(--teal)','var(--gold)','#8FB4FF','#C9A0FF'];
+  var state={};
+  MODEL.forEach(function(c){c.items.forEach(function(it){state[it.id]=0;});});
+  var form=document.getElementById('form');
+
+  function render(){
+    form.innerHTML=MODEL.map(function(c){
+      return '<div class="cat"><h2>'+c.cat+'</h2>'+c.items.map(function(it){
+        var ctrl;
+        if(it.type==='select'){
+          ctrl='<select data-id="'+it.id+'">'+it.opts.map(function(o){return '<option value="'+o[1]+'"'+(Number(state[it.id])===o[1]?' selected':'')+'>'+o[0]+'</option>';}).join('')+'</select>';
+        } else {
+          ctrl='<div class="step"><button type="button" data-id="'+it.id+'" data-d="-1">&minus;</button><span class="v" id="v-'+it.id+'">'+state[it.id]+'</span><button type="button" data-id="'+it.id+'" data-d="1">+</button></div>';
+        }
+        var meta=(it.sub?'<small>'+it.sub+(it.pts?' · '+it.pts+' pts each':'')+'</small>':(it.pts?'<small>'+it.pts+' pts each</small>':''));
+        return '<div class="row"><div class="lab">'+it.lab+meta+'</div>'+ctrl+'</div>';
+      }).join('')+'</div>';
+    }).join('');
+  }
+  function ptsFor(it){ return it.type==='select' ? (Number(state[it.id])||0) : (state[it.id]||0)*it.pts; }
+  function compute(){
+    var total=0, cats=[];
+    MODEL.forEach(function(c){ var ct=0; c.items.forEach(function(it){ct+=ptsFor(it);}); cats.push([c.cat,ct]); total+=ct; });
+    document.getElementById('total').textContent=total;
+    var tier=TIERS[0]; TIERS.forEach(function(t){ if(total>=t[0]) tier=t; });
+    var band=document.getElementById('band'); band.textContent=tier[1]; band.style.color=tier[2];
+    var max=Math.max(total,1);
+    document.getElementById('bars').innerHTML=cats.map(function(c,i){
+      var w=Math.round(100*c[1]/max);
+      return '<div class="bar"><div class="bl"><span>'+c[0]+'</span><span>'+c[1]+'</span></div><div class="track"><div class="fill" style="width:'+w+'%;background:'+CATCOL[i]+'"></div></div></div>';
+    }).join('');
+    document.getElementById('tiers').innerHTML='<b>Indicative tiers:</b><br>'+TIERS.map(function(t,i){
+      var hi=(t[1]===tier[1]); var range=t[0]+(TIERS[i+1]?'–'+(TIERS[i+1][0]-1):'+');
+      return '<span style="color:'+(hi?t[2]:'var(--mut)')+(hi?';font-weight:700':'')+'">'+t[1]+' ('+range+')</span>';
+    }).join(' · ');
+  }
+  form.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-id]'); if(!b) return;
+    var id=b.getAttribute('data-id'), d=Number(b.getAttribute('data-d'));
+    state[id]=Math.max(0,(state[id]||0)+d);
+    document.getElementById('v-'+id).textContent=state[id]; compute();
+  });
+  form.addEventListener('change',function(e){
+    var s=e.target.closest('select[data-id]'); if(!s) return;
+    state[s.getAttribute('data-id')]=Number(s.value); compute();
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    MODEL.forEach(function(c){c.items.forEach(function(it){state[it.id]=0;});}); render(); compute();
+  });
+  render(); compute();
+})();
+</script>
+</body>
+</html>

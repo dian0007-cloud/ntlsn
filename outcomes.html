@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Learning Outcome Check (Bloom's)</title>
+<meta name="description" content="Paste your learning outcomes and get an instant read on Bloom's taxonomy level, measurable-verb checks, and balance across the cognitive domain. Runs entirely in your browser; nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:700px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  textarea{width:100%;min-height:300px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:16px;font:400 15px/1.7 var(--F);resize:vertical}
+  textarea:focus{outline:none;border-color:var(--teal)}
+  .toolbar{display:flex;gap:10px;margin:10px 0 0;flex-wrap:wrap}
+  .btn{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer}
+  .btn:hover{color:var(--ink);border-color:var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  h2{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .bar{display:flex;height:12px;border-radius:999px;overflow:hidden;margin:0 0 6px;background:rgba(255,255,255,.05)}
+  .bar span{display:block;height:100%}
+  .legend{display:flex;flex-wrap:wrap;gap:10px 14px;margin:0 0 18px}
+  .legend i{display:inline-flex;align-items:center;gap:5px;font:600 11.5px var(--F);color:var(--mut);font-style:normal}
+  .legend i b{width:9px;height:9px;border-radius:2px;display:inline-block}
+  .oc{border-top:1px solid var(--line);padding:11px 0}
+  .oc:first-of-type{border-top:0}
+  .oc .lvl{font:800 10.5px var(--F);text-transform:uppercase;letter-spacing:.6px;padding:3px 8px;border-radius:5px;color:#0A1628;display:inline-block;margin-bottom:5px}
+  .oc .txt{font-size:14px;color:var(--ink)}
+  .oc .note{font-size:12.5px;color:var(--mut);margin-top:3px}
+  .oc .note.flag{color:var(--bad)}
+  .empty{color:var(--mut);font-size:14px;font-style:italic}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Learning Outcome Check <span style="color:var(--mut);font-weight:600;font-size:.6em">· Bloom's taxonomy</span></h1>
+  <p class="lead">Paste your learning outcomes — one per line. You'll see the Bloom's cognitive level each one targets, whether it uses a measurable action verb, and how the set balances across lower- and higher-order thinking. A quick constructive-alignment sense-check. Nothing is stored or sent.</p>
+  <div class="grid">
+    <div>
+      <textarea id="t" placeholder="One learning outcome per line, e.g.&#10;Explain the principles of constructive alignment&#10;Analyse a case study against a quality framework&#10;Design an assessment task for a diverse cohort" spellcheck="false"></textarea>
+      <div class="toolbar">
+        <button class="btn" id="sample">Load samples</button>
+        <button class="btn" id="clear">Clear</button>
+        <button class="btn" id="copymd" title="Copy the analysis as Markdown — paste into a unit outline, Moodle, docs or any Markdown editor">Copy as Markdown</button>
+      </div>
+    </div>
+    <div class="panel" id="out"><p class="empty">Add one outcome per line — your analysis appears here.</p></div>
+  </div>
+  <div class="foot">
+    Based on the revised Bloom's taxonomy (Anderson &amp; Krathwohl, 2001). Verb matching is heuristic — an outcome can legitimately span levels, and context matters, so treat this as a prompt for reflection, not a verdict. Everything runs in your browser; no text is stored, logged, or transmitted. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var LEVELS=[
+    {k:'Remember',c:'#7C9CFF',v:['define','list','recall','identify','name','state','recognise','recognize','label','recite','repeat','select','match','describe who','memorise','memorize','locate']},
+    {k:'Understand',c:'#4ECDC4',v:['explain','describe','summarise','summarize','interpret','classify','compare','discuss','paraphrase','illustrate','outline','restate','translate','exemplify','infer','clarify','report']},
+    {k:'Apply',c:'#9DD649',v:['apply','demonstrate','use','implement','solve','calculate','execute','operate','employ','perform','carry out','conduct','administer','compute','modify','practise','practice','show how']},
+    {k:'Analyse',c:'#FFB448',v:['analyse','analyze','differentiate','examine','contrast','distinguish','deconstruct','investigate','categorise','categorize','test','compare and contrast','organise','organize','attribute','diagnose','dissect']},
+    {k:'Evaluate',c:'#FF9F6B',v:['evaluate','assess','critique','judge','justify','defend','argue','appraise','recommend','prioritise','prioritize','validate','rank','review','conclude','support a','weigh']},
+    {k:'Create',c:'#C57BFF',v:['create','design','develop','formulate','construct','produce','devise','compose','generate','propose','plan','build','invent','synthesise','synthesize','author','compile','model']}
+  ];
+  var VAGUE=['understand','know','learn','appreciate','comprehend','grasp','be aware','be familiar','become familiar','gain knowledge','have knowledge','realise','realize'];
+  var t=document.getElementById('t'), out=document.getElementById('out');
+  var SAMPLE="Understand the key theories of student engagement\nExplain the principles of constructive alignment\nApply a quality framework to a unit of study\nCritically evaluate an assessment task for inclusivity\nDesign a programmatic assessment plan\nKnow the relevant regulatory standards";
+  function classify(line){
+    var low=' '+line.toLowerCase().replace(/[^a-z\s]/g,' ').replace(/\s+/g,' ')+' ';
+    var best=-1, verb=null;
+    for(var i=0;i<LEVELS.length;i++){
+      for(var j=0;j<LEVELS[i].v.length;j++){
+        var p=LEVELS[i].v[j];
+        if(low.indexOf(' '+p+' ')>-1 || low.indexOf(' '+p+'s ')>-1 || low.indexOf(' '+p.replace(/e$/,'ing')+' ')>-1){
+          if(i>best){best=i;verb=p;}
+        }
+      }
+    }
+    var vague=null;
+    for(var k=0;k<VAGUE.length;k++){ if(low.indexOf(' '+VAGUE[k]+' ')>-1){vague=VAGUE[k];break;} }
+    if(best>=0) return {level:LEVELS[best].k, c:LEVELS[best].c, idx:best, verb:verb, vague:vague};
+    if(vague) return {level:'Not measurable', c:'#FF8A8A', idx:-1, vague:vague};
+    return {level:'No clear verb', c:'#7d8da0', idx:-2};
+  }
+  function analyse(text){
+    var lines=text.split(/\n+/).map(function(s){return s.trim();}).filter(function(s){return s.length>2;});
+    if(!lines.length){ out.innerHTML='<p class="empty">Add one outcome per line — your analysis appears here.</p>'; return; }
+    var counts={}, ordered=[];
+    var rows=lines.map(function(l){
+      var r=classify(l);
+      counts[r.level]=(counts[r.level]||0)+1;
+      var note='', flag=false;
+      if(r.idx===-1){ note='No measurable action verb — "'+r.vague+'" is hard to assess. Try a verb like explain, apply, analyse or design.'; flag=true; }
+      else if(r.idx===-2){ note='No recognised action verb found — start the outcome with what the student will <i>do</i>.'; flag=true; }
+      else { note='Action verb: <b>'+r.verb+'</b>'+(r.vague?' &middot; note: also contains the vaguer "'+r.vague+'"':''); }
+      return '<div class="oc"><span class="lvl" style="background:'+r.c+'">'+r.level+'</span><div class="txt">'+l.replace(/[<>]/g,'')+'</div><div class="note'+(flag?' flag':'')+'">'+note+'</div></div>';
+    }).join('');
+    // distribution bar across the 6 levels
+    var bar=LEVELS.map(function(L){ var n=counts[L.k]||0; return n?'<span style="background:'+L.c+';flex:'+n+'"></span>':''; }).join('');
+    var higher=(counts['Analyse']||0)+(counts['Evaluate']||0)+(counts['Create']||0);
+    var lower=(counts['Remember']||0)+(counts['Understand']||0)+(counts['Apply']||0);
+    var unmeasured=(counts['Not measurable']||0)+(counts['No clear verb']||0);
+    var summary=[];
+    if(unmeasured) summary.push('<b style="color:var(--bad)">'+unmeasured+'</b> outcome'+(unmeasured>1?'s':'')+' without a clear measurable verb.');
+    if(lines.length-unmeasured>0) summary.push((higher>=lower?'Skews <b>higher-order</b>':'Skews <b>lower-order</b>')+' ('+higher+' higher · '+lower+' lower) — '+(higher>=lower?'good for later-year/degree level.':'consider some higher-order verbs if this is a later-year unit.'));
+    out.innerHTML=
+      '<h2>Balance across Bloom&rsquo;s levels</h2>'+
+      '<div class="bar">'+(bar||'<span style="flex:1"></span>')+'</div>'+
+      '<div class="legend">'+LEVELS.map(function(L){return '<i><b style="background:'+L.c+'"></b>'+L.k+(counts[L.k]?' ('+counts[L.k]+')':'')+'</i>';}).join('')+'</div>'+
+      (summary.length?'<div style="font-size:13px;color:var(--mut);margin:0 0 16px;line-height:1.6">'+summary.join(' ')+'</div>':'')+
+      '<h2>Outcome by outcome</h2>'+rows;
+  }
+  t.addEventListener('input',function(){analyse(t.value);});
+  document.getElementById('sample').addEventListener('click',function(){t.value=SAMPLE;analyse(SAMPLE);});
+  document.getElementById('clear').addEventListener('click',function(){t.value='';analyse('');t.focus();});
+
+  // --- Copy as Markdown — a portable alignment note for unit outlines / LMS ---
+  function buildMarkdown(){
+    var lines=t.value.split(/\n+/).map(function(s){return s.trim();}).filter(function(s){return s.length>2;});
+    if(!lines.length) return '';
+    var counts={};
+    var items=lines.map(function(l){
+      var r=classify(l); counts[r.level]=(counts[r.level]||0)+1;
+      var note=(r.verb?' _(verb: '+r.verb+')_':(r.idx<0?' _(no measurable verb)_':''));
+      return '- **['+r.level+']** '+l.replace(/\|/g,'\\|')+note;
+    });
+    var higher=(counts['Analyse']||0)+(counts['Evaluate']||0)+(counts['Create']||0);
+    var lower=(counts['Remember']||0)+(counts['Understand']||0)+(counts['Apply']||0);
+    var unmeasured=(counts['Not measurable']||0)+(counts['No clear verb']||0);
+    var L=['## Learning outcomes — Bloom’s check',''].concat(items);
+    L.push('');
+    L.push('_Balance: '+higher+' higher-order · '+lower+' lower-order'+(unmeasured?' · '+unmeasured+' without a measurable verb':'')+'._');
+    L.push('');
+    L.push('_Bloom’s level is heuristic (Anderson & Krathwohl, 2001) — a prompt for reflection, not a verdict._');
+    return L.join('\n');
+  }
+  function legacyCopy(text){
+    var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.top='-9999px';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta);
+  }
+  function copyText(text,cb){
+    if(!text){ cb(false); return; }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){cb(true);},function(){legacyCopy(text);cb(true);}); }
+    else { legacyCopy(text); cb(true); }
+  }
+  var cmd=document.getElementById('copymd');
+  cmd.addEventListener('click',function(){
+    var orig=cmd.textContent;
+    copyText(buildMarkdown(),function(ok){ cmd.textContent=ok?'Copied ✓':'Nothing to copy'; setTimeout(function(){cmd.textContent=orig;},1400); });
+  });
+})();
+</script>
+</body>
+</html>

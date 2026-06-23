@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN Private — on your own hardware</title>
+<meta name="description" content="A privacy-first, locally-hosted option for NTLSN: run the tools and an open-source AI assistant entirely on your own machine or campus. Data sovereignty by design — for security-conscious individuals and schools. Concept / in design.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--plum:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:30px 18px}
+  .wrap{max-width:920px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-size:clamp(27px,4.2vw,42px);margin:0 0 12px;font-weight:800;letter-spacing:-.015em;line-height:1.1}
+  .lead{color:var(--mut);font-size:16px;margin:0 0 30px;max-width:720px}
+  h2{font:800 12px var(--F);letter-spacing:1px;text-transform:uppercase;color:var(--mut);margin:34px 0 14px}
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:680px){.paths{grid-template-columns:1fr}}
+  .path{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:22px 23px}
+  .path.ind{border-top:3px solid var(--teal)} .path.sch{border-top:3px solid var(--gold)}
+  .path .ic{font-size:24px;margin-bottom:9px}
+  .path h3{font:800 17px var(--F);color:#fff;margin:0 0 8px}
+  .path p{font:400 14px/1.6 var(--F);color:var(--mut);margin:0}
+  .layers{list-style:none;padding:0;margin:0;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .layers li{background:var(--card);padding:15px 18px}
+  .layers .t{font:800 14.5px var(--F);color:#fff;display:flex;align-items:center;gap:9px}
+  .layers .tag{font:800 9px var(--F);letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+  .tag.live{background:var(--teal);color:#06251f} .tag.idea{background:rgba(255,255,255,.08);color:var(--mut)}
+  .layers .d{font:400 13px/1.55 var(--F);color:var(--mut);margin-top:4px}
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:680px){.why{grid-template-columns:1fr}}
+  .why div{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:11px;padding:13px 16px}
+  .why b{display:block;color:#fff;font-size:14px;margin-bottom:3px}
+  .why span{font-size:12.8px;color:var(--mut)}
+  .real{background:rgba(78,205,196,.06);border:1px solid rgba(78,205,196,.22);border-radius:13px;padding:18px 20px;margin:14px 0 0}
+  .real b{color:#fff}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 0}
+  .btn{background:var(--teal);color:#06251f;border-radius:999px;padding:11px 22px;font:800 13.5px var(--F);text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--mut);border:1px solid var(--line)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:26px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">● NTLSN · Concept · in design</div>
+  <h1>Your sector. Your data.<br>Your hardware.</h1>
+  <p class="lead">A privacy-first option for the security-conscious: run NTLSN&rsquo;s tools &mdash; and an open-source AI assistant &mdash; <b style="color:var(--ink)">entirely on your own machine or campus</b>. Nothing is sent to, or stored by, anyone. Built for individuals and schools who need genuine data sovereignty and a clean IT review.</p>
+
+  <h2>Personalise it — two ways in</h2>
+  <div class="paths">
+    <div class="path ind">
+      <div class="ic">👤</div>
+      <h3>For an individual</h3>
+      <p>Download it; run it on your own laptop. The tools work offline. Add a local open-source model and your AI teaching coach runs on <i>your</i> machine — your drafts, your students&rsquo; work and your reflections never leave it.</p>
+    </div>
+    <div class="path sch">
+      <div class="ic">🏫</div>
+      <h3>For a school</h3>
+      <p>Host the whole suite on one high-end on-prem machine. A single open-source LLM serves the school; IT keeps full control and can run it fully air-gapped. No cloud contracts, no data-residency questions, no per-seat AI bills.</p>
+    </div>
+  </div>
+
+  <h2>How it stays private</h2>
+  <ul class="layers">
+    <li><div class="t">Local-first tools <span class="tag live">Live today</span></div><div class="d">Every NTLSN &ldquo;try it now&rdquo; tool already runs entirely in your browser — open one and turn off your wifi; it still works. That is the foundation everything else builds on.</div></li>
+    <li><div class="t">Your own open-source LLM <span class="tag idea">In design</span></div><div class="d">Open models (e.g. Llama, Mistral, Qwen) run on your hardware via tools like Ollama or llama.cpp — no commercial AI API, no prompts or data leaving your network.</div></li>
+    <li><div class="t">On-premise hosting <span class="tag idea">In design</span></div><div class="d">Serve the suite from a local server or workstation; staff reach it on the campus network, or each person runs it locally. No public internet required.</div></li>
+    <li><div class="t">Local storage, your files <span class="tag live">Live today</span></div><div class="d">Records stay on the device or your own server. You own the files; there is no NTLSN account and no server-side copy.</div></li>
+    <li><div class="t">Air-gap capable <span class="tag idea">In design</span></div><div class="d">For the most sensitive settings, it can run with no internet connection at all.</div></li>
+  </ul>
+
+  <h2>Why IT and leadership say yes</h2>
+  <div class="why">
+    <div><b>Data sovereignty</b><span>Student work, assessments and peer reviews never touch a third party — Privacy Act 1988-friendly by design.</span></div>
+    <div><b>A clean IT review</b><span>No external data processor to vet; open-source and auditable, not a black box.</span></div>
+    <div><b>No lock-in, no token bills</b><span>You own the model and the data — predictable, with no per-use AI charges.</span></div>
+    <div><b>Resilient</b><span>Works offline and isn&rsquo;t dependent on any vendor&rsquo;s uptime or pricing.</span></div>
+  </div>
+
+  <div class="real"><b>Already half-real, today.</b> The privacy claim isn&rsquo;t marketing — every tool in the <a href="/">NTLSN toolbox</a> already runs 100% in your browser with nothing sent or stored. This concept simply packages that local-first suite together with a self-hosted open-source AI coach as a one-box option you own.</div>
+
+  <div class="cta">
+    <a class="btn" href="/">Try the local-first tools →</a>
+    <a class="btn ghost" href="/">← Back to NTLSN</a>
+  </div>
+
+  <div class="foot">
+    <b>Concept / in design.</b> This articulates an option, not a shipping product. The client-side tools are live now; the self-hosted open-source-LLM bundle, on-premise hosting and air-gap mode are on the roadmap — scoped and sized to your hardware (and any cost) <i>with you</i>, never assumed. Nothing on this page is collected, stored or sent.
+  </div>
+</div>
+</body>
+</html>

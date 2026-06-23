@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communities of Practice in Australian HE — Sector Scan</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0f1419;
+  --card: #1a2332;
+  --card-hover: #1e2a3a;
+  --border: #2a3a4a;
+  --accent: #e8a838;
+  --accent-dim: #c48a2a;
+  --teal: #38b2ac;
+  --teal-dim: #2c8c87;
+  --coral: #e06060;
+  --purple: #9f7aea;
+  --green: #48bb78;
+  --blue: #4299e1;
+  --text: #e2e8f0;
+  --text-dim: #8899aa;
+  --text-muted: #5a6a7a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, var(--card) 0%, #12202e 100%);
+  border-bottom: 2px solid var(--accent);
+  padding: 32px 28px 24px;
+}
+.header-tag {
+  font-size: 11px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+}
+.header h1 { font-size: 28px; font-weight: 700; line-height: 1.2; }
+.header p { font-size: 14px; color: var(--text-dim); margin-top: 8px; }
+
+/* TABS */
+.tab-bar {
+  display: flex; gap: 0; border-bottom: 1px solid var(--border);
+  overflow-x: auto; background: var(--card);
+  -webkit-overflow-scrolling: touch;
+}
+.tab-btn {
+  padding: 12px 18px; font-size: 13px; font-weight: 500;
+  color: var(--text-dim); background: transparent; border: none;
+  border-bottom: 3px solid transparent; cursor: pointer;
+  white-space: nowrap; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); font-weight: 700; border-bottom-color: var(--accent); }
+
+/* CONTENT */
+.content { padding: 24px 20px; max-width: 960px; margin: 0 auto; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* SECTION TITLE */
+.section-title {
+  font-size: 18px; font-weight: 700; margin: 0 0 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+.section-title.mt { margin-top: 32px; }
+.section-intro { color: var(--text-dim); font-size: 14px; margin-bottom: 20px; }
+
+/* CARDS */
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;
+}
+.card-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+.card-title { font-weight: 600; font-size: 14px; }
+.card-tag {
+  font-size: 11px; color: var(--accent); font-weight: 600;
+  background: rgba(232,168,56,0.1); padding: 2px 10px; border-radius: 10px;
+}
+.card-body { font-size: 13px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+
+/* FILTER CHIPS */
+.chip-bar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.chip {
+  padding: 6px 14px; font-size: 12px; font-weight: 600;
+  color: var(--text-dim); background: transparent;
+  border: 1px solid var(--border); border-radius: 20px;
+  cursor: pointer; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.chip.active { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+
+/* MULTI-INST */
+.multi-card {
+  background: var(--card); border: 1px solid rgba(56,178,172,0.25);
+  border-left: 3px solid var(--teal); border-radius: 8px;
+  padding: 12px 16px; margin-bottom: 8px;
+}
+.multi-name { font-weight: 700; font-size: 15px; color: var(--teal); }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 24px; border-left: 2px solid var(--border); }
+.timeline-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px; margin-bottom: 12px;
+  cursor: pointer; transition: all 0.2s; position: relative;
+}
+.timeline-item:hover { background: var(--card-hover); }
+.timeline-item.expanded { background: var(--card-hover); border-color: var(--accent); }
+.timeline-dot {
+  position: absolute; left: -33px; top: 18px;
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 6px; }
+.timeline-name { font-weight: 700; font-size: 14px; }
+.timeline-year { font-size: 11px; color: var(--accent); margin-left: 10px; }
+.timeline-stance {
+  font-size: 10px; color: var(--text-muted); font-weight: 600;
+  background: rgba(90,106,122,0.13); padding: 2px 8px; border-radius: 8px;
+  white-space: nowrap;
+}
+.timeline-detail {
+  font-size: 13px; color: var(--text-dim); margin-top: 10px;
+  line-height: 1.6; border-top: 1px solid var(--border); padding-top: 10px;
+  display: none;
+}
+.timeline-item.expanded .timeline-detail { display: block; }
+
+/* CRITIQUE CARDS */
+.critique-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 3px solid var(--coral); border-radius: 8px;
+  padding: 12px 16px; margin-bottom: 8px;
+}
+.critique-author { font-weight: 700; font-size: 13px; color: var(--coral); }
+
+/* TABLE */
+.table-wrap { overflow-x: auto; margin-bottom: 16px; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th {
+  padding: 10px 8px; text-align: left; color: var(--accent);
+  font-weight: 700; font-size: 11px; white-space: nowrap;
+  border-bottom: 2px solid var(--accent);
+}
+td { padding: 10px 8px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+td.bold { font-weight: 600; color: var(--text); }
+td.teal { color: var(--teal); }
+td.coral { color: var(--coral); font-size: 11px; }
+
+/* CHART CONTAINER */
+.chart-box { position: relative; margin-bottom: 24px; }
+.chart-box canvas { max-width: 100%; }
+
+/* CALLOUT */
+.callout-warn {
+  background: rgba(224,96,96,0.08); border: 1px solid rgba(224,96,96,0.25);
+  border-radius: 8px; padding: 14px 16px; margin-bottom: 24px;
+}
+.callout-warn p { font-size: 13px; color: var(--coral); font-weight: 600; }
+
+/* THINKING TOGETHER */
+.thinking-box {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px 20px; text-align: center;
+}
+.thinking-icon { font-size: 40px; margin-bottom: 12px; }
+.thinking-quote { font-size: 18px; font-weight: 700; color: var(--accent); font-style: italic; margin-bottom: 8px; }
+.thinking-body { font-size: 13px; color: var(--text-dim); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+/* RECOGNITION STACK */
+.rec-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px; margin-bottom: 10px;
+}
+.rec-tag {
+  font-size: 10px; font-weight: 700; padding: 3px 10px;
+  border-radius: 10px; display: inline-block;
+}
+
+/* VALUE PIPELINE */
+.pipeline-row { display: flex; align-items: stretch; min-height: 70px; }
+.pipeline-bar { width: 4px; }
+.pipeline-content {
+  flex: 1; background: var(--card);
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 12px 16px;
+}
+.pipeline-content:first-of-type { border-top: 1px solid var(--border); }
+.pipeline-cycle { font-weight: 700; font-size: 14px; }
+.pipeline-focus { font-size: 13px; color: var(--text); margin: 2px 0; }
+.pipeline-ind { font-size: 12px; color: var(--text-dim); }
+
+/* BADGE GRID */
+.badge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.badge-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; text-align: center;
+}
+.badge-icon { font-size: 32px; margin-bottom: 8px; }
+.badge-name { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.badge-req { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; line-height: 1.4; }
+.badge-level {
+  font-size: 10px; font-weight: 700; color: var(--accent);
+  background: rgba(232,168,56,0.13); padding: 2px 10px; border-radius: 10px;
+}
+
+/* DESIGN PRINCIPLES */
+.principle {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px; margin-bottom: 12px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.principle-icon { font-size: 28px; line-height: 1; flex-shrink: 0; }
+.principle-num {
+  font-size: 12px; font-weight: 800; color: var(--accent);
+  background: rgba(232,168,56,0.13); width: 24px; height: 24px;
+  border-radius: 50%; display: inline-flex; align-items: center;
+  justify-content: center;
+}
+.principle-title { font-weight: 700; font-size: 16px; }
+.principle-body { font-size: 13px; color: var(--text-dim); margin-top: 8px; line-height: 1.6; }
+
+/* TENSION BOX */
+.tension-box {
+  background: linear-gradient(135deg, var(--card) 0%, #1a2838 100%);
+  border: 1px solid rgba(232,168,56,0.25); border-radius: 10px;
+  padding: 24px 20px; text-align: center;
+}
+.tension-poles { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+.tension-label { font-size: 13px; font-weight: 700; }
+.tension-sub { font-size: 11px; color: var(--text-dim); }
+.tension-arrow { font-size: 24px; color: var(--accent); }
+.tension-text { font-size: 14px; max-width: 520px; margin: 0 auto; line-height: 1.6; font-style: italic; }
+
+/* PSF GRID */
+.psf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.psf-card {
+  background: var(--card); border: 1px solid rgba(56,178,172,0.25);
+  border-radius: 8px; padding: 14px 12px; text-align: center;
+}
+.psf-dim { font-size: 20px; font-weight: 800; color: var(--teal); }
+.psf-label { font-size: 12px; font-weight: 600; margin: 4px 0; }
+.psf-desc { font-size: 11px; color: var(--text-dim); }
+
+/* PROGRESS BAR */
+.progress-bar {
+  background: rgba(232,168,56,0.13); border-radius: 10px;
+  overflow: hidden; height: 8px; width: 80px; margin: 0 auto;
+}
+.progress-fill { background: var(--accent); height: 100%; border-radius: 10px; }
+.progress-val { font-size: 10px; color: var(--text-dim); margin-top: 2px; display: block; text-align: center; }
+
+/* FOOTER */
+.footer {
+  border-top: 1px solid var(--border); padding: 16px 20px;
+  text-align: center; margin-top: 24px;
+}
+.footer p { font-size: 11px; color: var(--text-muted); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .header h1 { font-size: 22px; }
+  .content { padding: 16px 12px; }
+  .badge-grid { grid-template-columns: 1fr 1fr; }
+  .psf-grid { grid-template-columns: 1fr 1fr; }
+}
+.colophon { border-top: 2px solid var(--accent); margin-top: 32px; padding: 30px 20px 34px; text-align: center; background: linear-gradient(135deg, var(--card) 0%, #12202e 100%); }
+.colophon-title { font-family: 'Avenir Next', 'Trebuchet MS', 'Gill Sans', 'Segoe UI', system-ui, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: .3px; color: var(--text); }
+.colophon-tag { font-family: 'Avenir Next', 'Trebuchet MS', 'Gill Sans', 'Segoe UI', system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-top: 9px; }
+.colophon-meta { font-size: 11px; color: var(--text-muted); margin-top: 11px; }
+</style>
+
+
+</head>
+<body>
+
+<!-- TAB BAR -->
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" data-tab="landscape">Sector Map</button>
+  <button class="tab-btn" data-tab="frameworks">Frameworks</button>
+  <button class="tab-btn" data-tab="evidence">Evidence</button>
+  <button class="tab-btn" data-tab="recognition">Recognition</button>
+  <button class="tab-btn" data-tab="design">Design Guide</button>
+  <button class="tab-btn" data-tab="psf">PSF Alignment</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════ SECTOR MAP ═══════════════ -->
+<div class="tab-panel active" id="panel-landscape">
+  <h2 class="section-title">Institutional CoP Programs Across Australia</h2>
+  <p class="section-intro sans">A national reference framework for CoP scholarship (McDonald &amp; Cater-Steel, 2017) anchors this scan; the largest formal scheme runs at a Go8 university. Filter by university grouping below.</p>
+
+  <div class="chip-bar" id="uniFilter"></div>
+
+  <div class="chart-box" style="height:420px">
+    <canvas id="chartUnis"></canvas>
+  </div>
+
+  <div id="uniCards"></div>
+
+  <h2 class="section-title mt">Multi-Institutional Infrastructure</h2>
+  <div id="multiCards"></div>
+
+  <div class="chart-box" style="height:300px;margin-top:24px">
+    <p class="sans" style="font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:8px">CoPs by University Grouping</p>
+    <canvas id="chartPie"></canvas>
+  </div>
+</div>
+
+<!-- ═══════════════ FRAMEWORKS ═══════════════ -->
+<div class="tab-panel" id="panel-frameworks">
+  <h2 class="section-title">Theoretical Evolution: From LPP to Landscapes</h2>
+  <p class="section-intro sans">The CoP concept has undergone four major shifts: descriptive → prescriptive → evaluative → post-bounded. Click any framework to expand.</p>
+
+  <div class="timeline" id="timelineContainer"></div>
+
+  <h2 class="section-title mt">Critical Literature: What Wenger Doesn't Address</h2>
+  <div id="critiqueCards"></div>
+
+  <h2 class="section-title mt">Structural Models: Choosing the Right One</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Model</th><th>Duration</th><th>Size</th><th>Structure</th><th>Best For</th><th>Risk</th></tr></thead>
+      <tbody id="modelsTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ EVIDENCE ═══════════════ -->
+<div class="tab-panel" id="panel-evidence">
+  <div class="callout-warn">
+    <p class="sans">⚠ Evidence quality caveat: No systematic review exists. Most case studies are written by facilitators of their own successful CoPs — substantial publication bias.</p>
+  </div>
+
+  <h2 class="section-title">Success Factors (Evidence Strength)</h2>
+  <div class="chart-box" style="height:360px">
+    <canvas id="chartSuccess"></canvas>
+  </div>
+
+  <h2 class="section-title mt">Failure Modes (Severity)</h2>
+  <div class="chart-box" style="height:300px">
+    <canvas id="chartFailure"></canvas>
+  </div>
+
+  <h2 class="section-title mt">The Operative Mechanism</h2>
+  <div class="thinking-box">
+    <div class="thinking-icon">🧠</div>
+    <div class="thinking-quote">"Thinking Together"</div>
+    <p class="thinking-body sans">Pyrko, Dörfler &amp; Eden (2017): The operative mechanism is trans-personal indwelling in real problems through Polanyi's tacit-knowing process. Without it, CoPs become "communities in name only."</p>
+  </div>
+</div>
+
+<!-- ═══════════════ RECOGNITION ═══════════════ -->
+<div class="tab-panel" id="panel-recognition">
+  <h2 class="section-title">The Recognition Stack: Current State</h2>
+  <p class="section-intro sans">Five mechanisms are converging. Workload allocation remains the critical gap.</p>
+  <div id="recCards"></div>
+
+  <h2 class="section-title mt">Value Creation Framework (Wenger-Trayner 2011)</h2>
+  <p class="section-intro sans">The default evaluation framework worldwide. Combines quantitative indicators with qualitative value-creation stories.</p>
+  <div id="pipelineContainer"></div>
+
+  <h2 class="section-title mt">Badging Ideas for an LTF Research CoP</h2>
+  <div class="badge-grid" id="badgeGrid"></div>
+</div>
+
+<!-- ═══════════════ DESIGN GUIDE ═══════════════ -->
+<div class="tab-panel" id="panel-design">
+  <h2 class="section-title">6 Evidence-Based Design Principles</h2>
+  <p class="section-intro sans">Distilled from leading Australian CoP programmes, the Pharo et al. four-institution network, and FYiMaths evidence.</p>
+  <div id="principlesContainer"></div>
+
+  <h2 class="section-title mt">The Structural Tension</h2>
+  <div class="tension-box">
+    <div class="tension-poles">
+      <div style="text-align:center">
+        <div class="tension-label sans" style="color:var(--green)">EMERGENT</div>
+        <div class="tension-sub">Member-led, voluntary</div>
+        <div class="tension-sub">Most generative</div>
+      </div>
+      <div class="tension-arrow">⇄</div>
+      <div style="text-align:center">
+        <div class="tension-label sans" style="color:var(--coral)">CULTIVATED</div>
+        <div class="tension-sub">Institutionally supported</div>
+        <div class="tension-sub">Most resourced</div>
+      </div>
+    </div>
+    <p class="tension-text">The McDonald–Cater-Steel resolution: executive sponsors <strong style="color:var(--accent)">protect</strong> rather than <strong style="color:var(--accent)">direct</strong> communities. Facilitators "manage up" without instrumentalising. Recognition follows demonstrated value, not KPI compliance.</p>
+  </div>
+</div>
+
+<!-- ═══════════════ PSF ALIGNMENT ═══════════════ -->
+<div class="tab-panel" id="panel-psf">
+  <h2 class="section-title">PSF 2023 ↔ CoP Theory Alignment</h2>
+  <p class="section-intro sans">PSF 2023's strengthened emphasis on collaboration, inclusion, and effectiveness brings it closer to the landscape-of-practice and value-creation reformulations than the 2011 UKPSF.</p>
+
+  <div class="chart-box" style="height:380px">
+    <canvas id="chartRadar"></canvas>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>PSF 2023 Element</th><th>CoP-Theoretic Alignment</th><th style="text-align:center">Strength</th></tr></thead>
+      <tbody id="psfTable"></tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title mt">Where CoP Participation Maps to Fellowship Evidence</h2>
+  <div class="psf-grid" id="psfGrid"></div>
+</div>
+
+</div><!-- .content -->
+
+<div class="colophon">
+  <div class="colophon-title">Communities of Practice in Australian HE</div>
+  <div class="colophon-tag">UniSQ Learning &amp; Teaching Futures</div>
+  <p class="colophon-meta">Sector scan &middot; frameworks &middot; evidence &middot; recognition &middot; design principles &mdash; prepared for the L&amp;T Research CoP, 27 April 2026</p>
+</div>
+
+<script>
+// ═══════════════ DATA ═══════════════
+const uniCoPs = [
+  {uni:"Institution A",type:"Go8",cops:12,notes:"Largest formal education-focused CoP scheme (est. 2018) — AI, work-integrated learning, assessment and first-year communities, plus a cross-faculty network."},
+  {uni:"Institution B",type:"Regional",cops:8,notes:"Long-running Communities of Practice initiative (est. 2011): 30+ CoPs across three programs, including sessional staff."},
+  {uni:"Institution C",type:"Regional",cops:6,notes:"A national reference site for CoP scholarship — fellowships, leadership grants, two edited volumes and a quality-assurance commendation."},
+  {uni:"Institution D",type:"Go8",cops:5,notes:"Integrated teaching institute: a fellowship community, a large students-as-partners network (~950 members), WIL, and an Indigenisation CoP."},
+  {uni:"Institution E",type:"ATN",cops:5,notes:"A teaching academy run as a CoP; a Festival of Learning across multiple campuses and a mentoring circle."},
+  {uni:"Institution F",type:"IRU",cops:5,notes:"Learning & teaching academy with group chapters and SIGs; multiple national teaching fellowships and excellence awards."},
+  {uni:"Institution G",type:"Go8",cops:4,notes:"Recent education-focused programme (2024): 220 new EF roles, grants to $30K and an educators CoP via a central innovation unit."},
+  {uni:"Institution H",type:"ATN",cops:4,notes:"An award-winning teaching programme; a world-first associate fellowship in Indigenous Knowledges."},
+  {uni:"Institution I",type:"ATN",cops:4,notes:"College-based CoPs (STEM, design, business/law); cross-institutional with an offshore campus."},
+  {uni:"Institution J",type:"ATN",cops:4,notes:"SoTL, WIL and inclusive-education CoPs; a centre anchoring a national assessment community."},
+  {uni:"Institution K",type:"Go8",cops:3,notes:"WIL CoP, an AI-in-education learning circle, and an education-academy digital-badge pilot."},
+  {uni:"Institution L",type:"IRU",cops:3,notes:"Teaching & learning academy (est. 2011); SIGs run as CoPs, ~165 members."},
+  {uni:"Institution M",type:"Go8-adj",cops:3,notes:"Learning-technology cluster, a rapid-response team for sessionals, and a T&L CoP; led a national workload project."},
+  {uni:"Institution N",type:"Other",cops:3,notes:"An education-focused fellowship scheme, aligned to Advance HE with peer review."},
+  {uni:"Institution O",type:"IRU",cops:2,notes:"A first-year CoP via a central teaching unit; participates in cross-institutional academic calibration."},
+];
+
+const multiInst = [
+  {name:"HERDSA",members:"2,000+",focus:"SoTL SIG (Oct 2023), Online Engagement, Belonging, HASS, Academic Development SIGs. TATAL program."},
+  {name:"CAULLT",members:"~120",focus:"Peak body for L&T leaders. Funded research projects, MOOC, Awards (incl. LIFT Innovation Award 2025)."},
+  {name:"ACODE",members:"~40 unis",focus:"Technology-enhanced learning leaders. ACODE Benchmarks 2nd Ed 2024."},
+  {name:"ALTF",members:"108",focus:"National Teaching Fellows network."},
+  {name:"CAUL",members:"~40 unis",focus:"Library L&T Leaders CoP."},
+];
+
+const frameworks = [
+  {name:"Lave & Wenger (1991)",year:1991,key:"Legitimate Peripheral Participation. Learning as identity formation through co-participation.",stance:"Descriptive / Critical",color:"#38b2ac"},
+  {name:"Wenger (1998)",year:1998,key:"Mutual engagement, joint enterprise, shared repertoire. Identity trajectories. Participation/reification duality.",stance:"Descriptive → Prescriptive",color:"#38b2ac"},
+  {name:"Wenger et al. (2002)",year:2002,key:"Cultivating CoPs. 5-stage lifecycle. 7 principles for cultivation. Knowledge management.",stance:"Prescriptive / Managerialist",color:"#e06060"},
+  {name:"Cox FLC (2004)",year:2004,key:"Faculty Learning Communities. 8–10 members, year-long cohort, deliverable-focused. 1,000+ unis adopted.",stance:"Structured / Hybrid",color:"#38b2ac"},
+  {name:"Wenger-Trayner (2011)",year:2011,key:"Value Creation Framework: 5 cycles (immediate → reframed). Stories + indicators.",stance:"Evaluative",color:"#9f7aea"},
+  {name:"Hager et al. (2012)",year:2012,key:"Practice is collective, embodied, materially mediated, emergent, historically situated.",stance:"Critical / Sociomaterial",color:"#e06060"},
+  {name:"Boud & Brew (2013)",year:2013,key:"Academic work AS practice. Work with practice not on it. Learning-conducive workplaces.",stance:"Practice-based",color:"#38b2ac"},
+  {name:"Wenger-Trayner (2015)",year:2015,key:"Landscapes of Practice. Knowledgeability. Systems conveners. Multi-membership.",stance:"Post-bounded",color:"#9f7aea"},
+  {name:"McDonald et al. (2017)",year:2017,key:"Community-Domain-Practice facilitator catch-cry. Facilitator leadership. Dreamers/Schemers/Seamers.",stance:"Applied / Australian",color:"#e8a838"},
+];
+
+const critiques = [
+  {author:"Roberts (2006)",issue:"Power relations inadequately theorised. Habitus ambiguity. Scaling problems."},
+  {author:"Cox (2005)",issue:"Conceptual drift from descriptive/critical → prescriptive/managerialist. Management creates groupings."},
+  {author:"Hughes et al. (2007)",issue:"Structural inequality. Gender/class/race blindness. 'Communities of malpractice.'"},
+  {author:"Mutch (2003)",issue:"Pre-existing habitus and dispositions ignored in CoP design."},
+  {author:"Contu & Willmott (2003)",issue:"Power and consent re-embedded. Consensual language masks conflict."},
+  {author:"Fox (2000)",issue:"Actor-network theory as alternative. Material agency overlooked."},
+];
+
+const structuralModels = [
+  {model:"Emergent CoP",dur:"Ongoing",size:"Variable",str:"Low",best:"Disciplinary teaching enhancement",risk:"Drift without purpose"},
+  {model:"Faculty Learning Community",dur:"1 year",size:"8–10",str:"High",best:"Onboarding, pre-tenure, innovation",risk:"Ends at year's end"},
+  {model:"FLC–CoP 'Seamer' Hybrid",dur:"FLC → ongoing",size:"8–10 → grows",str:"Med→Low",best:"SoTL research collaboration",risk:"Transition management"},
+  {model:"Cross-Institutional CoP",dur:"Ongoing",size:"15–50",str:"Medium",best:"Capacity building, benchmarking",risk:"Coordination overhead"},
+  {model:"Teaching Academy",dur:"Ongoing",size:"50–200",str:"High",best:"Recognition ecosystem, culture change",risk:"Becomes elite/exclusive"},
+  {model:"SIG (HERDSA-style)",dur:"Ongoing",size:"20–100",str:"Low",best:"National thematic networking",risk:"Sporadic engagement"},
+];
+
+const successFactors = [
+  {factor:"Skilled facilitator",strength:95,source:"McDonald et al. 2012"},
+  {factor:"Clear domain that matters",strength:90,source:"Wenger 1998; Patton & Parker 2017"},
+  {factor:"Voluntary membership",strength:88,source:"Roberts 2006; McDonald 2014"},
+  {factor:"Trust & psychological safety",strength:85,source:"Patton & Parker 2017"},
+  {factor:"'Thinking together' on real problems",strength:82,source:"Pyrko et al. 2017"},
+  {factor:"Regular cadence (~monthly)",strength:80,source:"Sector consensus"},
+  {factor:"Executive sponsor (protects not directs)",strength:78,source:"Pharo et al. 2014"},
+  {factor:"Recognition + modest resourcing",strength:75,source:"McDonald et al. 2012"},
+  {factor:"Food at every meeting",strength:70,source:"McDonald; sector practice"},
+];
+
+const failureModes = [
+  {mode:"Workload pressure / no release time",severity:95},
+  {mode:"No formal recognition in promotion",severity:90},
+  {mode:"Managerial co-option / instrumentalisation",severity:85},
+  {mode:"Founder dependency",severity:80},
+  {mode:"Power asymmetries silencing voices",severity:78},
+  {mode:"Conceptual confusion (CoP vs PLC vs FLC)",severity:65},
+  {mode:"Evaluation distorting community",severity:60},
+];
+
+const recognitionStack = [
+  {mechanism:"Advance HE Fellowship",maturity:"Established",coverage:"28 institutions",notes:"8,300+ Fellows. D1→D4. CoP participation maps to V3, V4, V5, A4, A5, K3.",color:"#48bb78"},
+  {mechanism:"Digital Badges (Credly / My eQuals)",maturity:"Growing",coverage:"~15 institutions",notes:"Sector examples include a 'Teaching for Learning' badge, a Go8 pilot, and stackable badges at a regional university.",color:"#e8a838"},
+  {mechanism:"Education-Focused Career Tracks",maturity:"Established",coverage:"Most large unis",notes:"Established at several Go8s (2017&ndash;2024). Still privileges research outputs.",color:"#48bb78"},
+  {mechanism:"Teaching Academies",maturity:"Established",coverage:"~12 institutions",notes:"Several established teaching academies bundle awards, mentoring and retreats.",color:"#48bb78"},
+  {mechanism:"Workload Allocation",maturity:"Nascent",coverage:"~2-3 institutions",notes:"BIGGEST GAP. Only one institution's policy provides a clear hook; mostly head-of-school discretion.",color:"#e06060"},
+  {mechanism:"Showcase / Festival Events",maturity:"Established",coverage:"Sector-wide",notes:"Festivals, celebration weeks and L&T showcases run sector-wide.",color:"#48bb78"},
+];
+
+const valueCreation = [
+  {cycle:"1. Immediate",focus:"Activities & interactions",ind:"Attendance, satisfaction, 'I felt heard'",color:"#4299e1"},
+  {cycle:"2. Potential",focus:"Knowledge capital",ind:"New contacts, resources, intentions to act",color:"#38b2ac"},
+  {cycle:"3. Applied",focus:"Changes in practice",ind:"Innovations trialled, lesson plans changed",color:"#48bb78"},
+  {cycle:"4. Realised",focus:"Performance improvement",ind:"SES scores, retention, grant success",color:"#e8a838"},
+  {cycle:"5. Reframing",focus:"Redefining success",ind:"Policy change, role redefinition, new narratives",color:"#9f7aea"},
+];
+
+const badges = [
+  {badge:"CoP Participant",req:"Attend 4+ sessions per year",level:"Bronze",emoji:"🟤"},
+  {badge:"CoP Contributor",req:"Present or lead a session",level:"Silver",emoji:"⚪"},
+  {badge:"SoTL Scholar",req:"Submit a CoP-generated publication",level:"Gold",emoji:"🟡"},
+  {badge:"CoP Facilitator",req:"Convene or co-facilitate for 1 semester",level:"Platinum",emoji:"💎"},
+  {badge:"Peer Mentor",req:"Mentor a colleague through Fellowship",level:"Gold",emoji:"🤝"},
+  {badge:"Cross-CoP Broker",req:"Connect ideas across 2+ CoPs",level:"Silver",emoji:"🌉"},
+];
+
+const principles = [
+  {num:1,title:"Charter First",detail:"Community-Domain-Practice charter with member-set deliverables visible by meeting two. Co-created purpose, cadence, decision rules.",icon:"📜"},
+  {num:2,title:"Dual Sponsorship",detail:"Executive sponsor (protects, doesn't direct) + credible facilitator. Written value proposition mapping to TEQSA 3.2/5.3, AAUT, institutional KPIs.",icon:"🛡️"},
+  {num:3,title:"Distributed Leadership",detail:"Jones/Lefoe/Harvey/Ryland ASERT framework. Activator (senior champion) + Facilitator (operational). Co-facilitator from year one.",icon:"🔄"},
+  {num:4,title:"Rhythm & Freshness",detail:"Monthly 60–90 min meetings with food. Quarterly deep-dives. Rotated roles. External voices. Annual charter refresh.",icon:"🥁"},
+  {num:5,title:"Recognition Stack",detail:"PSF-mapped participation → digital badge (Credly/My eQuals) → EF promotion track → annual showcase. Fellowship preparation embedded.",icon:"🏅"},
+  {num:6,title:"Hybrid Evaluation",detail:"Wenger-Trayner Value Creation stories + indicators. Most Significant Change. Light-touch, member-driven. Protect off-the-record space.",icon:"📊"},
+];
+
+const psfMapping = [
+  {psf:"A1–A5 (Areas of Activity)",cop:"Shared Repertoire / Practice",alignment:90},
+  {psf:"K1–K5 (Core Knowledge)",cop:"Domain",alignment:85},
+  {psf:"V1–V2 (Professional Values)",cop:"Community / Mutual Engagement",alignment:80},
+  {psf:"V3 (Equity & Inclusion)",cop:"LPP / Access",alignment:75},
+  {psf:"V4 (Collaboration)",cop:"Modes of Belonging",alignment:95},
+  {psf:"V5 (CPD & Scholarship)",cop:"Joint Enterprise / SoTL",alignment:92},
+  {psf:"D1→D4 (Descriptors)",cop:"LPP Trajectories",alignment:88},
+];
+
+const psfEvidence = [
+  {dim:"V3",label:"Equity & Inclusion",desc:"Inclusive participation design"},
+  {dim:"V4",label:"Collaboration",desc:"Peer learning & co-creation"},
+  {dim:"V5",label:"CPD & Scholarship",desc:"SoTL engagement"},
+  {dim:"A4",label:"Learning Environments",desc:"Shared practice development"},
+  {dim:"A5",label:"Prof. Development",desc:"Ongoing CPD activity"},
+  {dim:"K3",label:"Critical Evaluation",desc:"Evidence-based practice"},
+];
+
+// ═══════════════ TAB SWITCHING ═══════════════
+document.getElementById('tabBar').addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  if (btn.dataset.tab === 'evidence' && !window._evidenceRendered) renderEvidence();
+  if (btn.dataset.tab === 'psf' && !window._psfRendered) renderPSF();
+});
+
+// ═══════════════ RENDER: SECTOR MAP ═══════════════
+const typeColors = {Go8:'#e8a838','Go8-adj':'#c48a2a',ATN:'#38b2ac',IRU:'#9f7aea',Regional:'#48bb78',Other:'#4299e1'};
+const uniTypes = ['All',...[...new Set(uniCoPs.map(u=>u.type))]];
+let currentFilter = 'All';
+
+function renderUniFilter() {
+  const bar = document.getElementById('uniFilter');
+  bar.innerHTML = uniTypes.map(t =>
+    `<button class="chip sans ${t===currentFilter?'active':''}" data-type="${t}">${t}</button>`
+  ).join('');
+  bar.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (!chip) return;
+    currentFilter = chip.dataset.type;
+    renderUniFilter();
+    renderUniChart();
+    renderUniCards();
+  });
+}
+
+let uniChart;
+function renderUniChart() {
+  const filtered = currentFilter === 'All' ? uniCoPs : uniCoPs.filter(u => u.type === currentFilter);
+  const ctx = document.getElementById('chartUnis').getContext('2d');
+  if (uniChart) uniChart.destroy();
+  uniChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: filtered.map(u => u.uni),
+      datasets: [{
+        label: 'Active CoPs',
+        data: filtered.map(u => u.cops),
+        backgroundColor: filtered.map(u => typeColors[u.type] || '#e8a838'),
+        borderRadius: 4,
+        barThickness: 20,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a2332', borderColor: '#2a3a4a', borderWidth: 1,
+          titleFont: { family: "'DM Sans',sans-serif", size: 13 },
+          bodyFont: { family: "'DM Sans',sans-serif", size: 12 },
+          titleColor: '#e2e8f0', bodyColor: '#8899aa',
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#8899aa', font: { size: 11 } }, grid: { color: '#2a3a4a' } },
+        y: { ticks: { color: '#e2e8f0', font: { family: "'DM Sans',sans-serif", size: 12 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderUniCards() {
+  const filtered = currentFilter === 'All' ? uniCoPs : uniCoPs.filter(u => u.type === currentFilter);
+  document.getElementById('uniCards').innerHTML = filtered.map(u =>
+    `<div class="card"><div class="card-row"><span class="card-title sans">${u.uni}</span><span class="card-tag sans">${u.type}</span></div><p class="card-body">${u.notes}</p></div>`
+  ).join('');
+}
+
+function renderMultiCards() {
+  document.getElementById('multiCards').innerHTML = multiInst.map(m =>
+    `<div class="multi-card"><div class="card-row"><span class="multi-name sans">${m.name}</span><span style="font-size:11px;color:var(--text-dim)" class="sans">${m.members}</span></div><p class="card-body">${m.focus}</p></div>`
+  ).join('');
+}
+
+let pieChart;
+function renderPieChart() {
+  const grouped = {};
+  uniCoPs.forEach(u => { grouped[u.type] = (grouped[u.type]||0) + u.cops; });
+  const labels = Object.keys(grouped);
+  const data = Object.values(grouped);
+  const ctx = document.getElementById('chartPie').getContext('2d');
+  pieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{ data, backgroundColor: labels.map(l => typeColors[l]||'#4299e1'), borderColor: '#0f1419', borderWidth: 2 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { color: '#8899aa', font: { family: "'DM Sans',sans-serif", size: 11 }, padding: 12 } },
+        tooltip: { backgroundColor: '#1a2332', borderColor: '#2a3a4a', borderWidth: 1, titleColor: '#e2e8f0', bodyColor: '#8899aa' }
+      }
+    }
+  });
+}
+
+// ═══════════════ RENDER: FRAMEWORKS ═══════════════
+function renderTimeline() {
+  document.getElementById('timelineContainer').innerHTML = frameworks.map((f, i) =>
+    `<div class="timeline-item" data-idx="${i}">
+      <div class="timeline-dot" style="background:${f.color}"></div>
+      <div class="timeline-header">
+        <div><span class="timeline-name sans">${f.name}</span><span class="timeline-year">${f.year}</span></div>
+        <span class="timeline-stance sans">${f.stance}</span>
+      </div>
+      <div class="timeline-detail">${f.key}</div>
+    </div>`
+  ).join('');
+  document.getElementById('timelineContainer').addEventListener('click', e => {
+    const item = e.target.closest('.timeline-item');
+    if (!item) return;
+    const wasExpanded = item.classList.contains('expanded');
+    document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('expanded'));
+    if (!wasExpanded) item.classList.add('expanded');
+  });
+}
+
+function renderCritiques() {
+  document.getElementById('critiqueCards').innerHTML = critiques.map(c =>
+    `<div class="critique-card"><span class="critique-author sans">${c.author}</span><p class="card-body">${c.issue}</p></div>`
+  ).join('');
+}
+
+function renderModelsTable() {
+  document.getElementById('modelsTable').innerHTML = structuralModels.map(m =>
+    `<tr><td class="bold">${m.model}</td><td>${m.dur}</td><td>${m.size}</td><td>${m.str}</td><td class="teal">${m.best}</td><td class="coral">${m.risk}</td></tr>`
+  ).join('');
+}
+
+// ═══════════════ RENDER: EVIDENCE ═══════════════
+function renderEvidence() {
+  window._evidenceRendered = true;
+  // Success chart
+  const ctx1 = document.getElementById('chartSuccess').getContext('2d');
+  new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: successFactors.map(s => s.factor),
+      datasets: [{ label: 'Evidence Strength', data: successFactors.map(s => s.strength), backgroundColor: '#48bb78', borderRadius: 4, barThickness: 18 }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a2332', borderColor: '#2a3a4a', borderWidth: 1, titleColor: '#e2e8f0', bodyColor: '#8899aa',
+        callbacks: { afterLabel: (ctx) => 'Source: ' + successFactors[ctx.dataIndex].source }
+      }},
+      scales: {
+        x: { min: 0, max: 100, ticks: { color: '#8899aa', font: { size: 10 } }, grid: { color: '#2a3a4a' } },
+        y: { ticks: { color: '#e2e8f0', font: { family: "'DM Sans',sans-serif", size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+  // Failure chart
+  const ctx2 = document.getElementById('chartFailure').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: failureModes.map(f => f.mode),
+      datasets: [{ label: 'Severity', data: failureModes.map(f => f.severity), backgroundColor: '#e06060', borderRadius: 4, barThickness: 18 }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1a2332', borderColor: '#2a3a4a', borderWidth: 1, titleColor: '#e2e8f0', bodyColor: '#8899aa' }},
+      scales: {
+        x: { min: 0, max: 100, ticks: { color: '#8899aa', font: { size: 10 } }, grid: { color: '#2a3a4a' } },
+        y: { ticks: { color: '#e2e8f0', font: { family: "'DM Sans',sans-serif", size: 11 } }, grid: { display: false } }
+      }
+    }
+  });
+}
+
+// ═══════════════ RENDER: RECOGNITION ═══════════════
+function renderRecognition() {
+  // Stack cards
+  document.getElementById('recCards').innerHTML = recognitionStack.map(r =>
+    `<div class="rec-card" style="border-left:4px solid ${r.color}">
+      <div class="card-row">
+        <span class="card-title sans" style="font-size:15px">${r.mechanism}</span>
+        <div style="display:flex;gap:8px">
+          <span class="rec-tag sans" style="color:${r.color};background:${r.color}20">${r.maturity}</span>
+          <span class="rec-tag sans" style="color:var(--text-dim);background:rgba(90,106,122,0.13)">${r.coverage}</span>
+        </div>
+      </div>
+      <p class="card-body">${r.notes}</p>
+    </div>`
+  ).join('');
+
+  // Pipeline
+  document.getElementById('pipelineContainer').innerHTML = valueCreation.map((v, i) =>
+    `<div class="pipeline-row">
+      <div class="pipeline-bar" style="background:${v.color};border-radius:${i===0?'4px 4px 0 0':i===4?'0 0 4px 4px':'0'}"></div>
+      <div class="pipeline-content" ${i===0?'style="border-top:1px solid var(--border)"':''}>
+        <div class="pipeline-cycle sans" style="color:${v.color}">${v.cycle}</div>
+        <div class="pipeline-focus">${v.focus}</div>
+        <div class="pipeline-ind">${v.ind}</div>
+      </div>
+    </div>`
+  ).join('');
+
+  // Badges
+  document.getElementById('badgeGrid').innerHTML = badges.map(b =>
+    `<div class="badge-card"><div class="badge-icon">${b.emoji}</div><div class="badge-name sans">${b.badge}</div><div class="badge-req">${b.req}</div><span class="badge-level sans">${b.level}</span></div>`
+  ).join('');
+}
+
+// ═══════════════ RENDER: DESIGN GUIDE ═══════════════
+function renderDesign() {
+  document.getElementById('principlesContainer').innerHTML = principles.map(d =>
+    `<div class="principle">
+      <div class="principle-icon">${d.icon}</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="principle-num sans">${d.num}</span>
+          <span class="principle-title sans">${d.title}</span>
+        </div>
+        <p class="principle-body">${d.detail}</p>
+      </div>
+    </div>`
+  ).join('');
+}
+
+// ═══════════════ RENDER: PSF ═══════════════
+function renderPSF() {
+  window._psfRendered = true;
+  // Radar chart
+  const ctx = document.getElementById('chartRadar').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: psfMapping.map(p => p.psf),
+      datasets: [{
+        label: 'Alignment %',
+        data: psfMapping.map(p => p.alignment),
+        backgroundColor: 'rgba(232,168,56,0.15)',
+        borderColor: '#e8a838',
+        borderWidth: 2,
+        pointBackgroundColor: '#e8a838',
+        pointRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: '#1a2332', borderColor: '#2a3a4a', borderWidth: 1, titleColor: '#e2e8f0', bodyColor: '#8899aa' }
+      },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { display: false },
+          grid: { color: '#2a3a4a' },
+          angleLines: { color: '#2a3a4a' },
+          pointLabels: { color: '#8899aa', font: { family: "'DM Sans',sans-serif", size: 10 } }
+        }
+      }
+    }
+  });
+
+  // PSF table
+  document.getElementById('psfTable').innerHTML = psfMapping.map(p =>
+    `<tr>
+      <td class="bold">${p.psf}</td>
+      <td class="teal">${p.cop}</td>
+      <td style="text-align:center">
+        <div class="progress-bar"><div class="progress-fill" style="width:${p.alignment}%"></div></div>
+        <span class="progress-val">${p.alignment}%</span>
+      </td>
+    </tr>`
+  ).join('');
+
+  // PSF evidence grid
+  document.getElementById('psfGrid').innerHTML = psfEvidence.map(d =>
+    `<div class="psf-card"><div class="psf-dim sans">${d.dim}</div><div class="psf-label sans">${d.label}</div><div class="psf-desc">${d.desc}</div></div>`
+  ).join('');
+}
+
+// ═══════════════ INIT ═══════════════
+renderUniFilter();
+renderUniChart();
+renderUniCards();
+renderMultiCards();
+renderPieChart();
+renderTimeline();
+renderCritiques();
+renderModelsTable();
+renderRecognition();
+renderDesign();
+</script>
+</body>
+</html>

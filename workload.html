@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Student Workload Estimator</title>
+<meta name="description" content="Estimate the real student workload of a unit from its reading, writing, contact and other activities, and compare it to the nominal study hours. Transparent, adjustable assumptions. Runs entirely in your browser; nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:980px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:720px}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+  @media(max-width:780px){.grid{grid-template-columns:1fr}}
+  fieldset{border:1px solid var(--line);border-radius:13px;padding:14px 16px 16px;margin:0 0 16px}
+  legend{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);padding:0 6px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 0}
+  .row label{font:500 13.5px var(--F);color:var(--ink);flex:1}
+  .row .sub{display:block;font:400 11.5px var(--F);color:var(--mut)}
+  input[type=number],select{background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:600 14px var(--F);width:120px}
+  select{width:170px}
+  input:focus,select:focus{outline:none;border-color:var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:sticky;top:18px}
+  .big{display:flex;align-items:baseline;gap:10px}
+  .big b{font-size:44px;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .big span{color:var(--mut);font-size:13px}
+  .verdict{font:700 13px var(--F);padding:5px 12px;border-radius:999px;display:inline-block;margin:14px 0 4px}
+  .vsub{color:var(--mut);font-size:12.5px;margin:0 0 18px}
+  .bar{display:flex;height:14px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.05);margin:0 0 10px}
+  .bar span{display:block;height:100%}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:0 0 6px}
+  .legend i{display:inline-flex;align-items:center;gap:5px;font:600 12px var(--F);color:var(--mut);font-style:normal}
+  .legend i b{width:9px;height:9px;border-radius:2px;display:inline-block}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Student Workload Estimator</h1>
+  <p class="lead">Estimate the <i>real</i> hours a unit asks of students — from its reading, writing, classes and other activities — and compare that to the nominal study hours. Useful for designing fair, achievable units and for assurance conversations. Every assumption below is visible and adjustable.</p>
+  <div class="grid">
+    <div>
+      <fieldset>
+        <legend>The unit</legend>
+        <div class="row"><label>Teaching weeks</label><input type="number" id="weeks" value="12" min="1" max="52"></div>
+        <div class="row"><label>Nominal study hours <span class="sub">target for the whole unit (AU: a standard unit ≈ 130–150 hrs; set to your credit points)</span></label><input type="number" id="target" value="150" min="1"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Reading</legend>
+        <div class="row"><label>Total pages across the unit</label><input type="number" id="rpages" value="0" min="0"></div>
+        <div class="row"><label>Page density</label><select id="density"><option value="450">Light (~450 words/pg)</option><option value="600" selected>Standard (~600 words/pg)</option><option value="750">Dense (~750 words/pg)</option></select></div>
+        <div class="row"><label>Reading purpose</label><select id="wpm"><option value="250">Survey / familiar (~250 wpm)</option><option value="180" selected>Understand (~180 wpm)</option><option value="120">Analyse / difficult (~120 wpm)</option></select></div>
+      </fieldset>
+      <fieldset>
+        <legend>Writing</legend>
+        <div class="row"><label>Total pages to write <span class="sub">≈ 250–300 words per page</span></label><input type="number" id="wpages" value="0" min="0"></div>
+        <div class="row"><label>Writing type</label><select id="wtype"><option value="0.5">Reflection / free-write (~0.5 hr/pg)</option><option value="1" selected>Essay / report (~1 hr/pg)</option><option value="1.75">Research w/ sources (~1.75 hr/pg)</option></select></div>
+      </fieldset>
+      <fieldset>
+        <legend>Contact &amp; other</legend>
+        <div class="row"><label>Class / contact hours per week</label><input type="number" id="contact" value="3" min="0" step="0.5"></div>
+        <div class="row"><label>Videos, labs, other prep <span class="sub">total hours for the unit</span></label><input type="number" id="other" value="0" min="0"></div>
+      </fieldset>
+    </div>
+    <div>
+      <div class="panel" id="out"></div>
+    </div>
+  </div>
+  <div class="foot">
+    Method adapted from B. Barre &amp; J. Esarey, <i>Course Workload Estimator 2.0</i> (Rice University Center for Teaching Excellence, 2019); reading-rate ranges informed by Brysbaert (2019). These are <b>population averages</b> — individual students vary widely, and first-encounter or second-language reading is slower. Treat the result as a design prompt, not a precise measurement. Everything runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var ids=['weeks','target','rpages','density','wpm','wpages','wtype','contact','other'];
+  var el={}; ids.forEach(function(i){el[i]=document.getElementById(i);});
+  function num(i){var v=parseFloat(el[i].value);return isNaN(v)||v<0?0:v;}
+  function calc(){
+    var weeks=Math.max(1,num('weeks')), target=Math.max(1,num('target'));
+    var read=(num('rpages')*num('density'))/(num('wpm')*60);
+    var write=num('wpages')*num('wtype');
+    var cont=num('contact')*weeks;
+    var oth=num('other');
+    var total=read+write+cont+oth;
+    var parts=[{k:'Reading',v:read,c:'#4ECDC4'},{k:'Writing',v:write,c:'#C57BFF'},{k:'Contact',v:cont,c:'#7C9CFF'},{k:'Other',v:oth,c:'#FFB448'}];
+    var pw=total/weeks;
+    var ratio=total/target, diff=Math.round((ratio-1)*100);
+    var vlabel,vcol;
+    if(total===0){vlabel='Add some inputs';vcol='var(--mut)';}
+    else if(ratio>1.15){vlabel='Over the target';vcol='var(--bad)';}
+    else if(ratio<0.85){vlabel='Under the target';vcol='var(--warn)';}
+    else{vlabel='About right';vcol='var(--good)';}
+    var bar=parts.map(function(p){return p.v>0?'<span style="background:'+p.c+';flex:'+p.v+'"></span>':'';}).join('')||'<span style="flex:1"></span>';
+    var diffTxt = total===0?'' : (diff>=0?'+'+diff+'% vs nominal':diff+'% vs nominal');
+    document.getElementById('out').innerHTML=
+      '<div class="big"><b style="color:'+vcol+'">'+(total?Math.round(total):'—')+'</b><span>estimated student hours</span></div>'+
+      '<div class="verdict" style="background:rgba(255,255,255,.06);color:'+vcol+'">'+vlabel+(diffTxt?' &middot; '+diffTxt:'')+'</div>'+
+      '<div class="vsub">≈ <b>'+(total?pw.toFixed(1):'0')+'</b> hours per week over '+weeks+' weeks &middot; nominal target '+target+' h</div>'+
+      '<div class="bar">'+bar+'</div>'+
+      '<div class="legend">'+parts.map(function(p){return '<i><b style="background:'+p.c+'"></b>'+p.k+' '+p.v.toFixed(1)+'h</i>';}).join('')+'</div>';
+  }
+  ids.forEach(function(i){el[i].addEventListener('input',calc);el[i].addEventListener('change',calc);});
+  calc();
+})();
+</script>
+</body>
+</html>

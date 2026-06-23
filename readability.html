@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Readability & Cognitive-Load Check</title>
+<meta name="description" content="Paste an assessment brief or learning outcomes and get an instant readability and cognitive-load read — Flesch reading ease, grade level, passive voice and long-sentence flags. Runs entirely in your browser; nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:680px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  textarea{width:100%;min-height:340px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:16px;font:400 15px/1.6 var(--F);resize:vertical}
+  textarea:focus{outline:none;border-color:var(--teal)}
+  .toolbar{display:flex;gap:10px;margin:10px 0 0;flex-wrap:wrap}
+  .btn{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer}
+  .btn:hover{color:var(--ink);border-color:var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .score{display:flex;align-items:baseline;gap:12px;margin:0 0 4px}
+  .score b{font-size:46px;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .band{font:700 13px var(--F);padding:4px 11px;border-radius:999px;display:inline-block}
+  .scoresub{color:var(--mut);font-size:13px;margin:6px 0 18px}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:11px;overflow:hidden;margin:0 0 16px}
+  .stat{background:var(--card);padding:11px 13px}
+  .stat .n{font:800 19px var(--F);color:var(--ink)}
+  .stat .l{font:500 11.5px var(--F);color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-top:1px}
+  .flags{margin:0;padding:0;list-style:none}
+  .flags li{font-size:13.5px;padding:8px 0;border-top:1px solid var(--line);display:flex;gap:9px;align-items:flex-start}
+  .flags li:first-child{border-top:0}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none;margin-top:5px}
+  h2{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 10px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+  .empty{color:var(--mut);font-size:14px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Readability &amp; Cognitive-Load Check</h1>
+  <p class="lead">Paste an assessment brief, a set of learning outcomes, or any teaching text. You'll get an instant read on how demanding it is to process — useful for inclusive, UDL-aligned design. Nothing is stored or sent; it all runs locally.</p>
+  <div class="grid">
+    <div>
+      <textarea id="t" placeholder="Paste your text here…" spellcheck="false"></textarea>
+      <div class="toolbar">
+        <button class="btn" id="sample">Load a sample brief</button>
+        <button class="btn" id="clear">Clear</button>
+      </div>
+    </div>
+    <div class="panel" id="out">
+      <p class="empty">Start typing or paste text — your analysis appears here.</p>
+    </div>
+  </div>
+  <div class="foot">
+    A heuristic guide to support clear, accessible writing (Flesch–Kincaid readability, sentence length, passive voice). It is an aid for design, <b>not</b> a formal accessibility standard or a substitute for student feedback and your institution's guidelines. Syllable and passive-voice detection are approximate. Everything runs in your browser — no text is stored, logged, or transmitted. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var t=document.getElementById('t'), out=document.getElementById('out');
+  var SAMPLE="In this assessment, students are required to critically evaluate the extent to which contemporary pedagogical frameworks, which have been increasingly adopted across the higher education sector, are able to be meaningfully operationalised within the constraints that are imposed by large-cohort teaching environments. A comprehensive report must be submitted, and it is expected that a sophisticated and nuanced argument will be developed by the student, drawing upon a substantial body of peer-reviewed literature that has been published within the last decade. The rubric, which is provided separately, should be consulted.";
+  function syll(w){
+    w=w.toLowerCase().replace(/[^a-z]/g,'');
+    if(w.length<=3) return w.length?1:0;
+    w=w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/,'').replace(/^y/,'');
+    var m=w.match(/[aeiouy]{1,2}/g);
+    return m?m.length:1;
+  }
+  function analyse(text){
+    var clean=text.trim();
+    if(!clean){ out.innerHTML='<p class="empty">Start typing or paste text — your analysis appears here.</p>'; return; }
+    var sentences=clean.split(/[.!?]+(?:\s|$)/).filter(function(s){return s.trim().length>0;});
+    var words=clean.match(/\b[\w'’-]+\b/g)||[];
+    var nW=words.length, nS=Math.max(sentences.length,1);
+    var syllTotal=0, complex=0;
+    words.forEach(function(w){ var s=syll(w); syllTotal+=s; if(s>=3 && !/['’-]/.test(w)) complex++; });
+    var wps=nW/nS, spw=syllTotal/(nW||1);
+    var flesch=206.835-1.015*wps-84.6*spw;
+    var fk=0.39*wps+11.8*spw-15.59;
+    flesch=Math.max(0,Math.min(120,flesch));
+    var band, col;
+    if(flesch>=70){band='Plain &amp; accessible';col='var(--good)';}
+    else if(flesch>=50){band='Fairly demanding';col='var(--warn)';}
+    else{band='Hard to process';col='var(--bad)';}
+    // long sentences + passive
+    var longS=0; sentences.forEach(function(s){ if((s.match(/\b[\w'’-]+\b/g)||[]).length>25) longS++; });
+    var passive=(clean.match(/\b(am|is|are|was|were|be|been|being)\b\s+(?:\w+ly\s+)?(?:\w+ed|done|made|given|taken|seen|known|shown|written|built|held|found|told|kept|drawn|brought|sought|required|provided|expected|considered|developed|submitted|adopted|imposed|published)\b/gi)||[]).length;
+    var readMin=Math.max(1,Math.round(nW/200));
+    function pct(n,d){return d?Math.round(100*n/d):0;}
+    var flags=[];
+    flags.push(longS? {c:longS>nS*0.3?'var(--bad)':'var(--warn)', txt:'<b>'+longS+'</b> sentence'+(longS>1?'s':'')+' over 25 words — long sentences raise cognitive load; consider splitting.'} : {c:'var(--good)', txt:'No over-long sentences. Sentence length is manageable.'});
+    flags.push(passive? {c:passive>5?'var(--warn)':'var(--mut)', txt:'~<b>'+passive+'</b> likely passive construction'+(passive>1?'s':'')+' — active voice is usually clearer for instructions.'} : {c:'var(--good)', txt:'Little or no passive voice detected.'});
+    flags.push(complex? {c:pct(complex,nW)>20?'var(--warn)':'var(--mut)', txt:'<b>'+complex+'</b> long words (3+ syllables, '+pct(complex,nW)+'%) — define jargon or simplify where you can.'} : {c:'var(--good)', txt:'Few complex words.'});
+    flags.push({c:'var(--mut)', txt:'Aim for a reading grade around <b>10–12</b> for a broadly accessible brief; specialised cohorts may sit higher by design.'});
+    out.innerHTML=
+      '<div class="score"><b style="color:'+col+'">'+Math.round(flesch)+'</b><span class="band" style="background:rgba(255,255,255,.06);color:'+col+'">'+band+'</span></div>'+
+      '<div class="scoresub">Flesch Reading Ease (0–100, higher = easier) · approx. reading grade <b>'+(fk>0?fk.toFixed(1):'1')+'</b> · ~'+readMin+' min to read</div>'+
+      '<div class="stats">'+
+        '<div class="stat"><div class="n">'+nW+'</div><div class="l">Words</div></div>'+
+        '<div class="stat"><div class="n">'+nS+'</div><div class="l">Sentences</div></div>'+
+        '<div class="stat"><div class="n">'+wps.toFixed(1)+'</div><div class="l">Avg words / sentence</div></div>'+
+        '<div class="stat"><div class="n">'+spw.toFixed(2)+'</div><div class="l">Syllables / word</div></div>'+
+      '</div>'+
+      '<h2>What to look at</h2>'+
+      '<ul class="flags">'+flags.map(function(f){return '<li><span class="dot" style="background:'+f.c+'"></span><span>'+f.txt+'</span></li>';}).join('')+'</ul>';
+  }
+  t.addEventListener('input',function(){analyse(t.value);});
+  document.getElementById('sample').addEventListener('click',function(){t.value=SAMPLE;analyse(SAMPLE);});
+  document.getElementById('clear').addEventListener('click',function(){t.value='';analyse('');t.focus();});
+})();
+</script>
+</body>
+</html>

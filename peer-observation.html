@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Peer Observation of Teaching</title>
+<meta name="description" content="A structured, developmental peer-observation-of-teaching record. Fill it in your browser, then print or save as a PDF to keep — portable evidence for promotion, PPR and Advance HE Fellowship. Nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--paper:#ffffff;--teal:#2DD4BF;--gold:#C9A962;--ink:#13233a;--mut:#5b6b7e;--line:#dde3ea;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:#0A1628;color:var(--ink);font-family:var(--F);line-height:1.5;padding:26px 16px}
+  .noprint{max-width:880px;margin:0 auto 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .noprint .hint{color:#9fb0c3;font-size:12.5px}
+  .btn{background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:10px 20px;font:800 13px var(--F);cursor:pointer}
+  .back{color:#9fb0c3;font-size:13px;text-decoration:none}
+  .page{max-width:880px;margin:0 auto;background:var(--paper);border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.3)}
+  .hd{background:var(--navy);color:#fff;padding:24px 34px}
+  .hd .eye{font:800 10.5px var(--F);letter-spacing:2px;text-transform:uppercase;color:var(--teal)}
+  .hd h1{font-size:25px;margin:6px 0 5px;font-weight:800}
+  .hd p{margin:0;color:#aebfce;font-size:13px;max-width:620px}
+  .body{padding:26px 34px 30px}
+  h2{font:800 11px var(--F);letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin:22px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--line)}
+  h2:first-child{margin-top:0}
+  .ctx{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+  @media(max-width:620px){.ctx{grid-template-columns:1fr}}
+  .f{margin:4px 0}
+  .f .lab{font:700 11px var(--F);text-transform:uppercase;letter-spacing:.4px;color:var(--mut);margin-bottom:3px}
+  .ed{border:1px solid var(--line);border-radius:8px;padding:8px 11px;min-height:38px;font:400 14px/1.5 var(--F);color:var(--ink);background:#fbfcfd}
+  .ed:focus{outline:none;border-color:var(--teal);background:#fff}
+  [contenteditable][data-ph]:empty:before{content:attr(data-ph);color:#9aa7b5}
+  .dim{margin:13px 0;padding:0 0 13px;border-bottom:1px dashed var(--line)}
+  .dim .t{font:800 14.5px var(--F);color:var(--navy)}
+  .dim .q{font:400 12.5px var(--F);color:var(--mut);margin:1px 0 7px}
+  .dim .ed{min-height:54px}
+  .syn .ed{min-height:50px}
+  .foot{font-size:11px;color:#8a96a4;border-top:1px solid var(--line);margin-top:8px;padding-top:13px;line-height:1.55}
+  @media print{
+    body{background:#fff;padding:0}
+    .noprint{display:none!important}
+    .page{box-shadow:none;border-radius:0;max-width:100%}
+    .ed{background:#fff;border-color:#bcc6d2}
+    @page{size:A4;margin:13mm}
+    .dim,.f{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="noprint">
+  <a class="back" href="/">← Back to NTLSN</a>
+  <span class="hint">Fill it in, then save it as a PDF to keep · nothing is stored</span>
+  <button class="btn" onclick="window.print()">Save as PDF / Print</button>
+</div>
+<div class="page">
+  <div class="hd">
+    <div class="eye">NTLSN · Try it now · Peer-Review Exchange</div>
+    <h1>Peer Observation of Teaching</h1>
+    <p>A developmental record — evidence and conversation, not a score. Fill it in as you observe (or just after), then save it as a PDF. A portable record for promotion, PPR and Advance HE Fellowship.</p>
+  </div>
+  <div class="body">
+    <h2>Context</h2>
+    <div class="ctx">
+      <div class="f"><div class="lab">Observer</div><div class="ed" contenteditable data-ph="Your name"></div></div>
+      <div class="f"><div class="lab">Teacher observed</div><div class="ed" contenteditable data-ph="Colleague&rsquo;s name"></div></div>
+      <div class="f"><div class="lab">Course / class</div><div class="ed" contenteditable data-ph="Code &amp; title, cohort size"></div></div>
+      <div class="f"><div class="lab">Date &amp; mode</div><div class="ed" contenteditable data-ph="e.g. 19 Jun 2026 · in person / online"></div></div>
+    </div>
+    <div class="f" style="margin-top:10px"><div class="lab">What the teacher asked for feedback on</div><div class="ed" contenteditable data-ph="The focus they nominated — peer review works best when the reviewee sets the question"></div></div>
+
+    <h2>What was observed</h2>
+    <div id="dims"></div>
+
+    <h2>Synthesis &amp; next step</h2>
+    <div class="syn">
+      <div class="f"><div class="lab">Key strengths</div><div class="ed" contenteditable data-ph="What worked well, with specific evidence"></div></div>
+      <div class="f" style="margin-top:9px"><div class="lab">One thing to develop</div><div class="ed" contenteditable data-ph="A single, actionable focus — not a list"></div></div>
+      <div class="f" style="margin-top:9px"><div class="lab">Agreed next step</div><div class="ed" contenteditable data-ph="What the teacher will try, and when you&rsquo;ll follow up"></div></div>
+    </div>
+
+    <div class="foot">
+      A formative, developmental template aligned with NTLSN&rsquo;s Peer-Review Exchange — designed to leave a structured, portable record of demonstrated practice. It is collegial feedback, not a performance assessment. Everything runs in your browser; nothing is stored or sent.
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var DIMS=[
+    ['Climate &amp; rapport','Relationships, tone, inclusivity — do students feel it is safe to take part?'],
+    ['Structure &amp; purpose','Clear objectives, signposting and pacing — did students know where the session was going?'],
+    ['Explanation &amp; content','Clarity, accuracy, worked examples — were ideas made accessible?'],
+    ['Engagement &amp; participation','Activity, attention, student talk — how active were students, and who took part?'],
+    ['Questioning &amp; dialogue','Questions posed, checking for understanding, how responses were handled.'],
+    ['Inclusive &amp; accessible practice','UDL, multiple means of access, diverse needs and materials.'],
+    ['Space, technology &amp; resources','Were the room, tools and materials used purposefully and effectively?']
+  ];
+  document.getElementById('dims').innerHTML=DIMS.map(function(d){
+    return '<div class="dim"><div class="t">'+d[0]+'</div><div class="q">'+d[1]+'</div><div class="ed" contenteditable data-ph="Evidence — what you saw and heard"></div></div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

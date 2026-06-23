@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Course Quality Self-Check</title>
+<meta name="description" content="A reflective self-check for your unit or course, mapped to recognised quality frameworks — Quality Matters, PSF 2023, TEQSA HESF, QILT, JISC and the Australian Universities Accord. See where your design is strong and what to strengthen next. Runs in your browser; nothing is stored or sent.">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;
+    --line:rgba(255,255,255,.10);
+    --qm:#4ECDC4;--psf:#C57BFF;--hesf:#FFB448;--qilt:#9DD649;--jisc:#7C9CFF;--accord:#FF9F6B;
+    --yes:#9DD649;--part:#FFB448;--no:#5b6b7e;
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:30px 18px}
+  .wrap{max-width:1100px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(25px,3.6vw,36px);margin:0 0 8px;font-weight:800;letter-spacing:-.015em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 14px;max-width:760px}
+  .fwbar{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px}
+  .fwchip{display:inline-flex;align-items:center;gap:6px;font:700 11.5px var(--F);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .fwchip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .fwchip small{color:var(--mut);font-weight:600}
+  .disc{background:rgba(255,180,72,.07);border:1px solid rgba(255,180,72,.25);color:#e8d3a8;border-radius:10px;padding:11px 15px;font:500 12.5px/1.6 var(--F);margin:0 0 22px}
+  .disc b{color:var(--gold)}
+  .grid{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+  @media(max-width:880px){.grid{grid-template-columns:1fr}}
+
+  .theme{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 16px}
+  .theme h2{font-size:16.5px;margin:0 0 3px;font-weight:800;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .theme h2 .n{width:24px;height:24px;border-radius:7px;background:rgba(78,205,196,.14);color:var(--teal);font:800 12px var(--F);display:inline-flex;align-items:center;justify-content:center;flex:none}
+  .theme .tool{font:700 11.5px var(--F);color:var(--teal);text-decoration:none;border:1px solid rgba(78,205,196,.35);border-radius:999px;padding:3px 10px;margin-left:auto}
+  .theme .tool:hover{background:rgba(78,205,196,.1)}
+  .chk{border-top:1px solid var(--line);padding:13px 0 12px;display:flex;gap:14px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+  .chk .q{flex:1 1 320px;font-size:13.5px;color:var(--ink)}
+  .chk .fwtags{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+  .chk .fwtags span{font:800 8.5px var(--F);letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;border-radius:4px;color:#06251f}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex:none}
+  .seg button{background:transparent;color:var(--mut);border:0;border-right:1px solid var(--line);padding:7px 12px;font:700 11.5px var(--F);cursor:pointer;white-space:nowrap}
+  .seg button:last-child{border-right:0}
+  .seg button.on[data-v="2"]{background:var(--yes);color:#06251f}
+  .seg button.on[data-v="1"]{background:var(--part);color:#3a2a00}
+  .seg button.on[data-v="0"]{background:var(--no);color:#fff}
+
+  .panel{position:sticky;top:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .panel h3{font:700 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .score{display:flex;align-items:baseline;gap:10px;margin:0 0 4px}
+  .score b{font-size:34px;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .score .band{font:800 13px var(--F)}
+  .prog{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin:12px 0 6px}
+  .prog span{display:block;height:100%;border-radius:999px;transition:width .25s ease,background .25s ease}
+  .pcount{font-size:12px;color:var(--mut);margin:0 0 18px}
+  .fwcov{margin:0 0 18px}
+  .fwrow{display:flex;align-items:center;gap:9px;margin:0 0 8px}
+  .fwrow .lab{font:700 11px var(--F);width:54px;flex:none;color:var(--ink)}
+  .fwrow .track{flex:1;height:7px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+  .fwrow .track span{display:block;height:100%;border-radius:999px;transition:width .25s}
+  .fwrow .pc{font:700 10.5px var(--F);color:var(--mut);width:30px;text-align:right;flex:none;font-variant-numeric:tabular-nums}
+  .next h4{font:700 11px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:18px 0 8px}
+  .next ul{list-style:none;padding:0;margin:0}
+  .next li{font-size:12.5px;color:var(--ink);padding:8px 0;border-top:1px solid var(--line);line-height:1.5}
+  .next li:first-child{border-top:0}
+  .next li .lk{color:var(--teal);text-decoration:none;font-weight:700;white-space:nowrap}
+  .panelbtns{display:flex;gap:8px;margin-top:18px}
+  .panelbtns button{flex:1;border-radius:8px;padding:9px;font:800 12px var(--F);cursor:pointer;border:1px solid var(--line)}
+  .panelbtns .md{background:transparent;color:var(--teal);border-color:rgba(78,205,196,.4)}
+  .panelbtns .pr{background:var(--teal);color:#06251f;border:0}
+  .empty{color:var(--mut);font-size:13px;font-style:italic}
+
+  .about{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:22px 0 0}
+  .about h3{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .about dl{margin:0;display:grid;grid-template-columns:1fr;gap:11px}
+  .about dt{font:800 13px var(--F);color:var(--ink);display:flex;align-items:center;gap:8px}
+  .about dt i{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .about dd{margin:2px 0 0 17px;font-size:12.5px;color:var(--mut);line-height:1.55}
+  .about dd a{color:var(--teal)}
+  .about .kind{font:700 9.5px var(--F);letter-spacing:.4px;text-transform:uppercase;color:var(--gold);margin-left:6px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:22px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  .foot a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Course Quality Self-Check</h1>
+  <p class="lead">A reflective walk through your unit or course design. Answer honestly and you&rsquo;ll see where your design is strong and what to strengthen next &mdash; with each checkpoint mapped to the recognised frameworks it speaks to.</p>
+  <div class="fwbar" id="fwbar"></div>
+  <div class="disc"><b>A reflection, not a verdict.</b> This is a self-assessment to prompt good design conversations &mdash; it is not an audit, accreditation, certification or endorsement by any of the frameworks named, and a high score guarantees nothing. Frameworks are mapped at their published top level and cited below. Nothing you enter is stored or sent.</div>
+
+  <div class="grid">
+    <div id="themes"></div>
+    <div><div class="panel" id="panel"></div></div>
+  </div>
+
+  <div class="about">
+    <h3>About these frameworks &mdash; and what each one actually is</h3>
+    <dl id="about"></dl>
+  </div>
+
+  <div class="foot">
+    Mapping is indicative and kept at each framework&rsquo;s published top level (e.g. Quality Matters&rsquo; 8 General Standards, 7th ed.; PSF 2023 dimensions; TEQSA HESF standards 1.4 / 3.1 / 5.3; the QILT Student Experience Survey focus areas). QILT measures the student experience, JISC guides digital capability, and the Accord sets sector policy &mdash; they are included as lenses, not as course-design rubrics. Always check against your own institution&rsquo;s requirements and the primary sources linked above. Everything runs in your browser; nothing is stored, logged or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var FW = {
+    QM:    {name:"Quality Matters", kind:"Course-design rubric", note:"The QM Higher Education Rubric (7th ed., 2023): 8 General Standards centred on alignment of objectives, assessment, materials, activities and technology.", url:"https://www.qualitymatters.org/qa-resources/rubric-standards/higher-ed-rubric", color:"var(--qm)"},
+    PSF:   {name:"PSF 2023", kind:"Professional standards", note:"Advance HE&rsquo;s Professional Standards Framework (2023): 15 Dimensions across Areas of Activity (A1&ndash;A5), Core Knowledge (K1&ndash;K5) and Professional Values (V1&ndash;V5); the basis for Fellowship.", url:"https://www.advance-he.ac.uk/teaching-and-learning/psf", color:"var(--psf)"},
+    HESF:  {name:"TEQSA HESF", kind:"Threshold standards", note:"Australia&rsquo;s Higher Education Standards Framework (Threshold Standards) 2021. Mapped here to 1.4 Learning Outcomes and Assessment, 3.1 Course Design, and 5.3 Monitoring, Review and Improvement.", url:"https://www.teqsa.gov.au/how-we-regulate/higher-education-standards-framework-2021", color:"var(--hesf)"},
+    QILT:  {name:"QILT", kind:"Student-experience measures", note:"Quality Indicators for Learning and Teaching. The Student Experience Survey rates five focus areas: Skills Development, Learner Engagement, Teaching Quality, Student Support and Learning Resources. A signal of experience, not a design rubric.", url:"https://www.qilt.edu.au/", color:"var(--qilt)"},
+    JISC:  {name:"JISC", kind:"Digital capability guidance", note:"Jisc&rsquo;s &lsquo;Building digital capability&rsquo; work and digital learning-design guidance. Capability- and design-oriented guidance for accessible, active digital learning &mdash; not a course-accreditation rubric.", url:"https://digitalcapability.jisc.ac.uk/", color:"var(--jisc)"},
+    ACCORD:{name:"Accord", kind:"Sector policy priorities", note:"The Australian Universities Accord Final Report (2024). Included as the sector priorities good design aligns to &mdash; equity and access for under-represented groups, First Nations, lifelong learning and quality teaching &mdash; not a checklist.", url:"https://www.education.gov.au/australian-universities-accord/resources/final-report", color:"var(--accord)"}
+  };
+
+  var THEMES = [
+    {t:"Clear, measurable learning outcomes", tool:{href:"/outcomes.html", label:"Outcomes check →"}, checks:[
+      {q:"Outcomes use measurable, observable verbs (analyse, design, evaluate) &mdash; not &lsquo;understand&rsquo; or &lsquo;know&rsquo;.", fw:["QM","PSF","HESF","QILT"]},
+      {q:"Outcomes suit the level of study (year level / AQF) and are achievable in the time available.", fw:["QM","HESF","PSF"]},
+      {q:"Outcomes are stated plainly for students from the start of the unit.", fw:["QM","QILT"]}
+    ]},
+    {t:"Aligned, varied, authentic assessment &amp; feedback", tool:{href:"/assessment-mix.html", label:"Assessment mix →"}, checks:[
+      {q:"Every assessment maps to at least one learning outcome (constructive alignment).", fw:["QM","PSF","HESF"]},
+      {q:"Assessment uses varied, authentic tasks rather than over-relying on one format.", fw:["QM","QILT","HESF"]},
+      {q:"Marking criteria or a rubric are shared with students before they submit.", fw:["QM","PSF","QILT"]},
+      {q:"Students receive timely, usable feedback that feeds forward into later work.", fw:["PSF","QILT"]}
+    ]},
+    {t:"Quality learning materials &amp; resources", tool:{href:"/readability.html", label:"Readability →"}, checks:[
+      {q:"Materials are current, credible and clearly tied to the outcomes.", fw:["QM","HESF"]},
+      {q:"Reading load and reading level suit the cohort.", fw:["QM","QILT","JISC"]},
+      {q:"Resources are provided in accessible formats students can actually use.", fw:["QM","JISC","ACCORD"]}
+    ]},
+    {t:"Active learning &amp; engagement", tool:null, checks:[
+      {q:"Activities give students regular chances to practise and apply &mdash; not just receive content.", fw:["QM","PSF","QILT"]},
+      {q:"There is meaningful interaction (student&ndash;content, student&ndash;student, student&ndash;staff).", fw:["QM","QILT","JISC"]},
+      {q:"Online or blended elements are designed for active participation, not just delivery.", fw:["JISC","QM","QILT"]}
+    ]},
+    {t:"Accessibility &amp; inclusion", tool:{href:"/readability.html", label:"Readability →"}, checks:[
+      {q:"The unit meets accessibility standards (captions, alt text, navigable structure, contrast).", fw:["QM","JISC","ACCORD"]},
+      {q:"Design anticipates diverse learners (multiple means of engagement, representation and expression).", fw:["PSF","ACCORD","QM"]},
+      {q:"Language and examples are inclusive and free of unnecessary jargon.", fw:["QILT","ACCORD"]}
+    ]},
+    {t:"Orientation, technology &amp; learner support", tool:null, checks:[
+      {q:"A clear &lsquo;start here&rsquo; orients students to structure, expectations and how to get help.", fw:["QM","QILT"]},
+      {q:"Required technologies are named, supported, and not a barrier to participation.", fw:["QM","JISC","HESF"]},
+      {q:"Students know where to find academic and wellbeing support.", fw:["QM","QILT","ACCORD"]}
+    ]},
+    {t:"Equity, First Nations &amp; flexible design", tool:null, checks:[
+      {q:"Design actively widens access for under-represented students (low-SES, regional, disability, first-in-family).", fw:["ACCORD","PSF","HESF"]},
+      {q:"Where relevant, Indigenous perspectives are embedded through appropriate, custodian-led engagement &mdash; never tokenistic.", fw:["ACCORD","PSF"]},
+      {q:"The unit offers flexibility (modes, pacing or recognition) that supports lifelong learners.", fw:["ACCORD","JISC"]}
+    ]},
+    {t:"Monitoring, review &amp; improvement", tool:null, checks:[
+      {q:"Student feedback (including SES-type signals) is gathered and genuinely acted on.", fw:["HESF","QILT","PSF"]},
+      {q:"The unit is reviewed against its outcomes and improved each time it runs.", fw:["HESF","QM","PSF"]},
+      {q:"Teaching is informed by scholarship/evidence and your own ongoing development.", fw:["PSF","QM"]}
+    ]}
+  ];
+
+  // ---- build framework chip bar + about list ----
+  var fwOrder = ["QM","PSF","HESF","QILT","JISC","ACCORD"];
+  document.getElementById("fwbar").innerHTML = fwOrder.map(function(k){
+    return '<span class="fwchip"><i style="background:'+FW[k].color+'"></i>'+FW[k].name+' <small>'+FW[k].kind+'</small></span>';
+  }).join("");
+  document.getElementById("about").innerHTML = fwOrder.map(function(k){
+    var f=FW[k];
+    return '<div><dt><i style="background:'+f.color+'"></i>'+f.name+'<span class="kind">'+f.kind+'</span></dt>'+
+      '<dd>'+f.note+' <a href="'+f.url+'" target="_blank" rel="noopener">Source →</a></dd></div>';
+  }).join("");
+
+  // ---- assign ids, build theme cards ----
+  var answers = {}; // id -> 0|1|2
+  var html = "";
+  THEMES.forEach(function(th, ti){
+    html += '<div class="theme"><h2><span class="n">'+(ti+1)+'</span>'+th.t+
+      (th.tool ? '<a class="tool" href="'+th.tool.href+'">'+th.tool.label+'</a>' : '')+'</h2>';
+    th.checks.forEach(function(c, ci){
+      var id = "t"+ti+"c"+ci; c.id = id;
+      var tags = c.fw.map(function(k){ return '<span style="background:'+FW[k].color+'">'+FW[k].name+'</span>'; }).join("");
+      html += '<div class="chk"><div class="q">'+c.q+'<div class="fwtags">'+tags+'</div></div>'+
+        '<div class="seg" data-id="'+id+'">'+
+        '<button type="button" data-v="2">Yes</button>'+
+        '<button type="button" data-v="1">Partly</button>'+
+        '<button type="button" data-v="0">Not yet</button>'+
+        '</div></div>';
+    });
+    html += '</div>';
+  });
+  document.getElementById("themes").innerHTML = html;
+
+  // flat list of all checks for scoring
+  var ALL = [];
+  THEMES.forEach(function(th){ th.checks.forEach(function(c){ ALL.push({c:c, theme:th}); }); });
+
+  // ---- interaction ----
+  document.getElementById("themes").addEventListener("click", function(e){
+    var b = e.target.closest(".seg button"); if(!b) return;
+    var seg = b.closest(".seg"); var id = seg.getAttribute("data-id");
+    answers[id] = parseInt(b.getAttribute("data-v"), 10);
+    [].forEach.call(seg.querySelectorAll("button"), function(x){ x.classList.toggle("on", x===b); });
+    render();
+  });
+
+  function band(p){
+    if(p>=90) return {t:"Exemplary design", c:"var(--yes)"};
+    if(p>=70) return {t:"Strong design", c:"var(--qm)"};
+    if(p>=40) return {t:"Developing", c:"var(--part)"};
+    return {t:"Early design", c:"var(--accord)"};
+  }
+
+  function render(){
+    var answered = Object.keys(answers).length;
+    var panel = document.getElementById("panel");
+    if(!answered){
+      panel.innerHTML = '<h3>Your profile</h3><p class="empty">Answer the checkpoints and your quality profile, framework coverage and next steps appear here.</p>';
+      return;
+    }
+    // overall (out of all checks; unanswered count as 0 so the bar reflects whole-of-unit)
+    var total = ALL.length, got = 0;
+    ALL.forEach(function(o){ got += (answers[o.c.id]||0); });
+    var pct = Math.round((got/(total*2))*100);
+    var bnd = band(pct);
+
+    // per-framework coverage
+    var fwCov = {};
+    fwOrder.forEach(function(k){ fwCov[k] = {got:0, max:0}; });
+    ALL.forEach(function(o){
+      var v = answers[o.c.id];
+      o.c.fw.forEach(function(k){
+        fwCov[k].max += 2;
+        if(v!==undefined) fwCov[k].got += v;
+      });
+    });
+
+    // strengthen-next: answered Partly/Not-yet, worst first
+    var next = ALL.filter(function(o){ var v=answers[o.c.id]; return v===0 || v===1; })
+                  .sort(function(a,b){ return (answers[a.c.id]) - (answers[b.c.id]); }).slice(0,6);
+
+    var fwRows = fwOrder.map(function(k){
+      var cov = fwCov[k]; var p = cov.max ? Math.round((cov.got/cov.max)*100) : 0;
+      return '<div class="fwrow"><span class="lab">'+FW[k].name+'</span>'+
+        '<span class="track"><span style="width:'+p+'%;background:'+FW[k].color+'"></span></span>'+
+        '<span class="pc">'+p+'%</span></div>';
+    }).join("");
+
+    var nextHtml = next.length ? next.map(function(o){
+      var lk = o.theme.tool ? ' <a class="lk" href="'+o.theme.tool.href+'">'+o.theme.tool.label+'</a>' : '';
+      return '<li>'+o.c.q.replace(/&mdash;.*$/,'').trim()+lk+'</li>';
+    }).join("") : '<li style="color:var(--yes)">Nothing flagged — every answered checkpoint is solid.</li>';
+
+    panel.innerHTML =
+      '<h3>Your profile</h3>'+
+      '<div class="score"><b style="color:'+bnd.c+'">'+pct+'%</b><span class="band" style="color:'+bnd.c+'">'+bnd.t+'</span></div>'+
+      '<div class="prog"><span style="width:'+pct+'%;background:'+bnd.c+'"></span></div>'+
+      '<div class="pcount">'+answered+' of '+total+' checkpoints answered</div>'+
+      '<h3 style="margin-top:6px">Framework coverage</h3>'+
+      '<div class="fwcov">'+fwRows+'</div>'+
+      '<div class="next"><h4>Strengthen next</h4><ul>'+nextHtml+'</ul></div>'+
+      '<div class="panelbtns"><button class="md" id="copymd">Copy as Markdown</button><button class="pr" onclick="window.print()">Print / PDF</button></div>';
+
+    document.getElementById("copymd").addEventListener("click", copyMarkdown);
+  }
+
+  // ---- markdown export ----
+  function copyMarkdown(){
+    var total = ALL.length, got=0, answered=Object.keys(answers).length;
+    ALL.forEach(function(o){ got += (answers[o.c.id]||0); });
+    var pct = Math.round((got/(total*2))*100);
+    var L = ["## Course Quality Self-Check — NTLSN", "", "**Overall:** "+pct+"% ("+band(pct).t+") · "+answered+" of "+total+" checkpoints answered", ""];
+    var lbl = {2:"Yes",1:"Partly",0:"Not yet"};
+    THEMES.forEach(function(th, ti){
+      L.push("### "+(ti+1)+". "+strip(th.t));
+      th.checks.forEach(function(c){
+        var v = answers[c.id];
+        L.push("- ["+(v===2?"x":" ")+"] "+strip(c.q)+" *("+(v===undefined?"—":lbl[v])+" · "+c.fw.join(", ")+")*");
+      });
+      L.push("");
+    });
+    L.push("_Self-reflection mapped to QM, PSF 2023, TEQSA HESF, QILT, JISC and the Australian Universities Accord. Not an audit or endorsement. Generated with NTLSN — ntlsn.com._");
+    var text = L.join("\n");
+    var b = document.getElementById("copymd"), orig = b.textContent;
+    function done(){ b.textContent="Copied ✓"; setTimeout(function(){ b.textContent=orig; },1400); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, function(){legacy(text);done();}); }
+    else { legacy(text); done(); }
+  }
+  function legacy(t){ var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.top="-9999px"; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); }
+  function strip(s){ var d=document.createElement("div"); d.innerHTML=s; return (d.textContent||"").replace(/\s+/g," ").trim(); }
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — APA 7 Reference Formatter</title>
+<meta name="description" content="Turn the details of a journal article, book, chapter or web page into a formatted APA 7th-edition reference, in your browser. A starting point to check against your style guide. Nothing is stored or sent.">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:920px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(23px,3.3vw,33px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:700px}
+  .types{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+  .tb{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:8px 16px;font:700 13px var(--F);cursor:pointer}
+  .tb.on{background:var(--teal);color:#06251f;border-color:var(--teal)}
+  .f{margin:10px 0}
+  .f label{display:block;font:700 11px var(--F);text-transform:uppercase;letter-spacing:.4px;color:var(--mut);margin-bottom:4px}
+  .f input{width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:500 14px var(--F)}
+  .f input:focus{outline:none;border-color:var(--teal)}
+  .f .hint{font:400 11px var(--F);color:#7d8da0;margin-top:3px}
+  .cols{display:flex;gap:10px}.cols .f{flex:1}
+  .outwrap{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin:20px 0 0}
+  .outwrap h2{font:700 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 10px;display:flex;justify-content:space-between;align-items:center}
+  .copy{background:transparent;border:1px solid var(--line);color:var(--teal);border-radius:7px;padding:5px 12px;font:700 11.5px var(--F);cursor:pointer}
+  #ref{font:400 15px/1.7 Georgia,"Times New Roman",serif;color:#fff;word-break:break-word}
+  #ref i{font-style:italic}
+  #ref .ph{color:#6b7e90;font-style:normal;font-family:var(--F);font-size:13.5px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>APA 7 Reference Formatter</h1>
+  <p class="lead">Enter the details and get a formatted APA 7th-edition reference. A reliable starting point — always give it a final check against the official guide. Nothing is stored or sent.</p>
+  <div class="types" id="types">
+    <button class="tb on" data-t="journal">Journal article</button>
+    <button class="tb" data-t="book">Book</button>
+    <button class="tb" data-t="chapter">Book chapter</button>
+    <button class="tb" data-t="web">Web page</button>
+  </div>
+
+  <div class="f" data-for="journal book chapter web"><label>Authors</label><input id="authors" placeholder="Smith, John A; Jones, Beth C"><div class="hint">One per author, &ldquo;Surname, Given names&rdquo;, separated by semicolons. Leave blank for none.</div></div>
+  <div class="cols">
+    <div class="f" data-for="journal book chapter web" style="flex:0 0 130px"><label>Year</label><input id="year" placeholder="2024"></div>
+    <div class="f" data-for="book" style="flex:0 0 150px"><label>Edition</label><input id="edition" placeholder="2nd"><div class="hint">blank = 1st</div></div>
+  </div>
+  <div class="f" data-for="journal book chapter web"><label id="lab_title">Article title</label><input id="title" placeholder="Title of the work"></div>
+  <div class="f" data-for="chapter"><label>Editor(s)</label><input id="editors" placeholder="Brown, Tara; Lee, Sam"></div>
+  <div class="f" data-for="chapter"><label>Book title</label><input id="booktitle" placeholder="Title of the edited book"></div>
+  <div class="f" data-for="journal"><label>Journal name</label><input id="journal" placeholder="Journal of Higher Education"></div>
+  <div class="f" data-for="web"><label>Site / publisher name</label><input id="site" placeholder="TEQSA"></div>
+  <div class="cols">
+    <div class="f" data-for="journal"><label>Volume</label><input id="volume" placeholder="45"></div>
+    <div class="f" data-for="journal"><label>Issue</label><input id="issue" placeholder="2"></div>
+    <div class="f" data-for="journal chapter"><label>Pages</label><input id="pages" placeholder="123-145"></div>
+  </div>
+  <div class="f" data-for="book chapter"><label>Publisher</label><input id="publisher" placeholder="Routledge"></div>
+  <div class="f" data-for="journal web"><label id="lab_doi">DOI or URL</label><input id="doiurl" placeholder="https://doi.org/10.xxxx/xxxx"></div>
+
+  <div class="outwrap">
+    <h2>APA 7 reference <button class="copy" id="copy">Copy</button></h2>
+    <div id="ref"></div>
+  </div>
+  <div class="foot">
+    A best-effort formatter for the four most common source types in APA 7th edition. It uses what you type as-is (it does not change capitalisation), and complex cases — many authors, organisations as authors, missing dates — may need a manual tweak. Italics are shown here; keep them when you paste into a plain-text document. <b>Always check the result against the official APA 7 guide or your library&rsquo;s.</b> Everything runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var type='journal';
+  function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+  function inits(given){return given.split(/[\s.]+/).filter(Boolean).map(function(g){return g.charAt(0).toUpperCase()+'.';}).join(' ');}
+  function authorsAPA(str){
+    var list=str.split(';').map(function(s){return s.trim();}).filter(Boolean);
+    var names=list.map(function(a){var c=a.indexOf(','); if(c<0) return a; var sur=a.slice(0,c).trim(),giv=a.slice(c+1).trim(); return giv?sur+', '+inits(giv):sur;});
+    if(!names.length) return '';
+    if(names.length===1) return names[0];
+    if(names.length>20){ names=names.slice(0,19).concat(['… '+names[names.length-1]]); }
+    return names.slice(0,-1).join(', ')+', & '+names[names.length-1];
+  }
+  function editorsAPA(str){
+    var list=str.split(';').map(function(s){return s.trim();}).filter(Boolean);
+    var names=list.map(function(a){var c=a.indexOf(','); if(c<0) return a; var sur=a.slice(0,c).trim(),giv=a.slice(c+1).trim(); return giv?inits(giv)+' '+sur:sur;});
+    if(!names.length) return '';
+    if(names.length===1) return names[0];
+    if(names.length===2) return names[0]+' & '+names[1];
+    return names.slice(0,-1).join(', ')+', & '+names[names.length-1];
+  }
+  function dot(s){ s=s.trim(); if(!s) return ''; return /[.?!]$/.test(s)?s+' ':s+'. '; }
+  function build(){
+    var a=authorsAPA(val('authors')), y=val('year'), ti=val('title');
+    var out='';
+    var yr = y?'('+y+'). ':'(n.d.). ';
+    if(a) out+=dot(a); // "Author, A. A. "  (a already has trailing structure; ensure period)
+    out=out.replace(/\s+$/,''); if(a) out+=' ';
+    out+=yr;
+    if(type==='journal'){
+      if(ti) out+=dot(ti);
+      var j=val('journal'),v=val('volume'),is=val('issue'),pg=val('pages'),d=val('doiurl');
+      if(j) out+='<i>'+j+'</i>';
+      if(v) out+=', <i>'+v+'</i>'; if(is) out+='('+is+')'; if(pg) out+=', '+pg;
+      if(j||v||pg) out+='. ';
+      if(d) out+=linkify(d);
+    } else if(type==='book'){
+      var ed=val('edition'),pub=val('publisher');
+      if(ti){ out+='<i>'+ti+'</i>'; if(ed) out+=' ('+ed+' ed.)'; out+='. '; }
+      if(pub) out+=dot(pub);
+    } else if(type==='chapter'){
+      var eds=editorsAPA(val('editors')),bt=val('booktitle'),pg2=val('pages'),pub2=val('publisher');
+      if(ti) out+=dot(ti);
+      if(eds||bt){ out+='In '+(eds?eds+(val('editors').split(';').filter(Boolean).length>1?' (Eds.), ':' (Ed.), '):''); if(bt) out+='<i>'+bt+'</i>'; if(pg2) out+=' (pp. '+pg2+')'; out+='. '; }
+      if(pub2) out+=dot(pub2);
+    } else if(type==='web'){
+      var st=val('site'),u=val('doiurl');
+      if(ti) out+='<i>'+ti+'</i>. ';
+      if(st) out+=dot(st);
+      if(u) out+=linkify(u);
+    }
+    out=out.trim();
+    var el=document.getElementById('ref');
+    if(!a && !y && !ti){ el.innerHTML='<span class="ph">Fill in the fields above — your formatted reference appears here.</span>'; }
+    else { el.innerHTML=out; }
+  }
+  function linkify(d){ d=d.trim(); if(/^10\./.test(d)) return 'https://doi.org/'+d; return d; }
+  // type switching
+  document.getElementById('types').addEventListener('click',function(e){
+    var b=e.target.closest('.tb'); if(!b)return;
+    type=b.getAttribute('data-t');
+    [].forEach.call(document.querySelectorAll('.tb'),function(x){x.classList.toggle('on',x===b);});
+    [].forEach.call(document.querySelectorAll('[data-for]'),function(f){ f.style.display=f.getAttribute('data-for').indexOf(type)>-1?'':'none'; });
+    document.getElementById('lab_title').textContent = type==='book'?'Book title':type==='chapter'?'Chapter title':type==='web'?'Page title':'Article title';
+    document.getElementById('lab_doi').textContent = type==='web'?'URL':'DOI or URL';
+    build();
+  });
+  [].forEach.call(document.querySelectorAll('input'),function(i){i.addEventListener('input',build);});
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=document.getElementById('ref').textContent;
+    if(navigator.clipboard){navigator.clipboard.writeText(txt);}
+    this.textContent='Copied'; var b=this; setTimeout(function(){b.textContent='Copy';},1200);
+  });
+  // init field visibility + example
+  [].forEach.call(document.querySelectorAll('[data-for]'),function(f){ f.style.display=f.getAttribute('data-for').indexOf('journal')>-1?'':'none'; });
+  document.getElementById('authors').value='Smith, John A; Jones, Beth C';
+  document.getElementById('year').value='2024';
+  document.getElementById('title').value='Reframing assessment in the age of generative AI';
+  document.getElementById('journal').value='Journal of Higher Education';
+  document.getElementById('volume').value='45'; document.getElementById('issue').value='2'; document.getElementById('pages').value='123-145';
+  document.getElementById('doiurl').value='10.1080/00000000.2024.123456';
+  build();
+})();
+</script>
+</body>
+</html>
