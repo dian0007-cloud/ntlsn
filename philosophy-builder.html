@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Teaching Philosophy &amp; Narrative Builder</title>
+<meta name="description" content="Draft the reflective narrative at the heart of a fellowship application, teaching award or promotion case. Choose your target — a general teaching philosophy, an AAUT Citation or Award, or AFHEA–PFHEA — and the builder loads that scheme's public criteria as guided prompts. It scaffolds your own words; it writes nothing for you. Runs in your browser.">
+<meta property="og:title" content="Teaching Philosophy &amp; Narrative Builder — NTLSN">
+<meta property="og:description" content="Pick your target — teaching philosophy, AAUT Citation/Award, or AFHEA–PFHEA — and draft the narrative against that scheme's public criteria. Copy as Markdown. Your words only. Free.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1040px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 18px;max-width:780px}
+  .picker{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .picker label{font:700 12px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+  .picker select{flex:1;min-width:220px;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:600 14px var(--F)}
+  .picker select:focus{outline:none;border-color:var(--teal)}
+  .schemeNote{font-size:12px;color:var(--mut);width:100%;line-height:1.55;border-top:1px solid var(--line);padding-top:9px;margin-top:2px}
+  .schemeNote b{color:var(--gold)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .sec{margin:0 0 18px}.sec:last-child{margin-bottom:0}
+  .sech{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 3px}
+  .seci{font-size:12px;color:var(--mut);margin:0 0 11px}
+  .f{margin:0 0 13px}
+  .f label{display:block;font-size:13px;font-weight:600;margin:0 0 5px}
+  .f label b{color:var(--gold);font-weight:800;margin-right:5px}
+  .f .hint{font-size:11.5px;color:var(--mut);margin:0 0 6px}
+  textarea{width:100%;min-height:62px;resize:vertical;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:400 13.5px/1.5 var(--F)}
+  textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(78,205,196,.12)}
+  input.short{width:100%;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font:400 13.5px var(--F)}
+  input.short:focus{outline:none;border-color:var(--teal)}
+  .row3{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .res{position:sticky;top:20px}
+  .meter{height:8px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin:0 0 6px}
+  .meter .fill{height:100%;background:var(--teal);border-radius:999px;transition:width .25s}
+  .mtext{font-size:11.5px;color:var(--mut);margin:0 0 14px}
+  .doc{background:#0a1830;border:1px solid var(--line);border-radius:10px;padding:16px 18px;max-height:62vh;overflow:auto;font-size:13.5px;line-height:1.62}
+  .doc h2{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin:18px 0 7px;border-bottom:1px solid var(--line);padding-bottom:5px}
+  .doc h2:first-child{margin-top:0}
+  .doc .meta{color:var(--mut);font-style:italic;font-size:12.5px;margin:0 0 6px}
+  .doc p{margin:0 0 9px;white-space:pre-wrap}
+  .doc p b{color:#dfe8f4}
+  .doc .empty{color:var(--mut);font-style:italic}
+  .btns{display:flex;gap:8px;margin:14px 0 0}
+  .btn{flex:1;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 12px;font:700 12.5px var(--F);cursor:pointer;transition:.12s}
+  .btn:hover{border-color:var(--teal)}
+  .btn.pri{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+  .next{margin:14px 0 0;font-size:12.5px;background:rgba(78,205,196,.07);border:1px solid rgba(78,205,196,.25);border-radius:10px;padding:11px 13px}
+  .next a{color:var(--teal);font-weight:700}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Teaching Philosophy &amp; Narrative Builder</h1>
+  <p class="lead">The reflective narrative is the heart of every <b>fellowship application</b>, <b>teaching award</b> and <b>promotion case</b> — and the hardest part to start. Pick your target below and the builder loads that scheme’s prompts; a structured draft assembles on the right as you type. <b>It scaffolds your own words — it writes nothing for you and invents no claims.</b></p>
+
+  <div class="picker">
+    <label for="scheme">I’m writing toward:</label>
+    <select id="scheme"></select>
+    <div class="schemeNote" id="schemeNote"></div>
+  </div>
+
+  <div class="grid">
+    <div class="panel" id="form"></div>
+    <div class="panel res">
+      <div class="meter"><div class="fill" id="fill" style="width:0%"></div></div>
+      <div class="mtext" id="mtext">0 of 0 prompts answered</div>
+      <div class="doc" id="doc"></div>
+      <div class="btns">
+        <button class="btn pri" id="copy">Copy as Markdown</button>
+        <button class="btn" id="print">Print / PDF</button>
+        <button class="btn" id="clear">Clear</button>
+      </div>
+      <div class="next">A drafting aid — then check the fit: <a href="/fellowship-mapper.html">Fellowship Mapper</a> · <a href="/psf-evidence-audit.html">PSF Audit</a> · <a href="/aaut-readiness.html">AAUT Readiness</a></div>
+    </div>
+  </div>
+  <div class="foot">
+    <b>Your words, your draft — an unofficial aid.</b> The prompts paraphrase the <b>public</b> criteria of each scheme to help you structure your own writing; this is not affiliated with or endorsed by Advance HE or Universities Australia, and is not a substitute for the current official guidelines, which you should always work from. It is a structured scaffold, not a generator and not AI — every sentence in the draft is text you wrote. Nothing is stored or sent. &nbsp;·&nbsp; <a href="https://www.advance-he.ac.uk/teaching-and-learning/psf" target="_blank" rel="noopener">PSF 2023 ↗</a> &nbsp;·&nbsp; <a href="https://universitiesaustralia.edu.au/policy-submissions/teaching-learning-funding/australian-awards-for-university-teaching/" target="_blank" rel="noopener">AAUT ↗</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var CTX=[{id:'name',q:'Your name',ph:'Dr Jordan Lee'},{id:'role',q:'Role & discipline',ph:'Senior Lecturer, Nursing'}];
+
+  // Each prompt: {id, q, hint, b?(bold doc label)}.  Each scheme: {label, title, note, sections:[{key,h,i,prompts}]}.
+  var SCHEMES={
+    general:{label:'A general teaching philosophy', title:'Teaching Philosophy & Reflective Narrative',
+      note:'A first-person teaching philosophy, mapped to the PSF 2023 — useful for a portfolio, a job application, or as the spine of a fellowship or award case.',
+      sections:[
+        {key:'phil',h:'Your teaching philosophy',i:'The core — what you believe and why. First person, plain language.',prompts:[
+          {id:'g_p1',q:'What does good learning look like in your discipline?',hint:'Your central belief about how students learn best.'},
+          {id:'g_p2',q:'Why do you teach the way you do — what shaped your approach?',hint:'An influence, a mentor, your own experience.'},
+          {id:'g_p3',q:'A moment that defines your teaching.',hint:'A specific story. Specifics persuade.'}]},
+        {key:'aoa',h:'How I design, teach & assess',i:'One concrete example each — the PSF Areas of Activity (A1–A5).',prompts:[
+          {id:'g_a1',b:'Designing & planning (A1)',q:'Designing & planning learning',hint:'A unit, activity or programme you designed and the thinking behind it.'},
+          {id:'g_a2',b:'Teaching & supporting learning (A2)',q:'Teaching & supporting learning',hint:'An approach or environment you use and why it works.'},
+          {id:'g_a3',b:'Assessing & giving feedback (A3)',q:'Assessing & giving feedback',hint:'How you assess and make feedback useful.'},
+          {id:'g_a4',b:'Supporting & guiding learners (A4)',q:'Supporting & guiding learners',hint:'How you support students, especially those who struggle.'},
+          {id:'g_a5',b:'Developing my practice (A5)',q:'Developing your own practice',hint:'How you keep learning: reading, peer review, SoTL.'}]},
+        {key:'val',h:'What I stand for',i:'Briefly evidence each — the PSF Professional Values (V1–V5).',prompts:[
+          {id:'g_v1',b:'Respecting diverse learners (V1)',q:'Respecting diverse learners',hint:'How you make teaching inclusive.'},
+          {id:'g_v2',b:'Engagement & equity (V2)',q:'Engagement & equity of opportunity',hint:'How you help all students reach their potential.'},
+          {id:'g_v3',b:'Evidence-informed practice (V3)',q:'Evidence-informed practice',hint:'The scholarship or SoTL you draw on.'},
+          {id:'g_v4',b:'Wider context (V4)',q:'Responding to the wider context',hint:'A sector, policy or discipline shift you have responded to.'},
+          {id:'g_v5',b:'Collaborating with others (V5)',q:'Collaborating with others',hint:'How you work with colleagues to improve teaching.'}]},
+        {key:'imp',h:'Impact & reflection',i:'What changed, how you know, where you are heading.',prompts:[
+          {id:'g_i1',q:'What changed for your students — and how do you know?',hint:'Outcomes, feedback, results, stories.'},
+          {id:'g_i2',q:'Something that did not work, and what you changed.',hint:'Honest reflection signals a scholarly teacher.'}]}
+      ]},
+    citation:{label:'An AAUT Citation', title:'AAUT Citation — draft narrative',
+      note:'Citations recognise a <b>specific, focused</b> contribution to student learning, <b>sustained over at least three years</b>. You address <b>one or more</b> of the criteria — not all. There is a short citation statement (a strict word limit applies — check the current guidelines) plus a written statement.',
+      sections:[
+        {key:'stmt',h:'Your citation statement',i:'The single sentence that names what you are recognised for (a tight word limit applies — confirm it in the current AAUT guidelines).',prompts:[
+          {id:'c_stmt',q:'Citation statement',hint:'e.g. “For sustained leadership in … that …”. Keep it to the official word limit.'}]},
+        {key:'crit',h:'Address the criteria',i:'Write to the criteria your contribution fits — you need not cover them all.',prompts:[
+          {id:'c_c1',b:'Influence, motivate & inspire',q:'Approaches that influence, motivate and inspire students to learn',hint:'What you do, and the difference it makes to students’ engagement.'},
+          {id:'c_c2',b:'Curricula, resources & services',q:'Development of curricula, resources or services that reflect a command of the field',hint:'What you created and how it reflects command of your field.'},
+          {id:'c_c3',b:'Assessment & feedback',q:'Assessment and feedback that foster independent learning',hint:'How your assessment/feedback builds independent learners.'},
+          {id:'c_c4',b:'Respect & support for students',q:'Respect and support for the development of students as individuals',hint:'How you respect and support students as individuals.'},
+          {id:'c_c5',b:'Scholarly approach',q:'Scholarly activities that have influenced and enhanced learning and teaching',hint:'Scholarship, evaluation or innovation behind your practice.'}]},
+        {key:'ev',h:'Evidence of impact',i:'Citations need evidence of sustained impact.',prompts:[
+          {id:'c_ev',q:'Your evidence of impact, sustained over at least three years',hint:'Outcomes, student and peer feedback, reach, uptake — over time.'}]}
+      ]},
+    excellence:{label:'An AAUT Teaching Excellence Award', title:'AAUT Teaching Excellence — draft narrative',
+      note:'Teaching Excellence Awards recognise a <b>broad, sustained, leadership-level</b> record of teaching excellence (the pathway from which the Australian University Teacher of the Year is selected). Build a comprehensive case across the criteria, with breadth, leadership and impact.',
+      sections:[
+        {key:'case',h:'Your overarching case',i:'The narrative thread of your teaching excellence.',prompts:[
+          {id:'x_case',q:'In a few sentences, what is the story of your teaching excellence?',hint:'Broad, sustained, and showing leadership.'}]},
+        {key:'crit',h:'Evidence against the criteria',i:'Address each at a sustained, leadership level.',prompts:[
+          {id:'x_c1',b:'Influence, motivate & inspire',q:'Approaches that influence, motivate and inspire students to learn',hint:'Across cohorts and over time.'},
+          {id:'x_c2',b:'Curricula, resources & services',q:'Curricula, resources or services reflecting command of the field',hint:'Significant, adopted, sustained.'},
+          {id:'x_c3',b:'Assessment & feedback',q:'Assessment and feedback that foster independent learning',hint:'At scale or across programs.'},
+          {id:'x_c4',b:'Respect & support for students',q:'Respect and support for students as individuals',hint:'Embedded in your practice and culture.'},
+          {id:'x_c5',b:'Scholarly approach',q:'Scholarly activities that have influenced learning and teaching',hint:'Publications, evaluation, dissemination.'}]},
+        {key:'lead',h:'Breadth, leadership & impact',i:'What lifts this from good teaching to teaching excellence.',prompts:[
+          {id:'x_lead',q:'How have you influenced teaching beyond your own — colleagues, programs, the institution or sector?',hint:'Mentoring, leadership, reach.'},
+          {id:'x_ev',q:'Your comprehensive evidence base',hint:'Outcomes, peer & student feedback, reach, sustained over a long period.'}]}
+      ]},
+    afhea:{label:'AFHEA (Associate Fellow)', title:'AFHEA application — draft narrative',
+      note:'Associate Fellowship (PSF 2023, Descriptor 1) recognises <b>engagement</b> with teaching and/or supporting learning — often a focused or early-career role. You evidence <b>some</b> of the PSF Dimensions, usually through a couple of worked examples.',
+      sections:[
+        {key:'ctx',h:'Your context',i:'Where teaching or supporting learning sits in your role.',prompts:[
+          {id:'af_ctx',q:'Your role and your teaching / learning-support context',hint:'What you do, with whom, and in what setting.'}]},
+        {key:'prac',h:'Two examples of your practice',i:'Concrete examples, reflecting on what you do and why.',prompts:[
+          {id:'af_e1',q:'Example 1 — something you do in teaching or supporting learning, and why',hint:'Link to how learners learn (Core Knowledge).'},
+          {id:'af_e2',q:'Example 2 — a second example',hint:'Show a little range across what you do.'}]},
+        {key:'kv',h:'Knowledge & values',i:'What underpins your practice.',prompts:[
+          {id:'af_k',q:'What you draw on — how learners learn, and approaches in your subject',hint:'PSF Core Knowledge.'},
+          {id:'af_v',q:'A professional value you hold, and how it shows in your practice',hint:'e.g. respecting diverse learners (PSF Values).'}]}
+      ]},
+    fhea:{label:'FHEA (Fellow)', title:'FHEA application — draft narrative',
+      note:'Fellowship (PSF 2023, Descriptor 2) recognises <b>broad, effective, ongoing</b> practice across <b>all</b> the PSF Dimensions in a substantive teaching and/or learning-support role. Evidence each Area of Activity and Professional Value.',
+      sections:[
+        {key:'aoa',h:'Across the Areas of Activity',i:'A worked example for each (A1–A5).',prompts:[
+          {id:'f_a1',b:'Design & plan (A1)',q:'Designing & planning learning',hint:'A unit/activity you designed and your reasoning.'},
+          {id:'f_a2',b:'Teach & support (A2)',q:'Teaching & supporting learning',hint:'Your approaches and why they work.'},
+          {id:'f_a3',b:'Assess & feedback (A3)',q:'Assessing & giving feedback',hint:'How you assess and give useful feedback.'},
+          {id:'f_a4',b:'Support learners (A4)',q:'Supporting & guiding learners',hint:'How you guide and support students.'},
+          {id:'f_a5',b:'Develop practice (A5)',q:'Developing your own practice (CPD)',hint:'How you keep improving.'}]},
+        {key:'kv',h:'Knowledge & values',i:'What informs your effective practice.',prompts:[
+          {id:'f_k',q:'The core knowledge you apply (how learners learn, your pedagogy, use of technology, QA)',hint:'PSF Core Knowledge K1–K5.'},
+          {id:'f_v',q:'The professional values you enact (inclusion, equity, evidence-informed, wider context, collaboration)',hint:'PSF Values V1–V5.'}]},
+        {key:'imp',h:'Effectiveness',i:'How you know your practice works.',prompts:[
+          {id:'f_imp',q:'Evidence that your practice is effective',hint:'Outcomes, feedback, peer review.'}]}
+      ]},
+    sfhea:{label:'SFHEA (Senior Fellow)', title:'SFHEA application — draft narrative',
+      note:'Senior Fellowship (PSF 2023, Descriptor 3) recognises a <b>sustained record of leading or influencing the practice of others</b> — mentoring, coordinating, CPD, pedagogic leadership — in addition to your own effective practice.',
+      sections:[
+        {key:'own',h:'Your own effective practice',i:'Briefly — the foundation.',prompts:[
+          {id:'s_own',q:'A short account of your own effective teaching practice',hint:'You build on this to evidence influencing others.'}]},
+        {key:'lead',h:'Leading & influencing others',i:'The heart of an SFHEA case.',prompts:[
+          {id:'s_l1',q:'How you mentor, coordinate, or develop colleagues’ teaching',hint:'Your influencing role.'},
+          {id:'s_l2',q:'A specific example of influencing others’ practice — and its effect',hint:'Be concrete about the change in others.'},
+          {id:'s_l3',q:'How sustained and wide-reaching this influence has been',hint:'Across time, teams or contexts.'}]},
+        {key:'ev',h:'Evidence',i:'How you know you influenced others.',prompts:[
+          {id:'s_ev',q:'Evidence of your impact on others’ practice',hint:'Testimony, uptake, outcomes for their students.'}]}
+      ]},
+    pfhea:{label:'PFHEA (Principal Fellow)', title:'PFHEA application — draft narrative',
+      note:'Principal Fellowship (PSF 2023, Descriptor 4) recognises <b>sustained, strategic leadership</b> in teaching and learning, with influence felt at <b>institutional or sector</b> level.',
+      sections:[
+        {key:'strat',h:'Strategic leadership',i:'Your high-level, sustained leadership.',prompts:[
+          {id:'p_s1',q:'Your strategic leadership in teaching and learning',hint:'Strategy, policy, culture — not just your own teaching.'},
+          {id:'p_s2',q:'How your influence is felt at institutional or sector level',hint:'Reach and significance.'},
+          {id:'p_s3',q:'A sustained example of shaping practice at scale',hint:'A program, reform or initiative you led.'}]},
+        {key:'ev',h:'Evidence',i:'High-level, strategic impact.',prompts:[
+          {id:'p_ev',q:'Evidence of your strategic impact, sustained over time',hint:'Institutional change, sector influence, recognition.'}]}
+      ]}
+  };
+  var ORDER=['general','citation','excellence','afhea','fhea','sfhea','pfhea'];
+  var current='general';
+  var state={};
+  var form=document.getElementById('form');
+  function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function val(id){return (state[id]||'').trim();}
+  function scheme(){return SCHEMES[current];}
+  function allPrompts(){var a=[];scheme().sections.forEach(function(s){s.prompts.forEach(function(p){a.push(p.id);});});return a;}
+
+  // picker
+  var sel=document.getElementById('scheme');
+  sel.innerHTML=ORDER.map(function(k){return '<option value="'+k+'">'+SCHEMES[k].label+'</option>';}).join('');
+  sel.addEventListener('change',function(){ current=this.value; renderForm(); refresh(); });
+
+  function renderForm(){
+    document.getElementById('schemeNote').innerHTML=scheme().note;
+    var html='<div class="sec"><div class="sech">About you</div><div class="seci">Used for the heading line (optional).</div><div class="row3">'+
+      CTX.map(function(c){return '<input class="short" data-id="'+c.id+'" placeholder="'+c.ph+'" aria-label="'+esc(c.q)+'" value="'+esc(state[c.id]||'')+'">';}).join('')+'</div></div>';
+    html+=scheme().sections.map(function(s){
+      return '<div class="sec"><div class="sech">'+s.h+'</div><div class="seci">'+s.i+'</div>'+
+        s.prompts.map(function(p){
+          return '<div class="f"><label>'+p.q+'</label><div class="hint">'+p.hint+'</div><textarea data-id="'+p.id+'" placeholder="Your words…">'+esc(state[p.id]||'')+'</textarea></div>';
+        }).join('')+'</div>';
+    }).join('');
+    form.innerHTML=html;
+  }
+  function buildDocHtml(){
+    var sc=scheme();
+    var nm=val('name'), rl=val('role');
+    var out='<h2>'+esc(sc.title)+'</h2>';
+    if(nm||rl) out+='<p class="meta">'+esc([nm,rl].filter(Boolean).join(' — '))+'</p>';
+    var any=false;
+    sc.sections.forEach(function(s){
+      var rows=s.prompts.filter(function(p){return val(p.id);});
+      if(!rows.length) return; any=true;
+      out+='<h2>'+esc(s.h.replace(/&amp;/g,'&'))+'</h2>';
+      rows.forEach(function(p){ out+='<p>'+(p.b?'<b>'+esc(p.b)+'.</b> ':'')+esc(val(p.id))+'</p>'; });
+    });
+    if(!any) out+='<p class="empty">Start answering the prompts on the left — your draft assembles here, ready to copy and edit.</p>';
+    return out;
+  }
+  function buildMd(){
+    var sc=scheme(), md='# '+sc.title+'\n';
+    var nm=val('name'), rl=val('role');
+    if(nm||rl) md+='*'+[nm,rl].filter(Boolean).join(' — ')+'*\n';
+    sc.sections.forEach(function(s){
+      var rows=s.prompts.filter(function(p){return val(p.id);});
+      if(!rows.length) return;
+      md+='\n## '+s.h.replace(/&amp;/g,'&')+'\n\n';
+      rows.forEach(function(p){ md+=(p.b?'**'+p.b+'.** ':'')+val(p.id)+'\n\n'; });
+    });
+    return md.trim()+'\n';
+  }
+  function refresh(){
+    var ids=allPrompts();
+    var done=ids.filter(function(id){return val(id);}).length;
+    document.getElementById('fill').style.width=Math.round(100*done/Math.max(1,ids.length))+'%';
+    document.getElementById('mtext').textContent=done+' of '+ids.length+' prompts answered'+(done>=ids.length&&ids.length?' — complete draft ready':'');
+    document.getElementById('doc').innerHTML=buildDocHtml();
+  }
+  form.addEventListener('input',function(e){ var id=e.target.getAttribute('data-id'); if(!id)return; state[id]=e.target.value; refresh(); });
+  document.getElementById('copy').addEventListener('click',function(){ var md=buildMd(),b=this,l=b.textContent; function ok(){b.textContent='Copied ✓';setTimeout(function(){b.textContent=l;},1400);} if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(md).then(ok,ok);}else{ok();} });
+  document.getElementById('print').addEventListener('click',function(){window.print();});
+  document.getElementById('clear').addEventListener('click',function(){ if(!confirm('Clear all your answers (every scheme)?'))return; state={}; renderForm(); refresh(); });
+  renderForm(); refresh();
+})();
+</script>
+</body>
+</html>

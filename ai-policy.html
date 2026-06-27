@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit AI-Use Policy Builder — a clear GenAI policy for your students · NTLSN</title>
+<meta name="description" content="Set a generative-AI level for each assessment — from no-AI to AI-integral — and get a clear, student-facing policy statement to paste into your unit outline and LMS. Based on the traffic-light / AI-assessment-scale approach. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --red:#e06b6b;--amber:#e6b450;--green:#5fcf91;--blue:#7c9cff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 22px}
+  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:20px}
+  .lg{border:1px solid var(--line);border-left-width:3px;border-radius:9px;padding:9px 12px;background:var(--card)}
+  .lg .n{font:800 12.5px var(--sans);color:#fff}.lg .d{font-size:11.5px;color:var(--mut)}
+  .row{display:flex;gap:10px;margin-bottom:9px;align-items:center}
+  .row input[type=text]{flex:1;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  .row select{flex:none;width:200px;font:600 13px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 10px;outline:none}
+  input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .addrow{font:600 13px var(--sans);color:var(--teal);background:transparent;border:1px dashed var(--line);border-radius:9px;padding:8px 14px;cursor:pointer;margin-top:2px}
+  .doc{background:#f7f5ef;color:#1a2433;border-radius:12px;padding:24px 26px;margin-top:22px;font:400 13.5px/1.6 Georgia,serif}
+  .doc h2{font:700 16px Georgia,serif;margin:0 0 12px;color:#0A1628}.doc h3{font:700 13px var(--sans);margin:14px 0 3px;color:#0A1628}
+  .doc .pill{display:inline-block;font:800 10px var(--sans);color:#fff;border-radius:5px;padding:1px 7px;margin-right:6px;vertical-align:middle}
+  .doc p{margin:0 0 8px}.doc .princ{border-top:1px solid #d8d2c4;margin-top:14px;padding-top:12px;font-size:12.5px;color:#3a4655}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:14px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Assessment &amp; GenAI</p>
+  <h1>Unit AI-use policy builder.</h1>
+  <p class="lede">"Can we use AI?" deserves a clearer answer than silence or a blanket ban. Set a level for each assessment — from no-AI to AI-integral — and we'll generate a <b style="color:var(--ink)">student-facing policy</b> you can paste straight into your unit outline. Per-task clarity is what protects integrity and trust.</p>
+
+  <div class="legend">
+    <div class="lg" style="border-left-color:var(--red)"><div class="n">🔴 No AI</div><div class="d">Complete without generative AI.</div></div>
+    <div class="lg" style="border-left-color:var(--amber)"><div class="n">🟠 Prep only</div><div class="d">AI to explore; submission is your own.</div></div>
+    <div class="lg" style="border-left-color:var(--green)"><div class="n">🟢 With acknowledgement</div><div class="d">AI as a tool, declared.</div></div>
+    <div class="lg" style="border-left-color:var(--blue)"><div class="n">🔵 Integral</div><div class="d">AI use is part of the task; show your process.</div></div>
+  </div>
+
+  <div class="row"><input type="text" id="unit" placeholder="Unit name (e.g. NUR1101 Foundations of Nursing)" style="flex:1"></div>
+  <div id="rows"></div>
+  <button class="addrow" id="add" type="button">+ Add an assessment</button>
+
+  <div class="doc" id="doc"></div>
+  <button class="btn" id="copy" type="button">Copy the policy</button>
+
+  <div class="note"><b>Per-task beats blanket.</b> A whole-unit ban is unenforceable and pushes use underground; "anything goes" abandons integrity. Setting an explicit level per assessment — and saying <i>how</i> to disclose — is the approach Australian institutions and TEQSA are converging on. Align this with your university's academic-integrity policy; it complements, not replaces, it.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · based on the AI-assessment-scale / traffic-light approach · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var LV={
+    red:['No AI','#e06b6b','You must complete this assessment <b>without</b> generative AI tools. Submitting AI-generated work is a breach of academic integrity.'],
+    amber:['AI for preparation only','#e6b450','You may use AI to explore ideas, explain concepts or test your understanding while preparing. The work you submit must be written by you, without AI. Briefly note any AI use that shaped your thinking.'],
+    green:['AI permitted, with acknowledgement','#5fcf91','You may use AI as a tool (for example to brainstorm, get feedback or edit) provided you acknowledge how you used it. You remain fully responsible for accuracy, originality and academic integrity.'],
+    blue:['AI use is integral','#7c9cff','Using AI is part of this task. You must show your process — the prompts you used, the outputs, and how you critically evaluated and refined them.']
+  };
+  var rows=document.getElementById('rows');
+  function addRow(name,lv){
+    var d=document.createElement('div');d.className='row';
+    d.innerHTML='<input type="text" placeholder="Assessment name (e.g. Essay, Exam, Reflective journal)" value="'+(name||'')+'">'
+      +'<select><option value="red">🔴 No AI</option><option value="amber">🟠 Prep only</option><option value="green">🟢 With acknowledgement</option><option value="blue">🔵 Integral</option></select>';
+    rows.appendChild(d);
+    if(lv)d.querySelector('select').value=lv;
+    d.querySelector('input').addEventListener('input',build);
+    d.querySelector('select').addEventListener('change',build);
+    build();
+  }
+  document.getElementById('add').addEventListener('click',function(){addRow('','green');});
+  document.getElementById('unit').addEventListener('input',build);
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function build(){
+    var unit=(document.getElementById('unit').value||'').trim();
+    var items=[].slice.call(rows.querySelectorAll('.row')).map(function(r){return {n:(r.querySelector('input').value||'').trim(),lv:r.querySelector('select').value};}).filter(function(x){return x.n;});
+    var h='<h2>Use of generative AI in '+(unit?esc(unit):'this unit')+'</h2>';
+    if(!items.length){h+='<p style="color:#5a6b7d">Add your assessments above and the policy will write itself here…</p>';}
+    else{
+      h+='<p>This unit sets a clear expectation for each assessment. Where you are unsure, ask the teaching team <b>before</b> you submit.</p>';
+      items.forEach(function(it){var l=LV[it.lv];
+        h+='<h3><span class="pill" style="background:'+l[1]+'">'+l[0]+'</span>'+esc(it.n)+'</h3><p>'+l[2]+'</p>';});
+      var anyGreenBlue=items.some(function(it){return it.lv==='green'||it.lv==='blue';});
+      h+='<div class="princ"><b>How to acknowledge AI use:</b> '+(anyGreenBlue?'Where AI is permitted, include a short statement of which tool you used and how (a sentence is enough; an appendix if asked).':'No AI acknowledgement is required where AI is not permitted — simply complete the work yourself.')
+        +'<br><b>Integrity:</b> You are responsible for everything you submit, including AI errors or fabricated sources. This policy sits under, and does not override, the University’s academic-integrity policy.</div>';
+    }
+    document.getElementById('doc').innerHTML=h;
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=document.getElementById('doc').innerText.replace(/\n{3,}/g,'\n\n');
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  addRow('Written essay','green'); addRow('Final exam','red');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Constructive Alignment Matrix</title>
+<meta name="description" content="Map your learning outcomes against your assessments and teaching activities, and instantly see what's un-assessed, never taught, or assessing nothing. Build a constructive-alignment matrix and export it. Runs in your browser; saved locally.">
+<meta property="og:title" content="Constructive Alignment Matrix — NTLSN">
+<meta property="og:description" content="Map outcomes ↔ assessments ↔ activities and catch the gaps: outcomes never assessed, never taught, or assessments evidencing nothing. Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 20px;max-width:760px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px}
+  .add{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .add .fld{flex:1;min-width:200px}
+  .add label{display:block;font:700 11px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:0 0 5px}
+  .add input[type=text]{width:100%;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:400 13.5px var(--F)}
+  .add input:focus{outline:none;border-color:var(--teal)}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{background:transparent;color:var(--mut);border:none;padding:9px 12px;font:700 12px var(--F);cursor:pointer}
+  .seg button.on{background:rgba(78,205,196,.15);color:var(--ink)}
+  .addbtn{background:var(--teal);color:var(--navy);border:none;border-radius:9px;padding:10px 16px;font:800 13px var(--F);cursor:pointer}
+  .addbtn:hover{filter:brightness(1.05)}
+  .mwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{border-collapse:collapse;min-width:100%;font-size:12.5px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  thead th{background:#0a1830;font-weight:700;white-space:nowrap}
+  th.corner{font:700 10px var(--F);text-transform:uppercase;letter-spacing:.5px;color:var(--mut);min-width:210px}
+  th.item{min-width:120px;max-width:160px;white-space:normal}
+  th.item .bdg{display:inline-block;font:800 8.5px var(--F);text-transform:uppercase;letter-spacing:.4px;padding:2px 6px;border-radius:999px;margin-right:5px;vertical-align:middle}
+  .bdg.assess{background:rgba(201,169,98,.2);color:var(--gold)}
+  .bdg.activity{background:rgba(78,205,196,.18);color:var(--teal)}
+  th.outcome{min-width:210px;max-width:320px;white-space:normal;font-weight:600}
+  th.outcome .bloom{display:block;font:700 9.5px var(--F);text-transform:uppercase;letter-spacing:.4px;color:var(--mut);margin-top:3px}
+  .rm{background:transparent;border:none;color:var(--mut);cursor:pointer;font-size:13px;float:right;line-height:1;padding:0 0 0 6px}
+  .rm:hover{color:var(--bad)}
+  td.cell{text-align:center;cursor:pointer;width:120px}
+  td.cell:hover{background:rgba(78,205,196,.06)}
+  td.cell .dot{display:inline-block;width:16px;height:16px;border-radius:5px;border:1.5px solid var(--mut)}
+  td.cell.on .dot{background:var(--teal);border-color:var(--teal)}
+  tr.flag th.outcome{box-shadow:inset 3px 0 0 var(--warn)}
+  .empty{color:var(--mut);font-style:italic;font-size:13.5px;padding:18px 0}
+  .flags{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 4px}
+  @media(max-width:680px){.flags{grid-template-columns:1fr}}
+  .fc{border:1px solid var(--line);border-radius:11px;padding:12px 13px}
+  .fc h3{font:800 12px var(--F);margin:0 0 7px;display:flex;align-items:center;gap:7px}
+  .fc h3 .n{font-size:11px;color:var(--navy);background:var(--warn);border-radius:999px;padding:1px 8px;font-weight:800}
+  .fc.ok h3 .n{background:var(--good)}
+  .fc ul{margin:0;padding:0 0 0 16px;font-size:12px;color:var(--mut)}
+  .fc li{margin:0 0 3px}
+  .fc .clear{color:var(--good);font-size:12px}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 0}
+  .btn{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;font:700 12.5px var(--F);cursor:pointer}
+  .btn:hover{border-color:var(--teal)}
+  .btn.pri{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+  .ghost{color:var(--mut)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:22px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Constructive Alignment Matrix</h1>
+  <p class="lead">Good unit design lines up three things: what students should <b>learn</b>, what they <b>do</b>, and how they’re <b>assessed</b>. Add your outcomes, assessments and activities, tick what addresses what, and instantly see the gaps — outcomes never assessed, never taught, or assessments that evidence nothing. <b>Illustrative; saved in your browser.</b></p>
+
+  <div class="panel">
+    <div class="add">
+      <div class="fld"><label>Add a learning outcome</label><input type="text" id="oIn" placeholder="e.g. Critically evaluate sources of evidence" aria-label="Learning outcome"></div>
+      <button class="addbtn" id="oAdd">Add outcome</button>
+    </div>
+    <div class="add" style="margin-top:12px">
+      <div class="fld"><label>Add an assessment or activity</label><input type="text" id="iIn" placeholder="e.g. Case-study report  /  Weekly seminar" aria-label="Assessment or activity"></div>
+      <div><label>Type</label><div class="seg" id="seg"><button data-t="assess" class="on">Assessment</button><button data-t="activity">Activity</button></div></div>
+      <button class="addbtn" id="iAdd">Add</button>
+    </div>
+  </div>
+
+  <div class="panel"><div class="mwrap" id="mwrap"></div></div>
+
+  <div class="flags" id="flags"></div>
+  <div class="panel" style="margin-top:16px"><div class="btns">
+    <button class="btn pri" id="md">Export Markdown</button>
+    <button class="btn" id="ex">Load a worked example</button>
+    <button class="btn ghost" id="clr">Clear all</button>
+  </div></div>
+
+  <div class="foot">
+    <b>A design aid, not a verdict.</b> Alignment is a matter of judgement; this just makes the gaps visible. Bloom’s levels are a best-effort read of your outcome’s verb. Saved only in this browser (local storage); export to keep a copy. &nbsp;·&nbsp; <a href="/outcomes.html">Learning Outcome Check</a> &nbsp;·&nbsp; <a href="/assessment-mix.html">Assessment Mix</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var BLOOM=[
+    ['Create',['design','create','develop','compose','construct','formulate','devise','produce','plan','generate','build']],
+    ['Evaluate',['evaluate','critique','judge','justify','appraise','assess','argue','defend','recommend','prioritise','prioritize','reflect','review']],
+    ['Analyse',['analyse','analyze','compare','contrast','differentiate','examine','investigate','distinguish','categorise','categorize','test']],
+    ['Apply',['apply','use','implement','demonstrate','solve','calculate','perform','conduct','employ','illustrate','communicate','present']],
+    ['Understand',['explain','describe','summarise','summarize','interpret','classify','discuss','identify','recognise','recognize','outline']],
+    ['Remember',['define','list','state','recall','name','label','recite','memorise','memorize']]
+  ];
+  function bloom(text){
+    var t=' '+text.toLowerCase()+' ';
+    for(var i=0;i<BLOOM.length;i++){ for(var j=0;j<BLOOM[i][1].length;j++){ if(t.indexOf(' '+BLOOM[i][1][j])>-1) return BLOOM[i][0]; } }
+    return '';
+  }
+  var KEY='ntlsn-ca-matrix-v1';
+  var S={outcomes:[],items:[],links:{}}, nextId=1, segType='assess';
+  try{ var raw=localStorage.getItem(KEY); if(raw){ var p=JSON.parse(raw); if(p&&p.outcomes){ S=p; [].concat(S.outcomes,S.items).forEach(function(x){ if(x.id>=nextId)nextId=x.id+1; }); } } }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  var $=function(id){return document.getElementById(id);};
+
+  function lk(o,i){return o+'_'+i;}
+  function render(){
+    var mw=$('mwrap');
+    if(!S.outcomes.length || !S.items.length){
+      mw.innerHTML='<p class="empty">Add at least one outcome and one assessment or activity, and the matrix appears here.</p>';
+    } else {
+      // flags first (so rows can show a marker)
+      var flags=computeFlags();
+      var head='<tr><th class="corner">Outcomes &nbsp;↓ &nbsp;/ &nbsp;Items →</th>'+S.items.map(function(it){
+        return '<th class="item"><span class="bdg '+(it.type==='assess'?'assess':'activity')+'">'+(it.type==='assess'?'Assess':'Activity')+'</span><button class="rm" data-rmi="'+it.id+'" aria-label="Remove">×</button>'+esc(it.text)+'</th>';
+      }).join('')+'</tr>';
+      var rows=S.outcomes.map(function(o){
+        var bl=bloom(o.text);
+        var flagged=flags.unassessed.indexOf(o.id)>-1||flags.untaught.indexOf(o.id)>-1;
+        return '<tr'+(flagged?' class="flag"':'')+'><th class="outcome">'+esc(o.text)+'<button class="rm" data-rmo="'+o.id+'" aria-label="Remove">×</button>'+(bl?'<span class="bloom">Bloom: '+bl+'</span>':'')+'</th>'+
+          S.items.map(function(it){ var on=S.links[lk(o.id,it.id)]; return '<td class="cell'+(on?' on':'')+'" data-o="'+o.id+'" data-i="'+it.id+'"><span class="dot"></span></td>'; }).join('')+'</tr>';
+      }).join('');
+      mw.innerHTML='<table><thead>'+head+'</thead><tbody>'+rows+'</tbody></table>';
+    }
+    renderFlags();
+    save();
+  }
+  function computeFlags(){
+    var unassessed=[], untaught=[], orphan=[];
+    S.outcomes.forEach(function(o){
+      var hasA=false, hasT=false;
+      S.items.forEach(function(it){ if(S.links[lk(o.id,it.id)]){ if(it.type==='assess')hasA=true; else hasT=true; } });
+      if(!hasA) unassessed.push(o.id);
+      if(!hasT) untaught.push(o.id);
+    });
+    S.items.forEach(function(it){
+      var used=S.outcomes.some(function(o){return S.links[lk(o.id,it.id)];});
+      if(!used) orphan.push(it.id);
+    });
+    return {unassessed:unassessed, untaught:untaught, orphan:orphan};
+  }
+  function nm(id,arr){var x=arr.filter(function(e){return e.id===id;})[0];return x?x.text:'';}
+  function renderFlags(){
+    if(!S.outcomes.length && !S.items.length){ $('flags').innerHTML=''; return; }
+    var f=computeFlags();
+    function card(title,ids,arr,hint){
+      var ok=ids.length===0;
+      return '<div class="fc'+(ok?' ok':'')+'"><h3>'+title+' <span class="n">'+ids.length+'</span></h3>'+
+        (ok?'<div class="clear">None — nicely aligned.</div>':'<ul>'+ids.map(function(id){return '<li>'+esc(nm(id,arr))+'</li>';}).join('')+'</ul>')+'</div>';
+    }
+    $('flags').innerHTML=
+      card('Outcomes never assessed', f.unassessed, S.outcomes)+
+      card('Outcomes never taught', f.untaught, S.outcomes)+
+      card('Items assessing nothing', f.orphan, S.items);
+  }
+
+  // events
+  $('oAdd').addEventListener('click',function(){ var v=$('oIn').value.trim(); if(!v)return; S.outcomes.push({id:nextId++,text:v}); $('oIn').value=''; render(); });
+  $('iAdd').addEventListener('click',function(){ var v=$('iIn').value.trim(); if(!v)return; S.items.push({id:nextId++,text:v,type:segType}); $('iIn').value=''; render(); });
+  $('oIn').addEventListener('keydown',function(e){ if(e.key==='Enter')$('oAdd').click(); });
+  $('iIn').addEventListener('keydown',function(e){ if(e.key==='Enter')$('iAdd').click(); });
+  $('seg').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; segType=b.getAttribute('data-t'); [].forEach.call(this.children,function(c){c.classList.toggle('on',c===b);}); });
+  $('mwrap').addEventListener('click',function(e){
+    var cell=e.target.closest('.cell');
+    if(cell){ var k=lk(cell.getAttribute('data-o'),cell.getAttribute('data-i')); if(S.links[k])delete S.links[k]; else S.links[k]=1; render(); return; }
+    var rmo=e.target.closest('[data-rmo]'); if(rmo){ var oid=+rmo.getAttribute('data-rmo'); S.outcomes=S.outcomes.filter(function(o){return o.id!==oid;}); Object.keys(S.links).forEach(function(k){ if(k.split('_')[0]==oid)delete S.links[k]; }); render(); return; }
+    var rmi=e.target.closest('[data-rmi]'); if(rmi){ var iid=+rmi.getAttribute('data-rmi'); S.items=S.items.filter(function(i){return i.id!==iid;}); Object.keys(S.links).forEach(function(k){ if(k.split('_')[1]==iid)delete S.links[k]; }); render(); return; }
+  });
+  $('clr').addEventListener('click',function(){ if(!S.outcomes.length&&!S.items.length)return; if(!confirm('Clear the whole matrix?'))return; S={outcomes:[],items:[],links:{}}; render(); });
+  $('ex').addEventListener('click',function(){
+    S={outcomes:[],items:[],links:{}}; nextId=1;
+    var os=['Critically evaluate sources of evidence','Apply core methods to a real problem','Communicate findings to a professional audience','Reflect on their own learning'];
+    var its=[['Case-study report','assess'],['Final presentation','assess'],['Reflective journal','assess'],['Weekly seminars','activity'],['Methods workshop','activity']];
+    os.forEach(function(t){S.outcomes.push({id:nextId++,text:t});});
+    its.forEach(function(t){S.items.push({id:nextId++,text:t[0],type:t[1]});});
+    // some deliberately-imperfect links (leave a gap to demonstrate flags)
+    function link(oi,ii){ S.links[lk(S.outcomes[oi].id,S.items[ii].id)]=1; }
+    link(0,0); link(0,3); link(1,0); link(1,4); link(2,1); link(3,2);
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

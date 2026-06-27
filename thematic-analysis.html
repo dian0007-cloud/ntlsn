@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thematic Analysis Starter — build a codebook and themes for your SoTL data · NTLSN</title>
+<meta name="description" content="Code your qualitative SoTL data and organise it into themes — add codes with definitions and example quotes, group them, and get a codebook plus a Braun &amp; Clarke methods paragraph for the write-up. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 20px}
+  .phases{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .phase{font:600 11.5px var(--sans);padding:6px 11px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--mut)}
+  .phase b{color:var(--teal)}
+  .row{display:grid;grid-template-columns:1.1fr 1fr 1.3fr auto;gap:8px;margin-bottom:8px;align-items:start}
+  @media(max-width:720px){.row{grid-template-columns:1fr 1fr}}
+  .row input,.row textarea{width:100%;font:500 13px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:8px;padding:8px 9px;outline:none;resize:vertical}
+  .row textarea{min-height:38px}
+  .row input:focus,.row textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .row .x{background:none;border:none;color:var(--mut);cursor:pointer;font-size:17px;padding:6px 2px}
+  .hdr{display:grid;grid-template-columns:1.1fr 1fr 1.3fr auto;gap:8px;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin-bottom:6px;padding:0 2px}
+  @media(max-width:720px){.hdr{display:none}}
+  .addrow{font:600 13px var(--sans);color:var(--teal);background:transparent;border:1px dashed var(--line);border-radius:9px;padding:8px 14px;cursor:pointer;margin-top:2px}
+  .out{margin-top:22px;background:#f7f5ef;color:#1a2433;border-radius:12px;padding:22px 24px;font:400 13px/1.55 Georgia,serif}
+  .out h2{font:700 16px Georgia,serif;margin:0 0 10px;color:#0A1628}.out h3{font:700 13px var(--sans);color:#2c7a72;margin:14px 0 4px}
+  .out .theme{font-weight:700;color:#0A1628}.out ul{margin:3px 0 10px;padding-left:18px}.out li{margin-bottom:3px}.out .ex{color:#5a6b7d;font-style:italic}
+  .out .empty{color:#9aa6b2;font-size:12.5px}.out .methods{background:#f0ece1;border-radius:8px;padding:12px 14px;margin-top:12px;font-size:12.5px;color:#3a4655}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:12px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:22px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>Thematic analysis starter.</h1>
+  <p class="lede">Most teaching research ends up with a pile of student comments and no clear way through. Code them here — a label, a definition, an example quote — group the codes into <b style="color:var(--ink)">themes</b>, and get a codebook plus a methods paragraph ready for the write-up.</p>
+
+  <div class="phases">
+    <span class="phase"><b>1</b> Familiarise</span><span class="phase"><b>2</b> Generate codes</span><span class="phase"><b>3</b> Search for themes</span><span class="phase"><b>4</b> Review</span><span class="phase"><b>5</b> Define &amp; name</span><span class="phase"><b>6</b> Write up</span>
+  </div>
+
+  <div class="hdr"><div>Code</div><div>Theme it belongs to</div><div>Definition / example quote</div><div></div></div>
+  <div id="rows"></div>
+  <button class="addrow" id="add" type="button">+ Add a code</button>
+
+  <div class="out" id="out"></div>
+  <button class="btn" id="copy" type="button">Copy the codebook + methods</button>
+
+  <div class="note"><b>Codes are what you see; themes are what they mean.</b> A good theme is a <i>pattern with a point</i> — not just a topic bucket. Aim for codes grounded in real quotes, then ask of each cluster: "what's the story here?" This follows Braun &amp; Clarke's reflexive six phases; the rigour is in the doing, not the tool.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · scaffolds Braun &amp; Clarke (2006/2021) reflexive thematic analysis · a structuring aid, not a substitute for the analytic work · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var rows=document.getElementById('rows');
+  function addRow(code,theme,def){
+    var d=document.createElement('div');d.className='row';
+    d.innerHTML='<input type="text" class="c" placeholder="e.g. fear of speaking up" value="'+(code||'')+'">'
+      +'<input type="text" class="t" placeholder="e.g. Psychological safety" value="'+(theme||'')+'">'
+      +'<textarea class="d" placeholder="What it captures + a short quote…">'+(def||'')+'</textarea>'
+      +'<button class="x" title="remove">×</button>';
+    rows.appendChild(d);
+    d.querySelector('.x').addEventListener('click',function(){d.remove();render();});
+    [].forEach.call(d.querySelectorAll('input,textarea'),function(el){el.addEventListener('input',render);});
+    render();
+  }
+  document.getElementById('add').addEventListener('click',function(){addRow('','','');});
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function render(){
+    var data=[].slice.call(rows.querySelectorAll('.row')).map(function(r){return {c:r.querySelector('.c').value.trim(),t:r.querySelector('.t').value.trim(),d:r.querySelector('.d').value.trim()};}).filter(function(x){return x.c;});
+    var out=document.getElementById('out');
+    if(!data.length){out.innerHTML='<div class="empty">Add your codes above (label · theme · definition/quote) and your codebook assembles here.</div>';return;}
+    var themes={};data.forEach(function(x){var k=x.t||'(unthemed)';(themes[k]=themes[k]||[]).push(x);});
+    var tkeys=Object.keys(themes);
+    var h='<h2>Codebook</h2>';
+    tkeys.forEach(function(k){
+      h+='<h3 class="theme">'+esc(k)+' <span style="color:#7a8794;font-weight:400">('+themes[k].length+' code'+(themes[k].length>1?'s':'')+')</span></h3><ul>';
+      themes[k].forEach(function(x){h+='<li><b>'+esc(x.c)+'</b>'+(x.d?' — <span class="ex">'+esc(x.d)+'</span>':'')+'</li>';});
+      h+='</ul>';
+    });
+    var nThemes=tkeys.filter(function(k){return k!=='(unthemed)';}).length;
+    h+='<div class="methods"><b>Methods (draft):</b> We analysed the data using Braun and Clarke’s reflexive thematic analysis. After familiarisation, we generated '+data.length+' initial codes across the dataset, which we collated into '+(nThemes||tkeys.length)+' candidate theme'+((nThemes||tkeys.length)>1?'s':'')+'. Themes were reviewed against the coded extracts and the full dataset, then defined and named. [Add: who coded, how disagreements were resolved, your epistemological stance.]</div>';
+    out.innerHTML=h;window.__cb=out.innerText;
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=(window.__cb||'')+'\n\n— structured with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  addRow('','',''); addRow('','','');
+})();
+</script>
+</body>
+</html>

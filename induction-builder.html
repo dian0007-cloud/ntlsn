@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tailored Teaching Induction — a custom onboarding checklist for new staff · NTLSN</title>
+<meta name="description" content="Answer a few questions about your university, your students and how you teach, and get a teaching-induction checklist tailored to your context — grouped by when to do each thing. For schools onboarding new or sessional staff. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 24px}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px;background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ctl label{display:block;font:700 12px var(--sans);margin-bottom:5px;color:var(--ink)}
+  select{width:100%;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .demos{margin:16px 0 4px}.demos .lbl{font:700 12px var(--sans);color:var(--ink);margin-bottom:7px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font:600 12.5px var(--sans);padding:7px 13px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--mut);cursor:pointer;transition:.13s;user-select:none}
+  .chip.on{border-color:var(--teal);background:#11293f;color:var(--teal)}
+  .group{margin-top:20px}.group h3{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:0 0 9px;display:flex;align-items:center;gap:9px}
+  .group h3 span{flex:none;background:#143a37;color:var(--teal);border-radius:6px;padding:2px 9px;font-size:11px}
+  .item{display:flex;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin-bottom:8px}
+  .item .bx{flex:none;width:17px;height:17px;border:1.6px solid var(--mut);border-radius:5px;margin-top:2px}
+  .item .c .t{font:600 14px var(--sans);color:var(--ink)}.item .c .w{font-size:12px;color:var(--mut);margin-top:1px}
+  .item .c .w b{color:var(--gold);font-weight:700}
+  .meta{font-size:13px;color:var(--mut);margin:18px 2px 4px}.meta b{color:var(--ink)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:14px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Quality &amp; standards</p>
+  <h1>Tailored teaching induction.</h1>
+  <p class="lede">A generic induction PDF gets skimmed and forgotten. Tell us about <b style="color:var(--ink)">your</b> context — the size of the university, who your students are, how you teach — and we'll assemble an onboarding checklist that fits it, grouped by <b style="color:var(--ink)">when</b> to do each thing. Built for schools welcoming new or sessional teaching staff.</p>
+
+  <div class="controls">
+    <div class="ctl"><label>University type</label><select id="size"><option value="metro">Large metropolitan</option><option value="regional">Regional / smaller</option><option value="multi">Multi-campus / dual-sector</option></select></div>
+    <div class="ctl"><label>Delivery mode</label><select id="mode"><option value="campus">Mostly on-campus</option><option value="blended">Blended</option><option value="online">Mostly online</option><option value="dual">Dual-mode (both)</option></select></div>
+    <div class="ctl"><label>Staff type</label><select id="staff"><option value="continuing">Continuing / ongoing</option><option value="sessional">Sessional / casual</option><option value="ecr">Early-career (new to teaching)</option></select></div>
+    <div class="ctl"><label>Discipline (optional)</label><select id="disc"><option value="">—</option><option>Health &amp; nursing</option><option>Engineering &amp; IT</option><option>Business &amp; law</option><option>Education</option><option>Sciences</option><option>Humanities &amp; arts</option></select></div>
+  </div>
+
+  <div class="demos">
+    <div class="lbl">Your student cohort (tap any that are prominent)</div>
+    <div class="chips" id="demos">
+      <span class="chip" data-k="intl">Many international students</span>
+      <span class="chip" data-k="firstgen">First-in-family / equity</span>
+      <span class="chip" data-k="mature">Mature-age / part-time</span>
+      <span class="chip" data-k="large">Very large classes</span>
+      <span class="chip" data-k="placement">Work placements / WIL</span>
+      <span class="chip" data-k="remote">Remote / distance learners</span>
+    </div>
+  </div>
+
+  <div class="meta" id="meta"></div>
+  <div id="plan"></div>
+  <button class="btn" id="copy" type="button">Copy the checklist</button>
+
+  <div class="note"><b>Induction is a semester, not a day.</b> The research on new-staff retention is clear: belonging and early wins matter more than policy PDFs. This spaces the load — essentials first, the deeper craft once they've found their feet — and points to the free NTLSN tools that do each job. Adapt to your own school's specifics.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · a starting scaffold, not a substitute for your HR onboarding · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  // item: [when, title, why-tag(optional), condition-fn]
+  var demos={};
+  function on(k){return !!demos[k];}
+  function S(id){return document.getElementById(id).value;}
+  function items(){
+    var size=S('size'),mode=S('mode'),staff=S('staff'),disc=S('disc');
+    var L=[];
+    function add(when,t,w){L.push([when,t,w||'']);}
+    // BEFORE
+    add('before','Confirm system access — email, LMS, library, building/swipe','');
+    if(staff==='sessional')add('before','Confirm your contract dates, pay schedule and how long your access lasts','Sessional');
+    add('before','Find your teaching allocation and the units you’re on','');
+    add('before','Meet your induction buddy or mentor','');
+    if(mode==='online'||mode==='dual')add('before','Set up your virtual classroom and test the tech you’ll teach with','Online');
+    if(size==='multi')add('before','Check which campus each class runs on and how delivery is coordinated','Multi-campus');
+    // FORTNIGHT
+    add('fortnight','Read each unit’s outline, assessment and where it sits in the programme','');
+    add('fortnight','Draft a one-paragraph teaching approach for your first classes','');
+    if(on('intl'))add('fortnight','Plan EAL-aware teaching: clear instructions, accessible language, integrity across cultures','Many international students');
+    if(on('large'))add('fortnight','Set up a workable marking and feedback workflow before the first big cohort hits','Very large classes');
+    if(mode!=='campus')add('fortnight','Establish online presence and netiquette norms; check materials are accessible','Online/blended');
+    if(on('firstgen'))add('fortnight','Learn where to refer a struggling student, and design for belonging early','First-in-family / equity');
+    if(staff==='ecr'||staff==='sessional')add('fortnight','Skim the foundations of assessment and active learning (you don’t need a Grad Cert yet)','New to teaching');
+    if(disc)add('fortnight','Talk to a colleague in '+disc+' about discipline-specific assessment norms','');
+    // SEMESTER
+    add('semester','Run a quick early-semester pulse check and adjust before it’s too late','');
+    if(on('placement'))add('semester','Get across placement / WIL supervision, safety and assessment','Work placements / WIL');
+    if(on('remote'))add('semester','Build in deliberate contact points for remote learners so they don’t drift','Remote / distance learners');
+    if(on('mature'))add('semester','Offer flexibility and recognise the experience mature-age students bring','Mature-age / part-time');
+    add('semester','Start a teaching portfolio — keep evidence as you go, not at promotion time','');
+    if(staff==='sessional')add('semester','Log your work toward recognition so it counts — even as a casual','Sessional');
+    add('semester','Join a community of practice and find one thing to improve next term','');
+    return L;
+  }
+  function render(){
+    var L=items();
+    var groups={before:['Before you start',[]],fortnight:['First fortnight',[]],semester:['First semester',[]]};
+    L.forEach(function(it){groups[it[0]][1].push(it);});
+    var icon={before:'◷',fortnight:'◐',semester:'◑'};
+    var html=Object.keys(groups).map(function(g){
+      var rows=groups[g][1].map(function(it){
+        var w=it[2]?('<div class="w">Because: <b>'+esc(it[2])+'</b></div>'):'';
+        return '<div class="item"><div class="bx"></div><div class="c"><div class="t">'+esc(it[1])+'</div>'+w+'</div></div>';
+      }).join('');
+      return '<div class="group"><h3>'+icon[g]+' '+groups[g][0]+' <span>'+groups[g][1].length+'</span></h3>'+rows+'</div>';
+    }).join('');
+    document.getElementById('plan').innerHTML=html;
+    var tailored=L.filter(function(it){return it[2];}).length;
+    document.getElementById('meta').innerHTML='<b>'+L.length+'</b> steps · <b>'+tailored+'</b> tailored to your context';
+    window.__L=L;
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  document.getElementById('demos').addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;var k=c.getAttribute('data-k');demos[k]=!demos[k];c.classList.toggle('on');render();});
+  ['size','mode','staff','disc'].forEach(function(id){document.getElementById(id).addEventListener('change',render);});
+  document.getElementById('copy').addEventListener('click',function(){
+    var L=window.__L||[],g={before:'BEFORE YOU START',fortnight:'FIRST FORTNIGHT',semester:'FIRST SEMESTER'},cur='';
+    var txt='TAILORED TEACHING INDUCTION\n';
+    ['before','fortnight','semester'].forEach(function(k){txt+='\n'+g[k]+'\n';L.filter(function(it){return it[0]===k;}).forEach(function(it){txt+='  [ ] '+it[1].replace(/’/g,"'")+(it[2]?('  ('+it[2]+')'):'')+'\n';});});
+    txt+='\n— built with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

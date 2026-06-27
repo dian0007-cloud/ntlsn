@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Graduate Certificate, by the sector, for the sector — a proposal · NTLSN</title>
+<meta name="description" content="A proposal for a national, stackable Graduate Certificate in Higher Education — each university contributing one module of its genuine strength, convened through CAULLT, credit portable across institutions. The open commons alternative to the MOOC: shared infrastructure the sector owns together. In design.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--purple:#C57BFF;--blue:#7C9CFF;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:24px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:34px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .pill{display:inline-block;font:800 10.5px var(--sans);letter-spacing:1.6px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,169,98,.4);border-radius:999px;padding:5px 14px;margin-bottom:18px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(31px,5.2vw,50px);line-height:1.08;margin:0 0 16px;letter-spacing:-.01em}
+  .lede{font-size:clamp(17px,2.2vw,21px);color:#cbd8e6;max-width:64ch;margin:0 0 14px}
+  .sub{font-size:15px;color:var(--mut);max-width:62ch;margin:0 0 34px}
+  h2.sec{font:700 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  p.body{color:#cbd8e6;max-width:66ch;margin:0 0 14px}
+  .prob{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}@media(max-width:720px){.prob{grid-template-columns:1fr}}
+  .pc{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}
+  .pc .big{font:800 26px var(--serif);color:#fff}.pc .l{font:700 13px var(--sans);color:var(--ink);margin:4px 0 5px}.pc .d{font-size:13px;color:var(--mut)}
+  .modgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}@media(max-width:680px){.modgrid{grid-template-columns:1fr}}
+  .mod{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px}
+  .mod .n{flex:none;width:30px;height:30px;border-radius:9px;background:rgba(78,205,196,.16);color:var(--teal);font:800 13px var(--sans);display:flex;align-items:center;justify-content:center}
+  .mod .t{font:700 14px var(--sans);color:var(--ink)}.mod .d{font-size:12.5px;color:var(--mut);margin-top:2px}
+  .mod.fn{border-color:rgba(201,169,98,.3)}.mod.fn .n{background:rgba(201,169,98,.16);color:var(--gold)}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:6px}@media(max-width:640px){.vs{grid-template-columns:1fr}}
+  .vs>div{padding:18px 20px}.vs .moo{background:#160f1a;border-right:1px solid var(--line)}@media(max-width:640px){.vs .moo{border-right:none;border-bottom:1px solid var(--line)}}
+  .vs .com{background:linear-gradient(135deg,rgba(78,205,196,.07),rgba(201,169,98,.04))}
+  .vs h4{font:800 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px}.vs .moo h4{color:#b98ac9}.vs .com h4{color:var(--teal)}
+  .vs ul{margin:0;padding-left:17px}.vs li{font-size:13.5px;margin-bottom:6px}.vs .moo li{color:#a99}.vs .com li{color:#cbd8e6}
+  .infra{background:linear-gradient(135deg,rgba(124,156,255,.1),rgba(78,205,196,.05));border:1px solid rgba(124,156,255,.25);border-radius:16px;padding:24px 26px;margin-top:6px}
+  .infra h3{font:700 clamp(20px,3vw,26px)/1.2 var(--serif);color:#fff;margin:0 0 10px}.infra p{font-size:15px;color:#d3deea;margin:0;max-width:64ch}.infra b{color:#cfe}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .btn{font:700 14px var(--sans);border-radius:12px;padding:13px 26px;text-decoration:none;display:inline-block}
+  .btn.p{background:var(--gold);color:#1a1407;border:1px solid var(--gold)}.btn.g{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn.g:hover{border-color:var(--teal);color:var(--teal)}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:16px 19px;margin-top:30px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <div class="pill">◇ Proposal · in design · sector-convened</div>
+  <h1>A Graduate Certificate, by the sector, for the sector.</h1>
+  <p class="lede">One national, stackable Graduate Certificate in Higher Education — where <b style="color:var(--ink)">each university contributes a single module in its genuine area of strength</b>, credit is portable across institutions, and the whole thing is owned by no one.</p>
+  <p class="sub">The open-commons answer to the MOOC. Convened in conversation with CAULLT; hosted on the open infrastructure of NTLSN. This is a proposal in design — not yet an accredited award.</p>
+
+  <h2 class="sec">Why — the sector is duplicating, and access is uneven</h2>
+  <div class="prob">
+    <div class="pc"><div class="big">23<span style="font-size:15px;color:var(--mut)">/31</span></div><div class="l">universities each run their own Grad Cert</div><div class="d">Thirty-odd institutions rebuilding the same foundations in parallel — effort the sector spends competing instead of compounding.</div></div>
+    <div class="pc"><div class="big">0</div><div class="l">offer a fully stackable, portable model</div><div class="d">No provider yet offers open micro-units with credit that travels between institutions. The transferable layer simply doesn't exist.</div></div>
+    <div class="pc"><div class="big">∞</div><div class="l">casuals &amp; teaching-focused staff left out</div><div class="d">The people who do much of the teaching often can't access a Grad Cert at all — locked out by cost, contract or eligibility.</div></div>
+  </div>
+  <p class="body" style="margin-top:16px">The MOOC was supposed to fix this. Instead it became a commercial platform play — open in name, extractive in practice, the value flowing out of the sector and the content locked behind someone else's login. We can do the opposite.</p>
+
+  <h2 class="sec">The model — one module per university, its strength</h2>
+  <p class="body">Not thirty-one duplicate programs. <b style="color:var(--ink)">One</b> excellent program, assembled from modules each contributed by a university with real depth in that area — and offered as open, stackable micro-units (take what you need; build toward the full award).</p>
+  <div class="modgrid">
+    <div class="mod"><div class="n">1</div><div><div class="t">Designing learning &amp; curriculum</div><div class="d">Outcomes, constructive alignment, programmes that cohere.</div></div></div>
+    <div class="mod"><div class="n">2</div><div><div class="t">Assessment &amp; integrity in the age of AI</div><div class="d">Valid, authentic, AI-resilient assessment and feedback.</div></div></div>
+    <div class="mod"><div class="n">3</div><div><div class="t">Online, blended &amp; digital learning</div><div class="d">Designing for flexible and distance delivery, done well.</div></div></div>
+    <div class="mod"><div class="n">4</div><div><div class="t">Inclusive &amp; accessible teaching</div><div class="d">Universal Design for Learning; equity by design.</div></div></div>
+    <div class="mod fn"><div class="n">5</div><div><div class="t">First Nations knowledges &amp; perspectives</div><div class="d"><b style="color:#e7d6a8">Custodian-led</b> — authored and governed by First Nations scholars under ICIP sovereignty.</div></div></div>
+    <div class="mod"><div class="n">6</div><div><div class="t">Scholarship &amp; evaluation of teaching</div><div class="d">SoTL: studying your teaching and sharing what you find.</div></div></div>
+    <div class="mod"><div class="n">7</div><div><div class="t">Students as partners &amp; co-creation</div><div class="d">Sharing power; designing learning with students, not for them.</div></div></div>
+    <div class="mod"><div class="n">8</div><div><div class="t">Leadership &amp; mentoring in L&amp;T</div><div class="d">Leading change and growing others across a school or sector.</div></div></div>
+  </div>
+  <p class="body" style="margin-top:16px;font-size:13.5px;color:var(--mut)">Module areas are illustrative — the actual map would be set by the contributing universities and CAULLT. Each module: open, credit-bearing, badged (Open Badges 3.0), and stackable toward the full Graduate Certificate.</p>
+
+  <h2 class="sec">Why it isn't a MOOC</h2>
+  <div class="vs">
+    <div class="moo"><h4>The MOOC model</h4><ul><li>A platform someone else owns</li><li>Content locked behind a login</li><li>Value extracted from the sector</li><li>A certificate of completion</li><li>Built once, by one provider</li></ul></div>
+    <div class="com"><h4>A sector commons</h4><ul><li>Infrastructure the sector owns together</li><li>Open, portable, and yours to keep</li><li>Value shared and kept in the sector</li><li>Real credit, recognised across institutions</li><li>Built by the whole sector, to its strengths</li></ul></div>
+  </div>
+
+  <h2 class="sec">The transferable infrastructure of the sector</h2>
+  <div class="infra">
+    <h3>Build it once. Everyone keeps it.</h3>
+    <p>This is more than a course — it's <b>shared infrastructure</b>. Every academic, at every institution, casual or continuing, gets access to teaching development built by the whole sector. Credit travels with the person, not the platform. And because it's a commons, it <b>survives the restructures</b> that keep erasing the sector's hard-won knowledge. The MOOC asked the sector to rent. This asks it to <b>own — together</b>.</p>
+  </div>
+
+  <div class="cta">
+    <a class="btn p" href="/#ntlsn-network">Register your university's interest →</a>
+    <a class="btn g" href="/critical-learner-partnerships.html">See also: the open journal</a>
+  </div>
+
+  <div class="note"><b>This is a proposal in design — not an accredited award, and not yet endorsed by any body.</b> Realising it needs the sector: CAULLT to convene, universities to contribute and recognise modules, and accreditation worked through properly. What's fixed is the principle — open, stackable, portable, and owned by the sector rather than a platform. The First Nations module is named as custodian-led and would be authored and governed by First Nations scholars; it is not drafted here.</div>
+  <div class="foot">A proposal from <a href="/">NTLSN.com</a> · in conversation with CAULLT · the open-commons alternative to the MOOC.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "framework": "NTLSN Recognition Credit Framework",
+  "version": "1.0",
+  "updated": "2026-06-23",
+  "status": "Editorial draft v1 — illustrative and evidence-informed; not a sector-ratified standard.",
+  "note": "Point values, indicative RPL hours and provenance are NTLSN's own model, published openly so recognition is transparent and comparable. They are NOT an Advance HE, AQF, TEQSA or Universities Australia equivalence or endorsement. Institutions decide any credit. Versioned and open for comment.",
+  "cite": "NTLSN (2026). Recognition Credit Framework v1.0. National Teaching & Learning Scholarship Network. https://ntlsn.com/recognition-framework.html",
+  "tiers": [
+    { "name": "Emerging", "min": 0 },
+    { "name": "Established", "min": 120 },
+    { "name": "Leading", "min": 300 },
+    { "name": "Distinguished", "min": 600 }
+  ],
+  "domains": [
+    {
+      "key": "teaching",
+      "name": "Teaching & Facilitation",
+      "moves": [
+        { "id": "t-redesign", "label": "Redesign a class, tutorial or lab using an evidence-based approach", "points": 15, "rplHours": 4, "evidences": "Design rationale plus a before/after reflection", "provenance": { "standard": "PSF 2023", "ref": "A1, A2" } },
+        { "id": "t-active", "label": "Adopt active, flipped or inquiry-based learning across a unit", "points": 20, "rplHours": 6, "evidences": "The redesign and a reflection on its effect on engagement", "provenance": { "standard": "PSF 2023", "ref": "A2, K2" } },
+        { "id": "t-mode", "label": "Teach in a new mode (online, hybrid or work-integrated)", "points": 15, "rplHours": 5, "evidences": "Materials and a reflection on the mode shift", "provenance": { "standard": "PSF 2023", "ref": "A2, K4" } },
+        { "id": "t-peerobs", "label": "Be peer-observed and act on the feedback", "points": 15, "rplHours": 4, "evidences": "The observation record and what you changed", "provenance": { "standard": "PSF 2023", "ref": "A5, V3" } }
+      ]
+    },
+    {
+      "key": "design",
+      "name": "Curriculum & Learning Design",
+      "moves": [
+        { "id": "d-unit", "label": "Design or substantially revise a unit or subject", "points": 25, "rplHours": 8, "evidences": "The unit outline and design rationale", "provenance": { "standard": "PSF 2023 / HESF", "ref": "A1; HESF 3.1" } },
+        { "id": "d-align", "label": "Map and align learning outcomes across a unit (constructive alignment)", "points": 20, "rplHours": 6, "evidences": "An alignment map of outcomes, activities and assessment", "provenance": { "standard": "PSF 2023", "ref": "A1, K2" } },
+        { "id": "d-udl", "label": "Embed inclusive / Universal Design for Learning into a unit", "points": 20, "rplHours": 6, "evidences": "The inclusive design choices and their rationale", "provenance": { "standard": "PSF 2023", "ref": "V1, V2" } },
+        { "id": "d-sap", "label": "Co-design curriculum or assessment with students (Students as Partners)", "points": 20, "rplHours": 6, "evidences": "The partnership process and outcome", "provenance": { "standard": "PSF 2023", "ref": "V1, V2" } }
+      ]
+    },
+    {
+      "key": "assessment",
+      "name": "Assessment & Feedback",
+      "moves": [
+        { "id": "a-authentic", "label": "Redesign an assessment for authenticity or AI-resilience", "points": 20, "rplHours": 6, "evidences": "The task and the design reasoning", "provenance": { "standard": "PSF 2023 / HESF", "ref": "A3; HESF 1.4" } },
+        { "id": "a-rubric", "label": "Build or calibrate a criterion-referenced marking rubric", "points": 15, "rplHours": 4, "evidences": "The rubric and any calibration notes", "provenance": { "standard": "PSF 2023", "ref": "A3" } },
+        { "id": "a-moderate", "label": "Run or take part in assessment moderation or calibration", "points": 15, "rplHours": 4, "evidences": "The moderation record and agreed actions", "provenance": { "standard": "PSF 2023 / HESF", "ref": "A3, V3; HESF 5.3" } },
+        { "id": "a-feedback", "label": "Improve feedback practice (e.g. dialogic or feed-forward)", "points": 15, "rplHours": 4, "evidences": "The change and evidence students acted on it", "provenance": { "standard": "PSF 2023", "ref": "A3, K3" } }
+      ]
+    },
+    {
+      "key": "sotl",
+      "name": "Scholarship of Teaching & Learning",
+      "moves": [
+        { "id": "s-read", "label": "Read and apply SoTL literature to change your practice", "points": 10, "rplHours": 3, "evidences": "What you read and how practice changed", "provenance": { "standard": "PSF 2023", "ref": "K3, V3" } },
+        { "id": "s-evidence", "label": "Gather and analyse evidence of your teaching's impact", "points": 20, "rplHours": 6, "evidences": "The evidence and your analysis", "provenance": { "standard": "PSF 2023", "ref": "A5, V3" } },
+        { "id": "s-present", "label": "Present teaching work at a seminar, symposium or conference", "points": 25, "rplHours": 8, "evidences": "The abstract or slides and the venue", "provenance": { "standard": "SoTL", "ref": "Dissemination" } },
+        { "id": "s-publish", "label": "Publish peer-reviewed scholarship of teaching and learning", "points": 40, "rplHours": 15, "evidences": "The publication", "provenance": { "standard": "SoTL / AAUT", "ref": "Dissemination; Teaching Excellence" } }
+      ]
+    },
+    {
+      "key": "recognition",
+      "name": "Recognition, Fellowship & Awards",
+      "moves": [
+        { "id": "r-pd", "label": "Complete a teaching qualification or professional-development program", "points": 20, "rplHours": 8, "evidences": "The certificate or completion record", "provenance": { "standard": "PSF 2023", "ref": "A5" } },
+        { "id": "r-fellow", "label": "Gain an HEA fellowship (AFHEA, FHEA, SFHEA or PFHEA)", "points": 40, "rplHours": 0, "evidences": "The fellowship award", "provenance": { "standard": "PSF 2023 (holistic)", "ref": "Advance HE" } },
+        { "id": "r-award", "label": "Receive a teaching award or citation (institutional or national)", "points": 35, "rplHours": 0, "evidences": "The award or citation", "provenance": { "standard": "AAUT", "ref": "Recognition outcome" } },
+        { "id": "r-nominate", "label": "Be nominated or shortlisted for a teaching award", "points": 15, "rplHours": 0, "evidences": "The nomination", "provenance": { "standard": "AAUT", "ref": "Pipeline" } }
+      ]
+    },
+    {
+      "key": "leadership",
+      "name": "Leadership, Mentoring & Service",
+      "moves": [
+        { "id": "l-mentor", "label": "Mentor a colleague or new sessional in their teaching", "points": 20, "rplHours": 6, "evidences": "The mentoring arrangement and outcome", "provenance": { "standard": "PSF 2023", "ref": "A4, V5" } },
+        { "id": "l-lead", "label": "Lead a teaching project, special-interest group or community of practice", "points": 25, "rplHours": 8, "evidences": "Your leadership role and what it achieved", "provenance": { "standard": "PSF 2023 / AAUT", "ref": "V5; Programs" } },
+        { "id": "l-govern", "label": "Contribute to teaching & learning governance or committees", "points": 15, "rplHours": 4, "evidences": "The role and your contribution", "provenance": { "standard": "PSF 2023", "ref": "V4, V5" } },
+        { "id": "l-examine", "label": "Serve as an external examiner or peer reviewer of teaching", "points": 20, "rplHours": 6, "evidences": "The review undertaken", "provenance": { "standard": "HESF / PSF 2023", "ref": "HESF 5.3; V3" } }
+      ]
+    }
+  ]
+}

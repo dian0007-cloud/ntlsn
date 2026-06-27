@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoTL Research-Question Framer — turn a teaching problem into a researchable question · NTLSN</title>
+<meta name="description" content="Turn something you've noticed in your teaching into a sharp, researchable SoTL question — with the question type and a method that fits. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:780px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:62ch;margin:0 0 24px}
+  .field{margin-bottom:15px}.field label{display:block;font:700 13px var(--sans);margin-bottom:3px}
+  .field .h{font:400 12px var(--sans);color:var(--mut);margin:0 0 7px}
+  input[type=text],textarea{width:100%;font:500 15px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none}
+  textarea{min-height:54px;resize:vertical}
+  input:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .types{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+  .ty{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;transition:.13s}
+  .ty.on{border-color:var(--teal);background:#11293f;box-shadow:0 0 0 2px #4ecdc426}
+  .ty .n{font:800 13.5px var(--sans);color:var(--ink)} .ty .d{font:400 11.5px/1.4 var(--sans);color:var(--mut)}
+  .out{background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px;display:none}.out.on{display:block}
+  .out h3{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 9px}
+  #q{font:600 18px/1.5 var(--serif);color:#fff;margin:0 0 14px}
+  .meta{font-size:13px;color:var(--mut);margin:0 0 5px}.meta b{color:var(--teal)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:9px 15px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:12px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>Research-question framer.</h1>
+  <p class="lede">You've noticed something in your teaching. Turn it into a <b style="color:var(--ink)">sharp, researchable SoTL question</b> — with the question type and a method that fits. The hardest part of a SoTL project is asking it well.</p>
+
+  <div class="field"><label>What did you notice — or want to improve?</label><div class="h">The teaching thing at the heart of it.</div><textarea id="focus" placeholder="e.g. students disengage in large online lectures"></textarea></div>
+  <div class="field"><label>Whose experience? (cohort)</label><input type="text" id="cohort" placeholder="e.g. first-year nursing students"></div>
+  <div class="field"><label>In what context?</label><input type="text" id="ctx" placeholder="e.g. a fully-online unit"></div>
+
+  <div class="field"><label>What kind of question is it?</label><div class="types" id="types">
+    <div class="ty" data-k="works"><div class="n">Does it work?</div><div class="d">Test if an approach improves an outcome</div></div>
+    <div class="ty" data-k="is"><div class="n">What is happening?</div><div class="d">Describe / understand an experience</div></div>
+    <div class="ty" data-k="why"><div class="n">Why?</div><div class="d">Explain a pattern or mechanism</div></div>
+    <div class="ty" data-k="could"><div class="n">What could be?</div><div class="d">Design &amp; trial a new possibility</div></div>
+  </div></div>
+  <div class="field" id="ivField" style="display:none"><label id="ivLabel">The approach / intervention</label><input type="text" id="iv" placeholder="e.g. structured peer instruction"></div>
+  <div class="field"><label>What would you look at as evidence?</label><input type="text" id="outcome" placeholder="e.g. engagement and confidence"></div>
+
+  <div class="out" id="out"><h3>Your draft question</h3><p id="q"></p><p class="meta" id="mtype"></p><p class="meta" id="mmethod"></p><p class="meta" id="mnext"></p><button class="btn" id="copy" type="button">Copy question</button></div>
+
+  <div class="note"><b>A good SoTL question</b> names <i>who</i>, <i>what</i> and <i>in what context</i> — and is answerable with evidence you can actually gather. Refine it, then pressure-test the ethics with the <a href="/ethics-check.html">Ethics Self-Check</a> and the instrument with the <a href="/survey-checker.html">Survey Checker</a>.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · question types after Hutchings' taxonomy of SoTL questions · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var type=null;
+  var F={focus:0,cohort:0,ctx:0,iv:0,outcome:0};
+  Object.keys(F).forEach(function(k){F[k]=document.getElementById(k);F[k].addEventListener('input',build);});
+  document.getElementById('types').addEventListener('click',function(e){var t=e.target.closest('.ty');if(!t)return;
+    [].forEach.call(this.children,function(x){x.classList.remove('on');});t.classList.add('on');type=t.getAttribute('data-k');
+    var needsIv=(type==='works'||type==='could');
+    document.getElementById('ivField').style.display=needsIv?'':'none';
+    document.getElementById('ivLabel').textContent=type==='could'?'The new approach you’d trial':'The approach / intervention';
+    build();});
+  function v(k){return (F[k].value||'').trim();}
+  function build(){
+    if(!type)return;
+    var focus=v('focus')||'[what you noticed]', cohort=v('cohort')||'[cohort]', ctx=v('ctx')||'[context]',
+        iv=v('iv')||'[the approach]', out=v('outcome')||'[your evidence]';
+    var q,method,next;
+    if(type==='works'){ q='To what extent does '+iv+' improve '+out+' for '+cohort+' in '+ctx+'?';
+      method='Comparative / evaluative — pre–post or quasi-experimental design, or a comparison group.'; next='Define how you’ll measure '+out+' before and after.'; }
+    else if(type==='is'){ q='What is the experience of '+cohort+' regarding '+focus+' in '+ctx+'?';
+      method='Descriptive / interpretive — surveys, interviews, focus groups or reflective artefacts.'; next='Decide whose voices and how you’ll sample them.'; }
+    else if(type==='why'){ q='Why do '+cohort+' experience '+focus+' the way they do in '+ctx+'?';
+      method='Explanatory — mixed methods; pair patterns in '+out+' with interviews that explain them.'; next='Identify the patterns first, then the data that explains them.'; }
+    else { q='How might '+iv+' change '+out+' for '+cohort+' in '+ctx+'?';
+      method='Design-based research — trial it in cycles, refining as you learn.'; next='Sketch your first iteration and what you’d watch.'; }
+    document.getElementById('out').className='out on';
+    document.getElementById('q').textContent='“'+q+'”';
+    document.getElementById('mtype').innerHTML='<b>Question type:</b> '+({works:'Does it work?',is:'What is?',why:'Why?',could:'What could be?'}[type]);
+    document.getElementById('mmethod').innerHTML='<b>Method that fits:</b> '+method;
+    document.getElementById('mnext').innerHTML='<b>Next step:</b> '+next;
+  }
+  document.getElementById('copy').addEventListener('click',function(){var t=document.getElementById('q').textContent;navigator.clipboard&&navigator.clipboard.writeText(t.replace(/[“”]/g,''));var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
+})();
+</script>
+</body>
+</html>

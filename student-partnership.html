@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Student-Partner Contribution Record</title>
+<meta name="description" content="A record for students who partner with staff to improve teaching and learning — co-design, co-research, representation, peer mentoring. Capture the partnership, the capabilities you built, and your reflection, and export a record you keep for your CV or portfolio. Runs in your browser.">
+<meta property="og:title" content="Student-Partner Contribution Record — NTLSN">
+<meta property="og:description" content="Students who partner with staff deserve recognition too. Record your partnership work, the capabilities you built, and a reflection — and keep a portable record for your CV or portfolio. Free.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1040px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:760px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .sec{margin:0 0 17px}.sec:last-child{margin-bottom:0}
+  .sech{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 10px}
+  .f{margin:0 0 12px}
+  .f label{display:block;font-size:13px;font-weight:600;margin:0 0 5px}
+  .f .hint{font-size:11.5px;color:var(--mut);margin:0 0 6px}
+  input[type=text],input[type=number],select,textarea{width:100%;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:400 13.5px var(--F)}
+  textarea{min-height:58px;resize:vertical;line-height:1.5}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(78,205,196,.10)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:520px){.row2{grid-template-columns:1fr}}
+  .caps{display:flex;flex-wrap:wrap;gap:7px}
+  .cap{font:600 12px var(--F);padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--mut);cursor:pointer;transition:.12s}
+  .cap:hover{border-color:rgba(78,205,196,.45)}
+  .cap.on{border-color:var(--teal);background:rgba(78,205,196,.12);color:var(--ink);font-weight:700}
+  .cap:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .res{position:sticky;top:20px}
+  .meter{height:8px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin:0 0 6px}
+  .meter .fill{height:100%;background:var(--teal);border-radius:999px;transition:width .25s}
+  .mtext{font-size:11.5px;color:var(--mut);margin:0 0 14px}
+  .doc{background:#0a1830;border:1px solid var(--line);border-radius:10px;padding:16px 18px;max-height:60vh;overflow:auto;font-size:13.5px;line-height:1.62}
+  .doc h2{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin:16px 0 6px;border-bottom:1px solid var(--line);padding-bottom:5px}
+  .doc h2:first-child{margin-top:0}
+  .doc .meta{color:var(--mut);font-style:italic;font-size:12.5px;margin:0 0 6px}
+  .doc p{margin:0 0 8px;white-space:pre-wrap}
+  .doc p b{color:#dfe8f4}
+  .doc .caplist{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px}
+  .doc .caplist span{font-size:11.5px;background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.3);border-radius:999px;padding:3px 9px}
+  .doc .sign{margin-top:14px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--mut)}
+  .doc .empty{color:var(--mut);font-style:italic}
+  .btns{display:flex;gap:8px;margin:14px 0 0}
+  .btn{flex:1;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 12px;font:700 12.5px var(--F);cursor:pointer}
+  .btn:hover{border-color:var(--teal)}
+  .btn.pri{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Student-Partner Contribution Record</h1>
+  <p class="lead">When students partner with staff to improve teaching — co-designing, co-researching, representing peers, mentoring — that work deserves recognition too. Capture your partnership, the <b>capabilities you built</b>, and a short reflection, and keep a <b>portable record</b> for your CV, portfolio or scholarship application. <b>Your words; saved nowhere but your browser.</b></p>
+  <div class="grid">
+    <div class="panel" id="form"></div>
+    <div class="panel res">
+      <div class="meter"><div class="fill" id="fill" style="width:0%"></div></div>
+      <div class="mtext" id="mtext">Your record builds as you fill it in</div>
+      <div class="doc" id="doc"></div>
+      <div class="btns"><button class="btn pri" id="copy">Copy as Markdown</button><button class="btn" id="print">Print / PDF</button><button class="btn" id="clear">Clear</button></div>
+    </div>
+  </div>
+  <div class="foot">
+    <b>Recognising students as partners.</b> A self-recorded reflective record — not a verified credential or an award. A portable, verifiable version (via <b>My eQuals</b> / Open Badges) is on the NTLSN roadmap, not live. Nothing is stored or sent; export to keep a copy. &nbsp;·&nbsp; <a href="/cert.html">Students-as-Partners Certificate</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var TYPES=['Co-design of curriculum or assessment','Co-research / SoTL project','Student representative or voice role','Peer mentoring / PASS / peer-assisted learning','Evaluation &amp; feedback partner','Student–staff partnership committee','Co-creation of learning resources / OER'];
+  var CAPS=['Communication','Collaboration & teamwork','Leadership','Research & inquiry','Critical thinking','Project management','Creativity & innovation','Intercultural & inclusive practice','Digital capability','Self-management'];
+  var state={fields:{}, caps:{}};
+  var form=document.getElementById('form');
+  function esc(t){return String(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function dec(s){return s.replace(/&amp;/g,'&');}
+
+  form.innerHTML=
+    '<div class="sec"><div class="sech">About you</div>'+
+      '<div class="row2"><div class="f"><label>Your name</label><input type="text" data-f="name" placeholder="Sam Rivera"></div>'+
+      '<div class="f"><label>Course / program</label><input type="text" data-f="course" placeholder="Bachelor of Science"></div></div>'+
+      '<div class="f"><label>University <span style="color:var(--mut);font-weight:400">(optional)</span></label><input type="text" data-f="uni" placeholder="Your university"></div></div>'+
+    '<div class="sec"><div class="sech">The partnership</div>'+
+      '<div class="f"><label>Project or activity title</label><input type="text" data-f="title" placeholder="Redesigning the first-year lab program"></div>'+
+      '<div class="f"><label>Type of partnership</label><select data-f="type"><option value="">Choose…</option>'+TYPES.map(function(t){return '<option value="'+esc(dec(t))+'">'+t+'</option>';}).join('')+'</select></div>'+
+      '<div class="row2"><div class="f"><label>Your role &amp; contribution</label><textarea data-f="role" placeholder="What you actually did in the partnership…"></textarea></div>'+
+      '<div class="f"><label>Approx. hours <span style="color:var(--mut);font-weight:400">(optional)</span></label><input type="number" data-f="hours" min="0" step="1" placeholder="e.g. 25"></div></div></div>'+
+    '<div class="sec"><div class="sech">Capabilities you developed</div><div class="caps" id="caps">'+
+      CAPS.map(function(c,i){return '<span class="cap" role="button" tabindex="0" aria-pressed="false" data-c="'+i+'">'+c+'</span>';}).join('')+'</div></div>'+
+    '<div class="sec"><div class="sech">Your reflection</div>'+
+      '<div class="f"><label>What did you contribute, and what changed?</label><textarea data-f="r1" placeholder="The difference your partnership made…"></textarea></div>'+
+      '<div class="f"><label>What did you learn or gain?</label><textarea data-f="r2" placeholder="Skills, confidence, perspective…"></textarea></div></div>';
+
+  var capsEl=document.getElementById('caps');
+  function chosenCaps(){ return CAPS.filter(function(c,i){return state.caps[i];}); }
+  function val(f){return (state.fields[f]||'').trim();}
+  function buildDocHtml(){
+    var nm=val('name'), co=val('course'), uni=val('uni');
+    var out='<h2>Student-Partner Contribution Record</h2>';
+    if(nm||co||uni) out+='<p class="meta">'+esc([nm,co,uni].filter(Boolean).join(' · '))+'</p>';
+    var any=false;
+    if(val('title')||val('type')||val('role')){
+      any=true; out+='<h2>The partnership</h2>';
+      if(val('title')) out+='<p><b>'+esc(val('title'))+'</b></p>';
+      var meta=[val('type'), val('hours')?val('hours')+' hours':''].filter(Boolean).join(' · ');
+      if(meta) out+='<p class="meta">'+esc(meta)+'</p>';
+      if(val('role')) out+='<p>'+esc(val('role'))+'</p>';
+    }
+    var caps=chosenCaps();
+    if(caps.length){ any=true; out+='<h2>Capabilities developed</h2><div class="caplist">'+caps.map(function(c){return '<span>'+c+'</span>';}).join('')+'</div>'; }
+    if(val('r1')||val('r2')){ any=true; out+='<h2>Reflection</h2>'; if(val('r1'))out+='<p>'+esc(val('r1'))+'</p>'; if(val('r2'))out+='<p>'+esc(val('r2'))+'</p>'; }
+    if(!any) return '<p class="empty">Fill in the partnership on the left — your record assembles here, ready to copy, print and keep.</p>';
+    out+='<div class="sign">Verified by (staff partner): ____________________  ·  Date: __________</div>';
+    return out;
+  }
+  function buildMd(){
+    var md='# Student-Partner Contribution Record\n';
+    var head=[val('name'),val('course'),val('uni')].filter(Boolean).join(' · ');
+    if(head) md+='*'+head+'*\n';
+    if(val('title')||val('type')||val('role')){ md+='\n## The partnership\n\n'; if(val('title'))md+='**'+val('title')+'**\n'; var meta=[val('type'),val('hours')?val('hours')+' hours':''].filter(Boolean).join(' · '); if(meta)md+='*'+meta+'*\n'; if(val('role'))md+='\n'+val('role')+'\n'; }
+    var caps=chosenCaps(); if(caps.length) md+='\n## Capabilities developed\n\n'+caps.map(function(c){return '- '+c;}).join('\n')+'\n';
+    if(val('r1')||val('r2')){ md+='\n## Reflection\n\n'; if(val('r1'))md+=val('r1')+'\n\n'; if(val('r2'))md+=val('r2')+'\n'; }
+    md+='\n---\nVerified by (staff partner): ____________________   Date: __________\n';
+    return md.trim()+'\n';
+  }
+  function refresh(){
+    var fieldsDone=['name','title','type','role','r1','r2'].filter(function(f){return val(f);}).length;
+    var pct=Math.min(100, Math.round(100*(fieldsDone+(chosenCaps().length?1:0))/7));
+    document.getElementById('fill').style.width=pct+'%';
+    document.getElementById('mtext').textContent= pct>=100?'A complete record — copy or print it':'Your record builds as you fill it in';
+    document.getElementById('doc').innerHTML=buildDocHtml();
+  }
+  form.addEventListener('input',function(e){ var f=e.target.getAttribute('data-f'); if(!f)return; state.fields[f]=e.target.value; refresh(); });
+  form.addEventListener('change',function(e){ var f=e.target.getAttribute('data-f'); if(!f)return; state.fields[f]=e.target.value; refresh(); });
+  function toggleCap(i){ state.caps[i]=!state.caps[i]; var el=capsEl.querySelector('[data-c="'+i+'"]'); el.classList.toggle('on',state.caps[i]); el.setAttribute('aria-pressed',state.caps[i]?'true':'false'); refresh(); }
+  capsEl.addEventListener('click',function(e){ var c=e.target.closest('[data-c]'); if(!c)return; toggleCap(+c.getAttribute('data-c')); });
+  capsEl.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var c=e.target.closest('[data-c]'); if(c){ e.preventDefault(); toggleCap(+c.getAttribute('data-c')); } } });
+  document.getElementById('copy').addEventListener('click',function(){ var b=this,l=b.textContent,md=buildMd(); function ok(){b.textContent='Copied ✓';setTimeout(function(){b.textContent=l;},1400);} if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(md).then(ok,ok);}else{ok();} });
+  document.getElementById('print').addEventListener('click',function(){window.print();});
+  document.getElementById('clear').addEventListener('click',function(){ if(!confirm('Clear everything?'))return; state={fields:{},caps:{}}; [].forEach.call(form.querySelectorAll('input,textarea,select'),function(el){el.value='';}); [].forEach.call(capsEl.querySelectorAll('.cap'),function(el){el.classList.remove('on');el.setAttribute('aria-pressed','false');}); refresh(); });
+  refresh();
+})();
+</script>
+</body>
+</html>

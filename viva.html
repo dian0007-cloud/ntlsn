@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viva / Oral Question Generator — AI-resilient oral assessment prompts · NTLSN</title>
+<meta name="description" content="Generate a structured set of oral-exam questions — warm-up, authenticity probes, understanding and application — tailored to the work and what you want to check. A practical way to assess in the age of AI. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 22px}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ctl label{display:block;font:700 12px var(--sans);margin-bottom:5px;color:var(--ink)}
+  input[type=text],select{width:100%;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .grp{margin-top:18px}.grp h3{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  .grp h3 .tag{font:700 10px var(--sans);background:#143a37;color:var(--teal);border-radius:5px;padding:2px 8px;text-transform:none;letter-spacing:0}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 15px;margin-bottom:7px;font-size:14px;color:#cbd8e6}
+  .q b{color:var(--ink)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:14px}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Assessment</p>
+  <h1>Viva / oral question generator.</h1>
+  <p class="lede">A short oral conversation is one of the most <b style="color:var(--ink)">AI-resilient</b> ways to check that the person in front of you actually did — and understands — the work. Set the context and we'll generate a structured set of questions: warm-up, authenticity probes, understanding, and application.</p>
+
+  <div class="controls">
+    <div class="ctl"><label>Topic / subject</label><input type="text" id="topic" placeholder="e.g. their essay on supply &amp; demand"></div>
+    <div class="ctl"><label>What they submitted</label><select id="art"><option value="essay">Essay / written piece</option><option value="report">Report / case study</option><option value="project">Project / code / design</option><option value="reflection">Reflection / portfolio</option></select></div>
+    <div class="ctl"><label>Level</label><select id="lvl"><option value="intro">Introductory</option><option value="adv">Advanced</option></select></div>
+    <div class="ctl"><label>Emphasis</label><select id="focus"><option value="auth">Authenticity (did they do it?)</option><option value="deep">Depth of understanding</option><option value="apply">Application &amp; transfer</option></select></div>
+  </div>
+
+  <div id="out"></div>
+  <button class="btn" id="copy" type="button">Copy the question set</button>
+  <button class="btn ghost" id="reroll" type="button">Reshuffle</button>
+
+  <div class="note"><b>Fairness is in the design.</b> Ask each student a comparable spread of questions, mark against criteria they've seen, keep it short (5–10 min), and arrange accommodations in advance. A viva isn't a gotcha — it's a chance for students to show what they know in a way AI can't fake for them.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · prompts are starting points — adapt to your discipline · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  function V(id){return document.getElementById(id).value;}
+  function topic(){var t=(V('topic')||'').trim();return t?t:'this work';}
+  function pickN(arr,n){var a=arr.slice(),out=[];while(a.length&&out.length<n){out.push(a.splice(Math.floor(Math.random()*a.length),1)[0]);}return out;}
+  function build(){
+    var T=topic(),art=V('art'),lvl=V('lvl'),focus=V('focus');
+    var warm=['To start, tell me in a sentence or two what '+T+' is about.','What part of '+T+' are you most pleased with, and why?','How did you get started on '+T+'?'];
+    var authBase={
+      essay:['Walk me through how you developed your central argument.','Where did this particular example or source come from, and why that one?','If you had another week, what would you change first?','Read me your favourite sentence — why did you phrase it that way?'],
+      report:['Talk me through your method — why this approach over an alternative?','Which finding surprised you, and how do you explain it?','Where are the weak points in your data or reasoning?','How did you decide what to include and what to leave out?'],
+      project:['Show me a part you found hardest to build, and how you solved it.','Why did you make this design/architecture choice rather than another?','If this broke in one place, where would it be, and why?','Talk me through what happens, step by step, when this runs.'],
+      reflection:['What was the moment that changed your thinking, and how?','What would you do differently next time, concretely?','Which idea here did you most resist at first, and why?','How does this connect to something specific you did?']
+    };
+    var deep=['Explain the key idea behind '+T+' in your own words, as if to a first-year.','What’s a common misconception about this, and why is it wrong?','What would happen if we changed one key assumption?','How does '+T+' connect to what we covered earlier in the unit?'];
+    var apply=['Apply your thinking from '+T+' to this new scenario: [give one].','Where would your conclusion NOT hold? What are its limits?','If a colleague disagreed with you, what evidence would change your mind?','How would you extend this if you had more time or data?'];
+    var groups=[];
+    groups.push(['Warm-up','put them at ease',pickN(warm,2)]);
+    var nAuth=focus==='auth'?4:(lvl==='adv'?3:2);
+    groups.push(['Authenticity probes','process, not product',pickN(authBase[art],nAuth)]);
+    var nDeep=focus==='deep'?4:2;
+    groups.push(['Understanding','in their own words',pickN(deep,nDeep)]);
+    var nApply=focus==='apply'?4:(lvl==='adv'?3:2);
+    groups.push(['Application &amp; transfer','beyond the page',pickN(apply,nApply)]);
+    document.getElementById('out').innerHTML=groups.map(function(g){
+      return '<div class="grp"><h3>'+g[0]+' <span class="tag">'+g[1]+'</span></h3>'+g[2].map(function(q){return '<div class="q">'+esc(q)+'</div>';}).join('')+'</div>';
+    }).join('');
+    window.__g=groups;
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/&amp;amp;/g,'&amp;');}
+  ['topic','art','lvl','focus'].forEach(function(id){document.getElementById(id).addEventListener('input',build);document.getElementById(id).addEventListener('change',build);});
+  document.getElementById('reroll').addEventListener('click',build);
+  document.getElementById('copy').addEventListener('click',function(){
+    var g=window.__g||[];var txt='VIVA / ORAL QUESTION SET — '+topic()+'\n';
+    g.forEach(function(gr){txt+='\n'+gr[0].replace(/&amp;/g,'&').toUpperCase()+'\n';gr[2].forEach(function(q){txt+='  • '+q.replace(/&amp;/g,'&')+'\n';});});
+    txt+='\n— built with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  build();
+})();
+</script>
+</body>
+</html>

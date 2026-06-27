@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Sessional &amp; Casual Teaching Recognition</title>
+<meta name="description" content="A portable recognition record for sessional, casual and teaching-focused academics. Log the real teaching work that usually goes uncounted, build indicative RPL hours, and export a dated record you keep — even when you change institutions. Saved in your browser only.">
+<meta property="og:title" content="Sessional &amp; Casual Teaching Recognition — NTLSN">
+<meta property="og:description" content="The ~60% of the workforce who are casual rarely get recognised. Log your real teaching work, build RPL hours, and keep a portable record that survives leaving an institution. Free.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1020px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:780px}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}
+  @media(max-width:840px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .cat{margin:0 0 16px}.cat:last-child{margin-bottom:0}
+  .cath{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 8px}
+  .mv{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+  .mv:first-of-type{border-top:0}
+  .mv .nm{font-size:13px;flex:1}
+  .mv .hr{font:800 11.5px var(--F);color:var(--gold);min-width:30px;text-align:right}
+  .mv .add{background:transparent;border:1px solid var(--line);color:var(--teal);border-radius:999px;width:30px;height:30px;font:800 16px var(--F);cursor:pointer;flex:none;line-height:1}
+  .mv .add:hover{border-color:var(--teal);background:rgba(78,205,196,.1)}
+  .res{position:sticky;top:20px}
+  .tot{display:flex;gap:8px;margin:0 0 14px}
+  .tc{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:11px 4px}
+  .tc b{display:block;font-size:24px;font-weight:800;line-height:1;color:var(--teal)}
+  .tc span{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .wl{margin:0;padding:0;list-style:none;max-height:46vh;overflow:auto}
+  .wi{border-top:1px solid var(--line);padding:9px 0}
+  .wi:first-child{border-top:0}
+  .wir{display:flex;align-items:center;gap:8px}
+  .wir .wn{font-size:12.5px;font-weight:600;flex:1}
+  .wir .wh{font:800 11px var(--F);color:var(--gold)}
+  .wir .rm{background:transparent;border:none;color:var(--mut);cursor:pointer;font-size:15px;line-height:1;padding:2px 4px}
+  .wir .rm:hover{color:var(--teal)}
+  .wf{display:flex;gap:6px;margin:5px 0 0}
+  .wf input{background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:5px 8px;font:400 11.5px var(--F)}
+  .wf input.dt{width:130px}
+  .wf input.nt{flex:1}
+  .wf input:focus{outline:none;border-color:var(--teal)}
+  .empty{color:var(--mut);font-style:italic;font-size:13px;padding:14px 0}
+  .btns{display:flex;gap:8px;margin:14px 0 0}
+  .btn{flex:1;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 10px;font:700 12px var(--F);cursor:pointer}
+  .btn:hover{border-color:var(--teal)}
+  .btn.pri{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+  .save{font-size:11px;color:var(--mut);margin:10px 0 0}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Sessional &amp; Casual Teaching Recognition</h1>
+  <p class="lead">Around <b>three in five</b> who teach in Australian universities are casual or sessional — and the real teaching work they do mostly goes uncounted. Log it here, build up <b>indicative RPL hours</b>, and export a <b>dated record you keep</b> — one that follows you when you change institutions. <b>Your record, saved only in your browser.</b></p>
+  <div class="grid">
+    <div class="panel"><div class="h" style="font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 14px">Add the work you’ve done</div><div id="cat"></div></div>
+    <div class="panel res">
+      <div class="tot">
+        <div class="tc"><b id="tHrs">0</b><span>RPL hours</span></div>
+        <div class="tc"><b id="tCnt">0</b><span>Records</span></div>
+        <div class="tc"><b id="tCat">0/6</b><span>Domains</span></div>
+      </div>
+      <ul class="wl" id="wl"></ul>
+      <div class="btns"><button class="btn pri" id="md">Export Markdown</button><button class="btn" id="csv">Export CSV</button><button class="btn" id="clr">Clear</button></div>
+      <div class="save" id="save">Saved automatically in this browser.</div>
+    </div>
+  </div>
+  <div class="foot">
+    <b>A record you keep — self-recorded and unverified.</b> Indicative RPL hours are developmental estimates; each institution sets its own rates and decides any credit. Portable, verifiable issuance (via <b>My eQuals</b> / Open Badges) is on the NTLSN roadmap, not live — so export your record regularly. It is stored only in this browser (local storage); nothing is sent anywhere. &nbsp;·&nbsp; <a href="/recognition-points.html">Recognition Points Calculator</a> &nbsp;·&nbsp; <a href="/trp.html">Teaching Recognition Passport</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var CATALOG=[
+    {cat:'Teaching delivery', moves:[['Redesigned a tutorial, lab or workshop activity',3],['Introduced a new teaching approach (active, flipped, inquiry)',4],['Created or ran an online / synchronous session',3]]},
+    {cat:'Assessment &amp; feedback', moves:[['Marked and gave structured feedback on assessments',2],['Took part in a moderation / calibration session',2],['Designed or revised an assessment task or rubric',3]]},
+    {cat:'Curriculum &amp; materials', moves:[['Developed new learning materials or resources',3],['Aligned activities or assessment to learning outcomes',2]]},
+    {cat:'Student support', moves:[['Provided structured student consultation or support',2],['Supported students with diverse needs (UDL, accessibility)',2]]},
+    {cat:'Professional growth', moves:[['Completed a teaching workshop or short course',3],['Read and applied scholarship of teaching (SoTL)',2],['Was peer-observed, or observed a peer',2]]},
+    {cat:'Collaboration &amp; leadership', moves:[['Mentored a new sessional, tutor or demonstrator',3],['Contributed to course-team planning',2],['Presented at a teaching seminar or symposium',4]]}
+  ];
+  var CATS=CATALOG.map(function(c){return c.cat;});
+  var KEY='ntlsn-sessional-wallet-v1';
+  var wallet=[]; var nextId=1;
+  try{ var raw=localStorage.getItem(KEY); if(raw){ wallet=JSON.parse(raw)||[]; wallet.forEach(function(w){ if(w.id>=nextId) nextId=w.id+1; }); } }catch(e){}
+
+  function today(){ var d=new Date(); var m=('0'+(d.getMonth()+1)).slice(-2), day=('0'+d.getDate()).slice(-2); return d.getFullYear()+'-'+m+'-'+day; }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(wallet)); }catch(e){} }
+  function dec(s){ return s.replace(/&amp;/g,'&'); }
+
+  function renderCat(){
+    document.getElementById('cat').innerHTML=CATALOG.map(function(c){
+      return '<div class="cat"><div class="cath">'+c.cat+'</div>'+c.moves.map(function(m){
+        return '<div class="mv"><span class="nm">'+m[0]+'</span><span class="hr">'+m[1]+'h</span><button class="add" data-cat="'+c.cat+'" data-nm="'+encodeURIComponent(m[0])+'" data-hr="'+m[1]+'" aria-label="Add">+</button></div>';
+      }).join('')+'</div>';
+    }).join('');
+  }
+  function esc(t){return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function renderWallet(){
+    var wl=document.getElementById('wl');
+    var hrs=wallet.reduce(function(a,w){return a+w.hours;},0);
+    var cats={}; wallet.forEach(function(w){cats[w.cat]=1;});
+    document.getElementById('tHrs').textContent=hrs;
+    document.getElementById('tCnt').textContent=wallet.length;
+    document.getElementById('tCat').textContent=Object.keys(cats).length+'/6';
+    if(!wallet.length){ wl.innerHTML='<li class="empty">Add the teaching work you’ve done from the left — your record builds here, and saves automatically.</li>'; return; }
+    wl.innerHTML=wallet.map(function(w){
+      return '<li class="wi" data-id="'+w.id+'"><div class="wir"><span class="wn">'+dec(w.name)+'</span><span class="wh">'+w.hours+'h</span><button class="rm" data-id="'+w.id+'" aria-label="Remove">×</button></div>'+
+        '<div class="wf"><input class="dt" type="date" value="'+esc(w.date)+'" data-id="'+w.id+'" data-k="date"><input class="nt" type="text" placeholder="Note (unit, cohort, evidence…)" value="'+esc(w.note||'')+'" data-id="'+w.id+'" data-k="note"></div></li>';
+    }).join('');
+  }
+  function render(){ renderWallet(); save(); }
+
+  document.getElementById('cat').addEventListener('click',function(e){
+    var b=e.target.closest('.add'); if(!b) return;
+    wallet.unshift({id:nextId++, cat:b.getAttribute('data-cat'), name:decodeURIComponent(b.getAttribute('data-nm')), hours:+b.getAttribute('data-hr'), date:today(), note:''});
+    render();
+  });
+  document.getElementById('wl').addEventListener('click',function(e){
+    var b=e.target.closest('.rm'); if(!b) return;
+    var id=+b.getAttribute('data-id'); wallet=wallet.filter(function(w){return w.id!==id;}); render();
+  });
+  document.getElementById('wl').addEventListener('input',function(e){
+    var el=e.target; var id=+el.getAttribute('data-id'); var k=el.getAttribute('data-k'); if(!id||!k) return;
+    var w=wallet.filter(function(x){return x.id===id;})[0]; if(w){ w[k]=el.value; save(); }
+  });
+  function download(name,text,type){
+    var blob=new Blob([text],{type:type}); var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
+  document.getElementById('md').addEventListener('click',function(){
+    var hrs=wallet.reduce(function(a,w){return a+w.hours;},0);
+    var md='# Sessional & Casual Teaching Recognition Record\n\n*Self-recorded via NTLSN — '+today()+'. Indicative RPL hours; unverified.*\n\n**Total indicative RPL hours: '+hrs+'  ·  Records: '+wallet.length+'**\n\n';
+    CATS.forEach(function(c){
+      var rows=wallet.filter(function(w){return w.cat===c;});
+      if(!rows.length) return;
+      md+='## '+dec(c)+'\n\n';
+      rows.forEach(function(w){ md+='- '+dec(w.name)+' ('+w.hours+'h, '+w.date+')'+(w.note?' — '+w.note:'')+'\n'; });
+      md+='\n';
+    });
+    download('ntlsn-sessional-recognition.md', md, 'text/markdown');
+  });
+  document.getElementById('csv').addEventListener('click',function(){
+    function q(s){return '"'+String(s).replace(/"/g,'""')+'"';}
+    var rows=[['Date','Domain','Activity','RPL hours','Note']].concat(wallet.map(function(w){return [w.date, dec(w.cat), dec(w.name), w.hours, w.note||''];}));
+    download('ntlsn-sessional-recognition.csv', rows.map(function(r){return r.map(q).join(',');}).join('\n'), 'text/csv');
+  });
+  document.getElementById('clr').addEventListener('click',function(){
+    if(!wallet.length) return;
+    if(!confirm('Clear your whole record? Export it first if you want to keep it.')) return;
+    wallet=[]; render();
+  });
+  renderCat(); render();
+})();
+</script>
+</body>
+</html>

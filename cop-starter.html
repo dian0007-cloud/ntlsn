@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community of Practice Starter Kit — start a CoP in five minutes · NTLSN</title>
+<meta name="description" content="Thinking of starting a teaching Community of Practice? Answer four questions and get a ready-to-use starter pack — purpose, norms, a first-meeting agenda and a six-month rhythm. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:800px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:62ch;margin:0 0 24px}
+  .field{margin-bottom:15px}.field label{display:block;font:700 13px var(--sans);margin-bottom:7px}
+  input[type=text]{width:100%;font:500 15px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none}
+  input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .seg{display:flex;gap:7px;flex-wrap:wrap}
+  .seg button{font:600 13px var(--sans);color:var(--mut);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 14px;cursor:pointer}
+  .seg button.on{background:#11293f;border-color:var(--teal);color:var(--ink)}
+  .kit{background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:20px;display:none}.kit.on{display:block}
+  .kit h2{font:800 21px var(--serif);color:#fff;margin:0 0 4px}
+  .kit .pur{font-size:14.5px;color:#cbd8e6;margin:0 0 18px;font-style:italic}
+  .kit h4{font:800 12px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--teal);margin:18px 0 8px}
+  .kit ul,.kit ol{margin:0;padding-left:20px}.kit li{font-size:14px;color:var(--mut);margin-bottom:5px}
+  .kit li b{color:var(--ink)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:18px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Community</p>
+  <h1>CoP starter kit.</h1>
+  <p class="lede">A teaching <b style="color:var(--ink)">Community of Practice</b> is the cheapest, most durable way to not teach alone. Answer four questions and get a ready-to-run starter pack — purpose, norms, a first agenda and a six-month rhythm.</p>
+
+  <div class="field"><label>What's it about?</label><input type="text" id="focus" placeholder="e.g. assessment in large classes"></div>
+  <div class="field"><label>Who's it for?</label><input type="text" id="who" placeholder="e.g. early-career teachers across the faculty"></div>
+  <div class="field"><label>How often?</label><div class="seg" id="cad"><button class="on" data-v="monthly">Monthly</button><button data-v="fortnightly">Fortnightly</button><button data-v="each term">Each term</button></div></div>
+  <div class="field"><label>Format?</label><div class="seg" id="fmt"><button class="on" data-v="online">Online</button><button data-v="in person">In person</button><button data-v="hybrid">Hybrid</button></div></div>
+
+  <div class="kit" id="kit"></div>
+
+  <div class="note"><b>The secret to a CoP that lasts:</b> a clear purpose, a predictable rhythm, and one person who sends the invite each time. Start small — six committed people beats sixty on a list. Once you're running, list it so others can find you.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · grounded in Wenger's communities-of-practice · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var cad='monthly', fmt='online';
+  var focus=document.getElementById('focus'), who=document.getElementById('who');
+  [focus,who].forEach(function(e){e.addEventListener('input',build);});
+  function seg(id,set){document.getElementById(id).addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.children,function(x){x.classList.remove('on');});b.classList.add('on');set(b.getAttribute('data-v'));build();});}
+  seg('cad',function(v){cad=v;}); seg('fmt',function(v){fmt=v;});
+  function build(){
+    var f=(focus.value||'').trim(), w=(who.value||'').trim();
+    if(!f){document.getElementById('kit').className='kit';return;}
+    var W=w||'colleagues who care about teaching';
+    var name='The '+f.replace(/^the\s+/i,'').replace(/\b\w/,function(c){return c.toUpperCase();})+' Circle';
+    var html='<h2>'+name+'</h2><p class="pur">A community of practice for '+W+' to share, question and improve how we do <b style="color:#cbd8e6">'+f+'</b> — together, '+cad+', '+fmt+'.</p>';
+    html+='<h4>Purpose</h4><ul><li>Make the everyday work of '+f+' <b>visible and shared</b>, not solved alone.</li><li>Build trust to ask real questions and try things.</li><li>Surface what works, and turn it into something others can use.</li></ul>';
+    html+='<h4>How we work (norms)</h4><ul><li><b>Show up curious, not finished.</b> Half-formed ideas welcome.</li><li><b>Confidential by default</b> — what’s shared here stays here unless we agree otherwise.</li><li><b>Everyone contributes, no one performs.</b></li><li><b>One concrete takeaway</b> each session.</li></ul>';
+    html+='<h4>First meeting · agenda (60 min)</h4><ol><li><b>Welcome &amp; why we’re here</b> (10) — each person: one frustration, one hope about '+f+'.</li><li><b>What’s our shared question?</b> (20) — agree the one thing worth our attention.</li><li><b>One thing each</b> (20) — what are you trying right now?</li><li><b>Rhythm &amp; roles</b> (10) — confirm we meet '+cad+', who sends the invite, what’s next.</li></ol>';
+    html+='<h4>Six-month rhythm</h4><ul><li><b>Sessions 1–2:</b> trust + the shared question.</li><li><b>Sessions 3–4:</b> bring a problem; bring an attempt.</li><li><b>Session 5:</b> invite a guest or a guest read.</li><li><b>Session 6:</b> capture what we’ve learned → share it with the sector.</li></ul>';
+    html+='<button class="btn" id="copy" type="button">Copy the starter pack</button>';
+    var k=document.getElementById('kit');k.className='kit on';k.innerHTML=html;
+    document.getElementById('copy').addEventListener('click',function(){navigator.clipboard&&navigator.clipboard.writeText(k.innerText.replace('Copy the starter pack',''));var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
+  }
+})();
+</script>
+</body>
+</html>

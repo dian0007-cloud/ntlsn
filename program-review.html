@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program Review Readiness — get a degree ready for review or accreditation · NTLSN</title>
+<meta name="description" content="Self-assess a whole program against the dimensions a review panel or accreditation body looks for — outcomes and AQF alignment, assessment progression, WIL, inclusivity, the student-voice loop, graduate outcomes and continuous improvement. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;--red:#e06b6b;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 22px}
+  .dim{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:9px}
+  .dim .t{font:700 14.5px var(--sans);color:var(--ink)}.dim .d{font-size:12.5px;color:var(--mut);margin:2px 0 9px}
+  .opts{display:flex;gap:7px}
+  .opt{flex:1;text-align:center;font:600 12.5px var(--sans);padding:7px;border-radius:8px;border:1px solid var(--line);background:var(--navy);color:var(--mut);cursor:pointer;user-select:none}
+  .opt.on[data-v="2"]{border-color:var(--green);background:#11271c;color:var(--green)}
+  .opt.on[data-v="1"]{border-color:var(--amber);background:#241c06;color:var(--amber)}
+  .opt.on[data-v="0"]{border-color:var(--red);background:#2a1414;color:var(--red)}
+  .result{background:linear-gradient(135deg,rgba(78,205,196,.1),rgba(201,169,98,.05));border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:20px 0;display:none}
+  .result.show{display:block}
+  .ring{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+  .pct{font:800 34px var(--serif);color:#fff}.rlabel{font:700 14px var(--sans)}
+  .meterbar{height:9px;background:#0c1a2e;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:14px}.meterbar div{height:100%;transition:width .4s}
+  .gaps{margin-top:6px}.gaps .g{display:flex;gap:8px;font-size:13.5px;color:#e7dcc2;margin-bottom:5px}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:6px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Quality &amp; standards</p>
+  <h1>Program review readiness.</h1>
+  <p class="lede">A unit can be excellent while the <b style="color:var(--ink)">program</b> around it is incoherent. Before a course review or accreditation visit, rate the whole degree against the dimensions a panel actually probes — and see where the work is, not on the morning of the visit.</p>
+
+  <div id="dims"></div>
+
+  <div class="result" id="result">
+    <div class="ring"><div class="pct" id="pct">0%</div><div><div class="rlabel" id="rlabel"></div><div style="font-size:12.5px;color:var(--mut)" id="rsub"></div></div></div>
+    <div class="meterbar"><div id="meter" style="width:0%;background:var(--teal)"></div></div>
+    <div class="gaps" id="gaps"></div>
+  </div>
+  <button class="btn" id="copy" type="button" style="display:none">Copy the readiness report</button>
+
+  <div class="note"><b>Reviews reward coherence and evidence, not aspiration.</b> The strongest programs can show the <i>thread</i> — program outcomes mapped to AQF level, assessment that builds and isn't duplicated, a closed student-feedback loop, and data driving change. A red here is simply the highest-value place to put effort before the panel arrives.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · aligned to the Higher Education Standards Framework &amp; common accreditation expectations · an internal readiness aid, not an official audit · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var DIMS=[
+    ['Program outcomes &amp; AQF alignment','Program learning outcomes are explicit, current, and pitched at the right AQF level.'],
+    ['Constructive alignment across the degree','Outcomes map down to units and assessment — a visible thread, not just a curriculum map on paper.'],
+    ['Assessment progression &amp; validity','Assessment builds in complexity, isn’t duplicated or over-loaded, and has an authentic capstone.'],
+    ['Authentic &amp; work-integrated learning','Real-world / WIL experiences are embedded and assessed, not bolted on.'],
+    ['Inclusive &amp; accessible by design','UDL principles, accessible materials, and equity considered across the program.'],
+    ['Student voice &amp; the feedback loop','Student feedback is gathered AND visibly acted on — and students are told what changed.'],
+    ['Graduate outcomes &amp; employability','Evidence that graduates achieve the outcomes and transition well.'],
+    ['Benchmarking &amp; reference standards','The program is benchmarked externally against comparable degrees / standards.'],
+    ['Continuous improvement &amp; data use','A real cycle: data reviewed, changes made, impact tracked — documented.']
+  ];
+  var ratings={};
+  var dimsEl=document.getElementById('dims');
+  dimsEl.innerHTML=DIMS.map(function(d,i){
+    return '<div class="dim"><div class="t">'+d[0]+'</div><div class="d">'+d[1]+'</div>'
+      +'<div class="opts" data-i="'+i+'"><span class="opt" data-v="2">In place</span><span class="opt" data-v="1">Partial</span><span class="opt" data-v="0">Not yet</span></div></div>';
+  }).join('');
+  dimsEl.addEventListener('click',function(e){var o=e.target.closest('.opt');if(!o)return;var row=o.parentElement,i=row.getAttribute('data-i');[].forEach.call(row.children,function(x){x.classList.remove('on');});o.classList.add('on');ratings[i]=parseInt(o.getAttribute('data-v'));render();});
+  function render(){
+    var keys=Object.keys(ratings); if(keys.length<DIMS.length){document.getElementById('result').className='result';document.getElementById('copy').style.display='none';return;}
+    var score=keys.reduce(function(a,k){return a+ratings[k];},0), max=DIMS.length*2, pct=Math.round(score/max*100);
+    var res=document.getElementById('result'); res.className='result show'; document.getElementById('copy').style.display='';
+    document.getElementById('pct').textContent=pct+'%';
+    var col=pct>=80?'var(--green)':pct>=55?'var(--amber)':'var(--red)';
+    var lab=pct>=80?'Review-ready':pct>=55?'Nearly there — close the gaps':'Significant work before review';
+    document.getElementById('meter').style.width=pct+'%'; document.getElementById('meter').style.background=col;
+    document.getElementById('rlabel').textContent=lab; document.getElementById('rlabel').style.color=col;
+    var reds=keys.filter(function(k){return ratings[k]===0;}), ambers=keys.filter(function(k){return ratings[k]===1;});
+    document.getElementById('rsub').textContent=reds.length+' to start · '+ambers.length+' to strengthen · '+(keys.length-reds.length-ambers.length)+' in place';
+    var gaps=reds.concat(ambers);
+    document.getElementById('gaps').innerHTML = gaps.length? '<div style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-bottom:7px">Priority before the panel</div>'+gaps.map(function(k){return '<div class="g">'+(ratings[k]===0?'🔴':'🟠')+' '+DIMS[k][0]+'</div>';}).join('') : '<div class="g" style="color:var(--green)">✓ Every dimension is in place — strong position.</div>';
+    window.__rep={pct:pct,lab:lab,reds:reds,ambers:ambers};
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var r=window.__rep;var txt='PROGRAM REVIEW READINESS — '+r.pct+'% ('+r.lab+')\n';
+    DIMS.forEach(function(d,i){var v=ratings[i];txt+='\n['+(v===2?'✓ in place':v===1?'~ partial':'✗ not yet')+'] '+d[0].replace(/&amp;/g,'&');});
+    txt+='\n\n— assessed with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+})();
+</script>
+</body>
+</html>

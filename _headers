@@ -11,8 +11,11 @@
   # ── Caching ──
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
 /index.html
-  Cache-Control: public, max-age=300, stale-while-revalidate=3600
+  Cache-Control: public, max-age=0, must-revalidate
 
 /sw.js
   Cache-Control: no-cache
@@ -28,5 +31,5 @@
   Cache-Control: public, max-age=3600
 
 /data/*
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Cache-Control: public, max-age=60, must-revalidate
   Access-Control-Allow-Origin: *

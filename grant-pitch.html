@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoTL Grant Pitch Builder — scaffold a teaching grant application · NTLSN</title>
+<meta name="description" content="Turn a teaching idea into a structured grant pitch — problem, aim, approach, evaluation, outcomes and dissemination — and get it checked for the gaps assessors look for. A grant-writing aid. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 20px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}@media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .field{margin-bottom:12px}.field label{display:block;font:700 12.5px var(--sans);margin-bottom:3px}.field .h{font:400 11.5px var(--sans);color:var(--mut);margin:0 0 5px}
+  input[type=text],textarea{width:100%;font:500 13.5px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:8px;padding:8px 10px;outline:none}
+  textarea{min-height:48px;resize:vertical}input:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .panel{position:sticky;top:16px;align-self:start}
+  .doc{background:#f7f5ef;color:#1a2433;border-radius:12px;padding:22px 24px;font:400 13px/1.55 Georgia,serif;max-height:62vh;overflow:auto}
+  .doc h2{font:700 17px Georgia,serif;margin:0 0 12px;color:#0A1628}.doc h3{font:700 11.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:#2c7a72;margin:13px 0 3px}
+  .doc p{margin:0 0 8px}.doc .empty{color:#9aa6b2;font-size:12.5px}
+  .checks{margin-top:14px}.checks .c{display:flex;gap:8px;font-size:13px;margin-bottom:5px}.checks .y{color:var(--green)}.checks .n{color:var(--amber)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:12px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:22px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>SoTL grant pitch builder.</h1>
+  <p class="lede">Most teaching grants are lost in the gap between a good idea and a fundable <b style="color:var(--ink)">case</b>. Fill the parts and a structured pitch assembles on the right — then we flag the elements assessors look for and you've left out.</p>
+
+  <div class="grid">
+    <div>
+      <div class="field"><label>Project title</label><input type="text" id="title" placeholder="e.g. Authentic assessment in first-year nursing"></div>
+      <div class="field"><label>The problem / gap</label><div class="h">What's not working, and for whom? Evidence helps.</div><textarea id="problem" placeholder="First-year attrition is high and current assessment doesn't build professional judgement…"></textarea></div>
+      <div class="field"><label>Aim &amp; objectives</label><div class="h">One aim; 2–3 concrete objectives.</div><textarea id="aim"></textarea></div>
+      <div class="field"><label>Approach / what you'll do</label><textarea id="approach"></textarea></div>
+      <div class="field"><label>Who benefits &amp; significance</label><div class="h">Why it matters beyond your own class.</div><textarea id="signif"></textarea></div>
+      <div class="field"><label>Evaluation — how you'll know it worked</label><textarea id="eval" placeholder="Mixed methods: pre/post measures, student focus groups…"></textarea></div>
+      <div class="field"><label>Dissemination &amp; outputs</label><div class="h">Publications, sector sharing, resources.</div><textarea id="dissem"></textarea></div>
+    </div>
+    <div class="panel">
+      <div class="doc" id="doc"></div>
+      <div class="checks" id="checks"></div>
+      <button class="btn" id="copy" type="button">Copy the pitch</button>
+    </div>
+  </div>
+
+  <div class="note"><b>The two things assessors most often find missing:</b> a credible <i>evaluation</i> plan (how you'll know it worked, with real measures) and a <i>dissemination</i> plan (how the sector benefits, not just your unit). Fundable teaching projects are <i>scholarly</i> — grounded in evidence and designed to be shared.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · structured to common teaching-grant criteria · a drafting aid, not a specific scheme's template · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var F=[['title','Project'],['problem','The problem'],['aim','Aim &amp; objectives'],['approach','Approach'],['signif','Significance &amp; beneficiaries'],['eval','Evaluation'],['dissem','Dissemination &amp; outputs']];
+  var ids=F.map(function(x){return x[0];});
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',render);});
+  function v(id){return (document.getElementById(id).value||'').trim();}
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function render(){
+    var any=ids.some(function(id){return v(id);});
+    var doc=document.getElementById('doc');
+    if(!any){doc.innerHTML='<p class="empty">Fill the fields and your pitch assembles here, section by section.</p>';document.getElementById('checks').innerHTML='';return;}
+    var h='<h2>'+(v('title')?esc(v('title')):'Untitled teaching project')+'</h2>';
+    [['problem','The problem'],['aim','Aim &amp; objectives'],['approach','Approach'],['signif','Significance &amp; who benefits'],['eval','Evaluation'],['dissem','Dissemination &amp; outputs']].forEach(function(s){
+      if(v(s[0]))h+='<h3>'+s[1]+'</h3><p>'+esc(v(s[0])).replace(/\n/g,'<br>')+'</p>';
+    });
+    doc.innerHTML=h;
+    // gap checks
+    var checks=[
+      ['Frames a real problem', !!v('problem')],
+      ['Clear aim &amp; objectives', !!v('aim')],
+      ['Concrete approach', !!v('approach')],
+      ['Significance beyond your class', !!v('signif')],
+      ['Credible evaluation plan', !!v('eval')],
+      ['Dissemination / sector benefit', !!v('dissem')]
+    ];
+    document.getElementById('checks').innerHTML=checks.map(function(c){return '<div class="c '+(c[1]?'y':'n')+'">'+(c[1]?'✓':'○')+' '+c[0]+'</div>';}).join('');
+    window.__pitch=doc.innerText;
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=(window.__pitch||'')+'\n\n— drafted with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

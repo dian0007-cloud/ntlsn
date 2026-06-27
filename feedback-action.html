@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Feedback → Action Plan — close the loop on your unit survey · NTLSN</title>
+<meta name="description" content="Pick the themes that came up in your student feedback and get a concrete action plan — a diagnosis, two or three responses, and a ready 'you said / we did' line to publish back to students. Closes the feedback loop. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 22px}
+  .lbl{font:700 12.5px var(--sans);color:var(--ink);margin:0 0 9px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+  .chip{font:600 12.5px var(--sans);padding:8px 14px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--mut);cursor:pointer;transition:.13s;user-select:none}
+  .chip.on{border-color:var(--teal);background:#11293f;color:var(--teal)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin-bottom:11px}
+  .card h3{font:800 15px var(--sans);color:#fff;margin:0 0 4px}.card .dx{font-size:13px;color:var(--mut);margin:0 0 11px}
+  .card h4{font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--teal);margin:0 0 5px}
+  .card ul{margin:0 0 12px;padding-left:18px}.card li{font-size:13.5px;color:#cbd8e6;margin-bottom:3px}
+  .swd{background:#0c1a2e;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px;padding:10px 13px;font-size:13px;color:#e7dcc2}.swd b{color:var(--gold)}
+  .empty{color:#5d6e82;font-size:14px;padding:16px 0}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:8px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>Student feedback → action plan.</h1>
+  <p class="lede">Surveys only improve teaching if something <b style="color:var(--ink)">happens</b> next — and students only keep giving honest feedback if they see it land. Pick the themes that came up and get a concrete action plan, plus a ready <b style="color:var(--ink)">"you said / we did"</b> line to publish back to your class.</p>
+
+  <div class="lbl">Which themes came up in your feedback?</div>
+  <div class="chips" id="chips"></div>
+
+  <div id="out"><div class="empty">Tap the themes above to build your plan…</div></div>
+  <button class="btn" id="copy" type="button" style="display:none">Copy the action plan + "you said / we did"</button>
+
+  <div class="note"><b>Closing the loop is the highest-leverage, lowest-cost quality move you can make.</b> A short "here's what you told me and here's what's changing" at the start of next term lifts response rates and trust — and it's exactly the kind of evidence that strengthens a teaching portfolio or fellowship case. Use these as a starting point; your context will sharpen them.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · a reflective aid, not a verdict on your teaching · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var TH={
+    workload:['Workload felt too high','Perceived overload is often about <i>bunching</i> and unclear time expectations, not raw hours.',
+      ['Map assessment due dates across the whole unit and de-bunch the crunch points.','State the expected time per task up front, and cut or fold in anything that isn’t pulling its weight.','Check reading loads against realistic student reading speeds.'],
+      'You said the workload bunched up — we’ve spread the due dates and trimmed two tasks.'],
+    expectations:['Unclear expectations / criteria','Students can’t hit a target they can’t see — this is usually a transparency fix, not a standards fix.',
+      ['Share the rubric <i>before</i> the task, and annotate one exemplar against it.','Add a one-paragraph "what good looks like" to each assessment brief.','Run a 10-minute Q&A on the brief in class.'],
+      'You said expectations were unclear — we’ve added rubrics up front and a worked exemplar.'],
+    feedback:['Feedback too slow or not useful','"Useful and on time" beats "detailed and late" for learning — timing is the lever.',
+      ['Return feedback before the next task so it can actually be used (feed-forward).','Use a criteria-based comment bank to speed up without losing quality.','Add brief audio or whole-class feedback for common issues.'],
+      'You said feedback came too late to use — we’ve moved return dates earlier and added feed-forward.'],
+    pace:['Pace too fast / too much content','A packed unit usually trades coverage for learning — less, taught better, sticks more.',
+      ['Identify the threshold concepts and give them room; demote "nice to know" to optional.','Add retrieval and worked examples rather than more new content.','Build in a catch-up/consolidation week.'],
+      'You said the pace was relentless — we’ve cut optional content and added a consolidation week.'],
+    examples:['Wanted more examples / practice','Worked examples and low-stakes practice are among the best-evidenced ways to build confidence.',
+      ['Add worked examples, then faded practice (partly-completed problems).','Provide low-stakes self-check quizzes with feedback.','Share a bank of past examples or model answers.'],
+      'You said you wanted more practice — we’ve added worked examples and self-check quizzes.'],
+    engage:['Low engagement / not interactive','Engagement follows from <i>doing</i>; passive delivery is the usual culprit.',
+      ['Break classes into chunks with an active move every ~12 minutes.','Use polling or think-pair-share to make thinking visible.','Connect content to authentic, real-world problems.'],
+      'You said classes felt passive — we’ve added active tasks and polling throughout.'],
+    organise:['Disorganised / hard to navigate','Cognitive load spent finding things is load not spent learning.',
+      ['Adopt a consistent weekly structure in the LMS (same place, same pattern).','Add a single "start here" page and a clear weekly to-do.','Remove duplicate or dead links.'],
+      'You said the site was hard to navigate — we’ve standardised the weekly layout and added a "start here".'],
+    support:['Wanted more support / approachability','Often a signalling gap — students don’t know how or when to reach you.',
+      ['Publish clear, bounded contact hours and expected response times.','Add an anonymous "muddiest point" channel.','Signal warmth early — it measurably raises help-seeking.'],
+      'You said it was hard to get help — we’ve set clear contact hours and an anonymous questions channel.'],
+    group:['Group-work problems','Almost always an accountability-design issue, not a student-attitude issue.',
+      ['Add a peer-contribution factor so the group mark isn’t the only mark.','Require a team charter and an early check-in.','Keep groups small with clear roles.'],
+      'You said group work felt unfair — we’ve added peer assessment and team charters.'],
+    tech:['Tech / online issues','Friction in the tools erodes goodwill fast and hits equity hardest.',
+      ['Test the student view of every tool before release.','Provide low-bandwidth alternatives and clear tech-help routes.','Record live sessions for those who can’t attend.'],
+      'You said the tech got in the way — we’ve simplified tools and added recordings.']
+  };
+  var sel={};
+  var chips=document.getElementById('chips');
+  chips.innerHTML=Object.keys(TH).map(function(k){return '<span class="chip" data-k="'+k+'">'+TH[k][0]+'</span>';}).join('');
+  chips.addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;var k=c.getAttribute('data-k');sel[k]=!sel[k];c.classList.toggle('on');render();});
+  function render(){
+    var keys=Object.keys(sel).filter(function(k){return sel[k];});
+    var out=document.getElementById('out'), btn=document.getElementById('copy');
+    if(!keys.length){out.innerHTML='<div class="empty">Tap the themes above to build your plan…</div>';btn.style.display='none';return;}
+    btn.style.display='';
+    out.innerHTML=keys.map(function(k){var t=TH[k];
+      return '<div class="card"><h3>'+t[0]+'</h3><div class="dx">'+t[1]+'</div>'
+        +'<h4>What you can do</h4><ul>'+t[2].map(function(a){return '<li>'+a+'</li>';}).join('')+'</ul>'
+        +'<div class="swd"><b>You said / we did:</b> "'+t[3]+'"</div></div>';
+    }).join('');
+    window.__keys=keys;
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var keys=window.__keys||[];var txt='STUDENT FEEDBACK — ACTION PLAN\n';
+    keys.forEach(function(k){var t=TH[k];txt+='\n'+t[0].toUpperCase()+'\n';t[2].forEach(function(a){txt+='  • '+a.replace(/<[^>]+>/g,'').replace(/’/g,"'")+'\n';});txt+='  You said / we did: "'+t[3].replace(/’/g,"'")+'"\n';});
+    txt+='\n— built with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+})();
+</script>
+</body>
+</html>

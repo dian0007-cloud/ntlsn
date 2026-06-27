@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Active-Learning Session Planner — turn a class into a timed run-sheet · NTLSN</title>
+<meta name="description" content="Tell it your class length, size and goal and get a minute-by-minute run-sheet — openings, content chunks interleaved with active-learning techniques matched to your size and mode, a mid-point check, and a close. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 24px}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ctl label{display:block;font:700 12px var(--sans);margin-bottom:5px;color:var(--ink)}
+  select,input[type=text],input[type=number]{width:100%;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  select:focus,input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .seg{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:9px;align-items:flex-start}
+  .seg.act{border-left:3px solid var(--teal)}.seg.con{border-left:3px solid var(--line)}.seg.chk{border-left:3px solid var(--gold)}.seg.open,.seg.close{border-left:3px solid var(--green)}
+  .seg .min{flex:none;width:62px;text-align:right;font:800 15px var(--sans);color:#fff}.seg .min span{display:block;font:600 10px var(--sans);color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+  .seg .body .t{font:800 14.5px var(--sans);color:var(--ink)}.seg .body .t .badge{font:800 9px var(--sans);text-transform:uppercase;letter-spacing:.05em;padding:2px 6px;border-radius:5px;margin-left:7px;vertical-align:middle}
+  .badge.bt{background:#143a37;color:var(--teal)}.badge.bg{background:#3a3315;color:var(--gold)}.badge.bgr{background:#163a28;color:var(--green)}
+  .seg .body .d{font-size:13px;color:var(--mut);margin-top:2px}
+  .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin:18px 2px 12px}.meta b{color:var(--ink)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:6px}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Curriculum &amp; outcomes</p>
+  <h1>Active-learning session planner.</h1>
+  <p class="lede">A lecture is easy to write and hard to learn from. Tell us the shape of your class and we'll turn it into a <b style="color:var(--ink)">minute-by-minute run-sheet</b> — content broken into chunks, each followed by an active-learning move matched to your class size and mode, with a mid-point check and a deliberate close.</p>
+
+  <div class="controls">
+    <div class="ctl"><label>Length (min)</label><input type="number" id="len" value="50" min="10" max="180" step="5"></div>
+    <div class="ctl"><label>Class size</label><select id="size"><option value="s">Small (≤25)</option><option value="m" selected>Medium (26–80)</option><option value="l">Large (80+)</option></select></div>
+    <div class="ctl"><label>Mode</label><select id="mode"><option value="f">In-person</option><option value="o">Online (live)</option><option value="h">Hybrid</option></select></div>
+    <div class="ctl"><label>Main goal</label><select id="goal"><option value="understand">Understand a concept</option><option value="skill">Practise a skill</option><option value="solve">Solve problems</option><option value="discuss">Discuss &amp; critique</option></select></div>
+    <div class="ctl"><label>Topic (optional)</label><input type="text" id="topic" placeholder="e.g. enzyme kinetics"></div>
+  </div>
+
+  <div class="meta" id="meta"></div>
+  <div id="plan"></div>
+  <button class="btn" id="copy" type="button">Copy the run-sheet</button>
+  <button class="btn ghost" id="reroll" type="button">Reshuffle techniques</button>
+
+  <div class="note"><b>Why chunk-and-check beats a straight lecture:</b> attention sags after ~10–15 minutes, and learning sticks when students <i>retrieve</i> and <i>apply</i>, not just receive. Every active move here is a low-stakes way for students to do the thinking — and for you to see who's lost <i>before</i> the exam does. Adjust freely; this is a scaffold, not a script.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · grounded in active-learning &amp; retrieval-practice evidence · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var T={
+    // [name, desc, goals, sizes, modes, minutes]
+    tps:['Think–Pair–Share','Pose a question; 1 min solo thinking, 2 min in pairs, then sample answers.','understand discuss solve','s m l','f o h',5],
+    retrieve:['Retrieval practice','Students brain-dump everything they recall on the last idea — no notes.','understand skill','s m l','f o h',5],
+    muddiest:['Muddiest point','Each writes the one thing still unclear; you address the most common.','understand discuss','s m l','f o h',4],
+    poll:['Live poll / peer instruction','Pose a concept MCQ; vote, discuss in pairs, re-vote.','understand solve','m l','f o h',7],
+    faded:['Worked example → faded practice','Model one fully, then have students complete a partly-worked one.','skill solve','s m l','f o h',12],
+    problem:['Small-group problem','Groups of 3–4 tackle a problem; you circulate and prompt.','solve skill','s m','f h',15],
+    case:['Case analysis','Give a short scenario; groups decide and justify a course of action.','solve discuss','s m l','f o h',12],
+    jigsaw:['Jigsaw','Groups each master one piece, then regroup to teach each other.','understand discuss','m l','f h',18],
+    breakout:['Breakout discussion','Send to breakout rooms with one focus question + a nominated reporter.','discuss understand','s m l','o h',10],
+    gallery:['Gallery walk','Groups post answers; others circulate and add comments.','discuss solve','m','f h',14],
+    concept:['Concept map','Pairs map how today’s ideas connect to last week’s.','understand','s m','f o h',9],
+    debate:['Two-minute position','Students argue a stance, then swap and argue the opposite.','discuss','s m','f o h',8]
+  };
+  var ids=['len','size','mode','goal','topic'];
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',build);document.getElementById(id).addEventListener('change',build);});
+  document.getElementById('reroll').addEventListener('click',build);
+  function val(id){return document.getElementById(id).value;}
+  function fits(t,goal,size,mode){return t[2].indexOf(goal)>=0 && t[3].indexOf(size)>=0 && t[4].indexOf(mode)>=0;}
+  function pick(goal,size,mode,used){
+    var pool=Object.keys(T).filter(function(k){return fits(T[k],goal,size,mode)&&used.indexOf(k)<0;});
+    if(!pool.length)pool=Object.keys(T).filter(function(k){return fits(T[k],goal,size,mode);});
+    if(!pool.length)pool=['tps'];
+    return pool[Math.floor(Math.random()*pool.length)];
+  }
+  function build(){
+    var len=Math.max(10,parseInt(val('len'),10)||50), size=val('size'), mode=val('mode'), goal=val('goal'), topic=(val('topic')||'').trim();
+    var segs=[], used=[];
+    var openMin=Math.max(4,Math.round(len*0.1)), closeMin=Math.max(3,Math.round(len*0.08));
+    var body=len-openMin-closeMin;
+    segs.push(['open','Opening',openMin,'Hook + last-week retrieval','Frame today in one sentence, then 2 min retrieval practice on the previous class — primes memory and signals that recall matters.']);
+    // body: alternate content chunk (~10 min) + active move; one checkpoint near the middle
+    var chunks=Math.max(1,Math.round(body/16));
+    var per=body/chunks, chkAt=Math.ceil(chunks/2);
+    for(var c=0;c<chunks;c++){
+      var k=pick(goal,size,mode,used); used.push(k); var t=T[k];
+      var conMin=Math.max(5,Math.round(per-t[5]));
+      segs.push(['con','Content chunk '+(c+1),conMin,'Teach a chunk'+(topic?(' of '+topic):''),'One idea, well — explain, show an example, keep it under ~'+conMin+' min before students do something with it.']);
+      segs.push(['act','Active move',t[5],t[0],t[1]]);
+      if(c+1===chkAt){ segs.push(['chk','Checkpoint',4,'Quick understanding check','A poll or show-of-hands on the key idea so far. If >25% miss it, re-teach now — not next week.']); }
+    }
+    segs.push(['close','Close',closeMin,'Synthesis + exit ticket','Students write the one thing they’ll remember and one question still open (your exit ticket). You close the loop next class.']);
+    // normalise minutes to total
+    var sum=segs.reduce(function(a,s){return a+s[2];},0), diff=len-sum;
+    if(diff!==0){ // adjust the largest content chunk
+      var idx=-1,mx=-1; segs.forEach(function(s,i){if(s[0]==='con'&&s[2]>mx){mx=s[2];idx=i;}});
+      if(idx<0){segs.forEach(function(s,i){if(s[2]>mx){mx=s[2];idx=i;}});}
+      segs[idx][2]=Math.max(3,segs[idx][2]+diff);
+    }
+    // render with running clock
+    var t0=0, badge={act:'bt',chk:'bg',open:'bgr',close:'bgr',con:''}, blabel={act:'Active',chk:'Check',open:'Open',close:'Close'};
+    document.getElementById('plan').innerHTML=segs.map(function(s){
+      var from=t0, to=t0+s[2]; t0=to;
+      var bd=badge[s[0]]?('<span class="badge '+badge[s[0]]+'">'+blabel[s[0]]+'</span>'):'';
+      return '<div class="seg '+s[0]+'"><div class="min">'+s[2]+'′<span>'+from+'–'+to+'</span></div>'
+        +'<div class="body"><div class="t">'+esc(s[3])+bd+'</div><div class="d">'+esc(s[4])+'</div></div></div>';
+    }).join('');
+    var actCount=segs.filter(function(s){return s[0]==='act';}).length;
+    document.getElementById('meta').innerHTML='<div><b>'+len+' min</b> total</div><div><b>'+actCount+'</b> active moves</div><div><b>'+(t0)+' min</b> planned</div><div>'+({s:'Small',m:'Medium',l:'Large'}[size])+' · '+({f:'In-person',o:'Online',h:'Hybrid'}[mode])+'</div>';
+    window.__segs=segs;
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  document.getElementById('copy').addEventListener('click',function(){
+    var segs=window.__segs||[],t0=0;
+    var txt=segs.map(function(s){var from=t0,to=t0+s[2];t0=to;return from+'–'+to+' min ('+s[2]+'′)  '+s[3].replace(/&amp;/g,'&')+'\n      '+s[4].replace(/&amp;/g,'&').replace(/’/g,"'");}).join('\n\n');
+    txt='SESSION RUN-SHEET — '+document.getElementById('len').value+' min\n\n'+txt+'\n\n— built with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  build();
+})();
+</script>
+</body>
+</html>

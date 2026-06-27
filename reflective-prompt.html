@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reflective Practice Prompt — turn a teaching moment into reflection · NTLSN</title>
+<meta name="description" content="Describe a teaching moment, pick a reflective model (Gibbs, What–So What–Now What, or Brookfield's lenses), and get a structured set of prompts to write against — for CPD, fellowship and SoTL. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:790px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:62ch;margin:0 0 22px}
+  .field{margin-bottom:15px}.field label{display:block;font:700 13px var(--sans);margin-bottom:7px}
+  textarea{width:100%;min-height:66px;font:500 15px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none;resize:vertical}
+  textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+  .md{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;transition:.13s}
+  .md.on{border-color:var(--teal);background:#11293f;box-shadow:0 0 0 2px #4ecdc426}
+  .md .n{font:800 13.5px var(--sans);color:var(--ink)}.md .d{font:400 11.5px/1.4 var(--sans);color:var(--mut)}
+  .out{background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px;display:none}.out.on{display:block}
+  .out h3{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 12px}
+  .step{margin-bottom:13px}.step .s{font:800 14px var(--sans);color:var(--teal);margin-bottom:2px}.step .p{font-size:14px;color:#cbd8e6}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:8px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>Reflective practice prompt.</h1>
+  <p class="lede">Something happened in your teaching — a moment that stuck. Name it, pick a reflective model, and get a structured set of prompts to <b style="color:var(--ink)">write against</b>. Good for CPD, fellowship evidence, and the start of a SoTL study.</p>
+
+  <div class="field"><label>The teaching moment</label><textarea id="moment" placeholder="e.g. a class discussion fell completely flat, and I couldn't tell why"></textarea></div>
+  <div class="field"><label>Reflective model</label><div class="models" id="models">
+    <div class="md on" data-k="rolfe"><div class="n">What · So what · Now what</div><div class="d">Rolfe — quick &amp; powerful</div></div>
+    <div class="md" data-k="gibbs"><div class="n">Gibbs' cycle</div><div class="d">Six stages, feelings included</div></div>
+    <div class="md" data-k="brook"><div class="n">Brookfield's lenses</div><div class="d">Four critical viewpoints</div></div>
+  </div></div>
+
+  <div class="out" id="out"><h3>Write against these</h3><div id="steps"></div><button class="btn" id="copy" type="button">Copy prompts</button></div>
+
+  <div class="note"><b>Reflection isn't journaling.</b> The value is in moving from <i>what happened</i> to <i>what it means</i> to <i>what you'll change</i> — and ideally checking your read against other lenses. One honest paragraph per prompt is plenty.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · Rolfe et al. · Gibbs · Brookfield · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var model='rolfe', moment=document.getElementById('moment');
+  var M={
+    rolfe:[['What?','Describe MOMENT plainly — what actually happened, who was there, what you did?'],
+           ['So what?','What does it tell you — about your students, your assumptions, your teaching? Why did it land the way it did?'],
+           ['Now what?','What will you do differently next time, and what will you watch to know if it worked?']],
+    gibbs:[['Description','What happened in MOMENT — the facts, no judgement yet.'],
+           ['Feelings','What were you thinking and feeling, during and after?'],
+           ['Evaluation','What was good and bad about the experience?'],
+           ['Analysis','What sense can you make of it? What might explain it (your read, the students’, the literature)?'],
+           ['Conclusion','What else could you have done? What have you learned?'],
+           ['Action plan','If it arose again, what would you do?']],
+    brook:[['Your autobiography','How did MOMENT feel as a teacher and a learner? What past experience shapes your read?'],
+           ['Students’ eyes','How might your students have experienced this — and how could you actually find out?'],
+           ['Colleagues’ perceptions','What would a trusted colleague notice or ask if they’d been in the room?'],
+           ['Theory &amp; literature','What does the scholarship of teaching say about this — and does it confirm or unsettle your view?']]
+  };
+  moment.addEventListener('input',build);
+  document.getElementById('models').addEventListener('click',function(e){var m=e.target.closest('.md');if(!m)return;[].forEach.call(this.children,function(x){x.classList.remove('on');});m.classList.add('on');model=m.getAttribute('data-k');build();});
+  function build(){
+    var mo=(moment.value||'').trim();
+    var ref=mo?('“'+mo+'”'):'your moment';
+    var steps=M[model].map(function(s){return '<div class="step"><div class="s">'+s[0]+'</div><div class="p">'+s[1].replace('MOMENT',ref)+'</div></div>';}).join('');
+    document.getElementById('steps').innerHTML=steps;
+    document.getElementById('out').className='out on';
+  }
+  build();
+  document.getElementById('copy').addEventListener('click',function(){
+    var mo=(moment.value||'').trim(), ref=mo?('"'+mo+'"'):'your moment';
+    var txt=M[model].map(function(s,i){return (i+1)+'. '+s[0].replace(/&amp;/g,'&')+'\n   '+s[1].replace('MOMENT',ref).replace(/&amp;/g,'&').replace(/’/g,"'");}).join('\n\n');
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+})();
+</script>
+</body>
+</html>

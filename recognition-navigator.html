@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Recognition Navigator</title>
+<meta name="description" content="Not sure where to start? Tell us your goal and the Recognition Navigator points you to the right NTLSN self-check — fellowship, PSF evidence, national awards, SoTL, recognition points, or AI-resilient assessment. Runs in your browser.">
+<meta property="og:title" content="Recognition Navigator — NTLSN">
+<meta property="og:description" content="One front door to NTLSN's self-check tools for teaching recognition — fellowship, awards, PSF evidence, SoTL and more. Tell us your goal; we'll point the way. Free.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:720px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 18px}
+  .h{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  .opt{display:flex;gap:11px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14px;transition:.12s}
+  .opt:hover{border-color:rgba(78,205,196,.45);background:rgba(78,205,196,.04)}
+  .opt.sel{border-color:var(--teal);background:rgba(78,205,196,.08)}
+  .opt:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .cardlink:focus-visible,.recrow:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .opt .ar{margin-left:auto;color:var(--mut);transition:.12s}
+  .opt.sel .ar{color:var(--teal)}
+  .rec{display:none;border-top:1px solid var(--line);margin-top:16px;padding-top:16px}
+  .rec.show{display:block}
+  .rec .rh{font:800 13px var(--F);color:var(--teal);margin:0 0 10px}
+  .recrow{display:flex;gap:12px;align-items:flex-start;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:11px;padding:13px 14px;margin:0 0 9px;transition:.12s}
+  .recrow:hover{border-color:var(--teal);transform:translateY(-1px)}
+  .recrow.primary{border-color:rgba(78,205,196,.5);background:rgba(78,205,196,.07)}
+  .pill{font:800 9.5px var(--F);text-transform:uppercase;letter-spacing:.6px;padding:4px 8px;border-radius:999px;flex:none;margin-top:2px}
+  .pill.s{background:var(--teal);color:var(--navy)}
+  .pill.t{background:rgba(255,255,255,.08);color:var(--mut)}
+  .recrow .tt{font:800 14px var(--F);margin:0 0 2px}
+  .recrow .dd{font-size:12.5px;color:var(--mut)}
+  .recrow .go{margin-left:auto;color:var(--teal);font-weight:800;align-self:center;flex:none}
+  .dirh{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:4px 0 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .cardlink{text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:12px;padding:15px;display:block;transition:.12s;background:var(--card)}
+  .cardlink:hover{border-color:var(--teal);transform:translateY(-2px)}
+  .cardlink .ct{font:800 14.5px var(--F);margin:0 0 4px}
+  .cardlink .cd{font-size:12.5px;color:var(--mut);margin:0 0 10px}
+  .cardlink .open{font:800 12px var(--F);color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a.back{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Recognition Navigator</h1>
+  <p class="lead">A front door to NTLSN's self-check tools for teaching recognition. Not sure where to start? Tell us your goal and we'll point you to the right one — or browse them all below. <b>Every tool is free, illustrative, and runs entirely in your browser.</b></p>
+
+  <div class="panel">
+    <div class="h">What are you trying to do right now?</div>
+    <div class="opts" id="opts"></div>
+    <div class="rec" id="rec"></div>
+  </div>
+
+  <div class="dirh">All the self-check tools</div>
+  <div class="grid" id="dir"></div>
+
+  <div class="foot">
+    <b>Orientation, not assessment.</b> The Navigator suggests where to start — each tool is a self-reflective guide, not a determination of eligibility, a score, or an official outcome. Nothing is stored or sent. &nbsp;·&nbsp; <a class="back" href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var TOOLS={
+    crosswalk:{t:'Evidence Cross-Walk', d:'See how the evidence you already hold counts across fellowship, awards, promotion and SoTL — all at once.', u:'/evidence-crosswalk.html'},
+    fellowship:{t:'Fellowship Category Mapper', d:'Which AdvanceHE / HEA fellowship category fits your current practice?', u:'/fellowship-mapper.html'},
+    psf:{t:'PSF 2023 Evidence Self-Audit', d:'Map your evidence across the 15 Dimensions of the PSF and find the thin spots.', u:'/psf-evidence-audit.html'},
+    philosophy:{t:'Teaching Philosophy & Narrative Builder', d:'Draft the reflective narrative your fellowship, award or promotion case needs.', u:'/philosophy-builder.html'},
+    aaut:{t:'AAUT Award-Readiness', d:'Which national teaching-award pathway fits — and how ready are you?', u:'/aaut-readiness.html'},
+    sotl:{t:'SoTL Self-Placement', d:'Where are you on the scholarship-of-teaching journey, from curious to leading?', u:'/sotl-placement.html'},
+    points:{t:'Recognition Points Calculator', d:'Total your teaching, SoTL, fellowship and leadership contributions.', u:'/recognition-points.html'},
+    sessional:{t:'Sessional & Casual Recognition', d:'Log the teaching work casual staff do and keep a portable RPL record that follows you.', u:'/sessional-recognition.html'},
+    roi:{t:'Recognition ROI Calculator', d:'Model the retention payback of a recognition scheme — the one-page business case for a DVC.', u:'/recognition-roi.html'},
+    genai:{t:'GenAI Assessment-Readiness', d:'How resilient is one of your assessments to generative AI?', u:'/genai-readiness.html'},
+    peer:{t:'Peer Observation of Teaching', d:'A developmental peer-observation record you fill and keep — portable evidence for promotion, PPR and fellowship.', u:'/peer-observation.html'},
+    trp:{t:'Teaching Recognition Passport', d:'Build a portable record of your teaching recognition — yours to keep, wherever you go.', u:'/trp.html'},
+    cert:{t:'Students-as-Partners Certificate', d:'Generate a print-ready certificate that recognises your work with student partners.', u:'/cert.html'}
+  };
+  var ORDER=['crosswalk','fellowship','psf','philosophy','peer','aaut','sotl','cert','points','trp','sessional','roi','genai'];
+  var ROUTES=[
+    {q:'See what my existing evidence already counts for', rec:['crosswalk','points','trp']},
+    {q:'Work towards an HEA / AdvanceHE fellowship', rec:['fellowship','psf','philosophy','peer']},
+    {q:'Prepare a national teaching-award case (AAUT)', rec:['aaut','philosophy']},
+    {q:'Grow my scholarship of teaching & learning (SoTL)', rec:['sotl','psf']},
+    {q:'Recognise my work with student partners', rec:['cert','sotl']},
+    {q:'Keep a portable record of my teaching', rec:['trp','peer','sessional']},
+    {q:'I’m a sessional or casual academic', rec:['sessional','trp','crosswalk']},
+    {q:'Make the business case to my institution (DVC / HR)', rec:['roi','points']}
+  ];
+  var opts=document.getElementById('opts');
+  var rec=document.getElementById('rec');
+  var dir=document.getElementById('dir');
+  var sel=-1;
+
+  opts.innerHTML=ROUTES.map(function(r,i){
+    return '<div class="opt" role="button" tabindex="0" aria-pressed="false" data-i="'+i+'"><span>'+r.q+'</span><span class="ar">→</span></div>';
+  }).join('');
+
+  dir.innerHTML=ORDER.map(function(k){var T=TOOLS[k];
+    return '<a class="cardlink" href="'+T.u+'"><div class="ct">'+T.t+'</div><div class="cd">'+T.d+'</div><div class="open">Open →</div></a>';
+  }).join('');
+
+  function showRec(i){
+    var r=ROUTES[i];
+    rec.innerHTML='<div class="rh">Start here</div>'+r.rec.map(function(k,j){var T=TOOLS[k];
+      return '<a class="recrow'+(j===0?' primary':'')+'" href="'+T.u+'"><span class="pill '+(j===0?'s':'t')+'">'+(j===0?'Start':'Then')+'</span><span><span class="tt">'+T.t+'</span><span class="dd">'+T.d+'</span></span><span class="go">Open →</span></a>';
+    }).join('');
+    rec.classList.add('show');
+  }
+  opts.addEventListener('click',function(e){
+    var o=e.target.closest('.opt'); if(!o) return;
+    sel=Number(o.getAttribute('data-i'));
+    [].forEach.call(opts.querySelectorAll('.opt'),function(el){var on=Number(el.getAttribute('data-i'))===sel; el.classList.toggle('sel', on); el.setAttribute('aria-pressed', on?'true':'false');});
+    showRec(sel);
+  });
+  opts.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var o=e.target.closest('.opt'); if(o){ e.preventDefault(); o.click(); } } });
+})();
+</script>
+</body>
+</html>

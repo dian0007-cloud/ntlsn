@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — SoTL Self-Placement</title>
+<meta name="description" content="See where you are on the journey of the Scholarship of Teaching & Learning — from curious to leading — and what a next step could look like. Tick the activities you do; runs in your browser.">
+<meta property="og:title" content="SoTL Self-Placement — NTLSN">
+<meta property="og:description" content="Where are you on your Scholarship of Teaching & Learning journey, from curious to leading? Tick what you do and see a next step. Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:700px}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .h{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .ci{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+  .ci:first-of-type{border-top:0}
+  .ci:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:6px}
+  .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--mut);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:13px;transition:.15s}
+  .ci.on .box{background:var(--teal);border-color:var(--teal)}
+  .ci .tx{font-size:13.5px}
+  .ci .st{display:block;font-size:11px;color:var(--mut);margin-top:1px}
+  .res{position:sticky;top:20px}
+  .placeholder{color:var(--mut);font-style:italic;font-size:14px}
+  .stage{font:800 22px var(--F);letter-spacing:-.01em;color:var(--teal);margin:0 0 2px}
+  .stagesub{color:var(--mut);font-size:12px;margin:0 0 14px}
+  .ladder{display:flex;flex-direction:column;gap:5px;margin:0 0 14px}
+  .rung{display:flex;align-items:center;gap:9px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);font-size:12px;color:var(--mut)}
+  .rung.on{border-color:var(--teal);background:rgba(78,205,196,.10);color:var(--ink);font-weight:700}
+  .rung.done{color:#c3d2e6}
+  .rung .n{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font:800 10px var(--F);flex:none}
+  .rung.on .n,.rung.done .n{background:var(--teal);color:var(--navy)}
+  .desc{font-size:13.5px;color:#d4def0;margin:0 0 12px}
+  .next{background:rgba(78,205,196,.08);border:1px solid rgba(78,205,196,.28);border-radius:10px;padding:11px 13px;font-size:13px}
+  .next b{color:var(--teal)}
+  .gaps{font-size:11.5px;color:var(--mut);margin:11px 0 0;line-height:1.6}
+  .reset{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer;margin-top:14px}
+  .reset:hover{color:var(--ink);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>SoTL Self-Placement</h1>
+  <p class="lead">A reflective way to see where you are on your <b>Scholarship of Teaching &amp; Learning</b> journey — from curious to leading — and what a sensible next step looks like. Tick the activities you genuinely do. <b>Illustrative and self-reflective — a developmental guide, not a ranking.</b></p>
+  <div class="grid">
+    <div class="panel"><div class="h">Which of these do you do?</div><div id="form"></div></div>
+    <div class="panel res" id="res"><p class="placeholder">Tick the activities you do and your placement appears here →</p></div>
+  </div>
+  <div class="foot">
+    <b>A developmental guide, not a ranking or a determination.</b> The stages are an illustrative progression to support reflection and planning — SoTL journeys are rarely linear. Runs entirely in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var ACTS=[
+    {st:1, lab:'I reflect informally on how my teaching goes', sn:'Curious'},
+    {st:2, lab:'I reflect systematically — a journal, or a structured review after each iteration', sn:'Reflecting'},
+    {st:3, lab:'I read the scholarship of teaching &amp; learning to inform my practice', sn:'Engaging with the literature'},
+    {st:4, lab:'I collect evidence about my teaching or students’ learning (data, surveys, artefacts)', sn:'Gathering evidence'},
+    {st:5, lab:'I present my practice or findings at seminars, symposia or conferences', sn:'Sharing'},
+    {st:6, lab:'I publish peer-reviewed SoTL work', sn:'Publishing'},
+    {st:7, lab:'I mentor or lead others in SoTL — supervising, running programs, building capacity', sn:'Leading'}
+  ];
+  var STAGES={
+    1:{name:'Curious', desc:'You’re interested in your teaching and reflect on how it goes — the spark of SoTL.', next:'Make reflection systematic — keep a teaching journal, or a structured review after each iteration.'},
+    2:{name:'Reflecting', desc:'You reflect deliberately and systematically on your practice.', next:'Bring in the scholarship — read SoTL literature to frame and challenge your reflection.'},
+    3:{name:'Engaging with the literature', desc:'You draw on the scholarship of teaching and learning to inform your practice.', next:'Start gathering evidence about your teaching and your students’ learning.'},
+    4:{name:'Gathering evidence', desc:'You collect evidence about your teaching and your students’ learning.', next:'Share what you’re finding — present at a seminar, symposium or conference.'},
+    5:{name:'Sharing', desc:'You share your practice and findings with peers.', next:'Write it up for peer review — a SoTL article, case study or chapter.'},
+    6:{name:'Publishing', desc:'You contribute to the field through peer-reviewed SoTL outputs.', next:'Grow others — mentor colleagues, or lead a SoTL program or community.'},
+    7:{name:'Leading', desc:'You build SoTL capacity in others through mentoring, programs and leadership.', next:'Consider convening a community of practice, or shaping SoTL strategy more widely.'}
+  };
+  var ORDER=[1,2,3,4,5,6,7];
+  var state=ACTS.map(function(){return false;});
+  var form=document.getElementById('form');
+  function render(){
+    form.innerHTML=ACTS.map(function(a,i){
+      return '<div class="ci'+(state[i]?' on':'')+'" role="button" tabindex="0" aria-pressed="'+(state[i]?'true':'false')+'" data-i="'+i+'"><span class="box">'+(state[i]?'✓':'')+'</span><span class="tx">'+a.lab+'<span class="st">'+a.sn+'</span></span></div>';
+    }).join('');
+  }
+  function compute(){
+    var res=document.getElementById('res');
+    var stages=ACTS.filter(function(a,i){return state[i];}).map(function(a){return a.st;});
+    if(!stages.length){ res.innerHTML='<p class="placeholder">Tick the activities you do and your placement appears here →</p>'; return; }
+    var cur=Math.max.apply(null,stages);
+    var s=STAGES[cur];
+    // foundation gaps: lower-stage activities not yet ticked
+    var gaps=ACTS.filter(function(a,i){return a.st<cur && !state[i];});
+    res.innerHTML=
+      '<div class="stage">'+s.name+'</div>'+
+      '<div class="stagesub">Stage '+cur+' of 7 · furthest activity you’re doing</div>'+
+      '<div class="ladder">'+ORDER.map(function(n){
+        var cls = n===cur?'on' : (n<cur?'done':'');
+        return '<div class="rung '+cls+'"><span class="n">'+(n<cur?'✓':n)+'</span><span>'+STAGES[n].name+'</span></div>';
+      }).join('')+'</div>'+
+      '<div class="desc">'+s.desc+'</div>'+
+      '<div class="next"><b>A next step.</b> '+s.next+'</div>'+
+      (gaps.length? '<div class="gaps"><b>To deepen your foundation,</b> you might also revisit: '+gaps.map(function(g){return g.sn.toLowerCase();}).join(', ')+'.</div>' : '')+
+      '<button class="reset" id="reset">Start over</button>';
+    document.getElementById('reset').addEventListener('click',function(){ state=ACTS.map(function(){return false;}); render(); compute(); });
+  }
+  var lastFocus=null;
+  function refocus(){ if(lastFocus===null) return; var el=form.querySelector('.ci[data-i="'+lastFocus+'"]'); if(el) el.focus(); }
+  form.addEventListener('click',function(e){ var c=e.target.closest('.ci'); if(!c) return; var i=Number(c.getAttribute('data-i')); lastFocus=i; state[i]=!state[i]; render(); compute(); refocus(); });
+  form.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var c=e.target.closest('.ci'); if(c){ e.preventDefault(); c.click(); } } });
+  render(); compute();
+})();
+</script>
+</body>
+</html>

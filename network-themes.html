@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — The sector's themes, connected</title>
+<meta name="description" content="A guided journey through the Australian teaching & learning sector as a living network — 20 themes drawn from 1,431 works. The story flows node to node along real connections; move your cursor to explore freely. Runs in your browser.">
+<meta property="og:title" content="The sector's themes, connected — NTLSN">
+<meta property="og:description" content="Take the journey through Australian SoTL as a living network of 1,431 works — or explore it yourself. Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.12);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.5;padding:24px 16px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(23px,3.3vw,33px);margin:0 0 7px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:14.5px;margin:0 0 16px;max-width:760px}
+  .bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:0 0 12px}
+  .grp{display:flex;align-items:center;gap:6px}
+  .grp .lbl{font:700 10px var(--F);text-transform:uppercase;letter-spacing:.8px;color:var(--mut);margin-right:2px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{background:transparent;color:var(--mut);border:none;padding:7px 12px;font:700 12px var(--F);cursor:pointer;transition:.12s}
+  .seg button.on{background:rgba(78,205,196,.16);color:var(--ink)}
+  .seg button:hover:not(.on){color:var(--ink)}
+  .stage{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#0c1f3c 0%,#0a1628 70%)}
+  canvas{display:block;width:100%;touch-action:none}
+  /* journey caption */
+  .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 22px 58px;background:linear-gradient(0deg,rgba(7,14,24,.92) 0%,rgba(7,14,24,.72) 55%,rgba(7,14,24,0) 100%);pointer-events:none;transition:opacity .5s ease}
+  .cap .kick{font:800 10.5px var(--F);letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);margin:0 0 5px}
+  .cap .txt{font:600 clamp(15px,2.2vw,20px)/1.45 var(--F);color:#fff;max-width:760px;margin:0;text-shadow:0 1px 14px rgba(0,0,0,.7);transition:opacity .45s ease,transform .45s ease}
+  .jbar{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;gap:10px;pointer-events:auto;z-index:3}
+  .jbtn{background:rgba(78,205,196,.16);border:1px solid rgba(78,205,196,.4);color:var(--ink);border-radius:999px;padding:8px 15px;font:800 12.5px var(--F);cursor:pointer;white-space:nowrap}
+  .jbtn:hover{background:rgba(78,205,196,.28)}
+  .jbtn.ghost{background:transparent;border-color:var(--line);color:var(--mut)}
+  .prog{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+  .prog i{display:block;height:100%;width:0;background:var(--teal);border-radius:999px;transition:width .5s linear}
+  .pcount{font:700 11px var(--F);color:var(--mut);min-width:42px;text-align:right}
+  .tip{position:absolute;top:12px;left:14px;font:600 11.5px var(--F);color:var(--mut);pointer-events:none;background:rgba(10,22,40,.5);padding:5px 9px;border-radius:8px;transition:opacity .3s}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 0;font-size:11.5px;color:var(--mut)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:13px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · A journey through the sector</div>
+  <h1>The sector's themes, connected</h1>
+  <p class="lead">Australian teaching &amp; learning scholarship as a <b>living network</b> — 20 themes drawn from <b>1,431 works</b>, sized by how many works touch each, linked where they appear together. <b>Watch the story unfold</b>, or take the wheel: move your cursor, drag a theme. <b>Illustrative, from real archive titles.</b></p>
+  <div class="bar">
+    <div class="grp"><span class="lbl">Layout</span><div class="seg" id="layout"><button data-v="force" class="on">Force graph</button><button data-v="constellation">Constellation</button><button data-v="radial">Radial hub</button></div></div>
+    <div class="grp"><span class="lbl">Colour</span><div class="seg" id="colour"><button data-v="comm" class="on">Themes</button><button data-v="teal">Teal</button><button data-v="warm">Warm</button></div></div>
+    <div class="grp"><span class="lbl">Labels</span><div class="seg" id="labels"><button data-v="all">All</button><button data-v="hover" class="on">On hover</button></div></div>
+  </div>
+  <div class="stage" id="stage">
+    <canvas id="cv"></canvas>
+    <div class="tip" id="tip">the story is playing — move or click to explore</div>
+    <div class="cap" id="cap"><div class="kick" id="capKick"></div><p class="txt" id="capTxt"></p></div>
+    <div class="jbar">
+      <button class="jbtn" id="play">⏸ Pause</button>
+      <button class="jbtn ghost" id="replay">↻ Replay the journey</button>
+      <div class="prog"><i id="progFill"></i></div>
+      <div class="pcount" id="pcount">1 / 11</div>
+    </div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="foot">
+    <b>Illustrative.</b> Themes and links are derived by keyword-matching the titles of 1,431 archive works — a guide to the shape of the sector's scholarship, not a precise bibliometric analysis. First Nations scholarship is deliberately not reduced to a node here; it is custodian-led. Runs entirely in your browser. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var NODES=[{"id":"Assessment","n":151,"c":0},{"id":"Feedback","n":21,"c":0},{"id":"Curriculum","n":138,"c":1},{"id":"Students as Partners","n":19,"c":3},{"id":"Work-integrated learning","n":46,"c":1},{"id":"Generative AI","n":10,"c":2},{"id":"Online & blended","n":99,"c":2},{"id":"Inclusion & equity","n":41,"c":3},{"id":"First-year & transition","n":50,"c":3},{"id":"Employability","n":48,"c":1},{"id":"Wellbeing","n":39,"c":3},{"id":"Academic integrity","n":11,"c":0},{"id":"Peer review","n":20,"c":0},{"id":"Reflection","n":14,"c":4},{"id":"Leadership","n":111,"c":4},{"id":"Internationalisation","n":32,"c":3},{"id":"Retention & success","n":27,"c":3},{"id":"Standards & rubrics","n":78,"c":0},{"id":"Active learning","n":24,"c":1},{"id":"Scholarship (SoTL)","n":4,"c":4}];
+  var EDGES=[{"a":"Assessment","b":"Generative AI","w":2},{"a":"Feedback","b":"Generative AI","w":1},{"a":"Generative AI","b":"Peer review","w":1},{"a":"Feedback","b":"First-year & transition","w":2},{"a":"First-year & transition","b":"Online & blended","w":4},{"a":"Online & blended","b":"Wellbeing","w":6},{"a":"Online & blended","b":"Students as Partners","w":3},{"a":"Assessment","b":"Inclusion & equity","w":5},{"a":"Assessment","b":"Internationalisation","w":2},{"a":"Assessment","b":"Reflection","w":3},{"a":"Assessment","b":"Students as Partners","w":2},{"a":"Internationalisation","b":"Reflection","w":1},{"a":"Internationalisation","b":"Students as Partners","w":2},{"a":"Reflection","b":"Students as Partners","w":1},{"a":"Curriculum","b":"Internationalisation","w":6},{"a":"Assessment","b":"Retention & success","w":3},{"a":"Assessment","b":"Curriculum","w":8},{"a":"Assessment","b":"Standards & rubrics","w":20},{"a":"Curriculum","b":"Standards & rubrics","w":8},{"a":"Assessment","b":"Leadership","w":4},{"a":"Generative AI","b":"Leadership","w":1},{"a":"First-year & transition","b":"Retention & success","w":2},{"a":"Internationalisation","b":"Online & blended","w":3},{"a":"Curriculum","b":"Retention & success","w":2},{"a":"Curriculum","b":"First-year & transition","w":2},{"a":"Curriculum","b":"Employability","w":3},{"a":"Reflection","b":"Wellbeing","w":2},{"a":"Wellbeing","b":"Work-integrated learning","w":6},{"a":"Students as Partners","b":"Wellbeing","w":1},{"a":"First-year & transition","b":"Wellbeing","w":3},{"a":"Online & blended","b":"Retention & success","w":2},{"a":"Online & blended","b":"Work-integrated learning","w":1},{"a":"Curriculum","b":"Students as Partners","w":2},{"a":"Curriculum","b":"Work-integrated learning","w":6},{"a":"Standards & rubrics","b":"Work-integrated learning","w":1},{"a":"First-year & transition","b":"Standards & rubrics","w":1},{"a":"Peer review","b":"Standards & rubrics","w":8},{"a":"Employability","b":"Work-integrated learning","w":4},{"a":"Academic integrity","b":"Assessment","w":3},{"a":"Assessment","b":"Employability","w":1},{"a":"Employability","b":"Reflection","w":1},{"a":"Assessment","b":"Feedback","w":7},{"a":"Active learning","b":"Online & blended","w":3},{"a":"Curriculum","b":"Wellbeing","w":4},{"a":"Academic integrity","b":"Reflection","w":1},{"a":"Assessment","b":"Peer review","w":2},{"a":"Active learning","b":"First-year & transition","w":1},{"a":"Inclusion & equity","b":"Students as Partners","w":4},{"a":"Assessment","b":"Online & blended","w":11},{"a":"Internationalisation","b":"Work-integrated learning","w":1},{"a":"Curriculum","b":"Online & blended","w":4},{"a":"Curriculum","b":"Leadership","w":8},{"a":"Retention & success","b":"Work-integrated learning","w":1},{"a":"Curriculum","b":"Feedback","w":2},{"a":"Feedback","b":"Work-integrated learning","w":1},{"a":"Assessment","b":"First-year & transition","w":1},{"a":"Feedback","b":"Leadership","w":5},{"a":"Online & blended","b":"Standards & rubrics","w":3},{"a":"First-year & transition","b":"Leadership","w":1},{"a":"Employability","b":"Leadership","w":1},{"a":"Employability","b":"Retention & success","w":1},{"a":"Leadership","b":"Retention & success","w":1},{"a":"Active learning","b":"Retention & success","w":1},{"a":"Employability","b":"Standards & rubrics","w":2},{"a":"Leadership","b":"Online & blended","w":6},{"a":"Leadership","b":"Standards & rubrics","w":2},{"a":"Leadership","b":"Work-integrated learning","w":4},{"a":"First-year & transition","b":"Work-integrated learning","w":1},{"a":"Leadership","b":"Peer review","w":2},{"a":"Active learning","b":"Assessment","w":2},{"a":"Inclusion & equity","b":"Internationalisation","w":1},{"a":"Academic integrity","b":"Standards & rubrics","w":1},{"a":"Internationalisation","b":"Standards & rubrics","w":1},{"a":"Internationalisation","b":"Leadership","w":1},{"a":"Curriculum","b":"Inclusion & equity","w":1},{"a":"Online & blended","b":"Peer review","w":2},{"a":"Leadership","b":"Wellbeing","w":2},{"a":"Inclusion & equity","b":"Online & blended","w":2},{"a":"Inclusion & equity","b":"Retention & success","w":1},{"a":"Feedback","b":"Online & blended","w":1},{"a":"Feedback","b":"Reflection","w":1},{"a":"Online & blended","b":"Reflection","w":1}];
+  var COMM=[[78,205,196],[201,169,98],[107,168,255],[185,139,217],[111,207,151]];
+  var COMMLABEL=['Assessment & quality','Curriculum & learning','Digital & AI','Students & equity','Scholarship & leadership'];
+  // THE STORY — a journey along real connections
+  var JOURNEY=[
+   {id:null,kick:'The sector, as a network',txt:'1,431 works. Twenty themes. One sector’s scholarship — as a living network. Follow the thread.'},
+   {id:'Assessment',kick:'Where the sector talks most',txt:'It starts with Assessment — 151 works wrestling with how we judge learning. The busiest theme in Australian teaching.'},
+   {id:'Standards & rubrics',kick:'Its closest companion',txt:'Assessment’s strongest tie is to Standards & rubrics — paired in 20 works. You can’t assess without agreeing what “good” looks like.'},
+   {id:'Online & blended',kick:'The digital shift',txt:'Assessment pulls hard toward Online & blended learning — the move to digital reshaped how, and where, we assess.'},
+   {id:'Wellbeing',kick:'The human cost',txt:'Online learning leads, in turn, to Wellbeing — because how we teach online shapes how students cope, and whether they belong.'},
+   {id:'Work-integrated learning',kick:'Into the real world',txt:'Wellbeing meets Work-integrated learning — the placements and industry projects where students stretch, and grow.'},
+   {id:'Curriculum',kick:'The architecture',txt:'All of it sits inside Curriculum — 138 works — the structure that holds a whole degree together.'},
+   {id:'Leadership',kick:'Bringing people with you',txt:'And curriculum needs Leadership — 111 works on the quiet craft of changing practice across a team.'},
+   {id:'Inclusion & equity',kick:'Teaching with, not just to',txt:'Threaded throughout: Inclusion & equity and Students as Partners — the sector learning to teach with students, not only to them.'},
+   {id:'Generative AI',kick:'The newest thread',txt:'And the fastest-growing edge of the conversation: Generative AI — small today, reshaping everything tomorrow.'},
+   {id:null,kick:'One sector, one network',txt:'No single university holds this whole picture. Together, we do — one sector, one network. And you’re in it.'}
+  ];
+  var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stage=document.getElementById('stage');
+  var DPR=Math.min(window.devicePixelRatio||1,2),W=0,H=0;
+  var layout='force',colour='comm',labels='hover';
+  var byId={}; NODES.forEach(function(d){byId[d.id]=d;});
+  var adj={}; NODES.forEach(function(d){adj[d.id]={};});
+  EDGES.forEach(function(e){adj[e.a][e.b]=e.w;adj[e.b][e.a]=e.w;});
+  var maxN=Math.max.apply(null,NODES.map(function(d){return d.n;}));
+  function rad(d){return 7+Math.sqrt(d.n/maxN)*30;}
+  NODES.forEach(function(d,i){ d.x=0.2+0.6*Math.random(); d.y=0.2+0.6*Math.random(); d.vx=0; d.vy=0; d.r=rad(d); d.ang=(i/NODES.length)*6.2832; });
+  var mouse={x:-1e5,y:-1e5,on:false}, drag=null, hover=null;
+  var cam={x:0,y:0,s:1,tx:0,ty:0,ts:1};
+  var journey={on:true, i:0, t0:0, dwell:6200};
+
+  function size(){ var r=stage.getBoundingClientRect(); var h=Math.max(440,Math.min(640,Math.round(r.width*0.64)));
+    W=r.width; H=h; cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR); cv.style.height=h+'px'; ctx.setTransform(DPR,0,0,DPR,0,0);
+    NODES.forEach(function(d){ if(d.x<=1){ d.x=W*d.x; d.y=H*d.y; } });
+    if(!cam.x){ cam.x=cam.tx=W/2; cam.y=cam.ty=H/2; } }
+  function tick(){
+    var cx=W/2, cy=H/2;
+    for(var i=0;i<NODES.length;i++){ var a=NODES[i];
+      for(var j=i+1;j<NODES.length;j++){ var b=NODES[j]; var dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy||1,d=Math.sqrt(d2);
+        var rep=(layout==='constellation'?2600:5200)/d2; var fx=dx/d*rep, fy=dy/d*rep; a.vx+=fx;a.vy+=fy;b.vx-=fx;b.vy-=fy; } }
+    EDGES.forEach(function(e){ var a=byId[e.a],b=byId[e.b]; var dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy)||1;
+      var rest=layout==='constellation'?150:(110-e.w*1.5); var k=(layout==='constellation'?0.004:0.012)*(d-rest)/d;
+      a.vx+=dx*k;a.vy+=dy*k;b.vx-=dx*k;b.vy-=dy*k; });
+    NODES.forEach(function(d){
+      if(layout==='radial'){ var R=Math.min(W,H)*0.40*(1-0.55*(d.n/maxN)); var tx=cx+Math.cos(d.ang)*R, ty=cy+Math.sin(d.ang)*R*0.86; d.vx+=(tx-d.x)*0.02; d.vy+=(ty-d.y)*0.02; }
+      else { d.vx+=(cx-d.x)*0.0018; d.vy+=(cy-d.y)*0.0024; }
+      if(layout==='constellation'){ d.vx+=Math.sin((d.ang+=0.002))*0.02; }
+      if(mouse.on && !journey.on){ var mdx=mouse.x-d.x,mdy=mouse.y-d.y,md=Math.sqrt(mdx*mdx+mdy*mdy)||1; if(md<170){ d.vx+=mdx/md*0.5*(1-md/170); d.vy+=mdy/md*0.5*(1-md/170); } }
+    });
+    NODES.forEach(function(d){ if(d===drag){d.vx=d.vy=0;return;}
+      d.vx*=0.86; d.vy*=0.86; var sp=Math.sqrt(d.vx*d.vx+d.vy*d.vy); if(sp>6){d.vx*=6/sp;d.vy*=6/sp;}
+      d.x+=d.vx; d.y+=d.vy; var m=d.r+4; d.x=Math.max(m,Math.min(W-m,d.x)); d.y=Math.max(m,Math.min(H-m,d.y)); });
+  }
+  function col(d,alpha){ var rgb = colour==='teal'?[78,205,196] : colour==='warm'?[201,169,98] : COMM[d.c]; return 'rgba('+rgb[0]+','+rgb[1]+','+rgb[2]+','+alpha+')'; }
+  function focusId(){ return journey.on ? JOURNEY[journey.i].id : hover; }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.save(); ctx.translate(W/2,H/2); ctx.scale(cam.s,cam.s); ctx.translate(-cam.x,-cam.y);
+    var foc=focusId();
+    EDGES.forEach(function(e){ var a=byId[e.a],b=byId[e.b];
+      var hot = foc && (foc===a.id||foc===b.id);
+      var base = foc? (hot?0.4:0.085) : (0.055+Math.min(0.17,e.w*0.013));
+      ctx.strokeStyle='rgba(120,200,210,'+base+')'; ctx.lineWidth=hot?1.8:Math.max(.8,Math.min(2.6,e.w*0.2)); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); });
+    if(mouse.on && !drag && !journey.on){ NODES.forEach(function(d){ var dx=mouse.x-d.x,dy=mouse.y-d.y,md=Math.sqrt(dx*dx+dy*dy); if(md<170){ ctx.strokeStyle='rgba(78,205,196,'+(0.38*(1-md/170)).toFixed(3)+')'; ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(mouse.x,mouse.y); ctx.lineTo(d.x,d.y); ctx.stroke(); } }); }
+    NODES.forEach(function(d){ var dim = foc && foc!==d.id && !adj[foc][d.id]; var isFoc=foc===d.id;
+      if(!dim){ ctx.shadowColor=col(d,0.6); ctx.shadowBlur=(layout==='constellation'?18:8)+(isFoc?7:0); } else {ctx.shadowBlur=0;}
+      ctx.fillStyle=col(d,dim?0.34:0.9); ctx.beginPath(); ctx.arc(d.x,d.y,d.r*(isFoc?1.07:1),0,6.2832); ctx.fill(); ctx.shadowBlur=0;
+      ctx.lineWidth=isFoc?2:1.2; ctx.strokeStyle='rgba(255,255,255,'+(dim?0.05:(isFoc?0.7:0.22))+')'; ctx.stroke();
+      var showL = isFoc || (labels==='all'? !dim : (hover===d.id));
+      if(showL){ ctx.font='700 '+(d.r>18?13:11)+'px -apple-system,Segoe UI,Roboto,sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+        if(d.r>=16){ ctx.fillStyle='rgba(255,255,255,.96)'; ctx.fillText(d.id,d.x,d.y); }
+        else { ctx.fillStyle='rgba(232,238,245,.95)'; ctx.fillText(d.id,d.x,d.y-d.r-9); }
+        if(isFoc){ ctx.font='800 11px -apple-system,Segoe UI,Roboto,sans-serif'; ctx.fillStyle='rgba(78,205,196,.95)'; ctx.fillText(d.n+' works',d.x,d.y+d.r+(d.r>=16?15:24)); } }
+    });
+    ctx.restore();
+  }
+  // camera + journey loop
+  function step(){
+    // camera target
+    if(journey.on){ var st=JOURNEY[journey.i]; if(st.id && byId[st.id]){ cam.tx=byId[st.id].x; cam.ty=byId[st.id].y; cam.ts=1.42; } else { cam.tx=W/2; cam.ty=H/2; cam.ts=0.92; } }
+    else { cam.tx=W/2; cam.ty=H/2; cam.ts=1; }
+    var e=RM?1:0.05; cam.x+=(cam.tx-cam.x)*e; cam.y+=(cam.ty-cam.y)*e; cam.s+=(cam.ts-cam.s)*e;
+    if(!journey.on) tick();
+    draw();
+    // advance journey
+    if(journey.on && !RM){ var now=performance && performance.now? performance.now():Date.now();
+      if(!journey.t0) journey.t0=now;
+      var frac=Math.min(1,(now-journey.t0)/journey.dwell);
+      document.getElementById('progFill').style.width=Math.round(frac*100)+'%';
+      if(frac>=1){ next(); }
+    }
+    if(!RM) raf=requestAnimationFrame(step);
+  }
+  var raf;
+  function showCap(){ var st=JOURNEY[journey.on?journey.i:0]; var cap=document.getElementById('cap');
+    document.getElementById('capKick').textContent=st.kick; document.getElementById('capTxt').textContent=st.txt;
+    document.getElementById('pcount').textContent=(journey.i+1)+' / '+JOURNEY.length;
+    cap.style.opacity=1;
+    var t=document.getElementById('capTxt'); t.style.opacity=0; t.style.transform='translateY(8px)'; setTimeout(function(){t.style.opacity=1;t.style.transform='none';},30);
+  }
+  function gotoStop(i){ journey.i=(i+JOURNEY.length)%JOURNEY.length; journey.t0=0; showCap(); }
+  function next(){ if(journey.i>=JOURNEY.length-1){ endJourney(true); return;} gotoStop(journey.i+1); }
+  function startJourney(){ journey.on=true; journey.i=0; journey.t0=0; document.getElementById('play').textContent='⏸ Pause';
+    document.getElementById('tip').style.opacity=1; document.getElementById('cap').style.opacity=1; NODES.forEach(function(d){d.vx=d.vy=0;}); showCap(); }
+  function endJourney(finished){ journey.on=false; document.getElementById('play').textContent='▶ Play the journey';
+    document.getElementById('tip').style.opacity=0; if(finished){ document.getElementById('progFill').style.width='100%'; }
+    document.getElementById('capKick').textContent='Now it’s yours'; document.getElementById('capTxt').textContent='Move your cursor, drag a theme — or replay the journey.'; }
+  function pauseToggle(){ if(journey.on){ endJourney(false);} else { startJourney(); } if(RM){draw();} }
+
+  function pos(e){ var r=cv.getBoundingClientRect(); var t=e.touches&&e.touches[0]; var sx=(t?t.clientX:e.clientX)-r.left, sy=(t?t.clientY:e.clientY)-r.top;
+    return {x:(sx-W/2)/cam.s+cam.x, y:(sy-H/2)/cam.s+cam.y}; }
+  function nodeAt(p){ for(var i=NODES.length-1;i>=0;i--){ var d=NODES[i],dx=p.x-d.x,dy=p.y-d.y; if(dx*dx+dy*dy<=(d.r+3)*(d.r+3)) return d; } return null; }
+  function userTook(){ if(journey.on) endJourney(false); }
+  cv.addEventListener('mousemove',function(e){ var p=pos(e); mouse.x=p.x; mouse.y=p.y; mouse.on=true; if(drag){drag.x=p.x;drag.y=p.y;} else if(!journey.on){ var n=nodeAt(p); hover=n?n.id:null; cv.style.cursor=n?'grab':'default'; } if(RM)draw(); });
+  cv.addEventListener('mouseleave',function(){ mouse.on=false; if(!journey.on)hover=null; if(RM)draw(); });
+  cv.addEventListener('mousedown',function(e){ userTook(); var p=pos(e); var n=nodeAt(p); if(n){drag=n;cv.style.cursor='grabbing';} });
+  window.addEventListener('mouseup',function(){ drag=null; });
+  cv.addEventListener('touchstart',function(e){ userTook(); var p=pos(e); var n=nodeAt(p); if(n){drag=n;hover=n.id;} mouse.x=p.x;mouse.y=p.y;mouse.on=true; },{passive:true});
+  cv.addEventListener('touchmove',function(e){ var p=pos(e); mouse.x=p.x;mouse.y=p.y;mouse.on=true; if(drag){drag.x=p.x;drag.y=p.y;} e.preventDefault(); },{passive:false});
+  cv.addEventListener('touchend',function(){ drag=null;mouse.on=false; });
+  document.getElementById('play').addEventListener('click',pauseToggle);
+  document.getElementById('replay').addEventListener('click',startJourney);
+
+  function wire(id,set){ var seg=document.getElementById(id); seg.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b)return; [].forEach.call(seg.children,function(c){c.classList.toggle('on',c===b);}); set(b.getAttribute('data-v')); }); }
+  wire('layout',function(v){layout=v; NODES.forEach(function(d){d.vx=d.vy=0;}); if(RM)draw();});
+  wire('colour',function(v){colour=v; if(RM)draw();});
+  wire('labels',function(v){labels=v; if(RM)draw();});
+  document.getElementById('legend').innerHTML=COMMLABEL.map(function(l,i){return '<span><i style="background:rgb('+COMM[i].join(',')+')"></i>'+l+'</span>';}).join('');
+
+  var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){size();if(RM)draw();},150);});
+  try{ if(window.ResizeObserver){ new ResizeObserver(function(){clearTimeout(rt);rt=setTimeout(function(){size();if(RM)draw();},120);}).observe(stage); } }catch(e){}
+  size();
+  // settle the layout briefly, then begin the story
+  if(RM){ for(var k=0;k<160;k++) tick(); journey.on=true; journey.i=0; showCap(); draw(); document.getElementById('tip').style.opacity=0; }
+  else { for(var k=0;k<90;k++){ tick(); } startJourney(); raf=requestAnimationFrame(step); }
+})();
+</script>
+</body>
+</html>

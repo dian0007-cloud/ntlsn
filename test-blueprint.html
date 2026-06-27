@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test Blueprint — check your exam covers outcomes at the right levels · NTLSN</title>
+<meta name="description" content="List your exam questions with their topic, marks and Bloom level, and see the blueprint — coverage by topic and the balance of lower- vs higher-order thinking — with flags for over-weighting or recall-heavy papers. An assessment-design aid. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 22px}
+  .row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+  .row input[type=text]{flex:1;min-width:80px;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  .row input[type=number]{width:72px;font:600 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 9px;outline:none;text-align:center}
+  .row select{width:150px;font:600 13px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 9px;outline:none}
+  .row .x{flex:none;color:var(--mut);cursor:pointer;font-size:18px;padding:0 4px;background:none;border:none}
+  input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .addrow{font:600 13px var(--sans);color:var(--teal);background:transparent;border:1px dashed var(--line);border-radius:9px;padding:8px 14px;cursor:pointer;margin-top:2px}
+  .bar{display:flex;height:30px;border-radius:8px;overflow:hidden;border:1px solid var(--line);margin:6px 0 4px}
+  .bar .lo{background:linear-gradient(90deg,#3a3315,#e6b450);color:#241c06}.bar .hi{background:linear-gradient(90deg,#143a37,#4ECDC4);color:#06201d}
+  .bar div{display:flex;align-items:center;justify-content:center;font:800 12px var(--sans)}
+  .block{margin-top:20px}.block h3{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:0 0 9px}
+  .trow{display:flex;align-items:center;gap:10px;margin-bottom:6px}.trow .tn{width:140px;flex:none;font:600 13px var(--sans);color:var(--ink);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .trow .tb{flex:1;height:18px;background:#0c1a2e;border-radius:5px;overflow:hidden}.trow .tb div{height:100%;background:linear-gradient(90deg,#2f9e96,#4ECDC4)}
+  .trow .tv{width:74px;flex:none;font:700 12.5px var(--sans);color:var(--mut)}
+  .flag{display:flex;gap:9px;border-radius:10px;padding:10px 14px;margin-bottom:7px;font-size:13.5px}
+  .flag.warn{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--amber);color:#e7dcc2}
+  .flag.ok{background:#11271c;border:1px solid #2c5b45;color:var(--green);font-weight:600}
+  .meta{display:flex;gap:18px;font-size:14px;color:var(--mut);margin:6px 2px}.meta b{color:#fff;font-size:17px}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:14px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Assessment</p>
+  <h1>Test blueprint.</h1>
+  <p class="lede">An exam is only valid if it samples the <b style="color:var(--ink)">right things at the right depth</b>. List your questions with their topic, marks and Bloom level, and we'll show the blueprint — what's covered, what's over-weighted, and whether the paper actually asks students to think or just to recall.</p>
+
+  <div id="rows"></div>
+  <button class="addrow" id="add" type="button">+ Add a question</button>
+
+  <div class="meta" id="meta"></div>
+
+  <div class="block" id="blockBloom"><h3>Cognitive demand — lower vs higher order</h3><div class="bar" id="bloomBar"></div></div>
+  <div class="block" id="blockTopic"><h3>Coverage by topic</h3><div id="topics"></div></div>
+  <div class="block"><h3>Flags</h3><div id="flags"></div></div>
+  <button class="btn" id="copy" type="button">Copy the blueprint</button>
+
+  <div class="note"><b>A good paper is a sample, not a lottery.</b> If 70% of marks are recall, you're testing memory, not learning — and AI can ace it. Aim for genuine higher-order demand (apply, analyse, evaluate, create) proportionate to your outcomes, and don't let one easy topic dominate. This mirrors your marks against those goals so you can rebalance before students sit it.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · Bloom’s revised taxonomy · a design aid, not a psychometric analysis · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var ORDER=['Remember','Understand','Apply','Analyse','Evaluate','Create'];
+  var LOWER={Remember:1,Understand:1};
+  var rows=document.getElementById('rows');
+  function addRow(topic,marks,lv){
+    var d=document.createElement('div');d.className='row';
+    d.innerHTML='<input type="text" placeholder="Topic / outcome" value="'+(topic||'')+'">'
+      +'<input type="number" min="0" step="1" value="'+(marks||'')+'" placeholder="marks">'
+      +'<select>'+ORDER.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>'
+      +'<button class="x" title="remove">×</button>';
+    rows.appendChild(d);
+    if(lv)d.querySelector('select').value=lv;
+    d.querySelector('input[type=text]').addEventListener('input',build);
+    d.querySelector('input[type=number]').addEventListener('input',build);
+    d.querySelector('select').addEventListener('change',build);
+    d.querySelector('.x').addEventListener('click',function(){d.remove();build();});
+    build();
+  }
+  document.getElementById('add').addEventListener('click',function(){addRow('',10,'Apply');});
+  function build(){
+    var data=[].slice.call(rows.querySelectorAll('.row')).map(function(r){
+      return {t:(r.querySelector('input[type=text]').value||'').trim(), m:parseFloat(r.querySelector('input[type=number]').value)||0, lv:r.querySelector('select').value};
+    }).filter(function(x){return x.m>0;});
+    var total=data.reduce(function(a,x){return a+x.m;},0);
+    document.getElementById('meta').innerHTML='<div><b>'+total+'</b> total marks</div><div><b>'+data.length+'</b> questions</div>';
+    if(!total){document.getElementById('bloomBar').innerHTML='';document.getElementById('topics').innerHTML='<div style="color:#5d6e82;font-size:13px">Add questions above…</div>';document.getElementById('flags').innerHTML='';return;}
+    // bloom split
+    var lo=0,hi=0,byLv={};
+    data.forEach(function(x){byLv[x.lv]=(byLv[x.lv]||0)+x.m; if(LOWER[x.lv])lo+=x.m;else hi+=x.m;});
+    var loP=Math.round(lo/total*100), hiP=100-loP;
+    document.getElementById('bloomBar').innerHTML='<div class="lo" style="flex:'+Math.max(loP,1)+'">'+(loP>8?('Lower '+loP+'%'):'')+'</div><div class="hi" style="flex:'+Math.max(hiP,1)+'">'+(hiP>8?('Higher '+hiP+'%'):'')+'</div>';
+    // topics
+    var byT={};data.forEach(function(x){var k=x.t||'(untitled)';byT[k]=(byT[k]||0)+x.m;});
+    var maxT=Math.max.apply(null,Object.keys(byT).map(function(k){return byT[k];}));
+    document.getElementById('topics').innerHTML=Object.keys(byT).sort(function(a,b){return byT[b]-byT[a];}).map(function(k){
+      var p=Math.round(byT[k]/total*100);
+      return '<div class="trow"><div class="tn" title="'+esc(k)+'">'+esc(k)+'</div><div class="tb"><div style="width:'+(byT[k]/maxT*100)+'%"></div></div><div class="tv">'+byT[k]+'m · '+p+'%</div></div>';
+    }).join('');
+    // flags
+    var F=[];
+    if(hiP<40)F.push(['warn','Only <b>'+hiP+'%</b> of marks need higher-order thinking — the paper leans on recall. Convert some items to apply/analyse.']);
+    if(hiP>=40&&hiP<=75)F.push(['ok','Healthy balance: '+hiP+'% higher-order, '+loP+'% lower-order.']);
+    if(hiP>85)F.push(['warn','Very higher-order heavy ('+hiP+'%) — make sure students have the foundational marks to show partial knowledge.']);
+    var topShare=Math.round(maxT/total*100), topName=Object.keys(byT).sort(function(a,b){return byT[b]-byT[a];})[0];
+    if(topShare>50&&Object.keys(byT).length>1)F.push(['warn','<b>'+esc(topName)+'</b> carries '+topShare+'% of the marks — one topic is dominating. Spread coverage.']);
+    var levelsUsed=Object.keys(byLv).length;
+    if(levelsUsed<=1&&data.length>2)F.push(['warn','Every question is at one Bloom level — vary the cognitive demand.']);
+    if(!F.length)F.push(['ok','No obvious imbalances — nice blueprint.']);
+    document.getElementById('flags').innerHTML=F.map(function(f){return '<div class="flag '+f[0]+'">'+(f[0]==='ok'?'✓ ':'⚠ ')+f[1]+'</div>';}).join('');
+    window.__bp={total:total,loP:loP,hiP:hiP,byT:byT,F:F};
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  document.getElementById('copy').addEventListener('click',function(){
+    var bp=window.__bp;if(!bp)return;var txt='TEST BLUEPRINT\n\nTotal: '+bp.total+' marks\nLower-order: '+bp.loP+'%  ·  Higher-order: '+bp.hiP+'%\n\nBy topic:\n';
+    Object.keys(bp.byT).sort(function(a,b){return bp.byT[b]-bp.byT[a];}).forEach(function(k){txt+='  '+k+': '+bp.byT[k]+'m ('+Math.round(bp.byT[k]/bp.total*100)+'%)\n';});
+    txt+='\nFlags:\n';bp.F.forEach(function(f){txt+='  - '+f[1].replace(/<[^>]+>/g,'')+'\n';});
+    txt+='\n— built with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  addRow('Foundations',10,'Remember'); addRow('Core concepts',20,'Understand'); addRow('Application',30,'Apply'); addRow('Case analysis',20,'Analyse');
+})();
+</script>
+</body>
+</html>

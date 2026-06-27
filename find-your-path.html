@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find your SoTL path — a personalised way into NTLSN · NTLSN</title>
+<meta name="description" content="New to the scholarship of teaching? Tap a few bubbles — your interests, your field, what you want to explore — and we'll show you who you are as an educator and exactly where to plug into NTLSN. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--blue:#7C9CFF;--purp:#b18cff;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 700px at 50% -10%, #102a44 0%, var(--navy) 55%);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;min-height:100vh;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:30px 22px 70px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:18px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:24px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .prog{display:flex;gap:6px;margin-bottom:22px}.prog i{height:4px;flex:1;border-radius:99px;background:#16304d;transition:.3s}.prog i.on{background:var(--teal)}
+  .step{animation:fade .4s ease}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4.4vw,38px);line-height:1.12;margin:0 0 6px}
+  .sub{font-size:16px;color:var(--mut);margin:0 0 22px}.sub b{color:var(--teal)}
+  .cloud{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin:0 auto 26px;max-width:740px}
+  .bub{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-width:96px;min-height:96px;padding:10px 16px;border-radius:50%;background:#0f2138;border:1.5px solid rgba(255,255,255,.12);color:#cbd8e6;font:700 13px/1.25 var(--sans);cursor:pointer;transition:transform .15s,border-color .15s,background .15s,box-shadow .15s;user-select:none}
+  .bub:hover{transform:translateY(-3px) scale(1.04);border-color:rgba(78,205,196,.5)}
+  .bub.on{background:radial-gradient(circle at 35% 30%, #1d5e57, #103e3a);border-color:var(--teal);color:#fff;box-shadow:0 0 0 4px rgba(78,205,196,.16),0 8px 24px rgba(0,0,0,.35)}
+  .bub.big{min-width:120px;min-height:120px;font-size:14px}
+  .nav{display:flex;justify-content:center;gap:12px;align-items:center}
+  .btn{font:700 15px var(--sans);border-radius:11px;padding:12px 26px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;transition:.15s}
+  .btn:hover{background:#6bd8d0}.btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--mut);border-color:var(--line)}.btn.ghost:hover{border-color:var(--teal);color:var(--teal)}
+  .pick{font-size:13px;color:var(--mut);text-align:center;margin-bottom:14px;min-height:18px}
+  /* result */
+  .res h1{margin-bottom:14px}
+  .profile{background:linear-gradient(180deg,#13294a,#0f2138);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:20px}
+  .profile .who{font:800 21px var(--serif);color:#fff;margin:0 0 8px}
+  .profile .desc{font-size:15px;color:#cbd8e6;margin:0}
+  .recos{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  .reco{display:block;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:13px;padding:14px 16px;text-decoration:none;transition:.15s}
+  .reco:hover{border-color:var(--teal);transform:translateY(-2px)}
+  .reco .rn{font:800 14.5px var(--sans);color:var(--ink);margin-bottom:3px}.reco .rd{font:400 12.5px/1.45 var(--sans);color:var(--mut)}
+  .reco .rn .arr{color:var(--teal)}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <div class="prog" id="prog"><i class="on"></i><i></i><i></i></div>
+  <div id="stage"></div>
+
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · personalised, private — your picks never leave your browser.</div>
+</div>
+<script>
+(function(){
+  var stage=document.getElementById('stage'), prog=document.getElementById('prog').children;
+  var step=0, sel=[[],[],[]];
+  var STEPS=[
+    {q:'What pulls at you in teaching?', s:'Pick up to <b>three</b>. There are no wrong answers.', max:3, big:true, opts:[
+      ['assess','Assessment design'],['genai','GenAI &amp; teaching'],['feedback','Feedback'],['engage','Student engagement'],
+      ['curric','Curriculum design'],['inclusive','Inclusive teaching'],['wil','Work-integrated learning'],['integrity','Academic integrity'],
+      ['firstyear','First-year experience'],['online','Online &amp; blended'],['reflect','Reflective practice'],['recognition','Recognition &amp; fellowship']]},
+    {q:'Where do you teach?', s:'Pick the field(s) closest to your discipline.', max:4, opts:[
+      ['nursing','Nursing &amp; midwifery'],['health','Health sciences'],['med','Medicine'],['law','Law'],['eng','Engineering'],
+      ['it','IT &amp; computing'],['sci','Science'],['business','Business'],['edu','Education'],['hum','Humanities'],['arts','Creative arts'],['social','Social work']]},
+    {q:'What do you want to do next?', s:'Where would you like to plug in?', max:4, opts:[
+      ['cop','Find my people (CoPs)'],['grants','Grants &amp; funding'],['publish','Publish my SoTL'],['awards','Awards &amp; recognition'],
+      ['conf','Conferences &amp; symposiums'],['mentor','Mentoring'],['tools','Tools &amp; resources'],['archive','The sector archive']]}
+  ];
+  function render(){
+    for(var i=0;i<3;i++)prog[i].className=i<=step?'on':'';
+    var st=STEPS[step];
+    var html='<div class="step"><h1>'+st.q+'</h1><p class="sub">'+st.s+'</p>';
+    html+='<div class="pick" id="pick"></div><div class="cloud">';
+    html+=st.opts.map(function(o){var on=sel[step].indexOf(o[0])>=0;return '<div class="bub'+(st.big?' big':'')+(on?' on':'')+'" data-k="'+o[0]+'">'+o[1]+'</div>';}).join('');
+    html+='</div><div class="nav">'+(step>0?'<button class="btn ghost" id="back">Back</button>':'')+'<button class="btn" id="next" disabled>'+(step<2?'Continue':'Show me my path')+'</button></div></div>';
+    stage.innerHTML=html;
+    updatePick();
+    stage.querySelector('.cloud').addEventListener('click',function(e){var b=e.target.closest('.bub');if(!b)return;var k=b.getAttribute('data-k');var arr=sel[step];var ix=arr.indexOf(k);
+      if(ix>=0){arr.splice(ix,1);b.classList.remove('on');}
+      else{if(arr.length>=st.max){return;}arr.push(k);b.classList.add('on');}
+      updatePick();});
+    if(step>0)document.getElementById('back').onclick=function(){step--;render();};
+    document.getElementById('next').onclick=function(){if(step<2){step++;render();window.scrollTo(0,0);}else{result();}};
+  }
+  function updatePick(){var st=STEPS[step],n=sel[step].length;document.getElementById('pick').innerHTML=n?(n+' of '+st.max+' selected'):'';document.getElementById('next').disabled=n===0;}
+  // recommendations
+  var REC={
+    assess:[['Assessment Mix &amp; AI-Resilience','/assessment-mix.html'],['MCQ Quality Checker','/mcq-checker.html'],['Rubric Builder','/rubric.html']],
+    genai:[['TEQSA GenAI Readiness','/teqsa-readiness.html'],['AI-Use Disclosure','/ai-disclosure.html']],
+    feedback:[['Feedback &amp; Feedforward Builder','/feedback-builder.html']],
+    engage:[['Survey &amp; Likert Checker','/survey-checker.html']],
+    curric:[['Constructive Alignment Matrix','/constructive-alignment.html'],['Programme Curriculum Map','/programme-map.html'],['Microcredential Designer','/microcredential.html']],
+    inclusive:[['Accessibility Pre-flight','/accessibility-preflight.html'],['Contrast Checker','/contrast-checker.html'],['TELAS &amp; UDL Readiness','/selfcheck.html']],
+    integrity:[['SoTL Ethics Self-Check','/ethics-check.html']],
+    reflect:[['Reflective Practice Prompt','/reflective-prompt.html']],
+    recognition:[['Recognition Navigator','/recognition-navigator.html'],['Fellowship Category Mapper','/fellowship-mapper.html']],
+    online:[['Course Quality Self-Check','/course-quality.html']],
+    cop:[['CoP Starter Kit','/cop-starter.html']],
+    publish:[['Research-Question Framer','/research-question.html'],['SoTL Abstract Builder','/abstract-builder.html'],['Ethics Self-Check','/ethics-check.html']],
+    awards:[['AAUT Award-Readiness','/aaut-readiness.html'],['Teaching Recognition Passport','/trp.html']],
+    tools:[['Browse all 40+ tools','/#ntlsn-trynow']],
+    grants:[['SoTL Grants &amp; Awards','/#sotl-grants']],
+    conf:[['What’s On — events','/#events']],
+    archive:[['The 1,431-work archive','/#ntlsn-archive']],
+    mentor:[['Recognition Navigator','/recognition-navigator.html']]
+  };
+  var PROFILE={
+    assess:'an assessment thinker', genai:'an AI-era educator', feedback:'a feedback-focused teacher', engage:'an engagement-driven teacher',
+    curric:'a curriculum builder', inclusive:'an inclusive-practice educator', wil:'a work-integrated educator', integrity:'an integrity-minded teacher',
+    firstyear:'a first-year champion', online:'an online &amp; blended educator', reflect:'a reflective practitioner', recognition:'an educator building recognition'};
+  function result(){
+    prog[0].className=prog[1].className=prog[2].className='on';
+    var ints=sel[0], field=sel[1], explore=sel[2];
+    var who=ints.length?PROFILE[ints[0]]:'a curious educator';
+    var fieldTxt=field.length?(' in '+STEPS[1].opts.filter(function(o){return field.indexOf(o[0])>=0;}).map(function(o){return o[1];}).join(' &amp; ').replace(/&amp;/g,'&')):'';
+    var intTxt=ints.map(function(k){return STEPS[0].opts.filter(function(o){return o[0]===k;})[0][1];}).join(', ').replace(/&amp;/g,'&');
+    // gather recos from interests + explore
+    var keys=ints.concat(explore), seen={}, recos=[];
+    keys.forEach(function(k){(REC[k]||[]).forEach(function(r){if(!seen[r[1]]){seen[r[1]]=1;recos.push(r);}});});
+    recos=recos.slice(0,8);
+    var archiveHint=field.length?('<a class="reco" href="/#ntlsn-archive"><div class="rn">Search the archive for your field <span class="arr">→</span></div><div class="rd">1,431 sector-funded works — try your discipline.</div></a>'):'';
+    var html='<div class="step res"><h1>You’re '+who+fieldTxt+'.</h1>'
+      +'<div class="profile"><p class="who">Drawn to '+(intTxt||'great teaching')+'</p><p class="desc">Here’s where to plug into NTLSN — handpicked from what you chose. Everything’s free, no login.</p></div>'
+      +'<div class="recos">'+recos.map(function(r){return '<a class="reco" href="'+r[1]+'"><div class="rn">'+r[0]+' <span class="arr">→</span></div></a>';}).join('')+archiveHint+'</div>'
+      +'<div class="nav" style="margin-top:24px"><button class="btn ghost" id="restart">Start over</button><a class="btn" href="/" style="text-decoration:none">Explore the whole commons</a></div></div>';
+    stage.innerHTML=html;
+    document.getElementById('restart').onclick=function(){step=0;sel=[[],[],[]];render();window.scrollTo(0,0);};
+    window.scrollTo(0,0);
+  }
+  render();
+})();
+</script>
+</body>
+</html>

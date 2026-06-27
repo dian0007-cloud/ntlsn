@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group-Work Designer — design fair, free-rider-resistant team assessment · NTLSN</title>
+<meta name="description" content="Answer a few questions and get a group-work design that holds up — group size, formation, an individual-vs-group mark split, a peer-contribution mechanism, scaffolding and free-rider mitigations. An assessment-design aid. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 24px}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px;background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ctl label{display:block;font:700 12px var(--sans);margin-bottom:5px;color:var(--ink)}
+  select{width:100%;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .split{display:flex;align-items:center;gap:0;margin:20px 0;border-radius:11px;overflow:hidden;border:1px solid var(--line);font:800 15px var(--sans)}
+  .split .ind{background:#143a37;color:var(--teal);padding:14px;text-align:center}.split .grp{background:#21344e;color:#cfe;padding:14px;text-align:center}
+  .split div span{display:block;font:600 10.5px var(--sans);text-transform:uppercase;letter-spacing:.05em;opacity:.85;margin-top:2px}
+  .block{margin-top:16px}.block h3{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:0 0 8px}
+  .rec{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:11px;padding:13px 16px;margin-bottom:8px;font-size:14px;color:#cbd8e6}.rec b{color:var(--ink)}
+  .rec.warn{border-left-color:var(--amber)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:14px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Assessment</p>
+  <h1>Group-work designer.</h1>
+  <p class="lede">Students don't hate group work — they hate <b style="color:var(--ink)">unfair</b> group work. Tell us the shape of your task and we'll propose a design that holds up: the right group size, how to form teams, an <b style="color:var(--ink)">individual-vs-group mark split</b>, a peer-contribution mechanism, and the scaffolding that heads off free-riding before it starts.</p>
+
+  <div class="controls">
+    <div class="ctl"><label>Task duration</label><select id="dur"><option value="single">Single class / one-off</option><option value="weeks" selected>Multi-week project</option><option value="sem">Whole-semester</option></select></div>
+    <div class="ctl"><label>Group size</label><select id="size"><option value="2">Pairs</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5–6</option></select></div>
+    <div class="ctl"><label>Formation</label><select id="form"><option value="self">Self-selected</option><option value="random">Random</option><option value="assigned" selected>Assigned (mixed skills)</option></select></div>
+    <div class="ctl"><label>Biggest worry</label><select id="risk"><option value="free">Free-riders</option><option value="skill">Unequal skills</option><option value="conflict">Conflict / coordination</option></select></div>
+  </div>
+
+  <div class="split" id="split"></div>
+  <div id="out"></div>
+  <button class="btn" id="copy" type="button">Copy the design</button>
+
+  <div class="note"><b>The single most effective anti-free-rider move</b> is making individual contribution <i>visible and assessed</i> — through peer evaluation, individual reflections, or a viva — so the group mark isn't the only mark. Pair that with a team charter in week one and an early check-in, and most group-work problems never reach you. Adjust the split to your context.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · grounded in collaborative-learning &amp; peer-assessment evidence · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  function V(id){return document.getElementById(id).value;}
+  function build(){
+    var dur=V('dur'),size=V('size'),form=V('form'),risk=V('risk');
+    // mark split: longer + higher-stakes → more individual weighting
+    var ind=40; if(dur==='single')ind=25; if(dur==='sem')ind=50;
+    if(risk==='free')ind+=10; if(risk==='skill')ind+=5;
+    ind=Math.min(60,Math.max(20,ind)); var grp=100-ind;
+    document.getElementById('split').innerHTML='<div class="ind" style="flex:'+ind+'">'+ind+'%<span>Individual</span></div><div class="grp" style="flex:'+grp+'">'+grp+'%<span>Group / shared</span></div>';
+    var blocks=[];
+    // formation
+    var frec={self:'Self-selected groups are comfortable but tend to be homogeneous and can exclude. If you keep it, set the <b>size as a hard cap</b> and have a back-stop for unplaced students.',random:'Random groups are fair and quick. Tell students <b>why</b> (it mirrors real teams) so it doesn’t feel arbitrary.',assigned:'Assigning for <b>mixed skills</b> is best for equity — balance prior grades, background and a quick skills audit so no group is stacked.'};
+    blocks.push(['Forming the teams',[[frec[form],0]]]);
+    // accountability
+    var acc=[];
+    acc.push(['Use a <b>peer-contribution factor</b>: each member rates the others; it scales the individual portion of the mark. Keep it simple (e.g. WebPA-style or a 5-point rubric).',0]);
+    if(risk==='free')acc.push(['Add an <b>individual deliverable</b> inside the project — a short reflection or a viva on the shared work — so no one can hide.',0]);
+    if(dur!=='single')acc.push(['Require a <b>team charter</b> in week one: roles, norms, how decisions get made, what happens if someone goes quiet.',0]);
+    blocks.push(['Accountability — make contribution visible',acc]);
+    // scaffolding
+    var sc=[];
+    if(dur==='single'){sc.push(['Assign explicit roles (facilitator, scribe, timekeeper, sceptic) so a one-off task has instant structure.',0]);}
+    else{sc.push(['Break the project into <b>milestones</b> with check-ins — early feedback prevents a last-week collapse.',0]);
+      sc.push(['Schedule one <b>mid-point peer check</b>: a 2-minute "how’s the team working?" pulse you can act on.',0]);}
+    if(size==='5')sc.push(['At 5–6, coordination cost rises sharply — split into sub-tasks with clear owners, or drop to 4.',1]);
+    if(size==='2')sc.push(['Pairs are easy to manage but fragile if one withdraws — have a contingency for absences.',1]);
+    blocks.push(['Scaffolding the work',sc]);
+    // conflict
+    if(risk==='conflict'){blocks.push(['Heading off conflict',[['Set norms early and give teams a <b>simple escalation path</b> to you. A named "team contact" per group reduces noise.',0],['Make coordination part of the assessment (a shared log or stand-up notes) so process is valued, not just product.',0]]]);}
+    document.getElementById('out').innerHTML=blocks.map(function(bk){
+      return '<div class="block"><h3>'+bk[0]+'</h3>'+bk[1].map(function(r){return '<div class="rec'+(r[1]?' warn':'')+'">'+r[0]+'</div>';}).join('')+'</div>';
+    }).join('');
+    window.__ctx={ind:ind,grp:grp,blocks:blocks};
+  }
+  ['dur','size','form','risk'].forEach(function(id){document.getElementById(id).addEventListener('change',build);});
+  document.getElementById('copy').addEventListener('click',function(){
+    var c=window.__ctx;var txt='GROUP-WORK DESIGN\n\nMark split: '+c.ind+'% individual / '+c.grp+'% group\n';
+    c.blocks.forEach(function(bk){txt+='\n'+bk[0].toUpperCase()+'\n';bk[1].forEach(function(r){txt+='  • '+r[0].replace(/<[^>]+>/g,'').replace(/’/g,"'")+'\n';});});
+    txt+='\n— built with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  build();
+})();
+</script>
+</body>
+</html>

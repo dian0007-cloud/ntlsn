@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Portable Recognition Ledger</title>
+<meta name="description" content="Turn your teaching recognition into a portable, standards-based credential file you own — an Open Badges 3.0 / W3C Verifiable Credential built from the NTLSN Recognition Credit Framework. Self-asserted today, signable tomorrow. Not crypto. Runs in your browser.">
+<meta property="og:title" content="Portable Recognition Ledger — NTLSN">
+<meta property="og:description" content="Export your teaching recognition as a real Open Badges 3.0 / Verifiable Credential file you own — portable, standards-based, not crypto. Self-asserted now, signable later. Free.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--warn:#FFB448;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--M:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1060px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 14px;max-width:780px}
+  .note{background:rgba(255,180,72,.08);border:1px solid rgba(255,180,72,.28);border-radius:11px;padding:11px 14px;font-size:12.5px;color:var(--mut);margin:0 0 20px;line-height:1.6}
+  .note b{color:var(--warn)}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .f{margin:0 0 14px}
+  .f label{display:block;font-size:13px;font-weight:600;margin:0 0 5px}
+  input[type=text]{width:100%;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:400 13.5px var(--F)}
+  input:focus{outline:none;border-color:var(--teal)}
+  .dom{margin:0 0 14px}
+  .domh{font:800 11.5px var(--F);text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin:0 0 6px}
+  .mv{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line);cursor:pointer}
+  .mv:first-of-type{border-top:0}
+  .mv:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:6px}
+  .bx{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--mut);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:12px}
+  .mv.on .bx{background:var(--teal);border-color:var(--teal)}
+  .mv .ml{font-size:13px}
+  .mv .ms{display:block;font-size:11px;color:var(--mut);margin-top:1px}
+  .res{position:sticky;top:20px}
+  .stat{display:flex;gap:8px;margin:0 0 14px}
+  .sc{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 4px}
+  .sc b{display:block;font-size:22px;font-weight:800;line-height:1;color:var(--teal)}
+  .sc span{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .badge{display:inline-flex;align-items:center;gap:7px;font:800 11px var(--F);background:rgba(255,180,72,.14);color:var(--warn);border:1px solid rgba(255,180,72,.35);border-radius:999px;padding:5px 11px;margin:0 0 12px}
+  .badge .dotw{width:8px;height:8px;border-radius:50%;background:var(--warn)}
+  pre{background:#081426;border:1px solid var(--line);border-radius:10px;padding:12px;max-height:300px;overflow:auto;font:400 11px/1.5 var(--M);color:#bfe3df;margin:0 0 12px;white-space:pre-wrap;word-break:break-word}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{flex:1;min-width:120px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 12px;font:700 12.5px var(--F);cursor:pointer}
+  .btn:hover{border-color:var(--teal)}
+  .btn.pri{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+  .placeholder{color:var(--mut);font-style:italic;font-size:14px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Portable Recognition Ledger</h1>
+  <p class="lead">Turn your teaching recognition into a <b>file you own</b> — a standards-based <b>Open Badges 3.0 / W3C Verifiable Credential</b>, built from the open <a href="/recognition-framework.html">Recognition Credit Framework</a>, with each achievement aligned to the PSF 2023, AQF, AAUT or HESF. Carry it anywhere; have it signed when issuance arrives.</p>
+  <div class="note"><b>Self-asserted, and standards-based — not crypto.</b> This builds an unsigned draft credential you control. It uses Open Badges 3.0 / W3C Verifiable Credentials (the same standards behind My eQuals) — there is <b>no blockchain, wallet or token</b>. Cryptographic signing and verification (via My eQuals / an issuer) are on the NTLSN roadmap; until then every record is marked <b>self-asserted</b>. The file is built in your browser and never sent anywhere.</div>
+  <div class="grid">
+    <div class="panel">
+      <div class="f"><label>Your name (as it should appear on the credential)</label><input type="text" id="name" placeholder="Dr Jordan Lee"></div>
+      <div class="f"><label>Evidence or portfolio URL <span style="color:var(--mut);font-weight:400">(optional)</span></label><input type="text" id="evi" placeholder="https://… a link to your evidence"></div>
+      <div id="moves"><p class="placeholder">Loading the framework…</p></div>
+    </div>
+    <div class="panel res">
+      <div class="stat"><div class="sc"><b id="nA">0</b><span>Achievements</span></div><div class="sc"><b id="nP">0</b><span>Points</span></div><div class="sc"><b id="nH">0</b><span>RPL hours</span></div></div>
+      <div class="badge"><span class="dotw"></span>Self-asserted · unsigned draft</div>
+      <div id="prev"><p class="placeholder">Select what you’ve done — your credential builds here →</p></div>
+      <div class="btns"><button class="btn pri" id="dl">Download .json</button><button class="btn" id="cp">Copy JSON</button><button class="btn" id="verify">Check it →</button></div>
+    </div>
+  </div>
+  <div class="foot">
+    <b>A portable record you own — not a verified credential.</b> Self-asserted and unsigned: it asserts what you say you’ve done, against an open framework. It is not an award, an accredited credential, or proof verified by any institution, Advance HE or Universities Australia. Built with Open Badges 3.0 / W3C VC for portability; never crypto. Nothing leaves your browser. &nbsp;·&nbsp; <a href="/credential-checker.html">Credential Checker</a> &nbsp;·&nbsp; <a href="/recognition-framework.html">The framework</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var RCF=null, sel={}, byId={};
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function uid(){ try{ if(window.crypto&&crypto.randomUUID) return 'urn:uuid:'+crypto.randomUUID(); }catch(e){} return 'urn:ntlsn:'+new Date().getTime()+'-'+Math.floor(Math.random()*1e6); }
+  function nowISO(){ return new Date().toISOString().replace(/\.\d+Z$/,'Z'); }
+
+  function renderMoves(){
+    document.getElementById('moves').innerHTML=RCF.domains.map(function(dm){
+      return '<div class="dom"><div class="domh">'+esc(dm.name)+'</div>'+dm.moves.map(function(m){
+        byId[m.id]=Object.assign({domain:dm.name},m);
+        return '<div class="mv'+(sel[m.id]?' on':'')+'" role="button" tabindex="0" aria-pressed="'+(sel[m.id]?'true':'false')+'" data-id="'+m.id+'"><span class="bx">'+(sel[m.id]?'✓':'')+'</span><span class="ml">'+esc(m.label)+'<span class="ms">'+m.points+' pts · '+(m.rplHours?m.rplHours+'h':'no RPL hours')+' · '+esc(m.provenance.standard)+' '+esc(m.provenance.ref)+'</span></span></div>';
+      }).join('')+'</div>';
+    }).join('');
+  }
+  function chosen(){ return Object.keys(sel).filter(function(k){return sel[k];}).map(function(k){return byId[k];}); }
+  function buildCredential(){
+    var name=(document.getElementById('name').value||'').trim();
+    var evi=(document.getElementById('evi').value||'').trim();
+    var moves=chosen();
+    var totalP=moves.reduce(function(a,m){return a+m.points;},0);
+    var totalH=moves.reduce(function(a,m){return a+(m.rplHours||0);},0);
+    var cred={
+      "@context":["https://www.w3.org/ns/credentials/v2","https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json"],
+      "id":uid(),
+      "type":["VerifiableCredential","OpenBadgeCredential"],
+      "name":"NTLSN Teaching Recognition Record",
+      "issuer":{"type":["Profile"],"name":"Self-asserted via the NTLSN Recognition Credit Framework "+(RCF.version||"v1"),"url":"https://ntlsn.com/recognition-framework.html"},
+      "validFrom":nowISO(),
+      "credentialSubject":{
+        "type":["AchievementSubject"],
+        "name":name||"(your name)",
+        "achievement":moves.map(function(m){
+          var a={
+            "type":["Achievement"],
+            "id":"urn:ntlsn:rcf:"+m.id,
+            "name":m.label,
+            "description":"Evidence: "+m.evidences,
+            "criteria":{"narrative":"Recognised under the NTLSN Recognition Credit Framework "+(RCF.version||"v1")+" ("+m.domain+")."},
+            "alignment":[{"type":["Alignment"],"targetName":m.provenance.standard+" — "+m.provenance.ref,"targetFramework":m.provenance.standard,"targetType":"ceasn:Competency"}]
+          };
+          if(m.rplHours){ a.resultDescription=[{"type":["ResultDescription"],"name":"Indicative RPL hours","resultType":"https://schema.org/Number"}]; a["ntlsn:rplHours"]=m.rplHours; }
+          a["ntlsn:points"]=m.points;
+          return a;
+        })
+      },
+      "ntlsn:selfAsserted":true,
+      "ntlsn:framework":"Recognition Credit Framework "+(RCF.version||"v1"),
+      "ntlsn:totals":{"achievements":moves.length,"points":totalP,"rplHours":totalH}
+    };
+    if(evi){ cred.evidence=[{"type":["Evidence"],"id":evi}]; }
+    return {cred:cred, totalP:totalP, totalH:totalH, n:moves.length};
+  }
+  function refresh(){
+    var b=buildCredential();
+    document.getElementById('nA').textContent=b.n;
+    document.getElementById('nP').textContent=b.totalP;
+    document.getElementById('nH').textContent=b.totalH;
+    var prev=document.getElementById('prev');
+    if(!b.n){ prev.innerHTML='<p class="placeholder">Select what you’ve done — your credential builds here →</p>'; return; }
+    prev.innerHTML='<pre id="json">'+esc(JSON.stringify(b.cred,null,2))+'</pre>';
+  }
+  document.getElementById('moves').addEventListener('click',function(e){ var mv=e.target.closest('.mv'); if(!mv)return; var id=mv.getAttribute('data-id'); sel[id]=!sel[id]; renderMoves(); refresh(); });
+  document.getElementById('moves').addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var mv=e.target.closest('.mv'); if(mv){ e.preventDefault(); var id=mv.getAttribute('data-id'); sel[id]=!sel[id]; renderMoves(); refresh(); var f=document.querySelector('.mv[data-id="'+id+'"]'); if(f)f.focus(); } } });
+  document.getElementById('name').addEventListener('input',refresh);
+  document.getElementById('evi').addEventListener('input',refresh);
+  document.getElementById('dl').addEventListener('click',function(){
+    var b=buildCredential(); if(!b.n){alert('Select at least one achievement first.');return;}
+    var blob=new Blob([JSON.stringify(b.cred,null,2)],{type:'application/json'}); var url=URL.createObjectURL(blob);
+    var a=document.createElement('a'); a.href=url; a.download='ntlsn-recognition-credential.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  });
+  document.getElementById('cp').addEventListener('click',function(){
+    var b=buildCredential(); if(!b.n){alert('Select at least one achievement first.');return;}
+    var t=JSON.stringify(b.cred,null,2), btn=this, l=btn.textContent;
+    function ok(){btn.textContent='Copied ✓';setTimeout(function(){btn.textContent=l;},1400);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,ok);}else{ok();}
+  });
+  document.getElementById('verify').addEventListener('click',function(){ window.location.href='/credential-checker.html'; });
+  fetch('/data/rcf.json').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){ RCF=d; renderMoves(); refresh(); })
+    .catch(function(){ document.getElementById('moves').innerHTML='<p class="placeholder">Could not load the framework (<a href="/data/rcf.json">rcf.json</a>).</p>'; });
+})();
+</script>
+</body>
+</html>

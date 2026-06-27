@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Use Disclosure Generator — honest, standardised statements · NTLSN</title>
+<meta name="description" content="Generate a clear, honest statement of how you used generative AI in a piece of work — for assessments, papers or applications. Pick what you did; copy the statement. Runs in your browser, nothing stored.">
+<style>
+  :root{
+    --navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --green:#5fcf91;--rose:#e58a78;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style",Palatino,Georgia,serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:780px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}
+  .back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:60ch;margin:0 0 24px}
+  .warn{background:#26130e;border:1px solid #5a3127;border-radius:11px;padding:12px 15px;font-size:13px;color:#f0c9bd;margin-bottom:24px}
+  .warn b{color:#fff}
+  .step{font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:22px 0 11px}
+  .field{margin-bottom:6px}
+  .field>label{display:block;font:700 13px var(--sans);color:var(--ink);margin-bottom:9px}
+  input[type=text]{width:100%;font:500 15px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:11px 13px;outline:none}
+  input[type=text]:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font:600 13px var(--sans);color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 13px;cursor:pointer;transition:.13s;user-select:none}
+  .chip:hover{border-color:var(--teal)}
+  .chip.on{background:#11293f;border-color:var(--teal);color:var(--ink);box-shadow:0 0 0 2px #4ecdc426}
+  .radios{display:flex;flex-wrap:wrap;gap:8px}
+  .out{background:#0c1a2e;border:1px solid var(--line);border-radius:13px;padding:18px;margin-top:8px}
+  .out h3{font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+  #statement{font:400 15px/1.62 var(--sans);color:var(--ink);white-space:pre-wrap;margin:0}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;transition:.15s;margin-top:14px}
+  .btn:hover{background:#6bd8d0}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}
+  .note b{color:#f0e3c4}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top">
+    <svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg>
+    <div class="brand">NTLSN<b>.com</b></div>
+  </header>
+
+  <p class="eyebrow">◇ Academic integrity</p>
+  <h1>AI-use disclosure generator.</h1>
+  <p class="lede">Generate a clear, honest statement of <b style="color:var(--ink)">how you used generative AI</b> in a piece of work — an assignment, paper, or application. Transparency is the safest default. Tick what applies; copy the statement.</p>
+  <div class="warn"><b>Read your rules first.</b> This is a drafting aid, not permission. Always follow the specific AI policy for your unit, assessment, journal or institution — some prohibit AI use entirely, others require a set wording. When in doubt, ask the marker or editor.</div>
+
+  <p class="step">Step 1 · Did you use AI tools?</p>
+  <div class="radios" id="used">
+    <div class="chip on" data-v="yes">Yes, I used AI</div>
+    <div class="chip" data-v="no">No AI was used</div>
+  </div>
+
+  <div id="detail">
+    <p class="step">Step 2 · Which tool(s)?</p>
+    <div class="field"><input type="text" id="tools" placeholder="e.g. ChatGPT, Claude, Copilot, Gemini" value=""></div>
+
+    <p class="step">Step 3 · What did you use it for?</p>
+    <div class="chips" id="uses">
+      <div class="chip" data-v="brainstorming ideas">Brainstorming</div>
+      <div class="chip" data-v="planning and structuring">Outlining / structure</div>
+      <div class="chip" data-v="drafting sections of text">Drafting text</div>
+      <div class="chip" data-v="editing, proofreading and improving clarity">Editing / proofreading</div>
+      <div class="chip" data-v="summarising sources">Summarising sources</div>
+      <div class="chip" data-v="generating or debugging code">Code</div>
+      <div class="chip" data-v="assisting with data analysis">Data analysis</div>
+      <div class="chip" data-v="translation">Translation</div>
+      <div class="chip" data-v="generating images or media">Images / media</div>
+    </div>
+
+    <p class="step">Step 4 · How much?</p>
+    <div class="radios" id="extent">
+      <div class="chip on" data-v="limited">Limited assistance</div>
+      <div class="chip" data-v="moderate">Moderate assistance</div>
+      <div class="chip" data-v="substantial">Substantial assistance</div>
+    </div>
+
+    <p class="step">Step 5 · Accountability</p>
+    <div class="chips" id="acc">
+      <div class="chip on" data-v="reviewed">I reviewed &amp; verified all AI output</div>
+      <div class="chip on" data-v="own">The ideas &amp; final wording are my own</div>
+    </div>
+  </div>
+
+  <p class="step">Your statement</p>
+  <div class="out">
+    <h3>Disclosure statement</h3>
+    <p id="statement"></p>
+    <button class="btn" id="copy" type="button">Copy statement</button>
+  </div>
+
+  <div class="note"><b>Why disclose?</b> Honest, specific disclosure protects you — it shows integrity, demonstrates the judgement you applied over the tool, and meets the transparency most institutions now expect. Vague or absent disclosure is what gets flagged.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · a drafting aid, not a policy · no data leaves your browser.</div>
+</div>
+
+<script>
+(function(){
+  var used='yes', extent='limited';
+  function multi(id){return [].slice.call(document.querySelectorAll('#'+id+' .chip.on')).map(function(c){return c.getAttribute('data-v');});}
+  function joinList(a){if(a.length===0)return '';if(a.length===1)return a[0];return a.slice(0,-1).join(', ')+' and '+a[a.length-1];}
+  function gen(){
+    var st=document.getElementById('statement');
+    if(used==='no'){st.textContent='No generative AI tools were used in the preparation of this work. All ideas, analysis and wording are entirely my own.';return;}
+    var tools=document.getElementById('tools').value.trim();
+    var uses=multi('uses'), acc=multi('acc');
+    var extentWord={limited:'in a limited capacity',moderate:'to a moderate extent',substantial:'substantially'}[extent];
+    var s='I acknowledge the use of generative AI tools'+(tools?(' ('+tools+')'):'')+' in the preparation of this work, '+extentWord+'.';
+    if(uses.length) s+=' Specifically, AI was used for '+joinList(uses)+'.';
+    else s+=' AI was used as a general aid.';
+    var tail=[];
+    if(acc.indexOf('reviewed')>=0) tail.push('I have reviewed and verified all AI-generated content for accuracy');
+    if(acc.indexOf('own')>=0) tail.push('the ideas, arguments and final wording are my own');
+    if(tail.length) s+=' '+joinList(tail.map(function(t,i){return i===0?t.charAt(0).toUpperCase()+t.slice(1):t;}))+'.';
+    s+=' I take full responsibility for the content of this submission.';
+    st.textContent=s;
+  }
+  function bindRadio(id,set){document.getElementById(id).addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;[].forEach.call(this.children,function(x){x.classList.remove('on');});c.classList.add('on');set(c.getAttribute('data-v'));gen();});}
+  function bindMulti(id){document.getElementById(id).addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;c.classList.toggle('on');gen();});}
+  bindRadio('used',function(v){used=v;document.getElementById('detail').style.display=(v==='no'?'none':'');});
+  bindRadio('extent',function(v){extent=v;});
+  bindMulti('uses');bindMulti('acc');
+  document.getElementById('tools').addEventListener('input',gen);
+  document.getElementById('copy').addEventListener('click',function(){
+    navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('statement').textContent);
+    var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  gen();
+})();
+</script>
+</body>
+</html>

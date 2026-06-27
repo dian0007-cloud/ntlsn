@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Partnership Agreement Builder — a staff–student charter that shares power · NTLSN</title>
+<meta name="description" content="Draft a students-as-partners agreement that names roles, shares decision-making, and — crucially — sets out how the student's partnership will be formally recognised. A charter to start a partnership well. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 20px}
+  .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:24px}@media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .field{margin-bottom:12px}.field label{display:block;font:700 12.5px var(--sans);margin-bottom:3px}.field .h{font:400 11.5px var(--sans);color:var(--mut);margin:0 0 5px}
+  input[type=text],textarea{width:100%;font:500 13.5px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:8px;padding:8px 10px;outline:none}
+  textarea{min-height:46px;resize:vertical}input:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .recbox{border:1px solid rgba(201,169,98,.35);background:rgba(201,169,98,.07);border-radius:10px;padding:11px 12px;margin-bottom:12px}
+  .recbox label{color:#f0e3c4}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .chip{font:600 11.5px var(--sans);padding:5px 11px;border-radius:14px;border:1px solid var(--line);background:var(--navy);color:var(--mut);cursor:pointer;user-select:none}
+  .chip.on{border-color:var(--gold);background:#2a230d;color:#f0e3c4}
+  .panel{position:sticky;top:16px;align-self:start}
+  .doc{background:#f7f5ef;color:#1a2433;border-radius:12px;padding:24px 26px;font:400 13px/1.6 Georgia,serif;max-height:74vh;overflow:auto}
+  .doc h2{font:700 17px Georgia,serif;margin:0 0 3px;color:#0A1628}.doc .meta{font:400 11.5px var(--sans);color:#5a6b7d;margin:0 0 14px}
+  .doc h3{font:700 11.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:#2c7a72;margin:13px 0 3px}.doc p{margin:0 0 8px}
+  .doc .rec{background:#f3e6c8;border-radius:7px;padding:9px 12px;margin:8px 0}.doc .sign{border-top:1px solid #d8d2c4;margin-top:16px;padding-top:12px;font-size:12px;color:#5a6b7d}
+  .doc em{color:#9a6b1a;font-style:normal;background:#f3e6c8;padding:0 3px;border-radius:3px}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:12px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:22px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Partnership &amp; open resources</p>
+  <h1>Partnership agreement builder.</h1>
+  <p class="lede">Genuine partnership starts by naming the things that usually stay implicit — <b style="color:var(--ink)">who decides what</b>, what each person brings, and how the student's contribution will actually be <b style="color:var(--ink)">recognised</b>. Fill it in and a charter drafts on the right.</p>
+
+  <div class="grid">
+    <div>
+      <div class="field"><label>What you're partnering on</label><textarea id="purpose" placeholder="e.g. co-designing the assessment for NUR2002"></textarea></div>
+      <div class="field"><label>Staff partner(s)</label><input type="text" id="staff" placeholder="name(s) &amp; role"></div>
+      <div class="field"><label>Student partner(s)</label><input type="text" id="student" placeholder="name(s) &amp; stage"></div>
+      <div class="field"><label>What each partner brings</label><textarea id="brings" placeholder="Staff: disciplinary &amp; accreditation knowledge. Students: lived experience of the unit…"></textarea></div>
+      <div class="field"><label>How decisions get made</label><div class="h">Name the shared power explicitly.</div><textarea id="decisions" placeholder="Decisions are made together; where we disagree we…"></textarea></div>
+      <div class="recbox">
+        <label style="display:block;font:700 12.5px var(--sans);margin-bottom:3px">★ How the partnership will be recognised</label>
+        <div class="h" style="color:#cbb88a">The thing most partnerships leave out. Pick all that apply.</div>
+        <div class="chips" id="recchips"></div>
+        <input type="text" id="recother" placeholder="…or describe it" style="margin-top:8px">
+      </div>
+      <div class="field"><label>Time &amp; commitment</label><input type="text" id="time" placeholder="e.g. ~2 hrs/week over semester 1"></div>
+      <div class="field"><label>Check-in &amp; if it's not working</label><div class="h">A review point and a way to raise concerns safely.</div><textarea id="review" placeholder="We'll check in at week 6; either partner can pause or raise a concern with…"></textarea></div>
+    </div>
+    <div class="panel">
+      <div class="doc" id="doc"></div>
+      <button class="btn" id="copy" type="button">Copy the agreement</button>
+    </div>
+  </div>
+
+  <div class="note"><b>Recognition is what separates partnership from unpaid help.</b> Naming it up front — credit, co-authorship, a stipend, a reference, a portable record — is an act of respect, and it's what makes a partnership ethical rather than extractive. It's also the principle behind NTLSN's <a href="/critical-learner-partnerships.html" style="color:var(--gold)">Critical Learner Partnerships</a> journal.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · informed by SaP values (respect, reciprocity, shared responsibility) · a starting charter, not a legal contract · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var RECS=['Named credit / co-authorship','Certificate of partnership','Course credit / practicum','Stipend or payment','A reference / testimonial','Portable recognition record'];
+  var recSel={};
+  var rc=document.getElementById('recchips');
+  rc.innerHTML=RECS.map(function(r){return '<span class="chip" data-r="'+r+'">'+r+'</span>';}).join('');
+  rc.addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;var k=c.getAttribute('data-r');recSel[k]=!recSel[k];c.classList.toggle('on');render();});
+  var ids=['purpose','staff','student','brings','decisions','recother','time','review'];
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',render);});
+  function v(id){return (document.getElementById(id).value||'').trim();}
+  function ph(id,fb){return v(id)?esc(v(id)):'<em>'+fb+'</em>';}
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function render(){
+    var recs=Object.keys(recSel).filter(function(k){return recSel[k];});
+    if(v('recother'))recs.push(esc(v('recother')));
+    var h='<h2>Partnership agreement</h2><div class="meta">A students-as-partners charter</div>';
+    h+='<h3>Purpose</h3><p>'+ph('purpose','[what you’re partnering on]')+'</p>';
+    h+='<h3>Partners</h3><p><b>Staff:</b> '+ph('staff','[staff partner]')+'<br><b>Students:</b> '+ph('student','[student partner]')+'</p>';
+    if(v('brings'))h+='<h3>What each brings</h3><p>'+esc(v('brings')).replace(/\n/g,'<br>')+'</p>';
+    h+='<h3>Sharing power</h3><p>'+(v('decisions')?esc(v('decisions')):'We make decisions together. Where we disagree, we talk it through; the student partner’s perspective carries equal weight.')+'</p>';
+    h+='<div class="rec"><b>Recognition.</b> '+(recs.length? 'The student’s partnership will be recognised through: '+recs.join('; ')+'.' : '<em>[name how the student will be recognised — credit, co-authorship, stipend, certificate, reference]</em>')+'</div>';
+    if(v('time'))h+='<h3>Time &amp; commitment</h3><p>'+esc(v('time'))+'</p>';
+    h+='<h3>Check-in &amp; concerns</h3><p>'+(v('review')?esc(v('review')):'We’ll review how the partnership is working partway through, and either partner can raise a concern or pause at any time without penalty.')+'</p>';
+    h+='<div class="sign">Staff partner: __________________  Date: ________<br>Student partner: ________________  Date: ________</div>';
+    document.getElementById('doc').innerHTML=h;
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=document.getElementById('doc').innerText.replace(/\n{3,}/g,'\n\n')+'\n\n— drafted with NTLSN.com';
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

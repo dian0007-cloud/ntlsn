@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — GenAI Assessment-Readiness Self-Check</title>
+<meta name="description" content="Rate one assessment against ten evidence-informed design checks and see how resilient it is to generative AI, with a score, a band, and the weakest points to strengthen. Adapted from TEQSA's Gen AI toolkit. Runs in your browser.">
+<meta property="og:title" content="GenAI Assessment-Readiness Self-Check — NTLSN">
+<meta property="og:description" content="How AI-resilient is your assessment? Ten checks, an instant score, and where to strengthen it. Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:700px}
+  .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:start}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .row{padding:11px 0;border-top:1px solid var(--line)}
+  .row:first-child{border-top:0}
+  .stmt{font-size:13.5px;margin:0 0 8px}
+  .scale{display:flex;gap:7px}
+  .scale button{flex:1;background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:8px;padding:7px 4px;font:600 11.5px var(--F);cursor:pointer;transition:.12s}
+  .scale button:hover{border-color:rgba(78,205,196,.45)}
+  .scale button.sel{border-color:var(--teal);background:rgba(78,205,196,.12);color:var(--ink);font-weight:700}
+  .res{position:sticky;top:20px}
+  .score{display:flex;align-items:baseline;gap:10px;margin:0 0 2px}
+  .score b{font-size:50px;font-weight:800;line-height:1;letter-spacing:-.02em}
+  .score .o{color:var(--mut);font-size:13px}
+  .band{font:700 13px var(--F);padding:5px 12px;border-radius:999px;display:inline-block;margin:8px 0 16px;background:rgba(255,255,255,.06)}
+  .meter{height:9px;background:rgba(255,255,255,.07);border-radius:999px;overflow:hidden;margin:0 0 16px}
+  .meter .fill{height:100%;border-radius:999px;transition:width .25s}
+  h2{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 10px}
+  .flags{margin:0;padding:0;list-style:none}
+  .flags li{font-size:13px;padding:7px 0;border-top:1px solid var(--line);display:flex;gap:9px;align-items:flex-start}
+  .flags li:first-child{border-top:0}
+  .dot{width:8px;height:8px;border-radius:50%;flex:none;margin-top:5px;background:var(--warn)}
+  .placeholder{color:var(--mut);font-style:italic;font-size:14px}
+  .reset{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer;margin-top:14px}
+  .reset:hover{color:var(--ink);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>GenAI Assessment-Readiness Self-Check</h1>
+  <p class="lead">Rate <b>one assessment</b> against ten design checks and see how resilient it is to generative AI — with a score, a band, and the weakest points to strengthen first. Adapted from TEQSA's Gen AI toolkit. <b>Illustrative and self-reflective — not a compliance determination.</b></p>
+  <div class="grid">
+    <div class="panel" id="form"></div>
+    <div class="panel res" id="res"><p class="placeholder">Rate the ten statements — your readiness score appears here →</p></div>
+  </div>
+  <div class="foot">
+    <b>Indicative only.</b> A self-reflective design aid, consistent with TEQSA's own practice of sharing self-checks as examples — <b>not</b> guidance, a compliance instrument, or a guarantee of integrity. Adapted from TEQSA's <a href="https://www.teqsa.gov.au/guides-resources/higher-education-good-practice-hub/gen-ai-knowledge-hub/gen-ai-academic-integrity-and-assessment-reform" target="_blank" rel="noopener">Gen AI assessment-reform resources</a>. Runs entirely in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var ITEMS=[
+    'The task asks for personal reflection, local context, or the student’s own data — hard for AI to fabricate.',
+    'Drafts, process or iterations are submitted and count — not just the final product.',
+    'There is a supervised, in-person or oral element (viva, presentation, in-class task).',
+    'The task is authentic — applied to a real or realistic professional scenario.',
+    'Students are told clearly what AI use is permitted, required, or prohibited.',
+    'It targets higher-order outcomes (analysis, evaluation, creation) tied to the unit’s goals.',
+    'It is specific to your cohort or unit — not a generic prompt AI answers well off the shelf.',
+    'Students must connect to class materials, discussions or activities only they attended.',
+    'There is a way to discuss or defend the work, so authorship can be probed if needed.',
+    'The weighting and stakes are matched to how well the task is secured.'
+  ];
+  var LABELS=['Not at all','Somewhat','Fully'];
+  var state=ITEMS.map(function(){return 0;});  // 0 = unanswered; 1..3 = rating
+  var form=document.getElementById('form');
+
+  function render(){
+    form.innerHTML=ITEMS.map(function(t,i){
+      return '<div class="row"><div class="stmt">'+(i+1)+'. '+t+'</div><div class="scale">'+
+        LABELS.map(function(l,j){var v=j+1;return '<button data-i="'+i+'" data-v="'+v+'"'+(state[i]===v?' class="sel"':'')+'>'+l+'</button>';}).join('')+
+      '</div></div>';
+    }).join('');
+  }
+  function compute(){
+    var res=document.getElementById('res');
+    var answered=state.filter(function(v){return v>0;}).length;
+    if(answered<ITEMS.length){ res.innerHTML='<p class="placeholder">Rate all ten ('+answered+'/10 done) — your readiness score appears here →</p>'; return; }
+    var total=state.reduce(function(a,b){return a+b;},0);   // 10..30
+    var band,col;
+    if(total>=25){band='Well-designed for AI';col='var(--good)';}
+    else if(total>=18){band='Partly resilient';col='var(--warn)';}
+    else{band='Highly exposed';col='var(--bad)';}
+    var pct=Math.round(100*(total-10)/20);
+    var weak=ITEMS.map(function(t,i){return {t:t,v:state[i],i:i};}).filter(function(x){return x.v<=2;}).sort(function(a,b){return a.v-b.v;}).slice(0,4);
+    res.innerHTML=
+      '<div class="score"><b style="color:'+col+'">'+total+'</b><span class="o">/ 30</span></div>'+
+      '<span class="band" style="color:'+col+'">'+band+'</span>'+
+      '<div class="meter"><div class="fill" style="width:'+pct+'%;background:'+col+'"></div></div>'+
+      '<h2>Strengthen these first</h2>'+
+      (weak.length? '<ul class="flags">'+weak.map(function(w){return '<li><span class="dot"></span><span>'+w.t+'</span></li>';}).join('')+'</ul>'
+                  : '<p style="font-size:13px;color:var(--good)">Strong across the board — no weak points flagged.</p>')+
+      '<button class="reset" id="reset">Start over</button>';
+    document.getElementById('reset').addEventListener('click',function(){ state=ITEMS.map(function(){return 0;}); render(); compute(); });
+  }
+  form.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-i]'); if(!b) return;
+    state[Number(b.getAttribute('data-i'))]=Number(b.getAttribute('data-v')); render(); compute();
+  });
+  render(); compute();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — PSF 2023 Evidence Self-Audit</title>
+<meta name="description" content="Map how well your evidence covers the 15 Dimensions of the Professional Standards Framework (PSF 2023) — Areas of Activity, Core Knowledge and Professional Values. A coverage map to find where your evidence is thin, not a score. Runs in your browser.">
+<meta property="og:title" content="PSF 2023 Evidence Self-Audit — NTLSN">
+<meta property="og:description" content="Map your evidence across the 15 Dimensions of the PSF 2023 and see where it's thin before you write your fellowship case. Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1000px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:740px}
+  .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .area{margin:0 0 18px}.area:last-child{margin-bottom:0}
+  .areah{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 4px}
+  .areah span{color:var(--mut);font-weight:600;text-transform:none;letter-spacing:0}
+  .dim{padding:9px 0;border-top:1px solid var(--line)}
+  .dimt{font-size:13px;margin:0 0 7px}
+  .dimt b{color:var(--ink);font-weight:800;margin-right:6px}
+  .scale{display:flex;gap:6px}
+  .scale button{flex:1;background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:7px;padding:6px 4px;font:600 11px var(--F);cursor:pointer;transition:.12s}
+  .scale button:hover{border-color:rgba(78,205,196,.45)}
+  .scale button.l1.sel{border-color:var(--mut);background:rgba(255,255,255,.07);color:var(--ink)}
+  .scale button.l2.sel{border-color:var(--gold);background:rgba(201,169,98,.18);color:var(--ink);font-weight:700}
+  .scale button.l3.sel{border-color:var(--teal);background:rgba(78,205,196,.18);color:var(--ink);font-weight:700}
+  .res{position:sticky;top:20px}
+  .h{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .map{display:grid;grid-template-columns:auto repeat(5,1fr);gap:5px;margin:0 0 14px}
+  .rl{font:800 11px var(--F);color:var(--mut);display:flex;align-items:center}
+  .cell{aspect-ratio:1;border-radius:7px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font:800 11px var(--F);color:var(--mut)}
+  .cell.l1{background:rgba(255,255,255,.06);color:#c3d2e6;border-color:rgba(255,255,255,.16)}
+  .cell.l2{background:rgba(201,169,98,.20);color:#f0dcae;border-color:var(--gold)}
+  .cell.l3{background:rgba(78,205,196,.20);color:#bdeee9;border-color:var(--teal)}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:10.5px;color:var(--mut);margin:0 0 14px}
+  .legend span{display:flex;align-items:center;gap:5px}
+  .sw{width:11px;height:11px;border-radius:3px;border:1px solid var(--line)}
+  .counts{display:flex;gap:8px;margin:0 0 12px}
+  .ct{flex:1;text-align:center;border:1px solid var(--line);border-radius:9px;padding:9px 4px}
+  .ct b{display:block;font-size:20px;font-weight:800;line-height:1}
+  .ct span{font-size:9.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .thin{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.25);border-radius:10px;padding:11px 13px;font-size:12.5px;color:var(--mut)}
+  .thin b{color:var(--gold)}
+  .link{display:block;margin:12px 0 0;font-size:12.5px;background:rgba(78,205,196,.07);border:1px solid rgba(78,205,196,.25);border-radius:10px;padding:11px 13px}
+  .reset{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer;margin-top:14px}
+  .reset:hover{color:var(--ink);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>PSF 2023 Evidence Self-Audit</h1>
+  <p class="lead">Map how well your evidence covers the <b>15 Dimensions</b> of the Professional Standards Framework (PSF 2023) — across <b>Areas of Activity</b>, <b>Core Knowledge</b> and <b>Professional Values</b>. Rate each by how strongly you can evidence it. <b>A coverage map to find where your evidence is thin — not a score, not a judgement of your practice.</b></p>
+  <div class="grid">
+    <div class="panel" id="form"></div>
+    <div class="panel res" id="res"></div>
+  </div>
+  <div class="foot">
+    <b>A map, not a judgement.</b> This helps you see where your evidence is strong or thin before you write — it does <b>not</b> assess your practice, score you, or determine a fellowship outcome. Dimension labels are summarised; always work from the official PSF 2023. Runs entirely in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="https://www.advance-he.ac.uk/teaching-and-learning/psf" target="_blank" rel="noopener">About the PSF 2023 ↗</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var AREAS=[
+    {code:'A', name:'Areas of Activity', dims:[
+      ['A1','Design and plan learning activities and/or programmes'],
+      ['A2','Teach and/or support learning through appropriate approaches and environments'],
+      ['A3','Assess and give feedback for learning'],
+      ['A4','Support and guide learners'],
+      ['A5','Enhance practice through your own continuing professional development']]},
+    {code:'K', name:'Core Knowledge', dims:[
+      ['K1','How learners learn, generally and within specific subjects'],
+      ['K2','Approaches to teaching / supporting learning, appropriate for the subject and level'],
+      ['K3','Critical evaluation as a basis for effective practice'],
+      ['K4','Appropriate use of digital and/or other technologies, and resources for learning'],
+      ['K5','Requirements for quality assurance and enhancement, and their implications for practice']]},
+    {code:'V', name:'Professional Values', dims:[
+      ['V1','Respect individual learners and diverse learning communities'],
+      ['V2','Promote engagement in learning and equity of opportunity for all to reach their potential'],
+      ['V3','Use scholarship, research or other evidence-informed approaches as a basis for practice'],
+      ['V4','Respond to the wider context in which higher education operates'],
+      ['V5','Collaborate with others to enhance practice']]}
+  ];
+  var LABELS=['Not yet','Developing','Well-evidenced'];
+  var ALL=[]; AREAS.forEach(function(a){a.dims.forEach(function(d){ALL.push(d[0]);});});
+  var state={}; ALL.forEach(function(c){state[c]=0;});
+  var form=document.getElementById('form');
+
+  function render(){
+    form.innerHTML=AREAS.map(function(a){
+      return '<div class="area"><div class="areah">'+a.name+' <span>('+a.code+'1–'+a.code+'5)</span></div>'+
+        a.dims.map(function(d){
+          return '<div class="dim"><div class="dimt"><b>'+d[0]+'</b>'+d[1]+'</div><div class="scale">'+
+            LABELS.map(function(l,j){var v=j+1;return '<button class="l'+v+(state[d[0]]===v?' sel':'')+'" data-c="'+d[0]+'" data-v="'+v+'">'+l+'</button>';}).join('')+
+          '</div></div>';
+        }).join('')+'</div>';
+    }).join('');
+  }
+  function compute(){
+    var res=document.getElementById('res');
+    var n3=0,n2=0,n1=0,n0=0;
+    ALL.forEach(function(c){var v=state[c]; if(v===3)n3++;else if(v===2)n2++;else if(v===1)n1++;else n0++;});
+    var rated=15-n0;
+    // map
+    var mapHtml='<div class="map"><div></div>'+[1,2,3,4,5].map(function(i){return '<div class="rl" style="justify-content:center">'+i+'</div>';}).join('');
+    AREAS.forEach(function(a){
+      mapHtml+='<div class="rl">'+a.code+'</div>'+a.dims.map(function(d){
+        var v=state[d[0]]; return '<div class="cell'+(v?' l'+v:'')+'">'+d[0]+'</div>';
+      }).join('');
+    });
+    mapHtml+='</div>';
+    // thinnest area (lowest total of levels; only when all rated)
+    var thin='';
+    if(rated===15){
+      var sums=AREAS.map(function(a){return {name:a.name, code:a.code, s:a.dims.reduce(function(t,d){return t+state[d[0]];},0)};});
+      sums.sort(function(x,y){return x.s-y.s;});
+      var lo=sums[0];
+      thin = (sums[0].s===sums[2].s)
+        ? '<div class="thin"><b>Even coverage.</b> Your evidence is spread evenly across the three Dimensions — a strong base for a holistic case.</div>'
+        : '<div class="thin"><b>Thinnest area: '+lo.name+' ('+lo.code+').</b> This is where your evidence is lightest right now — a good place to gather more before you write.</div>';
+    } else {
+      thin = '<div class="thin">Rate all 15 Dimensions ('+rated+'/15 done) to see your thinnest area.</div>';
+    }
+    res.innerHTML=
+      '<div class="h">Your coverage map</div>'+
+      mapHtml+
+      '<div class="legend"><span><i class="sw" style="background:rgba(78,205,196,.20);border-color:var(--teal)"></i>Well-evidenced</span><span><i class="sw" style="background:rgba(201,169,98,.20);border-color:var(--gold)"></i>Developing</span><span><i class="sw" style="background:rgba(255,255,255,.06)"></i>Not yet</span></div>'+
+      '<div class="counts"><div class="ct" style="border-color:var(--teal)"><b style="color:var(--teal)">'+n3+'</b><span>Strong</span></div><div class="ct" style="border-color:var(--gold)"><b style="color:var(--gold)">'+n2+'</b><span>Developing</span></div><div class="ct"><b style="color:var(--mut)">'+(n1+n0)+'</b><span>Thin / —</span></div></div>'+
+      thin+
+      '<a class="link" href="/fellowship-mapper.html">Mapped your coverage? See which fellowship category fits your practice → <b>Fellowship Category Mapper</b></a>'+
+      '<button class="reset" id="reset">Start over</button>';
+    document.getElementById('reset').addEventListener('click',function(){ ALL.forEach(function(c){state[c]=0;}); render(); compute(); });
+  }
+  form.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-c]'); if(!b) return;
+    state[b.getAttribute('data-c')]=Number(b.getAttribute('data-v')); render(); compute();
+  });
+  render(); compute();
+})();
+</script>
+</body>
+</html>

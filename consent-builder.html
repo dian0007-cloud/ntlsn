@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Participant Information &amp; Consent Builder — draft your SoTL PICF · NTLSN</title>
+<meta name="description" content="Draft a Participant Information Statement and Consent Form for a scholarship-of-teaching study — the standard sections ethics committees expect, built from a few fields. A starting draft to take to your HREC, not a substitute for approval. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:64ch;margin:0 0 24px}
+  .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:24px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .field{margin-bottom:12px}.field label{display:block;font:700 12.5px var(--sans);margin-bottom:4px}.field .h{font:400 11.5px var(--sans);color:var(--mut);margin:0 0 5px}
+  input[type=text],textarea,select{width:100%;font:500 14px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  textarea{min-height:52px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .ck{display:flex;gap:8px;align-items:flex-start;margin:9px 0;font-size:13px;color:#cbd8e6}.ck input{margin-top:3px}
+  .doc{background:#f7f5ef;color:#1a2433;border-radius:12px;padding:26px 28px;font:400 13.5px/1.6 Georgia,serif;position:sticky;top:18px;max-height:78vh;overflow:auto}
+  .doc h2{font:700 16px Georgia,serif;margin:0 0 3px;color:#0A1628}.doc .sub{font:400 12px var(--sans);color:#5a6b7d;margin:0 0 16px}
+  .doc h3{font:700 12.5px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2c7a72;margin:16px 0 3px}
+  .doc p{margin:0 0 9px}.doc .decl{border-top:1px solid #d8d2c4;margin-top:18px;padding-top:14px}.doc .decl div{margin-bottom:6px}.doc .sig{margin-top:16px;font-size:12.5px;color:#5a6b7d}
+  .doc em{color:#9a6b1a;font-style:normal;background:#f3e6c8;padding:0 3px;border-radius:3px}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:12px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>Participant information &amp; consent builder.</h1>
+  <p class="lede">The paperwork shouldn't be what stops you studying your own teaching. Fill the fields and a <b style="color:var(--ink)">Participant Information Statement and Consent Form</b> drafts itself on the right — the standard sections a human-research ethics committee expects. It's a <b style="color:var(--ink)">starting draft</b> to take to your HREC, not a substitute for their approval.</p>
+
+  <div class="grid">
+    <div>
+      <div class="field"><label>Study title</label><input type="text" id="title" placeholder="e.g. Student experiences of AI-resilient assessment in first-year nursing"></div>
+      <div class="field"><label>Researcher name &amp; role</label><input type="text" id="who" placeholder="e.g. Dr Sam Lee, Senior Lecturer"></div>
+      <div class="field"><label>Institution</label><input type="text" id="inst" placeholder="e.g. University of …"></div>
+      <div class="field"><label>Contact email</label><input type="text" id="email" placeholder="e.g. s.lee@uni.edu.au"></div>
+      <div class="field"><label>What is the study about?</label><div class="h">One or two plain sentences.</div><textarea id="purpose" placeholder="We want to understand how students experience a new assessment design so we can improve it."></textarea></div>
+      <div class="field"><label>What will participants be asked to do?</label><textarea id="task" placeholder="Complete a 10-minute anonymous survey at the end of semester / take part in a 30-minute interview."></textarea></div>
+      <div class="field"><label>Time required</label><input type="text" id="time" placeholder="e.g. about 10 minutes"></div>
+      <div class="field"><label>What data is collected?</label><textarea id="data" placeholder="Survey responses; no name or student number is recorded."></textarea></div>
+      <div class="field"><label>Ethics approval reference <span style="color:var(--mut);font-weight:400">(if you have one)</span></label><input type="text" id="ethics" placeholder="e.g. HREC 2026/123"></div>
+      <div class="ck"><input type="checkbox" id="anon" checked><label for="anon" style="font-weight:400;margin:0">Responses are anonymous / de-identified</label></div>
+      <div class="ck"><input type="checkbox" id="student" checked><label for="student" style="font-weight:400;margin:0">Participants are my own students (adds the independence safeguard)</label></div>
+    </div>
+    <div class="doc" id="doc"></div>
+  </div>
+  <button class="btn" id="copy" type="button">Copy the document</button>
+
+  <div class="note"><b>This is a draft, not approval.</b> Every Australian university requires Human Research Ethics Committee (HREC) review before you collect data — even for "just my own class." Studying your students carries a real <i>power-relationship</i> risk, which is why the draft adds an independence safeguard when they're your own. Take this to your HREC; use their template wording where it differs.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · structured to the National Statement on Ethical Conduct in Human Research · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var ids=['title','who','inst','email','purpose','task','time','data','ethics'];
+  ids.forEach(function(id){document.getElementById(id).addEventListener('input',build);});
+  document.getElementById('anon').addEventListener('change',build);
+  document.getElementById('student').addEventListener('change',build);
+  function v(id){return (document.getElementById(id).value||'').trim();}
+  function ph(id,fb){return v(id)?esc(v(id)):'<em>'+fb+'</em>';}
+  function build(){
+    var anon=document.getElementById('anon').checked, stud=document.getElementById('student').checked;
+    var dataLine=anon?'Your responses are anonymous — we do not record your name, student number or anything that could identify you.':'We will store your information securely and report findings so that you are not individually identifiable.';
+    var indep=stud?'<p>Your decision to take part — or not — will have <b>no effect</b> on your marks, your standing, or your relationship with your teacher. To protect this, '+(anon?'responses are collected anonymously and ':'')+'the teaching team will not know who chose to participate'+(anon?'.':' until after results are finalised.')+'</p>':'';
+    var h='<h2>'+ph('title','[Study title]')+'</h2>'
+      +'<p class="sub">Participant Information Statement &amp; Consent Form'+(v('ethics')?(' · '+esc(v('ethics'))):'')+'</p>'
+      +'<h3>Invitation</h3><p>You are invited to take part in a research study conducted by '+ph('who','[Researcher name &amp; role]')+' at '+ph('inst','[Institution]')+'. Please read this statement before deciding whether to participate.</p>'
+      +'<h3>What is this study about?</h3><p>'+ph('purpose','[Plain-language purpose]')+'</p>'
+      +'<h3>What will I be asked to do?</h3><p>'+ph('task','[What participants do]')+(v('time')?(' This will take '+esc(v('time'))+'.'):'')+'</p>'
+      +'<h3>What data is collected, and how is it kept?</h3><p>'+ph('data','[Data collected]')+' '+dataLine+' Data is stored securely and used only for this research and resulting publications.</p>'
+      +'<h3>Is taking part voluntary?</h3><p>Yes, entirely. You may stop at any time'+(anon?', although once an anonymous response is submitted it cannot be withdrawn because we cannot identify it.':' and withdraw your data up until results are analysed.')+'</p>'
+      +indep
+      +'<h3>Risks &amp; benefits</h3><p>This study involves minimal foreseeable risk. There may be no direct benefit to you, but your input will help improve teaching and learning.</p>'
+      +'<h3>Who can I contact?</h3><p>'+ph('who','[Researcher]')+' — '+ph('email','[contact email]')+'. Concerns about the conduct of this research may be directed to your institution’s Human Research Ethics office'+(v('ethics')?(', quoting '+esc(v('ethics'))+'.'):'.')+'</p>'
+      +'<div class="decl"><h3>Consent</h3>'
+      +'<div>☐ I have read and understood this statement.</div>'
+      +'<div>☐ I understand participation is voluntary'+(stud?' and will not affect my marks or standing':'')+'.</div>'
+      +'<div>☐ I agree to take part in this study.</div>'
+      +'<div class="sig">Name: _______________________   Signature: _______________________   Date: ____________</div>'
+      +(anon?'<div class="sig" style="margin-top:8px">(For an anonymous survey, submitting your response is taken as your consent — a signature is not collected.)</div>':'')
+      +'</div>';
+    document.getElementById('doc').innerHTML=h;
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=document.getElementById('doc').innerText.replace(/\n{3,}/g,'\n\n');
+    navigator.clipboard&&navigator.clipboard.writeText(txt);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  build();
+})();
+</script>
+</body>
+</html>

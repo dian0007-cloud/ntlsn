@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alt-text Helper — write accessible image descriptions · NTLSN</title>
+<meta name="description" content="Write good alt text for images in slides, documents and LMS pages. Pick the image's role, get tailored guidance and a live length check. Runs in your browser, nothing stored.">
+<style>
+  :root{
+    --navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --green:#5fcf91;--rose:#e58a78;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style",Palatino,Georgia,serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:780px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}
+  .back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:60ch;margin:0 0 26px}
+  .step{font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:0 0 11px}
+
+  .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-bottom:24px}
+  .role{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px;cursor:pointer;transition:.15s;text-align:left}
+  .role:hover{border-color:var(--teal)}
+  .role.on{border-color:var(--teal);background:#11293f;box-shadow:0 0 0 3px #4ecdc426}
+  .role .rn{font:800 14px var(--sans);color:var(--ink);margin-bottom:3px}
+  .role .rd{font:400 12px/1.4 var(--sans);color:var(--mut)}
+
+  .guide{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:4px 13px 13px 13px;padding:16px 18px;margin-bottom:22px}
+  .guide h3{font:800 15px var(--sans);margin:0 0 9px;color:#fff}
+  .guide ul{margin:0;padding-left:18px}.guide li{font-size:13.5px;color:var(--mut);margin-bottom:5px}
+  .guide li b{color:var(--ink)}
+
+  .draftwrap{margin-bottom:8px}
+  textarea{width:100%;min-height:90px;font:400 15px/1.5 var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:12px;padding:13px 15px;outline:none;resize:vertical}
+  textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .countrow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--mut);margin:8px 2px 0}
+  .count b{color:var(--ink)}
+  .count.warn b{color:var(--amber)}.count.over b{color:var(--rose)}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:9px 15px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--ink);transition:.15s}
+  .btn:hover{border-color:var(--teal);color:var(--teal)}
+  .out{font:500 13px var(--mono);color:#cfe9e5;background:#0c1a2e;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-top:14px;word-break:break-word;display:none}
+  .out.on{display:block}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}
+  .note b{color:#f0e3c4}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top">
+    <svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg>
+    <div class="brand">NTLSN<b>.com</b></div>
+  </header>
+
+  <p class="eyebrow">◇ Accessibility</p>
+  <h1>Alt-text helper.</h1>
+  <p class="lede">Good alt text makes your slides, PDFs and LMS pages work for screen-reader users — and it's quick once you know the role the image plays. Pick the role, follow the guidance, draft, check the length. Nothing is stored or sent.</p>
+
+  <p class="step">Step 1 · What is this image doing?</p>
+  <div class="roles" id="roles">
+    <div class="role" data-k="informative"><div class="rn">Informative</div><div class="rd">A photo or diagram that adds meaning</div></div>
+    <div class="role" data-k="decorative"><div class="rn">Decorative</div><div class="rd">Purely visual; adds no information</div></div>
+    <div class="role" data-k="functional"><div class="rn">Functional</div><div class="rd">A link, button or logo that does something</div></div>
+    <div class="role" data-k="complex"><div class="rn">Complex</div><div class="rd">A chart, graph, map or infographic</div></div>
+    <div class="role" data-k="text"><div class="rn">Text in image</div><div class="rd">A screenshot or graphic containing words</div></div>
+  </div>
+
+  <div class="guide" id="guide">
+    <h3>Pick a role above</h3>
+    <ul><li>…and you'll get tailored guidance plus a length check for your draft.</li></ul>
+  </div>
+
+  <p class="step" id="draftStep" style="display:none">Step 2 · Draft &amp; check</p>
+  <div class="draftwrap" id="draftWrap" style="display:none">
+    <textarea id="draft" placeholder="Type your alt text here…" aria-label="Alt text draft"></textarea>
+    <div class="countrow">
+      <span class="count" id="count"><b>0</b> characters</span>
+      <button class="btn" id="copy" type="button">Copy as alt=&quot;…&quot;</button>
+    </div>
+    <div class="out" id="out"></div>
+  </div>
+
+  <div class="note"><b>The golden rule:</b> describe the image's <b>purpose in context</b>, not every pixel. The same photo needs different alt text in a biology lecture vs a design class. Don't start with "Image of…" — screen readers already announce it's an image.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · aligned with WCAG 2.1 (1.1.1 Non-text Content) · no data leaves your browser.</div>
+</div>
+
+<script>
+(function(){
+  var GUIDE={
+    informative:{h:"Informative — describe the meaning",t:120,tips:["Convey the <b>information the image carries</b>, briefly — what would a sighted reader take from it?","Aim for <b>one concise sentence</b> (~a tweet's worth). Detail that matters to your point, nothing more.","No \"image of / picture of\" — and no full stop is needed, but it's fine.","Context changes everything: the same X-ray is \"chest X-ray\" in one class and \"pneumonia in the left lower lobe\" in another."]},
+    decorative:{h:"Decorative — hide it from screen readers",t:0,tips:["If it adds <b>no information</b> (borders, stock flourishes, mood photos), give it an <b>empty</b> alt: <code>alt=\"\"</code>.","An empty alt tells the screen reader to skip it — better than describing clutter.","In PowerPoint/Word, tick <b>\"Mark as decorative.\"</b> In HTML, use <code>alt=\"\"</code> (never omit the attribute).","If you're unsure whether it's decorative, it probably isn't — treat it as informative."]},
+    functional:{h:"Functional — describe the action",t:80,tips:["Describe <b>what happens</b>, not what it looks like: a magnifier icon is <code>alt=\"Search\"</code>, not \"magnifying glass\".","For a linked logo: name the <b>destination</b> — <code>alt=\"NTLSN home\"</code>.","Don't double up: if visible text already labels the button, the image can be <code>alt=\"\"</code>.","Keep it to the action or destination — a few words."]},
+    complex:{h:"Complex — short alt + long description",t:120,tips:["Give a <b>short alt</b> naming what it is and the headline takeaway: \"Bar chart: completions rose 40% 2020–25.\"","Put the <b>full data/detail nearby</b> — a caption, a paragraph, or a data table the image summarises.","Never cram a whole dataset into alt text — that's what the long description is for.","A data table beside the chart helps everyone, not just screen-reader users."]},
+    text:{h:"Text in image — repeat the words",t:200,tips:["Put <b>all the text</b> from the image into the alt (or, better, as real selectable text on the page).","If it's a quote graphic, the alt is the quote (and attribution).","Avoid text-in-images where you can — real text is searchable, translatable and zoomable.","If the text is long, move it to the page body and mark the image decorative."]}
+  };
+  var sel=null, roles=document.getElementById('roles');
+  var guide=document.getElementById('guide'), draft=document.getElementById('draft'),
+      count=document.getElementById('count'), out=document.getElementById('out');
+  roles.addEventListener('click',function(e){
+    var r=e.target.closest('.role'); if(!r)return;
+    [].forEach.call(roles.children,function(c){c.classList.remove('on');});
+    r.classList.add('on'); sel=r.getAttribute('data-k'); var g=GUIDE[sel];
+    guide.innerHTML='<h3>'+g.h+'</h3><ul>'+g.tips.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>';
+    document.getElementById('draftStep').style.display='';
+    document.getElementById('draftWrap').style.display='';
+    if(sel==='decorative'){draft.value='';draft.placeholder='Decorative images use empty alt — alt=\"\" — nothing to type.';}
+    else draft.placeholder='Type your alt text here…';
+    update();
+  });
+  function update(){
+    var n=draft.value.length, g=sel?GUIDE[sel]:null, t=g?g.t:120;
+    count.innerHTML='<b>'+n+'</b> character'+(n===1?'':'s')+(t?(' · aim ≤ '+t):' · should be empty');
+    count.className='count'+(t===0?(n>0?' over':''):(n>t&&n<=t*1.4?' warn':(n>t*1.4?' over':'')));
+    if(sel){out.className='out on';out.textContent= sel==='decorative'?'alt=""':('alt="'+draft.value.replace(/"/g,'&quot;')+'"');}
+  }
+  draft.addEventListener('input',update);
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt= sel==='decorative'?'alt=""':('alt="'+draft.value.replace(/"/g,'&quot;')+'"');
+    navigator.clipboard&&navigator.clipboard.writeText(txt);
+    var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+})();
+</script>
+</body>
+</html>

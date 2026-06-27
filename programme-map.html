@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Programme Curriculum Map (I-D-A)</title>
+<meta name="description" content="Map a whole degree: which courses Introduce, Develop and Assure each programme learning outcome. Instantly see outcomes that are never assured (assessed), only introduced, or not addressed — the curriculum map accreditation and AQF reviews expect. Runs in your browser; saved locally.">
+<meta property="og:title" content="Programme Curriculum Map (I-D-A) — NTLSN">
+<meta property="og:description" content="Map Introduced / Developed / Assured across a whole degree and catch outcomes never assessed at programme level. The curriculum map TEQSA and AQF reviews expect. Free, in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1100px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 18px;max-width:780px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 16px}
+  .add{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+  .add .fld{flex:1;min-width:200px}
+  .add label{display:block;font:700 11px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:0 0 5px}
+  .add input{width:100%;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:400 13.5px var(--F)}
+  .add input:focus{outline:none;border-color:var(--teal)}
+  .addbtn{background:var(--teal);color:var(--navy);border:none;border-radius:9px;padding:10px 16px;font:800 13px var(--F);cursor:pointer}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--mut);margin:0 0 12px}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:22px;height:18px;border-radius:5px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font:800 10px var(--F)}
+  .sw.i{background:rgba(255,255,255,.09);color:#c3d2e6}
+  .sw.d{background:rgba(201,169,98,.22);color:#f0dcae;border-color:var(--gold)}
+  .sw.a{background:rgba(78,205,196,.22);color:#bdeee9;border-color:var(--teal)}
+  .mwrap{overflow-x:auto}
+  table{border-collapse:collapse;min-width:100%;font-size:12.5px}
+  th,td{border:1px solid var(--line);padding:7px 9px;vertical-align:top}
+  thead th{background:#0a1830;font-weight:700;white-space:normal;min-width:104px;max-width:150px}
+  th.corner{font:700 10px var(--F);text-transform:uppercase;letter-spacing:.5px;color:var(--mut);min-width:200px;text-align:left}
+  th.course{text-align:left;min-width:200px;max-width:300px;font-weight:600}
+  .rm{background:transparent;border:none;color:var(--mut);cursor:pointer;font-size:13px;float:right;line-height:1;padding:0 0 0 6px}
+  .rm:hover{color:var(--bad)}
+  td.cell{text-align:center;cursor:pointer;font:800 12px var(--F);width:104px;user-select:none}
+  td.cell:hover{background:rgba(78,205,196,.06)}
+  td.cell.i{background:rgba(255,255,255,.07);color:#c3d2e6}
+  td.cell.d{background:rgba(201,169,98,.18);color:#f0dcae}
+  td.cell.a{background:rgba(78,205,196,.18);color:#bdeee9}
+  .empty{color:var(--mut);font-style:italic;font-size:13.5px;padding:18px 0}
+  .h{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .plo{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:12.5px}
+  .plo:first-child{border-top:0}
+  .plo .pn{flex:1}
+  .plo .lv{display:flex;gap:4px}
+  .plo .lv b{width:22px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;font:800 10px var(--F);border:1px solid var(--line);color:var(--mut)}
+  .plo .lv b.i.on{background:rgba(255,255,255,.12);color:#dfe8f4}
+  .plo .lv b.d.on{background:rgba(201,169,98,.25);color:#f0dcae;border-color:var(--gold)}
+  .plo .lv b.a.on{background:rgba(78,205,196,.25);color:#bdeee9;border-color:var(--teal)}
+  .plo .tag{font:800 9.5px var(--F);text-transform:uppercase;letter-spacing:.4px;padding:3px 8px;border-radius:999px;min-width:96px;text-align:center}
+  .tag.ok{background:rgba(78,205,196,.15);color:var(--good)}
+  .tag.warn{background:rgba(255,180,72,.15);color:var(--warn)}
+  .tag.bad{background:rgba(255,138,138,.15);color:var(--bad)}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;font:700 12.5px var(--F);cursor:pointer}
+  .btn:hover{border-color:var(--teal)}
+  .btn.pri{background:var(--teal);color:var(--navy);border-color:var(--teal)}
+  .ghost{color:var(--mut)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:22px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Programme Curriculum Map <span style="color:var(--mut);font-weight:700">(I–D–A)</span></h1>
+  <p class="lead">Zoom out from one unit to the <b>whole degree</b>. Add your courses and programme learning outcomes, then mark where each outcome is <b>Introduced</b>, <b>Developed</b> and <b>Assured</b> (assessed). Instantly see outcomes that are never assured, only introduced, or not addressed at all — the map accreditation and AQF reviews expect. <b>Illustrative; saved in your browser.</b></p>
+
+  <div class="panel">
+    <div class="add">
+      <div class="fld"><label>Add a course / unit (a row)</label><input type="text" id="cIn" placeholder="e.g. BIOL101 Foundations of Biology"></div>
+      <button class="addbtn" id="cAdd">Add course</button>
+      <div class="fld"><label>Add a programme outcome (a column)</label><input type="text" id="pIn" placeholder="e.g. Apply scientific method"></div>
+      <button class="addbtn" id="pAdd">Add outcome</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="legend"><span><i class="sw i">I</i> Introduced</span><span><i class="sw d">D</i> Developed</span><span><i class="sw a">A</i> Assured (assessed)</span><span style="color:var(--mut)">· click a cell to cycle I → D → A → blank</span></div>
+    <div class="mwrap" id="mwrap"></div>
+  </div>
+
+  <div class="panel" id="analysisPanel" style="display:none"><div class="h">Outcome coverage across the degree</div><div id="analysis"></div></div>
+
+  <div class="panel"><div class="btns">
+    <button class="btn pri" id="md">Export Markdown</button>
+    <button class="btn" id="ex">Load a worked example</button>
+    <button class="btn ghost" id="clr">Clear all</button>
+  </div></div>
+
+  <div class="foot">
+    <b>A design aid, not an accreditation submission.</b> The I-D-A levels are your own judgements; this just makes coverage visible. “Assured” means assessed at a standard, the usual gap a course review looks for. Saved only in this browser (local storage); export to keep a copy. &nbsp;·&nbsp; <a href="/constructive-alignment.html">Constructive Alignment (one unit)</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='ntlsn-prog-map-v1';
+  var S={courses:[],plos:[],cells:{}}, nextId=1;
+  try{ var raw=localStorage.getItem(KEY); if(raw){ var p=JSON.parse(raw); if(p&&p.courses){ S=p; [].concat(S.courses,S.plos).forEach(function(x){ if(x.id>=nextId)nextId=x.id+1; }); } } }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  var $=function(id){return document.getElementById(id);};
+  var CYCLE={'':'I','I':'D','D':'A','A':''};
+  function ck(c,pl){return c+'_'+pl;}
+
+  function render(){
+    var mw=$('mwrap');
+    if(!S.courses.length||!S.plos.length){ mw.innerHTML='<p class="empty">Add at least one course and one programme outcome — the map appears here.</p>'; renderAnalysis(); save(); return; }
+    var head='<tr><th class="corner">Courses ↓ / Outcomes →</th>'+S.plos.map(function(pl){
+      return '<th>'+esc(pl.text)+'<button class="rm" data-rmp="'+pl.id+'" aria-label="Remove">×</button></th>';
+    }).join('')+'</tr>';
+    var rows=S.courses.map(function(c){
+      return '<tr><th class="course">'+esc(c.text)+'<button class="rm" data-rmc="'+c.id+'" aria-label="Remove">×</button></th>'+
+        S.plos.map(function(pl){ var v=S.cells[ck(c.id,pl.id)]||''; return '<td class="cell'+(v?' '+v.toLowerCase():'')+'" data-c="'+c.id+'" data-p="'+pl.id+'">'+v+'</td>'; }).join('')+'</tr>';
+    }).join('');
+    mw.innerHTML='<table><thead>'+head+'</thead><tbody>'+rows+'</tbody></table>';
+    renderAnalysis(); save();
+  }
+  function levelsFor(plId){
+    var set={I:0,D:0,A:0};
+    S.courses.forEach(function(c){ var v=S.cells[ck(c.id,plId)]; if(v)set[v]=1; });
+    return set;
+  }
+  function renderAnalysis(){
+    var ap=$('analysisPanel'), el=$('analysis');
+    if(!S.plos.length){ ap.style.display='none'; return; }
+    ap.style.display='';
+    el.innerHTML=S.plos.map(function(pl){
+      var L=levelsFor(pl.id);
+      var tag, cls;
+      if(!L.I&&!L.D&&!L.A){ tag='Not addressed'; cls='bad'; }
+      else if(!L.A){ tag='Never assured'; cls='bad'; }
+      else if(!L.D&&!L.I){ tag='Assured only'; cls='warn'; }
+      else if(!L.D){ tag='No development'; cls='warn'; }
+      else if(!L.I){ tag='Not introduced'; cls='warn'; }
+      else { tag='Fully mapped'; cls='ok'; }
+      return '<div class="plo"><span class="pn">'+esc(pl.text)+'</span>'+
+        '<span class="lv"><b class="i'+(L.I?' on':'')+'">I</b><b class="d'+(L.D?' on':'')+'">D</b><b class="a'+(L.A?' on':'')+'">A</b></span>'+
+        '<span class="tag '+cls+'">'+tag+'</span></div>';
+    }).join('');
+  }
+  $('cAdd').addEventListener('click',function(){ var v=$('cIn').value.trim(); if(!v)return; S.courses.push({id:nextId++,text:v}); $('cIn').value=''; render(); });
+  $('pAdd').addEventListener('click',function(){ var v=$('pIn').value.trim(); if(!v)return; S.plos.push({id:nextId++,text:v}); $('pIn').value=''; render(); });
+  $('cIn').addEventListener('keydown',function(e){if(e.key==='Enter')$('cAdd').click();});
+  $('pIn').addEventListener('keydown',function(e){if(e.key==='Enter')$('pAdd').click();});
+  $('mwrap').addEventListener('click',function(e){
+    var cell=e.target.closest('.cell');
+    if(cell){ var k=ck(cell.getAttribute('data-c'),cell.getAttribute('data-p')); var cur=S.cells[k]||''; var nx=CYCLE[cur]; if(nx)S.cells[k]=nx; else delete S.cells[k]; render(); return; }
+    var rc=e.target.closest('[data-rmc]'); if(rc){ var cid=+rc.getAttribute('data-rmc'); S.courses=S.courses.filter(function(c){return c.id!==cid;}); Object.keys(S.cells).forEach(function(k){if(k.split('_')[0]==cid)delete S.cells[k];}); render(); return; }
+    var rp=e.target.closest('[data-rmp]'); if(rp){ var pid=+rp.getAttribute('data-rmp'); S.plos=S.plos.filter(function(pl){return pl.id!==pid;}); Object.keys(S.cells).forEach(function(k){if(k.split('_')[1]==pid)delete S.cells[k];}); render(); return; }
+  });
+  $('clr').addEventListener('click',function(){ if(!S.courses.length&&!S.plos.length)return; if(!confirm('Clear the whole map?'))return; S={courses:[],plos:[],cells:{}}; render(); });
+  $('md').addEventListener('click',function(){
+    if(!S.courses.length||!S.plos.length){alert('Add courses and outcomes first.');return;}
+    var md='# Programme Curriculum Map (I–D–A)\n\n*Self-recorded via NTLSN. I = Introduced, D = Developed, A = Assured (assessed).*\n\n';
+    md+='| Course | '+S.plos.map(function(pl){return pl.text;}).join(' | ')+' |\n';
+    md+='|'+Array(S.plos.length+2).join('---|')+'\n';
+    S.courses.forEach(function(c){ md+='| '+c.text+' | '+S.plos.map(function(pl){return S.cells[ck(c.id,pl.id)]||'';}).join(' | ')+' |\n'; });
+    md+='\n## Coverage\n\n';
+    S.plos.forEach(function(pl){ var L=levelsFor(pl.id); var flag=(!L.I&&!L.D&&!L.A)?'NOT ADDRESSED':(!L.A?'NEVER ASSURED':(L.I&&L.D&&L.A?'fully mapped':'partial')); md+='- **'+pl.text+'** — '+['I','D','A'].filter(function(x){return L[x];}).join('/')+(flag?' ('+flag+')':'')+'\n'; });
+    var blob=new Blob([md],{type:'text/markdown'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='ntlsn-programme-map.md'; document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  });
+  $('ex').addEventListener('click',function(){
+    S={courses:[],plos:[],cells:{}}; nextId=1;
+    var cs=['BIOL101 Foundations','BIOL202 Methods & Design','BIOL210 Data & Analysis','BIOL305 Field Research','BIOL399 Capstone Project'];
+    var ps=['Apply scientific method','Analyse & interpret data','Communicate science','Work ethically & safely'];
+    cs.forEach(function(t){S.courses.push({id:nextId++,text:t});});
+    ps.forEach(function(t){S.plos.push({id:nextId++,text:t});});
+    function set(ci,pi,v){ S.cells[ck(S.courses[ci].id,S.plos[pi].id)]=v; }
+    // PLO0 method: I,D,D,A  | PLO1 data: I,D,A | PLO2 comms: I,...,A | PLO3 ethics: I,D only (never assured -> demo flag)
+    set(0,0,'I'); set(1,0,'D'); set(2,0,'D'); set(4,0,'A');
+    set(0,1,'I'); set(2,1,'D'); set(4,1,'A');
+    set(0,2,'I'); set(3,2,'D'); set(4,2,'A');
+    set(0,3,'I'); set(3,3,'D');
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

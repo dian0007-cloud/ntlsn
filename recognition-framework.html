@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Recognition Credit Framework</title>
+<meta name="description" content="The open, versioned framework behind NTLSN's recognition tools: what each teaching contribution is worth, the indicative RPL hours, the evidence it produces, and its provenance to the PSF 2023, AQF, AAUT and HESF. Transparent and citable; not a sector-ratified standard.">
+<meta property="og:title" content="Recognition Credit Framework — NTLSN">
+<meta property="og:description" content="The open, versioned model behind NTLSN's recognition points: what each contribution is worth, its RPL hours, and its provenance to PSF 2023 / AQF / AAUT / HESF. Transparent and citable.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:900px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .ver{display:inline-block;font:800 10.5px var(--F);letter-spacing:.5px;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:999px;padding:4px 10px;margin:0 0 10px}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 14px;max-width:720px}
+  .status{background:rgba(201,169,98,.07);border:1px solid rgba(201,169,98,.22);border-radius:11px;padding:12px 14px;font-size:12.5px;color:var(--mut);margin:0 0 20px;line-height:1.6}
+  .status b{color:var(--gold)}
+  .tiers{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+  .tier{flex:1;min-width:130px;border:1px solid var(--line);border-radius:11px;padding:11px 13px;background:var(--card)}
+  .tier .tn{font:800 14px var(--F);color:var(--teal)}
+  .tier .tm{font-size:11.5px;color:var(--mut)}
+  .dom{margin:0 0 22px}
+  .domh{display:flex;align-items:baseline;gap:10px;margin:0 0 4px;border-bottom:2px solid rgba(78,205,196,.3);padding-bottom:6px}
+  .domh .dn{font:800 16px var(--F)}
+  .domh .dc{font-size:11.5px;color:var(--mut);margin-left:auto}
+  .colhead,.move{display:grid;grid-template-columns:1fr 58px 52px 150px;gap:10px;align-items:start}
+  .colhead{font:700 10px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut);padding:8px 0 4px}
+  .move{padding:10px 0;border-top:1px solid var(--line);font-size:13px}
+  .move .ml b{font-weight:600}
+  .move .mev{display:block;font-size:11px;color:var(--mut);margin-top:2px}
+  .move .mp{font-weight:800;color:var(--teal)}
+  .move .mh{color:var(--ink)}
+  .move .mprov{font-size:11.5px;color:var(--mut)}
+  @media(max-width:640px){
+    .colhead{display:none}
+    .move{grid-template-columns:1fr auto;gap:4px 10px}
+    .move .mp{grid-row:1;grid-column:2;text-align:right}
+    .move .mh{grid-row:2;grid-column:2;text-align:right;font-size:11.5px;color:var(--mut)}
+    .move .mprov{grid-column:1/3}
+  }
+  .cite{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 16px;font-size:12.5px;margin:6px 0 0}
+  .cite .ch{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 6px}
+  .cite code{display:block;background:#0a1830;border:1px solid var(--line);border-radius:8px;padding:9px 11px;color:#cfe8e5;font-size:12px;line-height:1.5;word-break:break-word}
+  .uses{font-size:12.5px;color:var(--mut);margin:16px 0 0}
+  .uses a{color:var(--teal)}
+  .loading{color:var(--mut);font-style:italic;padding:30px 0}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · The open framework behind the recognition tools</div>
+  <h1>Recognition Credit Framework</h1>
+  <div id="head"></div>
+  <div id="body"><p class="loading">Loading the framework…</p></div>
+  <div class="foot" id="foot"></div>
+</div>
+<script>
+(function(){
+  var body=document.getElementById('body');
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function render(d){
+    var moves=d.domains.reduce(function(n,dm){return n+dm.moves.length;},0);
+    document.getElementById('head').innerHTML=
+      '<span class="ver">Version '+esc(d.version)+' · '+esc(d.updated)+'</span>'+
+      '<p class="lead">The open, versioned model behind NTLSN’s recognition tools: what each teaching contribution is worth, its indicative RPL hours, the evidence it produces, and its provenance to recognised standards. <b>'+d.domains.length+' domains · '+moves+' moves.</b></p>'+
+      '<div class="status"><b>'+esc(d.status)+'</b> '+esc(d.note)+'</div>'+
+      '<div class="tiers">'+d.tiers.map(function(t){return '<div class="tier"><div class="tn">'+esc(t.name)+'</div><div class="tm">from '+t.min+' points</div></div>';}).join('')+'</div>';
+    body.innerHTML=d.domains.map(function(dm){
+      return '<div class="dom"><div class="domh"><span class="dn">'+esc(dm.name)+'</span><span class="dc">'+dm.moves.length+' moves</span></div>'+
+        '<div class="colhead"><span>Contribution</span><span>Points</span><span>RPL hrs</span><span>Provenance</span></div>'+
+        dm.moves.map(function(m){
+          return '<div class="move"><div class="ml">'+esc(m.label)+'<span class="mev">Evidence: '+esc(m.evidences)+'</span></div>'+
+            '<div class="mp">'+m.points+'</div>'+
+            '<div class="mh">'+(m.rplHours? m.rplHours+'h':'—')+'</div>'+
+            '<div class="mprov">'+esc(m.provenance.standard)+'<br>'+esc(m.provenance.ref)+'</div></div>';
+        }).join('')+'</div>';
+    }).join('')+
+      '<div class="cite"><div class="ch">How to cite</div><code>'+esc(d.cite)+'</code></div>'+
+      '<div class="uses">This framework powers the <a href="/recognition-points.html">Recognition Points Calculator</a>, the <a href="/sessional-recognition.html">Sessional &amp; Casual record</a> and the <a href="/recognition-navigator.html">Recognition Navigator</a>. It is illustrative and evidence-informed — a transparent reference, not an official equivalence.</div>';
+    document.getElementById('foot').innerHTML='<b>Open &amp; versioned.</b> Provenance references (PSF 2023, AQF, AAUT, HESF) are NTLSN’s own mapping to make recognition transparent — not an endorsement or certified equivalence by Advance HE, TEQSA or Universities Australia. Institutions decide any credit. &nbsp;·&nbsp; <a href="/data/rcf.json" target="_blank" rel="noopener">View the raw data (rcf.json)</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>';
+  }
+  fetch('/data/rcf.json').then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+    .then(render)
+    .catch(function(){ body.innerHTML='<p class="loading">The framework data could not be loaded here. View it directly at <a href="/data/rcf.json">/data/rcf.json</a>.</p>'; });
+})();
+</script>
+</body>
+</html>

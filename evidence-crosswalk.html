@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Evidence Cross-Walk</title>
+<meta name="description" content="Tick the teaching evidence you already hold and see how each piece counts at once across four recognition frameworks — the PSF 2023, the AAUT, a promotion case, and SoTL. One artefact, many pathways. Illustrative; runs in your browser.">
+<meta property="og:title" content="Evidence Cross-Walk — NTLSN">
+<meta property="og:description" content="'I have these things — what are they good for?' Tick the evidence you hold and see how it counts across fellowship, awards, promotion and SoTL at once. Free, in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:1020px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:780px}
+  .grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;align-items:start}
+  @media(max-width:840px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .h{font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 12px}
+  .ci{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);cursor:pointer}
+  .ci:first-of-type{border-top:0}
+  .ci:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:6px}
+  .box{width:19px;height:19px;border-radius:6px;border:1.5px solid var(--mut);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:12px;transition:.15s}
+  .ci.on .box{background:var(--teal);border-color:var(--teal)}
+  .ci .tx{font-size:13px}
+  .res{position:sticky;top:20px}
+  .sumline{font-size:12.5px;color:var(--mut);margin:0 0 14px}
+  .sumline b{color:var(--teal)}
+  .fw{border:1px solid var(--line);border-radius:11px;padding:12px 13px;margin:0 0 10px}
+  .fwh{display:flex;align-items:center;gap:8px;margin:0 0 9px}
+  .fwh .nm{font:800 13px var(--F)}
+  .fwh .cov{margin-left:auto;font:800 11px var(--F);color:var(--mut)}
+  .fwh .cov.full{color:var(--teal)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font:600 11.5px var(--F);padding:5px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);transition:.15s}
+  .chip.on{background:rgba(78,205,196,.16);border-color:var(--teal);color:var(--ink);font-weight:700}
+  .fwl{display:block;margin:9px 0 0;font-size:11.5px}
+  .fwl a{color:var(--teal);font-weight:700}
+  .nudge{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.25);border-radius:10px;padding:11px 13px;font-size:12.5px;color:var(--mut);margin:4px 0 0}
+  .nudge b{color:var(--gold)}
+  .placeholder{color:var(--mut);font-style:italic;font-size:14px}
+  .reset{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer;margin-top:12px}
+  .reset:hover{color:var(--ink);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Evidence Cross-Walk</h1>
+  <p class="lead">You probably already hold more recognition evidence than you think — and the same piece often counts in several places at once. Tick what you have, and see how it maps across <b>four pathways together</b>: the <b>PSF 2023</b>, the <b>AAUT</b>, a <b>promotion case</b>, and <b>SoTL</b>. <b>Illustrative — NTLSN's own reading of public frameworks, not an official equivalence.</b></p>
+  <div class="grid">
+    <div class="panel"><div class="h">What evidence do you already hold?</div><div id="form"></div></div>
+    <div class="panel res" id="res"><p class="placeholder">Tick the evidence you hold — your cross-walk appears here →</p></div>
+  </div>
+  <div class="foot">
+    <b>A map, not a determination.</b> The cross-walk is an illustrative guide to where your existing evidence could count — it is not an official equivalence endorsed by Advance HE, Universities Australia or your institution, and ticking a box is self-asserted. Use it to see what you already have and where to aim next. Runs entirely in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/recognition-navigator.html">Recognition Navigator</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var FW=[
+    {key:'PSF', name:'PSF 2023 — fellowship', tool:'/fellowship-mapper.html', tl:'Fellowship Category Mapper', cells:[['A','Areas of Activity'],['K','Core Knowledge'],['V','Professional Values']]},
+    {key:'AAUT', name:'AAUT — national awards', tool:'/aaut-readiness.html', tl:'AAUT Award-Readiness', cells:[['cite','Citations'],['prog','Programs'],['excel','Teaching Excellence']]},
+    {key:'PROMO', name:'Promotion case', tool:'/recognition-points.html', tl:'Recognition Points', cells:[['teach','Teaching quality'],['lead','Educational leadership'],['schol','Scholarship / SoTL'],['engage','Engagement & service']]},
+    {key:'SOTL', name:'Scholarship of T&L', tool:'/sotl-placement.html', tl:'SoTL Self-Placement', cells:[['evid','Evidence-gathering'],['diss','Dissemination'],['impact','Impact']]}
+  ];
+  var ART=[
+    {n:'Student evaluation / feedback data (SET, SELT)', m:{PSF:['A','V'],AAUT:['cite'],PROMO:['teach'],SOTL:['evid']}},
+    {n:'Peer review or observation of your teaching', m:{PSF:['A','K'],AAUT:['cite'],PROMO:['teach'],SOTL:['evid']}},
+    {n:'A teaching award or nomination', m:{AAUT:['cite','excel'],PROMO:['teach','lead']}},
+    {n:'SoTL publications, chapters or conference papers', m:{PSF:['K','V'],AAUT:['excel'],PROMO:['schol'],SOTL:['diss','impact']}},
+    {n:'Curriculum or unit design documents', m:{PSF:['A','K'],AAUT:['prog'],PROMO:['teach','lead'],SOTL:['evid']}},
+    {n:'Assessment or rubric design you created', m:{PSF:['A','K'],AAUT:['cite'],PROMO:['teach'],SOTL:['evid']}},
+    {n:'Mentoring or HDR / colleague supervision records', m:{PSF:['A','V'],AAUT:['excel'],PROMO:['lead'],SOTL:['impact']}},
+    {n:'Completed professional development or a fellowship', m:{PSF:['K','V'],PROMO:['teach'],SOTL:['evid']}},
+    {n:'Leadership or committee roles in teaching & learning', m:{PSF:['V'],AAUT:['prog','excel'],PROMO:['lead','engage'],SOTL:['impact']}},
+    {n:'A teaching innovation (new approach, tool or method)', m:{PSF:['A','K'],AAUT:['cite','prog'],PROMO:['teach'],SOTL:['diss']}},
+    {n:'Student outcome data (grades, progression, completion)', m:{PSF:['A'],AAUT:['cite','prog'],PROMO:['teach'],SOTL:['impact']}},
+    {n:'Community, industry or WIL engagement in teaching', m:{PSF:['A','V'],AAUT:['prog'],PROMO:['engage'],SOTL:['impact']}}
+  ];
+  var state=ART.map(function(){return false;});
+  var form=document.getElementById('form');
+  function render(){
+    form.innerHTML=ART.map(function(a,i){
+      return '<div class="ci'+(state[i]?' on':'')+'" role="button" tabindex="0" aria-pressed="'+(state[i]?'true':'false')+'" data-i="'+i+'"><span class="box">'+(state[i]?'✓':'')+'</span><span class="tx">'+a.n+'</span></div>';
+    }).join('');
+  }
+  function compute(){
+    var res=document.getElementById('res');
+    var held=ART.filter(function(a,i){return state[i];});
+    if(!held.length){ res.innerHTML='<p class="placeholder">Tick the evidence you hold — your cross-walk appears here →</p>'; return; }
+    // covered cells per framework
+    var cov={}; FW.forEach(function(f){cov[f.key]={};});
+    held.forEach(function(a){ for(var k in a.m){ if(cov[k]) a.m[k].forEach(function(c){cov[k][c]=1;}); } });
+    var totalCells=0, totalCov=0;
+    var ratios=[];
+    var fwHtml=FW.map(function(f){
+      var on=f.cells.filter(function(c){return cov[f.key][c[0]];}).length;
+      totalCells+=f.cells.length; totalCov+=on;
+      ratios.push({name:f.name, r:on/f.cells.length, on:on, of:f.cells.length});
+      var full=on===f.cells.length;
+      return '<div class="fw"><div class="fwh"><span class="nm">'+f.name+'</span><span class="cov'+(full?' full':'')+'">'+on+'/'+f.cells.length+'</span></div>'+
+        '<div class="chips">'+f.cells.map(function(c){var lit=cov[f.key][c[0]];return '<span class="chip'+(lit?' on':'')+'">'+c[1]+'</span>';}).join('')+'</div>'+
+        '<span class="fwl">'+(on?'Strong start → ':'Not yet evidenced → ')+'<a href="'+f.tool+'">'+f.tl+'</a></span></div>';
+    }).join('');
+    // thinnest framework with at least something missing
+    ratios.sort(function(x,y){return x.r-y.r;});
+    var lo=ratios[0];
+    var nudge = lo.r>=1
+      ? '<div class="nudge"><b>Broad coverage.</b> Your evidence already reaches across all four pathways — a strong base for any recognition case.</div>'
+      : '<div class="nudge"><b>Thinnest pathway: '+lo.name+' ('+lo.on+'/'+lo.of+').</b> That is where your evidence is lightest — a good place to aim next.</div>';
+    res.innerHTML=
+      '<div class="sumline">Your '+held.length+' piece'+(held.length>1?'s':'')+' of evidence already cover <b>'+totalCov+' of '+totalCells+'</b> areas across the four pathways.</div>'+
+      fwHtml+ nudge+
+      '<button class="reset" id="reset">Start over</button>';
+    document.getElementById('reset').addEventListener('click',function(){ state=ART.map(function(){return false;}); render(); compute(); });
+  }
+  function toggle(i){ state[i]=!state[i]; render(); compute(); var el=form.querySelector('.ci[data-i="'+i+'"]'); if(el) el.focus(); }
+  form.addEventListener('click',function(e){ var c=e.target.closest('.ci'); if(!c) return; toggle(+c.getAttribute('data-i')); });
+  form.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var c=e.target.closest('.ci'); if(c){ e.preventDefault(); toggle(+c.getAttribute('data-i')); } } });
+  render(); compute();
+})();
+</script>
+</body>
+</html>

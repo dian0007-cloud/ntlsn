@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — AAUT Award-Readiness Self-Check</title>
+<meta name="description" content="An illustrative guide to which Australian Award for University Teaching (AAUT) pathway best fits your contribution, and how ready you are. Answer three questions for a suggested starting point. Runs in your browser.">
+<meta property="og:title" content="AAUT Award-Readiness Self-Check — NTLSN">
+<meta property="og:description" content="Which national teaching-award pathway fits you — Citations, Programs, or Teaching Excellence — and how ready are you? Free, runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#4ECDC4;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:700px}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:start}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .q{margin:0 0 16px}.q:last-child{margin-bottom:0}
+  .q .qn{font:700 14px var(--F);margin:0 0 8px}
+  .opt{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin:0 0 7px;cursor:pointer;font-size:13.5px;transition:.12s}
+  .opt:hover{border-color:rgba(78,205,196,.45)}
+  .opt.sel{border-color:var(--teal);background:rgba(78,205,196,.08)}
+  .opt:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .dot{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--mut);flex:none;margin-top:2px}
+  .opt.sel .dot{border-color:var(--teal);background:var(--teal);box-shadow:inset 0 0 0 3px var(--card)}
+  .res{position:sticky;top:20px}
+  .placeholder{color:var(--mut);font-style:italic;font-size:14px}
+  .award{font:800 18px var(--F);letter-spacing:-.01em;margin:0 0 2px;color:var(--teal)}
+  .ready{font:700 13px var(--F);padding:5px 12px;border-radius:999px;display:inline-block;margin:10px 0 14px;background:rgba(255,255,255,.06)}
+  .desc{font-size:13.5px;color:#d4def0;margin:0 0 12px}
+  .gap{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.25);border-radius:10px;padding:11px 13px;font-size:12.5px;color:var(--mut)}
+  .gap b{color:var(--gold)}
+  .note{font-size:11.5px;color:var(--mut);margin:14px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:11px}
+  .reset{background:transparent;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font:600 12.5px var(--F);cursor:pointer;margin-top:14px}
+  .reset:hover{color:var(--ink);border-color:var(--teal)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>AAUT Award-Readiness Self-Check</h1>
+  <p class="lead">An illustrative guide to which <b>Australian Award for University Teaching</b> pathway best fits your contribution — and how ready you are. Answer three questions for a suggested starting point. <b>Indicative only — not a determination of eligibility or success.</b></p>
+  <div class="grid">
+    <div class="panel" id="form"></div>
+    <div class="panel res" id="res"><p class="placeholder">Answer the three questions and your suggested pathway appears here →</p></div>
+  </div>
+  <div class="foot">
+    <b>Indicative only.</b> A self-reflective guide — not a determination of eligibility, and not a guarantee of success. Each university nominates against its own processes and the national criteria. It runs entirely in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="https://universitiesaustralia.edu.au/policy-submissions/teaching-learning-funding/australian-awards-for-university-teaching/" target="_blank" rel="noopener">About the AAUT ↗</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var QS=[
+    {id:'q1', q:'What is at the heart of your case?', opts:[
+      ['A specific, focused contribution to student learning — my own practice','cite'],
+      ['A program, service or initiative (often team-based) that enhanced learning','prog'],
+      ['A broad, sustained, leadership-level record of teaching excellence','excel']]},
+    {id:'q2', q:'How sustained is the contribution?', opts:[
+      ['Still building — under three years','under3'],
+      ['Sustained over three or more years','3plus']]},
+    {id:'q3', q:'How strong is your evidence of impact?', opts:[
+      ['Some evidence — still gathering it','some'],
+      ['Strong, documented evidence — outcomes, feedback, reach','strong']]}
+  ];
+  var CATS={
+    cite:{name:'Citations for Outstanding Contributions to Student Learning',
+      desc:'Recognises a specific, focused contribution to student learning, sustained over at least three years. Often the entry point to the AAUT.',
+      evid:'evidence of sustained impact on students — outcomes, feedback, and the difference your approach has made over time.'},
+    prog:{name:'Awards for Programs that Enhance Learning',
+      desc:'Recognises a program, service or initiative — often team-based — that has measurably enhanced student learning.',
+      evid:'evidence the program improved learning, with reach, outcomes and a sense of its sustainability.'},
+    excel:{name:'Awards for Teaching Excellence',
+      desc:'Recognises a broad, sustained, leadership-level record of teaching excellence. This is the pathway from which the Australian University Teacher of the Year is selected.',
+      evid:'a comprehensive evidence base spanning teaching, leadership, scholarship and sustained impact.'}
+  };
+  var state={q1:null,q2:null,q3:null};
+  var form=document.getElementById('form');
+  function render(){
+    form.innerHTML=QS.map(function(Q,i){
+      return '<div class="q"><div class="qn">'+(i+1)+'. '+Q.q+'</div>'+Q.opts.map(function(o){
+        var sel=(state[Q.id]===o[1]);
+        return '<div class="opt'+(sel?' sel':'')+'" role="button" tabindex="0" aria-pressed="'+(sel?'true':'false')+'" data-q="'+Q.id+'" data-v="'+o[1]+'"><span class="dot"></span><span>'+o[0]+'</span></div>';
+      }).join('')+'</div>';
+    }).join('');
+  }
+  function compute(){
+    var res=document.getElementById('res');
+    if(state.q1===null||state.q2===null||state.q3===null){ res.innerHTML='<p class="placeholder">Answer the three questions and your suggested pathway appears here →</p>'; return; }
+    var c=CATS[state.q1];
+    var ready, col;
+    if(state.q1==='cite' && state.q2==='under3'){ ready='Not yet — Citations need 3+ years'; col='var(--bad)'; }
+    else { var sc=(state.q2==='3plus'?1:0)+(state.q3==='strong'?1:0);
+      ready = sc===2?'Strong — likely ready to prepare a case' : sc===1?'Nearly there' : 'Early — keep building your evidence';
+      col = sc===2?'var(--good)':sc===1?'var(--warn)':'var(--mut)'; }
+    res.innerHTML=
+      '<div class="award">'+c.name+'</div>'+
+      '<span class="ready" style="color:'+col+'">'+ready+'</span>'+
+      '<div class="desc">'+c.desc+'</div>'+
+      '<div class="gap"><b>Evidence to gather.</b> '+c.evid+'</div>'+
+      '<div class="note">Note: the <b>Australian University Teacher of the Year</b> is selected <i>from</i> Teaching Excellence awardees, and the <b>Career Achievement Award</b> is offered only occasionally — both are outcomes of recognition, not separate application lanes.</div>'+
+      '<button class="reset" id="reset">Start over</button>';
+    document.getElementById('reset').addEventListener('click',function(){ state={q1:null,q2:null,q3:null}; render(); compute(); });
+  }
+  var lastFocus=null;
+  function refocus(){ if(!lastFocus) return; var p=lastFocus.split('~'); var el=form.querySelector('.opt[data-q="'+p[0]+'"][data-v="'+p[1]+'"]'); if(el) el.focus(); }
+  form.addEventListener('click',function(e){ var o=e.target.closest('.opt'); if(!o) return; lastFocus=o.getAttribute('data-q')+'~'+o.getAttribute('data-v'); state[o.getAttribute('data-q')]=o.getAttribute('data-v'); render(); compute(); refocus(); });
+  form.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var o=e.target.closest('.opt'); if(o){ e.preventDefault(); o.click(); } } });
+  render(); compute();
+})();
+</script>
+</body>
+</html>

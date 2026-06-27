@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SoTL Abstract Builder — structure a strong abstract · NTLSN</title>
+<meta name="description" content="Build a clear conference or journal abstract for a SoTL study — five guided moves (context, aim, method, findings, significance), live assembly, word count and a completeness check. Runs in your browser, nothing stored.">
+<style>
+  :root{
+    --navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --green:#5fcf91;--rose:#e58a78;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style",Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}
+  .back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:62ch;margin:0 0 24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .field{margin-bottom:15px}
+  .field label{display:block;font:700 13px var(--sans);color:var(--ink);margin-bottom:3px}
+  .field .hint{font:400 12px/1.4 var(--sans);color:var(--mut);margin-bottom:7px}
+  textarea{width:100%;min-height:62px;font:400 14px/1.5 var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none;resize:vertical}
+  textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .panel{position:sticky;top:18px;align-self:start}
+  .ab{background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ab h3{font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:0 0 11px;display:flex;justify-content:space-between}
+  .ab .wc{color:var(--teal)}.ab .wc.warn{color:var(--amber)}
+  #abstract{font:400 14.5px/1.62 var(--sans);color:var(--ink);white-space:pre-wrap;margin:0;min-height:40px}
+  #abstract .ph{color:#5d6e82}
+  .chk{margin-top:14px;display:flex;flex-direction:column;gap:5px}
+  .chk div{font-size:12.5px;color:var(--mut)}.chk .y{color:var(--green)}.chk .n{color:#6f7e90}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;transition:.15s;margin-top:14px;width:100%}
+  .btn:hover{background:#6bd8d0}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}
+  .note b{color:#f0e3c4}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top">
+    <svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg>
+    <div class="brand">NTLSN<b>.com</b></div>
+  </header>
+
+  <p class="eyebrow">◇ SoTL &amp; research</p>
+  <h1>SoTL abstract builder.</h1>
+  <p class="lede">A strong abstract makes five moves. Fill each in a sentence or two and watch it assemble — with a live word count and a completeness check. Built for conference and journal abstracts in the scholarship of teaching &amp; learning.</p>
+
+  <div class="grid">
+    <div>
+      <div class="field"><label>1 · Context &amp; problem</label><div class="hint">What's the teaching/learning issue, and why does it matter?</div><textarea data-k="context" placeholder="e.g. First-year STEM students often disengage from large lectures…"></textarea></div>
+      <div class="field"><label>2 · Aim or research question</label><div class="hint">What did you set out to find or do?</div><textarea data-k="aim" placeholder="e.g. This study asked whether structured peer instruction improves engagement…"></textarea></div>
+      <div class="field"><label>3 · Approach &amp; method</label><div class="hint">Context, participants, data, analysis — briefly.</div><textarea data-k="method" placeholder="e.g. A mixed-methods design across two cohorts (n=240), with surveys and focus groups…"></textarea></div>
+      <div class="field"><label>4 · Findings</label><div class="hint">The headline results — be concrete.</div><textarea data-k="findings" placeholder="e.g. Engagement scores rose 18%, and students reported greater confidence…"></textarea></div>
+      <div class="field"><label>5 · Significance &amp; implications</label><div class="hint">So what? What can others take from this?</div><textarea data-k="significance" placeholder="e.g. The findings offer a low-cost, transferable approach for large-class teaching…"></textarea></div>
+      <div class="field"><label>Keywords <span style="color:var(--mut);font-weight:400">(optional)</span></label><textarea data-k="keywords" style="min-height:40px" placeholder="e.g. peer instruction; student engagement; large classes; SoTL"></textarea></div>
+    </div>
+    <div class="panel">
+      <div class="ab">
+        <h3>Your abstract <span class="wc" id="wc">0 words</span></h3>
+        <p id="abstract"><span class="ph">Fill the moves on the left and your abstract appears here…</span></p>
+        <div class="chk" id="chk"></div>
+        <button class="btn" id="copy" type="button">Copy abstract</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="note"><b>The five moves</b> (context → aim → method → findings → significance) map to how reviewers read. Most conferences want 150–300 words; check your venue's limit. An abstract promising findings but reporting none is the most common desk-reject — make move 4 concrete.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · a structure aid, not a substitute for your venue's guidelines · nothing leaves your browser.</div>
+</div>
+
+<script>
+(function(){
+  var KS=['context','aim','method','findings','significance'];
+  var LBL={context:'Context',aim:'Aim',method:'Method',findings:'Findings',significance:'Significance'};
+  var fields={}, ta=document.querySelectorAll('textarea');
+  [].forEach.call(ta,function(t){fields[t.getAttribute('data-k')]=t;t.addEventListener('input',render);});
+  var abEl=document.getElementById('abstract'),wc=document.getElementById('wc'),chk=document.getElementById('chk');
+  function val(k){return (fields[k].value||'').trim();}
+  function render(){
+    var parts=KS.map(val).filter(Boolean);
+    var kw=val('keywords');
+    var text=parts.join(' ');
+    if(kw) text+= (text?'\n\n':'')+'Keywords: '+kw;
+    if(!parts.length){abEl.innerHTML='<span class="ph">Fill the moves on the left and your abstract appears here…</span>';}
+    else abEl.textContent=text;
+    var words=text.replace(/keywords:.*/i,'').split(/\s+/).filter(Boolean).length;
+    wc.textContent=words+' word'+(words===1?'':'s');
+    wc.className='wc'+((words>300||(words>0&&words<80))?' warn':'');
+    chk.innerHTML=KS.map(function(k){var on=!!val(k);return '<div class="'+(on?'y':'n')+'">'+(on?'✓':'○')+' '+LBL[k]+'</div>';}).join('');
+  }
+  document.getElementById('copy').addEventListener('click',function(){
+    var parts=KS.map(val).filter(Boolean);var kw=val('keywords');var text=parts.join(' ');if(kw)text+='\n\nKeywords: '+kw;
+    if(!text)return;
+    navigator.clipboard&&navigator.clipboard.writeText(text);
+    var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

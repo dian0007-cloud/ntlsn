@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colour Contrast Checker — WCAG 2.1 AA & AAA · NTLSN</title>
+<meta name="description" content="Check any text/background colour pair against WCAG 2.1 AA & AAA contrast thresholds — live ratio, pass/fail, and a real preview. Runs entirely in your browser, nothing stored.">
+<style>
+  :root{
+    --navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --green:#5fcf91;--rose:#e58a78;--amber:#e6b450;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style",Palatino,Georgia,serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}
+  .back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}
+  .logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}
+  .brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4vw,40px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:60ch;margin:0 0 28px}
+
+  .controls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+  @media(max-width:560px){.controls{grid-template-columns:1fr}}
+  .field{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+  .field label{display:block;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+  .pickrow{display:flex;gap:10px;align-items:center}
+  input[type=color]{-webkit-appearance:none;appearance:none;width:46px;height:46px;border:1px solid var(--line);border-radius:10px;background:none;cursor:pointer;padding:0;flex:none}
+  input[type=color]::-webkit-color-swatch-wrapper{padding:3px}
+  input[type=color]::-webkit-color-swatch{border:none;border-radius:7px}
+  input[type=text]{flex:1;min-width:0;font:600 15px var(--mono);text-transform:uppercase;color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:12px 13px;outline:none}
+  input[type=text]:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .swap{display:flex;justify-content:center;margin:-6px 0 14px}
+  .swapbtn{font:600 13px var(--sans);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:7px 15px;cursor:pointer;transition:.15s}
+  .swapbtn:hover{border-color:var(--teal);color:var(--teal)}
+
+  .result{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:center;margin-bottom:18px}
+  .ratio{font:800 clamp(40px,8vw,64px)/1 var(--sans);letter-spacing:-.02em;margin:0}
+  .ratio small{font-size:.42em;color:var(--mut);font-weight:600;letter-spacing:.02em}
+  .grades{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}
+  @media(max-width:560px){.grades{grid-template-columns:repeat(2,1fr)}}
+  .grade{border:1px solid var(--line);border-radius:11px;padding:11px 8px}
+  .grade .lv{font:800 13px var(--sans);margin-bottom:3px}
+  .grade .ctx{font:600 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+  .grade .vd{font:800 12px var(--sans);margin-top:7px;letter-spacing:.03em}
+  .pass{border-color:#2c5b45;background:#11271c}.pass .vd{color:var(--green)}
+  .fail{border-color:#5a3127;background:#26130e}.fail .vd{color:var(--rose)}
+
+  .preview{border-radius:14px;padding:26px 24px;border:1px solid var(--line);transition:.2s}
+  .preview .p-lg{font:700 24px/1.3 var(--sans);margin:0 0 8px}
+  .preview .p-sm{font:400 16px/1.5 var(--sans);margin:0}
+  .meta{font-size:12.5px;color:var(--mut);margin:16px 2px 0}
+  .meta b{color:var(--ink)}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}
+  .note b{color:#f0e3c4}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  .foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top">
+    <svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg>
+    <div class="brand">NTLSN<b>.com</b></div>
+  </header>
+
+  <p class="eyebrow">◇ Accessibility</p>
+  <h1>Colour contrast checker.</h1>
+  <p class="lede">Check any text-on-background pair against <b style="color:var(--ink)">WCAG 2.1</b> AA &amp; AAA. Pick your colours, see the exact ratio, what passes, and a real preview. Everything runs in your browser — nothing is stored or sent.</p>
+
+  <div class="controls">
+    <div class="field">
+      <label for="fgHex">Text colour</label>
+      <div class="pickrow">
+        <input type="color" id="fg" value="#0A1628" aria-label="Text colour picker">
+        <input type="text" id="fgHex" value="#0A1628" maxlength="7" spellcheck="false" aria-label="Text colour hex">
+      </div>
+    </div>
+    <div class="field">
+      <label for="bgHex">Background colour</label>
+      <div class="pickrow">
+        <input type="color" id="bg" value="#FFFFFF" aria-label="Background colour picker">
+        <input type="text" id="bgHex" value="#FFFFFF" maxlength="7" spellcheck="false" aria-label="Background colour hex">
+      </div>
+    </div>
+  </div>
+  <div class="swap"><button class="swapbtn" id="swap" type="button">⇅ Swap text &amp; background</button></div>
+
+  <div class="result">
+    <p class="ratio" id="ratio">21 <small>: 1</small></p>
+    <div class="grades">
+      <div class="grade" id="g-aa-n"><div class="lv">AA</div><div class="ctx">Normal text</div><div class="vd">—</div></div>
+      <div class="grade" id="g-aa-l"><div class="lv">AA</div><div class="ctx">Large text</div><div class="vd">—</div></div>
+      <div class="grade" id="g-aaa-n"><div class="lv">AAA</div><div class="ctx">Normal text</div><div class="vd">—</div></div>
+      <div class="grade" id="g-aaa-l"><div class="lv">AAA</div><div class="ctx">Large text</div><div class="vd">—</div></div>
+    </div>
+  </div>
+
+  <div class="preview" id="preview">
+    <p class="p-lg">Large text — headings &amp; 18pt+</p>
+    <p class="p-sm">Normal body text. The quick brown fox jumps over the lazy dog — does this read comfortably at this size?</p>
+  </div>
+  <p class="meta">“Large” = <b>18pt (24px) or 14pt bold (≈18.7px)</b> and above. AA needs <b>4.5:1</b> normal / <b>3:1</b> large; AAA needs <b>7:1</b> / <b>4.5:1</b>. Non-text UI (icons, borders, focus rings) needs <b>3:1</b> (WCAG 1.4.11).</p>
+
+  <div class="note"><b>Why it matters:</b> contrast is the single most common accessibility failure in teaching materials — slides, PDFs, LMS pages. Designing to AA from the start saves a remediation scramble later, and helps every learner in a bright room or on a cheap projector. This is a self-check, not a substitute for a full WCAG audit.</div>
+
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · WCAG 2.1 relative-luminance method · no data leaves your browser.</div>
+</div>
+
+<script>
+(function(){
+  var fg=document.getElementById('fg'),bg=document.getElementById('bg'),
+      fgHex=document.getElementById('fgHex'),bgHex=document.getElementById('bgHex'),
+      ratioEl=document.getElementById('ratio'),preview=document.getElementById('preview');
+  function clean(h){h=(h||'').trim();if(h[0]!=='#')h='#'+h;return h;}
+  function valid(h){return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(h);}
+  function toRGB(h){h=h.replace('#','');if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+  function lum(rgb){var a=rgb.map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});return 0.2126*a[0]+0.7152*a[1]+0.0722*a[2];}
+  function contrast(c1,c2){var L1=lum(c1),L2=lum(c2),hi=Math.max(L1,L2),lo=Math.min(L1,L2);return (hi+0.05)/(lo+0.05);}
+  function grade(id,ok){var e=document.getElementById(id);e.className='grade '+(ok?'pass':'fail');e.querySelector('.vd').textContent=ok?'PASS':'FAIL';}
+  function render(){
+    var f=fgHex.value,b=bgHex.value;
+    if(!valid(clean(f))||!valid(clean(b)))return;
+    var cf=toRGB(clean(f)),cb=toRGB(clean(b));
+    var r=contrast(cf,cb);
+    ratioEl.innerHTML=(Math.round(r*100)/100)+' <small>: 1</small>';
+    grade('g-aa-n',r>=4.5);grade('g-aa-l',r>=3);grade('g-aaa-n',r>=7);grade('g-aaa-l',r>=4.5);
+    preview.style.background=clean(b);preview.style.color=clean(f);
+    preview.style.borderColor=(r<1.3?'var(--rose)':'var(--line)');
+  }
+  function sync(picker,hex){
+    picker.addEventListener('input',function(){hex.value=picker.value.toUpperCase();render();});
+    hex.addEventListener('input',function(){var v=clean(hex.value);if(valid(v)){picker.value=v.length===4?'#'+v[1]+v[1]+v[2]+v[2]+v[3]+v[3]:v;render();}});
+  }
+  sync(fg,fgHex);sync(bg,bgHex);
+  document.getElementById('swap').addEventListener('click',function(){
+    var t=fgHex.value;fgHex.value=bgHex.value;bgHex.value=t;
+    var tp=fg.value;fg.value=bg.value;bg.value=tp;render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

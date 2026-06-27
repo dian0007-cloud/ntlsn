@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — The sector in 3D</title>
+<meta name="description" content="The Australian university teaching sector as a rotating 3D network — 43 universities clustered by state, linked to their alliances and the national associations that connect them. Drag to orbit; watch the journey. Vanilla 3D, runs in your browser.">
+<meta property="og:title" content="The sector in 3D — NTLSN">
+<meta property="og:description" content="A rotating 3D network of the Australian university teaching sector — 43 universities, states, alliances and national associations. Drag to orbit. Free.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.12);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.5;padding:24px 16px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(23px,3.3vw,33px);margin:0 0 7px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:14.5px;margin:0 0 16px;max-width:780px}
+  .bar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:0 0 12px}
+  .grp{display:flex;align-items:center;gap:6px}
+  .grp .lbl{font:700 10px var(--F);text-transform:uppercase;letter-spacing:.8px;color:var(--mut);margin-right:2px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .seg button{background:transparent;color:var(--mut);border:none;padding:7px 12px;font:700 12px var(--F);cursor:pointer;transition:.12s}
+  .seg button.on{background:rgba(78,205,196,.16);color:var(--ink)}
+  .seg button:hover:not(.on){color:var(--ink)}
+  .stage{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:radial-gradient(120% 100% at 50% 30%,#0d2143 0%,#0a1628 72%)}
+  canvas{display:block;width:100%;touch-action:none;cursor:grab}
+  canvas:active{cursor:grabbing}
+  .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 22px 58px;background:linear-gradient(0deg,rgba(7,14,24,.9) 0%,rgba(7,14,24,.66) 55%,rgba(7,14,24,0) 100%);pointer-events:none;transition:opacity .5s ease}
+  .cap .kick{font:800 10.5px var(--F);letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);margin:0 0 5px}
+  .cap .txt{font:600 clamp(15px,2.2vw,20px)/1.45 var(--F);color:#fff;max-width:780px;margin:0;text-shadow:0 1px 14px rgba(0,0,0,.7);transition:opacity .45s ease,transform .45s ease}
+  .jbar{position:absolute;left:14px;right:14px;bottom:14px;display:flex;align-items:center;gap:10px;pointer-events:auto;z-index:3}
+  .jbtn{background:rgba(78,205,196,.16);border:1px solid rgba(78,205,196,.4);color:var(--ink);border-radius:999px;padding:8px 15px;font:800 12.5px var(--F);cursor:pointer;white-space:nowrap}
+  .jbtn:hover{background:rgba(78,205,196,.28)}
+  .jbtn.ghost{background:transparent;border-color:var(--line);color:var(--mut)}
+  .prog{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+  .prog i{display:block;height:100%;width:0;background:var(--teal);border-radius:999px;transition:width .5s linear}
+  .pcount{font:700 11px var(--F);color:var(--mut);min-width:42px;text-align:right}
+  .tip{position:absolute;top:12px;left:14px;font:600 11.5px var(--F);color:var(--mut);pointer-events:none;background:rgba(10,22,40,.5);padding:5px 9px;border-radius:8px;transition:opacity .3s}
+  .legend{display:flex;flex-wrap:wrap;gap:11px;margin:12px 0 0;font-size:11.5px;color:var(--mut)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:13px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · A journey through the sector · 3D</div>
+  <h1>The sector, in three dimensions</h1>
+  <p class="lead">The Australian university teaching sector as a <b>rotating 3D network</b>: <b>43 universities</b> clustered by <b>state</b>, linked to their <b>alliances</b> and the <b>national associations</b> that connect them. <b>Drag to orbit</b>, scroll to zoom, or watch the journey fly through it.</p>
+  <div class="bar">
+    <div class="grp"><span class="lbl">Colour</span><div class="seg" id="colour"><button data-v="state" class="on">By state</button><button data-v="group">By alliance</button></div></div>
+    <div class="grp"><span class="lbl">Spin</span><div class="seg" id="spin"><button data-v="on" class="on">Auto</button><button data-v="off">Hold still</button></div></div>
+    <div class="grp"><span class="lbl">Labels</span><div class="seg" id="labels"><button data-v="hubs" class="on">Hubs</button><button data-v="near">Nearest</button><button data-v="off">Off</button></div></div>
+  </div>
+  <div class="stage" id="stage">
+    <canvas id="cv"></canvas>
+    <div class="tip" id="tip">the story is playing — drag to orbit</div>
+    <div class="cap" id="cap"><div class="kick" id="capKick"></div><p class="txt" id="capTxt"></p></div>
+    <div class="jbar">
+      <button class="jbtn" id="play">⏸ Pause</button>
+      <button class="jbtn ghost" id="replay">↻ Replay the journey</button>
+      <div class="prog"><i id="progFill"></i></div>
+      <div class="pcount" id="pcount"></div>
+    </div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="foot">
+    <b>Illustrative.</b> Universities, states and alliances are real (NTLSN's open directory of 43 institutions); links from a university to its state and alliance are real. National associations are shown as sector-wide bodies. First Nations governance is custodian-led and not modelled. Vanilla 3D — no libraries; runs entirely in your browser. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var UNI=[{"a":"ANU","nm":"Australian National University","ct":"Canberra","s":"ACT","g":"Go8"},{"a":"UniMelb","nm":"University of Melbourne","ct":"Melbourne","s":"VIC","g":"Go8"},{"a":"UNSW","nm":"UNSW Sydney","ct":"Sydney","s":"NSW","g":"Go8"},{"a":"USyd","nm":"University of Sydney","ct":"Sydney","s":"NSW","g":"Go8"},{"a":"UQ","nm":"University of Queensland","ct":"Brisbane","s":"QLD","g":"Go8"},{"a":"UWA","nm":"University of Western Australia","ct":"Perth","s":"WA","g":"Go8"},{"a":"Monash","nm":"Monash University","ct":"Melbourne","s":"VIC","g":"Go8"},{"a":"Adelaide","nm":"Adelaide University","ct":"Adelaide","s":"SA","g":"Go8"},{"a":"RMIT","nm":"RMIT University","ct":"Melbourne","s":"VIC","g":"ATN"},{"a":"UTS","nm":"University of Technology Sydney","ct":"Sydney","s":"NSW","g":"ATN"},{"a":"QUT","nm":"Queensland University of Technology","ct":"Brisbane","s":"QLD","g":"ATN"},{"a":"Curtin","nm":"Curtin University","ct":"Perth","s":"WA","g":"ATN"},{"a":"Deakin","nm":"Deakin University","ct":"Geelong","s":"VIC","g":"ATN"},{"a":"Newcastle","nm":"University of Newcastle","ct":"Newcastle","s":"NSW","g":"ATN"},{"a":"Flinders","nm":"Flinders University","ct":"Adelaide","s":"SA","g":"IRU"},{"a":"Griffith","nm":"Griffith University","ct":"Brisbane","s":"QLD","g":"IRU"},{"a":"JCU","nm":"James Cook University","ct":"Townsville","s":"QLD","g":"IRU"},{"a":"La Trobe","nm":"La Trobe University","ct":"Melbourne","s":"VIC","g":"IRU"},{"a":"Murdoch","nm":"Murdoch University","ct":"Perth","s":"WA","g":"IRU"},{"a":"WSU","nm":"Western Sydney University","ct":"Penrith","s":"NSW","g":"IRU"},{"a":"UC","nm":"University of Canberra","ct":"Canberra","s":"ACT","g":"IRU"},{"a":"CSU","nm":"Charles Sturt University","ct":"Wagga Wagga","s":"NSW","g":"RUN"},{"a":"CQU","nm":"CQUniversity","ct":"Rockhampton","s":"QLD","g":"RUN"},{"a":"FedUni","nm":"Federation University","ct":"Ballarat","s":"VIC","g":"RUN"},{"a":"SCU","nm":"Southern Cross University","ct":"Lismore","s":"NSW","g":"RUN"},{"a":"UNE","nm":"University of New England","ct":"Armidale","s":"NSW","g":"RUN"},{"a":"UniSQ","nm":"University of Southern Queensland","ct":"Toowoomba","s":"QLD","g":"RUN"},{"a":"USC","nm":"University of the Sunshine Coast","ct":"Sippy Downs","s":"QLD","g":"RUN"},{"a":"Macquarie","nm":"Macquarie University","ct":"Sydney","s":"NSW","g":"Unaligned"},{"a":"UOW","nm":"University of Wollongong","ct":"Wollongong","s":"NSW","g":"Unaligned"},{"a":"Swinburne","nm":"Swinburne University of Technology","ct":"Melbourne","s":"VIC","g":"Unaligned"},{"a":"VU","nm":"Victoria University","ct":"Melbourne","s":"VIC","g":"Unaligned"},{"a":"ECU","nm":"Edith Cowan University","ct":"Perth","s":"WA","g":"Unaligned"},{"a":"CDU","nm":"Charles Darwin University","ct":"Darwin","s":"NT","g":"Unaligned"},{"a":"UTAS","nm":"University of Tasmania","ct":"Hobart","s":"TAS","g":"Unaligned"},{"a":"ACU","nm":"Australian Catholic University","ct":"North Sydney","s":"NSW","g":"Unaligned"},{"a":"Bond","nm":"Bond University","ct":"Gold Coast","s":"QLD","g":"Unaligned"},{"a":"Notre Dame","nm":"University of Notre Dame Australia","ct":"Fremantle","s":"WA","g":"Unaligned"},{"a":"Torrens","nm":"Torrens University Australia","ct":"Sydney","s":"NSW","g":"Unaligned"},{"a":"Avondale","nm":"Avondale University","ct":"Cooranbong","s":"NSW","g":"Unaligned"},{"a":"Divinity","nm":"University of Divinity","ct":"Melbourne","s":"VIC","g":"Unaligned"},{"a":"UniSA","nm":"University of South Australia","ct":"Adelaide","s":"SA","g":"Unaligned"},{"a":"Batchelor","nm":"Batchelor Institute","ct":"Batchelor","s":"NT","g":"Unaligned"}];
+  var STN={NSW:'New South Wales',VIC:'Victoria',QLD:'Queensland',WA:'Western Australia',SA:'South Australia',ACT:'ACT',TAS:'Tasmania',NT:'Northern Territory'};
+  var STC={NSW:[78,205,196],VIC:[201,169,98],QLD:[107,168,255],WA:[185,139,217],SA:[111,207,151],ACT:[255,180,72],TAS:[255,138,138],NT:[229,155,214]};
+  var ALN={Go8:'Group of Eight',ATN:'Australian Technology Network',IRU:'Innovative Research Universities',RUN:'Regional Universities Network'};
+  var ALC={Go8:[201,169,98],ATN:[107,168,255],IRU:[111,207,151],RUN:[185,139,217],Unaligned:[125,140,160]};
+  var ASSOC=[['CAULLT','Council of Aust. University Leaders in L&T'],['HERDSA','Higher Ed Research & Development Society'],['ASCILITE','Computers in Learning in Tertiary Ed'],['ACODE','Open, Distance & e-Learning'],['UA','Universities Australia']];
+  var ACCENT={centre:[78,205,196],alliance:[255,180,72],assoc:[124,156,255]};
+  var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+
+  var nodes=[],byId={},edges=[];
+  function add(o){o.x=(Math.random()-.5)*300;o.y=(Math.random()-.5)*300;o.z=(Math.random()-.5)*300;o.vx=0;o.vy=0;o.vz=0;nodes.push(o);byId[o.id]=o;return o;}
+  add({id:'centre',kind:'centre',label:'The sector',r:8});
+  Object.keys(STN).forEach(function(s){ var c=UNI.filter(function(u){return u.s===s;}).length; add({id:'st:'+s,kind:'state',label:STN[s],st:s,r:5+c*0.45}); edges.push(['centre','st:'+s]); });
+  Object.keys(ALN).forEach(function(g){ add({id:'al:'+g,kind:'alliance',label:g,full:ALN[g],r:6}); edges.push(['centre','al:'+g]); });
+  ASSOC.forEach(function(a){ add({id:'as:'+a[0],kind:'assoc',label:a[0],full:a[1],r:5.5}); edges.push(['centre','as:'+a[0]]); });
+  UNI.forEach(function(u){ var id='u:'+u.a; add({id:id,kind:'uni',label:u.a,nm:u.nm,ct:u.ct,st:u.s,gr:u.g,r:3.4}); edges.push(['st:'+u.s,id]); if(u.g!=='Unaligned') edges.push(['al:'+u.g,id]); });
+  var adj={}; nodes.forEach(function(n){adj[n.id]={};}); edges.forEach(function(e){adj[e[0]][e[1]]=1;adj[e[1]][e[0]]=1;});
+
+  // 3D force settle (synchronous), then freeze and rotate
+  function settle(iters){ for(var t=0;t<iters;t++){
+    for(var i=0;i<nodes.length;i++){var a=nodes[i];
+      for(var j=i+1;j<nodes.length;j++){var b=nodes[j];var dx=a.x-b.x,dy=a.y-b.y,dz=a.z-b.z,d2=dx*dx+dy*dy+dz*dz||1,d=Math.sqrt(d2);var rep=12000/d2;a.vx+=dx/d*rep;a.vy+=dy/d*rep;a.vz+=dz/d*rep;b.vx-=dx/d*rep;b.vy-=dy/d*rep;b.vz-=dz/d*rep;}}
+    edges.forEach(function(e){var a=byId[e[0]],b=byId[e[1]];var dx=b.x-a.x,dy=b.y-a.y,dz=b.z-a.z,d=Math.sqrt(dx*dx+dy*dy+dz*dz)||1;var rest=e[0]==='centre'?70:96;var k=0.02*(d-rest)/d;a.vx+=dx*k;a.vy+=dy*k;a.vz+=dz*k;b.vx-=dx*k;b.vy-=dy*k;b.vz-=dz*k;});
+    nodes.forEach(function(n){n.vx+=-n.x*0.001;n.vy+=-n.y*0.001;n.vz+=-n.z*0.001;n.vx*=0.8;n.vy*=0.8;n.vz*=0.8;n.x+=n.vx;n.y+=n.vy;n.z+=n.vz;});
+  } byId['centre'].x=byId['centre'].y=byId['centre'].z=0; }
+  settle(220);
+  // scale to fit a sphere radius ~210
+  var maxr=0; nodes.forEach(function(n){var d=Math.sqrt(n.x*n.x+n.y*n.y+n.z*n.z);if(d>maxr)maxr=d;});
+  var sc=210/(maxr||1); nodes.forEach(function(n){n.x*=sc;n.y*=sc;n.z*=sc;});
+
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),stage=document.getElementById('stage');
+  var DPR=Math.min(window.devicePixelRatio||1,2),W=0,H=0;
+  var colour='state',spin=true,labels='hubs';
+  var rotY=0.4,rotX=-0.25,velY=0,velX=0,zoom=1,tzoom=1;
+  var mouse={x:-1e5,y:-1e5,on:false},down=false,lastX=0,lastY=0,dragMoved=false,hover=null;
+  var CAM=560,FOC=600;
+  var journey={on:true,i:0,t0:0,dwell:6200,tRotY:null,tRotX:null};
+  var JOURNEY=[
+   {id:'centre',kick:'One sector',txt:'Forty-three universities. Eight states and territories. One sector — turning in space.'},
+   {id:'st:NSW',kick:'The largest cluster',txt:'New South Wales — 13 universities, the densest knot in the network.'},
+   {id:'st:VIC',kick:'The southern hub',txt:'Victoria — 9 universities, research-intensive and far-reaching.'},
+   {id:'st:QLD',kick:'North by northeast',txt:'Queensland — 8 universities, Brisbane to the tropics.'},
+   {id:'al:Go8',kick:'The alliances',txt:'Universities also band together — the Group of Eight spans five states.'},
+   {id:'al:RUN',kick:'Alliances cross state lines',txt:'The Regional Universities Network, the IRU, the ATN — alliances that arc across the whole structure.'},
+   {id:'as:HERDSA',kick:'The national bodies',txt:'And the associations that bind teaching across them all — HERDSA, CAULLT, ASCILITE, ACODE.'},
+   {id:'centre',kick:'One network',txt:'No single university sees the whole. Together they are one sector — and NTLSN holds it open.'}
+  ];
+
+  function size(){var r=stage.getBoundingClientRect();var h=Math.max(480,Math.min(680,Math.round(r.width*0.7)));W=r.width;H=h;cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);cv.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0);}
+  function rgbOf(n){if(n.kind==='centre')return ACCENT.centre;if(n.kind==='alliance')return ACCENT.alliance;if(n.kind==='assoc')return ACCENT.assoc;return colour==='group'?(ALC[n.gr||n.st]||ALC.Unaligned):(STC[n.st]||[150,160,175]);}
+  function rotPt(n){ var cY=Math.cos(rotY),sY=Math.sin(rotY),cX=Math.cos(rotX),sX=Math.sin(rotX);
+    var x1=n.x*cY+n.z*sY, z1=-n.x*sY+n.z*cY, y1=n.y;
+    var y2=y1*cX-z1*sX, z2=y1*sX+z1*cX;
+    return {x:x1,y:y2,z:z2}; }
+  function project(p){ var vz=p.z+CAM; if(vz<40)vz=40; var s=FOC/vz*zoom; return {sx:W/2+p.x*s, sy:H/2+p.y*s, scale:s, vz:vz}; }
+  function focusId(){return journey.on?JOURNEY[journey.i].id:hover;}
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var foc=focusId();
+    // compute projected
+    var P={}; nodes.forEach(function(n){ var r=rotPt(n); P[n.id]={r:r,p:project(r)}; });
+    // edges sorted back-to-front by avg depth
+    var es=edges.map(function(e){return {e:e, z:(P[e[0]].r.z+P[e[1]].r.z)/2};}).sort(function(a,b){return a.z-b.z;});
+    es.forEach(function(o){ var a=byId[o.e[0]],b=byId[o.e[1]],pa=P[a.id].p,pb=P[b.id].p;
+      var hot=foc&&(foc===a.id||foc===b.id); var depth=(o.z+250)/500; // 0 far .. 1 near
+      var al=hot?0.55:(0.04+0.16*Math.max(0,depth)); var foclo=foc&&!hot; if(foclo)al=0.03;
+      ctx.strokeStyle='rgba(130,195,210,'+al.toFixed(3)+')'; ctx.lineWidth=hot?1.7:(0.5+depth*0.9);
+      ctx.beginPath();ctx.moveTo(pa.sx,pa.sy);ctx.lineTo(pb.sx,pb.sy);ctx.stroke(); });
+    // cursor links (screen space)
+    if(mouse.on&&!down&&!journey.on){ nodes.forEach(function(n){var p=P[n.id].p;var dx=mouse.x-p.sx,dy=mouse.y-p.sy,md=Math.sqrt(dx*dx+dy*dy);if(md<150){ctx.strokeStyle='rgba(78,205,196,'+(0.36*(1-md/150)).toFixed(3)+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(mouse.x,mouse.y);ctx.lineTo(p.sx,p.sy);ctx.stroke();}}); }
+    // nodes back-to-front
+    var order=nodes.slice().sort(function(a,b){return P[b.id].r.z-P[a.id].r.z;}); // far (big z) first
+    order.forEach(function(n){ var pr=P[n.id], p=pr.p; var depth=(pr.r.z+250)/500; depth=Math.max(0,Math.min(1,depth));
+      var dim=foc&&foc!==n.id&&!adj[foc][n.id]; var isF=foc===n.id;
+      var rad=n.r*p.scale*(isF?1.25:1); if(rad<0.6)rad=0.6;
+      var c=rgbOf(n); var bright=0.45+0.55*depth; // near brighter
+      var al=dim?0.18:(0.45+0.5*depth);
+      if(!dim){ctx.shadowColor='rgba('+c[0]+','+c[1]+','+c[2]+',0.7)';ctx.shadowBlur=(4+depth*9)+(isF?12:0);}else ctx.shadowBlur=0;
+      ctx.fillStyle='rgba('+Math.round(c[0]*bright)+','+Math.round(c[1]*bright)+','+Math.round(c[2]*bright)+','+al+')';
+      ctx.beginPath();ctx.arc(p.sx,p.sy,rad,0,6.2832);ctx.fill();ctx.shadowBlur=0;
+      if(!dim){ctx.lineWidth=isF?1.6:0.7;ctx.strokeStyle='rgba(255,255,255,'+(isF?0.8:0.12+depth*0.18)+')';ctx.stroke();}
+      var big=n.kind!=='uni';
+      var showL = isF || (labels==='hubs'&&big&&!dim) || (labels==='near'&&!dim&&depth>0.62) || (hover===n.id);
+      if(showL){ ctx.font='700 '+(big?12:10)+'px -apple-system,Segoe UI,Roboto,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillStyle='rgba(255,255,255,'+(isF?0.98:0.4+depth*0.5)+')'; ctx.fillText(n.label,p.sx,p.sy-rad-7); }
+    });
+    window.__P=P;
+  }
+
+  function bringFront(n){ // target rotation to bring node n toward camera (most negative z), roughly centred
+    var ax=Math.atan2(n.x, n.z); journey.tRotY=-ax+Math.PI; // face -z
+    journey.tRotX=Math.max(-0.5,Math.min(0.5,-Math.atan2(n.y,Math.sqrt(n.x*n.x+n.z*n.z)))); }
+  function step(){
+    if(journey.on){ var st=JOURNEY[journey.i],t=st.id&&byId[st.id]; if(t){ if(journey.tRotY===null) bringFront(t); tzoom=1.35; } else {journey.tRotY=rotY;journey.tRotX=-0.25;tzoom=0.95;} }
+    else { tzoom=1; }
+    // rotation
+    if(journey.on&&journey.tRotY!==null){ var dY=journey.tRotY-rotY; while(dY>Math.PI)dY-=6.2832; while(dY<-Math.PI)dY+=6.2832; rotY+=dY*0.05; rotX+=(journey.tRotX-rotX)*0.05; }
+    else { rotY+=velY; rotX+=velX; rotX=Math.max(-1.2,Math.min(1.2,rotX)); velY*=0.92; velX*=0.92; if(!down&&spin&&!journey.on) rotY+=0.0024; }
+    zoom+=(tzoom-zoom)*0.06;
+    draw();
+    if(journey.on&&!RM){ var now=performance&&performance.now?performance.now():Date.now(); if(!journey.t0)journey.t0=now; var frac=Math.min(1,(now-journey.t0)/journey.dwell); document.getElementById('progFill').style.width=Math.round(frac*100)+'%'; if(frac>=1)next(); }
+    if(!RM)raf=requestAnimationFrame(step);
+  }
+  var raf;
+  function showCap(){var st=JOURNEY[journey.i];document.getElementById('capKick').textContent=st.kick;document.getElementById('capTxt').textContent=st.txt;document.getElementById('pcount').textContent=(journey.i+1)+' / '+JOURNEY.length;document.getElementById('cap').style.opacity=1;var t=document.getElementById('capTxt');t.style.opacity=0;t.style.transform='translateY(8px)';setTimeout(function(){t.style.opacity=1;t.style.transform='none';},30);}
+  function gotoStop(i){journey.i=(i+JOURNEY.length)%JOURNEY.length;journey.t0=0;journey.tRotY=null;showCap();}
+  function next(){if(journey.i>=JOURNEY.length-1){endJourney(true);return;}gotoStop(journey.i+1);}
+  function startJourney(){journey.on=true;journey.i=0;journey.t0=0;journey.tRotY=null;document.getElementById('play').textContent='⏸ Pause';document.getElementById('tip').style.opacity=1;showCap();}
+  function endJourney(f){journey.on=false;document.getElementById('play').textContent='▶ Play the journey';document.getElementById('tip').style.opacity=0;if(f)document.getElementById('progFill').style.width='100%';document.getElementById('capKick').textContent='Now it’s yours';document.getElementById('capTxt').textContent='Drag to orbit, hover a sphere, switch the colour — or replay the journey.';}
+  function pauseToggle(){if(journey.on)endJourney(false);else startJourney();if(RM)draw();}
+  function userTook(){if(journey.on)endJourney(false);}
+
+  function rel(e){var r=cv.getBoundingClientRect();var t=e.touches&&e.touches[0];return{x:(t?t.clientX:e.clientX)-r.left,y:(t?t.clientY:e.clientY)-r.top};}
+  function hitTest(p){var P=window.__P;if(!P)return null;var best=null,bd=1e9;nodes.forEach(function(n){var pp=P[n.id].p;var dx=p.x-pp.sx,dy=p.y-pp.sy,d=dx*dx+dy*dy;var rr=Math.max(6,n.r*pp.scale+4);if(d<=rr*rr&&pp.vz<bd){bd=pp.vz;best=n;}});return best;}
+  cv.addEventListener('mousedown',function(e){down=true;dragMoved=false;var p=rel(e);lastX=p.x;lastY=p.y;});
+  window.addEventListener('mouseup',function(){down=false;});
+  cv.addEventListener('mousemove',function(e){var p=rel(e);mouse.x=p.x;mouse.y=p.y;mouse.on=true;
+    if(down){var dx=p.x-lastX,dy=p.y-lastY;if(Math.abs(dx)+Math.abs(dy)>2){dragMoved=true;userTook();}velY=dx*0.006;velX=dy*0.006;rotY+=velY;rotX+=dy*0.006;rotX=Math.max(-1.2,Math.min(1.2,rotX));lastX=p.x;lastY=p.y;}
+    else if(!journey.on){var n=hitTest(p);hover=n?n.id:null;}
+    if(RM)draw();});
+  cv.addEventListener('mouseleave',function(){mouse.on=false;if(!journey.on)hover=null;});
+  cv.addEventListener('wheel',function(e){tzoom=Math.max(0.6,Math.min(2.4,tzoom-e.deltaY*0.001));e.preventDefault();},{passive:false});
+  cv.addEventListener('touchstart',function(e){down=true;userTook();var p=rel(e);lastX=p.x;lastY=p.y;mouse.on=true;},{passive:true});
+  cv.addEventListener('touchmove',function(e){var p=rel(e);if(down){var dx=p.x-lastX,dy=p.y-lastY;velY=dx*0.006;rotY+=dx*0.006;rotX+=dy*0.006;rotX=Math.max(-1.2,Math.min(1.2,rotX));lastX=p.x;lastY=p.y;}e.preventDefault();},{passive:false});
+  cv.addEventListener('touchend',function(){down=false;});
+  document.getElementById('play').addEventListener('click',pauseToggle);
+  document.getElementById('replay').addEventListener('click',startJourney);
+  function wire(id,set){var seg=document.getElementById(id);seg.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(seg.children,function(c){c.classList.toggle('on',c===b);});set(b.getAttribute('data-v'));});}
+  wire('colour',function(v){colour=v;setLegend();if(RM)draw();});
+  wire('spin',function(v){spin=v==='on';});
+  wire('labels',function(v){labels=v;if(RM)draw();});
+  function setLegend(){var html;if(colour==='group'){html=Object.keys(ALC).map(function(g){return '<span><i style="background:rgb('+ALC[g].join(',')+')"></i>'+(ALN[g]||g)+'</span>';}).join('');}else{html=Object.keys(STC).map(function(s){return '<span><i style="background:rgb('+STC[s].join(',')+')"></i>'+STN[s]+'</span>';}).join('');}html+='<span><i style="background:rgb('+ACCENT.alliance.join(',')+')"></i>Alliance</span><span><i style="background:rgb('+ACCENT.assoc.join(',')+')"></i>National association</span>';document.getElementById('legend').innerHTML=html;}
+  setLegend();
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){size();if(RM)draw();},150);});
+  try{if(window.ResizeObserver){new ResizeObserver(function(){clearTimeout(rt);rt=setTimeout(function(){size();if(RM)draw();},120);}).observe(stage);}}catch(e){}
+  size();
+  if(RM){ journey.on=true;journey.i=0;showCap();draw();document.getElementById('tip').style.opacity=0; }
+  else { startJourney(); raf=requestAnimationFrame(step); }
+})();
+</script>
+</body>
+</html>

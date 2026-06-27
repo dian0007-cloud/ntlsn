@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback & Feedforward Builder — student feedback that actually helps · NTLSN</title>
+<meta name="description" content="Turn a grade into feedback students can act on — specific, criteria-linked and forward-looking, not a praise sandwich. Build it, copy it. Runs in your browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#10223b;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;--green:#5fcf91;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:780px;margin:0 auto;padding:34px 22px 80px}
+  .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}.back:hover{text-decoration:underline}
+  header.top{display:flex;align-items:center;gap:11px;margin-bottom:28px}.logo{width:30px;height:30px;flex:none}
+  .brand{font-family:var(--serif);font-weight:600;font-size:18px}.brand b{color:var(--teal)}
+  .eyebrow{font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(27px,4vw,39px);line-height:1.12;margin:0 0 12px}
+  .lede{font-size:17px;color:var(--mut);max-width:62ch;margin:0 0 24px}
+  .field{margin-bottom:14px}.field label{display:block;font:700 13px var(--sans);margin-bottom:3px}.field .h{font:400 12px var(--sans);color:var(--mut);margin:0 0 7px}
+  input[type=text],textarea{width:100%;font:500 14.5px var(--sans);color:var(--ink);background:var(--navy);border:1px solid var(--line);border-radius:10px;padding:10px 13px;outline:none}
+  textarea{min-height:50px;resize:vertical}input:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
+  .seg{display:flex;gap:7px;flex-wrap:wrap}.seg button{font:600 13px var(--sans);color:var(--mut);background:var(--navy);border:1px solid var(--line);border-radius:9px;padding:8px 13px;cursor:pointer}.seg button.on{background:#11293f;border-color:var(--teal);color:var(--ink)}
+  .out{background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px;display:none}.out.on{display:block}
+  .out h3{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 10px}
+  #fb{font:400 15px/1.62 var(--sans);color:var(--ink);white-space:pre-wrap;margin:0}
+  .btn{font:600 13px var(--sans);border-radius:9px;padding:10px 16px;cursor:pointer;border:1px solid var(--teal);background:var(--teal);color:#06201d;margin-top:14px}
+  .note{background:linear-gradient(180deg,#13294780,#10223b);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px 13px 13px 13px;padding:14px 17px;margin-top:24px;font-size:13.5px;color:var(--mut)}.note b{color:#f0e3c4}
+  .foot{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}.foot a{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/">‹ NTLSN.com</a>
+  <header class="top"><svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg><div class="brand">NTLSN<b>.com</b></div></header>
+
+  <p class="eyebrow">◇ Assessment</p>
+  <h1>Feedback &amp; feedforward builder.</h1>
+  <p class="lede">Feedback students can <b style="color:var(--ink)">act on</b> — specific, linked to the criteria, and forward-looking. Not a praise sandwich. Fill the parts; we'll shape it into something useful and humane.</p>
+
+  <div class="field"><label>Student name <span style="color:var(--mut);font-weight:400">(optional)</span></label><input type="text" id="name" placeholder="e.g. Maya"></div>
+  <div class="field"><label>What's the strength? — be specific</label><div class="h">Name the thing they did well, with evidence.</div><textarea id="strength" placeholder="e.g. your argument in section 2 was well-structured and used three relevant sources"></textarea></div>
+  <div class="field"><label>What's the one thing to develop?</label><div class="h">The single highest-leverage improvement (not five).</div><textarea id="grow" placeholder="e.g. the analysis stays descriptive where it could evaluate"></textarea></div>
+  <div class="field"><label>The next action they can take</label><div class="h">Concrete and doable on the next task.</div><textarea id="act" placeholder="e.g. for each source, add one sentence on what it means for your argument"></textarea></div>
+  <div class="field"><label>Tone</label><div class="seg" id="tone"><button class="on" data-v="warm">Warm</button><button data-v="direct">Direct</button><button data-v="brief">Brief</button></div></div>
+
+  <div class="out" id="out"><h3>Your feedback</h3><p id="fb"></p><button class="btn" id="copy" type="button">Copy feedback</button></div>
+
+  <div class="note"><b>Why not a sandwich?</b> Praise-criticism-praise trains students to brace for the middle and forget the rest. Lead with a genuine, specific strength; give <i>one</i> clear thing to develop; make the next step doable. That's what moves work forward.</div>
+  <div class="foot">A free tool from <a href="/">NTLSN.com</a> · feedforward principles (Hattie &amp; Timperley: where to next?) · nothing leaves your browser.</div>
+</div>
+<script>
+(function(){
+  var tone='warm';
+  ['name','strength','grow','act'].forEach(function(id){document.getElementById(id).addEventListener('input',build);});
+  document.getElementById('tone').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.children,function(x){x.classList.remove('on');});b.classList.add('on');tone=b.getAttribute('data-v');build();});
+  function v(id){return (document.getElementById(id).value||'').trim();}
+  function build(){
+    var s=v('strength'), g=v('grow'), a=v('act'), nm=v('name');
+    if(!s && !g){document.getElementById('out').className='out';return;}
+    var hi=nm?('Hi '+nm+' — '):'';
+    var txt;
+    if(tone==='brief'){
+      txt=(s?'Strength: '+lc(s)+'. ':'')+(g?'To develop: '+lc(g)+'. ':'')+(a?'Next: '+lc(a)+'.':'');
+    } else if(tone==='direct'){
+      txt=hi+(s?'You did this well: '+lc(s)+'. ':'')+(g?'The thing to work on is '+lc(g)+'. ':'')+(a?'Do this next time: '+lc(a)+'. ':'')+'You can build on this.';
+    } else {
+      txt=hi+(s?'There’s a real strength here — '+lc(s)+', and it shows. ':'')+(g?'The one thing I’d focus on next is '+lc(g)+' — not because it’s weak, but because it’s where your work will grow most. ':'')+(a?'A concrete way in: '+lc(a)+'. ':'')+'You’re on the right track — keep going, and bring me questions.';
+    }
+    document.getElementById('out').className='out on';
+    document.getElementById('fb').textContent=txt.trim();
+  }
+  function lc(t){return t.charAt(0).toLowerCase()+t.slice(1);}
+  document.getElementById('copy').addEventListener('click',function(){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('fb').textContent);var b=this,o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
+})();
+</script>
+</body>
+</html>
