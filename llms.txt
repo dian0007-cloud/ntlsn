@@ -17,6 +17,9 @@
 ## What the sector can find here
 - Teaching and learning events, conferences, grants and fellowships, frameworks and policy documents, career pathways, and curated sector and international SoTL talks, all aggregated across Australian higher education.
 
+## Open data & API
+- [Open Data & API](https://www.ntlsn.com/developers.html): every dataset as open, CORS-enabled JSON — events, the 1,431-work archive, 80 best-practice guides, frameworks, and the 42-university directory. Free to query, embed via a one-line widget, or wire into any AI assistant with a copy-paste MCP server. No key, no logins.
+
 ## About and licensing
 - NTLSN is a free, open Open Educational Practice commons. Paid services exist only to sustain the commons and never gate it. Curation and original benchmarking are licensed CC BY-NC-SA 4.0; linked third-party works remain the property of their authors and institutions.
 - NTLSN does not claim endorsement by the universities, peak bodies, or regulators it catalogues.
