@@ -42,7 +42,12 @@
   .rec .meta{font-size:13.5px;color:var(--mut);margin:6px 0 0}
   .rec .why{font-size:13.5px;color:#a9c4be;margin-top:8px}
   .rec .why .k{color:var(--teal)}
-  .rec .go{display:inline-block;margin-top:11px;font:700 13.5px var(--sans);color:var(--teal)}
+  .rec .t a{color:#fff;text-decoration:none}
+  .rec .t a:hover{color:var(--teal)}
+  .recact{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px;align-items:center}
+  .recact .go{font:800 13.5px var(--sans);color:var(--teal)}
+  .recact .cal{font:700 12px var(--sans);color:#a9c4be;background:rgba(78,205,196,.07);border:1px solid var(--line);border-radius:8px;padding:5px 11px;text-decoration:none}
+  .recact .cal:hover{border-color:var(--teal);color:var(--teal)}
   .foot{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
 </style>
 </head>
@@ -98,11 +103,19 @@
  chips('q1',THEMES,'q1'); chips('q2',FORMATS,'q2'); chips('q3',TIMING,'q3');
 
  function fmtDate(d){ try{var p=d.split('-'); return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(p[1],10)-1]+' '+parseInt(p[2],10);}catch(e){return d;} }
+ function plusOne(d){var t=new Date(d+'T00:00:00Z');t.setUTCDate(t.getUTCDate()+1);return t.toISOString().slice(0,10).replace(/-/g,'');}
+ function gcal(e){var s=(e.date||'').replace(/-/g,''),en=plusOne(e.endDate||e.date);var det=((e.desc||'')+(e.url?('\n\n'+e.url):'')).slice(0,900);return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.title||'Event')+'&dates='+s+'/'+en+'&details='+encodeURIComponent(det);}
+ function icsUri(e){var s=(e.date||'').replace(/-/g,''),en=plusOne(e.endDate||e.date);function esc(x){return String(x||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');}var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//NTLSN//EN','BEGIN:VEVENT','UID:ntlsn-'+(e.id||'evt')+'@ntlsn.com','DTSTART;VALUE=DATE:'+s,'DTEND;VALUE=DATE:'+en,'SUMMARY:'+esc(e.title),'DESCRIPTION:'+esc((e.desc||'')+(e.url?(' '+e.url):'')),e.url?('URL:'+esc(e.url)):'','END:VEVENT','END:VCALENDAR'].filter(Boolean).join('\r\n');return 'data:text/calendar;charset=utf-8,'+encodeURIComponent(L);}
  var out=document.getElementById('out'), go=document.getElementById('go');
 
  go.onclick=function(){
    go.disabled=true; out.innerHTML='<div id="status">Matching the sector feed…</div>';
-   fetch('/data/events.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(events){
+   Promise.all([
+     fetch('/data/events.json',{cache:'no-store'}).then(function(r){return r.json();}),
+     fetch('/data/universities.json').then(function(r){return r.json();}).catch(function(){return [];})
+   ]).then(function(res){
+     var events=res[0], UMAP={};
+     (res[1]||[]).forEach(function(u){ UMAP[u.id]={state:u.state,city:u.city,abbr:u.abbr}; });
      go.disabled=false;
      var theme=THEMES[sel.q1], fmt=FORMATS[sel.q2], tim=TIMING[sel.q3];
      var today=new Date(); var todayStr=new Date(today.getTime()-today.getTimezoneOffset()*6e4).toISOString().slice(0,10);
@@ -132,12 +145,19 @@
      html+=top.map(function(x,i){
        var e=x.e;
        var why= x.hits.length ? 'Matches your interest in <span class="k">'+x.hits.slice(0,3).join('</span>, <span class="k">')+'</span>.' : 'A strong upcoming '+(e.type||'event')+' in the sector.';
-       return '<a class="rec'+(i===0?' best':'')+'" href="'+(e.url||'/#events')+'" target="_blank" rel="noopener">'+
+       var u=UMAP[e.uni]||{};
+       var locbit=e.uni?(' &middot; '+(u.abbr||e.uni.toUpperCase())+(u.state?(' &middot; '+u.state):'')):'';
+       return '<div class="rec'+(i===0?' best':'')+'">'+
          (i===0?'<span class="badge">★ Best match for you</span>':'')+
-         '<div class="t">'+(e.title||'Event')+'</div>'+
-         '<div class="meta">'+fmtDate(e.date)+(e.endDate&&e.endDate!==e.date?'–'+fmtDate(e.endDate):'')+' &middot; '+(e.type||'event')+(e.uni?' &middot; '+e.uni.toUpperCase():'')+'</div>'+
+         '<div class="t"><a href="'+(e.url||'/#events')+'" target="_blank" rel="noopener">'+(e.title||'Event')+'</a></div>'+
+         '<div class="meta">'+fmtDate(e.date)+(e.endDate&&e.endDate!==e.date?'–'+fmtDate(e.endDate):'')+' &middot; '+(e.type||'event')+locbit+'</div>'+
          '<div class="why">'+why+'</div>'+
-         '<span class="go">Go to the event ↗</span></a>';
+         '<div class="recact">'+
+           '<a class="go" href="'+(e.url||'/#events')+'" target="_blank" rel="noopener">Go to the event ↗</a>'+
+           '<a class="cal" href="'+gcal(e)+'" target="_blank" rel="noopener" title="Add to Google Calendar">📅 Google Calendar</a>'+
+           '<a class="cal" href="'+icsUri(e)+'" download="ntlsn-'+(e.id||'event')+'.ics" title="Download .ics (Apple/Outlook)">⤓ .ics</a>'+
+         '</div>'+
+         '</div>';
      }).join('');
      out.innerHTML=html;
      out.scrollIntoView({behavior:'smooth',block:'start'});
