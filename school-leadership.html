@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Teaching &amp; Learning Leadership — a maturity self-check for your school · NTLSN</title>
+<meta name="description" content="A free maturity self-assessment for Heads of School, Associate Deans (Education) and T&L leads — rate your school's collective teaching & learning leadership and culture across seven dimensions and get a prioritised plan matched to NTLSN tools. In-browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#C0593A;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+  h1{font-size:clamp(27px,5vw,40px);line-height:1.1;margin:0 0 12px;font-weight:800;
+    background:linear-gradient(120deg,var(--green),var(--teal) 50%,var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:64ch;margin:0 0 16px}
+  .ground{background:rgba(111,207,151,.07);border:1px solid rgba(111,207,151,.3);border-radius:11px;padding:12px 15px;font-size:13px;color:#cfeede;margin:0 0 24px;line-height:1.55}
+  .sec-h{font:800 13px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:30px 0 12px}
+  .dim{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:13px;padding:15px 17px;margin-bottom:12px}
+  .dim .dt{font:800 16px var(--sans);color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .dim .dq{font-size:13px;color:var(--mut);margin-bottom:11px}
+  .opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:0 0 7px;color:#cbd8e6;font:500 13.5px var(--sans);cursor:pointer;transition:border-color .12s,background .12s}
+  .opt:hover{border-color:var(--teal)}
+  .opt.sel{border-color:var(--teal);background:rgba(78,205,196,.12);color:#fff}
+  .opt b{color:var(--teal);font-weight:800;margin-right:6px}
+  .opt.sel b{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#06251f;border:0;border-radius:999px;padding:14px 28px;font:800 15.5px var(--sans);cursor:pointer;margin-top:8px}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  #out{margin-top:34px;display:none}
+  .ring-wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .radar{flex-shrink:0}
+  .ov{flex:1;min-width:230px}
+  .ov .big{font:800 44px var(--sans);line-height:1}
+  .ov .lbl{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+  .ov p{font-size:14.5px;color:#cbd8e6;margin:8px 0 0}
+  .focus{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:13px;padding:15px 17px;margin-bottom:11px}
+  .focus .ft{font:800 15.5px var(--sans);color:#fff;display:flex;align-items:center;gap:8px}
+  .focus .sc{font:700 12px var(--sans);color:var(--green);margin-left:auto}
+  .focus ul{margin:9px 0 0;padding-left:19px}.focus li{font-size:13.5px;color:#cbd8e6;margin:5px 0}
+  .res{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+  .res a{font:600 12.5px var(--sans);background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .indesign{background:rgba(111,207,151,.08);border:1px solid rgba(111,207,151,.3);border-radius:12px;padding:15px 17px;margin:24px 0 0;font-size:13.5px;color:#cfeede;line-height:1.55}
+  .indesign b{color:#9be7bd}
+  .tools{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0 0;font-size:13.5px;color:#cbd8e6}
+  .tools a{font-weight:700}
+  .foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  @media(max-width:520px){.radar{margin:0 auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ For your school</div>
+  <h1>How well does your school lead teaching &amp; learning?</h1>
+  <p class="lede">A maturity self-check for <b>Heads of School, Associate Deans (Education) and T&amp;L leads</b>. Rate your school or faculty's <i>collective</i> teaching &amp; learning leadership and culture — not just your own — across seven dimensions, and get a prioritised plan matched to free NTLSN tools.</p>
+  <div class="ground">Pick the description that best fits your school today. Indicative self-reflection for a school or faculty — not an audit or a judgement. The companion to the individual <a href="/leadership.html">T&amp;L Leadership Pathway</a> and the <a href="/school-needs-diagnostic.html">School Needs Diagnostic</a>. Nothing is uploaded or stored.</p>
+
+  <div class="sec-h">▸ Rate your school — pick the closest description</div>
+  <div id="dims"></div>
+
+  <button class="btn" id="run" type="button">Show our school's maturity profile →</button>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    A free, indicative self-assessment from NTLSN — built to help schools lead teaching &amp; learning, not to rank them. Pair it with the <a href="/leadership.html">individual leadership pathway</a>, the <a href="/school-needs-diagnostic.html">needs diagnostic</a> and the <a href="/diagnostic.html">teaching diagnostic</a>. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var DIMS=[
+  {k:'vision',ic:'🎯',col:'#4ECDC4',name:'Shared T&amp;L vision &amp; strategy',q:'How clear and shared is your school’s direction for teaching &amp; learning?',
+   opts:['We don’t really have a shared T&amp;L direction — priorities vary by individual.','There’s a vision on paper, but it isn’t widely owned or acted on.','Most staff know and share our T&amp;L direction, aligned to the faculty.','A living, shared strategy actively shapes decisions and is reviewed with evidence.'],
+   moves:['Get your program leads in a room and agree ONE shared T&amp;L priority for the year.','Map your school’s teaching to the faculty/institutional strategy — find the gaps.','Make the direction visible, and review it against evidence each semester.'],
+   res:[['School Needs Diagnostic','/school-needs-diagnostic.html'],['The NTLSN Teaching Diagnostic','/diagnostic.html']]},
+  {k:'distributed',ic:'🕸️',col:'#7C9CFF',name:'Distributed leadership',q:'Is T&amp;L leadership shared, or carried by one or two people?',
+   opts:['T&amp;L leadership sits with one or two people; others just deliver.','Some course/program leads take responsibility, but it’s ad hoc.','Leadership is shared across program leads, with clear roles and support.','We deliberately grow leaders at every level and succession is healthy.'],
+   moves:['Give each program a named T&amp;L lead with real remit and support.','Run the individual leadership pathway with your emerging leaders.','Plan for succession — who leads next, and how are they being grown now?'],
+   res:[['T&amp;L Leadership Pathway','/leadership.html'],['CoP Starter Kit','/cop-starter.html']]},
+  {k:'culture',ic:'🏅',col:'#FFB448',name:'Teaching culture &amp; recognition',q:'Is good teaching valued, visible and recognised in your school?',
+   opts:['Research is what counts here; good teaching is largely invisible.','Teaching is valued informally, but rarely recognised or rewarded.','Good teaching is visible and recognised — citations, awards, promotion.','Teaching excellence is celebrated and genuinely counts for progression.'],
+   moves:['Make good teaching visible — share wins, peer observation, a teaching channel.','Actively nominate staff for citations, awards and teaching-focused promotion.','Build a recognition habit, not a once-a-year scramble.'],
+   res:[['Recognition Navigator','/recognition-navigator.html'],['Teaching Promotion Case','/promotion-case.html'],['Recognition Passport','/trp.html']]},
+  {k:'develop',ic:'🌱',col:'#6FCF97',name:'Educator development',q:'How well does your school develop its teachers — including sessionals?',
+   opts:['New and casual staff are mostly left to find their own way.','We run some induction/PD, but it’s patchy and not sustained.','Structured induction, mentoring and CPD support most staff.','Every educator, including sessionals, has a clear development pathway.'],
+   moves:['Give every new and sessional educator a real induction and a mentor.','Build a simple development pathway people can see themselves on.','Protect time for reflective practice and CPD, not just delivery.'],
+   res:[['Tailored Teaching Induction','/induction-builder.html'],['Reflective Coach','/reflective-coach.html']]},
+  {k:'evidence',ic:'🔬',col:'#C57BFF',name:'Evidence-informed improvement',q:'Do you use feedback, data and SoTL to improve — and close the loop?',
+   opts:['We collect student feedback but rarely act on it; little SoTL.','We respond to feedback reactively; SoTL is a few individuals’ work.','We use feedback and data to improve and close the loop with students.','Evidence and SoTL are built into how we plan, change and account for T&amp;L.'],
+   moves:['Close the loop — show students “you said / we did” every cycle.','Turn one teaching question into a small SoTL study this year.','Use program review as improvement, not just compliance.'],
+   res:[['Feedback → Action Plan','/feedback-action.html'],['Program Review Readiness','/program-review.html'],['Research-Question Framer','/research-question.html']]},
+  {k:'assessment',ic:'🤖',col:'#FF6B6B',name:'Assessment &amp; integrity in the AI age',q:'Is your school’s assessment coherent and AI-resilient?',
+   opts:['Assessment varies widely; no shared stance on generative AI.','We’re discussing GenAI, but practice is inconsistent across the school.','We have a coherent, defensible assessment approach and a clear AI position.','Authentic, AI-resilient assessment is designed in and reviewed across programs.'],
+   moves:['Agree a clear, school-wide GenAI position per assessment type.','Stress-test your most-vulnerable assessments and redesign them.','Map assessment across programs — variety, load and AI-resilience.'],
+   res:[['GenAI Assignment Redesign','/assignment-redesign.html'],['Assessment Mix &amp; AI-Resilience','/assessment-mix.html'],['Unit AI-Use Policy','/ai-policy.html']]},
+  {k:'partnership',ic:'🤝',col:'#C0593A',name:'Student partnership &amp; inclusion',q:'Are students partners, and is your school inclusive of every learner?',
+   opts:['Decisions are made for students, not with them; inclusion is reactive.','We consult students sometimes; inclusion is on the agenda.','Students partner in real decisions; we design for diverse learners.','Partnership and inclusion shape who we hear, develop and recognise.'],
+   moves:['Put students in real decisions — curriculum, assessment, even hiring panels.','Notice who is heard, developed and recognised — and widen it.','Design for diverse learners from the start, not as a retrofit.'],
+   res:[['Partnership Agreement Builder','/partnership-agreement.html'],['Critical Learner Partnerships','/critical-learner-partnerships.html']]}
+ ];
+
+ var ans={};
+ var cb=document.getElementById('dims');
+ cb.innerHTML=DIMS.map(function(d){ans[d.k]=null;
+   return '<div class="dim" style="border-left-color:'+d.col+'"><div class="dt">'+d.ic+' '+d.name+'</div><div class="dq">'+d.q+'</div>'+
+     d.opts.map(function(o,oi){return '<button class="opt" data-k="'+d.k+'" data-v="'+(oi+1)+'" type="button"><b>'+['Emerging','Developing','Embedded','Leading'][oi]+'</b>'+o+'</button>';}).join('')+'</div>';
+ }).join('');
+ cb.addEventListener('click',function(e){
+   var b=e.target.closest?e.target.closest('.opt'):null; if(!b)return;
+   var k=b.getAttribute('data-k'),v=+b.getAttribute('data-v');
+   ans[k]=v;
+   [].forEach.call(cb.querySelectorAll('.opt[data-k="'+k+'"]'),function(o){o.classList.toggle('sel',+o.getAttribute('data-v')===v);});
+ });
+
+ function radar(scores,max){
+   var R=92,cx=110,cy=110,N=DIMS.length,labels='',rings='';
+   for(var r=1;r<=max;r++){var pts='';for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N,rr=R*r/max;pts+=(cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1)+' ';}rings+='<polygon points="'+pts+'" fill="none" stroke="#1f3350" stroke-width="1"/>';}
+   var poly='',dots='';for(i=0;i<N;i++){a=-Math.PI/2+i*2*Math.PI/N;var rr=R*Math.max(scores[i],0)/max;poly+=(cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1)+' ';dots+='<circle cx="'+(cx+rr*Math.cos(a)).toFixed(1)+'" cy="'+(cy+rr*Math.sin(a)).toFixed(1)+'" r="3.2" fill="'+DIMS[i].col+'"/>';var lr=R+13;labels+='<text x="'+(cx+lr*Math.cos(a)).toFixed(1)+'" y="'+(cy+lr*Math.sin(a)+3).toFixed(1)+'" fill="#9fb0c3" font-size="9" text-anchor="middle">'+DIMS[i].ic+'</text>';}
+   return '<svg class="radar" width="220" height="220" viewBox="0 0 220 220" aria-label="school maturity radar">'+rings+'<polygon points="'+poly+'" fill="rgba(111,207,151,.18)" stroke="#6FCF97" stroke-width="2"/>'+dots+labels+'</svg>';
+ }
+ function strip(s){return s.replace(/&amp;/g,'&');}
+
+ document.getElementById('run').onclick=function(){
+   var scores=DIMS.map(function(d){return ans[d.k]||0;}), rated=scores.filter(function(s){return s>0;}).length;
+   if(rated<DIMS.length){ if(!confirm('You’ve rated '+rated+' of '+DIMS.length+' dimensions. Show the profile with what you’ve rated?')) return; }
+   var avg=scores.reduce(function(p,q){return p+q;},0)/DIMS.length, pct=Math.round(avg/4*100);
+   var idx=DIMS.map(function(d,i){return {i:i,s:scores[i]};}).filter(function(o){return o.s>0;}).sort(function(a,b){return a.s-b.s;});
+   var band= pct>=80?['Leading','#6FCF97','Your school is modelling sector-leading practice — consider sharing it (a showcase, a CoP, mentoring another school).']
+           : pct>=60?['Embedding','#4ECDC4','Strong foundations — focus on the edges below, and on growing the next leaders.']
+           : pct>=40?['Developing','#FFB448','You have pockets of good practice — make your two lowest areas below everyone’s business, not a few people’s.']
+           : ['Emerging','#C57BFF','Early days — start with one shared conversation: get your program leads together and agree a single T&amp;L priority.'];
+   var html='<div class="sec-h" style="color:#6FCF97">▸ Your school’s T&amp;L leadership maturity</div>'+
+     '<div class="ring-wrap">'+radar(scores,4)+
+     '<div class="ov"><div class="big" style="color:'+band[1]+'">'+pct+'%</div><div class="lbl">'+band[0]+' maturity</div><p>'+band[2]+'</p></div></div>';
+
+   if(idx.length){
+     html+='<div class="sec-h">▸ Focus here first (your lowest)</div>';
+     idx.slice(0,2).forEach(function(o){var d=DIMS[o.i];
+       html+='<div class="focus" style="border-left-color:'+d.col+'"><div class="ft">'+d.ic+' '+d.name+'<span class="sc">'+['','Emerging','Developing','Embedded','Leading'][o.s]+'</span></div><ul>'+d.moves.map(function(m){return '<li>'+m+'</li>';}).join('')+'</ul><div class="res">'+d.res.map(function(r){return '<a href="'+r[1]+'">'+r[0]+' →</a>';}).join('')+'</div></div>';
+     });
+   }
+
+   html+='<div class="sec-h">▸ The full picture</div>';
+   DIMS.forEach(function(d,i){var s=scores[i];html+='<div style="display:flex;align-items:center;gap:10px;margin:0 0 7px"><span style="width:160px;font:600 12.5px var(--sans);color:#cbd8e6">'+d.ic+' '+strip(d.name)+'</span><span style="flex:1;height:8px;background:#15263d;border-radius:99px;overflow:hidden"><span style="display:block;height:100%;width:'+(Math.max(s,0)/4*100)+'%;background:'+d.col+'"></span></span><span style="width:78px;text-align:right;font:700 11px var(--sans);color:'+d.col+'">'+(s?['','Emerging','Developing','Embedded','Leading'][s]:'—')+'</span></div>';});
+
+   html+='<div class="indesign"><b>🌱 An NTLSN School T&amp;L Leadership Intensive is in design.</b> A short, practical program that brings leadership development to your <i>whole</i> school team — program leads included — inspired by the best of the sector’s roadshow models. For now: this free self-assessment and the tools above. <a href="/#ntlsn-zoom">Tell us you’d be interested →</a></div>';
+
+   html+='<div class="tools">🧭 Go deeper for your school: the <a href="/school-needs-diagnostic.html">School Needs Diagnostic</a> (what you need, and where it lives on NTLSN), the <a href="/school-audit.html">School Audit</a>, and the individual <a href="/leadership.html">T&amp;L Leadership Pathway</a> to run with your team.</div>';
+
+   html+='<button class="btn ghost" id="copy" type="button" style="margin-top:18px">⧉ Copy our school plan</button>';
+   var out=document.getElementById('out');out.innerHTML=html;out.style.display='block';out.scrollIntoView({behavior:'smooth',block:'start'});
+   document.getElementById('copy').onclick=function(){
+     var L=['','Emerging','Developing','Embedded','Leading'];
+     var md='# Our school’s T&L leadership maturity\n\nOverall: '+pct+'% ('+band[0]+')\n\n## Profile\n'+
+       DIMS.map(function(d,i){return '- '+strip(d.name)+': '+(scores[i]?L[scores[i]]:'not rated');}).join('\n')+
+       '\n\n## Focus first\n'+idx.slice(0,2).map(function(o){var d=DIMS[o.i];return '### '+strip(d.name)+' ('+L[o.s]+')\n'+d.moves.map(function(m){return '- '+strip(m);}).join('\n');}).join('\n\n')+'\n';
+     navigator.clipboard.writeText(md).then(function(){var b=document.getElementById('copy');b.textContent='✓ Copied';setTimeout(function(){b.textContent='⧉ Copy our school plan';},1500);});
+   };
+ };
+})();
+</script>
+</body>
+</html>
