@@ -4086,7 +4086,7 @@ try{mo=new MutationObserver(patch);mo.observe(document.body,{childList:true,subt
 })();
 </script>
 <script id="ntlsn-bubblescta-script">
-(function(){
+(function(){return;/* superseded by interactive tools section (search+chips) */
  if(window.__bubblesCta)return; window.__bubblesCta=1;
  var F='-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif';
  function ensure(){
@@ -4261,18 +4261,51 @@ function build(){
   {e:'🎖️',label:'Recognition &amp; fellowship',urls:['/recognition-navigator.html','/recognition-points.html','/fellowship-mapper.html','/psf-evidence-audit.html','/aaut-readiness.html','/trp.html','/sotl-placement.html','/philosophy-builder.html','/evidence-crosswalk.html','/sessional-recognition.html','/recognition-roi.html','/recognition-framework.html','/recognition-ledger.html','/credential-checker.html','/autc-criteria.html','/promotion-case.html']},
   {e:'🤝',label:'Partnership &amp; open resources',urls:['/cert.html','/student-partnership.html','/reflective-coach.html','/open-building-blocks.html','/cop-starter.html','/find-your-path.html','/partnership-agreement.html','/teaching-hubs.html']}
  ];
- var used={};
- var cards=TCATS.map(function(c){var cs=c.urls.map(function(u){used[u]=1;return byUrl[u];}).filter(Boolean);if(!cs.length)return '';return '<div style="font:800 12px '+F+';letter-spacing:1.2px;text-transform:uppercase;color:#4ECDC4;margin:30px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="opacity:.85;font-size:15px;">'+c.e+'</span><span>'+c.label+'</span><span style="color:#738499;font-weight:600;letter-spacing:0;text-transform:none;font-size:11.5px;">'+cs.length+'</span></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;">'+cs.map(mkcard).join('')+'</div>';}).join('');
- var extra=TOOLS.filter(function(t){return !used[t.u];});
- if(extra.length){cards+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:10px;margin-top:14px;">'+extra.map(mkcard).join('')+'</div>';}
- sec.innerHTML='<div style="text-align:center;max-width:720px;margin:0 auto 22px;">'
+ var POP=['/rubric.html','/assessment-mix.html','/constructive-alignment.html','/course-quality.html','/research-search.html','/recognition-navigator.html','/conference-finder.html','/reflective-coach.html'];
+ function inAnyCat(u){for(var k=0;k<TCATS.length;k++){if(TCATS[k].urls.indexOf(u)>-1)return true;}return false;}
+ var TABS=[{k:'pop',e:'✨',label:'Start here',n:POP.length}];
+ TCATS.forEach(function(c,i){TABS.push({k:'c'+i,e:c.e,label:c.label,n:c.urls.map(function(u){return byUrl[u];}).filter(Boolean).length});});
+ TABS.push({k:'all',e:'🗂️',label:'Everything',n:TOOLS.length});
+ function gridHTML(list){return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px;">'+list.map(mkcard).join('')+'</div>';}
+ var state={tab:'pop',q:''};
+ function render(){
+  var grid=sec.querySelector('#ntlsn-tn-grid'); if(!grid)return;
+  var q=state.q.trim().toLowerCase();
+  if(q){
+   var hits=TOOLS.filter(function(t){return (t.n+' '+(t.d||'')).toLowerCase().indexOf(q)>-1;});
+   grid.innerHTML = hits.length ? ('<div style="color:#738499;font:600 12.5px '+F+';margin:0 0 14px;text-align:center;">'+hits.length+' tool'+(hits.length===1?'':'s')+' match “'+state.q+'”</div>'+gridHTML(hits)) : '<div style="color:#9fb0c3;text-align:center;padding:34px;font:15px '+F+';">No tools match “'+state.q+'” — try “rubric”, “AI”, “fellowship”…</div>';
+   return;
+  }
+  if(state.tab==='all'){
+   var html='';
+   TCATS.forEach(function(c){var cs=c.urls.map(function(u){return byUrl[u];}).filter(Boolean);if(!cs.length)return;html+='<div style="font:800 12px '+F+';letter-spacing:1.2px;text-transform:uppercase;color:#4ECDC4;margin:26px 0 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span style="font-size:15px;opacity:.85;">'+c.e+'</span><span>'+c.label+'</span><span style="color:#738499;font-weight:600;letter-spacing:0;text-transform:none;font-size:11.5px;">'+cs.length+'</span></div>'+gridHTML(cs);});
+   var extra=TOOLS.filter(function(t){return !inAnyCat(t.u);});
+   if(extra.length)html+='<div style="margin-top:18px;">'+gridHTML(extra)+'</div>';
+   grid.innerHTML=html; return;
+  }
+  var list;
+  if(state.tab==='pop')list=POP.map(function(u){return byUrl[u];}).filter(Boolean);
+  else{var idx=parseInt(state.tab.slice(1),10);var cc=TCATS[idx];list=cc?cc.urls.map(function(u){return byUrl[u];}).filter(Boolean):[];}
+  grid.innerHTML=gridHTML(list);
+ }
+ function chipsHTML(){return TABS.map(function(t){return '<button type="button" class="ntlsn-tn-chip" data-k="'+t.k+'" style="cursor:pointer;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:#cbd8e6;border-radius:999px;padding:8px 15px;font:700 13px '+F+';display:inline-flex;align-items:center;gap:6px;transition:all .12s;white-space:nowrap;"><span style="font-size:14px;">'+t.e+'</span><span>'+t.label+'</span><span style="opacity:.5;font-weight:600;">'+t.n+'</span></button>';}).join('');}
+ sec.innerHTML='<div style="text-align:center;max-width:760px;margin:0 auto 18px;">'
   +'<div style="font:800 11px '+F+';letter-spacing:2.5px;text-transform:uppercase;color:#4ECDC4;margin-bottom:10px;">&#9679; FREE TOOLS &middot; NO LOGIN &middot; USE ANY THIS MINUTE</div>'
   +'<h2 style="font:800 clamp(26px,3.6vw,40px)/1.15 '+F+';color:#fff;margin:0 0 11px;">The toolkit for academics.</h2>'
-  +'<p style="font:700 clamp(16px,2vw,19px)/1.45 '+F+';color:#e8eef5;margin:0 0 8px;">Learning designers have H5P. Academics have NTLSN.</p>'
-  +'<p style="font:400 clamp(15px,1.8vw,17px)/1.6 '+F+';color:#aebfce;margin:0;">'+TOOLS.length+' free tools for assessment, curriculum, scholarship and recognition &mdash; open any one and use it this minute. No login, nothing leaves your browser. <a href="/tools.html" style="color:#4ECDC4;font-weight:700;text-decoration:none;">Browse all '+TOOLS.length+' in one place &rarr;</a></p></div>'
-  +cards
-  +'<style>.ntlsn-tnc:hover{transform:translateY(-3px);border-color:rgba(78,205,196,.5)!important;}</style>';
+  +'<p style="font:400 clamp(15px,1.8vw,17px)/1.55 '+F+';color:#aebfce;margin:0 0 18px;">'+TOOLS.length+' free tools, no login — pick what you’re working on, or search. Nothing leaves your browser.</p>'
+  +'<input id="ntlsn-tn-search" type="search" autocomplete="off" placeholder="Search '+TOOLS.length+' tools — try “rubric”, “AI”, “feedback”, “fellowship”…" style="width:100%;max-width:580px;box-sizing:border-box;background:#0c1a2e;border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#e8eef5;font:15px '+F+';padding:14px 18px;outline:none;">'
+  +'</div>'
+  +'<div id="ntlsn-tn-chips" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 auto 24px;max-width:1040px;">'+chipsHTML()+'</div>'
+  +'<div id="ntlsn-tn-grid" style="max-width:92rem;margin:0 auto;min-height:120px;"></div>'
+  +'<style>.ntlsn-tnc:hover{transform:translateY(-3px);border-color:rgba(78,205,196,.5)!important;}.ntlsn-tn-chip:hover{border-color:rgba(78,205,196,.55)!important;color:#fff!important;}.ntlsn-tn-chip.on{background:#4ECDC4!important;border-color:#4ECDC4!important;color:#06121f!important;}#ntlsn-tn-search:focus{border-color:#4ECDC4!important;}</style>';
  hero.parentNode.appendChild(sec);
+ (function(){
+  function setActive(k){state.tab=k;state.q='';var si=sec.querySelector('#ntlsn-tn-search');if(si)si.value='';[].forEach.call(sec.querySelectorAll('.ntlsn-tn-chip'),function(b){b.classList.toggle('on',b.getAttribute('data-k')===k);});render();}
+  [].forEach.call(sec.querySelectorAll('.ntlsn-tn-chip'),function(b){b.onclick=function(){setActive(b.getAttribute('data-k'));};});
+  var si=sec.querySelector('#ntlsn-tn-search'),dt=null;
+  if(si)si.addEventListener('input',function(){clearTimeout(dt);dt=setTimeout(function(){state.q=si.value;if(state.q.trim())[].forEach.call(sec.querySelectorAll('.ntlsn-tn-chip'),function(b){b.classList.remove('on');});render();},110);});
+  setActive('pop');
+ })();
 }
 if(document.readyState!=='loading')build();else document.addEventListener('DOMContentLoaded',build);
 setTimeout(build,900);setTimeout(build,2500);
