@@ -5786,5 +5786,18 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  }
  build(); [600,1800,3500,6000].forEach(function(ms){setTimeout(build,ms);});
  var t=null;new MutationObserver(function(){clearTimeout(t);t=setTimeout(build,200);}).observe(document.body,{childList:true,subtree:true});
-})();</script>\n</body>
+})();</script>\n<script id="ntlsn-region-script">(function(){
+ if(window.__ntlsnRegion)return; window.__ntlsnRegion=1;
+ try{if(localStorage.getItem('ntlsn_region'))return;}catch(e){}
+ function note(){var n=document.createElement('div');n.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;max-width:520px;width:calc(100% - 32px);background:#0f2034;border:1px solid #25406a;border-radius:13px;padding:13px 16px;color:#cbd8e6;font:500 13.5px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;box-shadow:0 14px 40px rgba(0,0,0,.4);display:flex;gap:12px;align-items:flex-start';n.innerHTML='<span style="font-size:18px">🌏</span><div>Welcome! NTLSN is Australia’s teaching &amp; learning commons — most tools and ideas here work anywhere. A wider international network is on our roadmap. <button id="ntlsn-rn-x" style="background:none;border:0;color:#4ECDC4;cursor:pointer;font-weight:700">Got it</button></div>';document.body.appendChild(n);var x=document.getElementById('ntlsn-rn-x');if(x)x.onclick=function(){if(n.parentNode)n.parentNode.removeChild(n);};setTimeout(function(){if(n.parentNode)n.parentNode.removeChild(n);},12000);}
+ function show(){
+  if(document.getElementById('ntlsn-region-ov'))return;
+  var ov=document.createElement('div');ov.id='ntlsn-region-ov';
+  ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(6,12,22,.8);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;transition:opacity .35s;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif';
+  ov.innerHTML='<div style="max-width:440px;width:100%;background:#0f2034;border:1px solid #25406a;border-radius:18px;padding:30px 28px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.55)"><div style="font:800 11px sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#4ECDC4;margin-bottom:10px">◇ Welcome to NTLSN</div><h2 style="font:800 24px sans-serif;color:#fff;margin:0 0 8px;line-height:1.2">Australia’s open teaching &amp; learning commons</h2><p style="font-size:14.5px;color:#9fb0c3;margin:0 0 20px;line-height:1.55">We’re built for Australian higher education — but good practice travels. Where are you based?</p><div style="display:flex;gap:11px;flex-wrap:wrap;justify-content:center"><button data-r="au" style="flex:1;min-width:150px;background:linear-gradient(135deg,#4ECDC4,#7C9CFF);color:#06251f;border:0;border-radius:12px;padding:15px 14px;font:800 15px sans-serif;cursor:pointer">🇦🇺 In Australia</button><button data-r="global" style="flex:1;min-width:150px;background:#0c1a2e;color:#cbd8e6;border:1px solid #25406a;border-radius:12px;padding:15px 14px;font:800 15px sans-serif;cursor:pointer">🌏 Elsewhere</button></div><button data-r="skip" style="margin-top:14px;background:none;border:0;color:#6b7d92;font-size:12.5px;cursor:pointer;text-decoration:underline">Just browsing — skip</button></div>';
+  document.body.appendChild(ov);requestAnimationFrame(function(){ov.style.opacity='1';});
+  ov.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('button[data-r]'):null;if(!b)return;var r=b.getAttribute('data-r');try{localStorage.setItem('ntlsn_region',r);}catch(e){}ov.style.opacity='0';setTimeout(function(){if(ov.parentNode)ov.parentNode.removeChild(ov);},350);if(r==='global')note();});
+ }
+ setTimeout(show,900);
+})();</script></body>
 </html>
