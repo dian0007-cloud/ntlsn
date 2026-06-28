@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ATEC · TEQSA Curriculum QA — self-check a course against AQF, mission compacts & GenAI-resilience · NTLSN</title>
+<meta name="description" content="A free, in-browser self-check: does a course's learning outcomes match its AQF level (Bloom's), align to ATEC mission compacts (widening participation, VET→HE), and resist GenAI? Nothing leaves your browser.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--red:#FF6B6B;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 14px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17.5px;color:#cbd8e6;max-width:64ch;margin:0 0 10px}
+  .disc{font-size:13px;color:var(--mut);background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:11px 15px;margin:16px 0 6px;max-width:70ch}
+  label{display:block;font:700 12.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:#bcccdd;margin:22px 0 7px}
+  label .h{font-weight:400;text-transform:none;letter-spacing:0;color:var(--mut);font-size:12.5px}
+  select,textarea,input{width:100%;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:var(--ink);font:500 15px var(--sans);padding:11px 13px}
+  textarea{min-height:96px;resize:vertical;line-height:1.55}
+  select{cursor:pointer}
+  .arow{display:grid;grid-template-columns:1.1fr .5fr 2fr auto;gap:8px;margin-bottom:8px;align-items:center}
+  @media(max-width:620px){.arow{grid-template-columns:1fr 1fr;gap:7px}.arow .prompt{grid-column:1/3}}
+  .arow input.w{text-align:center}
+  .arow .rm{background:none;border:1px solid var(--line);color:var(--mut);border-radius:8px;width:34px;height:38px;cursor:pointer;font-size:16px}
+  .chk{display:flex;gap:9px;align-items:flex-start;margin:7px 0;font-size:14.5px;color:#cbd8e6;cursor:pointer}
+  .chk input{width:auto;margin-top:3px;flex:none}
+  .chk .note{font-size:12px;color:var(--mut)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:13px 26px;font:800 15px var(--sans);cursor:pointer;margin:8px 8px 0 0}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:transparent;color:var(--teal);border:1px solid rgba(78,205,196,.45)}
+  .addbtn{background:transparent;border:1px dashed var(--line);color:var(--mut);border-radius:9px;padding:8px 14px;font:700 13px var(--sans);cursor:pointer;margin-top:4px}
+  /* report */
+  #report{margin-top:30px;display:none}
+  .score{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:18px;flex-wrap:wrap}
+  .ring{font:800 34px var(--sans);width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px 19px;margin-bottom:14px}
+  .block h3{margin:0 0 4px;font-size:16.5px;display:flex;align-items:center;gap:9px}
+  .block .sub{font-size:13px;color:var(--mut);margin:0 0 12px}
+  .tag{font:800 10.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;flex:none}
+  .t-pass{background:rgba(78,205,196,.16);color:var(--teal)}
+  .t-warn{background:rgba(255,180,72,.16);color:var(--gold)}
+  .t-fail{background:rgba(255,107,107,.16);color:var(--red)}
+  .row{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px}
+  .row:first-of-type{border-top:0}
+  .row .ic{flex:none;width:20px;font-weight:800}
+  .row b{color:#fff}
+  .row .fix{color:var(--mut);font-size:13px;display:block;margin-top:3px}
+  .pill{display:inline-block;font:600 12px var(--mono);background:var(--card2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:3px 4px 0 0;color:#b9c8da}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  code{font:500 13px var(--mono);color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Curriculum QA · TEQSA HESF · ATEC compacts · GenAI-resilience</div>
+  <h1>Check a course before it ships.</h1>
+  <p class="lede">Paste a course's outcomes and assessments. In your browser, this self-check looks at three things institutions now have to get right: do the <b style="color:var(--ink)">outcomes match the AQF level</b>, does the design show <b style="color:var(--ink)">ATEC mission-compact</b> alignment, and are the assessments <b style="color:var(--ink)">resilient to generative AI</b>.</p>
+  <div class="disc">⚠ A <b>self-reflection aid</b>, not an official TEQSA or ATEC assessment. The verb→AQF mapping and compact lexicons are <b>illustrative and evidence-informed</b>, not the regulator's determination — always work from the current <a href="https://www.teqsa.gov.au/" target="_blank" rel="noopener">HESF</a>, AQF and your institution's processes. <b>Nothing you type leaves your browser.</b></div>
+
+  <label>AQF level of the course <span class="h">— what level is this qualification?</span></label>
+  <select id="aqf">
+    <option value="5">AQF 5 — Diploma</option>
+    <option value="6">AQF 6 — Advanced Diploma / Associate Degree</option>
+    <option value="7" selected>AQF 7 — Bachelor Degree</option>
+    <option value="8">AQF 8 — Bachelor Honours / Grad Cert / Grad Dip</option>
+    <option value="9">AQF 9 — Masters Degree</option>
+    <option value="10">AQF 10 — Doctoral Degree</option>
+  </select>
+
+  <label>Course / unit learning outcomes <span class="h">— one per line ("Students will be able to…")</span></label>
+  <textarea id="clos" placeholder="One learning outcome per line…">Critically evaluate competing theories of learning in their disciplinary context.
+Design an authentic assessment task aligned to stated outcomes.
+Describe the key stages of the research process.</textarea>
+
+  <label>Assessment tasks <span class="h">— type, weighting %, and the exact prompt students see</span></label>
+  <div id="assess"></div>
+  <button class="addbtn" id="add" type="button">+ Add assessment</button>
+
+  <label>ATEC mission compacts to check for <span class="h">— the federal priorities your design should evidence</span></label>
+  <label class="chk"><input type="checkbox" class="compact" value="wideningParticipation" checked> <span><b>Widening participation</b> <span class="note">— low-SES, regional/remote, first-in-family, UDL, equitable access</span></span></label>
+  <label class="chk"><input type="checkbox" class="compact" value="vetArticulation" checked> <span><b>VET → Higher-Ed pathways</b> <span class="note">— RPL, articulation, work-integrated learning, micro-credentials, industry</span></span></label>
+  <label class="chk"><input type="checkbox" class="compact" value="firstNations"> <span><b>First Nations knowledges</b> <span class="note">— a prompt to reflect, <b>not</b> an assessment of cultural appropriateness, which is custodian-led. Engage First Nations colleagues &amp; communities.</span></span></label>
+
+  <div style="margin-top:24px">
+    <button class="btn" id="run" type="button">Run the check →</button>
+    <button class="btn ghost" id="copy" type="button" style="display:none">Copy report (Markdown)</button>
+  </div>
+
+  <div id="report"></div>
+
+  <div class="foot">
+    Part of the NTLSN open toolkit · free · no login · curation CC BY-NC-SA 4.0. Complements <a href="/constructive-alignment.html">Constructive Alignment</a>, <a href="/programme-map.html">Programme Map</a> and <a href="/course-quality.html">Course Quality</a>. ATEC = the Australian Tertiary Education Commission stewarding the HESF &amp; mission-based compacts — this tool helps you self-check alignment <i>before</i> a course reaches committee.
+  </div>
+</div>
+
+<script>
+(function(){
+ // ---- AQF × Bloom's verb dictionary (illustrative, indicative only) ----
+ var VERB_AQF = {
+   // AQF 5 — lower-order
+   define:5,describe:5,identify:5,list:5,explain:5,outline:5,summarise:5,summarize:5,recognise:5,recognize:5,state:5,recall:5,label:5,
+   // AQF 6 — application
+   apply:6,demonstrate:6,calculate:6,implement:6,use:6,interpret:6,classify:6,solve:6,illustrate:6,operate:6,
+   // AQF 7 — analyse/evaluate
+   analyse:7,analyze:7,evaluate:7,investigate:7,compare:7,contrast:7,differentiate:7,examine:7,assess:7,distinguish:7,relate:7,
+   // AQF 8 — synthesise/create
+   synthesise:8,synthesize:8,design:8,formulate:8,critique:8,justify:8,integrate:8,appraise:8,construct:8,develop:8,produce:8,
+   // AQF 9 — advanced
+   theorise:9,theorize:9,conceptualise:9,conceptualize:9,advance:9,reconceptualise:9,
+   // AQF 10 — original
+   pioneer:10,discover:10,originate:10,"generate new":10
+ };
+ var LEX = {
+   wideningParticipation:["first-in-family","first in family","low-ses","low ses","regional","rural","remote","inclusive","universal design","udl","scaffold","equitable","equity","accessibility","accessible","non-traditional","widening participation","disadvantage","asynchronous"],
+   vetArticulation:["pathway","recognition of prior learning","rpl","articulat","vocational","applied learning","industry","tafe","work-integrated","work integrated","wil","micro-credential","microcredential","credit transfer","placement","internship"],
+   firstNations:["first nations","indigenous","aboriginal","torres strait","cultural competence","cultural capability","self-determination","yarning","community-led","country","custodian"]
+ };
+ // GenAI-vulnerability: high-risk generic patterns vs authentic countermeasures
+ var RISKY = ["discuss the","describe the","explain the","write an essay","write a essay","outline the","summarise the","what is","history of","overview of","compare and contrast","2000-word essay","2000 word essay","1500-word","essay on","report on the"];
+ var AUTHENTIC = ["case study","local","localised","localized","reflect","reflection","work-integrated","placement","portfolio","co-design","co-create","students as partners","sap","viva","oral","present","authentic","real-world","real world","client","industry partner","data you collect","your own","interview","fieldwork","scenario","simulation","in class","in-class","supervised","iterative","draft and","peer review","annotated"];
+
+ var TYPES = ["Essay","Exam","Report","Presentation","Viva / Oral","Portfolio","Reflective Journal","Authentic Case Study","Work-Integrated / Placement","Co-Designed Project","Quiz / MCQ","Other"];
+
+ var assess = document.getElementById('assess');
+ function addRow(t,w,p){
+   var d=document.createElement('div'); d.className='arow';
+   var sel='<select class="ty">'+TYPES.map(function(x){return '<option'+(x===t?' selected':'')+'>'+x+'</option>';}).join('')+'</select>';
+   d.innerHTML=sel+'<input class="w" type="number" min="0" max="100" placeholder="%" value="'+(w||'')+'"><input class="prompt" type="text" placeholder="The exact prompt students see…" value="'+(p?p.replace(/"/g,'&quot;'):'')+'"><button class="rm" type="button" title="remove">×</button>';
+   d.querySelector('.rm').onclick=function(){d.remove();};
+   assess.appendChild(d);
+ }
+ addRow('Essay',50,'Discuss the historical development of your discipline.');
+ addRow('Authentic Case Study',50,'Using data you collect from a local organisation, design and justify an intervention, then reflect on it in a 10-minute viva.');
+ document.getElementById('add').onclick=function(){addRow('Report','','');};
+
+ function verbsIn(text){
+   var t=' '+text.toLowerCase().replace(/[^a-z\s-]/g,' ').split(/\s+/).filter(Boolean).slice(0,9).join(' ')+' ', found=[];
+   for(var v in VERB_AQF){ if(t.indexOf(' '+v+' ')>-1 || t.indexOf(' '+v+'s ')>-1 || t.indexOf(' '+v+'d ')>-1 || t.indexOf(v+'ing')>-1){ found.push([v,VERB_AQF[v]]); } }
+   return found;
+ }
+ function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+ var lastMd='';
+ document.getElementById('run').onclick=function(){
+   var aqf=parseInt(document.getElementById('aqf').value,10);
+   var clos=document.getElementById('clos').value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
+   var rows=[].map.call(assess.querySelectorAll('.arow'),function(r){return {type:r.querySelector('.ty').value, w:parseInt(r.querySelector('.w').value,10)||0, prompt:r.querySelector('.prompt').value.trim()};}).filter(function(r){return r.prompt||r.w;});
+   var compacts=[].map.call(document.querySelectorAll('.compact:checked'),function(c){return c.value;});
+   if(!clos.length){alert('Add at least one learning outcome.');return;}
+
+   var html='', md='# ATEC · TEQSA Curriculum QA report\n\n**AQF level:** '+aqf+'\n\n';
+   var scoreParts=[];
+
+   // ---- 1. AQF / Bloom's ----
+   var closHtml='', closPass=0;
+   clos.forEach(function(c){
+     var vs=verbsIn(c), top=vs.reduce(function(m,x){return Math.max(m,x[1]);},0);
+     var ok=top>=aqf, ic= ok?'<span class="ic" style="color:var(--teal)">✓</span>':(top===0?'<span class="ic" style="color:var(--gold)">?</span>':'<span class="ic" style="color:var(--red)">▲</span>');
+     if(ok)closPass++;
+     var fix= ok?'' : (top===0? 'No measurable cognitive verb found — open with a clear action verb (e.g. <i>evaluate, design</i>).' : 'Under-levelled: highest verb reaches AQF '+top+', but the course is AQF '+aqf+'. Lift to higher-order verbs (e.g. <i>'+(aqf>=8?'synthesise, design, critique':'analyse, evaluate, justify')+'</i>).');
+     closHtml+='<div class="row">'+ic+'<div><b>'+esc(c.slice(0,120))+'</b>'+(vs.length?'<div style="margin-top:4px">'+vs.map(function(x){return '<span class="pill">'+x[0]+' · AQF '+x[1]+'</span>';}).join(''):'')+(fix?'<span class="fix">'+fix+'</span>':'')+'</div></div>';
+     md+='- ['+(ok?'OK':'FLAG')+'] '+c+(fix?' — '+fix.replace(/<[^>]+>/g,''):'')+'\n';
+   });
+   var aqfTag=closPass===clos.length?'t-pass':(closPass>=clos.length/2?'t-warn':'t-fail');
+   html+='<div class="block"><h3>1 · AQF cognitive alignment <span class="tag '+aqfTag+'">'+closPass+'/'+clos.length+' on level</span></h3><div class="sub">HESF 1.1 — do the outcomes demand the cognition the AQF level requires? (Bloom\'s verbs, indicative.)</div>'+closHtml+'</div>';
+   scoreParts.push(closPass/clos.length);
+
+   // ---- 2. Constructive alignment (weightings) ----
+   var sumW=rows.reduce(function(a,r){return a+r.w;},0);
+   var wOk=sumW===100, ahtml='';
+   ahtml+='<div class="row"><span class="ic" style="color:'+(wOk?'var(--teal)':'var(--red)')+'">'+(wOk?'✓':'▲')+'</span><div><b>Weightings total '+sumW+'%</b>'+(wOk?'':'<span class="fix">Assessment weightings should sum to exactly 100%.</span>')+'</div></div>';
+   ahtml+='<div class="row"><span class="ic" style="color:var(--mut)">→</span><div>'+rows.length+' task'+(rows.length===1?'':'s')+'. For full outcome↔task mapping use the dedicated <a href="/constructive-alignment.html">Constructive Alignment</a> tool.</div></div>';
+   html+='<div class="block"><h3>2 · Assessment structure <span class="tag '+(wOk?'t-pass':'t-warn')+'">'+(wOk?'balanced':'check weightings')+'</span></h3><div class="sub">HESF 1.4 / 5.2 — coherent, weighted assessment.</div>'+ahtml+'</div>';
+   md+='\n## Assessment\nWeightings total '+sumW+'% ('+(wOk?'OK':'should be 100')+'), '+rows.length+' tasks.\n';
+   scoreParts.push(wOk?1:0.5);
+
+   // ---- 3. ATEC compacts ----
+   if(compacts.length){
+     var blob=(document.getElementById('clos').value+' '+rows.map(function(r){return r.prompt;}).join(' ')).toLowerCase();
+     var chtml='', totalHits=0, names={wideningParticipation:'Widening participation',vetArticulation:'VET → Higher-Ed pathways',firstNations:'First Nations knowledges'};
+     compacts.forEach(function(k){
+       var hits=LEX[k].filter(function(w){return blob.indexOf(w)>-1;});
+       totalHits+=hits.length;
+       var ok=hits.length>=2;
+       chtml+='<div class="row"><span class="ic" style="color:'+(ok?'var(--teal)':'var(--gold)')+'">'+(ok?'✓':'○')+'</span><div><b>'+names[k]+'</b>'+(hits.length?'<div style="margin-top:4px">'+hits.map(function(h){return '<span class="pill">'+h+'</span>';}).join(''):'<span class="fix">No structural evidence found — embed it explicitly (e.g. UDL, RPL, work-integrated learning) rather than mentioning it once.</span>')+(k==='firstNations'?'<span class="fix">Reflective prompt only — First Nations curriculum work is custodian-led; engage First Nations colleagues &amp; communities.</span>':'')+'</div></div>';
+     });
+     var atecOk=totalHits>=3;
+     html+='<div class="block"><h3>3 · ATEC mission-compact alignment <span class="tag '+(atecOk?'t-pass':'t-warn')+'">'+(atecOk?'evidenced':'thin')+'</span></h3><div class="sub">ATEC weighs curriculum against mission-based compacts. ≥3 structural indicators avoids "tokenistic" alignment.</div>'+chtml+'</div>';
+     md+='\n## ATEC compacts\n'+totalHits+' structural indicators ('+(atecOk?'evidenced':'embed more')+').\n';
+     scoreParts.push(atecOk?1:(totalHits>0?0.5:0.2));
+   }
+
+   // ---- 4. GenAI resilience ----
+   var ghtml='', gPass=0, gTotal=rows.filter(function(r){return r.prompt;}).length;
+   rows.forEach(function(r){
+     if(!r.prompt)return;
+     var p=r.prompt.toLowerCase();
+     var risky=RISKY.some(function(x){return p.indexOf(x)>-1;});
+     var auth=AUTHENTIC.filter(function(x){return p.indexOf(x)>-1;});
+     var safe=auth.length>=1 && (!risky || auth.length>=2);
+     if(safe)gPass++;
+     ghtml+='<div class="row"><span class="ic" style="color:'+(safe?'var(--teal)':'var(--red)')+'">'+(safe?'✓':'▲')+'</span><div><b>'+esc(r.type)+' ('+r.w+'%)</b>: '+esc(r.prompt.slice(0,90))+(r.prompt.length>90?'…':'')+(safe?'<span class="fix">Authentic features detected: '+auth.slice(0,3).join(', ')+'.</span>':'<span class="fix">High GenAI vulnerability — a generic prompt a model can answer cold. Add a countermeasure: localised data, a live SaP co-design, an in-class/viva component, or reflection on the student\'s own practice.</span>')+'</div></div>';
+   });
+   if(gTotal){
+     var gTag=gPass===gTotal?'t-pass':(gPass>=gTotal/2?'t-warn':'t-fail');
+     html+='<div class="block"><h3>4 · GenAI resilience <span class="tag '+gTag+'">'+gPass+'/'+gTotal+' resilient</span></h3><div class="sub">HESF 5.2 — TEQSA expects assessment that AI can\'t simply complete. Authentic, localised, process-visible tasks.</div>'+ghtml+'</div>';
+     md+='\n## GenAI resilience\n'+gPass+'/'+gTotal+' tasks resilient.\n';
+     scoreParts.push(gPass/gTotal);
+   }
+
+   // ---- headline score ----
+   var pct=Math.round(scoreParts.reduce(function(a,b){return a+b;},0)/scoreParts.length*100);
+   var col=pct>=80?'var(--teal)':pct>=55?'var(--gold)':'var(--red)';
+   var headline=pct>=80?'Strong — ready for committee.':pct>=55?'Workable — tighten the flags below.':'Needs work before it ships.';
+   var ring='<div class="score"><div class="ring" style="background:'+col+'22;color:'+col+';border:3px solid '+col+'">'+pct+'</div><div><div style="font:800 19px var(--sans);color:#fff">'+headline+'</div><div style="font-size:13.5px;color:var(--mut);margin-top:3px">An indicative readiness signal across AQF cognition, assessment structure, ATEC alignment and GenAI-resilience — a starting point for your own quality review.</div></div></div>';
+
+   var rep=document.getElementById('report');
+   rep.innerHTML=ring+html;
+   rep.style.display='block';
+   document.getElementById('copy').style.display='inline-flex';
+   lastMd=md+'\n_Self-check via NTLSN ATEC·TEQSA Curriculum QA — indicative only, not an official determination._';
+   rep.scrollIntoView({behavior:'smooth',block:'start'});
+ };
+ document.getElementById('copy').onclick=function(){
+   navigator.clipboard.writeText(lastMd).then(function(){var b=document.getElementById('copy');var o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1500);});
+ };
+})();
+</script>
+</body>
+</html>
