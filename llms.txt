@@ -20,6 +20,7 @@
 - Teaching and learning events, conferences, grants and fellowships, frameworks and policy documents, career pathways, and curated sector and international SoTL talks, all aggregated across Australian higher education.
 
 ## Open data & API
+- [Hosted MCP server](https://www.ntlsn.com/.netlify/functions/mcp): a live Model Context Protocol endpoint over HTTP — point any MCP-compatible AI client at this URL to query NTLSN sector data (events, the 1,431-work archive, universities). No setup, no key.
 - [Open Data & API](https://www.ntlsn.com/developers.html): every dataset as open, CORS-enabled JSON — events, the 1,431-work archive, 80 best-practice guides, frameworks, and the 42-university directory. Free to query, embed via a one-line widget, or wire into any AI assistant with a copy-paste MCP server. No key, no logins.
 
 ## About and licensing
