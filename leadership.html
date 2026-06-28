@@ -82,6 +82,23 @@
 
   <div id="out"></div>
 
+  <div class="sec-h" id="progs">▸ Sector leadership programs we point you to</div>
+  <div style="background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:14px;padding:18px 20px;margin-bottom:12px">
+    <div style="font:800 18px var(--sans);color:#fff;display:flex;align-items:center;gap:10px;flex-wrap:wrap">🌸 WATTLE — Women’s Leadership Program <a href="https://www.wattle.edu.au/" target="_blank" rel="noopener" style="font:700 12px var(--sans)">wattle.edu.au ↗</a></div>
+    <p style="font-size:14px;color:#cbd8e6;margin:10px 0 0">A Swinburne-convened, cross-institutional leadership program for women in higher education and research, with <b>400+ alumnae</b> across ~17 universities. Three streams:</p>
+    <ul style="margin:9px 0 0;padding-left:19px;font-size:13.5px;color:#cbd8e6;line-height:1.6">
+      <li><b>Professional</b> (HEW 9–10) — fully residential; 2026 residential 15–19 June.</li>
+      <li><b>Academic</b> (Associate Professor / Professor) — fully residential; 2026 residential 23–27 November.</li>
+      <li><b>HEW 8 Professional Staff Strategic Leadership</b> — new, fully online; August 2026 intake (applications open).</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--mut);margin:11px 0 0">Themes: leadership context · career development · leading &amp; managing change · leadership in action. Enquiries: <span style="color:#cbd8e6">WATTLE_Admin@swin.edu.au</span> · HEW 8 (Karen Teo): <span style="color:#cbd8e6">kteo@swin.edu.au</span>.</p>
+  </div>
+  <div class="prog"><span style="font-size:20px">🎓</span><div><a href="https://www.advance-he.ac.uk/programmes-events/aurora" target="_blank" rel="noopener" class="pn">Advance HE — Aurora ↗</a><div class="pd">Leadership development for women in higher education.</div></div></div>
+  <div class="prog"><span style="font-size:20px">🎓</span><div><a href="https://melbourne-cshe.unimelb.edu.au/lh-martin-institute" target="_blank" rel="noopener" class="pn">LH Martin Institute ↗</a><div class="pd">Tertiary education leadership &amp; management (University of Melbourne, CSHE).</div></div></div>
+  <div class="prog"><span style="font-size:20px">🎓</span><div><a href="https://herdsa.org.au/" target="_blank" rel="noopener" class="pn">HERDSA ↗</a><div class="pd">Higher Education Research &amp; Development — leadership &amp; academic development.</div></div></div>
+  <div style="background:rgba(111,207,151,.07);border:1px solid rgba(111,207,151,.32);border-radius:12px;padding:14px 16px;margin:14px 0 0;font-size:12.5px;color:#cfeede;line-height:1.65">
+    <b style="color:#9be7bd">◇ Our independence — in plain terms.</b> NTLSN is <b>independent</b> of WATTLE and every program listed here. We showcase them as a free service to the sector. We have <b>no commercial, solicited or unsolicited connection, no conflict of interest, and no intellectual-property engagement</b> with WATTLE — its programs, associates or stakeholders — nor with the other programs above. All details are drawn from each program’s public website; please confirm directly with them. We point you to good work; we don’t claim it, profit from it, or speak for it.
+  </div>
   <div class="foot">
     A free, indicative self-assessment from NTLSN. Pair it with the <a href="/reflective-coach.html">Reflective Coach</a>, the <a href="/recognition-navigator.html">Recognition Navigator</a> and the <a href="/cop-starter.html">CoP Starter Kit</a>. Framework: Scott, Coates &amp; Anderson (2008), ALTC. CC BY-NC-SA 4.0.
   </div>
@@ -185,8 +202,7 @@
    html+='<div class="sec-h">▸ The full picture</div>';
    CAPS.forEach(function(c,i){html+='<div style="display:flex;align-items:center;gap:10px;margin:0 0 7px"><span style="width:150px;font:600 13px var(--sans);color:#cbd8e6">'+c.ic+' '+c.name.replace(/&amp;/g,"&")+'</span><span style="flex:1;height:8px;background:#15263d;border-radius:99px;overflow:hidden"><span style="display:block;height:100%;width:'+(scores[i]/5*100)+'%;background:'+c.col+'"></span></span><span style="width:34px;text-align:right;font:700 12px var(--sans);color:'+c.col+'">'+scores[i].toFixed(1)+'</span></div>';});
 
-   html+='<div class="sec-h">▸ Sector leadership programs</div>';
-   PROGRAMS.forEach(function(p){html+='<div class="prog"><span style="font-size:20px">🎓</span><div><a href="'+p[2]+'" target="_blank" rel="noopener" class="pn">'+p[0]+' ↗</a><div class="pd">'+p[1]+'</div></div></div>';});
+   html+='<div class="sec-h">▸ Where to go next</div><p style="font-size:14px;color:#cbd8e6;margin:0">Explore <a href="#progs">WATTLE and the sector’s leadership programs ↓</a> — and the NTLSN cohort in design.</p>';
 
    html+='<div class="indesign"><b>🌱 An NTLSN T&amp;L Leadership cohort is in design.</b> A peer-learning program — senior-leader career stories, strategic decision-making, and cross-institutional networking, built for teaching &amp; learning leaders across the sector. For now: this free self-assessment, and the established programs above. <a href="/#ntlsn-zoom">Tell us you’d be interested →</a></div>';
 
