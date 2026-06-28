@@ -77,7 +77,7 @@
   var STC={NSW:[78,205,196],VIC:[201,169,98],QLD:[107,168,255],WA:[185,139,217],SA:[111,207,151],ACT:[255,180,72],TAS:[255,138,138],NT:[229,155,214]};
   var ALN={Go8:'Group of Eight',ATN:'Australian Technology Network',IRU:'Innovative Research Universities',RUN:'Regional Universities Network'};
   var ALC={Go8:[201,169,98],ATN:[107,168,255],IRU:[111,207,151],RUN:[185,139,217],Unaligned:[125,140,160]};
-  var ASSOC=[['CAULLT','Council of Aust. University Leaders in L&T'],['HERDSA','Higher Ed Research & Development Society'],['ASCILITE','Computers in Learning in Tertiary Ed'],['ACODE','Open, Distance & e-Learning'],['UA','Universities Australia']];
+  var ASSOC=[['CAULLT','Council of Aust. University Leaders in L&T'],['HERDSA','Higher Ed Research & Development Society'],['ASCILITE','Computers in Learning in Tertiary Ed'],['ACODE','Open, Distance & e-Learning'],['UA','Universities Australia'],['WATTLE','Women’s Leadership Program (national)']];
   var ACCENT={centre:[78,205,196],alliance:[255,180,72],assoc:[124,156,255]};
   var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
 
@@ -187,11 +187,19 @@
 
   function pos(e){ var r=cv.getBoundingClientRect();var t=e.touches&&e.touches[0];var sx=(t?t.clientX:e.clientX)-r.left,sy=(t?t.clientY:e.clientY)-r.top;return{x:(sx-W/2)/cam.s+cam.x,y:(sy-H/2)/cam.s+cam.y}; }
   function nodeAt(p){ for(var i=nodes.length-1;i>=0;i--){var n=nodes[i];if(!visible(n))continue;var dx=p.x-n.x,dy=p.y-n.y;if(dx*dx+dy*dy<=(n.r+3)*(n.r+3))return n;}return null; }
-  cv.addEventListener('mousemove',function(e){var p=pos(e);mouse.x=p.x;mouse.y=p.y;mouse.on=true;if(drag){drag.x=p.x;drag.y=p.y;}else if(!journey.on){var n=nodeAt(p);hover=n?n.id:null;cv.style.cursor=n?'grab':'default';}if(RM)draw();});
+  var tipEl=document.getElementById('tip');
+  function describe(n){ if(!n)return '';
+    if(n.kind==='uni')return n.nm+' · '+n.ct+', '+(STN[n.st]||n.st)+' · '+(n.gr&&n.gr!=='Unaligned'?(ALN[n.gr]||n.gr):'Unaligned');
+    if(n.kind==='state'){var c=UNI.filter(function(u){return u.s===n.st;}).length;return (STN[n.st]||n.label)+' · '+c+' universities';}
+    if(n.kind==='alliance')return (n.full||n.label)+' · university alliance';
+    if(n.kind==='assoc')return (n.full||n.label);
+    if(n.kind==='centre')return 'The Australian university teaching sector';
+    return n.label; }
+  cv.addEventListener('mousemove',function(e){var p=pos(e);mouse.x=p.x;mouse.y=p.y;mouse.on=true;if(drag){drag.x=p.x;drag.y=p.y;}else if(!journey.on){var n=nodeAt(p);hover=n?n.id:null;cv.style.cursor=n?'grab':'default';if(n){tipEl.textContent=describe(n);tipEl.style.opacity=1;}else{tipEl.style.opacity=0;}}if(RM)draw();});
   cv.addEventListener('mouseleave',function(){mouse.on=false;if(!journey.on)hover=null;if(RM)draw();});
   cv.addEventListener('mousedown',function(e){userTook();var p=pos(e);var n=nodeAt(p);if(n){drag=n;cv.style.cursor='grabbing';}});
   window.addEventListener('mouseup',function(){drag=null;});
-  cv.addEventListener('touchstart',function(e){userTook();var p=pos(e);var n=nodeAt(p);if(n){drag=n;hover=n.id;}mouse.x=p.x;mouse.y=p.y;mouse.on=true;},{passive:true});
+  cv.addEventListener('touchstart',function(e){userTook();var p=pos(e);var n=nodeAt(p);if(n){drag=n;hover=n.id;tipEl.textContent=describe(n);tipEl.style.opacity=1;}mouse.x=p.x;mouse.y=p.y;mouse.on=true;},{passive:true});
   cv.addEventListener('touchmove',function(e){var p=pos(e);mouse.x=p.x;mouse.y=p.y;mouse.on=true;if(drag){drag.x=p.x;drag.y=p.y;}e.preventDefault();},{passive:false});
   cv.addEventListener('touchend',function(){drag=null;mouse.on=false;});
   document.getElementById('play').addEventListener('click',pauseToggle);
