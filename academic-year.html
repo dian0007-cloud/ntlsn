@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Academic Year 2026 — a personalised teaching planner · NTLSN</title>
+<meta name="description" content="Turn the academic calendar into a plan. Set your semester start and NTLSN maps your teaching year as a rhythm — prep, teaching, the mid-semester breather, and the marking crunch — with what to do and which support to reach for at each point. Free, in-browser.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#C0593A;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 12px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:64ch;margin:0 0 18px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:8px}
+  .lbl{font:700 12px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin:0 0 7px}
+  .roles{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+  .role{border:1px solid var(--line);background:var(--card2);color:var(--mut);border-radius:999px;padding:7px 13px;font:600 13px var(--sans);cursor:pointer}
+  .role:hover{color:var(--ink)}.role.on{background:var(--teal);color:#06251f;border-color:var(--teal)}
+  .row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+  .fld{flex:1;min-width:180px}
+  input[type=date],input[type=number]{width:100%;background:var(--card2);border:1px solid var(--line);border-radius:10px;color:#fff;font:15px var(--sans);padding:11px 13px}
+  input:focus{outline:none;border-color:var(--teal)}
+  .hint{font-size:12px;color:var(--mut);margin-top:5px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:13px 26px;font:800 15px var(--sans);cursor:pointer;margin-top:16px}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  #out{margin-top:30px;display:none}
+  .roleNote{background:rgba(78,205,196,.08);border:1px solid rgba(78,205,196,.28);border-radius:11px;padding:12px 15px;font-size:14px;color:#cdeeea;margin-bottom:18px}
+  .ph{position:relative;border-left:2px solid var(--line);margin-left:9px;padding:0 0 4px 22px}
+  .ph .node{position:absolute;left:-11px;top:2px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--card)}
+  .pcard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:13px;padding:14px 16px;margin-bottom:14px}
+  .pcard .dt{font:700 12px var(--sans);color:var(--gold);letter-spacing:.03em}
+  .pcard h3{font:800 16.5px var(--sans);color:#fff;margin:3px 0 8px;display:flex;align-items:center;gap:8px}
+  .pcard ul{margin:0 0 10px;padding-left:18px}.pcard li{font-size:13.5px;color:#cbd8e6;margin:4px 0}
+  .pcard .well{font-size:12.5px;color:var(--green);font-style:italic;margin:0 0 8px}
+  .tools{display:flex;flex-wrap:wrap;gap:7px}
+  .tools a{font:600 12px var(--sans);background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .vac{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:6px 0 0;font-size:13.5px;color:#cbd8e6}
+  .vac b{color:#fff}
+  .disc{background:rgba(255,180,72,.08);border:1px solid rgba(255,180,72,.3);border-radius:12px;padding:14px 16px;margin:16px 0 0;font-size:12.5px;color:#e7d6b0;line-height:1.6}
+  .disc b{color:#ffd98a}
+  .foot{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Your teaching year</div>
+  <h1>Your academic year, personalised.</h1>
+  <p class="lede">The calendar tells you the dates. This tells you the <i>rhythm</i> — prep, teaching, the mid-semester breather, and the marking crunch — and what to do, and which support to reach for, at each point. Set your start; we’ll map your year.</p>
+
+  <div class="panel">
+    <div class="lbl">Who are you, this semester?</div>
+    <div class="roles" id="roles"></div>
+    <div class="row">
+      <div class="fld"><div class="lbl">Your teaching starts (Week 1, Monday)</div><input type="date" id="start" value="2026-03-02"><div class="hint">Default = the Universities Australia standard (Week 1 = Monday nearest 1 March 2026).</div></div>
+      <div class="fld"><div class="lbl">Teaching weeks</div><input type="number" id="weeks" value="12" min="4" max="20"><div class="hint">Most AU semesters run 12–13 teaching weeks.</div></div>
+    </div>
+    <button class="btn" id="run" type="button">Map my year →</button>
+  </div>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    A free NTLSN planner. The rhythm and the common vacation weeks are based on the <a href="https://www.universitiesaustralia.edu.au/our-universities/teaching-calendar/" target="_blank" rel="noopener">Universities Australia teaching calendar</a>; the phase dates are <b>approximate</b> and personalised to the start date you enter. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var ROLES=[
+  ['teacher','Teaching academic','Your focus: great classes and fair marking, sustainably.'],
+  ['coord','Course/unit coordinator','Your focus: design the assessment and support your markers — especially the casuals.'],
+  ['casual','Casual / sessional','Your focus: be ready, mark fairly, and get paid for the work you actually do — including marking time.'],
+  ['lead','Program / T&L lead','Your focus: see the whole rhythm across your team and smooth the crunch.']
+ ];
+ var role='teacher';
+ var rb=document.getElementById('roles');
+ rb.innerHTML=ROLES.map(function(r){return '<button class="role'+(r[0]==='teacher'?' on':'')+'" data-r="'+r[0]+'" type="button">'+r[1]+'</button>';}).join('');
+ rb.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.role');if(!b)return;role=b.getAttribute('data-r');[].forEach.call(rb.querySelectorAll('.role'),function(x){x.classList.remove('on');});b.classList.add('on');});
+
+ var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],DW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+ function addDays(d,n){var x=new Date(d.getTime());x.setDate(x.getDate()+n);return x;}
+ function fmt(d){return DW[d.getDay()]+' '+d.getDate()+' '+MON[d.getMonth()];}
+ function range(a,b){return fmt(a)+' – '+fmt(b);}
+
+ document.getElementById('run').onclick=function(){
+   var sv=document.getElementById('start').value; if(!sv){alert('Pick your teaching start date.');return;}
+   var start=new Date(sv+'T00:00:00'); var W=Math.max(4,Math.min(20,+document.getElementById('weeks').value||12));
+   var breakAfter=Math.ceil(W/2);                       // mid-sem break after roughly half the weeks
+   var teach1End=addDays(start,breakAfter*7-3);          // Fri of last week before break
+   var brk=addDays(start,breakAfter*7);                  // break Monday
+   var brkEnd=addDays(brk,4);
+   var teach2Start=addDays(brk,7);
+   var lastTeach=addDays(start,(W+1)*7-3);               // +1 week for the break, Fri of final week
+   var swot=addDays(lastTeach,3);                        // study week starts ~Mon after
+   var examStart=addDays(swot,7); var examEnd=addDays(examStart,11);
+   var recover=addDays(examEnd,3);
+
+   var PH=[
+    {ic:'📋',col:'#7C9CFF',d:range(addDays(start,-14),addDays(start,-1)),t:'Prep & set up',
+     li:['Get across the unit outline, the assessments and the GenAI position before Week 1.','Plan your first classes and your assessment approach now, while you have the calmest fortnight of the semester.','Casuals & new staff: ask your coordinator the questions that matter (what am I marking, against what rubric, paid for how many hours?).'],
+     well:'Future-you is grateful for the work you do now.',
+     tools:[['Active-Learning Session Planner','/session-planner.html'],['GenAI Assignment Redesign','/assignment-redesign.html'],['New-to-Teaching Starter Kit','/casual-teaching.html']]},
+    {ic:'🎤',col:'#4ECDC4',d:'Weeks 1–'+(breakAfter)+'  ·  '+range(start,teach1End),t:'Teaching — first half',
+     li:['Set the tone early: names, warm-ups, active tasks over talking.','Keep a light record of what works — it becomes your evidence later.','Build the feedback loop now so it pays off by mid-semester.'],
+     well:'Pace yourself — it’s a marathon, not the first week.',
+     tools:[['Active-Learning Session Planner','/session-planner.html'],['Reflective Coach','/reflective-coach.html']]},
+    {ic:'😮‍💨',col:'#6FCF97',d:'Mid-semester break  ·  '+range(brk,brkEnd),t:'Breathe',
+     li:['Catch up, not burn out. Protect at least some of this as actual rest.','A good moment to tweak the second half based on how the first went.'],
+     well:'Rest is part of the job, not a reward for finishing it.',
+     tools:[['Reflective Coach','/reflective-coach.html']]},
+    {ic:'🎓',col:'#4ECDC4',d:'Weeks '+(breakAfter+1)+'–'+W+'  ·  '+range(teach2Start,lastTeach),t:'Teaching — second half',
+     li:['Wrap up the content and prepare students honestly for assessment.','Flag any integrity/GenAI concerns early and upward — don’t carry them alone.','Coordinators: brief and support your markers before the crunch hits.'],
+     well:'The end is in sight — keep the feedback humane.',
+     tools:[['Unit AI-Use Policy','/ai-policy.html'],['Assessment Mix &amp; AI-Resilience','/assessment-mix.html']]},
+    {ic:'⚖️',col:'#FFB448',d:'Study week + exams  ·  '+range(swot,examEnd),t:'The marking crunch',
+     li:['Use the rubric, calibrate on the first few scripts, take breaks to avoid drift.','Feedback: one strength + two specific next steps, tied to the criteria.','Casuals: track your marking hours and get paid for them — this is the work.'],
+     well:'Marking fatigue is real. Breaks make you fairer, not slower.',
+     tools:[['Build a Rubric','/rubric.html'],['Feedback &amp; Feedforward Builder','/feedback-builder.html'],['New-to-Teaching Starter Kit','/casual-teaching.html']]},
+    {ic:'🌱',col:'#C57BFF',d:'After exams  ·  from '+fmt(recover),t:'Recover, reflect &amp; bank the evidence',
+     li:['Breathe first. Then capture what worked while it’s fresh — three lines is enough.','Add it to your teaching record; it’s recognition and promotion gold later.','Pick one thing to change next time — small and specific.'],
+     well:'You did the hardest job in the university. Mark it.',
+     tools:[['Reflective Coach','/reflective-coach.html'],['Teaching Recognition Passport','/trp.html'],['Recognition Navigator','/recognition-navigator.html']]}
+   ];
+
+   var rn=ROLES.filter(function(r){return r[0]===role;})[0];
+   var html='<div class="roleNote"><b style="color:#fff">'+rn[1]+'.</b> '+rn[2]+'</div>';
+   html+=PH.map(function(p){
+     return '<div class="ph"><span class="node" style="border:2px solid '+p.col+'">'+p.ic+'</span>'+
+       '<div class="pcard" style="border-left-color:'+p.col+'"><div class="dt">'+p.d+'</div><h3>'+p.t+'</h3>'+
+       '<ul>'+p.li.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'+
+       '<div class="well">'+p.well+'</div>'+
+       '<div class="tools">'+p.tools.map(function(t){return '<a href="'+t[1]+'">'+t[0]+' →</a>';}).join('')+'</div></div></div>';
+   }).join('');
+
+   html+='<div class="vac"><b>📅 Universities Australia common vacation weeks, 2026</b> (a sector-wide guide your university may align to): Easter <b>6–10 April</b> · Week 19 <b>6–10 July</b> · Week 31 <b>28 Sep – 2 Oct</b>.</div>';
+   html+='<div class="disc"><b>◇ Approximate — confirm with your university.</b> These phase dates are calculated from the start date you entered, using the Universities Australia standard semester pattern. <b>Every university’s exact dates differ</b> (some run trimesters or multiple intakes). Universities Australia publishes the official per-university 2026 dates — always check your own institution’s academic calendar for the real teaching, census, supplementary-exam and results dates. This planner is a rhythm, not a substitute for your official calendar.</div>';
+   html+='<div style="margin-top:16px"><button class="btn ghost" id="again" type="button">↻ Map a different start</button></div>';
+
+   var out=document.getElementById('out');out.innerHTML=html;out.style.display='block';out.scrollIntoView({behavior:'smooth',block:'start'});
+   document.getElementById('again').onclick=function(){out.style.display='none';window.scrollTo(0,0);};
+ };
+})();
+</script>
+</body>
+</html>
