@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Data &amp; API · NTLSN — connect the sector's teaching &amp; learning data to anything</title>
+<meta name="description" content="NTLSN's open, CORS-enabled data: events, the 1,431-work SoTL archive, frameworks and the 42-university directory — free to query, embed, or wire into any AI via MCP. CC BY-NC-SA 4.0.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(30px,5.5vw,46px);line-height:1.08;margin:0 0 16px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:18px;color:#cbd8e6;max-width:62ch;margin:0 0 8px}
+  .sub{font-size:14px;color:var(--mut);max-width:64ch}
+  .pill{display:inline-block;font:700 11px var(--sans);letter-spacing:.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(255,180,72,.4);border-radius:999px;padding:4px 11px;margin:14px 8px 0 0}
+  h2{font-size:24px;font-weight:800;margin:46px 0 6px;padding-top:24px;border-top:1px solid var(--line)}
+  h2 .n{color:var(--teal);font-size:15px;font-weight:700;margin-right:8px}
+  h3{font-size:16px;margin:24px 0 6px;color:#fff}
+  p.body{color:#cbd8e6;max-width:66ch;margin:0 0 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:18px 0}@media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .ep{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
+  .ep .u{font:600 13.5px var(--mono);color:var(--teal);word-break:break-all}
+  .ep .d{font-size:13.5px;color:var(--mut);margin:7px 0 9px}
+  .ep .f{font:500 11.5px var(--mono);color:#b9c8da;background:#0a1a2c;border:1px solid var(--line);border-radius:7px;padding:6px 9px;display:inline-block}
+  .ep .c{font-size:11px;color:var(--gold);margin-top:8px;letter-spacing:.04em;text-transform:uppercase;font-weight:700}
+  pre{background:#0a1a2c;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow-x:auto;margin:14px 0;
+    font:500 13px/1.65 var(--mono);color:#cfe0ee}
+  pre .k{color:var(--purple)}pre .s{color:var(--gold)}pre .c{color:#5d7186}pre .fn{color:var(--teal)}
+  code{font:500 13px var(--mono);color:var(--gold);background:#0a1a2c;border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+  .copy{float:right;font:700 11px var(--sans);letter-spacing:.5px;text-transform:uppercase;color:#06251f;background:var(--teal);border:0;border-radius:7px;padding:5px 11px;cursor:pointer;margin:-2px 0 0 0}
+  .copy:active{transform:translateY(1px)}
+  .note{background:rgba(78,205,196,.07);border:1px solid rgba(78,205,196,.28);border-radius:12px;padding:14px 17px;margin:16px 0;font-size:14px;color:#d3e6e4}
+  .note b{color:#fff}
+  .foot{margin-top:46px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
+  ul.tight{margin:8px 0;padding-left:20px}ul.tight li{margin:4px 0;color:#cbd8e6;font-size:14.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Open Data &amp; API · Free · CORS-enabled</div>
+  <h1>The sector's data, open to anything.</h1>
+  <p class="lede">NTLSN is a static, public commons — no backend, no logins. But every dataset behind it is <b style="color:var(--ink)">openly readable</b>: query it, embed it, pipe it into a spreadsheet, or wire it straight into an AI assistant. One open source of truth for Australian higher-ed teaching &amp; learning.</p>
+  <p class="sub">All endpoints return JSON over HTTPS with <code>Access-Control-Allow-Origin: *</code>, so they work from any site or script. Curation licensed <b>CC BY-NC-SA 4.0</b>; linked third-party works belong to their authors. NTLSN claims no endorsement by the universities or bodies it catalogues.</p>
+  <div>
+    <span class="pill">No API key</span><span class="pill">No rate limit</span><span class="pill">No logins</span><span class="pill">CC BY-NC-SA 4.0</span>
+  </div>
+
+  <h2><span class="n">01</span>The endpoints</h2>
+  <p class="body">Base URL <code>https://www.ntlsn.com/data/</code>. Everything is a plain static JSON file — fast, cacheable, and impossible to take down with traffic.</p>
+  <div class="grid">
+    <div class="ep">
+      <div class="u">/data/events.json</div>
+      <div class="d">94 sector events — conferences, showcases, workshops, webinars across all 42 universities.</div>
+      <div class="f">id · title · uni · date · endDate · type · desc · url · verified</div>
+      <div class="c">Array · ~27 KB</div>
+    </div>
+    <div class="ep">
+      <div class="u">/data/ltr.json</div>
+      <div class="d">The rescued archive — 1,431 ALTC- &amp; OLT-funded teaching-scholarship works, 1994–2025.</div>
+      <div class="f">t (title) · a (author) · y (year) · u (url)</div>
+      <div class="c">Array · ~270 KB</div>
+    </div>
+    <div class="ep">
+      <div class="u">/data/ltr-bestpractice.json</div>
+      <div class="d">80 curated Good Practice Reports &amp; guides, 2006–2024.</div>
+      <div class="f">t · a · y · u · theme</div>
+      <div class="c">Array · ~14 KB</div>
+    </div>
+    <div class="ep">
+      <div class="u">/data/universities.json</div>
+      <div class="d">All 42 universities — geo-coords, alliance group, real L&amp;T team page, and the Traditional Country each stands on.</div>
+      <div class="f">id · name · abbr · city · state · lat · lng · group · tlUrl · traditionalCountry</div>
+      <div class="c">Array · ~13 KB</div>
+    </div>
+    <div class="ep">
+      <div class="u">/data/rcf.json</div>
+      <div class="d">The Recognition Credit Framework — open, versioned, sourced point-weights for teaching recognition.</div>
+      <div class="f">framework · version · updated · status · domains[] · cite</div>
+      <div class="c">Object · ~7 KB</div>
+    </div>
+    <div class="ep">
+      <div class="u">/feed.xml &nbsp;·&nbsp; /events.ics</div>
+      <div class="d">The same events as an <b>RSS feed</b> and a subscribable <b>iCalendar</b> file — drop into any reader or calendar.</div>
+      <div class="f">RSS 2.0 · iCalendar (VEVENT)</div>
+      <div class="c">Feeds</div>
+    </div>
+  </div>
+
+  <h2><span class="n">02</span>Quick start — fetch it</h2>
+  <p class="body">No setup. From a browser, a Node script, a notebook — anywhere:</p>
+  <pre><button class="copy" data-c="fetch('https://www.ntlsn.com/data/events.json')&#10;  .then(r =&gt; r.json())&#10;  .then(events =&gt; {&#10;    const soon = events&#10;      .filter(e =&gt; e.date &gt;= new Date().toISOString().slice(0,10))&#10;      .sort((a,b) =&gt; a.date.localeCompare(b.date));&#10;    console.log(soon.slice(0,5));&#10;  });">Copy</button><span class="c">// the next five sector events, anywhere</span>
+<span class="fn">fetch</span>(<span class="s">'https://www.ntlsn.com/data/events.json'</span>)
+  .then(r =&gt; r.json())
+  .then(events =&gt; {
+    <span class="k">const</span> soon = events
+      .filter(e =&gt; e.date &gt;= <span class="k">new</span> Date().toISOString().slice(<span class="s">0</span>,<span class="s">10</span>))
+      .sort((a,b) =&gt; a.date.localeCompare(b.date));
+    console.log(soon.slice(<span class="s">0</span>,<span class="s">5</span>));
+  });</pre>
+
+  <h2><span class="n">03</span>Embed live events on your site</h2>
+  <p class="body">One line. A self-contained, shadow-DOM widget that never clashes with your CSS — sector-wide, or filtered to one university. ~5 KB, no dependencies.</p>
+  <pre><button class="copy" data-c='&lt;script src="https://www.ntlsn.com/widget.js" data-limit="5" data-uni="usq"&gt;&lt;/script&gt;'>Copy</button><span class="k">&lt;script</span> <span class="fn">src</span>=<span class="s">"https://www.ntlsn.com/widget.js"</span> <span class="fn">data-limit</span>=<span class="s">"5"</span> <span class="fn">data-uni</span>=<span class="s">"usq"</span><span class="k">&gt;&lt;/script&gt;</span></pre>
+  <p class="sub"><code>data-limit</code> = how many to show (default 5). <code>data-uni</code> = optional university id (e.g. <code>usq</code>, <code>unimelb</code>, <code>curtin</code>) — omit for sector-wide. It reads <code>/data/events.json</code> and links back here.</p>
+
+  <h2><span class="n">04</span>Wire it into AI — the MCP server</h2>
+  <p class="body">This is the part that turns NTLSN into <b style="color:var(--ink)">infrastructure</b>: a small <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a> server wraps these open endpoints into <b>tools</b> any AI assistant (Claude, etc.) can call — "what teaching conferences are coming up in WA?", "search the archive for work on academic integrity." MCP is the USB-C standard for AI ↔ data; NTLSN is the sector's plug.</p>
+  <div class="note"><b>Run it in three steps.</b> <code>pip install "mcp[cli]" httpx</code> → save the file below as <code>ntlsn_mcp.py</code> → register it in your client (<code>claude mcp add ntlsn -- python /path/to/ntlsn_mcp.py</code>). No NTLSN credentials needed — it only reads the public open data.</div>
+  <pre><button class="copy" data-c='# ntlsn_mcp.py — expose NTLSN&#39;s open sector data to any AI assistant via MCP.&#10;# pip install "mcp[cli]" httpx&#10;import httpx&#10;from mcp.server.fastmcp import FastMCP&#10;&#10;BASE = "https://www.ntlsn.com/data"&#10;mcp = FastMCP("ntlsn")&#10;&#10;@mcp.tool()&#10;def upcoming_events(uni: str = "", limit: int = 10) -&gt; list:&#10;    """Upcoming Australian higher-ed teaching &amp; learning events. Optional uni id, e.g. usq."""&#10;    data = httpx.get(f"{BASE}/events.json", timeout=15).json()&#10;    today = __import__("datetime").date.today().isoformat()&#10;    data = [e for e in data if e.get("date","") &gt;= today]&#10;    if uni: data = [e for e in data if e.get("uni") == uni.lower()]&#10;    return sorted(data, key=lambda e: e["date"])[:limit]&#10;&#10;@mcp.tool()&#10;def search_archive(query: str, limit: int = 15) -&gt; list:&#10;    """Search the 1,431-work ALTC/OLT teaching-scholarship archive (1994-2025) by title or author."""&#10;    q = query.lower()&#10;    data = httpx.get(f"{BASE}/ltr.json", timeout=30).json()&#10;    hits = [w for w in data if q in (w.get("t","") + " " + w.get("a","")).lower()]&#10;    return hits[:limit]&#10;&#10;@mcp.tool()&#10;def universities() -&gt; list:&#10;    """All 42 Australian universities: L&amp;T team pages, alliance group, Traditional Country."""&#10;    return httpx.get(f"{BASE}/universities.json", timeout=15).json()&#10;&#10;if __name__ == "__main__":&#10;    mcp.run()'>Copy</button><span class="c"># ntlsn_mcp.py — expose NTLSN's open sector data to any AI assistant via MCP.</span>
+<span class="c"># pip install "mcp[cli]" httpx</span>
+<span class="k">import</span> httpx
+<span class="k">from</span> mcp.server.fastmcp <span class="k">import</span> FastMCP
+
+BASE = <span class="s">"https://www.ntlsn.com/data"</span>
+mcp = <span class="fn">FastMCP</span>(<span class="s">"ntlsn"</span>)
+
+<span class="fn">@mcp.tool()</span>
+<span class="k">def</span> <span class="fn">upcoming_events</span>(uni: str = <span class="s">""</span>, limit: int = <span class="s">10</span>) -&gt; list:
+    <span class="s">"""Upcoming Australian higher-ed teaching &amp; learning events. Optional uni id, e.g. usq."""</span>
+    data = httpx.get(f<span class="s">"{BASE}/events.json"</span>, timeout=<span class="s">15</span>).json()
+    today = __import__(<span class="s">"datetime"</span>).date.today().isoformat()
+    data = [e <span class="k">for</span> e <span class="k">in</span> data <span class="k">if</span> e.get(<span class="s">"date"</span>,<span class="s">""</span>) &gt;= today]
+    <span class="k">if</span> uni: data = [e <span class="k">for</span> e <span class="k">in</span> data <span class="k">if</span> e.get(<span class="s">"uni"</span>) == uni.lower()]
+    <span class="k">return</span> sorted(data, key=<span class="k">lambda</span> e: e[<span class="s">"date"</span>])[:limit]
+
+<span class="fn">@mcp.tool()</span>
+<span class="k">def</span> <span class="fn">search_archive</span>(query: str, limit: int = <span class="s">15</span>) -&gt; list:
+    <span class="s">"""Search the 1,431-work ALTC/OLT teaching-scholarship archive (1994-2025)."""</span>
+    q = query.lower()
+    data = httpx.get(f<span class="s">"{BASE}/ltr.json"</span>, timeout=<span class="s">30</span>).json()
+    hits = [w <span class="k">for</span> w <span class="k">in</span> data <span class="k">if</span> q <span class="k">in</span> (w.get(<span class="s">"t"</span>,<span class="s">""</span>) + <span class="s">" "</span> + w.get(<span class="s">"a"</span>,<span class="s">""</span>)).lower()]
+    <span class="k">return</span> hits[:limit]
+
+<span class="fn">@mcp.tool()</span>
+<span class="k">def</span> <span class="fn">universities</span>() -&gt; list:
+    <span class="s">"""All 42 Australian universities: L&amp;T team pages, alliance group, Traditional Country."""</span>
+    <span class="k">return</span> httpx.get(f<span class="s">"{BASE}/universities.json"</span>, timeout=<span class="s">15</span>).json()
+
+<span class="k">if</span> __name__ == <span class="s">"__main__"</span>:
+    mcp.run()</pre>
+  <p class="sub">That's three tools over open data, no backend required. Fork it, add <code>best_practices</code> or <code>recognition_framework</code>, and you've given any AI the sector's teaching &amp; learning memory. <a href="/llms.txt">llms.txt</a> describes the commons for AI crawlers too.</p>
+
+  <h2><span class="n">05</span>Use it well</h2>
+  <ul class="tight">
+    <li><b>Attribution:</b> link back to ntlsn.com and keep the CC BY-NC-SA 4.0 notice. Non-commercial; share-alike.</li>
+    <li><b>It's curated, not authoritative:</b> the archive indexes titles/authors — full texts live at the <a href="https://ltr.edu.au" target="_blank" rel="noopener">Australian Government L&amp;T Repository</a>. Events are verified where the <code>verified</code> flag is true.</li>
+    <li><b>No endorsement:</b> NTLSN catalogues the sector; it doesn't claim partnership with the universities or bodies listed.</li>
+    <li><b>Be kind:</b> files are cached ~60 s. Don't hammer — fetch once and work locally.</li>
+  </ul>
+
+  <div class="foot">
+    NTLSN — the National Teaching &amp; Learning Sector Network. A free, open Open Educational Practice commons. Found a gap in the data or want an endpoint added? <a href="/#about">Get in touch.</a><br>
+    Curation © NTLSN, licensed CC BY-NC-SA 4.0. Built by A/Prof Seb Dianati, University of Southern Queensland.
+  </div>
+</div>
+<script>
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.copy'); if(!b)return;
+    var t=b.getAttribute('data-c')||'';
+    navigator.clipboard.writeText(t).then(function(){var o=b.textContent;b.textContent='Copied ✓';setTimeout(function(){b.textContent=o;},1400);});
+  });
+</script>
+</body>
+</html>
