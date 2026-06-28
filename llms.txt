@@ -29,3 +29,4 @@
 ## About and licensing
 - NTLSN is a free, open Open Educational Practice commons. Paid services exist only to sustain the commons and never gate it. Curation and original benchmarking are licensed CC BY-NC-SA 4.0; linked third-party works remain the property of their authors and institutions.
 - NTLSN does not claim endorsement by the universities, peak bodies, or regulators it catalogues.
+- [Stream your symposium](https://www.ntlsn.com/symposium-streaming.html): pilot — connect your university's own Zoom (official OAuth) and NTLSN runs symposium registration, the live embed and the replay; sign in with ORCID. In design with founding universities.

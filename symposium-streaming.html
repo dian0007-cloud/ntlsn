@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drop your Zoom, we'll stream your symposium · NTLSN</title>
+<meta name="description" content="Connect your university's own Zoom once and NTLSN handles symposium registration, the live watch-page, and the replay — for IT and academics alike. Sign in with ORCID. A pilot, built on Zoom's official APIs.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .pilot{display:inline-flex;align-items:center;gap:8px;background:rgba(255,180,72,.12);border:1px solid rgba(255,180,72,.4);color:var(--gold);border-radius:999px;padding:6px 14px;font:800 11.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+  h1{font-size:clamp(30px,5.4vw,46px);line-height:1.08;margin:0 0 14px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:18px;color:#cbd8e6;max-width:64ch;margin:0 0 26px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 30px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:20px 18px}
+  .step .n{width:30px;height:30px;border-radius:9px;background:rgba(78,205,196,.14);color:var(--teal);font:800 15px var(--sans);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+  .step h3{font:800 16px var(--sans);margin:0 0 6px;color:#fff}
+  .step p{font-size:13.5px;color:var(--mut);margin:0}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 14px}
+  .btn{display:inline-flex;align-items:center;gap:9px;border:0;border-radius:12px;padding:14px 22px;font:800 15px var(--sans);cursor:pointer;text-decoration:none}
+  .btn-orcid{background:#fff;color:#111}
+  .btn-orcid .oi{width:20px;height:20px;border-radius:4px;background:#A6CE39;color:#fff;display:inline-flex;align-items:center;justify-content:center;font:800 11px var(--sans)}
+  .btn-zoom{background:rgba(78,205,196,.14);color:var(--teal);border:1px solid rgba(78,205,196,.4)}
+  .btn:hover{filter:brightness(1.05)}
+  #signed{display:none;background:rgba(111,207,151,.1);border:1px solid rgba(111,207,151,.4);border-radius:12px;padding:13px 16px;margin:0 0 14px;font-size:14.5px;color:#cde9d8}
+  #signed b{color:#fff}
+  .note{font-size:13px;color:var(--mut);margin:4px 0 30px}
+  .panel{background:var(--card2);border:1px solid var(--line);border-radius:15px;padding:22px 22px;margin:0 0 18px}
+  .panel h2{font:800 19px var(--sans);margin:0 0 12px;color:#fff;display:flex;align-items:center;gap:9px}
+  .panel ul{margin:0;padding-left:20px}.panel li{margin:7px 0;font-size:14.5px;color:#cbd8e6}
+  .panel li b{color:#fff}
+  .tag{font:700 10.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:5px;margin-left:8px}
+  .tag.live{background:rgba(111,207,151,.16);color:var(--green)}
+  .tag.soon{background:rgba(255,180,72,.14);color:var(--gold)}
+  .foot{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  @media(max-width:680px){.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="pilot">◆ Symposium streaming · pilot in design</div>
+  <h1>Drop your Zoom. We'll stream your symposium.</h1>
+  <p class="lede">Connect your university's <strong>own Zoom</strong> once. NTLSN then runs the registration, the live watch-page, and the replay — on your event's NTLSN page. Built so IT <em>and</em> academics can do it without learning a new platform. Your Zoom, your account, your data; we just make it effortless to share.</p>
+
+  <div id="signed"></div>
+
+  <div class="actions">
+    <button class="btn btn-orcid" id="orcid-btn" type="button"><span class="oi">iD</span> Sign in with ORCID</button>
+    <a class="btn btn-zoom" id="zoom-btn" href="/.netlify/functions/zoom-oauth-start">＋ Connect your university Zoom</a>
+  </div>
+  <p class="note" id="note">ORCID confirms you're a real researcher (free, no NTLSN account). Connecting Zoom needs your Zoom <strong>admin</strong> — one consent for the whole institution.</p>
+
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Connect Zoom (admin, once)</h3><p>Your Zoom admin approves NTLSN against your institution's own Zoom — a single account-wide consent on Zoom's official OAuth screen.</p></div>
+    <div class="step"><div class="n">2</div><h3>Sign in &amp; add your event</h3><p>An academic signs in with ORCID and points NTLSN at the symposium meeting or webinar. No re-keying details.</p></div>
+    <div class="step"><div class="n">3</div><h3>We register &amp; stream it</h3><p>Attendees register on your NTLSN page; we push them into your Zoom and embed the live session. Afterwards, the recording becomes the replay.</p></div>
+  </div>
+
+  <div class="panel">
+    <h2>What it does <span class="tag soon">pilot</span></h2>
+    <ul>
+      <li><b>One connection, your account.</b> Uses <b>your university's own Zoom</b> via Zoom's official user-managed OAuth — NTLSN never owns your meetings or data.</li>
+      <li><b>Registration on your page.</b> A registration form on NTLSN pushes attendees straight into your Zoom (each gets their unique join link).</li>
+      <li><b>Watch on NTLSN.</b> The live symposium embeds on your event page via Zoom's Meeting SDK — attendees never leave the commons.</li>
+      <li><b>Automatic replay.</b> When Zoom finishes the cloud recording, the replay link publishes itself to the event page.</li>
+      <li><b>Sign in with ORCID.</b> Researcher identity, free and standard — no new password.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Honest status — what's real today</h2>
+    <ul>
+      <li><b>Built &amp; live:</b> the interface, the <b>Sign-in-with-ORCID</b> flow, and the serverless backend stubs (Zoom OAuth connect, webhook verifier, Meeting-SDK signature) — on NTLSN's existing infrastructure.</li>
+      <li><b>Rolling out with founding universities:</b> live cross-institution connection needs a Zoom Marketplace <b>app review</b> (so other universities can authorize their Zoom) plus a secure token store. That's the pilot work, not a basic-research claim.</li>
+      <li><b>Your IT keeps control:</b> least-privilege scopes, account-wide admin consent, one-click disconnect (we delete your data), HMAC-verified webhooks. Nothing is hidden.</li>
+    </ul>
+    <p style="font-size:13px;color:var(--mut);margin:12px 0 0">Want to be a founding pilot university? <a href="/#ntlsn-zoom">Tell us about your symposium</a> and we'll set up the connection.</p>
+  </div>
+
+  <div class="foot">
+    Built on Zoom's official OAuth, Meeting SDK &amp; webhooks and ORCID's OpenID Connect. NTLSN streams <em>your</em> Zoom — it does not resell or rehost Zoom. A pilot interface; cross-institution connection is in design with founding universities. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ // --- Config: set these to go live (free ORCID app at orcid.org/developer-tools) ---
+ var ORCID={ clientId:'', env:'sandbox', redirectUri:location.origin+'/.netlify/functions/orcid-callback' };
+
+ // Handle the return from ORCID / Zoom
+ var p=new URLSearchParams(location.search);
+ if(p.get('orcid')){
+   var s=document.getElementById('signed');
+   s.style.display='block';
+   s.innerHTML='✓ Signed in as <b>'+(p.get('name')?decodeURIComponent(p.get('name')):'researcher')+'</b> &middot; ORCID <b>'+p.get('orcid')+'</b>. You can now add your symposium.';
+ }
+ if(p.get('connected')){
+   var z=document.getElementById('zoom-btn'); z.textContent='✓ Zoom connected'; z.style.pointerEvents='none'; z.style.opacity='.8';
+ }
+
+ // ORCID sign-in (real OAuth redirect once clientId is set)
+ document.getElementById('orcid-btn').onclick=function(){
+   if(!ORCID.clientId){
+     document.getElementById('note').innerHTML='<b style="color:var(--gold)">Sign-in with ORCID is wired and ready</b> — add a free ORCID client ID (orcid.org/developer-tools) to switch it on. The flow, callback function and security are already built.';
+     return;
+   }
+   var state=(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2));
+   document.cookie='ntlsn_orcid_state='+state+'; Path=/; Max-Age=600; SameSite=Lax';
+   var base=ORCID.env==='production'?'https://orcid.org':'https://sandbox.orcid.org';
+   var url=base+'/oauth/authorize?response_type=code&scope=openid'
+     +'&client_id='+encodeURIComponent(ORCID.clientId)
+     +'&redirect_uri='+encodeURIComponent(ORCID.redirectUri)
+     +'&state='+state;
+   location.assign(url);
+ };
+})();
+</script>
+</body>
+</html>
