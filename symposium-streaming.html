@@ -43,6 +43,24 @@
   .tag.soon{background:rgba(255,180,72,.14);color:var(--gold)}
   .foot{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
   @media(max-width:680px){.steps{grid-template-columns:1fr}}
+.preview-h{font:800 13px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:6px 0 14px;text-align:center}
+  .demo-embed{position:relative;background:linear-gradient(160deg,#13243f,#0a1424);border:1px solid var(--line);border-radius:16px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+  .demo-embed .live{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,107,.16);border:1px solid rgba(255,107,107,.5);color:#ff9b9b;border-radius:999px;padding:4px 11px;font:800 11px var(--sans);letter-spacing:.05em}
+  .demo-embed .dot{width:8px;height:8px;border-radius:50%;background:#FF6B6B;animation:dpulse 1.4s infinite}
+  @keyframes dpulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .demo-embed .who{position:absolute;top:14px;right:14px;font:600 12px var(--sans);color:var(--mut)}
+  .demo-embed .stage{text-align:center;padding:18px}
+  .demo-embed .av{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:27px}
+  .demo-embed .ttl{font:800 18px var(--sans);color:#fff}
+  .demo-embed .sub{font:400 13px var(--sans);color:var(--mut);margin-top:3px}
+  .demo-bar{position:absolute;bottom:0;left:0;right:0;height:42px;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;gap:20px;font-size:17px;opacity:.55}
+  .demo-tag{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);font:700 9.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+  .reg{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+  .reg .r-h{font:800 14px var(--sans);color:#fff;margin-bottom:11px}
+  .reg input{width:100%;box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:9px;color:var(--ink);font:14px var(--sans);padding:10px 12px;margin-bottom:9px}
+  .reg input:focus{outline:none;border-color:var(--teal)}
+  .reg button{background:var(--teal);color:#06251f;border:0;border-radius:9px;padding:11px 22px;font:800 14px var(--sans);cursor:pointer}
+  .reg .done{display:none;background:rgba(111,207,151,.1);border:1px solid rgba(111,207,151,.4);border-radius:10px;padding:13px 15px;font-size:14px;color:#cde9d8}
 </style>
 </head>
 <body>
@@ -68,6 +86,25 @@
     <div class="step"><div class="n">1</div><h3>Connect Zoom (admin, once)</h3><p>Your Zoom admin approves NTLSN against your institution's own Zoom — a single account-wide consent on Zoom's official OAuth screen.</p></div>
     <div class="step"><div class="n">2</div><h3>Sign in &amp; add your event</h3><p>An academic signs in with ORCID and points NTLSN at the symposium meeting or webinar. No re-keying details.</p></div>
     <div class="step"><div class="n">3</div><h3>We register &amp; stream it</h3><p>Attendees register on your NTLSN page; we push them into your Zoom and embed the live session. Afterwards, the recording becomes the replay.</p></div>
+  </div>
+
+  <div class="preview-h">◇ Preview the experience</div>
+  <div class="demo-embed">
+    <span class="live"><span class="dot"></span> LIVE</span>
+    <span class="who">247 watching</span>
+    <div class="stage"><div class="av">🎓</div><div class="ttl">UniSQ Teaching &amp; Learning Symposium 2026</div><div class="sub">Keynote: Designing assessment in the age of AI</div></div>
+    <div class="demo-tag">Sample embed — your Zoom, live on your NTLSN page</div>
+    <div class="demo-bar"><span>🎤</span><span>📹</span><span>💬</span><span>✋</span><span>⛶</span></div>
+  </div>
+  <div class="reg">
+    <div class="r-h">Register to attend (sample)</div>
+    <div id="reg-form">
+      <input id="r-name" placeholder="Your name" autocomplete="off">
+      <input id="r-email" type="email" placeholder="Your email" autocomplete="off">
+      <input id="r-inst" placeholder="Your institution" autocomplete="off">
+      <button id="r-go" type="button">Register →</button>
+    </div>
+    <div class="done" id="reg-done"></div>
   </div>
 
   <div class="panel">
@@ -129,5 +166,6 @@
  };
 })();
 </script>
+<script>(function(){var rg=document.getElementById('r-go');if(!rg)return;rg.onclick=function(){var nm=(document.getElementById('r-name').value||'there').split(' ')[0].replace(/[<>]/g,'');document.getElementById('reg-form').style.display='none';var d=document.getElementById('reg-done');d.style.display='block';d.innerHTML='✓ You’re registered, '+nm+'! Your unique join link would arrive by email and show here: <b>https://zoom.us/j/…?tk=…</b><br><span style="color:#9fb0c3;font-size:12px">Sample only — real registration activates once a university connects its Zoom.</span>';};})();</script>
 </body>
 </html>
