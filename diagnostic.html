@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The NTLSN Teaching Diagnostic — one review, every angle (unit · course · program) · NTLSN</title>
+<meta name="description" content="One comprehensive self-review that ties the whole NTLSN toolkit together — rate your unit, course or program across alignment, assessment, accessibility, partnership, quality, SoTL and recognition, and get a prioritised action plan that routes you to the exact tools for your gaps.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 12px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:64ch;margin:0 0 22px}
+  .scope{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+  .scope button{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:11px 20px;font:700 15px var(--sans);color:#cbd8e6;cursor:pointer;transition:all .12s}
+  .scope button.on{background:rgba(78,205,196,.16);border-color:var(--teal);color:var(--teal)}
+  .scopehint{font-size:13.5px;color:var(--mut);margin:0 0 24px}
+  .dim{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:11px}
+  .dim .h{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .dim .ic{font-size:19px}
+  .dim .nm{font:800 16px var(--sans);color:#fff}
+  .dim .q{font-size:13.5px;color:var(--mut);margin:0 0 11px}
+  .rate{display:flex;gap:7px;flex-wrap:wrap}
+  .rate button{flex:1;min-width:74px;background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:8px 6px;font:700 12.5px var(--sans);color:#9fb0c3;cursor:pointer;transition:all .1s}
+  .rate button:hover{border-color:rgba(78,205,196,.45)}
+  .rate button.on{background:rgba(78,205,196,.18);border-color:var(--teal);color:var(--teal)}
+  .go{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:14px 30px;font:800 16px var(--sans);cursor:pointer;margin:18px 0 0}
+  #out{margin-top:34px;display:none}
+  .ring-wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
+  .head-score{text-align:center}
+  .head-score .big{font:800 54px var(--sans);line-height:1;background:linear-gradient(120deg,var(--teal),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .head-score .lbl{font-size:13px;color:var(--mut);letter-spacing:.04em;text-transform:uppercase}
+  .sect-h{font:800 13px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:26px 0 12px}
+  .act{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin-bottom:10px;border-left:3px solid var(--line)}
+  .act.lo{border-left-color:var(--red)}.act.mid{border-left-color:var(--gold)}.act.hi{border-left-color:var(--green)}
+  .act .t{font:800 15px var(--sans);color:#fff;display:flex;align-items:center;gap:8px;justify-content:space-between}
+  .act .sc{font:800 13px var(--sans)}
+  .act .tools{margin-top:9px;display:flex;flex-wrap:wrap;gap:8px}
+  .act .tools a{font:700 12.5px var(--sans);color:var(--teal);background:rgba(78,205,196,.08);border:1px solid var(--line);border-radius:8px;padding:5px 11px}
+  .act .tools a:hover{border-color:var(--teal);text-decoration:none}
+  .btnrow{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .btn2{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font:700 13.5px var(--sans);color:#cbd8e6;cursor:pointer}
+  .foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ The diagnostic · one review, every angle</div>
+  <h1>The whole toolkit, in one review.</h1>
+  <p class="lede">Most NTLSN tools look at one thing. This one looks at <em>everything at once</em> — and tells you which tools to reach for. Rate where you're at across the dimensions of good teaching, and get a prioritised action plan that routes you straight to the right tool for each gap. Works for a <strong>unit</strong>, a <strong>course</strong>, or a whole <strong>program</strong>.</p>
+
+  <div class="scope" id="scope">
+    <button data-s="unit" type="button">A unit / subject</button>
+    <button data-s="course" class="on" type="button">A course / major</button>
+    <button data-s="program" type="button">A whole program</button>
+  </div>
+  <p class="scopehint" id="scopehint"></p>
+
+  <div id="dims"></div>
+  <button class="go" id="run" type="button">See my diagnostic →</button>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    A reflective self-review, not an audit or accreditation. Nothing leaves your browser. Each dimension links to the free NTLSN tool that goes deeper. Built on PSF 2023, AQF, TEQSA HESF, TELAS, UDL and AAUT criteria. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+ var DIMS=[
+  {k:'align',ic:'🎯',nm:'Constructive alignment',scope:'all',q:'Outcomes, assessment and activities all pull in the same direction.',tools:[['Constructive Alignment Matrix','/constructive-alignment.html'],['Learning Outcome Check','/outcomes.html']]},
+  {k:'assess',ic:'✅',nm:'Assessment & AI-resilience',scope:'all',q:'A varied assessment mix that holds up against generative AI.',tools:[['Assessment Mix & AI-Resilience','/assessment-mix.html'],['Rubric Builder','/rubric.html'],['TEQSA GenAI Readiness','/genai-readiness.html']]},
+  {k:'access',ic:'♿',nm:'Accessibility & UDL',scope:'all',q:'Materials are accessible and built on Universal Design for Learning.',tools:[['TELAS & UDL Readiness','/selfcheck.html'],['Accessibility Pre-flight','/accessibility-preflight.html']]},
+  {k:'partner',ic:'🤝',nm:'Students as partners',scope:'all',q:'Students help shape the learning, not just receive it.',tools:[['Partnership Agreement Builder','/partnership-agreement.html'],['Students-as-Partners Certificate','/cert.html']]},
+  {k:'quality',ic:'📋',nm:'Quality & standards',scope:'all',q:'Aligned to TEQSA / TELAS and the right AQF level.',tools:[['Course Quality Self-Check','/course-quality.html'],['ATEC · TEQSA Curriculum QA','/atec-curriculum-qa.html']]},
+  {k:'sotl',ic:'🔬',nm:'SoTL & evidence',scope:'all',q:'You gather evidence and treat your teaching as scholarship.',tools:[['Live SoTL Research Search','/research-search.html'],['Research-Question Framer','/research-question.html']]},
+  {k:'recog',ic:'🏅',nm:'Recognition-readiness',scope:'all',q:'Your teaching is documented for fellowship, awards or promotion.',tools:[['Recognition Navigator','/recognition-navigator.html'],['PSF 2023 Evidence Self-Audit','/psf-evidence-audit.html']]},
+  {k:'map',ic:'🗺️',nm:'Curriculum mapping (I–D–A)',scope:'program',q:'Outcomes are Introduced, Developed and Assured across the program.',tools:[['Programme Curriculum Map (I-D-A)','/programme-map.html']]},
+  {k:'review',ic:'🔎',nm:'Program review readiness',scope:'program',q:'The program is ready for accreditation or review.',tools:[['Program Review Readiness','/program-review.html']]},
+  {k:'workload',ic:'⚖️',nm:'Workload & progression',scope:'program',q:'Workload and progression are balanced across the whole program.',tools:[['Student Workload Estimator','/workload.html']]}
+ ];
+ var LEVELS=[['Not yet',0],['Started',33],['Mostly',67],['Strong',100]];
+ var HINTS={unit:'A single unit or subject — the tightest scope. We focus on alignment, assessment and accessibility.',course:'A course, major or degree program-of-study — the default. The seven core dimensions of good teaching.',program:'A whole program — adds curriculum mapping, program-review and workload across the program.'};
+ var state={scope:'course',vals:{}};
+ var scopeBox=document.getElementById('scope'), dimsBox=document.getElementById('dims'), hint=document.getElementById('scopehint');
+
+ function activeDims(){ return DIMS.filter(function(d){ return d.scope==='all' || (state.scope==='program' && d.scope==='program'); }); }
+ function renderDims(){
+   hint.textContent=HINTS[state.scope];
+   dimsBox.innerHTML=activeDims().map(function(d){
+     return '<div class="dim"><div class="h"><span class="ic">'+d.ic+'</span><span class="nm">'+d.nm+'</span></div>'+
+       '<div class="q">'+d.q+'</div>'+
+       '<div class="rate" data-k="'+d.k+'">'+LEVELS.map(function(l,i){return '<button type="button" data-v="'+l[1]+'"'+(state.vals[d.k]===l[1]?' class="on"':'')+'>'+l[0]+'</button>';}).join('')+'</div></div>';
+   }).join('');
+ }
+ dimsBox.addEventListener('click',function(e){var b=e.target.closest('.rate button');if(!b)return;var k=b.parentNode.getAttribute('data-k');state.vals[k]=Number(b.getAttribute('data-v'));[].forEach.call(b.parentNode.children,function(c){c.classList.toggle('on',c===b);});});
+ scopeBox.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;state.scope=b.getAttribute('data-s');[].forEach.call(scopeBox.children,function(c){c.classList.toggle('on',c===b);});renderDims();});
+ renderDims();
+
+ function radar(dims,vals){
+   var n=dims.length, cx=150, cy=150, R=110, pts=[], grid='';
+   for(var ring=1;ring<=4;ring++){var rr=R*ring/4, g=[];for(var i=0;i<n;i++){var a=-Math.PI/2+i*2*Math.PI/n;g.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1));}grid+='<polygon points="'+g.join(' ')+'" fill="none" stroke="rgba(255,255,255,.07)"/>';}
+   var poly=[], labels='';
+   for(var i=0;i<n;i++){var a=-Math.PI/2+i*2*Math.PI/n; var v=(vals[dims[i].k]||0)/100; var x=cx+R*v*Math.cos(a), y=cy+R*v*Math.sin(a); poly.push(x.toFixed(1)+','+y.toFixed(1));
+     var lx=cx+(R+16)*Math.cos(a), ly=cy+(R+16)*Math.sin(a); labels+='<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" font-size="13" fill="#9fb0c3" text-anchor="middle" dominant-baseline="middle">'+dims[i].ic+'</text>';}
+   return '<svg viewBox="0 0 300 300" width="260" height="260" aria-label="diagnostic radar">'+grid+
+     '<polygon points="'+poly.join(' ')+'" fill="rgba(78,205,196,.18)" stroke="#4ECDC4" stroke-width="2"/>'+labels+'</svg>';
+ }
+
+ document.getElementById('run').onclick=function(){
+   var dims=activeDims();
+   var scored=dims.map(function(d){return {d:d, v:(state.vals[d.k]!=null?state.vals[d.k]:0)};});
+   var overall=Math.round(scored.reduce(function(a,x){return a+x.v;},0)/scored.length);
+   var sorted=scored.slice().sort(function(a,b){return a.v-b.v;});
+   var cls=function(v){return v<40?'lo':v<70?'mid':'hi';};
+   var scopeWord={unit:'unit',course:'course',program:'program'}[state.scope];
+   var html='<div class="ring-wrap"><div class="head-score"><div class="big">'+overall+'%</div><div class="lbl">overall readiness</div></div>'+radar(dims,state.vals)+'</div>';
+   html+='<p style="text-align:center;color:#cbd8e6;max-width:60ch;margin:0 auto 6px;">Across <b>'+dims.length+'</b> dimensions of your '+scopeWord+', here’s where to put your energy first — lowest-scoring first, each with the tool that goes deeper.</p>';
+   html+='<div class="sect-h">▸ Your highest-impact next steps</div>';
+   html+=sorted.map(function(x){
+     return '<div class="act '+cls(x.v)+'"><div class="t"><span>'+x.d.ic+' '+x.d.nm+'</span><span class="sc" style="color:'+(x.v<40?'#FF6B6B':x.v<70?'#FFB448':'#6FCF97')+'">'+x.v+'%</span></div>'+
+       '<div class="tools">'+x.d.tools.map(function(t){return '<a href="'+t[1]+'" target="_blank" rel="noopener">'+t[0]+' →</a>';}).join('')+'</div></div>';
+   }).join('');
+   html+='<div class="btnrow"><button class="btn2" id="copybtn" type="button">⧉ Copy as Markdown</button><button class="btn2" id="printbtn" type="button">⎙ Print / PDF</button></div>';
+   var out=document.getElementById('out'); out.innerHTML=html; out.style.display='block';
+   out.scrollIntoView({behavior:'smooth',block:'start'});
+   document.getElementById('printbtn').onclick=function(){window.print();};
+   document.getElementById('copybtn').onclick=function(){
+     var md='# NTLSN Teaching Diagnostic — '+scopeWord+'\\n\\n**Overall readiness: '+overall+'%**\\n\\n| Dimension | Score | Tools |\\n|---|---|---|\\n'+
+       sorted.map(function(x){return '| '+x.d.nm+' | '+x.v+'% | '+x.d.tools.map(function(t){return t[0];}).join('; ')+' |';}).join('\\n')+'\\n';
+     navigator.clipboard.writeText(md).then(function(){var b=document.getElementById('copybtn');b.textContent='✓ Copied';setTimeout(function(){b.textContent='⧉ Copy as Markdown';},1500);});
+   };
+ };
+})();
+</script>
+</body>
+</html>
