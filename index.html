@@ -5681,5 +5681,9 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  }
  build(); [600,1800,3500,6000].forEach(function(ms){setTimeout(build,ms);});
  var t=null;new MutationObserver(function(){clearTimeout(t);t=setTimeout(build,200);}).observe(document.body,{childList:true,subtree:true});
-})();</script>\n</body>
+})();</script>\n<style id="ntlsn-searchfix">
+#root input[placeholder*="Search"], #root input[placeholder*="search"], #root input[placeholder*="try "]{width:100%!important;max-width:none!important;box-sizing:border-box!important}
+#root input[placeholder*="Search"]::placeholder, #root input[placeholder*="search"]::placeholder, #root input[placeholder*="try "]::placeholder{font-size:14.5px!important;opacity:.8!important;white-space:nowrap}
+</style>
+</body>
 </html>
