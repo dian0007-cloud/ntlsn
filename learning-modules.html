@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn from the Sector — self-paced SoTL modules · NTLSN</title>
+<meta name="description" content="Turn the sector's talks into self-paced micro-modules: watch on a theme, check your understanding with concept questions, read the key ideas, reflect, and track what you've completed. Free, in-browser, progress stays on your device.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 12px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:66ch;margin:0 0 20px}
+  /* progress */
+  .prog{display:flex;align-items:center;gap:14px;background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:14px 17px;margin-bottom:22px}
+  .prog .bar{flex:1;height:9px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
+  .prog .fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:99px;transition:width .5s}
+  .prog .lbl{font:700 13.5px var(--sans);color:var(--ink);white-space:nowrap}
+  .prog .rst{font-size:12px;color:var(--mut);background:none;border:0;cursor:pointer;text-decoration:underline}
+  /* module grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:13px}
+  .mcard{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:14px;padding:16px 17px;cursor:pointer;color:inherit;font:inherit;transition:transform .15s,border-color .15s}
+  .mcard:hover{transform:translateY(-2px);border-left-color:var(--gold)}
+  .mcard .ic{font-size:30px;line-height:1}
+  .mcard .th{font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:9px 0 3px}
+  .mcard h3{font:800 16.5px var(--sans);color:#fff;margin:0 0 6px;line-height:1.25}
+  .mcard p{font-size:13px;color:var(--mut);margin:0}
+  .mcard .done{position:absolute;top:13px;right:14px;font-size:12px;font-weight:800;color:var(--green);display:none}
+  .mcard.is-done{border-left-color:var(--green)}
+  .mcard.is-done .done{display:block}
+  /* module view */
+  #view{display:none}
+  .vtop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+  .vback{font-size:13.5px;color:var(--mut);background:none;border:0;cursor:pointer}
+  .steps{display:flex;gap:6px;margin:14px 0 22px;flex-wrap:wrap}
+  .step{font:700 11.5px var(--sans);letter-spacing:.03em;color:var(--mut);background:var(--card2);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+  .step.on{background:var(--teal);color:#06251f;border-color:var(--teal)}
+  .step.ok{color:var(--green);border-color:rgba(111,207,151,.4)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 22px;margin-bottom:16px}
+  .panel h2{font:800 19px var(--sans);color:#fff;margin:0 0 6px}
+  .panel .sub{font-size:13.5px;color:var(--mut);margin:0 0 14px}
+  .watchbtn{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#FF6B6B,#C0593A);color:#fff;border-radius:11px;padding:13px 20px;font:800 15px var(--sans);text-decoration:none;margin:4px 0 4px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:12px 24px;font:800 14.5px var(--sans);cursor:pointer}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.ghost{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  .mcq{margin:0 0 18px}
+  .mcq .q{font:700 15.5px var(--sans);color:#fff;margin:0 0 9px}
+  .opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:0 0 8px;color:#cbd8e6;font:500 14px var(--sans);cursor:pointer;transition:border-color .12s,background .12s}
+  .opt:hover{border-color:var(--teal)}
+  .opt.sel{border-color:var(--teal);background:rgba(78,205,196,.10)}
+  .opt.right{border-color:var(--green);background:rgba(111,207,151,.14);color:#dffbe9}
+  .opt.wrong{border-color:var(--red);background:rgba(255,107,107,.12);color:#ffd9d9}
+  .why{font-size:13px;color:var(--mut);margin:2px 0 0;padding-left:2px;display:none}
+  .why.show{display:block}
+  .read{font-size:15.5px;color:#cbd8e6;line-height:1.7}
+  textarea{width:100%;min-height:120px;background:var(--card2);border:1px solid var(--line);border-radius:11px;color:var(--ink);font:14.5px/1.6 var(--sans);padding:13px 15px;resize:vertical}
+  textarea:focus{outline:none;border-color:var(--teal)}
+  .done-wrap{text-align:center;padding:18px 10px}
+  .done-wrap .big{font-size:46px}
+  .scoreline{font:700 14px var(--sans);color:var(--gold);margin:10px 0 0}
+  .rowbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+  .foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div id="home">
+    <div class="eyebrow">◇ Learning modules</div>
+    <h1>Learn SoTL from the sector itself</h1>
+    <p class="lede">The sector has recorded hundreds of talks. These self-paced modules turn them into something you can <b>learn from and finish</b>: watch the talks on a theme, check your understanding, read the key ideas, reflect, and track what you've completed. Free, in-browser — your progress stays on your device.</p>
+
+    <div class="prog">
+      <div class="lbl" id="plbl">0 of 6 complete</div>
+      <div class="bar"><div class="fill" id="pfill"></div></div>
+      <button class="rst" id="reset" type="button">Reset</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="foot">
+      Modules draw on the sector's talks (CRADLE, ASCILITE, HERDSA, CAULLT, ACODE, TEQSA and beyond). The concept-checks test established teaching-and-learning principles, not any single speaker's words — always weigh ideas against your own context and evidence. Pair with the <a href="/teaching-ai-prompts.html">AI prompts for teaching</a> and the <a href="/reflective-coach.html">Reflective Coach</a>. CC BY-NC-SA 4.0.
+    </div>
+  </div>
+
+  <div id="view">
+    <div class="vtop">
+      <button class="vback" id="vback" type="button">&larr; All modules</button>
+      <div class="eyebrow" id="vtheme" style="margin:0"></div>
+    </div>
+    <h1 id="vtitle" style="font-size:clamp(24px,4.5vw,34px)"></h1>
+    <div class="steps" id="steps"></div>
+    <div id="stage"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+ var MODS=[
+  {id:'genai-assessment',ic:'🤖',theme:'Assessment & GenAI',title:'Assessment in the age of GenAI',
+   blurb:'Why some tasks are AI-trivial — and how to redesign for authentic learning.',
+   watch:'/#ntlsn-talkshub',watchLabel:'Watch sector talks on assessment & GenAI',
+   mcq:[
+    {q:'Which assessment is MOST vulnerable to a student using generative AI with little learning?',
+     a:['A reflective account linking the topic to the student’s own placement','A 1500-word essay summarising the main theories of a topic','An oral defence of a submitted portfolio','An analysis of data the student collected themselves'],c:1,
+     why:'A generic summary essay is exactly what large language models do best; the others need personal context, live data, or a live human checkpoint.'},
+    {q:'Which redesign move most directly makes authorship visible?',
+     a:['Making the essay longer','Adding a short oral defence or viva of the work','Banning the internet','Increasing the weighting'],c:1,
+     why:'A brief live checkpoint surfaces whether the student can stand behind the work — bans are neither enforceable nor educative.'},
+    {q:'The most defensible institutional stance on GenAI in assessment is to:',
+     a:['Ban it everywhere','Ignore it','Set a clear, per-assessment level of permitted use and assess the process','Require all work handwritten'],c:2,
+     why:'Transparent, per-task expectations plus process evidence are far more robust than a blanket ban.'}
+   ],
+   read:'Generative AI is strongest at exactly the tasks traditional assessment over-uses: summarising, defining, describing and generic essay-writing. Authentic-assessment principles point the way out — anchor tasks in the student’s own context, assess the process (drafts, decisions, reflection) as well as the product, use live or local data, and add a human checkpoint. The goal is not to defeat AI but to design assessment worth doing either way.',
+   reflect:'Pick one assessment you run. Where could a generative AI do the thinking for the student — and what is the smallest change that would make authorship visible?'},
+
+  {id:'authentic-assessment',ic:'🎯',theme:'Authentic assessment',title:'Designing authentic assessment',
+   blurb:'Tasks that resemble real practice — and reveal genuine understanding.',
+   watch:'/#ntlsn-talkshub',watchLabel:'Watch sector talks on authentic assessment',
+   mcq:[
+    {q:'Authentic assessment primarily asks students to:',
+     a:['Recall definitions under time pressure','Apply learning to realistic, meaningful tasks','Complete multiple-choice tests','Memorise the set text'],c:1,
+     why:'Authenticity is about performing understanding in conditions that resemble real-world practice.'},
+    {q:'Which feature most increases an assessment’s authenticity?',
+     a:['A higher word count','A real-world audience or purpose','More sub-questions','Stricter formatting rules'],c:1,
+     why:'A genuine audience or purpose makes the task meaningful and harder to fake.'},
+    {q:'Assessing the process (drafts, rationale, reflection) mainly helps because it:',
+     a:['Saves marking time','Makes learning and authorship visible','Is easier for students','Removes the need for feedback'],c:1,
+     why:'Process evidence shows the thinking, not just the polished product.'}
+   ],
+   read:'Authentic assessment (Wiggins; Villarroel and colleagues) asks students to do something that resembles what a practitioner in the field actually does — with realism, a meaningful context, and an element of judgement. It tends to be both more engaging and more resilient to shortcuts, because the task is anchored in a context only this student is in. Designing the process in (a proposal, an annotated draft, a short reflection) makes the learning visible and assessable.',
+   reflect:'What would a real-world audience or purpose for one of your tasks look like — a client, a community, a publication, a decision-maker?'},
+
+  {id:'constructive-alignment',ic:'🧩',theme:'Curriculum design',title:'Constructive alignment',
+   blurb:'Make outcomes, teaching and assessment pull in the same direction.',
+   watch:'/#ntlsn-talkshub',watchLabel:'Watch sector talks on curriculum & alignment',
+   mcq:[
+    {q:'Constructive alignment (Biggs) means:',
+     a:['Outcomes, teaching and assessment all support the same intended learning','Aligning grades to a bell curve','Using one textbook across a program','Teaching directly to the exam'],c:0,
+     why:'Alignment is the deliberate match between what you intend, how you teach it, and how you assess it.'},
+    {q:'A well-written intended learning outcome uses:',
+     a:['A vague verb like “understand”','A measurable, observable verb','No verb at all','The word “know”'],c:1,
+     why:'Observable verbs (analyse, design, evaluate) make the outcome assessable.'},
+    {q:'If an assessment tests something not in your outcomes, you should:',
+     a:['Leave it as is','Add the outcome, or change the assessment so they align','Remove all assessment','Just lower its weighting'],c:1,
+     why:'Anything that carries marks should trace back to a stated outcome — otherwise the map is broken.'}
+   ],
+   read:'Constructive alignment (Biggs) is the backbone of course design: intended learning outcomes, teaching and learning activities, and assessment tasks should all point at the same learning. Write outcomes with measurable verbs (the revised Bloom’s taxonomy helps), then check two things — that every outcome is actually taught and assessed, and that every assessment traces back to an outcome. Gaps in either direction are where courses quietly drift.',
+   reflect:'Take one outcome in a unit you teach. Is it genuinely assessed? And is each assessment traceable to an outcome?'},
+
+  {id:'feedback',ic:'✍️',theme:'Feedback',title:'Feedback that feeds forward',
+   blurb:'Move from a verdict to something the student can act on.',
+   watch:'/#ntlsn-talkshub',watchLabel:'Watch sector talks on feedback',
+   mcq:[
+    {q:'The most useful feedback is:',
+     a:['A grade on its own','Specific and actionable, tied to the criteria, with clear next steps','Praise only','Generic, reusable comments'],c:1,
+     why:'Actionable, criteria-linked feedback tells the student what to do, not just how they did.'},
+    {q:'“Feedforward” emphasises:',
+     a:['What the student did wrong','What the student should do next time','The final mark','How they compare to peers'],c:1,
+     why:'Feedforward orients the student toward the next task rather than dwelling on the last.'},
+    {q:'Feedback is most likely to improve learning when:',
+     a:['It arrives after the unit ends','Students can act on it before the next task that counts','It is purely summative','The marker stays anonymous'],c:1,
+     why:'Feedback only closes the loop if there is a chance to use it.'}
+   ],
+   read:'Effective feedback (Hattie and Timperley; Boud and Molloy) answers three questions for the learner: where am I going, how am I going, and where to next. The “where to next” — feedforward — is what changes behaviour. The single biggest design lever is timing: build at least one point where students can act on feedback before the next graded task, so feedback becomes a loop rather than a post-mortem.',
+   reflect:'Where in your unit do students currently get to act on feedback before it counts toward a grade?'},
+
+  {id:'students-as-partners',ic:'🤝',theme:'Students as Partners',title:'Working in partnership with students',
+   blurb:'Share power and responsibility — beyond consultation.',
+   watch:'/#ntlsn-talkshub',watchLabel:'Watch sector talks on Students as Partners',
+   mcq:[
+    {q:'Students as Partners (SaP) is grounded in seeing students as:',
+     a:['Customers to satisfy','Co-creators who share power and responsibility','Passive recipients','Data points'],c:1,
+     why:'Partnership reframes students as collaborators in learning and teaching, not consumers of it.'},
+    {q:'A genuine partnership requires:',
+     a:['A one-off survey','Shared power, mutual respect and reciprocity','Students doing staff admin','A consultation form'],c:1,
+     why:'Partnership is a values-based process: trust, reciprocity and shared responsibility.'},
+    {q:'A key risk to guard against in partnership work is:',
+     a:['Too much reciprocity','Tokenism and inequitable participation','Students learning too much','Staff sharing power'],c:1,
+     why:'Without care, partnership can become tokenistic or include only the already-confident few.'}
+   ],
+   read:'Students as Partners (Healey, Flint and Harrington) treats students as collaborators in learning, teaching and inquiry rather than consumers. It is as much an ethos as an activity — built on trust, reciprocity and shared responsibility. The work is most powerful when it moves past consultation to genuine shared decision-making, and most credible when it actively guards against tokenism and designs for inclusive, equitable participation.',
+   reflect:'In one of your courses, where do students have real influence over what happens — and where is it only consultation?'},
+
+  {id:'udl',ic:'♿',theme:'Accessibility & UDL',title:'Universal Design for Learning',
+   blurb:'Design for the full range of learners from the start.',
+   watch:'/#ntlsn-talkshub',watchLabel:'Watch sector talks on UDL & accessibility',
+   mcq:[
+    {q:'Universal Design for Learning is about:',
+     a:['Designing for the “average” student','Proactively designing flexible options for all learners','Retrofitting accommodations after the fact','Standardising one mode of delivery'],c:1,
+     why:'UDL designs for learner variability from the outset, reducing the need for individual retrofits.'},
+    {q:'The three UDL principles are multiple means of:',
+     a:['Engagement, representation, and action & expression','Assessment, grading and ranking','Lecturing, testing and marking','Reading, writing and exams'],c:0,
+     why:'Engagement (the why), representation (the what), and action & expression (the how) of learning.'},
+    {q:'An example of “multiple means of representation” is:',
+     a:['Offering content as text, audio and captioned video','Lecturing only','A single set textbook','One un-tagged PDF'],c:0,
+     why:'Representing the same content in more than one modality removes barriers for different learners.'}
+   ],
+   read:'Universal Design for Learning (CAST) starts from the fact that learners vary — so flexibility is designed in from the beginning rather than bolted on. Its three principles are multiple means of engagement, representation, and action and expression. UDL pairs naturally with an accessibility baseline (clear structure, captions, alt text, sufficient colour contrast): the accessible option is the floor, UDL is the design philosophy that builds choice on top of it.',
+   reflect:'Which UDL principle is weakest in your current materials — and what is one cheap, high-impact fix this week?'}
+ ];
+
+ var KEY='ntlsn_lm_done_v1';
+ function getDone(){try{return JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){return [];}}
+ function setDone(a){try{localStorage.setItem(KEY,JSON.stringify(a));}catch(e){}}
+ function isDone(id){return getDone().indexOf(id)>-1;}
+ function markDone(id){var a=getDone();if(a.indexOf(id)<0){a.push(id);setDone(a);}}
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+ var home=document.getElementById('home'),view=document.getElementById('view'),grid=document.getElementById('grid');
+
+ function renderProgress(){
+   var n=getDone().length,t=MODS.length;
+   document.getElementById('plbl').textContent=n+' of '+t+' complete';
+   document.getElementById('pfill').style.width=(t?Math.round(n/t*100):0)+'%';
+ }
+ function renderGrid(){
+   grid.innerHTML=MODS.map(function(m){
+     return '<button class="mcard'+(isDone(m.id)?' is-done':'')+'" data-id="'+m.id+'" type="button">'+
+       '<span class="done">✓ Done</span>'+
+       '<div class="ic">'+m.ic+'</div>'+
+       '<div class="th">'+esc(m.theme)+'</div>'+
+       '<h3>'+esc(m.title)+'</h3>'+
+       '<p>'+esc(m.blurb)+'</p></button>';
+   }).join('');
+   [].forEach.call(grid.querySelectorAll('.mcard'),function(b){b.addEventListener('click',function(){open(b.getAttribute('data-id'));});});
+   renderProgress();
+ }
+
+ var STEPS=['Watch','Check','Read','Reflect','Done'];
+ function open(id){
+   var m=null;for(var i=0;i<MODS.length;i++){if(MODS[i].id===id){m=MODS[i];break;}}
+   if(!m)return;
+   home.style.display='none';view.style.display='block';window.scrollTo(0,0);
+   document.getElementById('vtheme').textContent='◇ '+m.theme;
+   document.getElementById('vtitle').textContent=m.title;
+   var state={step:0,answers:{},score:0};
+   var stepsEl=document.getElementById('steps'),stage=document.getElementById('stage');
+   function paintSteps(){stepsEl.innerHTML=STEPS.map(function(s,i){var cls='step'+(i===state.step?' on':'')+(i<state.step?' ok':'');return '<span class="'+cls+'">'+(i<state.step?'✓ ':'')+s+'</span>';}).join('');}
+   function go(n){state.step=n;paintSteps();render();window.scrollTo(0,0);}
+
+   function render(){
+     if(state.step===0){
+       stage.innerHTML='<div class="panel"><h2>1 · Watch</h2><p class="sub">Watch the sector’s talks on this theme, then come back and check your understanding.</p>'+
+         '<a class="watchbtn" href="'+m.watch+'" target="_blank" rel="noopener">▶ '+esc(m.watchLabel)+'</a>'+
+         '<div style="font-size:12.5px;color:var(--mut);margin-top:10px">Opens the sector’s talks hub in a new tab. Already know this theme? You can continue.</div>'+
+         '<div class="rowbtns" style="margin-top:16px"><button class="btn" id="n0" type="button">I’ve watched — continue →</button></div></div>';
+       document.getElementById('n0').onclick=function(){go(1);};
+     }
+     else if(state.step===1){
+       var h='<div class="panel"><h2>2 · Check your understanding</h2><p class="sub">Three quick concept questions. Pick an answer to see why.</p>';
+       m.mcq.forEach(function(q,qi){
+         h+='<div class="mcq" data-q="'+qi+'"><div class="q">'+(qi+1)+'. '+esc(q.q)+'</div>';
+         q.a.forEach(function(opt,oi){h+='<button class="opt" data-q="'+qi+'" data-o="'+oi+'" type="button">'+esc(opt)+'</button>';});
+         h+='<div class="why" data-why="'+qi+'"></div></div>';
+       });
+       h+='<div class="rowbtns"><button class="btn" id="n1" type="button" disabled>Continue →</button><span id="sc" style="font:700 13.5px var(--sans);color:var(--mut);align-self:center"></span></div></div>';
+       stage.innerHTML=h;
+       [].forEach.call(stage.querySelectorAll('.opt'),function(b){
+         b.addEventListener('click',function(){
+           var qi=+b.getAttribute('data-q'),oi=+b.getAttribute('data-o'),q=m.mcq[qi];
+           if(state.answers[qi]!==undefined)return; // lock after first answer
+           state.answers[qi]=oi;
+           var opts=stage.querySelectorAll('.opt[data-q="'+qi+'"]');
+           [].forEach.call(opts,function(o){var ooi=+o.getAttribute('data-o');if(ooi===q.c)o.classList.add('right');if(ooi===oi&&oi!==q.c)o.classList.add('wrong');o.disabled=true;});
+           if(oi===q.c)state.score++;
+           var w=stage.querySelector('.why[data-why="'+qi+'"]');w.textContent=(oi===q.c?'✓ Correct. ':'Not quite. ')+q.why;w.classList.add('show');
+           var answered=Object.keys(state.answers).length;
+           document.getElementById('sc').textContent=answered+' / '+m.mcq.length+' answered';
+           if(answered===m.mcq.length){var nb=document.getElementById('n1');nb.disabled=false;nb.textContent='Continue → ('+state.score+'/'+m.mcq.length+')';}
+         });
+       });
+       document.getElementById('n1').onclick=function(){go(2);};
+     }
+     else if(state.step===2){
+       stage.innerHTML='<div class="panel"><h2>3 · The key idea</h2><p class="read">'+esc(m.read)+'</p>'+
+         '<div class="rowbtns" style="margin-top:18px"><button class="btn" id="n2" type="button">Continue →</button></div></div>';
+       document.getElementById('n2').onclick=function(){go(3);};
+     }
+     else if(state.step===3){
+       var saved='';try{saved=localStorage.getItem('ntlsn_lm_reflect_'+m.id)||'';}catch(e){}
+       stage.innerHTML='<div class="panel"><h2>4 · Reflect</h2><p class="sub">'+esc(m.reflect)+'</p>'+
+         '<textarea id="rfl" placeholder="Write a sentence or two — just for you. Saved on this device.">'+esc(saved)+'</textarea>'+
+         '<div class="rowbtns" style="margin-top:14px"><button class="btn" id="n3" type="button">Mark complete ✓</button></div></div>';
+       document.getElementById('n3').onclick=function(){
+         try{localStorage.setItem('ntlsn_lm_reflect_'+m.id,document.getElementById('rfl').value||'');}catch(e){}
+         markDone(m.id);go(4);
+       };
+     }
+     else{
+       var pct=Math.round(state.score/m.mcq.length*100);
+       stage.innerHTML='<div class="panel done-wrap"><div class="big">🎉</div><h2>Module complete</h2>'+
+         '<div class="scoreline">Concept check: '+state.score+' / '+m.mcq.length+' ('+pct+'%)</div>'+
+         '<p class="sub" style="margin-top:10px">Your reflection and progress are saved on this device.</p>'+
+         '<div class="rowbtns" style="justify-content:center"><button class="btn" id="dn" type="button">← Back to all modules</button></div></div>';
+       document.getElementById('dn').onclick=function(){close();};
+     }
+   }
+   paintSteps();render();
+ }
+ function close(){view.style.display='none';home.style.display='block';renderGrid();window.scrollTo(0,0);}
+
+ document.getElementById('vback').addEventListener('click',close);
+ document.getElementById('reset').addEventListener('click',function(){if(confirm('Reset your module progress on this device?')){setDone([]);renderGrid();}});
+ renderGrid();
+})();
+</script>
+</body>
+</html>
