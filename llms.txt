@@ -8,6 +8,7 @@
 - [Best Practice guides](https://www.ntlsn.com/#ntlsn-bestpractice): 80 curated Good Practice Reports and guides, 2006–2024 (academic integrity, work-integrated learning, assessment, curriculum design, student transition).
 
 ## Free in-browser tools
+- [GenAI Assignment Redesign](https://www.ntlsn.com/assignment-redesign.html): paste an assignment brief and see where a generative AI could do the work for a student, with a vulnerability score and five evidence-based redesign moves (personal, process, applied, interactive, creative) to make it authentically human. In-browser, nothing stored.
 - [The NTLSN Teaching Diagnostic](https://www.ntlsn.com/diagnostic.html): one comprehensive self-review that ties the whole toolkit together — rate a unit, course or whole program across alignment, assessment, accessibility, partnership, quality, SoTL and recognition, and get a prioritised action plan routing to the right tool for each gap. In-browser, no login.
 - [Live SoTL Research Search](https://www.ntlsn.com/research-search.html): search current teaching & learning research live from OpenAlex (250M+ open scholarly works), with open-access links surfaced — the living companion to the 1,431-work historical archive.
 - [Find Your SoTL Conference](https://www.ntlsn.com/conference-finder.html): a three-question wizard — interest, format, timing — that matches you to the right Australian teaching & learning event from the live calendar (e.g. a student-partnership interest routes you to the Students as Partners Roundtable). In-browser, no login.
