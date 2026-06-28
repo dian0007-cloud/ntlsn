@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where to Publish Your SoTL — open-access journal finder · NTLSN</title>
+<meta name="description" content="Find the open-access journal to publish your scholarship of teaching & learning — search by topic, see which journals are free to publish in (no APC / diamond OA), with peer-review type, licence and author guidelines. Live from DOAJ. Free, in-browser.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:800px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 14px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:62ch;margin:0 0 18px}
+  .search{display:flex;gap:10px;flex-wrap:wrap}
+  input[type=text]{flex:1;min-width:240px;background:var(--card2);border:1px solid var(--line);border-radius:11px;color:var(--ink);font:15px var(--sans);padding:13px 16px}
+  input[type=text]:focus{outline:none;border-color:var(--teal)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:11px;padding:13px 24px;font:800 15px var(--sans);cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .btn[disabled]{opacity:.55;cursor:wait}
+  .opts{margin-top:12px;font-size:14px;color:var(--mut);display:flex;align-items:center;gap:8px}
+  .opts input{accent-color:var(--teal);width:16px;height:16px}
+  #out{margin-top:30px}
+  #summary{font-size:15px;color:#dbe7f3;margin-bottom:16px}
+  #summary b{color:#fff}
+  .j{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:11px}
+  .j.free{border-color:rgba(111,207,151,.42)}
+  .pill{display:inline-flex;align-items:center;gap:6px;font:800 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-bottom:9px}
+  .pill.f{background:rgba(111,207,151,.16);color:var(--green);border:1px solid rgba(111,207,151,.45)}
+  .pill.a{background:rgba(255,180,72,.14);color:var(--gold);border:1px solid rgba(255,180,72,.4)}
+  .j .t{font:700 16.5px var(--sans);color:#fff;line-height:1.32}
+  .j .t a{color:#fff}.j .t a:hover{color:var(--teal)}
+  .j .meta{font-size:13px;color:var(--mut);margin:5px 0 0}
+  .kw{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .kw span{font-size:11.5px;color:#a9c4be;background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
+  .links{margin-top:11px;display:flex;gap:16px;flex-wrap:wrap}
+  .links a{font:700 13.5px var(--sans)}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Open journal finder · where to publish</div>
+  <h1>Where to publish your SoTL.</h1>
+  <p class="lede">You've done the teaching scholarship — now find the open-access journal for it. Search by topic and see which journals are <strong>free to publish in</strong> (no article fee — true diamond OA), with peer-review type, licence and a direct link to author guidelines.</p>
+
+  <div class="search">
+    <input type="text" id="q" value="scholarship of teaching and learning" spellcheck="false" placeholder="Your topic — e.g. assessment, students as partners, GenAI…">
+    <button class="btn" id="go" type="button">Find journals →</button>
+  </div>
+  <label class="opts"><input type="checkbox" id="freeonly" checked> Only show journals that are <b>&nbsp;free to publish in&nbsp;</b> (no APC)</label>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    Searched live across the <a href="https://doaj.org" target="_blank" rel="noopener">Directory of Open Access Journals</a> (DOAJ — CORS-open, no key). Every journal listed is fully open-access; <b>“free to publish”</b> means no article-processing charge (diamond OA — free to read <em>and</em> publish). Always check a journal's scope and current policies before submitting. Companion to the <a href="/research-search.html">research search</a> and <a href="/oa-finder.html">open-access finder</a>. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var q=document.getElementById('q'), go=document.getElementById('go'), out=document.getElementById('out'), freeonly=document.getElementById('freeonly');
+
+ function apcInfo(b){
+   var a=b.apc||{};
+   if(!a.has_apc) return {free:true, text:'Free to publish · no APC'};
+   var m=(a.max&&a.max[0])||{};
+   return {free:false, text: (m.price!=null? ('APC '+m.price+' '+(m.currency||'')) : 'APC charged')};
+ }
+ function homeLink(b){ return (b.ref&&(b.ref.journal||b.ref.aims_scope))||''; }
+ function submitLink(b){ return (b.ref&&b.ref.author_instructions)||''; }
+ function esc(s){ return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+ function run(){
+   var query=q.value.trim(); if(!query){ return; }
+   go.disabled=true; out.innerHTML='<div id="summary">Searching open-access journals…</div>';
+   var url='https://doaj.org/api/v3/search/journals/'+encodeURIComponent(query)+'?pageSize=40';
+   fetch(url).then(function(r){return r.json();}).then(function(d){
+     go.disabled=false;
+     var all=(d.results||[]).map(function(j){ var b=j.bibjson||{}; return {b:b, apc:apcInfo(b)}; });
+     var freeFirst=freeonly.checked ? all.filter(function(x){return x.apc.free;}) : all.slice();
+     // free-to-publish always sorted to the top
+     freeFirst.sort(function(a,c){ return (c.apc.free?1:0)-(a.apc.free?1:0); });
+     var freeCount=all.filter(function(x){return x.apc.free;}).length;
+     if(!freeFirst.length){
+       out.innerHTML='<div id="summary">No '+(freeonly.checked?'fee-free ':'')+'open-access journals matched “'+esc(query)+'”. Try broader terms, or untick the free-to-publish filter.</div>';
+       return;
+     }
+     var cards=freeFirst.slice(0,25).map(function(x){
+       var b=x.b, ap=x.apc;
+       var home=homeLink(b), submit=submitLink(b);
+       var title=esc(b.title||'Journal');
+       var head=home?('<a href="'+esc(home)+'" target="_blank" rel="noopener">'+title+'</a>'):title;
+       var rev=(b.editorial&&b.editorial.review_process&&b.editorial.review_process[0])||'';
+       var lic=(b.license&&b.license[0]&&b.license[0].type)||'';
+       var metabits=[esc((b.publisher||{}).name||''), b.oa_start?('OA since '+b.oa_start):'', esc(rev), esc(lic)].filter(Boolean).join(' &middot; ');
+       var kws=(b.keywords||[]).slice(0,5).map(function(k){return '<span>'+esc(k)+'</span>';}).join('');
+       var links=[];
+       if(home) links.push('<a href="'+esc(home)+'" target="_blank" rel="noopener">Visit journal ↗</a>');
+       if(submit && submit!==home) links.push('<a href="'+esc(submit)+'" target="_blank" rel="noopener">Author guidelines ↗</a>');
+       return '<div class="j'+(ap.free?' free':'')+'">'+
+         '<span class="pill '+(ap.free?'f':'a')+'">'+(ap.free?'✓ ':'')+esc(ap.text)+'</span>'+
+         '<div class="t">'+head+'</div>'+
+         '<div class="meta">'+metabits+'</div>'+
+         (kws?'<div class="kw">'+kws+'</div>':'')+
+         (links.length?'<div class="links">'+links.join('')+'</div>':'')+
+         '</div>';
+     }).join('');
+     var shown=Math.min(freeFirst.length,25);
+     var summary='<div id="summary">Showing <b>'+shown+'</b> open-access journal'+(shown===1?'':'s')+' for “'+esc(query)+'” &middot; <b>'+freeCount+'</b> free to publish in'+(freeonly.checked?'':' (shown first)')+'.</div>';
+     out.innerHTML=summary+cards;
+     out.scrollIntoView({behavior:'smooth',block:'start'});
+   }).catch(function(err){ go.disabled=false; out.innerHTML='<div id="summary">Couldn’t reach DOAJ ('+err.message+'). Try again shortly.</div>'; });
+ }
+ go.onclick=run;
+ q.addEventListener('keydown',function(e){ if(e.key==='Enter') run(); });
+})();
+</script>
+</body>
+</html>

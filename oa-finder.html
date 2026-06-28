@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open-Access Finder — the free, legal version of any paper · NTLSN</title>
+<meta name="description" content="Paste a DOI, a list of DOIs, or a whole reference list — NTLSN finds the free, legal open-access version of each paper and shows how open it is (diamond, gold, green, hybrid). Live from OpenAlex. Free, in-browser, no login.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:780px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 14px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:62ch;margin:0 0 18px}
+  textarea{width:100%;min-height:118px;background:var(--card2);border:1px solid var(--line);border-radius:12px;color:var(--ink);font:14px/1.6 var(--mono);padding:13px 15px;resize:vertical}
+  textarea:focus{outline:none;border-color:var(--teal)}
+  .row{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:13px 26px;font:800 15.5px var(--sans);cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .btn[disabled]{opacity:.55;cursor:wait}
+  .hint{font-size:13px;color:var(--mut)}
+  #out{margin-top:30px}
+  #summary{font-size:15px;color:#dbe7f3;margin-bottom:16px}
+  #summary b{color:#fff}
+  .res{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin-bottom:11px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font:800 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-bottom:9px}
+  .res .t{font:700 16.5px var(--sans);color:#fff;line-height:1.32}
+  .res .meta{font-size:13px;color:var(--mut);margin:5px 0 0}
+  .res .note{font-size:12.5px;color:#a9c4be;margin-top:3px;font-style:italic}
+  .res .go{display:inline-block;margin-top:11px;font:800 13.5px var(--sans);color:var(--teal)}
+  .res .closed{display:inline-block;margin-top:10px;font:600 13px var(--sans);color:#d9849a}
+  .unmatched{font-size:13px;color:var(--mut);margin-top:14px;background:var(--card2);border:1px dashed var(--line);border-radius:10px;padding:11px 14px}
+  .unmatched code{color:#cbd8e6;font-family:var(--mono);font-size:12px}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .legend span{font-size:11.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Open-access finder</div>
+  <h1>Find the free, legal version of any paper.</h1>
+  <p class="lede">Paste a DOI, a handful of DOIs, or a whole reference list. We'll locate the open-access copy of each paper across OpenAlex's index of 250M+ works — and tell you exactly how open it is. Nothing leaves your browser.</p>
+
+  <textarea id="in" spellcheck="false">10.55146/ajie.v54i1.1073
+10.15173/ijsap.v1i1.3119
+10.1080/07294360.2023.2218800
+10.1080/03075079.2020.1750582</textarea>
+  <div class="row">
+    <button class="btn" id="go" type="button">Find open versions →</button>
+    <span class="hint">DOIs are auto-extracted — paste raw references if you like (up to 50).</span>
+  </div>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    Resolved live against <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (CORS-open, no key). Open-access status reflects what is <em>legally and freely</em> available — <b>diamond</b> = free to read <em>and</em> publish (no fees), <b>gold/hybrid</b> = free on the publisher, <b>green</b> = free in a repository. A free companion to the <a href="/research-search.html">live research search</a> and the <a href="/#ntlsn-archive">1,431-work archive</a>. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var STATUS={
+   diamond:{label:'Diamond OA',icon:'💎',color:'#5BE6DC',note:'Free to read & publish — no author fees'},
+   gold:{label:'Gold OA',icon:'🟡',color:'#FFB448',note:'Open on the publisher'},
+   green:{label:'Green OA',icon:'♻️',color:'#6FCF97',note:'Free in a repository'},
+   hybrid:{label:'Hybrid OA',icon:'🔓',color:'#7C9CFF',note:'Open within a subscription journal'},
+   bronze:{label:'Bronze',icon:'🟤',color:'#C99A5B',note:'Free to read — no clear licence'},
+   closed:{label:'Closed',icon:'🔒',color:'#d9849a',note:'No free version found'}
+ };
+ var inp=document.getElementById('in'), out=document.getElementById('out'), go=document.getElementById('go');
+
+ function extractDois(text){
+   var re=/10\.\d{4,9}\/[^\s"'<>,]+/g, m, seen={}, list=[];
+   while((m=re.exec(text))){
+     var d=m[0].replace(/[.,;:)\]]+$/,'').toLowerCase();
+     if(!seen[d]){ seen[d]=1; list.push(d); }
+   }
+   return list;
+ }
+ function bareDoi(w){ return (w.doi||'').replace(/^https?:\/\/doi\.org\//i,'').toLowerCase(); }
+ function freeLink(w){ var b=w.best_oa_location||{}; return b.pdf_url || b.landing_page_url || (w.open_access&&w.open_access.oa_url) || ''; }
+ function authors(w){
+   var a=(w.authorships||[]).map(function(x){return x.author&&x.author.display_name;}).filter(Boolean);
+   if(!a.length) return '';
+   return a.slice(0,4).join(', ')+(a.length>4?' et al.':'');
+ }
+ function venue(w){ var p=w.primary_location; return (p&&p.source&&p.source.display_name)||''; }
+
+ go.onclick=function(){
+   var dois=extractDois(inp.value).slice(0,50);
+   if(!dois.length){ out.innerHTML='<div id="summary">No DOIs found. Paste at least one DOI (e.g. <code>10.15173/ijsap.v1i1.3119</code>).</div>'; return; }
+   go.disabled=true; out.innerHTML='<div id="summary">Resolving '+dois.length+' DOI'+(dois.length>1?'s':'')+' via OpenAlex…</div>';
+   var url='https://api.openalex.org/works?per_page=50&mailto=hello@ntlsn.com&select=id,doi,title,publication_year,open_access,best_oa_location,authorships,primary_location&filter=doi:'+dois.map(encodeURIComponent).join('|');
+   fetch(url).then(function(r){return r.json();}).then(function(d){
+     go.disabled=false;
+     var byDoi={}; (d.results||[]).forEach(function(w){ byDoi[bareDoi(w)]=w; });
+     var openCount=0, found=0, unmatched=[];
+     var cards=dois.map(function(doi){
+       var w=byDoi[doi];
+       if(!w){ unmatched.push(doi); return ''; }
+       found++;
+       var st=(w.open_access&&w.open_access.oa_status)||'closed';
+       var meta=STATUS[st]||STATUS.closed;
+       var isOpen=(w.open_access&&w.open_access.is_oa)&&st!=='closed';
+       if(isOpen) openCount++;
+       var link=freeLink(w);
+       var title=w.title||'(untitled)';
+       var head=(isOpen&&link)?'<a href="'+link+'" target="_blank" rel="noopener">'+title+'</a>':title;
+       var metaline=[authors(w),venue(w),w.publication_year].filter(Boolean).join(' &middot; ');
+       var action=(isOpen&&link)
+         ? '<a class="go" href="'+link+'" target="_blank" rel="noopener">Read it free ↗</a>'
+         : '<span class="closed">🔒 No open version found — try the author, your library, or an interlibrary loan.</span>';
+       return '<div class="res">'+
+         '<span class="pill" style="background:'+meta.color+'22;color:'+meta.color+';border:1px solid '+meta.color+'55">'+meta.icon+' '+meta.label+'</span>'+
+         '<div class="t">'+head+'</div>'+
+         '<div class="meta">'+metaline+'</div>'+
+         '<div class="note">'+meta.note+'</div>'+
+         action+
+         '</div>';
+     }).join('');
+     var summary='<div id="summary"><b>'+openCount+'</b> of <b>'+found+'</b> resolved paper'+(found===1?'':'s')+' '+(openCount===1?'is':'are')+' freely available'+(found<dois.length?' &middot; '+(dois.length-found)+' not indexed':'')+'.</div>';
+     var um = unmatched.length ? '<div class="unmatched">Not found in OpenAlex (check the DOI, or it may be too new): '+unmatched.map(function(x){return '<code>'+x+'</code>';}).join(', ')+'</div>' : '';
+     out.innerHTML=summary+cards+um;
+     out.scrollIntoView({behavior:'smooth',block:'start'});
+   }).catch(function(err){ go.disabled=false; out.innerHTML='<div id="summary">Couldn’t reach OpenAlex ('+err.message+'). Try again in a moment.</div>'; });
+ };
+})();
+</script>
+</body>
+</html>

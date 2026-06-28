@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find your SoTL conference — three questions, the right event for you · NTLSN</title>
+<meta name="description" content="Answer three quick questions and NTLSN points you to the Australian teaching & learning conference that fits — by your interest, preferred format and timing. Free, live from the sector events feed.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 14px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:60ch;margin:0 0 8px}
+  .q{margin:26px 0 4px}
+  .q .lbl{font:800 13px var(--sans);letter-spacing:.03em;text-transform:uppercase;color:#bcccdd;margin-bottom:3px}
+  .q .num{color:var(--teal);margin-right:7px}
+  .opts{display:flex;flex-wrap:wrap;gap:9px;margin-top:11px}
+  .opt{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font:600 14.5px var(--sans);color:#cbd8e6;cursor:pointer;transition:all .12s}
+  .opt:hover{border-color:rgba(78,205,196,.5)}
+  .opt.on{background:rgba(78,205,196,.16);border-color:var(--teal);color:var(--teal)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:14px 28px;font:800 15.5px var(--sans);cursor:pointer;margin-top:30px}
+  .btn:active{transform:translateY(1px)}
+  .btn[disabled]{opacity:.55;cursor:wait}
+  #out{margin-top:34px}
+  #status{font-size:14px;color:var(--mut)}
+  .narr{font-size:16px;color:#dbe7f3;background:rgba(255,180,72,.08);border:1px solid rgba(255,180,72,.3);border-radius:13px;padding:15px 18px;margin-bottom:16px}
+  .narr b{color:#fff}
+  .rec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px;display:block}
+  .rec.best{border-color:rgba(78,205,196,.55);box-shadow:0 0 24px rgba(78,205,196,.10)}
+  .rec .badge{font:800 10.5px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;display:inline-block}
+  .rec .t{font:700 17px var(--sans);color:#fff;line-height:1.3}
+  .rec .t a{color:#fff}.rec .t a:hover{color:var(--teal)}
+  .rec .meta{font-size:13.5px;color:var(--mut);margin:6px 0 0}
+  .rec .why{font-size:13.5px;color:#a9c4be;margin-top:8px}
+  .rec .why .k{color:var(--teal)}
+  .rec .go{display:inline-block;margin-top:11px;font:700 13.5px var(--sans);color:var(--teal)}
+  .foot{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Conference finder · three questions</div>
+  <h1>Find the right SoTL conference for you.</h1>
+  <p class="lede">There are dozens of teaching &amp; learning events across the sector each year. Answer three quick questions and we'll point you to the ones that actually fit — live from NTLSN's events feed.</p>
+
+  <div class="q"><div class="lbl"><span class="num">1</span>What are you most into right now?</div><div class="opts" id="q1"></div></div>
+  <div class="q"><div class="lbl"><span class="num">2</span>What kind of event suits you?</div><div class="opts" id="q2"></div></div>
+  <div class="q"><div class="lbl"><span class="num">3</span>When are you looking to go?</div><div class="opts" id="q3"></div></div>
+
+  <button class="btn" id="go" type="button">Find my conference →</button>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    Matched live against NTLSN's curated <a href="/#events">sector events feed</a> (CORS-open <code>/data/events.json</code>) — nothing leaves your browser. Don't see a fit? <a href="/#events">Browse everything</a> or <a href="/#ntlsn-zoom">share your own event</a>. Free · CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var THEMES={
+   partnership:{label:'Student partnership',kw:['partner','students as partners','sap','co-design','co-create','co-creation','student voice','student-led','student led','roundtable','student success','stars','student engagement']},
+   assessment:{label:'Assessment & feedback',kw:['assessment','feedback','grading','integrity','exam','rubric','marking','authentic assessment','moderation']},
+   curriculum:{label:'Curriculum & design',kw:['curriculum','program','course design','constructive alignment','learning outcomes','accreditation','program design','design']},
+   tech:{label:'Technology & GenAI',kw:['technology','digital','online learning','ascilite','generative','genai',' ai ','artificial intelligence','edtech','learning analytics','blended']},
+   development:{label:'Academic development',kw:['academic development','leadership','herdsa','caullt','professional development','fellowship','mentoring','educational development','staff']},
+   research:{label:'SoTL research & methods',kw:['sotl','scholarship of teaching','research','issotl','methods','evidence','inquiry','pedagogical research']},
+   any:{label:"Open to anything",kw:[]}
+ };
+ var FORMATS={
+   conference:{label:'In-person conference',m:function(e,b){return e.type==='conference' && !/online|virtual|webinar/i.test(b);}},
+   online:{label:'Online / virtual',m:function(e,b){return e.type==='webinar' || /online|virtual|webinar/i.test(b);}},
+   showcase:{label:'Showcase or workshop',m:function(e,b){return e.type==='showcase'||e.type==='workshop'||/showcase|workshop/i.test(b);}},
+   roundtable:{label:'Roundtable / symposium',m:function(e,b){return /roundtable|symposium|summit|forum/i.test(b);}},
+   any:{label:'Any format',m:function(){return true;}}
+ };
+ var TIMING={ soon:{label:'Soon — next 3 months',d:92}, year:{label:'Within the year',d:366}, any:{label:'Any time',d:99999} };
+ var sel={q1:'partnership',q2:'any',q3:'year'};
+ function chips(id,obj,key){
+   var box=document.getElementById(id);
+   box.innerHTML=Object.keys(obj).map(function(k){return '<button type="button" class="opt'+(sel[key]===k?' on':'')+'" data-k="'+k+'">'+obj[k].label+'</button>';}).join('');
+   box.onclick=function(e){var b=e.target.closest('.opt'); if(!b)return; sel[key]=b.getAttribute('data-k'); [].forEach.call(box.children,function(c){c.classList.toggle('on',c===b);});};
+ }
+ chips('q1',THEMES,'q1'); chips('q2',FORMATS,'q2'); chips('q3',TIMING,'q3');
+
+ function fmtDate(d){ try{var p=d.split('-'); return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(p[1],10)-1]+' '+parseInt(p[2],10);}catch(e){return d;} }
+ var out=document.getElementById('out'), go=document.getElementById('go');
+
+ go.onclick=function(){
+   go.disabled=true; out.innerHTML='<div id="status">Matching the sector feed…</div>';
+   fetch('/data/events.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(events){
+     go.disabled=false;
+     var theme=THEMES[sel.q1], fmt=FORMATS[sel.q2], tim=TIMING[sel.q3];
+     var today=new Date(); var todayStr=new Date(today.getTime()-today.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+     var horizon=new Date(today.getTime()+tim.d*864e5).toISOString().slice(0,10);
+     var scored=events.map(function(e){
+       var blob=((e.title||'')+' '+(e.desc||'')+' '+(e.type||'')).toLowerCase();
+       var future=(e.date||'')>=todayStr, inWindow=(e.date||'')<=horizon;
+       var hits=theme.kw.filter(function(k){return blob.indexOf(k)>-1;});
+       var score=0;
+       score+=hits.length*3;                       // interest match (primary)
+       if(sel.q1==='any')score+=1;                 // open to anything → everything eligible
+       if(fmt.m(e,blob))score+=2; else if(sel.q2!=='any')score-=1;
+       if(future&&inWindow)score+=2; else if(!future)score-=99;  // must be upcoming
+       // recency bonus (sooner = slightly better)
+       return {e:e,score:score,hits:hits,future:future,inWindow:inWindow};
+     }).filter(function(x){return x.future && x.inWindow && x.score>0;})
+       .sort(function(a,b){ if(b.score!==a.score)return b.score-a.score; return (a.e.date||'').localeCompare(b.e.date||''); });
+
+     if(!scored.length){
+       out.innerHTML='<div class="narr">No upcoming event matched all three answers. Try <b>"Open to anything"</b> or <b>"Any time"</b>, or <a href="/#events">browse the full calendar</a> — 90+ events across the sector.</div>';
+       return;
+     }
+     var top=scored.slice(0,4);
+     var lead=top[0];
+     var narr='Based on your interest in <b>'+theme.label.toLowerCase()+'</b>, your strongest match is <b>'+ (lead.e.title||'') +'</b>'+(lead.hits.length?' — it speaks directly to '+lead.hits.slice(0,2).join(' and ')+'.':'.');
+     var html='<div class="narr">'+narr+'</div>';
+     html+=top.map(function(x,i){
+       var e=x.e;
+       var why= x.hits.length ? 'Matches your interest in <span class="k">'+x.hits.slice(0,3).join('</span>, <span class="k">')+'</span>.' : 'A strong upcoming '+(e.type||'event')+' in the sector.';
+       return '<a class="rec'+(i===0?' best':'')+'" href="'+(e.url||'/#events')+'" target="_blank" rel="noopener">'+
+         (i===0?'<span class="badge">★ Best match for you</span>':'')+
+         '<div class="t">'+(e.title||'Event')+'</div>'+
+         '<div class="meta">'+fmtDate(e.date)+(e.endDate&&e.endDate!==e.date?'–'+fmtDate(e.endDate):'')+' &middot; '+(e.type||'event')+(e.uni?' &middot; '+e.uni.toUpperCase():'')+'</div>'+
+         '<div class="why">'+why+'</div>'+
+         '<span class="go">Go to the event ↗</span></a>';
+     }).join('');
+     out.innerHTML=html;
+     out.scrollIntoView({behavior:'smooth',block:'start'});
+   }).catch(function(err){ go.disabled=false; out.innerHTML='<div id="status">Couldn’t load the events feed ('+err.message+'). <a href="/#events">Browse the calendar</a> instead.</div>'; });
+ };
+})();
+</script>
+</body>
+</html>
