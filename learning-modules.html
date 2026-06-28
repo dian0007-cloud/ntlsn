@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Learn from the Sector — self-paced SoTL modules · NTLSN</title>
-<meta name="description" content="Turn the sector's talks into self-paced micro-modules: watch on a theme, check your understanding with concept questions, read the key ideas, reflect, and track what you've completed. Free, in-browser, progress stays on your device.">
+<title>Learn from the Sector — self-paced SoTL modules (SCORM-exportable) · NTLSN</title>
+<meta name="description" content="Turn the sector's talks into self-paced micro-modules: watch on a theme, check your understanding, read the key ideas, reflect, track completion — and export any module as a SCORM 1.2 package to drop into your LMS. Free, in-browser.">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
@@ -19,25 +19,26 @@
   .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
   h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 12px;font-weight:800;
     background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .lede{font-size:17px;color:#cbd8e6;max-width:66ch;margin:0 0 20px}
-  /* progress */
+  .lede{font-size:17px;color:#cbd8e6;max-width:66ch;margin:0 0 16px}
+  .note{background:rgba(124,156,255,.08);border:1px solid rgba(124,156,255,.34);border-radius:12px;padding:13px 16px;font-size:13.5px;color:#cdd8ef;margin:0 0 22px;line-height:1.55}
+  .note b{color:#b9c6ef}
   .prog{display:flex;align-items:center;gap:14px;background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:14px 17px;margin-bottom:22px}
   .prog .bar{flex:1;height:9px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}
   .prog .fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:99px;transition:width .5s}
   .prog .lbl{font:700 13.5px var(--sans);color:var(--ink);white-space:nowrap}
   .prog .rst{font-size:12px;color:var(--mut);background:none;border:0;cursor:pointer;text-decoration:underline}
-  /* module grid */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:13px}
   .mcard{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:14px;padding:16px 17px;cursor:pointer;color:inherit;font:inherit;transition:transform .15s,border-color .15s}
   .mcard:hover{transform:translateY(-2px);border-left-color:var(--gold)}
   .mcard .ic{font-size:30px;line-height:1}
   .mcard .th{font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:9px 0 3px}
   .mcard h3{font:800 16.5px var(--sans);color:#fff;margin:0 0 6px;line-height:1.25}
-  .mcard p{font-size:13px;color:var(--mut);margin:0}
+  .mcard p{font-size:13px;color:var(--mut);margin:0 0 10px}
+  .mcard .scorm{display:inline-flex;align-items:center;gap:5px;font:700 11.5px var(--sans);color:var(--blue);background:rgba(124,156,255,.1);border:1px solid rgba(124,156,255,.28);border-radius:8px;padding:5px 9px;cursor:pointer}
+  .mcard .scorm:hover{background:rgba(124,156,255,.2)}
   .mcard .done{position:absolute;top:13px;right:14px;font-size:12px;font-weight:800;color:var(--green);display:none}
   .mcard.is-done{border-left-color:var(--green)}
   .mcard.is-done .done{display:block}
-  /* module view */
   #view{display:none}
   .vtop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;flex-wrap:wrap}
   .vback{font-size:13.5px;color:var(--mut);background:none;border:0;cursor:pointer}
@@ -56,7 +57,6 @@
   .mcq .q{font:700 15.5px var(--sans);color:#fff;margin:0 0 9px}
   .opt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:0 0 8px;color:#cbd8e6;font:500 14px var(--sans);cursor:pointer;transition:border-color .12s,background .12s}
   .opt:hover{border-color:var(--teal)}
-  .opt.sel{border-color:var(--teal);background:rgba(78,205,196,.10)}
   .opt.right{border-color:var(--green);background:rgba(111,207,151,.14);color:#dffbe9}
   .opt.wrong{border-color:var(--red);background:rgba(255,107,107,.12);color:#ffd9d9}
   .why{font-size:13px;color:var(--mut);margin:2px 0 0;padding-left:2px;display:none}
@@ -82,6 +82,7 @@
     <div class="eyebrow">◇ Learning modules</div>
     <h1>Learn SoTL from the sector itself</h1>
     <p class="lede">The sector has recorded hundreds of talks. These self-paced modules turn them into something you can <b>learn from and finish</b>: watch the talks on a theme, check your understanding, read the key ideas, reflect, and track what you've completed. Free, in-browser — your progress stays on your device.</p>
+    <div class="note"><b>📦 Add a module to your LMS.</b> Open any module and hit <b>Export (SCORM)</b> — or use the badge on each card — to download a SCORM 1.2 package. Upload the .zip into Moodle, Canvas or Blackboard and it reports completion (and the quiz score) back to your gradebook.</div>
 
     <div class="prog">
       <div class="lbl" id="plbl">0 of 6 complete</div>
@@ -102,6 +103,7 @@
       <div class="eyebrow" id="vtheme" style="margin:0"></div>
     </div>
     <h1 id="vtitle" style="font-size:clamp(24px,4.5vw,34px)"></h1>
+    <button class="btn ghost" id="vscorm" type="button" style="padding:9px 16px;font-size:13px;margin:0 0 6px">📦 Export this module to your LMS (SCORM)</button>
     <div class="steps" id="steps"></div>
     <div id="stage"></div>
   </div>
@@ -221,6 +223,7 @@
  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
  var home=document.getElementById('home'),view=document.getElementById('view'),grid=document.getElementById('grid');
+ var current=null;
 
  function renderProgress(){
    var n=getDone().length,t=MODS.length;
@@ -229,21 +232,28 @@
  }
  function renderGrid(){
    grid.innerHTML=MODS.map(function(m){
-     return '<button class="mcard'+(isDone(m.id)?' is-done':'')+'" data-id="'+m.id+'" type="button">'+
+     return '<div class="mcard'+(isDone(m.id)?' is-done':'')+'" data-id="'+m.id+'" role="button" tabindex="0">'+
        '<span class="done">✓ Done</span>'+
        '<div class="ic">'+m.ic+'</div>'+
        '<div class="th">'+esc(m.theme)+'</div>'+
        '<h3>'+esc(m.title)+'</h3>'+
-       '<p>'+esc(m.blurb)+'</p></button>';
+       '<p>'+esc(m.blurb)+'</p>'+
+       '<span class="scorm" data-scorm="'+m.id+'">📦 SCORM</span></div>';
    }).join('');
-   [].forEach.call(grid.querySelectorAll('.mcard'),function(b){b.addEventListener('click',function(){open(b.getAttribute('data-id'));});});
+   [].forEach.call(grid.querySelectorAll('.mcard'),function(b){
+     b.addEventListener('click',function(e){
+       var sc=e.target.closest?e.target.closest('.scorm'):null;
+       if(sc){e.stopPropagation();var id=sc.getAttribute('data-scorm');exportScorm(find(id));return;}
+       open(b.getAttribute('data-id'));
+     });
+   });
    renderProgress();
  }
+ function find(id){for(var i=0;i<MODS.length;i++){if(MODS[i].id===id)return MODS[i];}return null;}
 
  var STEPS=['Watch','Check','Read','Reflect','Done'];
  function open(id){
-   var m=null;for(var i=0;i<MODS.length;i++){if(MODS[i].id===id){m=MODS[i];break;}}
-   if(!m)return;
+   var m=find(id); if(!m)return; current=m;
    home.style.display='none';view.style.display='block';window.scrollTo(0,0);
    document.getElementById('vtheme').textContent='◇ '+m.theme;
    document.getElementById('vtitle').textContent=m.title;
@@ -272,7 +282,7 @@
        [].forEach.call(stage.querySelectorAll('.opt'),function(b){
          b.addEventListener('click',function(){
            var qi=+b.getAttribute('data-q'),oi=+b.getAttribute('data-o'),q=m.mcq[qi];
-           if(state.answers[qi]!==undefined)return; // lock after first answer
+           if(state.answers[qi]!==undefined)return;
            state.answers[qi]=oi;
            var opts=stage.querySelectorAll('.opt[data-q="'+qi+'"]');
            [].forEach.call(opts,function(o){var ooi=+o.getAttribute('data-o');if(ooi===q.c)o.classList.add('right');if(ooi===oi&&oi!==q.c)o.classList.add('wrong');o.disabled=true;});
@@ -304,16 +314,104 @@
        var pct=Math.round(state.score/m.mcq.length*100);
        stage.innerHTML='<div class="panel done-wrap"><div class="big">🎉</div><h2>Module complete</h2>'+
          '<div class="scoreline">Concept check: '+state.score+' / '+m.mcq.length+' ('+pct+'%)</div>'+
-         '<p class="sub" style="margin-top:10px">Your reflection and progress are saved on this device.</p>'+
-         '<div class="rowbtns" style="justify-content:center"><button class="btn" id="dn" type="button">← Back to all modules</button></div></div>';
+         '<p class="sub" style="margin-top:10px">Your reflection and progress are saved on this device. Want it for your students?</p>'+
+         '<div class="rowbtns" style="justify-content:center"><button class="btn" id="dscorm" type="button">📦 Export to LMS (SCORM)</button><button class="btn ghost" id="dn" type="button">← All modules</button></div></div>';
        document.getElementById('dn').onclick=function(){close();};
+       document.getElementById('dscorm').onclick=function(){exportScorm(m);};
      }
    }
    paintSteps();render();
  }
  function close(){view.style.display='none';home.style.display='block';renderGrid();window.scrollTo(0,0);}
 
+ /* ---------------- SCORM 1.2 package export (self-contained, no libraries) ---------------- */
+ var CRCT=(function(){var t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0;}return t;})();
+ function crc32(b){var c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=CRCT[(c^b[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+ function bytes(s){return new TextEncoder().encode(s);}
+ function zip(files){
+   var u16=function(n){return [n&255,(n>>8)&255];};
+   var u32=function(n){return [n&255,(n>>8)&255,(n>>16)&255,(n>>>24)&255];};
+   var parts=[],central=[],offset=0;
+   files.forEach(function(f){
+     var nameB=bytes(f.name),data=f.data,crc=crc32(data);
+     var local=[].concat(u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(nameB.length),u16(0));
+     parts.push(new Uint8Array(local));parts.push(nameB);parts.push(data);
+     var cen=[].concat(u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(nameB.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset));
+     central.push(new Uint8Array(cen));central.push(nameB);
+     offset+=local.length+nameB.length+data.length;
+   });
+   var cstart=offset,csize=0;central.forEach(function(a){csize+=a.length;});
+   var eocd=new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(csize),u32(cstart),u16(0)));
+   var all=parts.concat(central).concat([eocd]);
+   var total=0;all.forEach(function(a){total+=a.length;});
+   var out=new Uint8Array(total),p=0;all.forEach(function(a){out.set(a,p);p+=a.length;});
+   return out;
+ }
+ var SCORM_JS='var _a=null;function findAPI(w){var n=0;while(w&&w.API==null&&w.parent&&w.parent!=w&&n<12){n++;w=w.parent;}return w?w.API:null;}'+
+   'function getAPI(){if(_a)return _a;_a=findAPI(window);if(!_a&&window.opener)_a=findAPI(window.opener);return _a;}'+
+   'window.SCORM={init:function(){var a=getAPI();if(a){try{a.LMSInitialize("");a.LMSSetValue("cmi.core.lesson_status","incomplete");a.LMSCommit("");}catch(e){}}return !!a;},'+
+   'complete:function(s){var a=getAPI();if(!a)return false;try{a.LMSSetValue("cmi.core.lesson_status","completed");if(s!=null){a.LMSSetValue("cmi.core.score.raw",String(s));a.LMSSetValue("cmi.core.score.min","0");a.LMSSetValue("cmi.core.score.max","100");}a.LMSCommit("");}catch(e){}return true;},'+
+   'finish:function(){var a=getAPI();if(a){try{a.LMSFinish("");}catch(e){}}}};';
+ function xmlEsc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];});}
+ function manifest(m){
+   var t=xmlEsc(m.title);
+   return '<?xml version="1.0" encoding="UTF-8"?>\n'+
+   '<manifest identifier="NTLSN-'+m.id+'" version="1.0" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">\n'+
+   '  <metadata><schema>ADL SCORM</schema><schemaversion>1.2</schemaversion></metadata>\n'+
+   '  <organizations default="ORG"><organization identifier="ORG"><title>'+t+'</title>\n'+
+   '    <item identifier="ITEM1" identifierref="RES1" isvisible="true"><title>'+t+'</title></item></organization></organizations>\n'+
+   '  <resources><resource identifier="RES1" type="webcontent" adlcp:scormtype="sco" href="index.html">\n'+
+   '    <file href="index.html"/><file href="scormAPI.js"/></resource></resources>\n</manifest>';
+ }
+ function contentHtml(m){
+   var watchUrl='https://www.ntlsn.com'+m.watch;
+   var mcq=m.mcq.map(function(q,qi){
+     var opts=q.a.map(function(o,oi){return '<button class="opt" data-q="'+qi+'" data-o="'+oi+'" data-c="'+q.c+'" type="button">'+esc(o)+'</button>';}).join('');
+     return '<div class="qq"><div class="q">'+(qi+1)+'. '+esc(q.q)+'</div>'+opts+'<div class="why" data-w="'+qi+'">'+esc(q.why)+'</div></div>';
+   }).join('');
+   var js='(function(){try{SCORM.init();}catch(e){}var N='+m.mcq.length+',score=0,answered=0,box=document.getElementById("mcq");'+
+     'box.addEventListener("click",function(e){var b=e.target;if(!b.getAttribute||b.className.indexOf("opt")<0)return;var qi=b.getAttribute("data-q"),oi=+b.getAttribute("data-o"),cc=+b.getAttribute("data-c");var sib=box.querySelectorAll(".opt[data-q=\\""+qi+"\\"]");if(sib[0].disabled)return;[].forEach.call(sib,function(o){var k=+o.getAttribute("data-o");if(k===cc)o.className="opt right";else if(k===oi)o.className="opt wrong";o.disabled=true;});if(oi===cc)score++;answered++;var w=box.querySelector(".why[data-w=\\""+qi+"\\"]");if(w)w.className="why show";if(answered===N)document.getElementById("done").disabled=false;});'+
+     'document.getElementById("done").onclick=function(){var pct=Math.round(score/N*100);try{SCORM.complete(pct);SCORM.finish();}catch(e){}document.getElementById("msg").textContent="\\u2713 Completed \\u2014 "+score+"/"+N+" ("+pct+"%). Reported to your LMS.";this.disabled=true;};})();';
+   return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+
+   '<title>'+esc(m.title)+' · NTLSN<\/title><script src="scormAPI.js"><\/script><style>'+
+   'body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;max-width:760px;margin:0 auto;padding:28px 22px 60px;color:#14202e;line-height:1.6}'+
+   '.eb{font:700 11px sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#0E8C82;margin-bottom:6px}'+
+   'h1{font-size:27px;margin:0 0 12px}h2{font-size:18px;margin:28px 0 10px;border-top:1px solid #e4e9ef;padding-top:20px}'+
+   '.watch{display:inline-block;background:#0E8C82;color:#fff;text-decoration:none;border-radius:8px;padding:11px 18px;font-weight:700}'+
+   '.q{font-weight:700;margin:16px 0 8px}.opt{display:block;width:100%;text-align:left;border:1px solid #cfd8e2;background:#f7f9fc;border-radius:8px;padding:10px 13px;margin:0 0 7px;cursor:pointer;font-size:15px}'+
+   '.opt.right{border-color:#1a9e6a;background:#e7f8ef}.opt.wrong{border-color:#d3506b;background:#fceaee}'+
+   '.why{font-size:13px;color:#5a6b7b;margin:2px 0 10px;display:none}.why.show{display:block}'+
+   'textarea{width:100%;min-height:96px;border:1px solid #cfd8e2;border-radius:8px;padding:11px;font:15px sans-serif}'+
+   '#done{background:#0E8C82;color:#fff;border:0;border-radius:999px;padding:13px 26px;font-weight:800;font-size:15px;cursor:pointer;margin-top:18px}#done:disabled{opacity:.5}'+
+   '#msg{margin-top:14px;font-weight:700;color:#1a9e6a}'+
+   '<\/style></head><body>'+
+   '<div class="eb">NTLSN · '+esc(m.theme)+'</div><h1>'+esc(m.title)+'</h1><p>'+esc(m.blurb)+'</p>'+
+   '<h2>1 · Watch</h2><p>Watch the sector’s talks on this theme, then complete the check below.</p>'+
+   '<a class="watch" href="'+watchUrl+'" target="_blank" rel="noopener">▶ '+esc(m.watchLabel)+'</a>'+
+   '<h2>2 · Check your understanding</h2><div id="mcq">'+mcq+'</div>'+
+   '<h2>3 · The key idea</h2><p>'+esc(m.read)+'</p>'+
+   '<h2>4 · Reflect</h2><p>'+esc(m.reflect)+'</p><textarea placeholder="Write a sentence or two…"></textarea>'+
+   '<button id="done" type="button" disabled>Mark complete ✓</button><div id="msg"></div>'+
+   '<script>'+js+'<\/script></body></html>';
+ }
+ function exportScorm(m){
+   if(!m)return;
+   try{
+     var files=[
+       {name:'imsmanifest.xml',data:bytes(manifest(m))},
+       {name:'scormAPI.js',data:bytes(SCORM_JS)},
+       {name:'index.html',data:bytes(contentHtml(m))}
+     ];
+     var blob=new Blob([zip(files)],{type:'application/zip'});
+     var url=URL.createObjectURL(blob);
+     var a=document.createElement('a');a.href=url;a.download='ntlsn-'+m.id+'-scorm.zip';
+     document.body.appendChild(a);a.click();
+     setTimeout(function(){URL.revokeObjectURL(url);if(a.parentNode)a.parentNode.removeChild(a);},1200);
+   }catch(e){alert('Sorry — SCORM export failed in this browser.');}
+ }
+
  document.getElementById('vback').addEventListener('click',close);
+ document.getElementById('vscorm').addEventListener('click',function(){if(current)exportScorm(current);});
  document.getElementById('reset').addEventListener('click',function(){if(confirm('Reset your module progress on this device?')){setDone([]);renderGrid();}});
  renderGrid();
 })();
