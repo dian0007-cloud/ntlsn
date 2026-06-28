@@ -8,6 +8,7 @@
 - [Best Practice guides](https://www.ntlsn.com/#ntlsn-bestpractice): 80 curated Good Practice Reports and guides, 2006–2024 (academic integrity, work-integrated learning, assessment, curriculum design, student transition).
 
 ## Free in-browser tools
+- [Live SoTL Research Search](https://www.ntlsn.com/research-search.html): search current teaching & learning research live from OpenAlex (250M+ open scholarly works), with open-access links surfaced — the living companion to the 1,431-work historical archive.
 - [ATEC · TEQSA Curriculum QA](https://www.ntlsn.com/atec-curriculum-qa.html): self-check a course's outcomes against its AQF level (Bloom's verbs), ATEC mission-compact alignment (widening participation, VET→HE), and the GenAI-resilience of its assessments. Indicative, in-browser.
 - [Course Quality Self-Check](https://www.ntlsn.com/selfcheck.html): rate a course against the TELAS standards and UDL guidelines; produces a readiness profile.
 - [TEQSA GenAI Readiness](https://www.ntlsn.com/teqsa-readiness.html): self-assess a course or program against TEQSA generative-AI guidance.

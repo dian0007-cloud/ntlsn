@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live SoTL Research Search — current teaching &amp; learning research from the open scholarly graph · NTLSN</title>
+<meta name="description" content="Search current teaching & learning research live from OpenAlex (200M+ open scholarly works). Free, no login, open-access links surfaced. The living companion to NTLSN's 1,431-work historical archive.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#4ECDC4;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 14px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:64ch;margin:0 0 18px}
+  .searchbar{display:flex;gap:9px;margin:6px 0 8px;flex-wrap:wrap}
+  .searchbar input{flex:1;min-width:220px;background:var(--card2);border:1px solid var(--line);border-radius:12px;color:var(--ink);font:500 16px var(--sans);padding:14px 16px}
+  .searchbar input:focus{outline:none;border-color:var(--teal)}
+  .btn{background:var(--teal);color:#06251f;border:0;border-radius:12px;padding:14px 24px;font:800 15px var(--sans);cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .btn[disabled]{opacity:.55;cursor:wait}
+  .opts{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:13.5px;color:var(--mut);margin-bottom:4px}
+  .opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+  .chips{margin:4px 0 6px}
+  .chip{display:inline-block;font:600 12.5px var(--sans);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;margin:4px 5px 0 0;cursor:pointer;color:#b9c8da}
+  .chip:hover{border-color:var(--teal);color:var(--teal)}
+  #status{font-size:14px;color:var(--mut);margin:14px 0}
+  .res{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 17px;margin-bottom:12px}
+  .res .t{font:700 16px var(--sans);color:#fff;line-height:1.35}
+  .res .t a{color:#fff}.res .t a:hover{color:var(--teal)}
+  .res .meta{font-size:13px;color:var(--mut);margin:6px 0 0}
+  .res .badges{margin-top:9px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+  .b{font:700 11px var(--sans);letter-spacing:.04em;border-radius:999px;padding:3px 10px}
+  .b-oa{background:rgba(78,205,196,.16);color:var(--teal)}
+  .b-cite{background:rgba(124,156,255,.14);color:var(--blue)}
+  .b-yr{background:rgba(255,180,72,.14);color:var(--gold)}
+  .b-link{border:1px solid var(--line);color:var(--mut)}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  code{font:500 13px var(--mono);color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Live research · OpenAlex open scholarly graph</div>
+  <h1>What's being published, right now.</h1>
+  <p class="lede">The <a href="/#ntlsn-archive">Sector Archive</a> holds 1,431 nationally-funded works from 1994–2025 — the field's memory. This searches the <b style="color:var(--ink)">living edge</b>: current teaching &amp; learning research across 250M+ open scholarly works, with the open-access copy surfaced wherever one exists. Free, no login, queried live in your browser.</p>
+
+  <div class="searchbar">
+    <input id="q" type="search" placeholder="e.g. authentic assessment, students as partners, generative AI…" autocomplete="off">
+    <button class="btn" id="go" type="button">Search →</button>
+  </div>
+  <div class="opts">
+    <label><input type="checkbox" id="recent"> Last 3 years only</label>
+    <label><input type="checkbox" id="oaonly"> Open-access only</label>
+    <span style="margin-left:auto">Sorted by relevance</span>
+  </div>
+  <div class="chips">
+    <span class="chip">scholarship of teaching and learning</span>
+    <span class="chip">authentic assessment generative AI</span>
+    <span class="chip">students as partners</span>
+    <span class="chip">work-integrated learning</span>
+    <span class="chip">academic development</span>
+    <span class="chip">first nations curriculum</span>
+  </div>
+
+  <div id="status"></div>
+  <div id="results"></div>
+
+  <div class="foot">
+    Live from <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> — a free, open index of the world's scholarship (CC0). NTLSN adds no paywall and stores nothing; your search runs in your browser against OpenAlex's open API. Open-access links resolve to the legal full text where the work is open. Part of the NTLSN open toolkit · CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var q=document.getElementById('q'), go=document.getElementById('go'), status=document.getElementById('status'), results=document.getElementById('results');
+ function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+ function authors(w){
+   var a=(w.authorships||[]).map(function(x){return x.author&&x.author.display_name;}).filter(Boolean);
+   if(!a.length)return '';
+   if(a.length>4)return a.slice(0,4).join(', ')+' +'+(a.length-4);
+   return a.join(', ');
+ }
+ function venue(w){ var p=w.primary_location||{}; return (p.source&&p.source.display_name)||''; }
+ function search(){
+   var term=q.value.trim(); if(!term){q.focus();return;}
+   go.disabled=true; status.textContent='Searching OpenAlex…'; results.innerHTML='';
+   var url='https://api.openalex.org/works?search='+encodeURIComponent(term)+'&per_page=15&sort=relevance_score:desc&mailto=hello@ntlsn.com';
+   var filters=[];
+   if(document.getElementById('recent').checked){var y=new Date().getFullYear()-3; filters.push('from_publication_date:'+y+'-01-01');}
+   if(document.getElementById('oaonly').checked){filters.push('is_oa:true');}
+   if(filters.length)url+='&filter='+filters.join(',');
+   fetch(url,{headers:{'Accept':'application/json'}}).then(function(r){if(!r.ok)throw new Error('OpenAlex returned '+r.status);return r.json();}).then(function(d){
+     var ws=d.results||[];
+     go.disabled=false;
+     if(!ws.length){status.textContent='No results for "'+esc(term)+'". Try broader terms.';return;}
+     status.innerHTML='<b style="color:#fff">'+(d.meta&&d.meta.count?d.meta.count.toLocaleString():ws.length)+'</b> works found — showing the top '+ws.length+'.';
+     results.innerHTML=ws.map(function(w){
+       var title=esc(w.title||w.display_name||'Untitled');
+       var doi=w.doi, oa=w.open_access||{}, link=oa.oa_url||doi||w.id;
+       var yr=w.publication_year||'', v=esc(venue(w)), au=esc(authors(w));
+       var badges='';
+       if(yr)badges+='<span class="b b-yr">'+yr+'</span>';
+       if(oa.is_oa&&oa.oa_url)badges+='<a class="b b-oa" href="'+oa.oa_url+'" target="_blank" rel="noopener">● Open access ↗</a>';
+       if(typeof w.cited_by_count==='number'&&w.cited_by_count>0)badges+='<span class="b b-cite">'+w.cited_by_count.toLocaleString()+' citation'+(w.cited_by_count===1?'':'s')+'</span>';
+       if(doi)badges+='<a class="b b-link" href="'+doi+'" target="_blank" rel="noopener">DOI ↗</a>';
+       return '<div class="res"><div class="t"><a href="'+(link||'#')+'" target="_blank" rel="noopener">'+title+'</a></div>'+
+         '<div class="meta">'+(au?au:'—')+(v?' &middot; <i>'+v+'</i>':'')+'</div>'+
+         '<div class="badges">'+badges+'</div></div>';
+     }).join('');
+   }).catch(function(e){ go.disabled=false; status.textContent='Couldn’t reach OpenAlex right now ('+e.message+'). Try again in a moment.'; });
+ }
+ go.onclick=search;
+ q.addEventListener('keydown',function(e){if(e.key==='Enter')search();});
+ [].forEach.call(document.querySelectorAll('.chip'),function(c){c.onclick=function(){q.value=c.textContent;search();};});
+})();
+</script>
+</body>
+</html>
