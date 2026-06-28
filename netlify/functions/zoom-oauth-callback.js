@@ -16,7 +16,8 @@ exports.handler = async (event) => {
   // CSRF: compare `state` to the value set in the httpOnly cookie at start.
   const cookie = (event.headers.cookie || "");
   const m = cookie.match(/ntlsn_zoom_state=([a-f0-9]+)/);
-  if (m && state && m[1] !== state) return J(401, { error: "state mismatch (possible CSRF)" });
+  // Fail closed: reject if the state cookie OR the state param is missing, not only on mismatch.
+  if (!m || !state || m[1] !== state) return J(401, { error: "state mismatch (possible CSRF)" });
 
   const id = process.env.ZOOM_CLIENT_ID, secret = process.env.ZOOM_CLIENT_SECRET, redirect = process.env.ZOOM_REDIRECT_URI;
   if (!id || !secret || !redirect) return J(200, { error: "Set ZOOM_CLIENT_ID / ZOOM_CLIENT_SECRET / ZOOM_REDIRECT_URI", configured: false });

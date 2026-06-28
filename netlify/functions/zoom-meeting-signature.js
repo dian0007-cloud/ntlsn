@@ -2,19 +2,27 @@
 // REAL logic — generates the exact JWT the Meeting SDK for Web (Component View) needs to join.
 // Needs env: ZOOM_SDK_KEY, ZOOM_SDK_SECRET  (from your Zoom *Meeting SDK* app — a SEPARATE
 //   registration from the General OAuth app). The SDK Secret NEVER ships to the browser.
-// POST { meetingNumber, role }  ->  { signature, sdkKey }
+// POST { meetingNumber }  ->  { signature, sdkKey }   (attendee-only; host tokens are gated)
 // Stateless — no DB required. See ~/Desktop/NTLSN-symposium-streaming-spec.md.
 
 const crypto = require("crypto");
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Content-Type": "application/json",
-};
+// CORS: only NTLSN origins may request a join signature. The SDK secret never leaves the
+// server, but a wildcard would let any website mint attendee join tokens for any meeting.
+const ALLOWED = ["https://www.ntlsn.com", "https://ntlsn.com"];
+function cors(event) {
+  const o = (event.headers && (event.headers.origin || event.headers.Origin)) || "";
+  return {
+    "Access-Control-Allow-Origin": ALLOWED.indexOf(o) > -1 ? o : ALLOWED[0],
+    "Vary": "Origin",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Content-Type": "application/json",
+  };
+}
 const b64url = (o) => Buffer.from(typeof o === "string" ? o : JSON.stringify(o)).toString("base64url");
 
 exports.handler = async (event) => {
+  const CORS = cors(event);
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: CORS, body: "" };
   if (event.httpMethod !== "POST")
     return { statusCode: 405, headers: CORS, body: JSON.stringify({ error: "POST only" }) };
@@ -26,7 +34,9 @@ exports.handler = async (event) => {
   let body = {};
   try { body = JSON.parse(event.body || "{}"); } catch (e) {}
   const meetingNumber = String(body.meetingNumber || "");
-  const role = Number(body.role || 0); // 0 = attendee, 1 = host
+  // Public watch-embed: only ever mint an ATTENDEE (role 0) signature. Host (role 1) tokens
+  // must be gated behind an authenticated session — never issued from this open endpoint.
+  const role = 0;
   if (!meetingNumber) return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: "meetingNumber required" }) };
 
   const iat = Math.floor(Date.now() / 1000) - 30;

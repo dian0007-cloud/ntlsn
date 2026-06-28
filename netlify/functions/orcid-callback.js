@@ -15,7 +15,8 @@ exports.handler = async (event) => {
   // CSRF: verify state against the cookie set at login start.
   const cookie = event.headers.cookie || "";
   const m = cookie.match(/ntlsn_orcid_state=([A-Za-z0-9-]+)/);
-  if (m && state && m[1] !== state) return J(401, { error: "state mismatch (possible CSRF)" });
+  // Fail closed: reject if the state cookie OR the state param is missing, not only on mismatch.
+  if (!m || !state || m[1] !== state) return J(401, { error: "state mismatch (possible CSRF)" });
 
   const id = process.env.ORCID_CLIENT_ID, secret = process.env.ORCID_CLIENT_SECRET, redirect = process.env.ORCID_REDIRECT_URI;
   if (!id || !secret || !redirect)
