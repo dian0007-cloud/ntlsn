@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teaching &amp; Learning Leadership Pathway — self-assess &amp; grow · NTLSN</title>
+<meta name="description" content="A free self-assessment for academics stepping into teaching & learning leadership — from coordinator to Associate Dean to sector leader. Rate yourself across six evidence-based leadership capabilities and get a development pathway matched to NTLSN tools and sector programs. In-browser, nothing stored.">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#C0593A;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:26px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 12px;font-weight:800;
+    background:linear-gradient(120deg,var(--gold),var(--terra) 55%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:17px;color:#cbd8e6;max-width:64ch;margin:0 0 16px}
+  .ground{background:rgba(255,180,72,.07);border:1px solid rgba(255,180,72,.3);border-radius:11px;padding:12px 15px;font-size:13px;color:#e7d6b0;margin:0 0 24px;line-height:1.55}
+  .sec-h{font:800 13px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:30px 0 12px}
+  .lvls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .lvl{border:1px solid var(--line);background:var(--card2);color:var(--mut);border-radius:999px;padding:8px 14px;font:600 13px var(--sans);cursor:pointer;text-align:left}
+  .lvl:hover{color:var(--ink)}
+  .lvl.on{background:var(--gold);color:#3a2606;border-color:var(--gold)}
+  .cap{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:13px;padding:15px 17px;margin-bottom:12px}
+  .cap .ct{font:800 16px var(--sans);color:#fff;display:flex;align-items:center;gap:9px;margin-bottom:11px}
+  .stmt{margin:0 0 12px}
+  .stmt:last-child{margin-bottom:0}
+  .stmt .q{font-size:14.5px;color:#cbd8e6;margin-bottom:7px}
+  .scale{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .dot{width:38px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--card2);color:var(--mut);font:700 13px var(--sans);cursor:pointer;transition:all .12s}
+  .dot:hover{border-color:var(--teal)}
+  .dot.sel{background:var(--teal);color:#06251f;border-color:var(--teal)}
+  .scale .ends{font-size:11px;color:var(--mut)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#3a2606;border:0;border-radius:999px;padding:14px 28px;font:800 15.5px var(--sans);cursor:pointer;margin-top:8px}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  #out{margin-top:34px;display:none}
+  .ring-wrap{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .radar{flex-shrink:0}
+  .ov{flex:1;min-width:230px}
+  .ov .big{font:800 46px var(--sans);line-height:1}
+  .ov .lbl{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+  .ov p{font-size:14.5px;color:#cbd8e6;margin:8px 0 0}
+  .focus{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:13px;padding:15px 17px;margin-bottom:11px}
+  .focus .ft{font:800 15.5px var(--sans);color:#fff;display:flex;align-items:center;gap:8px}
+  .focus .sc{font:700 12px var(--sans);color:var(--gold);margin-left:auto}
+  .focus ul{margin:9px 0 0;padding-left:19px}.focus li{font-size:13.5px;color:#cbd8e6;margin:5px 0}
+  .res{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+  .res a{font:600 12.5px var(--sans);background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:8px;padding:5px 10px;color:var(--teal)}
+  .prog{background:var(--card2);border:1px solid var(--line);border-radius:11px;padding:13px 15px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
+  .prog .pn{font:800 14.5px var(--sans);color:#fff}.prog .pd{font-size:12.5px;color:var(--mut)}
+  .indesign{background:rgba(124,156,255,.08);border:1px solid rgba(124,156,255,.3);border-radius:12px;padding:15px 17px;margin:24px 0 0;font-size:13.5px;color:#cdd8ef;line-height:1.55}
+  .indesign b{color:#b9c6ef}
+  .foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+  @media(max-width:520px){.radar{margin:0 auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Academic leadership</div>
+  <h1>Lead teaching &amp; learning — at every level</h1>
+  <p class="lede">Many of the sector's best educators want to step up — from coordinator, to program lead, to Associate Dean, to sector leadership — but the path rarely comes with a map. Rate yourself across six evidence-based leadership capabilities and get a development pathway matched to free NTLSN tools and the sector's leadership programs.</p>
+  <div class="ground">Grounded in <b>Scott, Coates &amp; Anderson (2008), <i>Learning Leaders in Times of Change: Academic Leadership Capabilities for Australian Higher Education</i></b> — a landmark ALTC study (rescued in the <a href="/#ntlsn-archive">NTLSN archive</a>). Indicative self-reflection, not a diagnostic. Nothing is uploaded or stored.</p>
+
+  <div class="sec-h">▸ Where are you leading from now?</div>
+  <div class="lvls" id="lvls"></div>
+
+  <div class="sec-h">▸ Rate yourself — 1 (rarely true) to 5 (consistently true)</div>
+  <div id="caps"></div>
+
+  <button class="btn" id="run" type="button">Reveal my leadership profile →</button>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    A free, indicative self-assessment from NTLSN. Pair it with the <a href="/reflective-coach.html">Reflective Coach</a>, the <a href="/recognition-navigator.html">Recognition Navigator</a> and the <a href="/cop-starter.html">CoP Starter Kit</a>. Framework: Scott, Coates &amp; Anderson (2008), ALTC. CC BY-NC-SA 4.0.
+  </div>
+</div>
+
+<script>
+(function(){
+ var LEVELS=['Educator / teaching academic','Course or unit coordinator','Program or discipline lead','Associate Dean (Education) / Director','Institutional or sector leader'];
+ var NEXT=[
+   'Your next move is from doing great teaching to shaping how others teach — take responsibility for a shared task (a unit team, a moderation panel, a CoP).',
+   'Your next move is from coordinating a unit to leading a program — get across the whole-of-course view and how decisions are made above you.',
+   'Your next move is from leading a program to leading across it — influence beyond your discipline and connect your work to institutional strategy.',
+   'Your next move is from running an education portfolio to shaping institutional direction — build sector-level networks and strategic influence.',
+   'Your move is to grow the next generation of leaders — sponsor others, convene across institutions, and shape the sector, not just your own.'
+ ];
+ var CAPS=[
+  {k:'self',ic:'🧭',col:'#4ECDC4',name:'Leading self',
+   items:['I know my leadership values and act on them, even under pressure.','I stay composed and effective when priorities conflict or change suddenly.'],
+   moves:['Name your three non-negotiable leadership values — and where you last compromised one.','Build a brief reflective habit after hard leadership moments (Gibbs or Rolfe).','Find a mentor or coach a level above you to pressure-test your thinking.'],
+   res:[['Reflective Coach','/reflective-coach.html'],['Reflective Practice Prompt','/reflective-prompt.html']]},
+  {k:'others',ic:'🤝',col:'#7C9CFF',name:'Developing others',
+   items:['I actively develop and mentor colleagues, not just allocate tasks.','I build collaborative teams or communities rather than carrying the load alone.'],
+   moves:['Start or join a Community of Practice; give one colleague a stretch opportunity this month.','Swap one “I’ll do it” for “let’s do it together — you lead, I’ll back you.”','Make recognition explicit: nominate a colleague for a citation or award.'],
+   res:[['CoP Starter Kit','/cop-starter.html'],['Partnership Agreement Builder','/partnership-agreement.html'],['Recognition Navigator','/recognition-navigator.html']]},
+  {k:'strategic',ic:'🏛️',col:'#C57BFF',name:'Strategic &amp; institutional thinking',
+   items:['I understand how my university makes decisions and allocates resources.','I can connect my own work to institutional strategy and sector-wide change.'],
+   moves:['Read your university’s strategic plan and map one of your projects onto it.','Track one sector signal (TEQSA, the Accord, ATEC) and what it means for your area.','Ask to observe a committee one level above your own.'],
+   res:[['The NTLSN Teaching Diagnostic','/diagnostic.html'],['Program Review Readiness','/program-review.html']]},
+  {k:'influence',ic:'📣',col:'#FFB448',name:'Influence beyond authority',
+   items:['I influence decisions and people I don’t formally manage.','I build coalitions and bring others with me through a change.'],
+   moves:['Map your next initiative’s stakeholders — who decides, who influences, who’s affected.','Practise the one-sentence case for your idea, framed in the other person’s priorities.','Build the relationships before you need them — across schools, not just within yours.'],
+   res:[['Find Your SoTL Path','/find-your-path.html'],['World Teaching Hubs','/teaching-hubs.html']]},
+  {k:'change',ic:'🔄',col:'#6FCF97',name:'Leading change in teaching &amp; learning',
+   items:['I lead teaching &amp; learning change with evidence, not just enthusiasm.','I can take a T&amp;L initiative from an idea to embedded, sustained practice.'],
+   moves:['Frame your next change as a small SoTL study — question, evidence, evaluation.','Pilot small, gather evidence, scale — and plan for what sustains it after you move on.','Bring the sceptics in early; design the change with them, not at them.'],
+   res:[['Assessment Mix &amp; AI-Resilience','/assessment-mix.html'],['SoTL Grant Pitch Builder','/grant-pitch.html'],['Learn from the Sector','/learning-modules.html']]},
+  {k:'inclusive',ic:'⚖️',col:'#C0593A',name:'Navigating power, inclusively',
+   items:['I read and navigate organisational politics and power dynamics.','I lead inclusively — actively widening who is heard, developed and recognised.'],
+   moves:['Notice who speaks and who gets recognised in your meetings — then change it.','Sponsor someone with less power than you into a visible opportunity.','Learn the informal map of how things really get done — and use it ethically.'],
+   res:[['Teaching Recognition Passport','/trp.html'],['Critical Learner Partnerships','/critical-learner-partnerships.html']]}
+ ];
+ var PROGRAMS=[
+  ['WATTLE','Women in academic &amp; professional leadership — cross-institutional programs (Swinburne-convened).','https://www.wattle.edu.au/'],
+  ['Advance HE — Aurora','Leadership development for women in higher education.','https://www.advance-he.ac.uk/programmes-events/aurora'],
+  ['LH Martin Institute','Tertiary education leadership &amp; management (University of Melbourne, CSHE).','https://melbourne-cshe.unimelb.edu.au/lh-martin-institute'],
+  ['HERDSA','Higher Education Research &amp; Development — leadership &amp; academic development.','https://herdsa.org.au/']
+ ];
+
+ var level=-1, ans={};
+ function esc(s){return String(s==null?'':s);}
+
+ var lv=document.getElementById('lvls');
+ lv.innerHTML=LEVELS.map(function(l,i){return '<button class="lvl" data-l="'+i+'" type="button">'+l+'</button>';}).join('');
+ [].forEach.call(lv.querySelectorAll('.lvl'),function(b){b.addEventListener('click',function(){level=+b.getAttribute('data-l');[].forEach.call(lv.querySelectorAll('.lvl'),function(x){x.classList.remove('on');});b.classList.add('on');});});
+
+ var cb=document.getElementById('caps');
+ cb.innerHTML=CAPS.map(function(c){
+   ans[c.k]=[null,null];
+   return '<div class="cap" style="border-left-color:'+c.col+'"><div class="ct">'+c.ic+' '+c.name+'</div>'+
+     c.items.map(function(q,si){
+       return '<div class="stmt"><div class="q">'+q+'</div><div class="scale"><span class="ends">rarely</span>'+
+         [1,2,3,4,5].map(function(n){return '<button class="dot" data-k="'+c.k+'" data-s="'+si+'" data-v="'+n+'" type="button">'+n+'</button>';}).join('')+
+         '<span class="ends">always</span></div></div>';
+     }).join('')+'</div>';
+ }).join('');
+ cb.addEventListener('click',function(e){
+   var b=e.target; if(!b.classList||!b.classList.contains('dot'))return;
+   var k=b.getAttribute('data-k'),s=+b.getAttribute('data-s'),v=+b.getAttribute('data-v');
+   ans[k][s]=v;
+   var sibs=cb.querySelectorAll('.dot[data-k="'+k+'"][data-s="'+s+'"]');
+   [].forEach.call(sibs,function(d){d.classList.toggle('sel',+d.getAttribute('data-v')===v);});
+ });
+
+ function radar(scores){
+   var R=92,cx=110,cy=110,N=CAPS.length,svg='',rings='';
+   for(var r=1;r<=5;r++){var pts='';for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N,rr=R*r/5;pts+=(cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1)+' ';}rings+='<polygon points="'+pts+'" fill="none" stroke="#1f3350" stroke-width="1"/>';}
+   var poly='';for(i=0;i<N;i++){a=-Math.PI/2+i*2*Math.PI/N;var rr=R*scores[i]/5;poly+=(cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1)+' ';}
+   var dots='';for(i=0;i<N;i++){a=-Math.PI/2+i*2*Math.PI/N;rr=R*scores[i]/5;dots+='<circle cx="'+(cx+rr*Math.cos(a)).toFixed(1)+'" cy="'+(cy+rr*Math.sin(a)).toFixed(1)+'" r="3.4" fill="'+CAPS[i].col+'"/>';var lr=R+13;svg+='<text x="'+(cx+lr*Math.cos(a)).toFixed(1)+'" y="'+(cy+lr*Math.sin(a)+3).toFixed(1)+'" fill="#9fb0c3" font-size="9" text-anchor="middle">'+CAPS[i].ic+'</text>';}
+   return '<svg class="radar" width="220" height="220" viewBox="0 0 220 220" aria-label="leadership radar">'+rings+'<polygon points="'+poly+'" fill="rgba(255,180,72,.18)" stroke="#FFB448" stroke-width="2"/>'+dots+svg+'</svg>';
+ }
+
+ document.getElementById('run').onclick=function(){
+   var scores=[],done=0,total=0;
+   CAPS.forEach(function(c){var a=ans[c.k];var got=a.filter(function(x){return x!=null;});total+=2;done+=got.length;var sc=got.length?got.reduce(function(p,q){return p+q;},0)/got.length:0;scores.push(sc);});
+   if(done<total){ if(!confirm('You haven’t rated every statement ('+done+'/'+total+'). Show the profile anyway, using what you’ve rated?')) return; }
+   var overall=Math.round(scores.reduce(function(p,q){return p+q;},0)/CAPS.length/5*100);
+   var idx=CAPS.map(function(c,i){return {i:i,s:scores[i]};}).sort(function(a,b){return a.s-b.s;});
+   var band= overall>=75?['Strong','#6FCF97','You’re leading with real breadth — focus now on the edges below and on growing others.']
+           : overall>=50?['Emerging','#FFB448','A solid base with clear room to stretch — the focus areas below are where the next level lives.']
+           : ['Building','#C57BFF','Early in the leadership journey — pick one focus area below and go deep; depth beats breadth here.'];
+   var html='<div class="sec-h" style="color:#FFB448">▸ Your leadership profile</div>'+
+     '<div class="ring-wrap">'+radar(scores)+
+     '<div class="ov"><div class="big" style="color:'+band[1]+'">'+overall+'%</div><div class="lbl">'+band[0]+' leadership breadth</div><p>'+band[2]+'</p>'+
+     (level>=0?'<p style="color:#cbd8e6"><b style="color:#fff">Where you said you lead from:</b> '+LEVELS[level]+'. '+NEXT[level]+'</p>':'')+'</div></div>';
+
+   html+='<div class="sec-h">▸ Focus here first (your two lowest)</div>';
+   idx.slice(0,2).forEach(function(o){var c=CAPS[o.i];
+     html+='<div class="focus" style="border-left-color:'+c.col+'"><div class="ft">'+c.ic+' '+c.name+'<span class="sc">'+o.s.toFixed(1)+'/5</span></div><ul>'+c.moves.map(function(m){return '<li>'+m+'</li>';}).join('')+'</ul><div class="res">'+c.res.map(function(r){return '<a href="'+r[1]+'">'+r[0]+' →</a>';}).join('')+'</div></div>';
+   });
+
+   html+='<div class="sec-h">▸ The full picture</div>';
+   CAPS.forEach(function(c,i){html+='<div style="display:flex;align-items:center;gap:10px;margin:0 0 7px"><span style="width:150px;font:600 13px var(--sans);color:#cbd8e6">'+c.ic+' '+c.name.replace(/&amp;/g,"&")+'</span><span style="flex:1;height:8px;background:#15263d;border-radius:99px;overflow:hidden"><span style="display:block;height:100%;width:'+(scores[i]/5*100)+'%;background:'+c.col+'"></span></span><span style="width:34px;text-align:right;font:700 12px var(--sans);color:'+c.col+'">'+scores[i].toFixed(1)+'</span></div>';});
+
+   html+='<div class="sec-h">▸ Sector leadership programs</div>';
+   PROGRAMS.forEach(function(p){html+='<div class="prog"><span style="font-size:20px">🎓</span><div><a href="'+p[2]+'" target="_blank" rel="noopener" class="pn">'+p[0]+' ↗</a><div class="pd">'+p[1]+'</div></div></div>';});
+
+   html+='<div class="indesign"><b>🌱 An NTLSN T&amp;L Leadership cohort is in design.</b> A peer-learning program — senior-leader career stories, strategic decision-making, and cross-institutional networking, built for teaching &amp; learning leaders across the sector. For now: this free self-assessment, and the established programs above. <a href="/#ntlsn-zoom">Tell us you’d be interested →</a></div>';
+
+   html+='<button class="btn ghost" id="copy" type="button" style="margin-top:18px">⧉ Copy my development plan</button>';
+
+   var out=document.getElementById('out');out.innerHTML=html;out.style.display='block';out.scrollIntoView({behavior:'smooth',block:'start'});
+   document.getElementById('copy').onclick=function(){
+     var md='# My Teaching & Learning Leadership plan\n\nOverall breadth: '+overall+'% ('+band[0]+')\n'+(level>=0?'Leading from: '+LEVELS[level]+'\n':'')+'\n## Profile\n'+
+       CAPS.map(function(c,i){return '- '+c.name.replace(/&amp;/g,"&")+': '+scores[i].toFixed(1)+'/5';}).join('\n')+
+       '\n\n## Focus first\n'+idx.slice(0,2).map(function(o){var c=CAPS[o.i];return '### '+c.name.replace(/&amp;/g,"&")+' ('+o.s.toFixed(1)+'/5)\n'+c.moves.map(function(m){return '- '+m.replace(/&amp;/g,"&");}).join('\n');}).join('\n\n')+'\n';
+     navigator.clipboard.writeText(md).then(function(){var b=document.getElementById('copy');b.textContent='✓ Copied';setTimeout(function(){b.textContent='⧉ Copy my development plan';},1500);});
+   };
+ };
+})();
+</script>
+</body>
+</html>
