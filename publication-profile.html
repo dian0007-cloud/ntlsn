@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Publication Profile: your open research footprint, by journal quartile</title>
+<meta name="description" content="Enter an ORCID (or a university) and see an open, field-normalised journal-quartile profile of the research outputs — Q1–Q4 distribution, open-access share and reach — built entirely from open OpenAlex data, in your browser. A reflection tool, in the spirit of DORA: quartiles rate the journal, not the work.">
+<meta property="og:title" content="Publication Profile — NTLSN">
+<meta property="og:description" content="An open, field-normalised journal-quartile profile from any ORCID or university. Built from open data, in your browser. Quartiles rate the journal, not you.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);
+    --q1:#4ECDC4;--q2:#73C9A6;--q3:#C9A962;--q4:#8595a8;--qx:#56657a;
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
+  .wrap{max-width:880px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(25px,3.6vw,37px);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 18px;max-width:720px}
+  a{color:var(--teal)}
+  /* DORA caveat — the hero honesty element */
+  .dora{background:linear-gradient(180deg,rgba(201,169,98,.12),rgba(201,169,98,.04));border:1px solid rgba(201,169,98,.34);border-radius:14px;padding:15px 17px;margin:0 0 22px;font-size:14px;color:#e8e0cf}
+  .dora b{color:var(--gold)}
+  .dora .h{display:block;font:800 11px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+  /* mode tabs */
+  .tabs{display:flex;gap:6px;margin:0 0 14px;border:1px solid var(--line);border-radius:12px;padding:5px;background:var(--card);max-width:430px}
+  .tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;font:700 13.5px var(--F);color:var(--mut);cursor:pointer;border:0;background:transparent;transition:.15s}
+  .tab.on{background:rgba(78,205,196,.15);color:var(--teal)}
+  /* input */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 18px}
+  label.fl{display:block;font:700 12.5px var(--F);color:var(--ink);margin:0 0 7px}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  input[type=text]{flex:1;min-width:220px;background:#0a1830;border:1px solid var(--line);border-radius:10px;color:var(--ink);font:500 15px var(--F);padding:12px 14px;outline:none}
+  input[type=text]:focus{border-color:var(--teal)}
+  .btn{background:var(--teal);color:#06222b;border:0;border-radius:10px;font:800 14px var(--F);padding:12px 20px;cursor:pointer;white-space:nowrap}
+  .btn:hover{filter:brightness(1.07)}
+  .btn[disabled]{opacity:.5;cursor:default}
+  .hint{color:var(--mut);font-size:12.5px;margin:9px 0 0}
+  .hint a{cursor:pointer}
+  .err{color:#f3b0a8;font-size:13.5px;margin:10px 0 0;display:none}
+  /* status */
+  .status{display:none;align-items:center;gap:11px;color:var(--mut);font-size:14px;margin:4px 0 18px}
+  .spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.18);border-top-color:var(--teal);border-radius:50%;animation:sp .8s linear infinite;flex:none}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  /* results */
+  #out{display:none}
+  .who{font:800 19px var(--F);margin:2px 0 2px}
+  .whosub{color:var(--mut);font-size:13px;margin:0 0 16px}
+  .head{background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 16px}
+  .bigq{font-size:clamp(26px,4.4vw,40px);font-weight:800;line-height:1.08;letter-spacing:-.01em;margin:0 0 4px}
+  .bigq small{display:block;font:600 13.5px var(--F);color:var(--mut);margin-top:6px;letter-spacing:0}
+  /* stacked quartile bar */
+  .qbar{display:flex;height:34px;border-radius:9px;overflow:hidden;margin:16px 0 8px;border:1px solid var(--line)}
+  .qseg{display:flex;align-items:center;justify-content:center;font:800 12px var(--F);color:#06222b;min-width:0;transition:.2s}
+  .qseg.s1{background:var(--q1)} .qseg.s2{background:var(--q2)} .qseg.s3{background:var(--q3);color:#2a2410} .qseg.s4{background:var(--q4);color:#11171f} .qseg.sx{background:var(--qx);color:#cfd8e3}
+  .qleg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin:4px 0 0}
+  .qleg span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  /* stat chips */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:0 0 16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+  .stat .n{font:800 23px var(--F);color:var(--ink);line-height:1}
+  .stat .l{font-size:11.5px;color:var(--mut);margin-top:5px;letter-spacing:.2px}
+  .stat.oa .n{color:var(--teal)}
+  /* quartile detail cards */
+  h2.sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:24px 0 11px}
+  .qcard{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:12px;margin:0 0 9px;overflow:hidden}
+  .qcard.q1{border-left-color:var(--q1)} .qcard.q2{border-left-color:var(--q2)} .qcard.q3{border-left-color:var(--q3)} .qcard.q4{border-left-color:var(--q4)} .qcard.qx{border-left-color:var(--qx)}
+  .qhead{display:flex;align-items:center;gap:12px;padding:13px 15px;cursor:pointer}
+  .qbadge{font:800 13px var(--F);width:38px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}
+  .q1 .qbadge{background:rgba(78,205,196,.16);color:var(--q1)} .q2 .qbadge{background:rgba(115,201,166,.16);color:var(--q2)} .q3 .qbadge{background:rgba(201,169,98,.16);color:var(--q3)} .q4 .qbadge{background:rgba(133,149,168,.18);color:#aab6c6} .qx .qbadge{background:rgba(86,101,122,.2);color:#9fb0c3;font-size:10px}
+  .qtitle{flex:1;font:700 14.5px var(--F)}
+  .qtitle small{display:block;color:var(--mut);font:500 12px var(--F);margin-top:1px}
+  .qcount{font:800 16px var(--F);color:var(--ink)}
+  .chev{color:var(--mut);font-size:17px;transition:transform .2s;flex:none}
+  .qcard.open .chev{transform:rotate(90deg)}
+  .jlist{display:none;padding:0 15px 13px}
+  .qcard.open .jlist{display:block}
+  .jrow{display:flex;align-items:baseline;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:13.5px}
+  .jrow .jn{flex:1}
+  .jrow .jf{color:var(--mut);font-size:11.5px}
+  .jrow .jc{color:var(--mut);font-size:12px;white-space:nowrap}
+  .jrow .jw{font-weight:800;white-space:nowrap}
+  /* non-journal note */
+  .note{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:13.5px;color:var(--mut);margin:14px 0 0}
+  .note b{color:var(--ink)}
+  /* method/attrib */
+  .method{background:rgba(201,169,98,.06);border:1px solid rgba(201,169,98,.22);border-radius:12px;padding:15px 16px;font-size:12.7px;color:var(--mut);margin:24px 0 0;line-height:1.62}
+  .method b{color:var(--gold)}
+  .method .h{display:block;font:800 11px var(--F);letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);margin:0 0 7px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:20px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  .pill{display:inline-block;background:rgba(78,205,196,.12);color:var(--teal);font:700 11px var(--F);padding:3px 9px;border-radius:20px;margin:0 0 0 6px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Open research footprint</div>
+  <h1>Your publication profile <span class="pill">open data</span></h1>
+  <p class="lead">Enter an ORCID — or a whole university — and see an <b>open, field-normalised journal-quartile profile</b> of the research outputs: the Q1–Q4 spread, the open-access share, and the reach. Built entirely from open <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> data, in your browser. Nothing is stored.</p>
+
+  <div class="dora">
+    <span class="h">Read this first — quartiles rate the journal, not the work</span>
+    A journal quartile measures where a <b>journal</b> sits among its peers — never the quality, worth or productivity of a <b>person</b> or a <b>paper</b>. A Q4 journal can carry landmark work; a Q1 journal can carry weak work. NTLSN shows this profile for <b>reflection and context only</b>, in the spirit of <a href="https://sfdora.org" target="_blank" rel="noopener">DORA</a> — the San Francisco Declaration on Research Assessment, signed by the ARC and most Australian universities — which calls for an end to using journal-based metrics as a proxy for individual research quality. Please use it in that spirit.
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-mode="orcid">By researcher (ORCID)</button>
+    <button class="tab" data-mode="uni">By university</button>
+  </div>
+
+  <div class="panel" id="panel-orcid">
+    <label class="fl" for="orcid">ORCID iD</label>
+    <div class="row">
+      <input type="text" id="orcid" placeholder="0000-0002-1428-2921  (or paste an orcid.org link)" autocomplete="off" spellcheck="false">
+      <button class="btn" id="go-orcid">Build profile</button>
+    </div>
+    <div class="hint">Don't know it? Find any researcher at <a href="https://orcid.org" target="_blank" rel="noopener">orcid.org</a>. &nbsp;·&nbsp; <a id="ex">See an example profile →</a></div>
+    <div class="err" id="err-orcid"></div>
+  </div>
+
+  <div class="panel" id="panel-uni" style="display:none">
+    <label class="fl" for="uni">University or institution</label>
+    <div class="row">
+      <input type="text" id="uni" placeholder="e.g. University of Southern Queensland" autocomplete="off" spellcheck="false">
+      <button class="btn" id="go-uni">Build profile</button>
+    </div>
+    <div class="hint">Builds a profile from the institution's most-published journals (top 200 by output volume). A sector-level mirror, not a ranking of people.</div>
+    <div class="err" id="err-uni"></div>
+  </div>
+
+  <div class="status" id="status"><div class="spin"></div><span id="status-tx">Reading open records…</span></div>
+
+  <div id="out">
+    <div class="who" id="who"></div>
+    <div class="whosub" id="whosub"></div>
+
+    <div class="head">
+      <div class="bigq" id="bigq"></div>
+      <div class="qbar" id="qbar"></div>
+      <div class="qleg" id="qleg"></div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <h2 class="sec">Where the work sits — by journal quartile</h2>
+    <div id="qcards"></div>
+    <div class="note" id="nonj"></div>
+  </div>
+
+  <div class="method">
+    <span class="h">How this is calculated — and what it is not</span>
+    We read public outputs from <b>OpenAlex</b> (open bibliographic data) via the ORCID or institution, match each journal article to its journal, and place that journal in a quartile by its <b>2-year mean citedness, normalised within its primary field of research</b> — so a journal is only ever compared with others in its own discipline. Quartile cut-points come from a 7,000-journal reference sample of active, citing journals (OpenAlex, mid-2026). <b>This is an open approximation.</b> It is <b>not</b> SCImago SJR, Scopus CiteScore or Clarivate JIF, and may differ from a journal's "official" quartile elsewhere. Books, chapters, conference papers and repository deposits are counted in the profile but are not quartile-ranked. NTLSN is independent and not affiliated with OpenAlex, SCImago, Scopus or Clarivate. Everything runs in your browser — your ORCID is sent only to OpenAlex's public API to fetch the public record; nothing is stored or sent anywhere else.
+  </div>
+
+  <div class="foot">A free NTLSN reflection tool. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var MAILTO="mailto=hello@ntlsn.com";
+  var API="https://api.openalex.org";
+  // Field-normalised quartile cut-points (2yr mean citedness), from a 7,000-journal OpenAlex sample, mid-2026.
+  var FQ={"global":{"p25":0.1152,"p50":0.3396,"p75":1.1282,"n":7000},"fields":{
+    "Social Sciences":{"p25":0.075,"p50":0.1875,"p75":0.49,"n":2029},
+    "Medicine":{"p25":0.1429,"p50":0.5143,"p75":1.5297,"n":936},
+    "Engineering":{"p25":0.1857,"p50":0.7843,"p75":2.391,"n":510},
+    "Arts and Humanities":{"p25":0.0698,"p50":0.1494,"p75":0.3684,"n":499},
+    "Computer Science":{"p25":0.1111,"p50":0.3264,"p75":0.9231,"n":475},
+    "Agricultural and Biological Sciences":{"p25":0.1579,"p50":0.3548,"p75":0.9352,"n":403},
+    "Economics, Econometrics and Finance":{"p25":0.18,"p50":0.437,"p75":1.1136,"n":302},
+    "Environmental Science":{"p25":0.1429,"p50":0.5,"p75":1.5017,"n":297},
+    "Business, Management and Accounting":{"p25":0.2328,"p50":0.6053,"p75":1.8541,"n":269},
+    "Psychology":{"p25":0.1974,"p50":0.5402,"p75":1.5169,"n":233},
+    "Health Professions":{"p25":0.1071,"p50":0.2381,"p75":0.6165,"n":188},
+    "Biochemistry, Genetics and Molecular Biology":{"p25":0.7432,"p50":1.7195,"p75":3.1273,"n":154},
+    "Mathematics":{"p25":0.1553,"p50":0.5357,"p75":0.9143,"n":103},
+    "Earth and Planetary Sciences":{"p25":0.3333,"p50":0.8889,"p75":1.7568,"n":95},
+    "Decision Sciences":{"p25":0.1579,"p50":0.4444,"p75":1.7083,"n":75},
+    "Chemistry":{"p25":0.5833,"p50":1.6667,"p75":4.0,"n":74},
+    "Materials Science":{"p25":0.3226,"p50":1.8296,"p75":3.7711,"n":72},
+    "Physics and Astronomy":{"p25":0.4595,"p50":1.5149,"p75":2.6692,"n":60},
+    "Neuroscience":{"p25":0.5833,"p50":1.4444,"p75":2.5492,"n":58},
+    "Dentistry":{"p25":0.129,"p50":0.3689,"p75":1.4755,"n":51},
+    "Nursing":{"p25":0.3404,"p50":1.1143,"p75":2.8498,"n":35},
+    "Energy":{"p25":0.1538,"p50":1.6222,"p75":4.1555,"n":27},
+    "Immunology and Microbiology":{"p25":1.2411,"p50":2.0202,"p75":3.2206,"n":22},
+    "Pharmacology, Toxicology and Pharmaceutics":{"p25":0.4194,"p50":1.3779,"p75":4.5152,"n":21}
+  }};
+  var FMIN=15; // below this sample size for a field, fall back to global cut-points
+
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function cut(field){var f=FQ.fields[field];if(f&&f.n>=FMIN)return f;return FQ.global;}
+  function quartile(cited,field){
+    if(cited==null||!(cited>0))return 0; // 0 = unrated (no/zero recent citedness)
+    var c=cut(field);
+    if(cited>=c.p75)return 1; if(cited>=c.p50)return 2; if(cited>=c.p25)return 3; return 4;
+  }
+  function primaryField(topics){
+    var cnt={},i,f;
+    for(i=0;i<(topics||[]).length;i++){f=(topics[i].field||{}).display_name;if(f)cnt[f]=(cnt[f]||0)+(topics[i].count||1);}
+    var best=null,bc=-1;for(var k in cnt){if(cnt[k]>bc){bc=cnt[k];best=k;}}
+    return best;
+  }
+  function normOrcid(s){var m=String(s||"").match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);return m?m[1].toUpperCase():null;}
+
+  function getJSON(url){
+    return fetch(url,{headers:{"Accept":"application/json"}}).then(function(r){
+      if(!r.ok)throw new Error("HTTP "+r.status);return r.json();
+    });
+  }
+  function setStatus(on,tx){var s=$("status");s.style.display=on?"flex":"none";if(tx)$("status-tx").textContent=tx;}
+  function showErr(which,msg){var e=$("err-"+which);e.textContent=msg;e.style.display=msg?"block":"none";}
+
+  // ---- fetch all works for a works-API filter (cursor paged) ----
+  function fetchWorks(filter,cap,onpage){
+    var sel="select=id,display_name,publication_year,cited_by_count,primary_location,open_access,type";
+    var out=[],cursor="*";
+    function step(){
+      var url=API+"/works?filter="+encodeURIComponent(filter)+"&per_page=200&cursor="+encodeURIComponent(cursor)+"&"+sel+"&"+MAILTO;
+      return getJSON(url).then(function(d){
+        var res=d.results||[];out=out.concat(res);
+        if(onpage)onpage(out.length,(d.meta||{}).count||0);
+        cursor=(d.meta||{}).next_cursor;
+        if(cursor&&res.length&&out.length<cap)return step();
+        return out;
+      });
+    }
+    return step();
+  }
+
+  // ---- batch fetch sources (50 at a time) -> map id -> {field,cited,name,issn} ----
+  function fetchSources(ids){
+    var chunks=[],i;for(i=0;i<ids.length;i+=50)chunks.push(ids.slice(i,i+50));
+    var map={};
+    function step(k){
+      if(k>=chunks.length)return Promise.resolve(map);
+      var url=API+"/sources?filter=ids.openalex:"+chunks[k].join("|")+"&per_page=50&select=id,display_name,issn_l,type,summary_stats,topics&"+MAILTO;
+      return getJSON(url).then(function(d){
+        (d.results||[]).forEach(function(s){
+          var sid=(s.id||"").split("/").pop();
+          var cited=(s.summary_stats||{})["2yr_mean_citedness"];
+          var fld=primaryField(s.topics);
+          map[sid]={name:s.display_name,issn:s.issn_l,field:fld,cited:(cited==null?null:cited),q:quartile(cited,fld)};
+        });
+        return step(k+1);
+      });
+    }
+    return step(0);
+  }
+
+  // ---- shared: turn a list of works into a profile + render ----
+  function buildFromWorks(works,ctx){
+    // tally non-journal vs journal; collect journal source ids with per-source work counts
+    var srcCount={},journalWorks=0,nonJournal=0,repo=0,books=0,oa=0,cites=0,years={},fields={},total=works.length;
+    works.forEach(function(w){
+      if((w.open_access||{}).is_oa)oa++;
+      cites+=w.cited_by_count||0;
+      if(w.publication_year)years[w.publication_year]=1;
+      var pl=w.primary_location||{},src=pl.source||{};
+      var st=src.type;
+      if(src.id&&st==="journal"){var sid=src.id.split("/").pop();srcCount[sid]=(srcCount[sid]||0)+1;journalWorks++;}
+      else{nonJournal++; if(st==="repository")repo++; if(w.type==="book"||w.type==="book-chapter")books++;}
+    });
+    var ids=Object.keys(srcCount);
+    setStatus(true,"Placing "+ids.length+" journals in their fields…");
+    return fetchSources(ids).then(function(smap){
+      // aggregate quartiles, weighted by the author's number of works in each journal
+      var qn={1:0,2:0,3:0,4:0,0:0}, byq={1:[],2:[],3:[],4:[],0:[]};
+      ids.forEach(function(sid){
+        var s=smap[sid]||{q:0,name:sid,field:null,cited:null};
+        var n=srcCount[sid];
+        qn[s.q]+=n;
+        byq[s.q].push({name:s.name,field:s.field,cited:s.cited,n:n});
+        if(s.field)fields[s.field]=(fields[s.field]||0)+n;
+      });
+      render({
+        ctx:ctx,total:total,journalWorks:journalWorks,nonJournal:nonJournal,repo:repo,books:books,
+        oa:oa,cites:cites,years:Object.keys(years).map(Number).filter(Boolean),
+        fields:fields,qn:qn,byq:byq,rankedJournals:ids.length
+      });
+    });
+  }
+
+  var QMETA={1:{t:"Q1",d:"Top quarter of journals in their field"},2:{t:"Q2",d:"Upper-middle quarter"},3:{t:"Q3",d:"Lower-middle quarter"},4:{t:"Q4",d:"Bottom quarter by recent citation rate"},0:{t:"—",d:"Not rated (no recent citation data / new or niche journal)"}};
+
+  function render(p){
+    var ranked=p.qn[1]+p.qn[2]+p.qn[3]+p.qn[4];
+    var q12=p.qn[1]+p.qn[2];
+    // headline
+    var pct=ranked?Math.round(100*q12/ranked):0;
+    $("bigq").innerHTML = ranked
+      ? pct+"% of rated journal articles sit in <span style='color:var(--q1)'>Q1–Q2</span> journals."
+        +"<small>"+q12+" of "+ranked+" rated journal outputs · field-normalised, open metric</small>"
+      : "No journal articles with citation data found yet.<small>Books, chapters and repository deposits are listed below.</small>";
+    // stacked bar
+    var bar="",leg="",segs=[[1,"s1","Q1"],[2,"s2","Q2"],[3,"s3","Q3"],[4,"s4","Q4"],[0,"sx","—"]];
+    var denom=ranked+p.qn[0];
+    segs.forEach(function(s){
+      var n=p.qn[s[0]];if(!n)return;
+      var w=denom?(100*n/denom):0;
+      bar+="<div class='qseg "+s[1]+"' style='flex:"+n+" "+n+" 0' title='"+s[2]+": "+n+"'>"+(w>9?n:"")+"</div>";
+    });
+    $("qbar").innerHTML=bar||"<div class='qseg sx' style='flex:1'>—</div>";
+    var cols={1:"--q1",2:"--q2",3:"--q3",4:"--q4",0:"--qx"};
+    segs.forEach(function(s){var n=p.qn[s[0]];if(!n)return;leg+="<span><i class='dot' style='background:var("+cols[s[0]]+")'></i>"+s[2]+" · "+n+"</span>";});
+    $("qleg").innerHTML=leg;
+    // stats
+    var yrs=p.years.length?(Math.min.apply(null,p.years)+"–"+Math.max.apply(null,p.years)):"—";
+    var topf=Object.keys(p.fields).sort(function(a,b){return p.fields[b]-p.fields[a];}).slice(0,2).join(", ")||"—";
+    var oaPct=p.total?Math.round(100*p.oa/p.total):0;
+    var st=p.stats||[
+      ["n",p.total,"total outputs"],
+      ["n",p.journalWorks,"journal articles"],
+      ["oa",oaPct+"%","open access"],
+      ["n",p.cites.toLocaleString(),"citations (all-time)"],
+      ["n",yrs,"active years"],
+      ["n",topf,"main field"]
+    ];
+    $("stats").innerHTML=st.map(function(s){return "<div class='stat "+(s[0]==='oa'?'oa':'')+"'><div class='n'>"+esc(s[1])+"</div><div class='l'>"+s[2]+"</div></div>";}).join("");
+    // quartile cards
+    var order=[1,2,3,4,0],html="";
+    order.forEach(function(q){
+      var n=p.qn[q];if(!n)return;
+      var list=p.byq[q].slice().sort(function(a,b){return b.n-a.n||(b.cited||0)-(a.cited||0);});
+      var rows=list.map(function(j){
+        return "<div class='jrow'><span class='jn'>"+esc(j.name)+"<span class='jf'> · "+esc(j.field||"field n/a")+"</span></span>"
+          +"<span class='jc'>citedness "+(j.cited==null?"n/a":(Math.round(j.cited*100)/100))+"</span>"
+          +"<span class='jw'>"+j.n+"×</span></div>";
+      }).join("");
+      html+="<div class='qcard q"+(q||'x')+"'><div class='qhead'><div class='qbadge'>"+QMETA[q].t+"</div>"
+        +"<div class='qtitle'>"+(q?("Quartile "+q):"Not rated")+"<small>"+QMETA[q].d+"</small></div>"
+        +"<div class='qcount'>"+n+"</div><div class='chev'>›</div></div>"
+        +"<div class='jlist'>"+rows+"</div></div>";
+    });
+    $("qcards").innerHTML=html;
+    // non-journal note
+    var bits=[];
+    if(p.repo)bits.push(p.repo+" repository deposit"+(p.repo>1?"s":""));
+    if(p.books)bits.push(p.books+" book"+(p.books>1?"s":"")+" / chapter"+(p.books>1?"s":""));
+    var other=p.nonJournal-p.repo-p.books; if(other>0)bits.push(other+" other output"+(other>1?"s":"")+" (conference, dataset, etc.)");
+    $("nonj").innerHTML = p.nonJournal
+      ? "<b>"+p.nonJournal+" outputs are not journal-ranked</b> — "+bits.join(", ")+". Quartiles only apply to journals, so these sit outside the bars above. Many of the most valuable scholarly outputs (books, open resources, datasets) carry no quartile at all — which is part of why a quartile profile is only ever one narrow lens."
+      : "";
+    $("nonj").style.display=p.nonJournal?"block":"none";
+
+    $("who").textContent=p.ctx.title;
+    $("whosub").innerHTML=p.ctx.sub;
+    setStatus(false);
+    $("out").style.display="block";
+    bindCards();
+  }
+
+  function bindCards(){
+    Array.prototype.forEach.call(document.querySelectorAll(".qhead"),function(h){
+      h.onclick=function(){h.parentNode.classList.toggle("open");};
+    });
+    var f=document.querySelector(".qcard");if(f)f.classList.add("open");
+  }
+
+  // ---- ORCID flow ----
+  function runOrcid(raw){
+    showErr("orcid","");
+    var orcid=normOrcid(raw);
+    if(!orcid){showErr("orcid","That doesn't look like an ORCID iD. It should look like 0000-0002-1428-2921.");return;}
+    $("out").style.display="none";setStatus(true,"Finding the ORCID record…");
+    // resolve author for a friendly name + counts
+    getJSON(API+"/authors/orcid:"+orcid+"?"+MAILTO).catch(function(){return null;}).then(function(a){
+      var name=a&&a.display_name?a.display_name:orcid;
+      var inst=a&&(a.last_known_institutions&&a.last_known_institutions[0])?a.last_known_institutions[0].display_name:(a&&a.last_known_institution?a.last_known_institution.display_name:"");
+      setStatus(true,"Reading "+(a?(a.works_count+" "):"")+"outputs from OpenAlex…");
+      return fetchWorks("author.orcid:"+orcid,1200,function(got,tot){setStatus(true,"Read "+got+(tot?(" of "+tot):"")+" outputs…");}).then(function(works){
+        if(!works.length){showErr("orcid","No outputs found in OpenAlex for that ORCID yet.");setStatus(false);return;}
+        return buildFromWorks(works,{title:name,sub:(inst?esc(inst)+" · ":"")+"ORCID "+orcid+" · via OpenAlex"});
+      });
+    }).catch(function(e){showErr("orcid","Couldn't reach OpenAlex just now ("+e.message+"). Try again in a moment.");setStatus(false);});
+  }
+
+  // ---- University flow: top journals by output volume (group_by) ----
+  function runUni(raw){
+    showErr("uni","");
+    var q=(raw||"").trim();
+    if(q.length<3){showErr("uni","Type at least a few letters of the university name.");return;}
+    $("out").style.display="none";setStatus(true,"Finding the institution…");
+    getJSON(API+"/institutions?search="+encodeURIComponent(q)+"&per_page=1&select=id,display_name,works_count,country_code&"+MAILTO).then(function(d){
+      var inst=(d.results||[])[0];
+      if(!inst){showErr("uni","No institution matched \""+esc(q)+"\".");setStatus(false);return;}
+      var iid=inst.id.split("/").pop();
+      setStatus(true,"Reading "+inst.display_name+"'s most-used journals…");
+      // group works by source -> top journals by volume
+      var url=API+"/works?filter="+encodeURIComponent("authorships.institutions.id:"+iid+",type:article")+"&group_by=primary_location.source.id&per_page=200&"+MAILTO;
+      return getJSON(url).then(function(g){
+        var groups=(g.group_by||[]).filter(function(x){return x.key&&x.key.indexOf("S")>-1;}).slice(0,200);
+        var srcCount={},ids=[];
+        groups.forEach(function(x){var sid=x.key.split("/").pop();if(sid&&sid.charAt(0)==="S"){srcCount[sid]=x.count;ids.push(sid);}});
+        if(!ids.length){showErr("uni","Couldn't read journal data for that institution.");setStatus(false);return;}
+        setStatus(true,"Placing "+ids.length+" journals in their fields…");
+        return fetchSources(ids).then(function(smap){
+          var qn={1:0,2:0,3:0,4:0,0:0},byq={1:[],2:[],3:[],4:[],0:[]},fields={},jw=0;
+          ids.forEach(function(sid){
+            var s=smap[sid]||{q:0,name:sid,field:null,cited:null};var n=srcCount[sid];jw+=n;
+            qn[s.q]+=n;byq[s.q].push({name:s.name,field:s.field,cited:s.cited,n:n});
+            if(s.field)fields[s.field]=(fields[s.field]||0)+n;
+          });
+          var rk=qn[1]+qn[2]+qn[3]+qn[4];
+          var topf=Object.keys(fields).sort(function(a,b){return fields[b]-fields[a];}).slice(0,2).join(", ")||"—";
+          var ustats=[
+            ["n",(inst.works_count||0).toLocaleString(),"works at institution"],
+            ["n",ids.length,"top journals analysed"],
+            ["n",jw.toLocaleString(),"outputs in those journals"],
+            ["oa",(rk?Math.round(100*qn[1]/rk):0)+"%","in Q1 journals"],
+            ["n",topf,"main field"]
+          ];
+          render({ctx:{title:inst.display_name,sub:"Institutional profile · top "+ids.length+" journals by output volume · "+(inst.works_count||0).toLocaleString()+" total works · via OpenAlex"},
+            total:jw,journalWorks:jw,nonJournal:0,repo:0,books:0,oa:0,cites:0,years:[],fields:fields,qn:qn,byq:byq,rankedJournals:ids.length,stats:ustats});
+        });
+      });
+    }).catch(function(e){showErr("uni","Couldn't reach OpenAlex just now ("+e.message+").");setStatus(false);});
+  }
+
+  // ---- wire UI ----
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){
+    t.onclick=function(){
+      Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(x){x.classList.remove("on");});
+      t.classList.add("on");
+      var m=t.getAttribute("data-mode");
+      $("panel-orcid").style.display=m==="orcid"?"block":"none";
+      $("panel-uni").style.display=m==="uni"?"block":"none";
+      $("out").style.display="none";setStatus(false);
+    };
+  });
+  $("go-orcid").onclick=function(){runOrcid($("orcid").value);};
+  $("orcid").addEventListener("keydown",function(e){if(e.key==="Enter")runOrcid($("orcid").value);});
+  $("go-uni").onclick=function(){runUni($("uni").value);};
+  $("uni").addEventListener("keydown",function(e){if(e.key==="Enter")runUni($("uni").value);});
+  $("ex").onclick=function(){$("orcid").value="0000-0002-1428-2921";runOrcid("0000-0002-1428-2921");};
+})();
+</script>
+</body>
+</html>

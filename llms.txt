@@ -65,3 +65,5 @@
 - [AI for Marking & Feedback crash course](https://www.ntlsn.com/ai-marking-crash-course.html)
 - [Rubric Builder — scaffold a marking rubric (free tool)](https://www.ntlsn.com/rubric-builder.html)
 - [Your NTLSN — a glanceable teaching dashboard you build from widgets](https://www.ntlsn.com/widgets.html)
+- [The SoTL Index — a free, open, DORA-aligned 1–7 spectrum of Scholarship of Teaching & Learning; enter an ORCID or university for a developmental band fully decomposed into field-normalised reach, openness, SoTL focus, collaboration & sustained contribution; built from open OpenAlex data, a reflection tool not a ranking](https://www.ntlsn.com/sotl-index.html)
+- [Responsible Research Assessment — a curated hub of DORA, the Leiden Manifesto, the Hong Kong Principles, practical guides, good practices, case studies, initiatives & tools for assessing scholarship beyond the impact factor; curated from DORA's Resource Library](https://www.ntlsn.com/responsible-assessment.html)
