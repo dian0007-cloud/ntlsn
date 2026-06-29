@@ -13,7 +13,7 @@
   :root{
     --navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;
     --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);
-    --d1:#4ECDC4;--d2:#73C9A6;--d3:#C9A962;--d4:#8FB8E0;--d5:#B79CE0;
+    --d1:#4ECDC4;--d2:#73C9A6;--d3:#C9A962;--d4:#8FB8E0;--d5:#B79CE0;--d6:#E2B266;
     --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
   }
   *{box-sizing:border-box}
@@ -152,7 +152,7 @@
 
   <div class="method">
     <span class="h">How the SoTL Index is built — and what it is not</span>
-    Public outputs are read from <b>OpenAlex</b> (open bibliographic data) via the ORCID or institution. Five dimensions, each scored 0–100, then mapped to a <b>1–7 developmental spectrum</b> (you can re-weight every dimension live) — a spectrum, not a precise score, because reducing a scholar to a fine-grained rank is exactly what DORA cautions against: <b>Reach</b> — citations per output, <b>normalised to the author's primary field</b> so teaching/education scholars are judged fairly, not against lab sciences. <b>Openness</b> — share of outputs that are open access. <b>SoTL focus</b> — share of outputs that are genuinely teaching-&-learning scholarship (recognised SoTL/higher-education journals + education-tagged work). <b>Collaboration</b> — breadth of the co-authorship network. <b>Sustained contribution</b> — consistency of scholarly output over time. Grounded in <b>Boyer's scholarship of teaching</b>, <b>Glassick's standards</b> and <b>DORA</b>. It is an <b>open, in-development instrument for reflection</b> — not SCImago, Scopus or Clarivate; not a measure of a person's worth or their teaching; and explicitly not a tool for ranking individuals against each other. Calibration constants are deliberately transparent and will be refined with the sector. NTLSN is independent of OpenAlex and all metric providers. Everything runs in your browser; nothing is stored.
+    Public outputs are read from <b>OpenAlex</b> (open bibliographic data) via the ORCID or institution. Five dimensions, each scored 0–100, then mapped to a <b>1–7 developmental spectrum</b> (you can re-weight every dimension live) — a spectrum, not a precise score, because reducing a scholar to a fine-grained rank is exactly what DORA cautions against: <b>Reach</b> — citations per output, <b>normalised to the author's primary field</b> so teaching/education scholars are judged fairly, not against lab sciences. <b>Openness</b> — share of outputs that are open access. <b>SoTL focus</b> — share of outputs that are genuinely teaching-&-learning scholarship (recognised SoTL/higher-education journals + education-tagged work). <b>Collaboration</b> — breadth of the co-authorship network. <b>Sustained contribution</b> — consistency of scholarly output over time. <b>Recognition &amp; awards</b> — an optional sixth dimension you add yourself (fellowships, teaching awards, editorial and leadership roles no database can see); it starts un-weighted so it never penalises a blank. Grounded in <b>Boyer's scholarship of teaching</b>, <b>Glassick's standards</b> and <b>DORA</b>. It is an <b>open, in-development instrument for reflection</b> — not SCImago, Scopus or Clarivate; not a measure of a person's worth or their teaching; and explicitly not a tool for ranking individuals against each other. Calibration constants are deliberately transparent and will be refined with the sector. NTLSN is independent of OpenAlex and all metric providers. Everything runs in your browser; nothing is stored.
   </div>
 
   <div class="foot">A free NTLSN reflection tool, in development. &nbsp;·&nbsp; <a href="/sotl-index-methodology.html">Read the methodology →</a> &nbsp;·&nbsp; <a href="/narrative-cv.html">Narrative CV builder →</a> &nbsp;·&nbsp; <a href="/responsible-assessment.html">RRA hub →</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
@@ -245,7 +245,8 @@
       open:{s:Math.round(100*(n?oa/n:0)), det:oa+" of "+n+" outputs open access ("+Math.round(100*(n?oa/n:0))+"%)"},
       sotl:{s:Math.round(100*(jworks?sotl/jworks:0)), det:sotl+" of "+jworks+" journal outputs in teaching-&-learning venues"},
       collab:{s:Math.round(100*clamp(distinctCo/COLLAB_REF,0,1)), det:distinctCo+" distinct co-authors · "+crossInst+" cross-institution outputs"},
-      sustain:{s:Math.round(100*0.5*(consistency+maturity)), det:active+" active years across a "+span+"-year span"}
+      sustain:{s:Math.round(100*0.5*(consistency+maturity)), det:active+" active years across a "+span+"-year span"},
+      recog:{s:computeRecog(), det:recogDet()}
     };
     return {D:D, raw:{n:n,oa:oa,cites:cites,jworks:jworks,sotl:sotl,pf:pf,yrs:yrs,nonJournal:nonJournal,repo:repo,books:books,distinctCo:distinctCo}};
   }
@@ -255,10 +256,26 @@
     {k:"open",ic:"🔓",c:"--d2",name:"Openness",sub:"Open-access share of outputs"},
     {k:"sotl",ic:"🎓",c:"--d3",name:"SoTL focus",sub:"Share that is teaching-&-learning scholarship"},
     {k:"collab",ic:"🤝",c:"--d4",name:"Collaboration",sub:"Breadth of the co-authorship network"},
-    {k:"sustain",ic:"⏳",c:"--d5",name:"Sustained contribution",sub:"Consistency of output over time"}
+    {k:"sustain",ic:"⏳",c:"--d5",name:"Sustained contribution",sub:"Consistency of output over time"},
+    {k:"recog",ic:"🏅",c:"--d6",name:"Recognition & awards",sub:"What bibliometrics can't see — add your own",manual:true}
   ];
-  var weights={reach:20,open:20,sotl:20,collab:20,sustain:20};
+  var weights={reach:20,open:20,sotl:20,collab:20,sustain:20,recog:0};
   var CUR=null; // current scored result
+  // Recognition is MANUAL — bibliometrics can't see fellowships, awards, editorial or leadership roles. Opt-in (weight defaults to 0).
+  var RECOG_ITEMS=[
+    {k:"fel",label:"Advance HE Fellowship — FHEA / SFHEA / PFHEA (or equivalent)",pts:30},
+    {k:"awn",label:"National teaching award or citation (e.g. AAUT)",pts:40},
+    {k:"awi",label:"Institutional teaching award or citation",pts:20},
+    {k:"ed",label:"Journal editor or editorial board (teaching & learning)",pts:20},
+    {k:"key",label:"Invited keynote or plenary on teaching & learning",pts:15},
+    {k:"grant",label:"Led a teaching & learning grant or fellowship",pts:25},
+    {k:"lead",label:"Formal T&L leadership role (program / school or above)",pts:20},
+    {k:"rev",label:"Regular peer reviewer for T&L journals or conferences",pts:10},
+    {k:"prof",label:"Office-bearer in a teaching & learning professional body",pts:15}
+  ];
+  var RECOG={};
+  function computeRecog(){var t=0;RECOG_ITEMS.forEach(function(it){if(RECOG[it.k])t+=it.pts;});return Math.min(100,t);}
+  function recogDet(){var n=0;RECOG_ITEMS.forEach(function(it){if(RECOG[it.k])n++;});return n?(n+" form"+(n>1?"s":"")+" of recognition added — capped at 100, then weight it in":"Tick what applies — bibliometrics can't see this, so it starts at weight 0 until you add it.");}
 
   function composite(){
     var tot=0,wsum=0;
@@ -288,18 +305,33 @@
   }
   function renderDims(){
     $("dims").innerHTML=DIM.map(function(d){
-      var sc=CUR.D[d.k];
+      var sc=CUR.D[d.k], body;
+      if(d.manual){
+        body="<div class='dimdet'>"+esc(sc.det)+"</div><div style='margin:9px 0 1px'>"
+          +RECOG_ITEMS.map(function(it){return "<label style=\"display:flex;gap:9px;align-items:flex-start;padding:5px 0;font-size:13px;color:#d4def0;cursor:pointer\"><input type='checkbox' data-rk='"+it.k+"'"+(RECOG[it.k]?" checked":"")+" style='margin-top:3px;flex:none;accent-color:var(--d6)'><span style='flex:1'>"+it.label+"</span><span style='color:var(--mut)'>+"+it.pts+"</span></label>";}).join("")
+          +"</div>";
+      } else {
+        body="<div class='track'><div class='fill' style='width:"+sc.s+"%;background:var("+d.c+")'></div></div><div class='dimdet'>"+esc(sc.det)+"</div>";
+      }
       return "<div class='dim'><div class='dimtop'>"
         +"<div class='dimic' style='background:var("+d.c+");color:#06222b'>"+d.ic+"</div>"
         +"<div class='dimname'>"+d.name+"<small>"+d.sub+"</small></div>"
         +"<div class='dimscore' style='color:var("+d.c+")'>"+sc.s+"</div></div>"
-        +"<div class='track'><div class='fill' style='width:"+sc.s+"%;background:var("+d.c+")'></div></div>"
-        +"<div class='dimdet'>"+esc(sc.det)+"</div>"
+        +body
         +"<div class='wt'>weight <input type='range' min='0' max='40' value='"+weights[d.k]+"' data-k='"+d.k+"'> <b data-wv='"+d.k+"'>"+weights[d.k]+"%</b></div>"
         +"</div>";
     }).join("");
     Array.prototype.forEach.call(document.querySelectorAll(".wt input"),function(r){
       r.oninput=function(){weights[r.getAttribute("data-k")]=+r.value;document.querySelector("[data-wv='"+r.getAttribute("data-k")+"']").textContent=r.value+"%";renderSpectrum();};
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("input[data-rk]"),function(cb){
+      cb.onchange=function(){
+        RECOG[cb.getAttribute("data-rk")]=cb.checked;
+        CUR.D.recog.s=computeRecog(); CUR.D.recog.det=recogDet();
+        if(weights.recog===0 && CUR.D.recog.s>0){weights.recog=20; var rs=document.querySelector(".wt input[data-k='recog']"); if(rs)rs.value=20; var rb=document.querySelector("[data-wv='recog']"); if(rb)rb.textContent="20%";}
+        var card=cb.closest(".dim"); if(card){card.querySelector(".dimscore").textContent=CUR.D.recog.s; var dt=card.querySelector(".dimdet"); if(dt)dt.textContent=CUR.D.recog.det;}
+        renderSpectrum();
+      };
     });
   }
   function renderStats(){
