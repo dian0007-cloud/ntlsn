@@ -5545,6 +5545,21 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
 })();</script>
 <script id="ntlsn-titlesize-script">(function(){if(window.__ntlsnTitleSize)return;window.__ntlsnTitleSize=1;function norm(){var p=document.getElementById("hero");if(!p||!p.parentNode)return;[].forEach.call(p.parentNode.children,function(sec){if(sec.id==="hero")return;if(sec.tagName!=="SECTION" && !(sec.id||"").length)return;var h=sec.querySelector("h1,h2,h3");if(!h)return;var fs=parseFloat(getComputedStyle(h).fontSize)||0;if(fs>46)h.style.setProperty("font-size","42px","important");else if(fs>0 && fs<31)h.style.setProperty("font-size","34px","important");});}setTimeout(norm,1500);setTimeout(norm,4000);setTimeout(norm,8000);var pend=null;try{new MutationObserver(function(){if(pend)return;pend=setTimeout(function(){pend=null;try{norm();}catch(e){}},600);}).observe(document.getElementById("hero").parentNode,{childList:true,subtree:true});}catch(e){}})();</script>
 <style id="ntlsn-vispolish">#events{background-color:transparent!important;}#root h1,#root h2,#root h3{font-family:'Plus Jakarta Sans',-apple-system,"Segoe UI",Roboto,sans-serif!important;}</style>
+<script id="ntlsn-acknowledgement-script">(function(){
+ if(window.__ntlsnAck)return; window.__ntlsnAck=1;
+ var TXT="NTLSN acknowledges the Traditional Custodians of the lands, waters and skies across Australia on which we live, work, teach and learn — and pays respect to Elders past and present, honouring their continuing connection to Country, knowledge and community.";
+ function build(){
+  if(document.getElementById('ntlsn-ack-strip')) return;
+  try{ if(sessionStorage.getItem('ntlsn_ack_seen')==='1') return; }catch(e){}
+  if(!document.body) return;
+  var s=document.createElement('div'); s.id='ntlsn-ack-strip'; s.setAttribute('role','note'); s.setAttribute('aria-label','Acknowledgement of Country');
+  s.style.cssText="position:fixed;left:0;right:0;bottom:0;z-index:2147482000;background:linear-gradient(90deg,#13243f,#0f1f3a 70%);border-top:1px solid rgba(216,150,90,.4);box-shadow:0 -7px 26px rgba(0,0,0,.34);padding:11px 46px 11px 20px;text-align:center;font:500 12.7px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#d3dde8;letter-spacing:.1px";
+  s.innerHTML="<span style='color:#d8965a'>◇</span> "+TXT+"<button type='button' aria-label='Dismiss acknowledgement' style='position:absolute;right:12px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#9fb0c3;font:700 19px/1 sans-serif;cursor:pointer;padding:4px 8px'>×</button>";
+  document.body.appendChild(s);
+  var b=s.querySelector('button'); if(b){ b.onclick=function(){ try{sessionStorage.setItem('ntlsn_ack_seen','1');}catch(e){} s.parentNode&&s.parentNode.removeChild(s); }; }
+ }
+ build(); setTimeout(build,600); setTimeout(build,2200); setTimeout(build,5000);
+})();</script>
 <script id="ntlsn-startgrid-script">(function(){
  if(window.__ntlsnStartGrid)return; window.__ntlsnStartGrid=1;
  var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
