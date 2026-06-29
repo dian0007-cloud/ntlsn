@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Narrative CV Builder: a DORA-aligned résumé for teaching scholarship</title>
+<meta name="description" content="A free, in-browser builder for a DORA-aligned narrative CV — the alternative to the publication-list CV. Structured on the R4RI / Royal Society narrative model, oriented to the Scholarship of Teaching & Learning. Write, count words, export. Nothing is stored.">
+<meta property="og:title" content="Narrative CV Builder — NTLSN">
+<meta property="og:description" content="Build a DORA-aligned narrative CV for teaching scholarship — assess the contribution, not the metrics. Free, in-browser, exportable.">
+<meta property="og:type" content="website">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--warn:#F0A868;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
+  .wrap{max-width:840px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(27px,4.2vw,42px);margin:0 0 9px;font-weight:800;letter-spacing:-.015em;line-height:1.05}
+  h1 .g{background:linear-gradient(100deg,var(--teal),#86ece3 60%,var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 18px;max-width:710px}
+  a{color:var(--teal)}
+  .dora{background:linear-gradient(180deg,rgba(201,169,98,.13),rgba(201,169,98,.04));border:1px solid rgba(201,169,98,.34);border-radius:14px;padding:16px 18px;margin:0 0 18px;font-size:14px;color:#ece4d2}
+  .dora b{color:var(--gold)}
+  .dora .h{display:block;font:800 11px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+  .xlink{display:inline-flex;gap:7px;align-items:center;background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.28);border-radius:20px;padding:6px 13px;font:700 12.5px var(--F);color:var(--teal);margin:0 0 20px;text-decoration:none}
+  .xlink:hover{background:rgba(78,205,196,.16)}
+  .idrow{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+  .idrow input{flex:1;min-width:200px;background:#0a1830;border:1px solid var(--line);border-radius:10px;color:var(--ink);font:600 15px var(--F);padding:11px 13px;outline:none}
+  .idrow input:focus{border-color:var(--teal)}
+  .mod{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 13px;overflow:hidden}
+  .mhead{display:flex;align-items:center;gap:13px;padding:15px 17px;cursor:pointer;user-select:none}
+  .mhead:hover{background:rgba(255,255,255,.02)}
+  .mnum{width:30px;height:30px;border-radius:9px;background:rgba(78,205,196,.13);color:var(--teal);font:800 14px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
+  .mtitle{flex:1;font:700 16px var(--F)}
+  .mtitle small{display:block;color:var(--mut);font:500 12.5px var(--F);margin-top:1px}
+  .chev{color:var(--mut);font-size:18px;transition:transform .2s}
+  .mod.open .chev{transform:rotate(90deg)}
+  .mbody{display:none;padding:0 17px 17px}
+  .mod.open .mbody{display:block}
+  .guide{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:0 0 11px;font-size:13px;color:var(--mut)}
+  .guide b{color:var(--ink)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
+  .chip{background:rgba(201,169,98,.1);color:var(--gold);font:600 11.5px var(--F);padding:4px 10px;border-radius:14px}
+  textarea{width:100%;min-height:120px;background:#0a1830;border:1px solid var(--line);border-radius:10px;color:var(--ink);font:400 14.5px var(--F);line-height:1.6;padding:12px 14px;outline:none;resize:vertical}
+  textarea:focus{border-color:var(--teal)}
+  .wc{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin:7px 2px 0}
+  .wc .over{color:var(--warn);font-weight:700}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+  .btn{background:var(--teal);color:#06222b;border:0;border-radius:10px;font:800 14px var(--F);padding:11px 18px;cursor:pointer}
+  .btn:hover{filter:brightness(1.07)}
+  .btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn.alt:hover{border-color:var(--teal)}
+  #preview{display:none;background:#fff;color:#1a2230;border-radius:12px;padding:26px 30px;margin:18px 0 0;font-size:14.5px;line-height:1.6}
+  #preview h2{font-size:21px;margin:0 0 2px}
+  #preview .pr{color:#5a6675;font-size:13px;margin:0 0 16px}
+  #preview h3{font-size:15px;color:#0d7a72;margin:18px 0 6px;border-bottom:1px solid #e2e6ec;padding-bottom:4px}
+  #preview p{margin:0 0 10px;white-space:pre-wrap}
+  .saved{font-size:12px;color:var(--mut);margin:10px 2px 0}
+  .attrib{background:rgba(201,169,98,.06);border:1px solid rgba(201,169,98,.22);border-radius:12px;padding:14px 16px;font-size:12.5px;color:var(--mut);margin:24px 0 0;line-height:1.6}
+  .attrib b{color:var(--gold)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:20px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  @media print{body{background:#fff}.wrap>*{display:none}.wrap #preview{display:block!important;box-shadow:none;padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Responsible Research Assessment · DORA-aligned</div>
+  <h1>Narrative <span class="g">CV Builder</span></h1>
+  <p class="lead">The narrative CV is the alternative to the publication-list CV: it asks what you've <i>contributed</i> and what difference it made — not how many citations in which journal. This builder scaffolds one for <b>teaching scholarship</b>, on the R4RI / Royal Society narrative model. Write in each module, watch your word count, and export. Everything stays in your browser.</p>
+
+  <div class="dora">
+    <span class="h">Why a narrative CV</span>
+    <b>DORA</b>, the Leiden Manifesto and the Hong Kong Principles all argue assessment should weigh the <b>contribution and its merit</b>, not the venue or the count. A narrative CV makes that practical — it lets you show open practice, partnership, teaching, mentoring and service that a metrics CV renders invisible. Pair it with your <a href="/sotl-index.html">SoTL Index</a> for the evidence, and the <a href="/responsible-assessment.html">RRA hub</a> for the wider toolkit.
+  </div>
+
+  <a class="xlink" href="/sotl-index.html">📊 Need the evidence? Build your SoTL Index first →</a>
+
+  <div class="idrow">
+    <input type="text" id="cvname" placeholder="Your name" autocomplete="off">
+    <input type="text" id="cvrole" placeholder="Role &amp; institution (e.g. Senior Lecturer, USQ)" autocomplete="off">
+  </div>
+
+  <div id="mods"></div>
+
+  <div class="bar">
+    <button class="btn" id="build">Assemble my narrative CV</button>
+    <button class="btn alt" id="copy">Copy as Markdown</button>
+    <button class="btn alt" id="print">Print / Save PDF</button>
+    <button class="btn alt" id="clear">Clear all</button>
+  </div>
+  <div class="saved" id="saved"></div>
+
+  <div id="preview"></div>
+
+  <div class="attrib"><b>Frameworks &amp; attribution.</b> Module structure adapts the <b>Résumé for Research and Innovation (R4RI)</b> used by UKRI and the <b>Royal Society narrative CV</b>, with Glassick et al.'s (1997) standards for scholarly quality and DORA's principles. NTLSN is independent and not affiliated with these bodies. This is a drafting aid, not a template mandated by any institution — always check your own institution's or funder's required format and word limits. Runs entirely in your browser; nothing is stored or sent.</div>
+
+  <div class="foot">A free NTLSN reflection tool. &nbsp;·&nbsp; <a href="/sotl-index.html">The SoTL Index →</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var MODS=[
+    {k:"statement",t:"Personal statement",s:"Who you are as a teacher-scholar",limit:250,
+     g:"A short framing of your contribution as a teacher-scholar — your approach, your values, the through-line of your work. A paragraph, not a list.",
+     chips:["Your philosophy of teaching","What drives your scholarship","The thread connecting your work"]},
+    {k:"knowledge",t:"Contribution to knowledge & scholarship",s:"Your SoTL, research & open outputs",limit:350,
+     g:"Tell the story of your scholarly contribution to teaching & learning. Choose a few exemplary outputs — a paper, an OER, a framework, a tool — and say what difference each made, to whom and how. Describe the contribution, not the journal's prestige.",
+     chips:["2–3 key outputs + their impact","Open / OER contributions","Frameworks or tools you built","What changed because of it"]},
+    {k:"people",t:"Contribution to the development of individuals",s:"Teaching, supervision, mentoring, partnership",limit:350,
+     g:"How have you helped people grow — students, sessional staff, colleagues, mentees? Include students-as-partners work, supervision, and curriculum or teaching that changed outcomes.",
+     chips:["Students-as-partners","Supervision & mentoring","Curriculum that lifted outcomes","Supporting sessional / new staff"]},
+    {k:"community",t:"Contribution to the scholarly & professional community",s:"Peer review, editorial, leadership, service",limit:300,
+     g:"Your contribution to the collective — peer review, editorial roles, communities of practice, committee and leadership service, organising events or networks.",
+     chips:["Peer review & editorial","Communities of practice","Leadership & committees","Organising / convening"]},
+    {k:"society",t:"Contribution to broader society & impact",s:"Engagement, partnerships, public good",limit:300,
+     g:"How has your work reached beyond the academy — practice change, public or industry engagement, policy influence, partnerships, or advancing equity and access?",
+     chips:["Impact on practice","Public / industry engagement","Policy or sector influence","Equity, access & inclusion"]}
+  ];
+  var KEY="ntlsn_narrative_cv_v1";
+  function $(id){return document.getElementById(id);}
+  function words(s){s=(s||"").trim();return s?s.split(/\s+/).length:0;}
+  function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+
+  $("mods").innerHTML=MODS.map(function(m,i){
+    return "<div class='mod"+(i===0?" open":"")+"' data-k='"+m.k+"'>"
+      +"<div class='mhead'><div class='mnum'>"+(i+1)+"</div><div class='mtitle'>"+m.t+"<small>"+m.s+"</small></div><div class='chev'>›</div></div>"
+      +"<div class='mbody'>"
+      +"<div class='guide'><b>What to include.</b> "+m.g+"<div class='chips'>"+m.chips.map(function(c){return "<span class='chip'>"+c+"</span>";}).join("")+"</div></div>"
+      +"<textarea data-k='"+m.k+"' placeholder='Write your "+m.t.toLowerCase()+"…'></textarea>"
+      +"<div class='wc'><span data-wc='"+m.k+"'>0 words</span><span>suggested ≤ "+m.limit+" words</span></div>"
+      +"</div></div>";
+  }).join("");
+
+  function save(){
+    var d={name:$("cvname").value,role:$("cvrole").value,mods:{}};
+    Array.prototype.forEach.call(document.querySelectorAll("textarea"),function(t){d.mods[t.getAttribute("data-k")]=t.value;});
+    try{localStorage.setItem(KEY,JSON.stringify(d));$("saved").textContent="Draft saved in this browser · "+new Date().toLocaleTimeString();}catch(e){}
+  }
+  function load(){
+    try{var d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;
+      $("cvname").value=d.name||"";$("cvrole").value=d.role||"";
+      Array.prototype.forEach.call(document.querySelectorAll("textarea"),function(t){var k=t.getAttribute("data-k");if(d.mods&&d.mods[k]!=null)t.value=d.mods[k];});
+      Array.prototype.forEach.call(document.querySelectorAll("textarea"),function(t){upd(t);});
+      $("saved").textContent="Draft restored from this browser.";
+    }catch(e){}
+  }
+  function upd(t){
+    var k=t.getAttribute("data-k"),m=MODS.filter(function(x){return x.k===k;})[0],w=words(t.value);
+    var el=document.querySelector("[data-wc='"+k+"']");
+    el.textContent=w+" word"+(w===1?"":"s");
+    el.className=w>m.limit?"over":"";
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".mhead"),function(h){h.onclick=function(){h.parentNode.classList.toggle("open");};});
+  Array.prototype.forEach.call(document.querySelectorAll("textarea"),function(t){t.addEventListener("input",function(){upd(t);save();});});
+  $("cvname").addEventListener("input",save);$("cvrole").addEventListener("input",save);
+
+  function assemble(){
+    var name=$("cvname").value||"[Your name]",role=$("cvrole").value||"";
+    var html="<h2>"+esc(name)+"</h2><div class='pr'>"+esc(role)+(role?" · ":"")+"Narrative CV</div>";
+    var md="# "+name+"\n"+(role?"_"+role+"_\n":"")+"\n_Narrative CV — assessed on contribution, in the spirit of DORA._\n";
+    MODS.forEach(function(m){
+      var v=(document.querySelector("textarea[data-k='"+m.k+"']").value||"").trim();
+      if(!v)return;
+      html+="<h3>"+esc(m.t)+"</h3><p>"+esc(v)+"</p>";
+      md+="\n## "+m.t+"\n\n"+v+"\n";
+    });
+    return {html:html,md:md};
+  }
+  $("build").onclick=function(){var a=assemble();$("preview").innerHTML=a.html;$("preview").style.display="block";$("preview").scrollIntoView({behavior:"smooth",block:"start"});};
+  $("copy").onclick=function(){var a=assemble();(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(a.md):Promise.reject()).then(function(){$("saved").textContent="Copied as Markdown to clipboard.";},function(){
+    var ta=document.createElement("textarea");ta.value=a.md;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");$("saved").textContent="Copied as Markdown.";}catch(e){$("saved").textContent="Copy not supported — select the preview and copy manually.";}document.body.removeChild(ta);
+  });};
+  $("print").onclick=function(){var a=assemble();$("preview").innerHTML=a.html;$("preview").style.display="block";setTimeout(function(){window.print();},120);};
+  $("clear").onclick=function(){if(!confirm("Clear all fields and the saved draft?"))return;$("cvname").value="";$("cvrole").value="";Array.prototype.forEach.call(document.querySelectorAll("textarea"),function(t){t.value="";upd(t);});$("preview").style.display="none";try{localStorage.removeItem(KEY);}catch(e){}$("saved").textContent="Cleared.";};
+
+  load();
+})();
+</script>
+</body>
+</html>

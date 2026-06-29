@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The SoTL Index: a DORA-aligned, field-normalised spectrum for the Scholarship of Teaching and Learning — Dianati (2026)</title>
+<meta name="description" content="Methodology paper for the SoTL Index — a free, open, DORA-aligned 1–7 spectrum for the Scholarship of Teaching and Learning, computed from open OpenAlex data across five field-normalised dimensions. A. Dianati, 2026.">
+<meta property="og:title" content="The SoTL Index — methodology (Dianati, 2026)">
+<meta property="og:description" content="A DORA-aligned, field-normalised 1–7 spectrum for the Scholarship of Teaching and Learning. Open methodology, citable.">
+<meta property="og:type" content="article">
+<style>
+  :root{--ink:#1a2230;--mut:#5a6675;--line:#e2e6ec;--accent:#0d7a72;--gold:#9a7b2e;--paper:#fff;--F:"Charter","Georgia","Times New Roman",serif;--S:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef1f4;color:var(--ink);font-family:var(--F);line-height:1.62;font-size:16px}
+  .sheet{max-width:760px;margin:24px auto;background:var(--paper);padding:54px 60px;box-shadow:0 2px 24px rgba(20,30,50,.10);border-radius:4px}
+  .brand{font:800 12px var(--S);letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin:0 0 4px}
+  .type{font:600 11px var(--S);letter-spacing:1.5px;color:var(--mut);text-transform:uppercase;margin:0 0 18px}
+  h1{font-size:27px;line-height:1.22;margin:0 0 14px;font-weight:700;letter-spacing:-.01em}
+  .auth{font-family:var(--S);font-size:14.5px;margin:0 0 2px}
+  .aff{font-family:var(--S);color:var(--mut);font-size:13px;margin:0 0 4px}
+  .meta{font-family:var(--S);color:var(--mut);font-size:12.5px;margin:0 0 24px;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+  .abs{background:#f6f8fa;border:1px solid var(--line);border-radius:7px;padding:18px 20px;margin:0 0 26px}
+  .abs h2{font:800 11px var(--S);letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+  .abs p{margin:0;font-size:14.5px}
+  h2.sec{font-size:18px;margin:30px 0 10px;font-weight:700;letter-spacing:-.01em}
+  h3{font-size:15.5px;margin:20px 0 7px;font-weight:700;font-family:var(--S)}
+  p{margin:0 0 13px}
+  a{color:var(--accent)}
+  ul,ol{margin:0 0 13px;padding-left:22px}
+  li{margin:0 0 6px}
+  .dim{font-family:var(--S);font-size:14px;background:#f6f8fa;border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:11px 15px;margin:0 0 10px}
+  .dim b{color:var(--accent)}
+  code,.f{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:#f0f3f6;padding:1px 6px;border-radius:4px}
+  .eq{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13.5px;background:#f6f8fa;border:1px solid var(--line);border-radius:6px;padding:12px 15px;margin:0 0 14px;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-family:var(--S);font-size:13px;margin:0 0 16px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+  th{background:#f6f8fa;font-weight:700}
+  .cite{background:#fbf8f0;border:1px solid #ece0c6;border-radius:7px;padding:15px 18px;font-family:var(--S);font-size:13px;margin:20px 0}
+  .cite b{color:var(--gold)}
+  .refs{font-family:var(--S);font-size:12.8px;line-height:1.5}
+  .refs p{margin:0 0 9px;padding-left:24px;text-indent:-24px}
+  .foot{font-family:var(--S);font-size:11.5px;color:var(--mut);margin-top:30px;padding-top:16px;border-top:1px solid var(--line)}
+  .noprint{font-family:var(--S)}
+  .toolbar{max-width:760px;margin:0 auto;display:flex;gap:10px;justify-content:flex-end;padding:4px 4px 0}
+  .tb{background:var(--accent);color:#fff;border:0;border-radius:7px;font:700 13px var(--S);padding:9px 15px;cursor:pointer;text-decoration:none}
+  .tb.alt{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  @media print{
+    body{background:#fff;font-size:11.5pt}
+    .sheet{box-shadow:none;margin:0;max-width:none;padding:0}
+    .toolbar{display:none}
+    a{color:var(--ink);text-decoration:none}
+    h2.sec{page-break-after:avoid}
+  }
+  @media(max-width:640px){.sheet{padding:30px 22px}}
+</style>
+</head>
+<body>
+<div class="toolbar noprint">
+  <a class="tb" href="javascript:window.print()">⎙ Save as PDF</a>
+  <a class="tb alt" href="/sotl-index.html">Open the tool →</a>
+</div>
+<div class="sheet">
+  <div class="brand">NTLSN · Responsible Research Assessment</div>
+  <div class="type">Methodology · Open preprint · v1 (in development)</div>
+  <h1>The SoTL Index: a DORA-aligned, field-normalised spectrum for the Scholarship of Teaching and Learning</h1>
+  <div class="auth">A/Prof Sebastian Dianati</div>
+  <div class="aff">University of Southern Queensland · National Teaching &amp; Learning Scholarship Network (NTLSN)</div>
+  <div class="meta">2026 · Licensed CC BY 4.0 · Tool: <a href="https://ntlsn.com/sotl-index.html">ntlsn.com/sotl-index.html</a></div>
+
+  <div class="abs">
+    <h2>Abstract</h2>
+    <p>Established author-level metrics — the h-index, the Journal Impact Factor and journal quartile rankings — are precisely the instruments the San Francisco Declaration on Research Assessment (DORA) cautions against using to judge individuals. They are field-blind, so scholars in low-citation disciplines such as education appear systematically weaker; and they reward citation volume in high-prestige journals while remaining blind to what the Scholarship of Teaching and Learning (SoTL) actually produces: open educational practice, partnership, and a sustained, public, peer-reviewed body of teaching scholarship. This paper describes the <b>SoTL Index</b>: a free, open, in-development instrument that places a scholar (or institution) on a <b>1–7 developmental spectrum</b> derived from five transparent, field-normalised dimensions — reach, openness, SoTL focus, collaboration, and sustained contribution — computed entirely from open <a href="https://openalex.org">OpenAlex</a> bibliographic data in the user's browser. We set out its conceptual grounding (Boyer, Glassick, DORA), its computation, a worked example, and its limitations. The Index is offered explicitly as a tool for reflection and conversation, not for ranking individuals.</p>
+  </div>
+
+  <h2 class="sec">1. The problem: SoTL is invisible to the dominant metrics</h2>
+  <p>Research assessment is dominated by citation-based author metrics, chief among them the h-index (Hirsch, 2005). These metrics carry three well-documented problems for the Scholarship of Teaching and Learning. <b>First, they are field-blind.</b> Citation densities differ by orders of magnitude across disciplines; a citation rate that is exceptional in education is unremarkable in molecular biology. Comparing raw counts across fields — as the h-index implicitly does — systematically disadvantages teaching-focused and social-science scholars. <b>Second, they privilege journal prestige.</b> The Journal Impact Factor and SCImago/Scopus quartiles measure the journal, not the work, yet are routinely read onto individuals. <b>Third, they are blind to the outputs SoTL most values</b> — open educational resources, students-as-partners work, sustained programmatic contribution, and dissemination into practice rather than into highly cited journals.</p>
+  <p>The San Francisco Declaration on Research Assessment (DORA, 2012), the Leiden Manifesto (Hicks et al., 2015) and the Hong Kong Principles (Moher et al., 2020) together call for assessment that is field-normalised, transparent, holistic, and focused on the merits of the work rather than the venue. The SoTL Index is a deliberate, modest attempt to operationalise those principles for teaching scholarship.</p>
+
+  <h2 class="sec">2. Conceptual grounding</h2>
+  <p>The Index draws on three traditions. Boyer's (1990) <i>Scholarship Reconsidered</i> establishes the scholarship of teaching as a legitimate form of scholarship alongside discovery, integration and application. Glassick, Huber and Maeroff's (1997) standards — clear goals, adequate preparation, appropriate methods, significant results, effective presentation, reflective critique — frame what quality teaching scholarship looks like. DORA and the responsible-metrics movement supply the assessment principles: <b>field-normalise; value openness; never reduce a person to a single hidden number; assess the body of work, not the venue.</b> The Index translates these into five visible dimensions and a developmental band rather than a precise score.</p>
+
+  <h2 class="sec">3. The SoTL Index</h2>
+  <p>For a given scholar (identified by ORCID) or institution, the Index computes five dimension scores, each on a 0–100 scale, then forms a weighted composite and maps it to a <b>1–7 developmental spectrum</b> (Emerging · Building · Developing · Establishing · Embedding · Leading · Transforming). A spectrum is used deliberately in place of a precise score: it communicates a developmental position without inviting the fine-grained ranking of individuals that DORA warns against. Every dimension is always displayed, and the user may re-weight any dimension live, so the composite can never operate as a single opaque figure.</p>
+
+  <h3>3.1 The five dimensions</h3>
+  <div class="dim"><b>Reach</b> — field-normalised citation impact. Mean citations per output, scaled by a field factor so disciplines are compared fairly.</div>
+  <div class="dim"><b>Openness</b> — the share of outputs that are open access, foregrounding dissemination over enclosure.</div>
+  <div class="dim"><b>SoTL focus</b> — the share of outputs that are genuinely teaching-and-learning scholarship (in recognised SoTL/higher-education venues or education-tagged work).</div>
+  <div class="dim"><b>Collaboration</b> — the breadth of the co-authorship network, including cross-institutional reach.</div>
+  <div class="dim"><b>Sustained contribution</b> — the consistency of scholarly output over time, rewarding programmatic rather than one-off engagement.</div>
+
+  <h3>3.2 Data source</h3>
+  <p>All inputs are drawn from <b>OpenAlex</b> (Priem, Piwowar &amp; Orr, 2022), a fully open index of scholarly works released under CC0, queried directly from the browser via its public API. No proprietary database (Scopus, Web of Science, Clarivate) is used, and no data is stored or transmitted beyond the OpenAlex request needed to fetch the public record. This keeps the instrument free, reproducible and independent of paywalled metric providers.</p>
+
+  <h2 class="sec">4. Computation</h2>
+  <h3>4.1 Field normalisation</h3>
+  <p>To make <b>Reach</b> comparable across disciplines, each journal is assigned a primary field (the modal field of its OpenAlex topics). A field factor is derived from a reference distribution of journal two-year mean citedness, sampled from ~7,000 active journals (filtered to <code>type:journal</code>, &ge;100 works, non-zero recent citedness) and bucketed by primary field to obtain a median citedness <span class="f">p50<sub>field</sub></span> per field and a global median <span class="f">p50<sub>global</sub></span>:</p>
+  <div class="eq">field_factor = clamp( p50<sub>global</sub> / p50<sub>field</sub> , 0.5, 3.0 )</div>
+  <p>A scholar working in a low-citation field (e.g. Social Sciences, p50 ≈ 0.19) receives an upward adjustment (factor ≈ 1.8), while a high-citation field (e.g. Medicine, p50 ≈ 0.51) is adjusted downward (factor ≈ 0.66). This is the same normalising logic SCImago applies within subject categories, but computed transparently from open data.</p>
+
+  <h3>4.2 Dimension scores</h3>
+  <p>With <span class="f">n</span> total outputs, <span class="f">c̄</span> mean citations per output, <span class="f">oa</span> open-access outputs, <span class="f">j</span> journal outputs, <span class="f">s</span> SoTL-venue outputs, <span class="f">k</span> distinct co-authors, and publication years spanning <span class="f">span</span> with <span class="f">active</span> distinct active years:</p>
+  <div class="eq">Reach        = 100 · clamp( (c̄ · field_factor) / 8 , 0, 1 )
+Openness     = 100 · (oa / n)
+SoTL focus   = 100 · (s / j)
+Collaboration= 100 · clamp( k / 25 , 0, 1 )
+Sustained    = 100 · 0.5 · ( active/span  +  min(1, active/6) )</div>
+  <p>The reference constants (8 field-adjusted citations per output; 25 distinct collaborators; 6 active years for "maturity") are deliberately exposed in the tool and are intended to be calibrated with the sector rather than fixed by fiat.</p>
+
+  <h3>4.3 Composite and spectrum</h3>
+  <div class="eq">Composite = Σ (Dimension<sub>i</sub> · weight<sub>i</sub>) / Σ weight<sub>i</sub>        (default weights equal)
+Band      = clamp( ⌊ Composite / 100 · 7 ⌋ + 1 , 1, 7 )</div>
+  <p>Books, chapters, conference papers and repository deposits are counted toward openness, collaboration and sustained contribution but are excluded from the journal-based SoTL-focus share — and the tool states plainly that many of the most valuable SoTL outputs (books, open resources, datasets) carry no journal quartile at all.</p>
+
+  <h2 class="sec">5. Worked example</h2>
+  <p>For the author's own public record (ORCID 0000-0002-1428-2921; 36 outputs, 2013–2026), the Index returns <b>Band 6 of 7 — "Leading"</b>, decomposed as: Reach 100 (5.6 citations/output × field factor 1.81 = 10.1 adjusted), Openness 58 (21/36 open access), SoTL focus 76 (13 of 17 journal outputs in teaching-and-learning venues), Collaboration 100 (60 distinct co-authors), and Sustained 93 (12 active years across a 14-year span). The decomposition is the point: the band is legible, but the five components — and the ability to re-weight them — keep the judgement open.</p>
+
+  <h2 class="sec">6. Limitations and responsible use</h2>
+  <ul>
+    <li><b>It assesses a bibliographic footprint, not teaching, and not worth.</b> No bibliographic tool can see the quality of someone's teaching; the Index measures the visible, public, scholarly record only.</li>
+    <li><b>Not for ranking individuals.</b> It is offered for personal reflection and developmental conversation. It is explicitly not designed, and should not be used, to rank or compare individuals in hiring, promotion or performance management.</li>
+    <li><b>Coverage and tagging depend on OpenAlex.</b> Disciplinary tagging, venue typing and ORCID completeness vary; results are indicative.</li>
+    <li><b>Calibration is provisional.</b> The reference constants and the SoTL-venue list are v1 and will be refined openly with the sector.</li>
+    <li><b>It is one lens.</b> Openness and teaching focus are foregrounded because they are under-counted elsewhere — not because they are the whole of scholarly value.</li>
+  </ul>
+
+  <h2 class="sec">7. Availability</h2>
+  <p>The SoTL Index runs free and login-free at <a href="https://ntlsn.com/sotl-index.html">ntlsn.com/sotl-index.html</a>, entirely in the browser. The accompanying Responsible Research Assessment hub (<a href="https://ntlsn.com/responsible-assessment.html">ntlsn.com/responsible-assessment.html</a>) curates the wider DORA toolkit. This methodology is released under CC BY 4.0; reuse and adaptation are encouraged with attribution.</p>
+
+  <div class="cite">
+    <b>How to cite.</b> Dianati, S. (2026). <i>The SoTL Index: a DORA-aligned, field-normalised spectrum for the Scholarship of Teaching and Learning</i> (v1). National Teaching &amp; Learning Scholarship Network. [Zenodo DOI to be minted on deposit].
+  </div>
+
+  <h2 class="sec">References</h2>
+  <div class="refs">
+    <p>Boyer, E. L. (1990). <i>Scholarship Reconsidered: Priorities of the Professoriate.</i> Carnegie Foundation for the Advancement of Teaching.</p>
+    <p>DORA. (2012). <i>San Francisco Declaration on Research Assessment.</i> https://sfdora.org/read/</p>
+    <p>Glassick, C. E., Huber, M. T., &amp; Maeroff, G. I. (1997). <i>Scholarship Assessed: Evaluation of the Professoriate.</i> Jossey-Bass.</p>
+    <p>Hicks, D., Wouters, P., Waltman, L., de Rijcke, S., &amp; Rafols, I. (2015). Bibliometrics: The Leiden Manifesto for research metrics. <i>Nature, 520</i>(7548), 429–431. https://doi.org/10.1038/520429a</p>
+    <p>Hirsch, J. E. (2005). An index to quantify an individual's scientific research output. <i>PNAS, 102</i>(46), 16569–16572. https://doi.org/10.1073/pnas.0507655102</p>
+    <p>Hutchings, P., &amp; Shulman, L. S. (1999). The scholarship of teaching: New elaborations, new developments. <i>Change, 31</i>(5), 10–15.</p>
+    <p>Moher, D., Bouter, L., Kleinert, S., et al. (2020). The Hong Kong Principles for assessing researchers. <i>PLoS Biology, 18</i>(7), e3000737. https://doi.org/10.1371/journal.pbio.3000737</p>
+    <p>Priem, J., Piwowar, H., &amp; Orr, R. (2022). OpenAlex: A fully-open index of scholarly works, authors, venues, institutions, and concepts. <i>arXiv:2205.01833.</i></p>
+  </div>
+
+  <div class="foot">Open preprint · National Teaching &amp; Learning Scholarship Network (NTLSN) · An independent initiative; not affiliated with DORA, OpenAlex, SCImago, Scopus or Clarivate. Prepared with computational assistance; all scholarly framing and judgement are the author's. &nbsp;·&nbsp; <a href="/sotl-index.html">← The SoTL Index tool</a></div>
+</div>
+</body>
+</html>
