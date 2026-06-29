@@ -1035,7 +1035,7 @@ function injectNav(){
   document.body.appendChild(w);}
  var bar=document.querySelector('.ntlsn-topnav');
  if(bar&&!bar.querySelector('[data-np]')){var mkb=function(t,fn){var x=document.createElement('button');x.setAttribute('data-np','1');x.className='px-2 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap';x.style.color='#4ECDC4';x.textContent=t;x.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();fn();});return x;};
-  bar.appendChild(mkb('Crash Courses',function(){window.location.href='/crash-courses.html';}));bar.appendChild(mkb('Pricing',function(){var el=document.getElementById('pricing');if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});}));
+  bar.appendChild(mkb('Crash Courses',function(){window.location.href='/crash-courses.html';}));bar.appendChild(mkb('Dashboard',function(){window.location.href='/widgets.html';}));bar.appendChild(mkb('Pricing',function(){var el=document.getElementById('pricing');if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});}));
   bar.appendChild(mkb('Portal',function(){openPortal('submit');}));}
 }
 function ensure(){var hero=document.getElementById('hero');if(!hero)return;injectNav();if(document.getElementById('pricing'))return;var sec=build();hero.parentNode.appendChild(sec);fillUnis(sec);wireTabs(sec);}

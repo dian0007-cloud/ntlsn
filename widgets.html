@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your NTLSN — a teaching dashboard you build from widgets · NTLSN</title>
+<meta name="description" content="Build your own at-a-glance teaching dashboard. Add widgets like you add skills — the next event, deadlines closing soon, where you are in the academic year, a daily prompt, a focus timer — each one surfacing the commons in a single glance. Free, in-browser, nothing to install.">
+<meta property="og:title" content="Your NTLSN — a teaching dashboard you build from widgets · NTLSN">
+<meta property="og:description" content="Add widgets like you add skills. The next event, deadlines closing soon, your place in the academic year, a daily prompt, a focus timer — the commons at a glance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/widgets.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your NTLSN — a teaching dashboard you build from widgets · NTLSN">
+<meta name="twitter:description" content="Add widgets like you add skills. The commons at a glance.">
+<meta name="twitter:image" content="https://www.ntlsn.com/og-image.png">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#FF8A65;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;min-height:100vh}
+  .wrap{max-width:1120px;margin:0 auto;padding:24px 22px 90px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:17px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:14px}
+  .back{font-size:13.5px;color:var(--mut)}
+  .head{margin-bottom:18px}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  h1{font-size:clamp(26px,4.6vw,40px);line-height:1.08;margin:0 0 10px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 50%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:16.5px;color:#cbd8e6;max-width:70ch;margin:0 0 18px}
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:11px 20px;font:800 14px var(--sans);cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  .count{font-size:13px;color:var(--mut);margin-left:auto}
+  /* board */
+  #board{display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:16px;align-items:start}
+  .w{position:relative;background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);border:1px solid var(--line);border-radius:18px;padding:17px 18px 16px;overflow:hidden;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;min-height:148px}
+  .w:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.14);box-shadow:0 14px 34px rgba(0,0,0,.34)}
+  .w::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--ac,var(--teal))}
+  .w.big{grid-column:span 2}
+  @media(max-width:600px){.w.big{grid-column:span 1}#board{grid-template-columns:1fr}}
+  .w .wh{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+  .w .ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:color-mix(in srgb,var(--ac,var(--teal)) 18%,transparent);flex:none}
+  .w .cat{font:800 10.5px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--ac,var(--teal))}
+  .w .nm{font:700 13px var(--sans);color:#fff;margin-left:auto;opacity:.0;transition:opacity .15s}
+  .w:hover .nm{opacity:.5}
+  .w .x{position:absolute;top:11px;right:12px;width:22px;height:22px;border:0;border-radius:7px;background:rgba(255,255,255,.06);color:var(--mut);font-size:14px;line-height:1;cursor:pointer;opacity:0;transition:opacity .15s}
+  .w:hover .x{opacity:1}.w .x:hover{background:rgba(255,107,107,.18);color:#ffb3b3}
+  .big-num{font:800 40px/1 var(--sans);color:#fff;letter-spacing:-.02em}
+  .big-num .u{font-size:16px;color:var(--mut);font-weight:700;margin-left:6px}
+  .w .ttl{font:700 16px var(--sans);color:#fff;margin:2px 0 4px}
+  .w .sub{font-size:13px;color:var(--mut)}
+  .w .lnk{display:inline-block;margin-top:11px;font:700 13px var(--sans);color:var(--ac,var(--teal))}
+  .pill{display:inline-block;font:800 10px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:color-mix(in srgb,var(--ac,var(--teal)) 16%,transparent);color:var(--ac,var(--teal));margin-bottom:8px}
+  .rows{display:flex;flex-direction:column;gap:9px;margin-top:2px}
+  .er{display:flex;align-items:baseline;gap:10px;font-size:13.5px}
+  .er .d{font:800 13px var(--sans);color:var(--ac,var(--gold));white-space:nowrap;min-width:58px}
+  .er .t{color:#dbe6f1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  /* focus timer */
+  .ft{text-align:center}
+  .ft .clock{font:800 46px/1 var(--sans);color:#fff;letter-spacing:.02em;margin:4px 0 10px;font-variant-numeric:tabular-nums}
+  .ft .modes{display:inline-flex;background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:3px;margin-bottom:11px}
+  .ft .modes button{border:0;background:transparent;color:var(--mut);font:700 12px var(--sans);padding:5px 13px;border-radius:999px;cursor:pointer}
+  .ft .modes button.on{background:var(--ac,var(--terra));color:#2a0f08}
+  .ft .ctl{display:flex;gap:8px;justify-content:center}
+  .ft .ctl button{border:0;border-radius:10px;padding:8px 16px;font:800 13px var(--sans);cursor:pointer;background:var(--ac,var(--terra));color:#2a0f08}
+  .ft .ctl button.sec{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  .ft .pom{font-size:12px;color:var(--mut);margin-top:9px}
+  /* clock widget */
+  .clk{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:2px}
+  .clk .z{font-size:12px;color:var(--mut)}
+  .clk .z b{display:block;font:800 19px var(--sans);color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  /* search */
+  .qs input{width:100%;background:var(--card2);border:1px solid var(--line);border-radius:11px;color:#fff;font:14.5px var(--sans);padding:11px 13px}
+  .qs input:focus{outline:none;border-color:var(--ac,var(--blue))}
+  .qs .hint{font-size:12px;color:var(--mut);margin-top:8px}
+  /* gallery modal */
+  .ov{position:fixed;inset:0;background:rgba(4,10,20,.72);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center;padding:40px 18px;z-index:50;overflow:auto}
+  .ov.on{display:flex}
+  .gal{width:100%;max-width:760px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 24px 26px}
+  .gal h2{font:800 21px var(--sans);margin:0 0 3px;color:#fff}
+  .gal .gsub{font-size:14px;color:var(--mut);margin:0 0 18px}
+  .gal .close{position:absolute;top:18px;right:20px}
+  .galwrap{position:relative}
+  .gcat{font:800 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:18px 0 9px}
+  .gitem{display:flex;align-items:center;gap:13px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;margin-bottom:8px;background:var(--card2)}
+  .gitem .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;background:color-mix(in srgb,var(--ac,var(--teal)) 18%,transparent);flex:none}
+  .gitem .gi{flex:1;min-width:0}
+  .gitem .gn{font:700 14.5px var(--sans);color:#fff}
+  .gitem .gb{font-size:12.5px;color:var(--mut)}
+  .add{border:1px solid var(--teal);background:transparent;color:var(--teal);border-radius:999px;padding:7px 15px;font:800 12.5px var(--sans);cursor:pointer;white-space:nowrap}
+  .add.added{background:var(--teal);color:#06251f}
+  .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut);line-height:1.7}
+  .foot b{color:#cbd8e6}
+  .empty{grid-column:1/-1;text-align:center;padding:50px 20px;border:1px dashed var(--line);border-radius:18px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="head">
+    <div class="eyebrow">◇ Your dashboard</div>
+    <h1>The commons, at a glance.</h1>
+    <p class="lede">Build a teaching dashboard the way you'd add skills — pick the widgets that matter to you and each one surfaces one thing in a single glance: the next event, deadlines closing soon, where you are in the academic year, a prompt to try, a focus timer for the marking. Nothing to install. Your choices stay in this browser.</p>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn" id="addBtn">＋ Add widgets</button>
+    <button class="btn ghost" id="resetBtn">Reset to defaults</button>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div id="board"></div>
+
+  <div class="foot">
+    <b>How this works.</b> Every widget draws on the live commons — the events feed updates automatically; the daily widgets rotate each day. Your selection is saved only in this browser (no account, no tracking). This is a working prototype of a personalisation layer for NTLSN: the same idea as adding skills, applied to glanceable teaching content.<br>
+    <span style="color:var(--mut)">Add or remove widgets any time. Hover a card and click ✕ to remove it; use “＋ Add widgets” to bring others back.</span>
+  </div>
+</div>
+
+<!-- gallery -->
+<div class="ov" id="ov">
+  <div class="gal galwrap">
+    <button class="btn ghost close" id="galClose">Done</button>
+    <h2>Widget gallery</h2>
+    <p class="gsub">Add to your board like adding a skill. Each widget surfaces one part of the commons.</p>
+    <div id="galList"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="ntlsn_widgets_v1";
+  var board=document.getElementById("board"),ov=document.getElementById("ov"),galList=document.getElementById("galList"),countEl=document.getElementById("count");
+  var now=new Date();
+  var DOY=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(now.getFullYear(),0,0))/864e5);
+  function pick(a){return a[DOY%a.length];}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function daysTo(d){var t=new Date(d+"T00:00:00");return Math.ceil((t-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);}
+  function fmtDate(d){var t=new Date(d+"T00:00:00");return t.toLocaleDateString("en-AU",{day:"numeric",month:"short"});}
+  function inDays(n){return n===0?"today":n===1?"tomorrow":"in "+n+" days";}
+  function uniName(u){if(!u)return"";u=String(u).trim();return u.length<=4?u.toUpperCase():u.charAt(0).toUpperCase()+u.slice(1);}
+
+  /* ---- live data: events feed (with graceful fallback) ---- */
+  var EVENTS=[],dataReady=false,onReady=[];
+  function futureSorted(){var k=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0");
+    return EVENTS.filter(function(e){return e.date&&e.date>=k;}).sort(function(a,b){return a.date<b.date?-1:1;});}
+  function fallback(){
+    function iso(off){var d=new Date(now.getTime()+off*864e5);return d.toISOString().slice(0,10);}
+    return [
+      {title:"ASCILITE Annual Conference",uni:"",date:iso(48),type:"conference",desc:"",url:"/#ntlsn-events"},
+      {title:"HERDSA Conference",uni:"",date:iso(73),type:"conference",desc:"",url:"/#ntlsn-events"},
+      {title:"Students-as-Partners Roundtable",uni:"",date:iso(19),type:"roundtable",desc:"",url:"/#ntlsn-events"},
+      {title:"Assessment in the Age of AI — webinar",uni:"",date:iso(8),type:"webinar",desc:"",url:"/#ntlsn-events"}
+    ];
+  }
+  fetch("/data/events.json").then(function(r){return r.ok?r.json():Promise.reject();})
+    .then(function(d){EVENTS=Array.isArray(d)?d:fallback();})
+    .catch(function(){EVENTS=fallback();})
+    .then(function(){dataReady=true;onReady.forEach(function(f){f();});});
+  function whenData(f){if(dataReady)f();else onReady.push(f);}
+
+  /* ---- daily content pools (honest: prompts & reflections, NTLSN's own numbers, real archive themes) ---- */
+  var PROMPTS=[
+    {t:"Make one task authentic",b:"Take a single quiz question and rewrite it as something a graduate would actually do in the workplace."},
+    {t:"Find the muddiest point",b:"End your next class by asking students to name the one idea still unclear. Open the following class with it."},
+    {t:"Cut one thing",b:"Look at next week's slides and remove the least essential ten minutes. What opens up when you do?"},
+    {t:"Feedback before grades",b:"Return comments on one task a few days before the mark. Watch whether students read them differently."},
+    {t:"Name the threshold",b:"Pick the concept students most often get stuck on. Plan one activity that lets them get it wrong safely."},
+    {t:"Ask, don't tell",b:"Replace one explanation with a question that makes students reconstruct the idea themselves."},
+    {t:"Two-minute check",b:"Mid-class, ask everyone to write one sentence summarising what you've covered. Read a few aloud."},
+    {t:"Design for the back row",b:"Plan your next activity for the student least likely to speak. If it works for them, it works for everyone."}
+  ];
+  var REFLECT=[
+    "What did a student teach you this week?",
+    "Which part of your teaching are you avoiding feedback on — and why?",
+    "When were your students most alive in your last class? What caused it?",
+    "What would you stop doing if no one was watching the metrics?",
+    "Whose voice was missing from the room — and how would you bring it in?",
+    "What's one thing you do because it's tradition, not because it works?",
+    "If a struggling student described your course, what would they say?",
+    "What small change would make your marking fairer next time?"
+  ];
+  var STATS=[
+    {n:"1,431",u:"",l:"SoTL resources indexed, 1994–2025 — searchable, free, every result linked to its source."},
+    {n:"31",u:"years",l:"of ALTC &amp; OLT-funded teaching work, resurfaced from the vault."},
+    {n:"94",u:"",l:"curated teaching &amp; learning events across the Australian sector."},
+    {n:"100%",u:"",l:"free. No logins, no paywall — funded so the commons stays open for everyone."}
+  ];
+  // real archive browse-by themes (First Nations / Indigenous deliberately handled custodian-led, not in this rotation)
+  var THEMES=["Assessment","Feedback","Curriculum","Students as Partners","Work-integrated learning","Academic integrity","First year","Online learning","Blended learning","Peer review","Employability","Inclusive education","Internationalisation","Leadership","Academic development","Reflective practice","Evaluation","Graduate outcomes","Threshold concepts"];
+
+  function acStyle(ac){return ac?("--ac:var(--"+ac+")"):"";}
+
+  /* ---- widget registry ---- */
+  var REG=[
+    {id:"next-event",cat:"Events",ac:"teal",ic:"📅",def:true,big:true,name:"Next event",blurb:"Countdown to the next teaching &amp; learning event in the commons.",
+     render:function(el){el.innerHTML='<div class="sub">loading the feed…</div>';whenData(function(){
+       var f=futureSorted(),e=f[0];if(!e){el.innerHTML='<div class="ttl">No upcoming events listed</div><a class="lnk" href="/#ntlsn-events">Browse the calendar →</a>';return;}
+       var n=daysTo(e.date),loc=e.uni?(" · "+uniName(e.uni)):"";
+       el.innerHTML='<span class="pill">'+esc(e.type||"event")+'</span>'+
+         '<div class="big-num">'+(n<=0?"now":n)+(n>0?'<span class="u">day'+(n===1?"":"s")+'</span>':"")+'</div>'+
+         '<div class="ttl">'+esc(e.title)+'</div>'+
+         '<div class="sub">'+fmtDate(e.date)+(e.endDate?("–"+fmtDate(e.endDate)):"")+loc+'</div>'+
+         '<a class="lnk" href="'+esc(e.url||"/#ntlsn-events")+'" target="_blank" rel="noopener">Details →</a>';
+     });}},
+    {id:"upcoming-radar",cat:"Closing soon",ac:"gold",ic:"⏳",def:true,name:"On the horizon",blurb:"The next few events to register for, with day counts.",
+     render:function(el){el.innerHTML='<div class="sub">loading…</div>';whenData(function(){
+       var f=futureSorted().slice(0,4);if(!f.length){el.innerHTML='<div class="sub">Nothing upcoming listed.</div>';return;}
+       el.innerHTML='<div class="wh"><span class="ic">⏳</span><span class="cat">On the horizon</span></div>'+
+         '<div class="rows">'+f.map(function(e){var n=daysTo(e.date);return '<a class="er" style="text-decoration:none" href="'+esc(e.url||"/#ntlsn-events")+'" target="_blank" rel="noopener"><span class="d">'+(n<=0?"now":n+"d")+'</span><span class="t">'+esc(e.title)+'</span></a>';}).join("")+'</div>'+
+         '<a class="lnk" href="/#ntlsn-events">All events →</a>';
+     });}},
+    {id:"teaching-calendar",cat:"Academic year",ac:"purple",ic:"🗓️",def:true,name:"Where you are",blurb:"Your approximate place in the teaching year, and what to reach for.",
+     render:function(el){
+       var m=now.getMonth();// 0=Jan
+       var P=[["Summer break · planning season","Shape next semester before it shapes you."],
+              ["Semester 1 starting","Orientation &amp; first impressions — set the tone."],
+              ["Semester 1 in full swing","Keep the feedback loops short."],
+              ["Semester 1 in full swing","Mid-semester check: what's landing, what isn't?"],
+              ["Semester 1 winding up","Assessment &amp; the marking run begins."],
+              ["Mid-year break","Marking, moderation, and a breather to re-plan."],
+              ["Semester 2 starting","A fresh cohort — carry forward what worked."],
+              ["Semester 2 in full swing","Protect time for the deep teaching work."],
+              ["Semester 2 in full swing","Mid-semester check-in with your students."],
+              ["Semester 2 winding up","Assessment season — pace the marking."],
+              ["Exams &amp; results","The marking crunch — lean on moderation."],
+              ["Year wrapping up","Reflect, archive, and rest before summer."]][m];
+       el.innerHTML='<div class="wh"><span class="ic">🗓️</span><span class="cat">Academic year</span></div>'+
+         '<div class="ttl">'+P[0]+'</div><div class="sub">'+P[1]+'</div>'+
+         '<a class="lnk" href="/academic-year.html">Map my year →</a>'+
+         '<div class="sub" style="margin-top:7px;opacity:.7;font-size:11.5px">Approximate · set your dates for the personalised version.</div>';
+     }},
+    {id:"archive-vault",cat:"From the vault",ac:"blue",ic:"📚",def:true,name:"From the vault",blurb:"A theme from the 1,431-resource archive, fresh each day.",
+     render:function(el){var th=pick(THEMES);
+       el.innerHTML='<div class="wh"><span class="ic">📚</span><span class="cat">From the vault</span></div>'+
+         '<div class="ttl">'+esc(th)+'</div>'+
+         '<div class="sub">Part of 1,431 SoTL resources (1994–2025) — every grant, paper and fellowship the sector already funded.</div>'+
+         '<a class="lnk" href="/#ntlsn-archive">Browse '+esc(th)+' →</a>';
+     }},
+    {id:"prompt-of-day",cat:"Prompt",ac:"green",ic:"💡",def:true,name:"Prompt of the day",blurb:"One small, concrete teaching move to try today.",
+     render:function(el){var p=pick(PROMPTS);
+       el.innerHTML='<div class="wh"><span class="ic">💡</span><span class="cat">Prompt of the day</span></div>'+
+         '<div class="ttl">'+esc(p.t)+'</div><div class="sub">'+esc(p.b)+'</div>'+
+         '<a class="lnk" href="/teaching-ai-prompts.html">More prompts →</a>';
+     }},
+    {id:"focus-timer",cat:"Focus",ac:"terra",ic:"🍅",def:true,name:"Focus timer",blurb:"A Pomodoro timer for marking and writing sprints.",
+     render:function(el){
+       el.innerHTML='<div class="wh"><span class="ic">🍅</span><span class="cat">Focus</span></div>'+
+         '<div class="ft"><div class="modes"><button data-m="focus" class="on">Focus</button><button data-m="break">Break</button></div>'+
+         '<div class="clock" data-clk>25:00</div>'+
+         '<div class="ctl"><button data-act="start">Start</button><button data-act="reset" class="sec">Reset</button></div>'+
+         '<div class="pom" data-pom>0 focus sessions today</div></div>';
+       var mode="focus",left=25*60,running=false,iv=null,done=0;
+       var clk=el.querySelector("[data-clk]"),pom=el.querySelector("[data-pom]"),startBtn=el.querySelector('[data-act="start"]');
+       function dur(){return mode==="focus"?25*60:5*60;}
+       function draw(){var m=Math.floor(left/60),s=left%60;clk.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;}
+       function tick(){left--;if(left<0){running=false;clearInterval(iv);if(mode==="focus"){done++;pom.textContent=done+" focus session"+(done===1?"":"s")+" today";mode="break";}else{mode="focus";}left=dur();setMode();draw();startBtn.textContent="Start";return;}draw();}
+       function setMode(){el.querySelectorAll(".modes button").forEach(function(b){b.classList.toggle("on",b.dataset.m===mode);});}
+       el.querySelectorAll(".modes button").forEach(function(b){b.onclick=function(){mode=b.dataset.m;left=dur();running=false;clearInterval(iv);startBtn.textContent="Start";setMode();draw();};});
+       startBtn.onclick=function(){if(running){running=false;clearInterval(iv);startBtn.textContent="Start";}else{running=true;startBtn.textContent="Pause";iv=setInterval(tick,1000);}};
+       el.querySelector('[data-act="reset"]').onclick=function(){running=false;clearInterval(iv);left=dur();startBtn.textContent="Start";draw();};
+       draw();
+     }},
+    {id:"quick-search",cat:"Search",ac:"blue",ic:"🔎",name:"Quick search",blurb:"Search the commons without leaving your dashboard.",
+     render:function(el){
+       el.innerHTML='<div class="wh"><span class="ic">🔎</span><span class="cat">Search</span></div>'+
+         '<div class="qs"><input type="search" placeholder="Search the commons…" aria-label="Search the commons"><div class="hint">↵ to search all of NTLSN</div></div>';
+       var inp=el.querySelector("input");
+       inp.addEventListener("keydown",function(e){if(e.key==="Enter"&&inp.value.trim()){window.location.href="/?q="+encodeURIComponent(inp.value.trim());}});
+     }},
+    {id:"world-clock",cat:"Timezones",ac:"teal",ic:"🌏",name:"Sector clock",blurb:"Live times across the sector — handy for national webinars.",
+     render:function(el){
+       var zones=[["Perth","Australia/Perth"],["Brisbane","Australia/Brisbane"],["Sydney","Australia/Sydney"],["UTC","UTC"]];
+       el.innerHTML='<div class="wh"><span class="ic">🌏</span><span class="cat">Sector clock</span></div><div class="clk">'+
+         zones.map(function(z){return '<div class="z" data-tz="'+z[1]+'">'+esc(z[0])+'<b>—</b></div>';}).join("")+'</div>';
+       function upd(){el.querySelectorAll("[data-tz]").forEach(function(d){try{d.querySelector("b").textContent=new Intl.DateTimeFormat("en-AU",{hour:"2-digit",minute:"2-digit",hour12:false,timeZone:d.dataset.tz}).format(new Date());}catch(e){}});}
+       upd();var iv=setInterval(upd,1000*15);el._cleanup=function(){clearInterval(iv);};
+     }},
+    {id:"reflect",cat:"Practice",ac:"green",ic:"🪞",name:"Reflective question",blurb:"A reflective-practice question to sit with today.",
+     render:function(el){var q=pick(REFLECT);
+       el.innerHTML='<div class="wh"><span class="ic">🪞</span><span class="cat">Practice</span></div>'+
+         '<div class="ttl" style="font-weight:700;font-size:15.5px;line-height:1.4">“'+esc(q)+'”</div>'+
+         '<div class="sub" style="margin-top:8px">A question, not a task. Carry it into your next class.</div>';
+     }},
+    {id:"stat",cat:"The commons",ac:"teal",ic:"📈",name:"By the numbers",blurb:"One thing the open commons makes true, rotating daily.",
+     render:function(el){var s=pick(STATS);
+       el.innerHTML='<div class="wh"><span class="ic">📈</span><span class="cat">The commons</span></div>'+
+         '<div class="big-num">'+s.n+(s.u?'<span class="u">'+s.u+'</span>':"")+'</div>'+
+         '<div class="sub" style="margin-top:6px">'+s.l+'</div>';
+     }},
+    {id:"recordings",cat:"Catch up",ac:"gold",ic:"▶",name:"Missed a session?",blurb:"Recordings &amp; programs from recent workshops, in one place.",
+     render:function(el){
+       el.innerHTML='<div class="wh"><span class="ic">▶</span><span class="cat">Catch up</span></div>'+
+         '<div class="ttl">Don\'t worry — here\'s the recording</div>'+
+         '<div class="sub">Recordings and programs from recent sector workshops, gathered so you can catch up on your own time.</div>'+
+         '<a class="lnk" href="/missed-it.html">Open the recordings hub →</a>';
+     }}
+  ];
+  var BYID={};REG.forEach(function(w){BYID[w.id]=w;});
+  var DEFAULTS=REG.filter(function(w){return w.def;}).map(function(w){return w.id;});
+
+  /* ---- state ---- */
+  function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(v))return v.filter(function(id){return BYID[id];});}catch(e){}return DEFAULTS.slice();}
+  function save(ids){try{localStorage.setItem(KEY,JSON.stringify(ids));}catch(e){}}
+  var enabled=load();
+
+  function renderBoard(){
+    board.querySelectorAll(".w").forEach(function(n){if(n._cleanup)n._cleanup();});
+    board.innerHTML="";
+    if(!enabled.length){board.innerHTML='<div class="empty">Your board is empty.<br><br><button class="btn" onclick="document.getElementById(\'addBtn\').click()">＋ Add widgets</button></div>';updCount();return;}
+    enabled.forEach(function(id){
+      var w=BYID[id];if(!w)return;
+      var el=document.createElement("div");el.className="w"+(w.big?" big":"");el.setAttribute("style",acStyle(w.ac));el.dataset.id=id;
+      var x=document.createElement("button");x.className="x";x.title="Remove";x.textContent="✕";x.onclick=function(){enabled=enabled.filter(function(i){return i!==id;});save(enabled);renderBoard();renderGallery();};
+      var body=document.createElement("div");
+      el.appendChild(x);el.appendChild(body);board.appendChild(el);
+      try{w.render(body);}catch(e){body.innerHTML='<div class="sub">—</div>';}
+    });
+    updCount();
+  }
+  function updCount(){countEl.textContent=enabled.length+" of "+REG.length+" widgets on your board";}
+
+  /* ---- gallery ---- */
+  function renderGallery(){
+    var cats={};REG.forEach(function(w){(cats[w.cat]=cats[w.cat]||[]).push(w);});
+    var html="";
+    REG.forEach(function(w){});// keep registry order
+    var seen={};
+    REG.forEach(function(w){if(seen[w.cat])return;seen[w.cat]=1;
+      html+='<div class="gcat">'+esc(w.cat)+'</div>';
+      cats[w.cat].forEach(function(x){
+        var on=enabled.indexOf(x.id)>-1;
+        html+='<div class="gitem" style="'+acStyle(x.ac)+'"><span class="ic">'+x.ic+'</span><div class="gi"><div class="gn">'+x.name+'</div><div class="gb">'+x.blurb+'</div></div>'+
+          '<button class="add'+(on?" added":"")+'" data-id="'+x.id+'">'+(on?"✓ Added":"＋ Add")+'</button></div>';
+      });
+    });
+    galList.innerHTML=html;
+    galList.querySelectorAll(".add").forEach(function(b){b.onclick=function(){var id=b.dataset.id;
+      if(enabled.indexOf(id)>-1){enabled=enabled.filter(function(i){return i!==id;});}else{enabled.push(id);}
+      save(enabled);renderBoard();renderGallery();};});
+  }
+
+  document.getElementById("addBtn").onclick=function(){renderGallery();ov.classList.add("on");};
+  document.getElementById("galClose").onclick=function(){ov.classList.remove("on");};
+  ov.addEventListener("click",function(e){if(e.target===ov)ov.classList.remove("on");});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")ov.classList.remove("on");});
+  document.getElementById("resetBtn").onclick=function(){enabled=DEFAULTS.slice();save(enabled);renderBoard();renderGallery();};
+
+  renderBoard();
+})();
+</script>
+</body>
+</html>
