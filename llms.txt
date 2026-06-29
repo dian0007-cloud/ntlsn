@@ -58,3 +58,8 @@
 - [Peer Observation of Teaching crash course](https://www.ntlsn.com/peer-observation-crash-course.html)
 - [Teaching Critical Thinking crash course](https://www.ntlsn.com/criticalthinking-crash-course.html)
 - [Supporting Student Wellbeing crash course](https://www.ntlsn.com/wellbeing-crash-course.html)
+- [Prompting for Academics crash course](https://www.ntlsn.com/prompting-crash-course.html)
+- [Claude Code for Academics crash course](https://www.ntlsn.com/claudecode-crash-course.html)
+- [AI-Assisted Research & Writing crash course](https://www.ntlsn.com/ai-research-crash-course.html)
+- [Build Your Own Teaching Tools crash course](https://www.ntlsn.com/buildtools-crash-course.html)
+- [AI for Marking & Feedback crash course](https://www.ntlsn.com/ai-marking-crash-course.html)
