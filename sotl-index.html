@@ -20,13 +20,17 @@
   body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
   .wrap{max-width:880px;margin:0 auto}
   .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
-  h1{font-size:clamp(26px,3.8vw,38px);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;line-height:1.08}
-  h1 .sotl{color:var(--teal)}
+  h1{font-size:clamp(34px,5.4vw,56px);margin:0 0 8px;font-weight:800;letter-spacing:-.018em;line-height:1.02}
+  h1 .sotl{background:linear-gradient(100deg,var(--teal),#86ece3 60%,var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tagline{font:700 17px var(--F);color:var(--ink);margin:0 0 14px;max-width:680px}
+  .tagline b{color:var(--teal)}
+  .hublink{display:inline-flex;align-items:center;gap:7px;background:rgba(201,169,98,.1);border:1px solid rgba(201,169,98,.28);border-radius:20px;padding:6px 13px;font:700 12.5px var(--F);color:var(--gold);margin:0 0 20px}
+  .hublink:hover{background:rgba(201,169,98,.16);text-decoration:none}
   .lead{color:var(--mut);font-size:15.5px;margin:0 0 18px;max-width:730px}
   a{color:var(--teal)}
-  .dora{background:linear-gradient(180deg,rgba(201,169,98,.12),rgba(201,169,98,.04));border:1px solid rgba(201,169,98,.34);border-radius:14px;padding:15px 17px;margin:0 0 22px;font-size:14px;color:#e8e0cf}
+  .dora{background:linear-gradient(180deg,rgba(201,169,98,.14),rgba(201,169,98,.04));border:1px solid rgba(201,169,98,.36);border-radius:15px;padding:18px 20px;margin:0 0 24px;font-size:14.7px;color:#ece4d2;line-height:1.62}
   .dora b{color:var(--gold)}
-  .dora .h{display:block;font:800 11px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+  .dora .h{display:block;font:800 12.5px var(--F);letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
   .tabs{display:flex;gap:6px;margin:0 0 14px;border:1px solid var(--line);border-radius:12px;padding:5px;background:var(--card);max-width:430px}
   .tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;font:700 13.5px var(--F);color:var(--mut);cursor:pointer;border:0;background:transparent;transition:.15s}
   .tab.on{background:rgba(78,205,196,.15);color:var(--teal)}
@@ -87,8 +91,10 @@
 </head>
 <body>
 <div class="wrap">
-  <div class="eyebrow">NTLSN · A DORA-aligned measure · in development</div>
-  <h1>The <span class="sotl">SoTL Index</span><span class="pill">open · field-normalised</span></h1>
+  <div class="eyebrow">Responsible Research Assessment · DORA-aligned · in development</div>
+  <h1>The <span class="sotl">SoTL Index</span> <span class="pill">open · field-normalised</span></h1>
+  <p class="tagline">The metric built for <b>teaching scholarship</b> — not the impact factor.</p>
+  <a class="hublink" href="/responsible-assessment.html">◇ Part of NTLSN's Responsible Research Assessment hub →</a>
   <p class="lead">Most metrics reward <i>research</i>. This one is built for the <b>Scholarship of Teaching &amp; Learning</b>. Enter an ORCID — or a university — to be placed on a <b>1–7 SoTL spectrum</b>, fully decomposed into five dimensions. Built from open <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> data, in your browser. A reflection tool — never a ranking of people.</p>
 
   <div class="dora">
