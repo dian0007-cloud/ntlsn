@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rubric Builder — scaffold a marking rubric, free · NTLSN</title>
+<meta name="description" content="Build a criteria-by-standards marking rubric in your browser: set your standard levels, add criteria and weights, write the descriptors, and export to Markdown or print. Free, no login, nothing leaves your browser.">
+<meta property="og:title" content="Rubric Builder — NTLSN">
+<meta property="og:description" content="Scaffold a clear marking rubric in your browser and export it. Free, no login.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--green:#6FCF97;--red:#FF6B6B;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 80px}
+  a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px}
+  .logo{width:29px;height:29px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,#C57BFF);display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:13px}
+  .back{font-size:13px;color:var(--mut)}
+  .eyebrow{font:800 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:9px}
+  h1{font-size:clamp(26px,4vw,38px);line-height:1.1;margin:0 0 10px;font-weight:800;
+    background:linear-gradient(120deg,var(--teal),var(--blue) 55%,#C57BFF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{font-size:16px;color:#cbd8e6;max-width:68ch;margin:0 0 22px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 16px}
+  .lbl{font:700 11px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin:0 0 6px;display:block}
+  input,textarea,select{background:var(--card2);border:1px solid var(--line);border-radius:9px;color:#fff;font:14px var(--sans);padding:9px 11px;width:100%}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--teal)}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+  .row>div{flex:1;min-width:160px}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--teal);color:#06251f;border:0;border-radius:9px;padding:10px 16px;font:800 13.5px var(--sans);cursor:pointer}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:var(--card2);color:#cbd8e6;border:1px solid var(--line)}
+  .btn.sm{padding:7px 12px;font-size:12.5px}
+  .bar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:6px 0 14px}
+  .levels{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-top:4px}
+  .lvl{min-width:120px;flex:1}
+  .lvl input{font-weight:700}
+  .x{border:0;background:rgba(255,107,107,.14);color:#ff9b9b;border-radius:7px;width:30px;height:30px;cursor:pointer;font-size:15px;flex:none}
+  /* rubric table */
+  .scroll{overflow:auto;border:1px solid var(--line);border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:640px}
+  th,td{border:1px solid var(--line);vertical-align:top;padding:0}
+  thead th{background:var(--card2);color:#fff;font:800 12.5px var(--sans);padding:10px 12px;text-align:left;position:sticky;top:0}
+  thead th.crit{background:#10243c}
+  .crit-cell{background:var(--card);min-width:150px;max-width:200px;padding:10px 12px}
+  .crit-cell .cn{font:700 14px var(--sans);color:#fff}
+  .crit-cell .cw{font:600 11.5px var(--sans);color:var(--gold);margin-top:3px}
+  td textarea{border:0;border-radius:0;background:transparent;min-height:88px;resize:vertical;font-size:13px;color:#dbe6f1;width:100%;padding:9px 11px}
+  td textarea::placeholder{color:rgba(159,176,195,.5);font-style:italic}
+  .out{margin:16px 0 0;display:none}
+  .out textarea{min-height:200px;font:13px ui-monospace,Menlo,Consolas,monospace;white-space:pre}
+  .commons{background:linear-gradient(180deg,rgba(78,205,196,.08),rgba(78,205,196,.02));border:1px solid rgba(78,205,196,.28);border-radius:14px;padding:15px 17px;margin:20px 0 0}
+  .commons .ch{font:800 11px var(--sans);text-transform:uppercase;letter-spacing:1.1px;color:var(--teal);margin:0 0 10px}
+  .commons .cg{display:flex;flex-wrap:wrap;gap:8px}
+  .commons a{display:inline-flex;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font:700 12.5px var(--sans);color:var(--ink)}
+  .commons a:hover{border-color:var(--teal);background:rgba(78,205,196,.1);text-decoration:none}
+  .note{background:rgba(255,180,72,.08);border:1px solid rgba(255,180,72,.3);border-radius:12px;padding:13px 16px;margin:18px 0 0;font-size:12.5px;color:#e7d6b0;line-height:1.6}
+  .note b{color:#ffd98a}
+  .foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
+  @media print{.no-print{display:none!important}body{background:#fff;color:#000}.scroll{border-color:#999}th,td{border-color:#999}thead th{background:#eee;color:#000;position:static}.crit-cell{background:#f6f6f6}.crit-cell .cn{color:#000}td textarea{color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top no-print">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="no-print">
+    <div class="eyebrow">◇ Free tool · nothing leaves your browser</div>
+    <h1>Rubric Builder</h1>
+    <p class="lede">Scaffold a clear, criteria-by-standards marking rubric: set your standard levels, add criteria and weights, write the descriptors, and export to Markdown or print. A good rubric makes your standards explicit for markers and students alike — this gives you the structure; you write the words.</p>
+
+    <div class="panel">
+      <label class="lbl" for="task">Assessment task</label>
+      <input id="task" placeholder="e.g. Case-study report (2,000 words), Nursing 201">
+    </div>
+
+    <div class="panel">
+      <label class="lbl">Standard levels <span style="color:#6b7c93;font-weight:500;text-transform:none;letter-spacing:0">— the columns of your rubric</span></label>
+      <div class="bar">
+        <select id="preset" style="max-width:240px">
+          <option value="">Preset…</option>
+          <option value="hd">HD · D · C · P (Australian grades)</option>
+          <option value="q4">Excellent · Good · Satisfactory · Needs work</option>
+          <option value="q3">Strong · Developing · Beginning</option>
+          <option value="q5">Outstanding · Strong · Sound · Limited · Not yet</option>
+        </select>
+        <button class="btn ghost sm" id="addLevel" type="button">＋ Level</button>
+      </div>
+      <div class="levels" id="levels"></div>
+    </div>
+
+    <div class="bar">
+      <button class="btn" id="addCrit" type="button">＋ Add criterion</button>
+      <button class="btn ghost" id="exportBtn" type="button">⇩ Export Markdown</button>
+      <button class="btn ghost" id="printBtn" type="button">🖨 Print / PDF</button>
+      <button class="btn ghost" id="clearBtn" type="button">Clear</button>
+      <span id="status" style="font-size:12px;color:var(--mut);margin-left:auto"></span>
+    </div>
+  </div>
+
+  <div id="rubricTitle" style="font:800 17px var(--sans);color:#fff;margin:0 0 10px;display:none"></div>
+  <div class="scroll" id="scroll"><table id="tbl"></table></div>
+
+  <div class="out no-print" id="out">
+    <label class="lbl">Markdown — copy into your LMS, doc, or anywhere</label>
+    <textarea id="md" readonly></textarea>
+    <div class="bar" style="margin-top:8px"><button class="btn sm" id="copyMd" type="button">Copy to clipboard</button></div>
+  </div>
+
+  <div class="commons no-print">
+    <div class="ch">◇ Go deeper — from the NTLSN commons</div>
+    <div class="cg">
+      <a href="/marking-crash-course.html">Marking &amp; Moderation course</a>
+      <a href="/assessment-crash-course.html">Authentic Assessment course</a>
+      <a href="/feedback-crash-course.html">Feedback That Works course</a>
+      <a href="/?q=assessment">Assessment resources</a>
+    </div>
+  </div>
+
+  <div class="note no-print"><b>A scaffold, not a standard.</b> This builds the structure of a rubric; the descriptors and standards are yours to write and your institution's to approve. Good rubrics describe observable standards in plain language and are shared with students before they submit. Nothing you type is stored or sent — it lives in this browser only.</div>
+
+  <div class="foot no-print">Free NTLSN tool · runs entirely in your browser. &nbsp;·&nbsp; <a href="/crash-courses.html">Crash courses</a> &nbsp;·&nbsp; <a href="/">← NTLSN</a></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="ntlsn_rubric_v1";
+  var PRESETS={hd:["High Distinction","Distinction","Credit","Pass"],q4:["Excellent","Good","Satisfactory","Needs work"],q3:["Strong","Developing","Beginning"],q5:["Outstanding","Strong","Sound","Limited","Not yet"]};
+  var state={task:"",levels:["High Distinction","Distinction","Credit","Pass"],criteria:[{name:"Argument & analysis",weight:""},{name:"Use of evidence",weight:""},{name:"Structure & clarity",weight:""}],cells:{}};
+  try{var v=JSON.parse(localStorage.getItem(KEY));if(v&&v.levels&&v.criteria)state=v;}catch(e){}
+
+  var $=function(id){return document.getElementById(id);};
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}flash();}
+  var ft;function flash(){var s=$("status");s.textContent="Saved";clearTimeout(ft);ft=setTimeout(function(){s.textContent="";},1200);}
+  function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+  // ---- levels editor ----
+  function renderLevels(){
+    var w=$("levels");w.innerHTML="";
+    state.levels.forEach(function(lab,i){
+      var d=document.createElement("div");d.className="lvl";
+      d.innerHTML='<label class="lbl" style="font-size:10px">Level '+(i+1)+'</label>'+
+        '<div style="display:flex;gap:6px"><input value="'+esc(lab)+'" data-li="'+i+'">'+(state.levels.length>2?'<button class="x" data-lx="'+i+'" title="Remove">×</button>':'')+'</div>';
+      w.appendChild(d);
+    });
+    w.querySelectorAll("input[data-li]").forEach(function(inp){inp.addEventListener("input",function(){state.levels[+inp.dataset.li]=inp.value;save();renderTable();});});
+    w.querySelectorAll("[data-lx]").forEach(function(b){b.addEventListener("click",function(){var i=+b.dataset.lx;state.levels.splice(i,1);reindexCells();save();renderLevels();renderTable();});});
+  }
+  function reindexCells(){ /* cells keyed by criterion idx + level idx; simplest: clear orphaned */
+    var nc={};Object.keys(state.cells).forEach(function(k){var p=k.split("_"),ci=+p[0],li=+p[1];if(ci<state.criteria.length&&li<state.levels.length)nc[k]=state.cells[k];});state.cells=nc; }
+
+  // ---- rubric table ----
+  function renderTable(){
+    $("task").value=state.task||"";
+    var t=$("tbl");
+    var head="<thead><tr><th class='crit'>Criterion</th>"+state.levels.map(function(l){return "<th>"+esc(l)+"</th>";}).join("")+"</tr></thead>";
+    var body="<tbody>"+state.criteria.map(function(c,ci){
+      var cells=state.levels.map(function(l,li){
+        var key=ci+"_"+li,val=state.cells[key]||"";
+        return "<td><textarea data-k='"+key+"' placeholder='What does “"+esc(l)+"” look like for this criterion?'>"+esc(val)+"</textarea></td>";
+      }).join("");
+      return "<tr><td class='crit-cell'><div class='cn' contenteditable data-cn='"+ci+"'>"+esc(c.name)+"</div>"+
+        "<div class='cw'><span contenteditable data-cw='"+ci+"'>"+esc(c.weight||"")+"</span>"+(c.weight?'%':' <span style=\"color:#5b7c93;font-style:italic\">weight%</span>')+"</div>"+
+        "<button class='x no-print' data-rx='"+ci+"' title='Remove criterion' style='margin-top:8px'>×</button></td>"+cells+"</tr>";
+    }).join("")+"</tbody>";
+    t.innerHTML=head+body;
+    // wire cells
+    t.querySelectorAll("textarea[data-k]").forEach(function(ta){ta.addEventListener("input",function(){state.cells[ta.dataset.k]=ta.value;save();});});
+    t.querySelectorAll("[data-cn]").forEach(function(el){el.addEventListener("blur",function(){state.criteria[+el.dataset.cn].name=el.textContent.trim();save();});});
+    t.querySelectorAll("[data-cw]").forEach(function(el){el.addEventListener("blur",function(){state.criteria[+el.dataset.cw].weight=el.textContent.replace(/[^0-9.]/g,"");save();renderTable();});});
+    t.querySelectorAll("[data-rx]").forEach(function(b){b.addEventListener("click",function(){state.criteria.splice(+b.dataset.rx,1);reindexCells();save();renderTable();});});
+    // title for print
+    var rt=$("rubricTitle");if(state.task){rt.style.display="block";rt.textContent="Rubric — "+state.task;}else rt.style.display="none";
+  }
+
+  // ---- export ----
+  function toMarkdown(){
+    var L=state.levels;
+    var head="| Criterion |"+L.map(function(l){return " "+l+" |";}).join("");
+    var sep="| --- |"+L.map(function(){return " --- |";}).join("");
+    var rows=state.criteria.map(function(c,ci){
+      var name=c.name+(c.weight?(" ("+c.weight+"%)"):"");
+      return "| **"+name+"** |"+L.map(function(l,li){return " "+((state.cells[ci+"_"+li]||"").replace(/\n/g," ").replace(/\|/g,"\\|"))+" |";}).join("");
+    });
+    return (state.task?("# Rubric — "+state.task+"\n\n"):"")+[head,sep].concat(rows).join("\n")+"\n";
+  }
+
+  // ---- wire controls ----
+  $("task").addEventListener("input",function(){state.task=$("task").value;save();var rt=$("rubricTitle");if(state.task){rt.style.display="block";rt.textContent="Rubric — "+state.task;}else rt.style.display="none";});
+  $("addLevel").addEventListener("click",function(){if(state.levels.length>=6)return;state.levels.push("New level");save();renderLevels();renderTable();});
+  $("preset").addEventListener("change",function(){var p=PRESETS[this.value];if(p){state.levels=p.slice();reindexCells();save();renderLevels();renderTable();}this.value="";});
+  $("addCrit").addEventListener("click",function(){state.criteria.push({name:"New criterion",weight:""});save();renderTable();var tas=document.querySelectorAll("[data-cn]");if(tas.length)tas[tas.length-1].focus();});
+  $("exportBtn").addEventListener("click",function(){$("md").value=toMarkdown();$("out").style.display="block";$("out").scrollIntoView({behavior:"smooth",block:"nearest"});});
+  $("copyMd").addEventListener("click",function(){var ta=$("md");ta.select();try{navigator.clipboard.writeText(ta.value);}catch(e){document.execCommand("copy");}this.textContent="Copied ✓";var b=this;setTimeout(function(){b.textContent="Copy to clipboard";},1400);});
+  $("printBtn").addEventListener("click",function(){window.print();});
+  $("clearBtn").addEventListener("click",function(){if(!confirm("Clear this rubric? This can't be undone."))return;state={task:"",levels:["High Distinction","Distinction","Credit","Pass"],criteria:[{name:"Criterion 1",weight:""}],cells:{}};save();renderLevels();renderTable();$("out").style.display="none";});
+
+  renderLevels();renderTable();
+})();
+</script>
+</body>
+</html>
