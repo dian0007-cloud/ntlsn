@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Assessment Spread Planner</title>
+<meta name="description" content="See where your assessment deadlines bunch up across the teaching weeks, spot overloaded weeks, and design a fairer, more spread-out assessment schedule. Runs entirely in your browser; nothing is stored or sent.">
+<meta property="og:title" content="NTLSN — Assessment Spread Planner">
+<meta property="og:description" content="See where assessment deadlines bunch across the teaching weeks and design a fairer spread. Transparent, in-browser, nothing stored.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/assessment-spread.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NTLSN — Assessment Spread Planner">
+<meta name="twitter:description" content="See where assessment deadlines bunch across the teaching weeks and design a fairer spread.">
+<meta name="twitter:image" content="https://www.ntlsn.com/og-image.png">
+<link rel="canonical" href="https://www.ntlsn.com/assessment-spread.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:980px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:720px}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  fieldset{border:1px solid var(--line);border-radius:13px;padding:14px 16px 16px;margin:0 0 16px}
+  legend{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);padding:0 6px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 0}
+  .row label{font:500 13.5px var(--F);color:var(--ink);flex:1}
+  input[type=number],input[type=text]{background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:600 14px var(--F)}
+  input[type=number]{width:92px}
+  input:focus{outline:none;border-color:var(--teal)}
+  .item{display:grid;grid-template-columns:1fr 86px 86px 34px;gap:8px;align-items:center;margin:8px 0}
+  .item input[type=text]{width:100%}
+  .item .lbl{display:none}
+  .item .rm{background:rgba(255,138,138,.10);color:var(--bad);border:1px solid rgba(255,138,138,.30);border-radius:8px;height:36px;cursor:pointer;font:700 16px var(--F)}
+  .item .rm:hover{background:rgba(255,138,138,.18)}
+  .heads{display:grid;grid-template-columns:1fr 86px 86px 34px;gap:8px;font:700 10.5px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:2px 0 4px}
+  .add{background:rgba(78,205,196,.10);color:var(--teal);border:1px solid rgba(78,205,196,.30);border-radius:9px;padding:9px 14px;font:800 12.5px var(--F);cursor:pointer;margin-top:6px}
+  .add:hover{background:rgba(78,205,196,.18)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:sticky;top:18px}
+  .verdict{font:700 13px var(--F);padding:5px 12px;border-radius:999px;display:inline-block;margin:0 0 4px}
+  .vsub{color:var(--mut);font-size:12.5px;margin:0 0 16px}
+  .wk{display:grid;grid-template-columns:54px 1fr 46px;gap:8px;align-items:center;margin:5px 0;font:600 12px var(--F)}
+  .wk .wn{color:var(--mut)}
+  .wk .track{background:rgba(255,255,255,.05);border-radius:999px;height:16px;overflow:hidden}
+  .wk .fill{height:100%;border-radius:999px;min-width:2px}
+  .wk .wv{text-align:right;color:var(--ink);font-weight:700}
+  .wk.empty .wv{color:var(--mut);font-weight:500}
+  .tot{display:flex;gap:18px;flex-wrap:wrap;margin:4px 0 14px;font-size:12.5px;color:var(--mut)}
+  .tot b{color:var(--ink);font-size:15px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Assessment Spread Planner</h1>
+  <p class="lead">List a unit's assessments and see <i>where the load lands</i> across the teaching weeks. Bunched deadlines are one of the most common — and most avoidable — causes of student stress. This shows you the shape of your schedule so you can spread it. Every assumption is visible; nothing is stored or sent.</p>
+  <div class="grid">
+    <div>
+      <fieldset>
+        <legend>The unit</legend>
+        <div class="row"><label for="weeks">Teaching weeks</label><input type="number" id="weeks" value="12" min="1" max="52"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Assessments</legend>
+        <div class="heads"><span>Name</span><span>Due week</span><span>Weight %</span><span></span></div>
+        <div id="items"></div>
+        <button type="button" class="add" id="add">＋ Add assessment</button>
+      </fieldset>
+    </div>
+    <div>
+      <div class="panel" id="out" role="status" aria-live="polite" aria-atomic="true"></div>
+    </div>
+  </div>
+  <div class="foot">
+    A rough planning aid, not a rule. &ldquo;Bunching&rdquo; here means a lot of assessment weight falling in one week or in back-to-back weeks — remember students take several units at once, so even a well-spread unit can collide with others. Use it as a design prompt. Everything runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/wellbeingcrashcourse.html">Wellbeing crash course</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var itemsEl=document.getElementById("items"), out=document.getElementById("out"), weeksEl=document.getElementById("weeks");
+  var seed=[{n:"Quiz",w:4,p:10},{n:"Essay",w:7,p:30},{n:"Report",w:11,p:30},{n:"Exam",w:12,p:30}];
+  function clampInt(v,lo,hi){v=parseInt(v,10);if(isNaN(v))v=lo;return Math.max(lo,Math.min(hi,v));}
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function rowEl(it){
+    var d=document.createElement("div");d.className="item";
+    d.innerHTML='<input type="text" aria-label="Assessment name" placeholder="e.g. Essay" value="'+esc(it.n)+'">'+
+      '<input type="number" aria-label="Due week" min="1" value="'+it.w+'">'+
+      '<input type="number" aria-label="Weight percent" min="0" value="'+it.p+'">'+
+      '<button type="button" class="rm" aria-label="Remove assessment" title="Remove">✕</button>';
+    var ins=d.querySelectorAll("input");
+    ins[0].addEventListener("input",calc); ins[1].addEventListener("input",calc); ins[2].addEventListener("input",calc);
+    d.querySelector(".rm").addEventListener("click",function(){d.remove();calc();});
+    return d;
+  }
+  function read(){
+    var weeks=clampInt(weeksEl.value,1,52);
+    var items=[];
+    itemsEl.querySelectorAll(".item").forEach(function(r){
+      var ins=r.querySelectorAll("input");
+      var name=ins[0].value.trim();
+      var wk=clampInt(ins[1].value,1,weeks);
+      var p=parseFloat(ins[2].value); if(isNaN(p)||p<0)p=0;
+      items.push({n:name,w:wk,p:p});
+    });
+    return {weeks:weeks,items:items};
+  }
+  function calc(){
+    var st=read(), weeks=st.weeks, items=st.items;
+    var byWeek=[]; for(var i=0;i<=weeks;i++)byWeek[i]=0;
+    var total=0;
+    items.forEach(function(it){byWeek[it.w]=(byWeek[it.w]||0)+it.p;total+=it.p;});
+    var peak=0,peakWk=0; for(var w=1;w<=weeks;w++){if(byWeek[w]>peak){peak=byWeek[w];peakWk=w;}}
+    // adjacent-week load (this week + next) to catch back-to-back bunching
+    var maxPair=0,pairWk=0;
+    for(var w2=1;w2<=weeks;w2++){var pair=byWeek[w2]+(byWeek[w2+1]||0);if(pair>maxPair){maxPair=pair;pairWk=w2;}}
+    var heavy=0; for(var w3=1;w3<=weeks;w3++){if(byWeek[w3]>25)heavy++;}
+    var vlabel,vcol;
+    if(total===0){vlabel="Add some assessments";vcol="var(--mut)";}
+    else if(peak>40||maxPair>55){vlabel="Heavily bunched";vcol="var(--bad)";}
+    else if(peak>25||maxPair>40||heavy>1){vlabel="Some bunching";vcol="var(--warn)";}
+    else{vlabel="Well spread";vcol="var(--good)";}
+    function barColor(v){return v>40?"var(--bad)":v>25?"var(--warn)":"var(--teal)";}
+    var rows="";
+    for(var w=1;w<=weeks;w++){
+      var v=byWeek[w]||0, pct=Math.min(100,v);
+      rows+='<div class="wk'+(v===0?" empty":"")+'"><span class="wn">Wk '+w+'</span>'+
+        '<span class="track"><span class="fill" style="width:'+pct+'%;background:'+barColor(v)+'"></span></span>'+
+        '<span class="wv">'+(v?Math.round(v)+'%':'–')+'</span></div>';
+    }
+    var totColor=total===100?"var(--good)":(total>100||total<100&&total>0?"var(--warn)":"var(--mut)");
+    out.innerHTML=
+      '<div class="verdict" style="background:rgba(255,255,255,.06);color:'+vcol+'">'+vlabel+'</div>'+
+      '<div class="vsub">'+(total?('Heaviest week: <b style="color:'+vcol+'">Wk '+peakWk+'</b> ('+Math.round(peak)+'%)'+(maxPair>peak?(' · back-to-back peak Wk '+pairWk+'–'+(pairWk+1)+' ('+Math.round(maxPair)+'%)'):'')):'Enter due weeks and weights to see the spread.')+'</div>'+
+      '<div class="tot"><span>Total weight <b style="color:'+totColor+'">'+Math.round(total)+'%</b>'+(total!==100&&total>0?' <span style="color:var(--warn)">(should be 100%)</span>':'')+'</span><span>Assessments <b>'+items.length+'</b></span></div>'+
+      rows;
+  }
+  // build initial rows
+  seed.forEach(function(it){itemsEl.appendChild(rowEl(it));});
+  document.getElementById("add").addEventListener("click",function(){itemsEl.appendChild(rowEl({n:"",w:1,p:0}));calc();});
+  weeksEl.addEventListener("input",calc);
+  calc();
+})();
+</script>
+</body>
+</html>

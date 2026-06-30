@@ -15,6 +15,7 @@
 <meta name="twitter:title" content="Your NTLSN — a teaching dashboard you build from widgets · NTLSN">
 <meta name="twitter:description" content="Add widgets like you add skills. The commons at a glance.">
 <meta name="twitter:image" content="https://www.ntlsn.com/og-image.png">
+<link rel="canonical" href="https://www.ntlsn.com/widgets.html">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#FF8A65;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
@@ -97,6 +98,7 @@
   .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut);line-height:1.7}
   .foot b{color:#cbd8e6}
   .empty{grid-column:1/-1;text-align:center;padding:50px 20px;border:1px dashed var(--line);border-radius:18px;color:var(--mut)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.w:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -145,6 +147,8 @@
   var DOY=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(now.getFullYear(),0,0))/864e5);
   function pick(a){return a[DOY%a.length];}
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  // Only allow http(s)/protocol-relative/root/relative/hash links — blocks javascript:/data: from feed data
+  function safeUrl(u,fallback){if(!u)return fallback;var s=String(u).trim();if(/^(https?:|\/\/|\/|#|\.\/|\.\.\/)/i.test(s))return s;if(/^[a-z][a-z0-9+.\-]*:/i.test(s))return fallback;return s;}
   function daysTo(d){var t=new Date(d+"T00:00:00");return Math.ceil((t-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);}
   function fmtDate(d){var t=new Date(d+"T00:00:00");return t.toLocaleDateString("en-AU",{day:"numeric",month:"short"});}
   function inDays(n){return n===0?"today":n===1?"tomorrow":"in "+n+" days";}
@@ -211,13 +215,13 @@
          '<div class="big-num">'+(n<=0?"now":n)+(n>0?'<span class="u">day'+(n===1?"":"s")+'</span>':"")+'</div>'+
          '<div class="ttl">'+esc(e.title)+'</div>'+
          '<div class="sub">'+fmtDate(e.date)+(e.endDate?("–"+fmtDate(e.endDate)):"")+loc+'</div>'+
-         '<a class="lnk" href="'+esc(e.url||"/#ntlsn-events")+'" target="_blank" rel="noopener">Details →</a>';
+         '<a class="lnk" href="'+esc(safeUrl(e.url,"/#ntlsn-events"))+'" target="_blank" rel="noopener">Details →</a>';
      });}},
     {id:"upcoming-radar",cat:"Closing soon",ac:"gold",ic:"⏳",def:true,name:"On the horizon",blurb:"The next few events to register for, with day counts.",
      render:function(el){el.innerHTML='<div class="sub">loading…</div>';whenData(function(){
        var f=futureSorted().slice(0,4);if(!f.length){el.innerHTML='<div class="sub">Nothing upcoming listed.</div>';return;}
        el.innerHTML='<div class="wh"><span class="ic">⏳</span><span class="cat">On the horizon</span></div>'+
-         '<div class="rows">'+f.map(function(e){var n=daysTo(e.date);return '<a class="er" style="text-decoration:none" href="'+esc(e.url||"/#ntlsn-events")+'" target="_blank" rel="noopener"><span class="d">'+(n<=0?"now":n+"d")+'</span><span class="t">'+esc(e.title)+'</span></a>';}).join("")+'</div>'+
+         '<div class="rows">'+f.map(function(e){var n=daysTo(e.date);return '<a class="er" style="text-decoration:none" href="'+esc(safeUrl(e.url,"/#ntlsn-events"))+'" target="_blank" rel="noopener"><span class="d">'+(n<=0?"now":n+"d")+'</span><span class="t">'+esc(e.title)+'</span></a>';}).join("")+'</div>'+
          '<a class="lnk" href="/#ntlsn-events">All events →</a>';
      });}},
     {id:"teaching-calendar",cat:"Academic year",ac:"purple",ic:"🗓️",def:true,name:"Where you are",blurb:"Your approximate place in the teaching year, and what to reach for.",
@@ -304,6 +308,40 @@
          '<div class="ttl">Don\'t worry — here\'s the recording</div>'+
          '<div class="sub">Recordings and programs from recent sector workshops, gathered so you can catch up on your own time.</div>'+
          '<a class="lnk" href="/missed-it.html">Open the recordings hub →</a>';
+     }},
+    {id:"crash-course",cat:"Learn",ac:"purple",ic:"🎓",name:"Crash course of the day",blurb:"A short, free teaching crash course — a new one each day.",
+     render:function(el){
+       var COURSES=[
+         {t:"Giving better feedback",u:"/feedbackcrashcourse.html"},
+         {t:"Designing assessment",u:"/assessment-design-crash-course.html"},
+         {t:"Academic integrity in the age of AI",u:"/academic-integrity-ai-crash-course.html"},
+         {t:"Active learning",u:"/active-learning-crash-course.html"},
+         {t:"Constructive alignment",u:"/constructive-alignment-crash-course.html"},
+         {t:"Rubrics & marking",u:"/rubrics-marking-crash-course.html"},
+         {t:"Teaching large classes",u:"/large-classes-crash-course.html"},
+         {t:"Online & blended teaching",u:"/online-blended-crash-course.html"},
+         {t:"Reflective practice & SoTL",u:"/reflective-practice-crash-course.html"},
+         {t:"Inclusive & equitable assessment",u:"/inclusive-assessment-crash-course.html"},
+         {t:"Supervising research students",u:"/research-supervision-crash-course.html"},
+         {t:"Work-integrated learning",u:"/wilcrashcourse.html"},
+         {t:"Supporting student wellbeing",u:"/wellbeingcrashcourse.html"}
+       ];
+       var c=pick(COURSES);
+       el.innerHTML='<div class="wh"><span class="ic">🎓</span><span class="cat">Crash course</span></div>'+
+         '<div class="ttl">'+esc(c.t)+'</div>'+
+         '<div class="sub">Four short lessons and a self-check — about ten minutes, free, runs in your browser.</div>'+
+         '<a class="lnk" href="'+esc(safeUrl(c.u,"/crash-courses.html"))+'">Start the course →</a>';
+     }},
+    {id:"tool-spotlight",cat:"Tools",ac:"gold",ic:"🛠️",name:"Tool of the day",blurb:"One of NTLSN's free in-browser teaching tools.",
+     render:function(el){
+       var TOOLS=[
+         {t:"Student Workload Estimator",d:"Estimate the real hours a unit asks of students, and compare to the nominal load.",u:"/workload.html"},
+         {t:"Build your own dashboard",d:"Add glanceable widgets like you add skills — the commons at a glance.",u:"/widgets.html"}
+       ];
+       var t=pick(TOOLS);
+       el.innerHTML='<div class="wh"><span class="ic">🛠️</span><span class="cat">Tools</span></div>'+
+         '<div class="ttl">'+esc(t.t)+'</div><div class="sub">'+esc(t.d)+'</div>'+
+         '<a class="lnk" href="'+esc(safeUrl(t.u,"/"))+'">Open the tool →</a>';
      }}
   ];
   var BYID={};REG.forEach(function(w){BYID[w.id]=w;});
@@ -321,10 +359,11 @@
     enabled.forEach(function(id){
       var w=BYID[id];if(!w)return;
       var el=document.createElement("div");el.className="w"+(w.big?" big":"");el.setAttribute("style",acStyle(w.ac));el.dataset.id=id;
-      var x=document.createElement("button");x.className="x";x.title="Remove";x.textContent="✕";x.onclick=function(){enabled=enabled.filter(function(i){return i!==id;});save(enabled);renderBoard();renderGallery();};
+      var x=document.createElement("button");x.className="x";x.title="Remove";x.setAttribute("aria-label","Remove "+(w.name||"widget"));x.textContent="✕";x.onclick=function(){enabled=enabled.filter(function(i){return i!==id;});save(enabled);renderBoard();renderGallery();};
       var body=document.createElement("div");
       el.appendChild(x);el.appendChild(body);board.appendChild(el);
       try{w.render(body);}catch(e){body.innerHTML='<div class="sub">—</div>';}
+      if(body._cleanup)el._cleanup=body._cleanup;// lift cleanup onto the .w card so renderBoard can clear its intervals
     });
     updCount();
   }
@@ -334,7 +373,6 @@
   function renderGallery(){
     var cats={};REG.forEach(function(w){(cats[w.cat]=cats[w.cat]||[]).push(w);});
     var html="";
-    REG.forEach(function(w){});// keep registry order
     var seen={};
     REG.forEach(function(w){if(seen[w.cat])return;seen[w.cat]=1;
       html+='<div class="gcat">'+esc(w.cat)+'</div>';

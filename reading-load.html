@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Reading-Load Calculator</title>
+<meta name="description" content="Add the readings you set and see how many hours they really ask of students — by item and in total — at a realistic reading speed. Spread it across the weeks to check the weekly load. In-browser; nothing stored or sent.">
+<meta property="og:title" content="NTLSN — Reading-Load Calculator">
+<meta property="og:description" content="See how many hours your set readings really ask of students, by item and in total, at a realistic reading speed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/reading-load.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NTLSN — Reading-Load Calculator">
+<meta name="twitter:description" content="See how many hours your set readings really ask of students.">
+<link rel="canonical" href="https://www.ntlsn.com/reading-load.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:980px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:720px}
+  .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  fieldset{border:1px solid var(--line);border-radius:13px;padding:14px 16px 16px;margin:0 0 16px}
+  legend{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);padding:0 6px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:9px 0}
+  .row label{font:500 13.5px var(--F);color:var(--ink);flex:1}
+  input[type=number],input[type=text],select{background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:600 14px var(--F)}
+  input[type=number]{width:90px}
+  select{font-size:13px}
+  input:focus,select:focus{outline:none;border-color:var(--teal)}
+  .heads,.item{display:grid;grid-template-columns:1fr 70px 92px 1.2fr 34px;gap:8px;align-items:center}
+  .heads{font:700 10.5px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:2px 0 4px}
+  .item{margin:8px 0}
+  .item input[type=text]{width:100%}
+  .item input[type=number]{width:100%}
+  .item select{width:100%}
+  .rm{background:rgba(255,138,138,.10);color:var(--bad);border:1px solid rgba(255,138,138,.30);border-radius:8px;height:36px;cursor:pointer;font:700 15px var(--F)}
+  .rm:hover{background:rgba(255,138,138,.18)}
+  .rm:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .add{background:rgba(78,205,196,.10);color:var(--teal);border:1px solid rgba(78,205,196,.30);border-radius:9px;padding:9px 14px;font:800 12.5px var(--F);cursor:pointer;margin-top:8px}
+  .add:hover{background:rgba(78,205,196,.18)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:sticky;top:18px}
+  .big{display:flex;align-items:baseline;gap:10px}
+  .big b{font-size:42px;font-weight:800;line-height:1;letter-spacing:-.02em;color:#fff}
+  .big span{color:var(--mut);font-size:13px}
+  .verdict{font:700 13px var(--F);padding:5px 12px;border-radius:999px;display:inline-block;margin:14px 0 4px}
+  .vsub{color:var(--mut);font-size:12.5px;margin:0 0 16px}
+  .brk{margin-top:10px}
+  .br{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:5px 0;border-top:1px solid var(--line)}
+  .br span:first-child{color:#dbe6f1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .br span:last-child{color:var(--mut);white-space:nowrap;font-weight:700}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Reading-Load Calculator</h1>
+  <p class="lead">It's easy to set more reading than students can realistically do. List your readings, set a reading purpose for each, and see the <i>real</i> hours — by item, in total, and per week. Reading rates are population averages; first-encounter and second-language reading is slower. Use it as a design prompt. Nothing is stored or sent.</p>
+  <div class="grid">
+    <div>
+      <fieldset>
+        <legend>Settings</legend>
+        <div class="row"><label for="wpp">Words per page <span style="color:var(--mut);font-weight:400">(for page counts)</span></label><input type="number" id="wpp" value="500" min="100" max="1200"></div>
+        <div class="row"><label for="weeks">Spread across weeks</label><input type="number" id="weeks" value="12" min="1" max="52"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Readings</legend>
+        <div class="heads"><span>Title</span><span>Amount</span><span>Unit</span><span>Purpose</span><span></span></div>
+        <div id="items"></div>
+        <button type="button" class="add" id="add">＋ Add reading</button>
+      </fieldset>
+    </div>
+    <div>
+      <div class="panel" role="status" aria-live="polite" aria-atomic="true" id="out"></div>
+    </div>
+  </div>
+  <div class="foot">
+    Reading-rate ranges informed by typical adult silent-reading research (e.g. Brysbaert, 2019): ~250 wpm to survey familiar text, slower to understand or analyse. These are <b>averages</b> — real students vary widely. Treat the result as a prompt to right-size the reading, not a precise measure. Everything runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/workload.html">Full workload estimator</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var itemsEl=document.getElementById("items"),out=document.getElementById("out"),wppEl=document.getElementById("wpp"),weeksEl=document.getElementById("weeks");
+  var seed=[
+    {t:"Textbook ch. 3",amt:24,unit:"pages",wpm:180},
+    {t:"Key journal article",amt:8000,unit:"words",wpm:120},
+    {t:"Case study",amt:6,unit:"pages",wpm:250}
+  ];
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function n(v,d){v=parseFloat(v);return isNaN(v)||v<0?d:v;}
+  function fmt(mins){if(mins<1)return "0 min";var h=Math.floor(mins/60),m=Math.round(mins%60);return (h?h+" h ":"")+(m?m+" min":(h?"":"0 min"));}
+  function rowEl(it){
+    var d=document.createElement("div");d.className="item";
+    d.innerHTML='<input type="text" aria-label="Reading title" placeholder="e.g. Chapter 4" value="'+esc(it.t)+'">'+
+      '<input type="number" aria-label="Amount" min="0" value="'+it.amt+'">'+
+      '<select aria-label="Unit"><option value="pages"'+(it.unit==="pages"?" selected":"")+'>pages</option><option value="words"'+(it.unit==="words"?" selected":"")+'>words</option></select>'+
+      '<select aria-label="Reading purpose"><option value="250"'+(it.wpm==250?" selected":"")+'>Survey (250 wpm)</option><option value="180"'+(it.wpm==180?" selected":"")+'>Understand (180 wpm)</option><option value="120"'+(it.wpm==120?" selected":"")+'>Analyse (120 wpm)</option></select>'+
+      '<button type="button" class="rm" aria-label="Remove reading" title="Remove">✕</button>';
+    d.querySelectorAll("input,select").forEach(function(el){el.addEventListener("input",calc);el.addEventListener("change",calc);});
+    d.querySelector(".rm").addEventListener("click",function(){d.remove();calc();});
+    return d;
+  }
+  function calc(){
+    var wpp=n(wppEl.value,500), weeks=Math.max(1,n(weeksEl.value,12));
+    var rows=[],totalMin=0;
+    itemsEl.querySelectorAll(".item").forEach(function(r){
+      var els=r.querySelectorAll("input,select");
+      var title=els[0].value.trim()||"(untitled)";
+      var amt=n(els[1].value,0), unit=els[2].value, wpm=n(els[3].value,180)||180;
+      var words=unit==="pages"?amt*wpp:amt;
+      var mins=words/wpm;
+      totalMin+=mins; rows.push({title:title,mins:mins});
+    });
+    var totalH=totalMin/60, perWk=totalMin/weeks;
+    var vlabel,vcol;
+    // rough weekly-reading comfort bands (hours/week of reading for one unit)
+    if(totalMin===0){vlabel="Add some readings";vcol="var(--mut)";}
+    else if(perWk>180){vlabel="Heavy reading load";vcol="var(--bad)";}
+    else if(perWk>90){vlabel="Substantial";vcol="var(--warn)";}
+    else{vlabel="Reasonable";vcol="var(--good)";}
+    var brk=rows.map(function(r){return '<div class="br"><span>'+esc(r.title)+'</span><span>'+fmt(r.mins)+'</span></div>';}).join("");
+    out.innerHTML=
+      '<div class="big"><b style="color:'+vcol+'">'+(totalMin?totalH.toFixed(1):'—')+'</b><span>total hours of reading</span></div>'+
+      '<div class="verdict" style="background:rgba(255,255,255,.06);color:'+vcol+'">'+vlabel+'</div>'+
+      '<div class="vsub">'+(totalMin?('≈ <b>'+fmt(perWk)+'</b> per week over '+weeks+' weeks · '+rows.length+' reading'+(rows.length===1?'':'s')):'Enter readings to see the load.')+'</div>'+
+      (brk?'<div class="brk">'+brk+'</div>':'');
+  }
+  seed.forEach(function(it){itemsEl.appendChild(rowEl(it));});
+  document.getElementById("add").addEventListener("click",function(){itemsEl.appendChild(rowEl({t:"",amt:0,unit:"pages",wpm:180}));calc();});
+  wppEl.addEventListener("input",calc); weeksEl.addEventListener("input",calc);
+  calc();
+})();
+</script>
+</body>
+</html>
