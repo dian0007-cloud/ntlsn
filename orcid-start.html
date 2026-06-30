@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Start with your ORCID</title>
+<meta name="description" content="Paste your ORCID iD and NTLSN reads your public scholarly record — entirely in your browser — to build a personalised starting point: a snapshot of your work, your SoTL footprint, and the commons resources most likely to help. Free. Nothing is sent to us, stored, or sold.">
+<meta property="og:title" content="Start with your ORCID — NTLSN">
+<meta property="og:description" content="Paste your ORCID iD and we personalise the commons for you — in your browser. Nothing sent to us, stored, or sold.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/orcid-start.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Start with your ORCID — NTLSN">
+<meta name="twitter:description" content="Paste your ORCID iD and we personalise the commons for you — in your browser. Nothing stored or sent to us.">
+<link rel="canonical" href="https://www.ntlsn.com/orcid-start.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#9DD649;--orcid:#A6CE39;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 560px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px;min-height:100vh}
+  .wrap{max-width:880px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--teal),#7C9CFF 55%,#C57BFF);display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:13px}
+  .back{font-size:13px;color:var(--mut);text-decoration:none}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-size:clamp(26px,4vw,40px);margin:0 0 12px;font-weight:800;letter-spacing:-.015em;line-height:1.08}
+  .lead{color:#cbd8e6;font-size:16px;margin:0 0 22px;max-width:64ch}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:0 0 16px}
+  .orcidrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .orcidrow label{font:700 13px var(--F);display:flex;align-items:center;gap:8px;width:100%;margin-bottom:4px}
+  .oicon{width:18px;height:18px;border-radius:4px;background:var(--orcid);color:#fff;font:800 10px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
+  input[type=text]{flex:1;min-width:220px;background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:600 15px var(--F);letter-spacing:.02em}
+  input[type=text]:focus{outline:none;border-color:var(--teal)}
+  .btn{background:var(--teal);color:#06251f;border:0;border-radius:10px;padding:12px 20px;font:800 14px var(--F);cursor:pointer;white-space:nowrap}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn:active{transform:translateY(1px)}
+  .demo{background:none;border:0;color:var(--teal);font:700 13px var(--F);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
+  .err{color:#FF8A8A;font-size:13px;margin:10px 0 0;min-height:0}
+  .privacy{background:linear-gradient(180deg,rgba(166,206,57,.08),rgba(166,206,57,.02));border:1px solid rgba(166,206,57,.28);border-radius:14px;padding:15px 17px;margin:0 0 16px;font-size:13.5px;color:#d4def0}
+  .privacy b{color:var(--orcid)}
+  .privacy ul{margin:9px 0 0;padding:0 0 0 4px;list-style:none}
+  .privacy li{padding:4px 0 4px 22px;position:relative;color:var(--mut)}
+  .privacy li:before{content:"\2713";position:absolute;left:0;color:var(--orcid);font-weight:800}
+  /* results */
+  #results{display:none}
+  #results.on{display:block}
+  .who{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:2px 0 4px}
+  .who h2{font-size:24px;margin:0;font-weight:800;letter-spacing:-.01em}
+  .who a{font-size:12.5px;color:var(--mut)}
+  .sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:24px 0 12px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+  .stat{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+  .stat b{font:800 30px/1 var(--F);color:#fff;letter-spacing:-.02em;display:block;margin-bottom:4px}
+  .stat span{font-size:12px;color:var(--mut)}
+  .fields{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .chip{background:rgba(78,205,196,.10);border:1px solid rgba(78,205,196,.28);color:var(--teal);border-radius:999px;padding:6px 12px;font:700 12.5px var(--F)}
+  .sotl{background:linear-gradient(180deg,rgba(201,169,98,.10),rgba(201,169,98,.03));border:1px solid rgba(201,169,98,.30);border-radius:14px;padding:17px 19px}
+  .sotl .h{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);margin:0 0 8px}
+  .sotl .big{font-size:17px;color:#fff;font-weight:700;margin:0 0 6px}
+  .sotl p{color:var(--mut);font-size:13.5px;margin:0 0 12px}
+  .sotl a.go{display:inline-block;font:800 13px var(--F);color:var(--gold);text-decoration:none;border:1px solid rgba(201,169,98,.4);border-radius:9px;padding:8px 14px}
+  .sotl a.go:hover{background:rgba(201,169,98,.12)}
+  .picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}
+  .pick{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+  .pick:hover{transform:translateY(-3px);border-color:rgba(78,205,196,.45)}
+  .pick:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .pick .tag{font:800 10px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 7px}
+  .pick h3{font:700 15.5px var(--F);margin:0 0 5px;letter-spacing:-.01em}
+  .pick p{color:var(--mut);font-size:12.5px;margin:0 0 11px;flex:1}
+  .pick .why{font-size:11.5px;color:#8aa0b6;font-style:italic;margin:0 0 9px}
+  .pick .go{font:700 12.5px var(--F);color:var(--teal)}
+  .loading{display:flex;align-items:center;gap:11px;color:var(--mut);font-size:14px;padding:8px 0}
+  .spin{width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;flex:none}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .attrib{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:12px;color:var(--mut);margin:26px 0 0;line-height:1.6}
+  .attrib b{color:var(--ink)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}.pick:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Personalise · 30 seconds</div>
+  <h1>Start with your ORCID.</h1>
+  <p class="lead">Paste your ORCID iD and NTLSN reads your public scholarly record — right here in your browser — to build a starting point that's actually <i>yours</i>: a snapshot of your work, your SoTL footprint, and the commons resources most likely to help your teaching.</p>
+
+  <div class="privacy">
+    <b>◌ Free, and genuinely private.</b> We don't sell, on-sell, profile, or store your data — this is only to personalise <i>your</i> view of the commons.
+    <ul>
+      <li>The lookup runs entirely in your browser against ORCID's and OpenAlex's <b>public</b> APIs.</li>
+      <li>Your ORCID iD is <b>never sent to NTLSN</b>, never stored on our servers, never sold.</li>
+      <li>Nothing is saved unless you choose to — close the tab and it's gone.</li>
+      <li>Honest caveat: to look up your public record, your browser does send your iD to ORCID/OpenAlex. That's the only place it goes.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <div class="orcidrow">
+      <label for="orcid"><span class="oicon">iD</span> Your ORCID iD</label>
+      <input type="text" id="orcid" placeholder="0000-0002-1825-0097  ·  or paste the full orcid.org link" autocomplete="off" spellcheck="false">
+      <button class="btn" id="go">Personalise →</button>
+    </div>
+    <div style="margin-top:11px"><button class="demo" id="demo">Don't have it handy? Try a live demo profile</button></div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="results"></div>
+
+  <div class="attrib">
+    <b>How the picks are chosen.</b> We read your public works from <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (an open scholarly index), summarise your fields, and detect education- and teaching-related scholarship to estimate your SoTL footprint. Recommendations blend your field with universally useful practice — they're a starting point, not a verdict, and the quality depends on how complete your public record is. Crash courses are practitioner syntheses of sector good practice, honestly attributed on each page.
+  </div>
+  <div class="foot">A free NTLSN front door · everything runs in your browser; nothing is stored or sent to us. &nbsp;·&nbsp; <a href="/sotl-index.html">The SoTL Index</a> &nbsp;·&nbsp; <a href="/crash-courses.html">All crash courses</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var orcidIn=document.getElementById("orcid"),goBtn=document.getElementById("go"),demoBtn=document.getElementById("demo"),errEl=document.getElementById("err"),results=document.getElementById("results");
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+  // --- commons catalogue (real pages) ---
+  var COURSES={
+    feedback:{tag:"Feedback",t:"Giving better feedback",d:"Make feedback usable — timely, specific, acted on.",u:"/feedbackcrashcourse.html"},
+    assessment:{tag:"Assessment",t:"Designing assessment",d:"Align it, make it valid and reliable, make it authentic.",u:"/assessment-design-crash-course.html"},
+    integrity:{tag:"Integrity",t:"Academic integrity in the age of AI",d:"Design for integrity, don't just police it.",u:"/academic-integrity-ai-crash-course.html"},
+    active:{tag:"Active",t:"Active learning",d:"Students learn by doing, not by listening.",u:"/active-learning-crash-course.html"},
+    alignment:{tag:"Curriculum",t:"Constructive alignment",d:"Point outcomes, teaching and assessment the same way.",u:"/constructive-alignment-crash-course.html"},
+    rubrics:{tag:"Marking",t:"Rubrics & marking",d:"Fairer, faster, clearer — rubrics as a teaching tool.",u:"/rubrics-marking-crash-course.html"},
+    large:{tag:"Large class",t:"Teaching large classes",d:"Structure makes a 300-seat room feel active.",u:"/large-classes-crash-course.html"},
+    online:{tag:"Online",t:"Online & blended teaching",d:"Design for presence and interaction, not video lectures.",u:"/online-blended-crash-course.html"},
+    reflective:{tag:"Practice",t:"Reflective practice & SoTL",d:"Study your own teaching; share what you learn.",u:"/reflective-practice-crash-course.html"},
+    group:{tag:"Group work",t:"Group work & collaborative learning",d:"Design for interdependence and accountability.",u:"/group-work-crash-course.html"},
+    lecturing:{tag:"Lecturing",t:"Effective lecturing",d:"A designed experience for attention and understanding.",u:"/lecturing-crash-course.html"},
+    ai:{tag:"AI",t:"Teaching with AI",d:"A tool for thinking, used deliberately and critically.",u:"/teaching-with-ai-crash-course.html"},
+    threshold:{tag:"Concepts",t:"Threshold concepts",d:"Help students through the gateway ideas where they get stuck.",u:"/threshold-concepts-crash-course.html"},
+    inclusive:{tag:"Inclusion",t:"Inclusive & equitable assessment",d:"A clear, accessible task that lets every student show what they know.",u:"/inclusive-assessment-crash-course.html"},
+    supervision:{tag:"Supervision",t:"Supervising research students",d:"Teaching one-to-one over years — relationship, expectations, feedback.",u:"/research-supervision-crash-course.html"},
+    wil:{tag:"WIL",t:"Work-integrated learning",d:"Design the learning, not just the placement.",u:"/wilcrashcourse.html"}
+  };
+  var SOTL_TOOL={tag:"Tool",t:"Reflective coach",d:"A prototype reflective-practice coach for your teaching.",u:"/reflective-coach.html"};
+
+  // PRIMARY signal: teaching-topic keywords found in the person's own works → direct, high-confidence match.
+  // Matched against aggregated OpenAlex topic/subfield/field/keyword text (lowercased).
+  var TEACH_KW={
+    feedback:["feedback"],
+    assessment:["assessment","grading","examination","marking"],
+    integrity:["academic integrity","plagiar","contract cheating","misconduct","cheating"],
+    active:["active learning","student engagement","peer instruction","flipped classroom"],
+    alignment:["constructive alignment","curriculum design","learning outcome","programme design","program design","graduate attribute"],
+    rubrics:["rubric","moderation"],
+    large:["large class","large cohort","massification","lecture hall"],
+    online:["online learning","blended learning","e-learning","distance education","flipped learning","mooc","community of inquiry","educational technology"],
+    reflective:["scholarship of teaching","sotl","reflective practice","teaching portfolio","academic development","faculty development"],
+    group:["group work","collaborative learning","cooperative learning","teamwork","peer learning"],
+    lecturing:["lecturing","lecture"],
+    ai:["generative ai","artificial intelligence","chatgpt","large language model","machine learning"],
+    threshold:["threshold concept","troublesome knowledge","misconception"],
+    inclusive:["inclusive education","equity","accessibility","universal design for learning"," udl","widening participation","diversity and inclusion"],
+    supervision:["doctoral supervision","research supervision","postgraduate research","hdr","phd supervision","thesis"],
+    wil:["work-integrated learning","work integrated learning","placement","internship","practicum","professional experience","employability"]
+  };
+  // SECONDARY signal: research discipline → a teaching context common in that field (labelled as such, lower priority).
+  var FIELD_HEURISTIC=[
+    {re:/health|medic|nurs|clinical|pharma|dent|midwif|allied health|public health/,keys:["wil","large","supervision"],label:"health disciplines"},
+    {re:/engineer|comput|software|information systems|data science|technolog|mathematic|physics/,keys:["large","active","group"],label:"STEM disciplines"},
+    {re:/business|management|account|economic|marketing|finance/,keys:["group","wil","assessment"],label:"business disciplines"},
+    {re:/law|legal/,keys:["lecturing","assessment"],label:"law"},
+    {re:/art|humanit|histor|languag|philosoph|literatur/,keys:["lecturing","threshold","feedback"],label:"the humanities"},
+    {re:/biolog|chemi|environ|geolog|agricultur|ecolog|veterin/,keys:["large","active","threshold"],label:"the sciences"}
+  ];
+  // signals that a work is education / SoTL flavoured
+  var SOTL_RE=/teach|learn|pedagog|curricul|assessment|student|education|scholarship of teaching|higher education|classroom|academic (development|practice)|feedback literacy/i;
+
+  function normaliseOrcid(v){
+    v=String(v||"").trim();
+    var m=v.match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);
+    return m?m[1].toUpperCase():"";
+  }
+
+  function setLoading(msg){
+    results.className="on";
+    results.innerHTML='<div class="loading"><span class="spin"></span><span>'+esc(msg)+'</span></div>';
+  }
+  function fail(msg){ errEl.textContent=msg; results.className=""; results.innerHTML=""; goBtn.disabled=false; goBtn.textContent="Personalise →"; }
+
+  function run(orcid){
+    errEl.textContent="";
+    var id=normaliseOrcid(orcid);
+    if(!id){ fail("That doesn't look like an ORCID iD. It should look like 0000-0002-1825-0097."); return; }
+    goBtn.disabled=true; goBtn.textContent="Reading…";
+    setLoading("Reading your public record from OpenAlex…");
+
+    // OpenAlex: all works by this ORCID, with topics/keywords, newest first.
+    var url="https://api.openalex.org/works?filter=author.orcid:"+id+"&per-page=200&sort=publication_year:desc&select=id,title,publication_year,topics,keywords,authorships";
+    fetch(url,{headers:{"Accept":"application/json"}})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(data){
+        var works=(data&&data.results)||[];
+        if(!works.length){ fail("No public works found for that ORCID on OpenAlex. Double-check the iD, or your record may be private or new."); return; }
+        render(id,works,data.meta?data.meta.count:works.length);
+      })
+      .catch(function(){ fail("Couldn't reach OpenAlex just now. Check your connection and try again — nothing was sent to us either way."); });
+  }
+
+  function render(id,works,total){
+    goBtn.disabled=false; goBtn.textContent="Personalise →";
+    // --- author name (from first work's matching authorship) ---
+    var name="";
+    for(var i=0;i<works.length&&!name;i++){
+      (works[i].authorships||[]).forEach(function(a){
+        if(name) return;
+        var au=a.author||{};
+        if(au.orcid&&au.orcid.indexOf(id)>-1) name=au.display_name||"";
+      });
+    }
+
+    // --- aggregate fields/topics/keywords ---
+    var fieldCount={}, topicText=[], years=[], sotlHits=0;
+    works.forEach(function(w){
+      if(w.publication_year) years.push(w.publication_year);
+      var isSotl=SOTL_RE.test(w.title||"");
+      (w.topics||[]).forEach(function(t){
+        if(t.display_name) topicText.push(t.display_name);
+        if(t.field&&t.field.display_name){ var f=t.field.display_name; fieldCount[f]=(fieldCount[f]||0)+1; topicText.push(f); }
+        if(t.subfield&&t.subfield.display_name) topicText.push(t.subfield.display_name);
+        if(SOTL_RE.test(t.display_name||"")) isSotl=true;
+      });
+      (w.keywords||[]).forEach(function(k){ if(k.display_name){ topicText.push(k.display_name); if(SOTL_RE.test(k.display_name)) isSotl=true; } });
+      if(isSotl) sotlHits++;
+    });
+    var allText=topicText.join(" ; ").toLowerCase();
+    var topFields=Object.keys(fieldCount).sort(function(a,b){return fieldCount[b]-fieldCount[a];}).slice(0,4);
+    var analysed=works.length;              // works actually fetched & analysed (<=200)
+    var full=total<=analysed;               // did we see the whole record?
+    var minY=(full&&years.length)?Math.min.apply(null,years):null, maxY=years.length?Math.max.apply(null,years):null;
+
+    // --- match courses: (1) direct teaching-topic hits, (2) field heuristic, (3) universal backbone ---
+    var why={}, scores={};
+    Object.keys(TEACH_KW).forEach(function(k){
+      var s=0,hit=null;
+      TEACH_KW[k].forEach(function(kw){ if(allText.indexOf(kw)>-1){ s++; if(!hit) hit=kw.trim(); } });
+      if(s>0){ scores[k]=s; why[k]='Your work touches “'+hit+'”'; }
+    });
+    var direct=Object.keys(scores).sort(function(a,b){return scores[b]-scores[a];});
+
+    var fieldKeys=[], fieldLabel="";
+    FIELD_HEURISTIC.forEach(function(h){ if(h.re.test(allText)){ if(!fieldLabel) fieldLabel=h.label; h.keys.forEach(function(k){ if(fieldKeys.indexOf(k)<0) fieldKeys.push(k); }); } });
+
+    var picked=[], seen={};
+    function add(k,reason){ if(!seen[k]&&COURSES[k]){ seen[k]=1; picked.push(k); if(!why[k]) why[k]=reason; } }
+    direct.forEach(function(k){ add(k); });                                          // strongest: their own topics
+    fieldKeys.forEach(function(k){ add(k,"Common in "+(fieldLabel||"your field")); }); // secondary: discipline context
+    ["feedback","assessment","reflective"].forEach(function(k){ add(k,"A high-value foundation for any teacher"); });
+    picked=picked.slice(0,6);
+
+    var sotlPct=Math.round((sotlHits/works.length)*100);
+    var sotlStrong=sotlHits>=3||sotlPct>=15;
+
+    // --- build markup ---
+    var html="";
+    html+='<div class="who"><h2>'+(name?esc(name):"Your scholarly profile")+'</h2>'+
+          '<a href="https://orcid.org/'+esc(id)+'" target="_blank" rel="noopener">orcid.org/'+esc(id)+' ↗</a></div>';
+
+    html+='<div class="sec">Your snapshot</div><div class="stats">'+
+      '<div class="stat"><b>'+total+'</b><span>public works indexed</span></div>'+
+      (minY?'<div class="stat"><b>'+minY+'</b><span>first publication</span></div>':'')+
+      (full&&minY&&maxY?'<div class="stat"><b>'+(maxY-minY+1)+'</b><span>years active</span></div>':'')+
+      '<div class="stat"><b>'+sotlHits+'</b><span>look education / SoTL-related</span></div>'+
+      '</div>';
+    if(topFields.length){
+      html+='<div class="fields" style="margin-top:14px">'+topFields.map(function(f){return '<span class="chip">'+esc(f)+'</span>';}).join("")+'</div>';
+    }
+    if(!full){
+      html+='<div class="sub" style="color:var(--mut);font-size:12px;margin-top:12px">Your fields and SoTL footprint below are read from your <b style="color:#cbd8e6">'+analysed+'</b> most recent works (of '+total+').</div>';
+    }
+
+    // SoTL footprint -> ties to the SoTL Index
+    html+='<div class="sec">Your SoTL footprint</div><div class="sotl">';
+    if(sotlStrong){
+      html+='<div class="h">You\'re already doing SoTL</div>'+
+        '<div class="big">~'+sotlPct+'% of '+(full?'your public output':'your recent works')+' looks education- or teaching-related ('+sotlHits+' of '+analysed+').</div>'+
+        '<p>That\'s a real scholarship-of-teaching footprint. The SoTL Index turns it into a field-normalised, DORA-aligned score you can use in promotion and fellowship cases.</p>';
+    } else if(sotlHits>0){
+      html+='<div class="h">A SoTL footprint, starting</div>'+
+        '<div class="big">'+sotlHits+' of your works look teaching- or education-related.</div>'+
+        '<p>There\'s a seed of scholarship-of-teaching here. The SoTL Index shows how it scores and where it could grow — and the reflective-practice course helps you build the next piece.</p>';
+    } else {
+      html+='<div class="h">Turn your teaching into scholarship</div>'+
+        '<div class="big">No education-flagged outputs detected yet — but every researcher can do SoTL.</div>'+
+        '<p>SoTL means studying your own teaching as rigorously as your discipline. The reflective-practice course is the place to start; the SoTL Index shows what a footprint looks like.</p>';
+    }
+    html+='<a class="go" href="/sotl-index.html">See the SoTL Index →</a></div>';
+
+    // Picks
+    html+='<div class="sec">Your picks from the commons</div><div class="picks">';
+    picked.forEach(function(k){
+      var c=COURSES[k]; if(!c) return;
+      var w = (sotlStrong&&k==="reflective") ? "Because you already publish on teaching" : (why[k]||"A useful starting point");
+      html+='<a class="pick" href="'+esc(c.u)+'"><span class="tag">'+esc(c.tag)+'</span><h3>'+esc(c.t)+'</h3><p>'+esc(c.d)+'</p><div class="why">'+esc(w)+'</div><span class="go">Start →</span></a>';
+    });
+    // always offer the dashboard + tools as the "keep going" step
+    html+='<a class="pick" href="/widgets.html"><span class="tag">Dashboard</span><h3>Build your dashboard</h3><p>Add glanceable widgets like you add skills — keep the commons one tab away.</p><div class="why">Your personalised home base</div><span class="go">Open →</span></a>';
+    html+='</div>';
+
+    results.className="on";
+    results.innerHTML=html;
+    // move focus to the results heading region for screen-reader users
+    var h2=results.querySelector("h2"); if(h2){ h2.setAttribute("tabindex","-1"); h2.focus(); }
+  }
+
+  goBtn.addEventListener("click",function(){ run(orcidIn.value); });
+  orcidIn.addEventListener("keydown",function(e){ if(e.key==="Enter") run(orcidIn.value); });
+  demoBtn.addEventListener("click",function(){ orcidIn.value="0000-0002-1428-2921"; run(orcidIn.value); });
+})();
+</script>
+</body>
+</html>
