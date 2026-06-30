@@ -52,12 +52,20 @@
     return day + ' ' + MON[m - 1] + ' ' + y;
   }
   function cap(x) { return x ? x.charAt(0).toUpperCase() + x.slice(1) : ''; }
+  // Only allow http(s), protocol-relative, root/relative or hash links — blocks javascript:/data: etc.
+  function safeUrl(u, fallback) {
+    if (!u) return fallback;
+    var s = String(u).trim();
+    if (/^(https?:|\/\/|\/|#|\.\/|\.\.\/)/i.test(s)) return s;
+    if (/^[a-z][a-z0-9+.\-]*:/i.test(s)) return fallback; // an untrusted scheme — drop it
+    return s; // bare relative path, e.g. "events.html"
+  }
 
   function render(html) { root.innerHTML = '<style>' + CSS + '</style>' + html; }
   render('<div class="w"><div class="hd"><span class="dot"></span><b>NTLSN · What’s On</b></div><div class="empty">Loading sector events…</div></div>');
 
   fetch(origin + '/data/events.json', { mode: 'cors' })
-    .then(function (r) { return r.json(); })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (events) {
       var today = new Date().toISOString().slice(0, 10);
       var list = events.filter(function (e) { return (e.endDate || e.date) >= today; });
@@ -77,7 +85,7 @@
       } else {
         list.forEach(function (e) {
           var a = el('a', 'it');
-          a.href = e.url || (origin + '/#events');
+          a.href = safeUrl(e.url, origin + '/#events');
           a.target = '_blank'; a.rel = 'noopener';
           a.appendChild(el('p', 't', e.title));
           var m = el('div', 'm');
@@ -95,7 +103,7 @@
       ft.appendChild(link);
       w.appendChild(ft);
 
-      render('<style>' + CSS + '</style>');
+      render('');// reset to a single <style>, then attach the built widget
       root.appendChild(w);
     })
     .catch(function () {

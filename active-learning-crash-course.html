@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Active Learning: a crash course</title>
+<meta name="description" content="Students learn by doing, not by listening. Four lessons on why active learning works, concrete techniques, designing tasks tied to outcomes, and managing participation. Plus a self-check. Free.">
+<meta property="og:title" content="Active Learning: a crash course — NTLSN">
+<meta property="og:description" content="Students learn by doing, not by listening. Four lessons on why active learning works, concrete techniques, designing tasks tied to outcomes, and managing participation. Plus a self-check. Free.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.ntlsn.com/active-learning-crash-course.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://www.ntlsn.com/active-learning-crash-course.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
+  .wrap{max-width:820px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(25px,3.6vw,36px);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 20px;max-width:680px}
+  .callout{background:linear-gradient(180deg,rgba(78,205,196,.10),rgba(78,205,196,.03));border:1px solid rgba(78,205,196,.30);border-radius:14px;padding:16px 18px;margin:0 0 24px;font-size:14.5px}
+  .callout b{color:var(--teal)}
+  .meta{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:12.5px;margin:0 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0}
+  .meta span b{color:var(--ink)}
+  h2.sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:26px 0 12px}
+  .lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 12px;overflow:hidden}
+  .lhead{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+  .lhead:hover{background:rgba(255,255,255,.02)}
+  .lnum{width:30px;height:30px;border-radius:9px;background:rgba(78,205,196,.12);color:var(--teal);font:800 14px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
+  .ltitle{flex:1;font:700 16px var(--F)}
+  .ltitle small{display:block;color:var(--mut);font:500 12.5px var(--F);margin-top:2px}
+  .chev{color:var(--mut);font-size:18px;transition:transform .2s}
+  .lesson.open .chev{transform:rotate(90deg)}
+  .lbody{display:none;padding:0 18px 18px;font-size:14.5px}
+  .lesson.open .lbody{display:block}
+  .lbody p{margin:0 0 11px;color:#d4def0}
+  .lbody ul{margin:0 0 12px;padding:0 0 0 4px;list-style:none}
+  .lbody li{padding:6px 0 6px 22px;position:relative}
+  .lbody li:before{content:"\2192";position:absolute;left:0;color:var(--teal)}
+  .res{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:10px 0 0;font-size:13px}
+  .res .rl{font:800 10.5px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin:0 0 6px}
+  .res ul{margin:0;padding:0;list-style:none}
+  .res li{padding:3px 0 3px 16px;color:var(--mut);position:relative}
+  .res li:before{content:"\00b7";position:absolute;left:2px;color:var(--gold)}
+  .commons{background:linear-gradient(180deg,rgba(78,205,196,.08),rgba(78,205,196,.02));border:1px solid rgba(78,205,196,.28);border-radius:14px;padding:16px 18px;margin:14px 0 0}
+  .commons .ch{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);margin:0 0 10px}
+  .commons .cg{display:flex;flex-wrap:wrap;gap:8px}
+  .commons a{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:700 13px var(--F);color:var(--ink);text-decoration:none}
+  .commons a:hover{border-color:var(--teal);background:rgba(78,205,196,.10)}
+  .check{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .check .ci{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);cursor:pointer}
+  .check .ci:first-child{border-top:0}
+  .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--mut);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.15s;color:transparent}
+  .ci.on .box{background:var(--teal);border-color:var(--teal);color:var(--navy)}
+  .ci .tx{font-size:14px}
+  .ci.on .tx{color:var(--mut);text-decoration:line-through}
+  .attrib{background:rgba(201,169,98,.07);border:1px solid rgba(201,169,98,.25);border-radius:12px;padding:14px 16px;font-size:12.5px;color:var(--mut);margin:26px 0 0;line-height:1.6}
+  .attrib b{color:var(--gold)}
+  a{color:var(--teal)}
+  .lhead:focus-visible,.ci:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:22px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Crash Course · Active Learning</div>
+  <h1>Active learning — a crash course</h1>
+  <p class="lead">Students learn by doing, not by sitting and listening. Four short lessons on putting structured &lsquo;doing&rsquo; into your teaching, then a self-check.</p>
+  <div class="callout"><b>The one thing to remember:</b> students learn by doing, not by listening. Replace some of the &lsquo;telling&rsquo; with structured &lsquo;<b>doing</b>&rsquo; — and you can do it even in large lecture rooms.</div>
+  <div class="meta"><span><b>4</b> lessons</span><span><b>~10</b> min read</span><span><b>1</b> self-check</span><span>Grounded in <b>active-learning good practice (retrieval practice, peer instruction &amp; the sector)</b></span></div>
+  <h2 class="sec">The lessons</h2>
+  <div class="lesson"><div class="lhead"><div class="lnum">1</div><div class="ltitle">Why it works<small>Engagement and retrieval practice</small></div><div class="chev">›</div></div><div class="lbody"><p>Listening feels like learning, but it is easy to follow a clear explanation without being able to reproduce or use it. Active learning asks students to do the cognitive work themselves, which is what actually builds and strengthens understanding.</p><ul><li>Doing forces students to retrieve and apply ideas, not just recognise them when you say them.</li><li>Pulling information out of memory — retrieval practice — strengthens learning far more than re-reading or re-hearing it.</li><li>Activity surfaces what students don&rsquo;t yet understand, to you and to them, while there is still time to fix it.</li></ul><div class="res"><div class="rl">Grounded in</div><ul><li>Retrieval practice as a learning strategy</li><li>The difference between recognition and recall</li></ul></div></div></div><div class="lesson"><div class="lhead"><div class="lnum">2</div><div class="ltitle">Concrete techniques<small>Low-cost ways to start tomorrow</small></div><div class="chev">›</div></div><div class="lbody"><p>You don&rsquo;t need to redesign a module to teach actively. A handful of well-tested moves drop straight into an existing session, including a large lecture.</p><ul><li>Think&ndash;pair&ndash;share: pose a question, students think alone, then discuss in pairs, then a few share.</li><li>Peer instruction: ask a concept question, students vote, discuss with a neighbour, then vote again — Mazur&rsquo;s well-known approach.</li><li>The one-minute paper: at the end, students write the main point and one thing still unclear.</li><li>Polling or a quick show of hands to make every student commit to an answer before you reveal it.</li></ul><div class="res"><div class="rl">Grounded in</div><ul><li>Mazur&rsquo;s peer instruction</li><li>Think&ndash;pair&ndash;share and the one-minute paper</li></ul></div></div></div><div class="lesson"><div class="lhead"><div class="lnum">3</div><div class="ltitle">Design tasks that count<small>Tie the doing to outcomes</small></div><div class="chev">›</div></div><div class="lbody"><p>Activity for its own sake feels busy but teaches little. The task has to make students practise the actual thing you want them to be able to do.</p><ul><li>Start from the learning outcome and ask what students would have to do to demonstrate it.</li><li>Design questions that expose common misconceptions, not just ones with an obvious right answer.</li><li>Give a clear prompt, a time limit, and a visible way to share or check the result.</li></ul></div></div><div class="lesson"><div class="lhead"><div class="lnum">4</div><div class="ltitle">Manage participation<small>Psychological safety in any room</small></div><div class="chev">›</div></div><div class="lbody"><p>Active learning can stall if students feel exposed or unsure why they&rsquo;re doing it. A little structure and safety turns reluctance into participation, even with quiet students and large groups.</p><ul><li>Explain why you&rsquo;re doing it — students cooperate more when the purpose is clear.</li><li>Use pairs and small groups first so quieter students rehearse before any whole-room sharing.</li><li>Make it safe to be wrong: treat wrong answers as useful information, not as failures.</li><li>In large rooms, use anonymous polling and structured pair talk so participation doesn&rsquo;t depend on a few confident voices.</li></ul></div></div>
+  <div class="commons"><div class="ch">◇ Bring it together — from the NTLSN commons</div><div class="cg"><a href="/?q=active%20learning">Browse &ldquo;Active learning&rdquo;</a><a href="/?q=engagement">Engagement resources</a><a href="/#ntlsn-talkshub">369 sector videos</a><a href="/#frameworks">Frameworks &amp; policy</a></div></div>
+  <h2 class="sec">Before your next session — a quick self-check</h2>
+  <div class="check" id="check"><div class="ci"><div class="box">✓</div><div class="tx">I plan at least one moment where students do something, not just listen.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I use retrieval — students recall or apply ideas rather than just re-hearing them.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I have a low-cost technique ready, such as think&ndash;pair&ndash;share or a one-minute paper.</div></div><div class="ci"><div class="box">✓</div><div class="tx">Each task is tied to a learning outcome, not activity for its own sake.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I explain why we&rsquo;re doing it and make it safe to be wrong.</div></div><div class="ci"><div class="box">✓</div><div class="tx">In large rooms I use pairs and anonymous polling so participation isn&rsquo;t left to a few voices.</div></div></div>
+  <div class="attrib"><b>Source &amp; attribution.</b> Curated from active-learning good practice (including widely-used sector work such as retrieval practice and Mazur&rsquo;s peer instruction) indexed by the NTLSN commons. Practitioner synthesis, not original research.</div>
+  <div class="foot">A free NTLSN crash course · see them all at <a href="/crash-courses.html">/crash-courses.html</a>. Runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+</div>
+<script>
+(function(){
+  // Accordions — keyboard operable, with aria-expanded state
+  document.querySelectorAll('.lhead').forEach(function(h){
+    h.setAttribute('role','button');h.setAttribute('tabindex','0');h.setAttribute('aria-expanded','false');
+    function toggle(){var open=h.parentNode.classList.toggle('open');h.setAttribute('aria-expanded',open?'true':'false');}
+    h.addEventListener('click',toggle);
+    h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+  var first=document.querySelector('.lesson');
+  if(first){first.classList.add('open');var fh=first.querySelector('.lhead');if(fh)fh.setAttribute('aria-expanded','true');}
+  // Self-check — keyboard operable checkboxes, with aria-checked state
+  document.querySelectorAll('.check .ci').forEach(function(ci){
+    ci.setAttribute('role','checkbox');ci.setAttribute('tabindex','0');ci.setAttribute('aria-checked','false');
+    function toggle(){var on=ci.classList.toggle('on');ci.setAttribute('aria-checked',on?'true':'false');}
+    ci.addEventListener('click',toggle);
+    ci.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+})();
+</script>
+</body>
+</html>

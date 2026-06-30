@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Teaching with AI: a crash course</title>
+<meta name="description" content="Generative AI as a teaching and learning aid, used deliberately and critically. Four lessons on AI literacy, supporting your teaching, designing critical use, and equity, ethics and transparency. Plus a self-check. Free.">
+<meta property="og:title" content="Teaching with AI: a crash course — NTLSN">
+<meta property="og:description" content="Generative AI as a teaching and learning aid, used deliberately and critically. Four lessons on AI literacy, supporting your teaching, designing critical use, and equity, ethics and transparency. Plus a self-check. Free.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.ntlsn.com/teaching-with-ai-crash-course.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://www.ntlsn.com/teaching-with-ai-crash-course.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
+  .wrap{max-width:820px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(25px,3.6vw,36px);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 20px;max-width:680px}
+  .callout{background:linear-gradient(180deg,rgba(78,205,196,.10),rgba(78,205,196,.03));border:1px solid rgba(78,205,196,.30);border-radius:14px;padding:16px 18px;margin:0 0 24px;font-size:14.5px}
+  .callout b{color:var(--teal)}
+  .meta{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:12.5px;margin:0 0 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0}
+  .meta span b{color:var(--ink)}
+  h2.sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:26px 0 12px}
+  .lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 12px;overflow:hidden}
+  .lhead{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+  .lhead:hover{background:rgba(255,255,255,.02)}
+  .lnum{width:30px;height:30px;border-radius:9px;background:rgba(78,205,196,.12);color:var(--teal);font:800 14px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
+  .ltitle{flex:1;font:700 16px var(--F)}
+  .ltitle small{display:block;color:var(--mut);font:500 12.5px var(--F);margin-top:2px}
+  .chev{color:var(--mut);font-size:18px;transition:transform .2s}
+  .lesson.open .chev{transform:rotate(90deg)}
+  .lbody{display:none;padding:0 18px 18px;font-size:14.5px}
+  .lesson.open .lbody{display:block}
+  .lbody p{margin:0 0 11px;color:#d4def0}
+  .lbody ul{margin:0 0 12px;padding:0 0 0 4px;list-style:none}
+  .lbody li{padding:6px 0 6px 22px;position:relative}
+  .lbody li:before{content:"\2192";position:absolute;left:0;color:var(--teal)}
+  .res{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin:10px 0 0;font-size:13px}
+  .res .rl{font:800 10.5px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin:0 0 6px}
+  .res ul{margin:0;padding:0;list-style:none}
+  .res li{padding:3px 0 3px 16px;color:var(--mut);position:relative}
+  .res li:before{content:"\00b7";position:absolute;left:2px;color:var(--gold)}
+  .commons{background:linear-gradient(180deg,rgba(78,205,196,.08),rgba(78,205,196,.02));border:1px solid rgba(78,205,196,.28);border-radius:14px;padding:16px 18px;margin:14px 0 0}
+  .commons .ch{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);margin:0 0 10px}
+  .commons .cg{display:flex;flex-wrap:wrap;gap:8px}
+  .commons a{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font:700 13px var(--F);color:var(--ink);text-decoration:none}
+  .commons a:hover{border-color:var(--teal);background:rgba(78,205,196,.10)}
+  .check{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .check .ci{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);cursor:pointer}
+  .check .ci:first-child{border-top:0}
+  .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--mut);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.15s;color:transparent}
+  .ci.on .box{background:var(--teal);border-color:var(--teal);color:var(--navy)}
+  .ci .tx{font-size:14px}
+  .ci.on .tx{color:var(--mut);text-decoration:line-through}
+  .attrib{background:rgba(201,169,98,.07);border:1px solid rgba(201,169,98,.25);border-radius:12px;padding:14px 16px;font-size:12.5px;color:var(--mut);margin:26px 0 0;line-height:1.6}
+  .attrib b{color:var(--gold)}
+  a{color:var(--teal)}
+  .lhead:focus-visible,.ci:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:22px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Crash Course · Teaching with AI</div>
+  <h1>Teaching with AI — a crash course</h1>
+  <p class="lead">Generative AI is already in your students&rsquo; hands and your own workflow. Four short lessons on using it deliberately as a teaching and learning aid, then a self-check.</p>
+  <div class="callout"><b>The one thing to remember:</b> AI is a <b>tool for thinking, not a replacement for it</b>. Used deliberately and critically, it can support learning; used by default, it can quietly erode it.</div>
+  <div class="meta"><span><b>4</b> lessons</span><span><b>~10</b> min read</span><span><b>1</b> self-check</span><span>Grounded in <b>emerging AI-in-education good practice (sector guidance &amp; digital literacy frameworks)</b></span></div>
+  <h2 class="sec">The lessons</h2>
+  <div class="lesson"><div class="lhead"><div class="lnum">1</div><div class="ltitle">Build AI literacy first<small>Know what these tools do and don&rsquo;t do</small></div><div class="chev">›</div></div><div class="lbody"><p>Before you teach with generative AI, understand it. These tools predict plausible text; they don&rsquo;t know what&rsquo;s true, and confidence is not accuracy.</p><ul><li>Expect fabrication — outputs can invent facts, sources and quotes that read convincingly.</li><li>Watch for bias and gaps — training data carries the slants and blind spots of its sources.</li><li>Treat what you type as potentially retained — don&rsquo;t paste sensitive student or personal data.</li><li>Build your own working sense of where a tool is strong and where it falls down.</li></ul></div></div><div class="lesson"><div class="lhead"><div class="lnum">2</div><div class="ltitle">Let AI support your teaching<small>Draft and explore — keep your judgement</small></div><div class="chev">›</div></div><div class="lbody"><p>AI can take some load off preparation, but the professional decisions stay with you. Use it to get started, not to decide.</p><ul><li>Draft first passes — outlines, examples, alternative explanations — then revise to fit your students.</li><li>Generate ideas and variations when you&rsquo;re stuck, and keep the ones that earn their place.</li><li>Use it for accessibility — simplifying language, offering alternative formats, summarising.</li><li>Check every output against your own knowledge and your context before it reaches students.</li></ul></div></div><div class="lesson"><div class="lhead"><div class="lnum">3</div><div class="ltitle">Design learning that uses AI critically<small>A thinking partner, not a shortcut</small></div><div class="chev">›</div></div><div class="lbody"><p>The richest use isn&rsquo;t hiding AI from students — it&rsquo;s teaching them to interrogate it. Build tasks where the critique is the learning.</p><ul><li>Have students compare and critique AI outputs against criteria and against good sources.</li><li>Position AI as a thinking partner — to question, draft and stress-test ideas, not to hand in.</li><li>Scaffold the harder thinking so AI supports the work rather than skipping it.</li><li>Make the reasoning visible — ask students to show what they kept, changed and rejected.</li></ul><div class="res"><div class="rl">Grounded in</div><ul><li>Digital and AI literacy frameworks</li><li>Evaluative judgement and critical-use practice</li></ul></div></div></div><div class="lesson"><div class="lhead"><div class="lnum">4</div><div class="ltitle">Equity, ethics &amp; transparency<small>Access, data and openness</small></div><div class="chev">›</div></div><div class="lbody"><p>AI use sits on uneven ground. Not every student has the same access, and not every tool handles data well. Be open about how and why you use it.</p><ul><li>Don&rsquo;t assume equal access — paid tools, devices and connectivity vary between students.</li><li>Mind data and privacy — know what a tool stores and check it against your institution&rsquo;s policy.</li><li>Be transparent with students about where you use AI and what you expect from them.</li><li>Set clear, course-level expectations so &lsquo;allowed&rsquo; use isn&rsquo;t left to guesswork.</li></ul></div></div>
+  <div class="commons"><div class="ch">◇ Bring it together — from the NTLSN commons</div><div class="cg"><a href="/teaching-ai-prompts.html">Teaching AI prompts</a><a href="/?q=artificial%20intelligence">Browse &ldquo;Artificial intelligence&rdquo;</a><a href="/?q=assessment">Assessment resources</a><a href="/#frameworks">Frameworks &amp; policy</a></div></div>
+  <h2 class="sec">Before you bring AI into your next class — a quick self-check</h2>
+  <div class="check" id="check"><div class="ci"><div class="box">✓</div><div class="tx">I understand these tools can fabricate, and I check outputs for accuracy.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I don&rsquo;t paste sensitive student or personal data into AI tools.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I use AI to draft and explore, but the teaching judgement stays mine.</div></div><div class="ci"><div class="box">✓</div><div class="tx">My tasks have students critique AI, not just consume it.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I&rsquo;ve considered access gaps so AI use doesn&rsquo;t disadvantage anyone.</div></div><div class="ci"><div class="box">✓</div><div class="tx">I&rsquo;m transparent with students about where and why I use AI.</div></div></div>
+  <div class="attrib"><b>Source &amp; attribution.</b> Curated from emerging AI-in-education good practice and digital-literacy frameworks indexed by the NTLSN commons. Practitioner synthesis, not original research. This is practice guidance in a fast-moving area — treat it as a starting point and check it against current sector and institutional advice.</div>
+  <div class="foot">A free NTLSN crash course · see them all at <a href="/crash-courses.html">/crash-courses.html</a>. Runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+</div>
+<script>
+(function(){
+  // Accordions — keyboard operable, with aria-expanded state
+  document.querySelectorAll('.lhead').forEach(function(h){
+    h.setAttribute('role','button');h.setAttribute('tabindex','0');h.setAttribute('aria-expanded','false');
+    function toggle(){var open=h.parentNode.classList.toggle('open');h.setAttribute('aria-expanded',open?'true':'false');}
+    h.addEventListener('click',toggle);
+    h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+  var first=document.querySelector('.lesson');
+  if(first){first.classList.add('open');var fh=first.querySelector('.lhead');if(fh)fh.setAttribute('aria-expanded','true');}
+  // Self-check — keyboard operable checkboxes, with aria-checked state
+  document.querySelectorAll('.check .ci').forEach(function(ci){
+    ci.setAttribute('role','checkbox');ci.setAttribute('tabindex','0');ci.setAttribute('aria-checked','false');
+    function toggle(){var on=ci.classList.toggle('on');ci.setAttribute('aria-checked',on?'true':'false');}
+    ci.addEventListener('click',toggle);
+    ci.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+})();
+</script>
+</body>
+</html>

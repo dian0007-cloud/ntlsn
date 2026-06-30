@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Peer Review of Teaching Template</title>
+<meta name="description" content="A structured, fillable peer-observation template for higher-education teaching. Developmental and strengths-based — a conversation between colleagues, not performance management. Runs entirely in your browser; nothing is stored or sent.">
+<meta property="og:title" content="NTLSN — Peer Review of Teaching Template">
+<meta property="og:description" content="A developmental peer-observation template for HE teaching. A conversation between colleagues, not performance management. In-browser, nothing stored.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/peer-review-teaching.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NTLSN — Peer Review of Teaching Template">
+<meta name="twitter:description" content="A developmental peer-observation template for HE teaching. A conversation between colleagues, not performance management.">
+<meta name="twitter:image" content="https://www.ntlsn.com/og-image.png">
+<link rel="canonical" href="https://www.ntlsn.com/peer-review-teaching.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--warn:#FFB448;--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:880px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:760px}
+  .lead b{color:var(--ink)}
+  fieldset{border:1px solid var(--line);border-radius:13px;padding:14px 16px 16px;margin:0 0 16px}
+  legend{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);padding:0 6px}
+  .hint{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+  .prompts{color:var(--mut);font-size:13px;margin:0 0 10px;padding-left:18px}
+  .prompts li{margin:3px 0}
+  .ctx{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+  @media(max-width:680px){.ctx{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field.full{grid-column:1 / -1}
+  label{font:600 12.5px var(--F);color:var(--ink)}
+  input[type=text],input[type=date],input[type=number],select,textarea{background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:500 14px var(--F);width:100%;font-family:var(--F)}
+  textarea{min-height:96px;resize:vertical;line-height:1.5}
+  input:focus,select:focus,textarea:focus,button:focus{outline:none;border-color:var(--teal)}
+  input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-color:var(--teal)}
+  .ta-field{margin:0 0 4px}
+  .ta-field label{display:block;margin:0 0 6px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 0}
+  .btn{border-radius:9px;padding:11px 18px;font:800 13px var(--F);cursor:pointer;border:1px solid}
+  .btn.primary{background:rgba(78,205,196,.12);color:var(--teal);border-color:rgba(78,205,196,.32)}
+  .btn.primary:hover{background:rgba(78,205,196,.20)}
+  .btn.ghost{background:rgba(255,255,255,.04);color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{background:rgba(255,255,255,.08)}
+  .status{font:600 12.5px var(--F);color:var(--good);margin:0 0 0;min-height:18px;align-self:center}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+  @media print{body{background:#fff;color:#111;padding:0}.actions,.foot .noprint,.btn{display:none}fieldset,input,textarea,select{border-color:#ccc}legend,.eyebrow{color:#333}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Peer Review of Teaching</h1>
+  <p class="lead">A structured template for observing a colleague's teaching. This is <b>formative, developmental peer review</b> — a conversation between colleagues that exists to support growth and reflection, <b>not</b> performance management or a judgement of competence. Notice what works, ask curious questions, and agree one small thing to try next. Fill it in during or after the session, then <b>Copy as text</b> or <b>Print</b> to share with your colleague. Nothing here is stored or sent — everything stays in your browser.</p>
+
+  <form id="form">
+    <fieldset>
+      <legend>Context</legend>
+      <div class="ctx">
+        <div class="field"><label for="observer">Observer (you)</label><input type="text" id="observer" placeholder="Your name"></div>
+        <div class="field"><label for="teacher">Colleague observed (optional)</label><input type="text" id="teacher" placeholder="Their name"></div>
+        <div class="field"><label for="unit">Unit / class</label><input type="text" id="unit" placeholder="e.g. BIOL101 Cell Biology"></div>
+        <div class="field"><label for="date">Date</label><input type="date" id="date"></div>
+        <div class="field"><label for="topic">Topic of the session</label><input type="text" id="topic" placeholder="e.g. Enzyme kinetics"></div>
+        <div class="field"><label for="students">Number of students</label><input type="number" id="students" min="0" placeholder="e.g. 30"></div>
+        <div class="field"><label for="mode">Mode</label>
+          <select id="mode">
+            <option value="In-person">In-person</option>
+            <option value="Online">Online</option>
+            <option value="Hybrid">Hybrid</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Before the session</legend>
+      <p class="hint">Set by the person being observed, so the focus is theirs.</p>
+      <div class="ta-field"><label for="focus">What would you like feedback on?</label><textarea id="focus" placeholder="e.g. Whether my questioning draws in quieter students; pacing of the second half."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>1 · Climate, rapport &amp; inclusion</legend>
+      <ul class="prompts">
+        <li>How are students welcomed and put at ease?</li>
+        <li>Where do you notice an inclusive, respectful atmosphere?</li>
+        <li>How are different students given space to contribute?</li>
+      </ul>
+      <div class="ta-field"><label for="s1">Notes</label><textarea id="s1" placeholder="What you observed — describe rather than judge."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Structure &amp; clarity</legend>
+      <ul class="prompts">
+        <li>Are the aims or learning outcomes made clear?</li>
+        <li>How is the session organised and signposted?</li>
+        <li>How do the parts connect, and how is it drawn together?</li>
+      </ul>
+      <div class="ta-field"><label for="s2">Notes</label><textarea id="s2" placeholder="What you observed — describe rather than judge."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Engagement &amp; active learning</legend>
+      <ul class="prompts">
+        <li>What invites students to think and do, not just listen?</li>
+        <li>How are activities, discussion or pair work used?</li>
+        <li>Where is student energy and attention strongest?</li>
+      </ul>
+      <div class="ta-field"><label for="s3">Notes</label><textarea id="s3" placeholder="What you observed — describe rather than judge."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Explanation &amp; questioning</legend>
+      <ul class="prompts">
+        <li>How are ideas explained — examples, analogies, visuals?</li>
+        <li>What kinds of questions are asked, and how is wait time used?</li>
+        <li>How are student answers built on or checked for understanding?</li>
+      </ul>
+      <div class="ta-field"><label for="s4">Notes</label><textarea id="s4" placeholder="What you observed — describe rather than judge."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Materials, technology &amp; accessibility</legend>
+      <ul class="prompts">
+        <li>How do slides, handouts or tools support learning?</li>
+        <li>Are materials readable and accessible (contrast, captions, alt text)?</li>
+        <li>Can everyone see, hear and follow along?</li>
+      </ul>
+      <div class="ta-field"><label for="s5">Notes</label><textarea id="s5" placeholder="What you observed — describe rather than judge."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>6 · Assessment &amp; feedback in the session</legend>
+      <p class="hint">If any informal checks or feedback happened in the session — otherwise leave blank.</p>
+      <ul class="prompts">
+        <li>How is understanding checked during the session?</li>
+        <li>What feedback do students receive, and how timely is it?</li>
+        <li>How does the teacher adjust based on what students show?</li>
+      </ul>
+      <div class="ta-field"><label for="s6">Notes</label><textarea id="s6" placeholder="What you observed — describe rather than judge."></textarea></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Feedback conversation</legend>
+      <p class="hint">A strengths-based frame for the chat afterwards. Lead with what worked.</p>
+      <div class="ta-field"><label for="fb1">What worked well</label><textarea id="fb1" placeholder="Specific things worth keeping and doing more of."></textarea></div>
+      <div class="ta-field"><label for="fb2">One or two things to consider</label><textarea id="fb2" placeholder="Offered as questions or options, not verdicts."></textarea></div>
+      <div class="ta-field"><label for="fb3">Agreed next step / what to try</label><textarea id="fb3" placeholder="One small, concrete thing the colleague chooses to try next."></textarea></div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" class="btn primary" id="copyBtn">Copy as text</button>
+      <button type="button" class="btn ghost" id="printBtn">Print</button>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <div class="foot">
+    <span class="noprint">This is a generic template — adapt the dimensions and wording to your own institution's peer-review scheme and values. Developmental peer review works best when it is voluntary, confidential to the pair, and owned by the person being observed. Everything runs in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/reflective-practice-crash-course.html">Reflective practice crash course</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></span>
+  </div>
+</div>
+<script>
+(function(){
+  var byId=function(id){return document.getElementById(id);};
+  var statusEl=byId("status");
+
+  function val(id){var el=byId(id);return el?String(el.value||"").trim():"";}
+
+  function line(label,v){return v?(label+": "+v):"";}
+
+  function block(title,v){
+    if(!v) return "";
+    return title+"\n"+v+"\n";
+  }
+
+  function buildText(){
+    var parts=[];
+    parts.push("PEER REVIEW OF TEACHING — OBSERVATION RECORD");
+    parts.push("(Formative / developmental — a conversation between colleagues)");
+    parts.push("");
+
+    var ctx=[
+      line("Observer", val("observer")),
+      line("Colleague observed", val("teacher")),
+      line("Unit / class", val("unit")),
+      line("Date", val("date")),
+      line("Topic", val("topic")),
+      line("Number of students", val("students")),
+      line("Mode", val("mode"))
+    ].filter(Boolean);
+    if(ctx.length){parts.push("CONTEXT");parts.push(ctx.join("\n"));parts.push("");}
+
+    var focus=val("focus");
+    if(focus){parts.push("REQUESTED FOCUS (set by colleague)");parts.push(focus);parts.push("");}
+
+    var sections=[
+      ["1. CLIMATE, RAPPORT & INCLUSION","s1"],
+      ["2. STRUCTURE & CLARITY","s2"],
+      ["3. ENGAGEMENT & ACTIVE LEARNING","s3"],
+      ["4. EXPLANATION & QUESTIONING","s4"],
+      ["5. MATERIALS, TECHNOLOGY & ACCESSIBILITY","s5"],
+      ["6. ASSESSMENT & FEEDBACK IN THE SESSION","s6"]
+    ];
+    var anySection=false;
+    var secText=[];
+    sections.forEach(function(s){
+      var v=val(s[1]);
+      if(v){anySection=true;secText.push(s[0]+"\n"+v);}
+    });
+    if(anySection){parts.push("OBSERVATION NOTES");parts.push(secText.join("\n\n"));parts.push("");}
+
+    var fb=[];
+    var f1=val("fb1"), f2=val("fb2"), f3=val("fb3");
+    if(f1) fb.push("What worked well:\n"+f1);
+    if(f2) fb.push("One or two things to consider:\n"+f2);
+    if(f3) fb.push("Agreed next step / what to try:\n"+f3);
+    if(fb.length){parts.push("FEEDBACK CONVERSATION");parts.push(fb.join("\n\n"));parts.push("");}
+
+    parts.push("— Generated with the NTLSN Peer Review of Teaching template. Nothing stored or sent.");
+    return parts.join("\n").replace(/\n{3,}/g,"\n\n");
+  }
+
+  function flash(msg,ok){
+    statusEl.textContent=msg;
+    statusEl.style.color=ok===false?"var(--warn)":"var(--good)";
+  }
+
+  function fallbackCopy(text){
+    try{
+      var ta=document.createElement("textarea");
+      ta.value=text;
+      ta.setAttribute("readonly","");
+      ta.style.position="fixed";
+      ta.style.top="-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok=document.execCommand("copy");
+      document.body.removeChild(ta);
+      if(ok){flash("Copied to clipboard.");}
+      else{flash("Couldn't copy automatically — select the text and copy manually.",false);}
+    }catch(e){
+      flash("Couldn't copy automatically — please copy manually.",false);
+    }
+  }
+
+  byId("copyBtn").addEventListener("click",function(){
+    var text=buildText();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        flash("Copied to clipboard.");
+      },function(){
+        fallbackCopy(text);
+      });
+    }else{
+      fallbackCopy(text);
+    }
+  });
+
+  byId("printBtn").addEventListener("click",function(){
+    window.print();
+  });
+})();
+</script>
+</body>
+</html>
