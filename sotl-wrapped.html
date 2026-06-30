@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Your SoTL, Wrapped</title>
+<meta name="description" content="Paste your ORCID iD and NTLSN reads your public scholarly record — in your browser — to tell your teaching-scholarship story back to you: your turn toward teaching, your signature themes, your most-cited idea, your open footprint. Free. Nothing stored or sent to us.">
+<meta property="og:title" content="Your SoTL, Wrapped — NTLSN">
+<meta property="og:description" content="Your teaching-scholarship year, told back to you. Paste your ORCID — in-browser, nothing stored.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/sotl-wrapped.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your SoTL, Wrapped — NTLSN">
+<meta name="twitter:description" content="Your teaching-scholarship year, told back to you. In-browser, nothing stored.">
+<link rel="canonical" href="https://www.ntlsn.com/sotl-wrapped.html">
+<style>
+  :root{
+    --navy:#0A1628;--ink:#ffffff;--mut:#9fb0c3;--line:rgba(255,255,255,.14);
+    --teal:#4ECDC4;--gold:#FFB448;--purple:#C57BFF;--coral:#FF6B6B;--blue:#7C9CFF;--green:#6FCF97;--orcid:#A6CE39;
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--navy);color:var(--ink);font-family:var(--F);-webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit}
+  /* ---------- intro / input ---------- */
+  #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px 20px;background:radial-gradient(1000px 520px at 50% -10%,#13243f 0%,var(--navy) 60%)}
+  .card{max-width:560px;width:100%}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.6px;text-transform:uppercase;color:var(--teal);margin:0 0 12px}
+  h1{font-size:clamp(34px,7vw,60px);line-height:1.02;margin:0 0 14px;font-weight:900;letter-spacing:-.02em;
+     background:linear-gradient(110deg,var(--teal),var(--blue) 45%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{color:#cbd8e6;font-size:16px;margin:0 0 22px;max-width:48ch}
+  .priv{background:rgba(166,206,57,.08);border:1px solid rgba(166,206,57,.30);border-radius:13px;padding:13px 15px;font-size:13px;color:#d4def0;margin:0 0 20px}
+  .priv b{color:var(--orcid)}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  input[type=text]{flex:1;min-width:210px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;color:#fff;font:600 16px var(--F);padding:14px 15px;letter-spacing:.02em}
+  input[type=text]:focus{outline:none;border-color:var(--teal)}
+  .btn{border:0;border-radius:12px;padding:14px 22px;font:900 15px var(--F);cursor:pointer;background:var(--teal);color:#06251f;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .demo{background:none;border:0;color:var(--teal);font:700 13px var(--F);cursor:pointer;padding:0;margin-top:12px;text-decoration:underline;text-underline-offset:3px}
+  .err{color:#ffb3b3;font-size:13.5px;margin:12px 0 0;min-height:0}
+  .back{position:fixed;top:14px;left:16px;font:700 13px var(--F);color:var(--mut);text-decoration:none;z-index:60}
+  .loading{display:flex;align-items:center;gap:12px;color:var(--mut);font-size:15px}
+  .spin{width:20px;height:20px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  /* ---------- wrapped story ---------- */
+  #story{display:none}
+  #story.on{display:block}
+  .slides{scroll-snap-type:y mandatory;height:100vh;overflow-y:scroll;scroll-behavior:smooth}
+  .slide{scroll-snap-align:start;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:64px 24px;position:relative}
+  .slide .inner{max-width:720px;width:100%;opacity:1;transform:translateY(16px);transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+  .slide.in .inner{transform:translateY(0)}
+  .kicker{font:800 12px var(--F);letter-spacing:2.4px;text-transform:uppercase;opacity:.85;margin:0 0 18px}
+  .big{font-weight:900;letter-spacing:-.025em;line-height:.98;font-size:clamp(56px,16vw,150px);margin:0}
+  .bigsm{font-size:clamp(34px,8vw,72px);font-weight:900;letter-spacing:-.02em;line-height:1.04;margin:0}
+  .sub{font-size:clamp(17px,3.2vw,23px);margin:20px auto 0;max-width:30ch;color:rgba(255,255,255,.92);font-weight:600}
+  .foot{font-size:13.5px;color:rgba(255,255,255,.62);margin:22px auto 0;max-width:40ch}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0 0}
+  .tag{font:800 clamp(16px,3.6vw,26px) var(--F);padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)}
+  .cta{display:inline-block;margin-top:8px;font:800 15px var(--F);padding:12px 20px;border-radius:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);text-decoration:none;color:#fff}
+  .hint{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:12px;color:rgba(255,255,255,.6);animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+  .spark{display:flex;align-items:flex-end;gap:5px;height:120px;justify-content:center;margin:8px auto 0;max-width:560px}
+  .spark i{flex:1;max-width:34px;background:rgba(255,255,255,.85);border-radius:4px 4px 0 0;min-height:4px;display:block}
+  .spark i.hot{background:#fff}
+  .dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:50}
+  .dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);transition:.2s;cursor:pointer;display:block}
+  .dots b.on{background:#fff;transform:scale(1.4)}
+  /* summary card */
+  .summary{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.3);border-radius:22px;padding:26px 24px;max-width:460px;margin:0 auto;text-align:left}
+  .summary h3{font:900 13px var(--F);letter-spacing:2px;text-transform:uppercase;margin:0 0 4px;opacity:.8}
+  .summary .arche{font:900 clamp(24px,5.5vw,34px) var(--F);letter-spacing:-.02em;margin:0 0 16px;line-height:1.05}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+  .stat b{display:block;font:900 26px var(--F);letter-spacing:-.01em}
+  .stat span{font-size:12px;opacity:.8}
+  .share{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+  .brandline{margin-top:18px;font-size:12px;opacity:.7;text-align:center}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.slide .inner{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<a class="back" href="/">&larr; NTLSN</a>
+
+<!-- GATE -->
+<section id="gate">
+  <div class="card">
+    <div class="eyebrow">◇ NTLSN · in your browser · 30 seconds</div>
+    <h1>Your SoTL,<br>Wrapped.</h1>
+    <p class="lede">Paste your ORCID iD and we'll tell your teaching-scholarship story back to you — your turn toward teaching, the themes you've championed, your most-cited idea, your open footprint.</p>
+    <div class="priv"><b>◌ Free &amp; private.</b> Runs entirely in your browser against ORCID's and OpenAlex's public APIs. Your iD is <b>never sent to NTLSN</b>, never stored, never sold.</div>
+    <div class="row">
+      <input id="orcid" type="text" placeholder="0000-0000-0000-0000  ·  or paste your orcid.org link" autocomplete="off" spellcheck="false">
+      <button class="btn" id="go">Wrap it →</button>
+    </div>
+    <button class="demo" id="demo">Don't have it handy? Try a live demo</button>
+    <div class="err" id="err"></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <div class="slides" id="slides"></div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+  var orcidIn=document.getElementById("orcid"),goBtn=document.getElementById("go"),demoBtn=document.getElementById("demo"),errEl=document.getElementById("err");
+  var gate=document.getElementById("gate"),story=document.getElementById("story"),slidesEl=document.getElementById("slides"),dotsEl=document.getElementById("dots");
+  var DEMO="0000-0002-1428-2921";
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function normaliseOrcid(v){v=String(v||"").trim();var m=v.match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);return m?m[1].toUpperCase():"";}
+  var SOTL_RE=/teach|learn|pedagog|curricul|assessment|student|education|scholarship of teaching|higher education|classroom|academic (development|practice)|feedback|supervis|graduate attribute|employab/i;
+
+  function fail(msg){ errEl.textContent=msg; goBtn.disabled=false; goBtn.textContent="Wrap it →"; gate.style.display="flex"; story.className=""; }
+
+  function run(raw){
+    errEl.textContent="";
+    var id=normaliseOrcid(raw);
+    if(!id){ fail("That doesn't look like an ORCID iD — it should look like 0000-0002-1825-0097."); return; }
+    goBtn.disabled=true; goBtn.textContent="Reading…";
+    gate.querySelector(".card").innerHTML='<div class="loading"><span class="spin"></span><span>Reading your public record &amp; writing your story…</span></div>';
+    var sel="id,title,publication_year,cited_by_count,topics,keywords,authorships,open_access,primary_location";
+    var url="https://api.openalex.org/works?filter=author.orcid:"+id+"&per-page=200&sort=publication_year:desc&select="+sel;
+    fetch(url,{headers:{Accept:"application/json"}})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(data){
+        var works=(data&&data.results)||[];
+        if(!works.length){ fail("No public works found for that ORCID on OpenAlex. Check the iD, or your record may be private or new."); return; }
+        build(id, works, (data.meta&&data.meta.count)||works.length);
+      })
+      .catch(function(){ fail("Couldn't reach OpenAlex just now — check your connection and try again. Nothing was sent to us either way."); });
+  }
+
+  function build(id, works, total){
+    // ---- name ----
+    var name="";
+    for(var i=0;i<works.length&&!name;i++){ (works[i].authorships||[]).forEach(function(a){ var au=a.author||{}; if(!name&&au.orcid&&au.orcid.indexOf(id)>-1) name=au.display_name||""; }); }
+    var first=name?name.split(" ")[0]:"there";
+
+    // ---- aggregates ----
+    var analysed=works.length, full=total<=analysed;
+    var byYear={}, years=[], sotlHits=0, totalCites=0, oa=0, mostCited=null, topicCount={}, coauthors={}, venues={};
+    works.forEach(function(w){
+      var y=w.publication_year; if(y){ years.push(y); byYear[y]=byYear[y]||{all:0,sotl:0}; byYear[y].all++; }
+      var isS=SOTL_RE.test(w.title||"");
+      (w.topics||[]).forEach(function(t){
+        if(t.display_name){ topicCount[t.display_name]=(topicCount[t.display_name]||0)+1; if(SOTL_RE.test(t.display_name)) isS=true; }
+      });
+      (w.keywords||[]).forEach(function(k){ if(k.display_name&&SOTL_RE.test(k.display_name)) isS=true; });
+      if(isS){ sotlHits++; if(y){ byYear[y].sotl++; } }
+      var c=w.cited_by_count||0; totalCites+=c;
+      if(!mostCited || c>(mostCited.cited_by_count||0)) mostCited=w;
+      if(w.open_access&&w.open_access.is_oa) oa++;
+      (w.authorships||[]).forEach(function(a){ var au=a.author||{}; if(au.display_name && !(au.orcid&&au.orcid.indexOf(id)>-1)) coauthors[au.display_name]=1; });
+      var src=w.primary_location&&w.primary_location.source; if(src&&src.display_name) venues[src.display_name]=(venues[src.display_name]||0)+1;
+    });
+    var minY=full&&years.length?Math.min.apply(null,years):null, maxY=years.length?Math.max.apply(null,years):null;
+    var sotlPct=Math.round(sotlHits/analysed*100);
+    var oaPct=Math.round(oa/analysed*100);
+    var coN=Object.keys(coauthors).length;
+
+    // signature themes: most-frequent SoTL-flavoured topics, else top topics
+    var topicsSorted=Object.keys(topicCount).sort(function(a,b){return topicCount[b]-topicCount[a];});
+    var sotlThemes=topicsSorted.filter(function(t){return SOTL_RE.test(t);}).slice(0,3);
+    var themes=(sotlThemes.length?sotlThemes:topicsSorted.slice(0,3));
+
+    // "the turn": earliest year where SoTL share of that year >=50% (and >=1), among years with >=1 work
+    var turnYear=null, ys=Object.keys(byYear).map(Number).sort(function(a,b){return a-b;});
+    for(var j=0;j<ys.length;j++){ var d=byYear[ys[j]]; if(d.sotl>0 && d.sotl/d.all>=0.5){ turnYear=ys[j]; break; } }
+    if(!turnYear){ for(var k=0;k<ys.length;k++){ if(byYear[ys[k]].sotl>0){ turnYear=ys[k]; break; } } }
+
+    // archetype label from top SoTL theme
+    var arche = sotlThemes.length ? ("The "+sotlThemes[0].replace(/ and /gi," & ")+" scholar")
+              : (sotlPct>=50 ? "A scholar of teaching" : "A researcher turning to teaching");
+
+    // sparkline data (works per year, recent up to 12 yrs)
+    var sparkYears=ys.slice(-12);
+    var sparkMax=Math.max.apply(null, sparkYears.map(function(y){return byYear[y].all;}).concat([1]));
+
+    // ---- assemble slides ----
+    var S=[];
+    S.push({ac:"var(--teal)",cover:true});
+    S.push({ac:"var(--blue)",kick:"The body of work",big:String(total),sub:(total===1?"public work":"public works")+(minY?(" across "+(maxY-minY+1)+" years"):" indexed"),foot:full?"":"(your "+analysed+" most recent works)"});
+    if(turnYear){
+      var fromStart = (minY!=null && turnYear===minY);
+      S.push(fromStart
+        ? {ac:"var(--purple)",kick:"From the very start",bigsm:turnYear,sub:"your work centred on teaching &amp; learning from your first year",foot:"Some scholars find teaching late. You started there."}
+        : {ac:"var(--purple)",kick:"The turn",bigsm:turnYear,sub:"the year your work tilted toward teaching &amp; learning",foot:"Most scholars never name this moment. Yours is on the record."});
+    }
+    if(themes.length) S.push({ac:"var(--coral)",kick:"Your signature themes",tags:themes,sub:"the ideas you've quietly championed",foot:""});
+    if(mostCited && (mostCited.cited_by_count||0)>0) S.push({ac:"var(--gold)",kick:"Your most-cited idea",bigsm:'&ldquo;'+esc((mostCited.title||"").slice(0,90))+(mostCited.title&&mostCited.title.length>90?'…':'')+'&rdquo;',sub:"cited "+mostCited.cited_by_count+" times",foot:totalCites?(totalCites.toLocaleString()+" citations across your work"):""});
+    if(sparkYears.length>=3) S.push({ac:"var(--blue)",kick:"Your rhythm",spark:sparkYears.map(function(y){return {y:y,v:byYear[y].all,h:byYear[y].sotl>0&&byYear[y].sotl/byYear[y].all>=0.5,max:sparkMax};}),sub:"works per year — the bars where teaching led are brightest"});
+    if(!isNaN(oaPct)) S.push({ac:"var(--green)",kick:"Open by default",big:oaPct+"%",sub:"of your work is open access — read by anyone, anywhere",foot:"The commons way. NTLSN is built on the same principle."});
+    S.push({ac:"var(--teal)",kick:"Your SoTL footprint",big:sotlPct+"%",sub:sotlPct>=40?"You're not just teaching. You're studying it.":"A scholarship-of-teaching footprint, and growing.",cta:{t:"See it scored on the SoTL Index →",u:"/sotl-index.html"},foot:sotlHits+" of "+(full?"your":"your recent")+" "+analysed+" works look education-related"});
+    if(coN>0) S.push({ac:"var(--purple)",kick:"You don't work alone",big:String(coN),sub:coN===1?"co-author across the sector":"co-authors across the sector",foot:"Teaching scholarship is a team sport."});
+    S.push({ac:"var(--navy)",summary:{name:name,arche:arche,id:id,total:total,sotlPct:sotlPct,themes:themes,oaPct:oaPct,coN:coN,cites:totalCites}});
+
+    renderStory(S, first);
+  }
+
+  function slideHTML(s){
+    if(s.cover){
+      return '<div class="inner"><div class="kicker" style="color:var(--teal)">NTLSN · The commons, distilled</div>'+
+        '<p class="big" style="background:linear-gradient(110deg,var(--teal),var(--blue) 45%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Your SoTL,<br>Wrapped.</p>'+
+        '<p class="sub" id="coverhi"></p><p class="foot">Scroll to begin. Everything here runs in your browser; nothing is stored or sent to us.</p></div>'+
+        '<div class="hint">scroll ↓</div>';
+    }
+    if(s.summary){
+      var m=s.summary;
+      var stats='<div class="grid">'+
+        '<div class="stat"><b>'+m.total+'</b><span>public works</span></div>'+
+        '<div class="stat"><b>'+m.sotlPct+'%</b><span>SoTL footprint</span></div>'+
+        (isNaN(m.oaPct)?'':'<div class="stat"><b>'+m.oaPct+'%</b><span>open access</span></div>')+
+        (m.coN?'<div class="stat"><b>'+m.coN+'</b><span>collaborators</span></div>':'')+
+        '</div>';
+      var th=m.themes&&m.themes.length?('<div class="brandline" style="text-align:left;opacity:.85;margin-top:14px">Signature themes — '+m.themes.map(esc).join(" · ")+'</div>'):'';
+      return '<div class="inner"><div class="summary">'+
+        '<h3>Your SoTL, Wrapped</h3>'+
+        '<div class="arche">'+esc(m.arche)+'</div>'+
+        stats+th+
+        '<div class="brandline">'+esc(m.name||"")+' · orcid.org/'+esc(m.id)+'</div>'+
+        '</div>'+
+        '<div class="share">'+
+        '<button class="cta" id="shareBtn">Copy my Wrapped</button>'+
+        '<a class="cta" href="/sotl-index.html">Score it on the SoTL Index →</a>'+
+        '<a class="cta" href="/orcid-start.html">Personalise the commons →</a>'+
+        '</div>'+
+        '<p class="foot" style="margin-top:18px">Made with the free NTLSN commons · nothing stored or sent. Share yours and bring a colleague.</p>'+
+        '</div>';
+    }
+    var body='<div class="kicker">'+esc(s.kick||"")+'</div>';
+    if(s.big!=null) body+='<p class="big">'+s.big+'</p>';
+    if(s.bigsm!=null) body+='<p class="bigsm">'+s.bigsm+'</p>';
+    if(s.tags) body+='<div class="tags">'+s.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join("")+'</div>';
+    if(s.spark){ body+='<div class="spark">'+s.spark.map(function(b){var h=Math.round(8+(b.v/b.max)*112);return '<i class="'+(b.h?"hot":"")+'" style="height:'+h+'px" title="'+b.y+': '+b.v+'"></i>';}).join("")+'</div>'; }
+    if(s.sub) body+='<p class="sub">'+s.sub+'</p>';
+    if(s.cta) body+='<p style="margin-top:18px"><a class="cta" href="'+esc(s.cta.u)+'">'+esc(s.cta.t)+'</a></p>';
+    if(s.foot) body+='<p class="foot">'+s.foot+'</p>';
+    return '<div class="inner">'+body+'</div>';
+  }
+
+  function renderStory(S, first){
+    gate.style.display="none"; story.className="on";
+    slidesEl.innerHTML=""; dotsEl.innerHTML="";
+    S.forEach(function(s,i){
+      var sec=document.createElement("section"); sec.className="slide"; sec.tabIndex=0;
+      sec.style.background = s.summary ? "radial-gradient(900px 600px at 50% 30%,#1b2c49,var(--navy))" :
+        "radial-gradient(1100px 700px at 50% 35%, color-mix(in srgb, "+(s.ac||"var(--teal)")+" 26%, var(--navy)), var(--navy) 72%)";
+      sec.innerHTML=slideHTML(s);
+      slidesEl.appendChild(sec);
+      var d=document.createElement("b"); d.addEventListener("click",function(){sec.scrollIntoView();}); dotsEl.appendChild(d);
+    });
+    var hi=document.getElementById("coverhi"); if(hi) hi.textContent=first+", here's the story your scholarship tells.";
+    wire();
+  }
+
+  function wire(){
+    var secs=[].slice.call(slidesEl.querySelectorAll(".slide"));
+    var dots=[].slice.call(dotsEl.querySelectorAll("b"));
+    function onScroll(){
+      var vh=slidesEl.clientHeight||1, idx=Math.round(slidesEl.scrollTop/vh);
+      idx=Math.max(0,Math.min(secs.length-1,idx));
+      secs.forEach(function(s,i){ if(i<=idx) s.classList.add("in"); });
+      dots.forEach(function(d,i){ d.classList.toggle("on", i===idx); });
+      var big=secs[idx] && secs[idx].querySelector(".big"); if(big && /^\d/.test(big.textContent)) countUp(big);
+    }
+    slidesEl.addEventListener("scroll", onScroll, {passive:true});
+    onScroll();
+    // share
+    document.addEventListener("click",function(ev){
+      if(ev.target && ev.target.id==="shareBtn"){
+        var sum=slidesEl.querySelector(".summary"); var txt=(sum?sum.innerText:"").replace(/\n{2,}/g,"\n")+"\n\nMade free at ntlsn.com/sotl-wrapped";
+        if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){ev.target.textContent="✓ Copied — go share it";}); }
+        else { ev.target.textContent="Select & copy ↑"; }
+      }
+    });
+  }
+  function countUp(el){
+    if(el.dataset.done) return; el.dataset.done="1";
+    var raw=el.textContent, suffix=/%$/.test(raw)?"%":"", target=parseInt(raw,10); if(isNaN(target)) return;
+    if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches){ return; }
+    var t0=null, dur=900;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); el.textContent=Math.round(target*(1-Math.pow(1-p,3)))+suffix; if(p<1) requestAnimationFrame(step); else el.textContent=target+suffix; }
+    el.textContent="0"+suffix; requestAnimationFrame(step);
+  }
+
+  goBtn.addEventListener("click",function(){ run(orcidIn.value); });
+  orcidIn.addEventListener("keydown",function(e){ if(e.key==="Enter") run(orcidIn.value); });
+  demoBtn.addEventListener("click",function(){ orcidIn.value=DEMO; run(DEMO); });
+  // deep-link: ?orcid=...
+  var q=(location.search.match(/[?&]orcid=([^&]+)/)||[])[1];
+  if(q) run(decodeURIComponent(q));
+})();
+</script>
+</body>
+</html>
