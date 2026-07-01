@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Your Academic Development Home (ORCID)</title>
+<meta name="description" content="One ORCID iD, your academic development home base: a scholarly snapshot, scholarship-of-teaching sparks matched to your work, the Australian teaching-and-learning associations worth connecting with, and an editable view of your engagement-and-service workload. In your browser; nothing stored or sent.">
+<meta property="og:title" content="NTLSN — Your Academic Development Home (ORCID)">
+<meta property="og:description" content="One ORCID iD → your academic development home base: scholarship sparks, associations to connect with, and an engagement-and-service workload view.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/academic-home.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.ntlsn.com/academic-home.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px;min-height:100vh}
+  .wrap{max-width:1040px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(25px,3.6vw,36px);margin:0 0 8px;font-weight:800;letter-spacing:-.015em}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 20px;max-width:760px}
+  .orcidbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin:0 0 8px}
+  .orcidbar label{font:700 13px var(--F);display:flex;align-items:center;gap:8px}
+  .oi{width:18px;height:18px;border-radius:50%;background:#A6CE39;color:#fff;font:800 10px var(--F);display:flex;align-items:center;justify-content:center}
+  .orcidbar input{flex:1;min-width:180px;background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:600 14px var(--F)}
+  .orcidbar input:focus{outline:none;border-color:var(--teal)}
+  .btn{background:var(--teal);color:#06251f;border:0;border-radius:9px;padding:10px 16px;font:800 13px var(--F);cursor:pointer}
+  .btn.sec{background:rgba(255,255,255,.05);color:var(--ink);border:1px solid var(--line)}
+  .btn:focus-visible,input:focus-visible,a:focus-visible,.ci:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .note{font-size:12px;color:var(--mut);margin:0 0 22px}
+  .sample-tag{display:inline-block;background:rgba(201,169,98,.14);color:var(--gold);border:1px solid rgba(201,169,98,.3);border-radius:999px;font:800 10px var(--F);text-transform:uppercase;letter-spacing:.8px;padding:3px 9px;margin-left:8px;vertical-align:middle}
+  .sec{margin:26px 0 0}
+  .sec h2{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:0 0 12px}
+  .sec h2 small{color:var(--mut);text-transform:none;letter-spacing:0;font-weight:500}
+  .who{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 14px}
+  .who .nm{font:800 21px var(--F);color:#fff}
+  .who .rl{color:var(--mut);font-size:13.5px;margin-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+  .chip{background:rgba(78,205,196,.12);color:var(--teal);border:1px solid rgba(78,205,196,.25);border-radius:999px;font:700 12px var(--F);padding:4px 11px}
+  .chip.t{background:rgba(124,156,255,.12);color:var(--blue);border-color:rgba(124,156,255,.25)}
+  .snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 16px}
+  .stat b{display:block;font:800 26px var(--F);color:#fff;line-height:1}
+  .stat span{font-size:12px;color:var(--mut)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
+  .idea{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px;border-left:3px solid var(--purple)}
+  .idea .th{font:800 10.5px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--purple);margin:0 0 7px}
+  .idea p{margin:0 0 11px;font-size:14px;color:#dbe6f1}
+  .idea a{font:700 12.5px var(--F);color:var(--teal);text-decoration:none}
+  .assoc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;display:flex;flex-direction:column}
+  .assoc.match{border-color:rgba(78,205,196,.4)}
+  .assoc .an{font:800 14.5px var(--F);color:#fff}
+  .assoc .ab{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--teal);background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.25);border-radius:6px;padding:2px 7px;margin-left:6px}
+  .assoc .af{font-size:12.5px;color:var(--mut);margin:7px 0 9px;flex:1}
+  .assoc .ae{font-size:11.5px;color:#bcd}
+  .assoc .ae b{color:var(--gold)}
+  .eng{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px 14px}
+  .er{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px}
+  .er:first-child{border-top:0}
+  .er .k{font:800 10px var(--F);text-transform:uppercase;letter-spacing:.6px;padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .er .k.review{background:rgba(124,156,255,.14);color:var(--blue)}
+  .er .k.service{background:rgba(201,169,98,.14);color:var(--gold)}
+  .er .k.member{background:rgba(78,205,196,.14);color:var(--teal)}
+  .er .k.invited{background:rgba(197,123,255,.14);color:var(--purple)}
+  .er .d{flex:1;color:#dbe6f1;overflow:hidden;text-overflow:ellipsis}
+  .er .d small{color:var(--mut)}
+  .assume{display:flex;flex-wrap:wrap;gap:10px 16px;margin:12px 0 0;padding:13px 16px;background:var(--card2);border:1px solid var(--line);border-radius:12px}
+  .assume .a{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mut)}
+  .assume input{width:54px;background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:5px 7px;font:600 13px var(--F)}
+  .assume input:focus{outline:none;border-color:var(--teal)}
+  .wkbox{display:flex;flex-wrap:wrap;gap:14px;align-items:baseline;background:linear-gradient(180deg,rgba(157,214,73,.08),transparent);border:1px solid rgba(157,214,73,.25);border-radius:13px;padding:15px 18px;margin:12px 0 0}
+  .wkbox b{font:800 30px var(--F);color:var(--good)}
+  .wkbox span{font-size:12.5px;color:var(--mut);flex:1;min-width:220px}
+  .path{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+  .step{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+  .step .sn{font:800 11px var(--F);color:var(--teal);letter-spacing:.5px}
+  .step .st{font:700 14.5px var(--F);color:#fff;margin:5px 0 6px}
+  .step .sd{font-size:12.5px;color:var(--mut);margin-bottom:9px}
+  .step a{font:700 12.5px var(--F);color:var(--teal);text-decoration:none}
+  .empty{color:var(--mut);font-size:13.5px;padding:14px 0}
+  .check{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px 12px}
+  .ci{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+  .ci:first-child{border-top:0}
+  .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--mut);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;color:transparent;font-size:12px}
+  .ci.on .box{background:var(--teal);border-color:var(--teal);color:var(--navy)}
+  .ci.on .tx{color:var(--mut);text-decoration:line-through}
+  .err{background:rgba(255,138,138,.08);border:1px solid rgba(255,138,138,.3);color:#ffb3b3;border-radius:10px;padding:11px 14px;font-size:13px;margin:0 0 14px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:30px 0 0;line-height:1.65;border-top:1px solid var(--line);padding-top:16px}
+  .foot b{color:#cbd8e6}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Academic development home · in your browser</div>
+  <h1>Your academic development home</h1>
+  <p class="lead">One ORCID iD, one home base. NTLSN turns your <b>public</b> record into a scholarly snapshot, scholarship-of-teaching ideas matched to your work, the Australian teaching-and-learning associations worth connecting with, and an editable view of the engagement and service that rarely counts in a workload model — then points you to the courses and tools to grow. Public data only; nothing is stored or sent.</p>
+
+  <div class="orcidbar">
+    <label for="orcid"><span class="oi">iD</span> ORCID iD</label>
+    <input type="text" id="orcid" placeholder="0000-0002-1825-0097" autocomplete="off" spellcheck="false">
+    <button type="button" class="btn" id="go">Build my home</button>
+    <button type="button" class="btn sec" id="demo">Show a sample</button>
+  </div>
+  <p class="note">Don't have one? Register a free iD at <a href="https://orcid.org" target="_blank" rel="noopener">orcid.org</a>. NTLSN reads only your public record, in your browser — it never sees a password and stores nothing.</p>
+
+  <div id="out"></div>
+
+  <div class="foot">
+    <b>A note on Canvas and other LMSs.</b> NTLSN deliberately does <b>not</b> integrate with Canvas, Moodle, Blackboard or any LMS. Deep integration (LTI, institutional sign-on, gradebook access) means holding institutional credentials and student data — a security and privacy liability an independent, self-funded commons won't take on. Everything here runs in your browser, stores nothing, and sends nothing; you copy what's useful into your own systems. The human stays the integration layer.<br><br>
+    <b>Data, scope &amp; independence.</b> Profile data comes from your public <a href="https://orcid.org" target="_blank" rel="noopener">ORCID</a> record (CC0). Association descriptions are general and may change — always check the association's own site. Workload figures are rough, assumption-based prompts, not official load. This is an early prototype of an academic-development home base, not a finished platform. NTLSN is independent of all AI and edtech vendors. &nbsp;·&nbsp; <a href="/tools.html">All tools</a> &nbsp;·&nbsp; <a href="/crash-courses.html">Crash courses</a> &nbsp;·&nbsp; <a href="/">← NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  var elOrcid=document.getElementById("orcid"), out=document.getElementById("out");
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function g(o,path){for(var i=0;i<path.length;i++){if(o==null)return undefined;o=o[path[i]];}return o;}
+  function arr(x){return Array.isArray(x)?x:[];}
+  function titleCase(s){s=String(s||"").replace(/[-_]/g," ");return s.charAt(0).toUpperCase()+s.slice(1);}
+
+  /* ---------- sample ---------- */
+  var SAMPLE={sample:true,name:"Dr Alex Rivera",role:"Senior Lecturer, Learning & Teaching",org:"University of Example",startYear:2014,
+    education:"PhD, University of Example",
+    keywords:["assessment","feedback","generative AI","inclusive education","first-year transition"],
+    works:[{title:"Designing AI-resilient authentic assessment",year:"2025",type:"journal-article"},{title:"Dialogic feedback and student uptake",year:"2024",type:"journal-article"},{title:"Belonging in the first year",year:"2023",type:"conference-paper"},{title:"Inclusive assessment for diverse cohorts",year:"2022",type:"book-chapter"},{title:"Peer learning at scale",year:"2021",type:"conference-paper"}],
+    engagement:[{kind:"review",org:"HERDSA Review of Higher Education",detail:"Journal peer review",n:4},{kind:"review",org:"ASCILITE Conference",detail:"Conference peer review",n:6},{kind:"service",org:"ACEN",detail:"Conference committee"},{kind:"member",org:"HERDSA",detail:"Member"},{kind:"member",org:"ASCILITE",detail:"Member"},{kind:"invited",org:"Advance HE",detail:"Fellowship assessor"}],
+    fundings:[{title:"Improving feedback at scale",org:"national T&L grant scheme",year:"2021"}],
+    distinctions:[{title:"Senior Fellowship (SFHEA)",org:"Advance HE"},{title:"Citation for Outstanding Contributions to Student Learning",org:"AAUT"}]};
+
+  /* ---------- parse ORCID v3.0 ---------- */
+  function parseRecord(r){
+    var p={sample:false};
+    var credit=g(r,["person","name","credit-name","value"]);
+    p.name=credit||(((g(r,["person","name","given-names","value"])||"")+" "+(g(r,["person","name","family-name","value"])||"")).trim())||"This researcher";
+    var emps=arr(g(r,["activities-summary","employments","affiliation-group"])),best=null,bs=-1,minY=null;
+    emps.forEach(function(grp){arr(g(grp,["summaries"])).forEach(function(s){var e=g(s,["employment-summary"]);if(!e)return;var en=g(e,["end-date"])==null,y=parseInt(g(e,["start-date","year","value"]),10)||0,sc=(en?1e5:0)+y;if(sc>bs){bs=sc;best=e;}if(y){if(minY==null||y<minY)minY=y;}});});
+    if(best){p.role=g(best,["role-title"])||"";p.org=g(best,["organization","name"])||"";}
+    p.startYear=minY;
+    // education (most recent)
+    var eds=arr(g(r,["activities-summary","educations","affiliation-group"])),edBest=null,eb=-1;
+    eds.forEach(function(grp){arr(g(grp,["summaries"])).forEach(function(s){var e=g(s,["education-summary"]);if(!e)return;var y=parseInt(g(e,["end-date","year","value"]),10)||parseInt(g(e,["start-date","year","value"]),10)||0;if(y>eb){eb=y;edBest=e;}});});
+    if(edBest)p.education=[g(edBest,["role-title"]),g(edBest,["organization","name"])].filter(Boolean).join(", ");
+    p.keywords=arr(g(r,["person","keywords","keyword"])).map(function(k){return g(k,["content"]);}).filter(Boolean);
+    var works=[];
+    arr(g(r,["activities-summary","works","group"])).forEach(function(grp){var w=g(grp,["work-summary",0]);if(!w)return;works.push({title:g(w,["title","title","value"])||"(untitled)",year:g(w,["publication-date","year","value"])||"",type:g(w,["type"])||""});});
+    works.sort(function(a,b){return (parseInt(b.year,10)||0)-(parseInt(a.year,10)||0);});
+    p.works=works;
+    var eng=[],rev={};
+    arr(g(r,["activities-summary","peer-reviews","group"])).forEach(function(grp){arr(g(grp,["peer-review-group"])).forEach(function(pg){arr(g(pg,["peer-review-summary"])).forEach(function(ps){var o=g(ps,["convening-organization","name"])||"a journal or conference";rev[o]=(rev[o]||0)+1;});});});
+    Object.keys(rev).forEach(function(o){eng.push({kind:"review",org:o,detail:"Peer review",n:rev[o]});});
+    function affil(sec,key,kind,label){arr(g(r,["activities-summary",sec,"affiliation-group"])).forEach(function(grp){arr(g(grp,["summaries"])).forEach(function(s){var a=g(s,[key]);if(!a)return;eng.push({kind:kind,org:g(a,["organization","name"])||"",detail:g(a,["role-title"])||label});});});}
+    affil("services","service-summary","service","Service");
+    affil("memberships","membership-summary","member","Member");
+    affil("invited-positions","invited-position-summary","invited","Invited position");
+    p.engagement=eng;
+    // fundings
+    var fundings=[];
+    arr(g(r,["activities-summary","fundings","group"])).forEach(function(grp){var f=g(grp,["funding-summary",0]);if(!f)return;fundings.push({title:g(f,["title","title","value"])||"Grant",org:g(f,["organization","name"])||"",year:g(f,["start-date","year","value"])||""});});
+    p.fundings=fundings;
+    // distinctions / awards
+    var dist=[];
+    arr(g(r,["activities-summary","distinctions","affiliation-group"])).forEach(function(grp){arr(g(grp,["summaries"])).forEach(function(s){var d=g(s,["distinction-summary"]);if(!d)return;dist.push({title:g(d,["role-title"])||"Distinction",org:g(d,["organization","name"])||""});});});
+    p.distinctions=dist;
+    return p;
+  }
+  // career stage from role title + years active
+  function careerStage(p){
+    var role=(p.role||"").toLowerCase(), yrs=p.startYear?(new Date().getFullYear()-p.startYear):null;
+    if(/(dean|head of|director|chair|provost|vice-?chancellor|pro vice)/.test(role)) return "leader";
+    if(/(^|[^e])professor/.test(role) && !/associate|assistant/.test(role)) return "leader";
+    if(/associate professor|senior lecturer|principal|senior fellow|reader/.test(role)) return "experienced";
+    if(/lecturer|fellow|postdoc|associate|tutor|teaching/.test(role)) return "early";
+    if(yrs!=null){return yrs<6?"early":(yrs<15?"experienced":"leader");}
+    return "experienced";
+  }
+  var PATHWAYS={
+    early:[
+      {n:"01 · LEARN",t:"Build your foundations",d:"Take two crash courses matched to your first units and your sparks above.",a:"/crash-courses.html",al:"Browse courses →"},
+      {n:"02 · DO",t:"Design something real",d:"Use the Rubric, Outcome or Workload tool on a task you teach this term.",a:"/tools.html",al:"Open tools →"},
+      {n:"03 · RECOGNISE",t:"Aim for Associate Fellowship",d:"Start gathering evidence toward AFHEA (Advance HE) — it values exactly this early work.",a:"/crash-courses.html",al:"How recognition works →"},
+      {n:"04 · CONNECT",t:"Join one association",d:"Become a member of HERDSA or a discipline body and go to one event.",a:"#",al:"See matches ↑"}
+    ],
+    experienced:[
+      {n:"01 · STUDY",t:"Run a small SoTL project",d:"Turn one teaching change into a study you can publish or present.",a:"/crash-courses.html",al:"SoTL course →"},
+      {n:"02 · RECOGNISE",t:"Pursue Fellowship",d:"Work toward FHEA / SFHEA, and consider a teaching citation (AAUT).",a:"/crash-courses.html",al:"Recognition paths →"},
+      {n:"03 · PRESENT",t:"Take it to a conference",d:"Submit to HERDSA, ASCILITE, ACEN or STARS — your themes match above.",a:"#",al:"See matches ↑"},
+      {n:"04 · GROW",t:"Mentor and lead a change",d:"Lead a curriculum or assessment change in your team and study its impact.",a:"/tools.html",al:"Tools to design it →"}
+    ],
+    leader:[
+      {n:"01 · LEAD",t:"Drive whole-program change",d:"Use the toolkit to redesign assessment or curriculum across a program.",a:"/tools.html",al:"Open tools →"},
+      {n:"02 · RECOGNISE",t:"Senior / Principal Fellowship",d:"Pursue SFHEA / PFHEA and support colleagues' applications.",a:"/crash-courses.html",al:"Recognition paths →"},
+      {n:"03 · DEVELOP OTHERS",t:"Build your people",d:"Run an induction + symposium for your school; mentor toward Fellowship.",a:"/crash-courses.html",al:"Crash courses to share →"},
+      {n:"04 · CONNECT",t:"Sector leadership",d:"Engage CAULLT and leadership programmes; shape the conversation.",a:"#",al:"See matches ↑"}
+    ]
+  };
+  var STAGE_LABEL={early:"Early-career",experienced:"Established",leader:"Leadership"};
+
+  /* ---------- sparks ---------- */
+  var THEMES=[
+    {keys:["feedback"],th:"Feedback",spark:"Turn your feedback practice into a small SoTL study — measure whether students act on dialogic feedback, not just receive it.",link:"/crash-courses.html",ll:"Feedback crash course"},
+    {keys:["assessment","authentic","grading","marking","rubric"],th:"Assessment",spark:"Take one assessment you run and study it: does it measure the outcome you intend, and could it be more authentic?",link:"/crash-courses.html",ll:"Designing assessment"},
+    {keys:["ai","generative","genai","artificial intelligence","chatgpt","llm"],th:"AI in education",spark:"Design and evaluate an AI-resilient or AI-integrated task and write up what students did — the sector needs honest, grounded cases.",link:"/crash-courses.html",ll:"Teaching with AI"},
+    {keys:["inclus","equit","accessib","cald","international","diversity","belonging"],th:"Inclusion & equity",spark:"Frame an equity question as scholarship: who does your current design quietly advantage, and what changes when you redesign?",link:"/crash-courses.html",ll:"Inclusive assessment"},
+    {keys:["first year","first-year","transition","retention"],th:"First-year & transition",spark:"Study one transition-pedagogy change across the first weeks and track belonging and engagement, not just grades.",link:"/crash-courses.html",ll:"Crash courses"},
+    {keys:["work-integrated","wil","placement","employab"],th:"Work-integrated learning",spark:"Investigate the reflection in your WIL — is the learning being designed and assessed, or just assumed?",link:"/crash-courses.html",ll:"WIL crash course"},
+    {keys:["online","blended","flipped","hybrid","distance"],th:"Online & blended",spark:"Use the Community of Inquiry lens to study presence in your online unit — which presence is hardest to sustain, and why?",link:"/crash-courses.html",ll:"Online & blended"},
+    {keys:["threshold","concept"],th:"Threshold concepts",spark:"Map the concept students reliably get stuck on, design a way through the 'liminal' state, and study whether it helps.",link:"/crash-courses.html",ll:"Threshold concepts"},
+    {keys:["lecture","large class","large-class"],th:"Teaching at scale",spark:"Trial one active-learning technique in your largest class and measure engagement before and after.",link:"/crash-courses.html",ll:"Large classes"},
+    {keys:["supervis","hdr","doctoral","postgrad"],th:"Research supervision",spark:"Study your supervision practice — how do expectations get set, and where do candidatures stall?",link:"/crash-courses.html",ll:"Research supervision"}
+  ];
+  var UNIVERSAL=[
+    {th:"Make it scholarship",spark:"Write up one teaching change as a short case study — what you changed, what you saw, what you'd do next. That's the seed of a SoTL paper.",link:"/crash-courses.html",ll:"Reflective practice & SoTL"},
+    {th:"Students as partners",spark:"Invite a student to co-author your next teaching paper or co-design a task — better scholarship and better teaching.",link:"/crash-courses.html",ll:"Crash courses"},
+    {th:"Build the evidence",spark:"Pick one claim you make about your teaching and design the smallest study that would test it.",link:"/crash-courses.html",ll:"Reflective practice & SoTL"}
+  ];
+  function detectThemes(p){var hay=(p.keywords.join(" ")+" "+p.works.map(function(w){return w.title;}).join(" ")).toLowerCase();var hits=[];THEMES.forEach(function(t){for(var i=0;i<t.keys.length;i++){if(hay.indexOf(t.keys[i])>-1){hits.push(t);break;}}});return hits;}
+  function ideasFor(hits){var picks=hits.slice(0,3);for(var i=0;picks.length<3&&i<UNIVERSAL.length;i++)picks.push(UNIVERSAL[i]);return picks;}
+
+  /* ---------- Australian / Australasian T&L associations (general, real) ---------- */
+  var ASSOC=[
+    {n:"HERDSA",f:"Higher Education Research and Development Society of Australasia — the broad home for university teaching scholarship.",e:"Join, present at the annual conference, publish in <i>HER</i>, or pursue HERDSA Fellowship.",keys:["feedback","assessment","first-year","inclusion & equity","threshold concepts","teaching at scale","research supervision"],broad:true},
+    {n:"ASCILITE",f:"Australasian Society for Computers in Learning in Tertiary Education — educational technology and online learning.",e:"Join a SIG, present at the conference, or publish in <i>AJET</i>.",keys:["ai in education","online & blended"]},
+    {n:"ACEN",f:"Australian Collaborative Education Network — the national body for work-integrated learning.",e:"Present at the WIL conference or apply for a WIL grant.",keys:["work-integrated learning"]},
+    {n:"STARS",f:"Students, Transition, Achievement, Retention & Success — first-year and student success.",e:"Present a practice report or paper at the STARS conference.",keys:["first-year & transition","inclusion & equity"]},
+    {n:"CAULLT",f:"Council of Australasian University Leaders in Learning and Teaching — T&L leadership and academic development.",e:"Connect through your institution's L&T leadership and CAULLT projects.",keys:[],broad:true},
+    {n:"ACODE",f:"Australasian Council on Open, Distance and e-Learning — institutional learning-technology leadership and benchmarking.",e:"Engage via your institution's ACODE representative and benchmarking activities.",keys:["online & blended","ai in education"]},
+    {n:"ISSOTL",f:"International Society for the Scholarship of Teaching and Learning — the global SoTL community.",e:"Present at ISSOTL or join its networks to share your SoTL work.",keys:[],broad:true},
+    {n:"Advance HE",f:"Professional recognition for teaching — Fellowship categories (AFHEA → PFHEA) used widely across Australia.",e:"Apply for Fellowship, or train as an assessor/mentor in your institution's scheme.",keys:[],broad:true}
+  ];
+  function assocFor(themeLabels){
+    var set={};themeLabels.forEach(function(t){set[t.toLowerCase()]=1;});
+    var scored=ASSOC.map(function(a){var match=a.broad?0.5:0;a.keys.forEach(function(k){if(set[k.toLowerCase()])match+=1;});return {a:a,match:match};});
+    scored.sort(function(x,y){return y.match-x.match;});
+    return scored;
+  }
+
+  /* ---------- workload (editable) ---------- */
+  var HRS={review:4,service:22,invited:18,member:2};
+  function workloadHours(eng){var t=0;eng.forEach(function(e){t+=(HRS[e.kind]||0)*(e.n||1);});return t;}
+
+  var CUR=SAMPLE;
+  function render(p){
+    CUR=p;
+    var stage=careerStage(p);
+    var hits=detectThemes(p), ideas=ideasFor(hits), themeLabels=hits.map(function(h){return h.th;});
+    var scored=assocFor(themeLabels);
+    var kindLabel={review:"Review",service:"Service",member:"Member",invited:"Invited"};
+    // publication type breakdown
+    var types={};p.works.forEach(function(w){var t=titleCase(w.type||"other");types[t]=(types[t]||0)+1;});
+    var typeChips=Object.keys(types).sort(function(a,b){return types[b]-types[a];}).slice(0,4);
+    var html="";
+    if(p.sample)html+='<div class="note" style="margin-top:-8px">Showing a <b style="color:var(--gold)">sample</b> profile — enter your own ORCID iD above to use your real record.</div>';
+
+    html+='<div class="who"><div class="nm">'+esc(p.name)+(p.sample?'<span class="sample-tag">sample</span>':'')+'</div>'+
+      '<div class="rl">'+esc([p.role,p.org].filter(Boolean).join(" · ")||"Role not listed on ORCID")+(p.education?(' · '+esc(p.education)):'')+'</div>'+
+      '<div class="chips"><span class="chip" style="background:rgba(197,123,255,.14);color:var(--purple);border-color:rgba(197,123,255,.3)">'+esc(STAGE_LABEL[stage])+'</span>'+p.keywords.slice(0,6).map(function(k){return '<span class="chip">'+esc(k)+'</span>';}).join("")+typeChips.map(function(t){return '<span class="chip t">'+esc(t)+' ×'+types[t]+'</span>';}).join("")+'</div>'+
+      '</div>';
+    html+='<div style="display:flex;justify-content:flex-end;gap:10px;align-items:center;margin:0 0 4px"><span id="expmsg" style="font-size:12px;color:var(--mut)"></span><button type="button" class="btn sec" id="exportBtn">⤓ Copy my profile summary</button></div>';
+
+    html+='<div class="sec"><h2>Your scholarly snapshot</h2><div class="snap">'+
+      '<div class="stat"><b>'+p.works.length+'</b><span>works on ORCID</span></div>'+
+      '<div class="stat"><b>'+((p.fundings||[]).length)+'</b><span>grants on ORCID</span></div>'+
+      '<div class="stat"><b>'+((p.distinctions||[]).length)+'</b><span>awards &amp; distinctions</span></div>'+
+      '<div class="stat"><b>'+p.engagement.length+'</b><span>engagement &amp; service records</span></div>'+
+      '<div class="stat"><b>'+(p.startYear?(new Date().getFullYear()-p.startYear):'—')+'</b><span>years active'+(p.startYear?(' since '+p.startYear):'')+'</span></div>'+
+      '<div class="stat"><b>'+(p.works[0]?esc(p.works[0].year||"—"):"—")+'</b><span>most recent work</span></div>'+
+      '</div></div>';
+
+    html+='<div class="sec"><h2>Scholarship sparks <small>— ideas matched to your work</small></h2><div class="cards">'+
+      ideas.map(function(it){return '<div class="idea"><div class="th">'+esc(it.th)+'</div><p>'+esc(it.spark)+'</p><a href="'+esc(it.link)+'">'+esc(it.ll)+' →</a></div>';}).join("")+'</div></div>';
+
+    html+='<div class="sec"><h2>Associations to connect with <small>— Australian T&amp;L, matched to your themes</small></h2><div class="cards">'+
+      scored.slice(0,6).map(function(s){var a=s.a;return '<div class="assoc'+(s.match>=1?' match':'')+'"><div><span class="an">'+esc(a.n)+'</span>'+(s.match>=1?'<span class="ab">match</span>':'')+'</div><div class="af">'+a.f+'</div><div class="ae"><b>How to engage:</b> '+a.e+'</div></div>';}).join("")+'</div></div>';
+
+    html+='<div class="sec"><h2>Engagement &amp; service <small>— the work that rarely counts</small></h2>';
+    if(p.engagement.length){
+      html+='<div class="eng">'+p.engagement.map(function(e){return '<div class="er"><span class="k '+esc(e.kind)+'">'+esc(kindLabel[e.kind]||"Other")+'</span><span class="d">'+esc(e.org||"")+(e.detail?' <small>· '+esc(e.detail)+'</small>':'')+(e.n>1?' <small>×'+e.n+'</small>':'')+'</span></div>';}).join("")+'</div>'+
+        '<div class="assume"><span style="color:#cbd8e6;font-weight:700">Tune the assumptions (hrs):</span>'+
+        '<span class="a">Review <input type="number" id="hr_review" value="'+HRS.review+'" min="0"></span>'+
+        '<span class="a">Service <input type="number" id="hr_service" value="'+HRS.service+'" min="0"></span>'+
+        '<span class="a">Invited <input type="number" id="hr_invited" value="'+HRS.invited+'" min="0"></span>'+
+        '<span class="a">Membership <input type="number" id="hr_member" value="'+HRS.member+'" min="0"></span></div>'+
+        '<div class="wkbox"><b id="wktotal">≈ '+workloadHours(p.engagement)+' h/yr</b><span>rough engagement &amp; service load — the kind of work often invisible in a standard workload model. Adjust the assumptions above to your reality, and take this number into your workload conversation.</span></div>';
+    } else {
+      html+='<div class="eng"><div class="empty">No peer-review, membership or service records found on this ORCID profile. Adding them makes your service visible — here and everywhere.</div></div>';
+    }
+    html+='</div>';
+
+    // development pathway
+    html+='<div class="sec"><h2>Your development pathway <small>— tuned to your '+esc((STAGE_LABEL[stage]||"").toLowerCase())+' stage</small></h2><div class="path">'+
+      (PATHWAYS[stage]||PATHWAYS.experienced).map(function(s){return '<div class="step"><div class="sn">'+esc(s.n)+'</div><div class="st">'+esc(s.t)+'</div><div class="sd">'+esc(s.d)+'</div><a href="'+esc(s.a)+'"'+(s.a==="#"?' onclick="return false"':'')+'>'+esc(s.al)+'</a></div>';}).join("")+
+      '</div></div>';
+
+    html+='<div class="sec"><h2>Your induction checklist</h2><div class="check" id="check">'+
+      ['Add your peer review, memberships and service to ORCID so the engagement view above is complete.',
+       'Link Scopus and Web of Science to ORCID so your record updates itself.',
+       'Pick one scholarship spark and design the smallest version of it.',
+       'Connect with one matched association — present, review or join.',
+       'Start a teaching portfolio — collect evidence as you go.',
+       'Take your engagement-and-service hours into your workload conversation.'
+      ].map(function(t){return '<div class="ci"><div class="box">✓</div><div class="tx">'+esc(t)+'</div></div>';}).join("")+'</div></div>';
+
+    out.innerHTML=html;
+
+    // wire assumptions
+    ["review","service","invited","member"].forEach(function(k){var inp=document.getElementById("hr_"+k);if(inp)inp.addEventListener("input",function(){var v=parseFloat(inp.value);HRS[k]=isNaN(v)||v<0?0:v;var el=document.getElementById("wktotal");if(el)el.textContent="≈ "+workloadHours(CUR.engagement)+" h/yr";});});
+    // wire checklist
+    var ck=document.getElementById("check");
+    if(ck)ck.querySelectorAll(".ci").forEach(function(ci){ci.setAttribute("role","checkbox");ci.setAttribute("tabindex","0");ci.setAttribute("aria-checked","false");function tog(){var on=ci.classList.toggle("on");ci.setAttribute("aria-checked",on?"true":"false");}ci.addEventListener("click",tog);ci.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();tog();}});});
+    // export to portfolio / workload form (human is the integration layer)
+    function profileText(){
+      var L=[];
+      L.push("ACADEMIC DEVELOPMENT PROFILE — generated by NTLSN from public ORCID data");
+      L.push(p.name+(p.role?(" — "+p.role):"")+(p.org?(", "+p.org):""));
+      L.push("Career stage: "+(STAGE_LABEL[stage]||""));
+      L.push("");
+      L.push("Snapshot: "+p.works.length+" works · "+((p.fundings||[]).length)+" grants · "+((p.distinctions||[]).length)+" awards · "+p.engagement.length+" engagement/service records"+(p.startYear?(" · active since "+p.startYear):""));
+      if(themeLabels.length)L.push("Themes: "+themeLabels.join(", "));
+      L.push("");
+      L.push("Engagement & service (~"+workloadHours(p.engagement)+" h/yr, assumption-based):");
+      p.engagement.forEach(function(e){L.push("  - ["+(kindLabel[e.kind]||"")+"] "+(e.org||"")+(e.detail?(" — "+e.detail):"")+(e.n>1?(" x"+e.n):""));});
+      L.push("");
+      L.push("Scholarship sparks:");
+      ideas.forEach(function(it){L.push("  - "+it.th+": "+it.spark);});
+      L.push("");
+      L.push("Source: public ORCID record. Nothing stored by NTLSN. Verify association details on each body's own site.");
+      return L.join("\n");
+    }
+    var eb=document.getElementById("exportBtn");
+    if(eb)eb.addEventListener("click",function(){var t=profileText(),m=document.getElementById("expmsg");if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){if(m)m.textContent="Copied — paste into your portfolio or workload form ✓";});}else{if(m)m.textContent="Clipboard unavailable — select the page and copy.";}});
+  }
+  function showError(msg){var d=document.createElement("div");d.className="err";d.textContent=msg;out.insertBefore(d,out.firstChild);}
+
+  function cleanId(v){var m=String(v||"").match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);return m?m[1].toUpperCase():"";}
+  function build(){
+    var id=cleanId(elOrcid.value);
+    if(!id){render(SAMPLE);showError("That doesn't look like an ORCID iD (expected 0000-0000-0000-0000). Showing a sample instead.");return;}
+    out.innerHTML='<div class="note">Reading your public ORCID record…</div>';
+    fetch("https://pub.orcid.org/v3.0/"+id+"/record",{headers:{"Accept":"application/json"}})
+      .then(function(r){if(!r.ok)throw new Error("ORCID returned "+r.status);return r.json();})
+      .then(function(rec){render(parseRecord(rec));})
+      .catch(function(e){render(SAMPLE);showError("Couldn't reach your ORCID record ("+e.message+") — it may be private or your network may block it. Showing a sample so you can see the idea.");});
+  }
+  document.getElementById("go").addEventListener("click",build);
+  document.getElementById("demo").addEventListener("click",function(){elOrcid.value="";render(SAMPLE);});
+  elOrcid.addEventListener("keydown",function(e){if(e.key==="Enter")build();});
+  render(SAMPLE);
+})();
+</script>
+</body>
+</html>
