@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Calibration Suite</title>
+<meta name="description" content="Get your markers marking the same. A calibration workflow for teaching teams — score a shared sample, see the spread, close the gap. Try the live spread checker. Stateless — nothing stored.">
+<meta property="og:title" content="NTLSN — Calibration Suite">
+<meta property="og:description" content="Get your markers marking the same. Score a shared sample, see the spread, close the gap. Try the live spread checker. Nothing stored.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/calibration-suite.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.ntlsn.com/calibration-suite.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#9DD649;--warn:#FFB454;--bad:#FF5470;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px;min-height:100vh}
+  .wrap{max-width:1000px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+  h1{font-size:clamp(26px,4vw,38px);margin:0 0 10px;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+  .lead{color:#cbd8e6;font-size:16px;margin:0 0 22px;max-width:760px}
+  h2.sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:30px 0 14px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .step{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:14px;padding:16px}
+  .step .sn{font:800 11px var(--F);color:var(--gold);letter-spacing:.5px}
+  .step .st{font:800 15px var(--F);color:#fff;margin:4px 0 6px}
+  .step .sd{font-size:12.5px;color:var(--mut)}
+  .tool{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(78,205,196,.35);border-radius:18px;padding:22px 22px 18px;margin:6px 0 0}
+  .tool h3{font:800 18px var(--F);color:#fff;margin:0 0 4px}
+  .tool .th{font-size:13px;color:var(--mut);margin:0 0 16px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .mk label{display:block;font:700 12px var(--F);color:#cbd8e6;margin:0 0 5px}
+  .mk .row{display:flex;align-items:center;gap:10px}
+  .mk input[type=range]{flex:1;accent-color:var(--teal)}
+  .mk .val{min-width:44px;text-align:right;font:800 15px var(--F);color:var(--teal)}
+  .mk .nm{background:var(--card2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 9px;font:600 13px var(--F);width:100%;margin:0 0 6px}
+  .mk .nm:focus-visible,input[type=range]:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .out{margin:18px 0 0;border-top:1px solid var(--line);padding-top:16px}
+  .bars{display:flex;align-items:flex-end;gap:10px;height:120px;padding:0 2px}
+  .bars .b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .bars .bar{width:100%;border-radius:6px 6px 0 0;background:linear-gradient(180deg,var(--teal),#2f8f88);min-height:3px;transition:height .25s ease}
+  .bars .bl{font:700 10.5px var(--F);color:var(--mut);margin-top:6px;text-align:center;word-break:break-word}
+  .verdict{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:16px 0 0}
+  .stat{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 15px;min-width:120px}
+  .stat .sl{font:700 10.5px var(--F);text-transform:uppercase;letter-spacing:.8px;color:var(--mut)}
+  .stat .sv{font:800 22px var(--F);color:#fff;margin-top:2px}
+  .pill{font:800 13px var(--F);border-radius:999px;padding:8px 16px}
+  .pill.good{background:rgba(157,214,73,.16);color:var(--good);border:1px solid rgba(157,214,73,.4)}
+  .pill.warn{background:rgba(255,180,84,.16);color:var(--warn);border:1px solid rgba(255,180,84,.4)}
+  .pill.bad{background:rgba(255,84,112,.16);color:var(--bad);border:1px solid rgba(255,84,112,.4)}
+  .msg{font-size:13px;color:#cbd8e6;margin:12px 0 0;min-height:1.2em}
+  .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .wc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}.wc .wt{font:800 14.5px var(--F);color:#fff;margin:0 0 5px}.wc .wd{font-size:12.5px;color:var(--mut)}
+  .cta{text-align:center;background:linear-gradient(120deg,rgba(201,169,98,.14),rgba(78,205,196,.12));border:1px solid rgba(201,169,98,.35);border-radius:18px;padding:28px 22px;margin:30px 0 0}
+  .cta h3{font:800 clamp(19px,3vw,24px) var(--F);color:#fff;margin:0 0 8px}.cta p{color:#cbd8e6;font-size:14px;margin:0 0 16px}
+  .btn{display:inline-block;background:var(--teal);color:#06251f;border-radius:999px;padding:12px 23px;font:800 15px var(--F);text-decoration:none}
+  .foot{color:#7d8da0;font-size:11.5px;margin:30px 0 0;line-height:1.65;border-top:1px solid var(--line);padding-top:16px}.foot b{color:#cbd8e6}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · For institutions &amp; schools</div>
+  <h1>Calibration Suite</h1>
+  <p class="lead">The fairest thing you can do for students is make sure a 72 from one marker is a 72 from every marker. The Calibration Suite runs a simple ritual before marking starts: everyone scores the <b>same</b> sample, you see the <b>spread</b>, and you talk until it closes. Try the live spread checker below.</p>
+
+  <h2 class="sec">The calibration ritual</h2>
+  <div class="steps">
+    <div class="step"><div class="sn">01 · SAMPLE</div><div class="st">Pick a shared script</div><div class="sd">Choose 2&ndash;3 anonymised student samples that span the grade range.</div></div>
+    <div class="step"><div class="sn">02 · SCORE BLIND</div><div class="st">Everyone marks alone</div><div class="sd">Each marker scores the same sample independently against the rubric &mdash; no conferring yet.</div></div>
+    <div class="step"><div class="sn">03 · SEE THE SPREAD</div><div class="st">Reveal together</div><div class="sd">Plot every marker's score. The gap between highest and lowest is the number that matters.</div></div>
+    <div class="step"><div class="sn">04 · CLOSE THE GAP</div><div class="st">Talk &amp; align</div><div class="sd">Discuss the outliers, agree what the rubric means, re-mark. Repeat until tight.</div></div>
+  </div>
+
+  <h2 class="sec">Live spread checker</h2>
+  <div class="tool">
+    <h3>Score the sample</h3>
+    <p class="th">Enter each marker's score for one shared sample (0&ndash;100). Watch the spread. Nothing is saved &mdash; it clears when you close the tab.</p>
+    <div class="grid" id="markers"></div>
+    <div class="out">
+      <div class="bars" id="bars" aria-hidden="true"></div>
+      <div class="verdict">
+        <div class="stat"><div class="sl">Spread (max &minus; min)</div><div class="sv" id="spread">0</div></div>
+        <div class="stat"><div class="sl">Mean</div><div class="sv" id="mean">0</div></div>
+        <div class="stat"><div class="sl">Std dev</div><div class="sv" id="sd">0</div></div>
+        <span class="pill good" id="pill" role="status">Enter scores</span>
+      </div>
+      <p class="msg" id="msg" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <h2 class="sec">Why calibrate?</h2>
+  <div class="why">
+    <div class="wc"><div class="wt">Fairness you can defend</div><div class="wd">If a grade appeal lands, "we calibrated before marking" is the answer moderators want to hear.</div></div>
+    <div class="wc"><div class="wt">Rubrics that actually mean something</div><div class="wd">The disagreements surface exactly which criteria are read differently &mdash; then you fix the wording.</div></div>
+    <div class="wc"><div class="wt">Sessional onboarding, fast</div><div class="wd">New and casual markers get inside the standard in one session instead of a semester.</div></div>
+    <div class="wc"><div class="wt">Evidence for recognition</div><div class="wd">Leading calibration is assessment leadership &mdash; strong SFHEA and award evidence.</div></div>
+  </div>
+
+  <div class="cta">
+    <h3>Run calibration across your school</h3>
+    <p>Facilitated calibration workshops, rubric clinics and a moderation record &mdash; part of the School &amp; Enterprise packages, or standalone.</p>
+    <a class="btn" href="mailto:hello@ntlsn.com?subject=Calibration%20Suite&amp;body=School%2Fdiscipline:%0ANumber%20of%20markers:%0AUnit%20%2F%20assessment:%0AWhat%20we'd%20like%20help%20with:">Book a calibration →</a>
+  </div>
+
+  <div class="foot">
+    <b>Stateless &amp; independent.</b> The spread checker runs entirely in your browser &mdash; we store no scores, no rubrics, no student work, nothing. It's a facilitation aid, not a marking system of record; your institution's board of examiners remains the authority on grades. NTLSN is independent of all institutions and vendors. &nbsp;&middot;&nbsp; <a href="/tools.html">More free tools</a> &nbsp;&middot;&nbsp; <a href="/">&larr; NTLSN</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var wrap=document.getElementById("markers"), barsEl=document.getElementById("bars");
+  var state=[{n:"Marker A",v:72},{n:"Marker B",v:68},{n:"Marker C",v:74},{n:"Marker D",v:65}];
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
+  function render(){
+    wrap.innerHTML="";
+    state.forEach(function(m,i){
+      var d=document.createElement("div"); d.className="mk";
+      d.innerHTML='<input class="nm" type="text" aria-label="Marker '+(i+1)+' name" value="'+esc(m.n)+'">'+
+        '<div class="row"><input type="range" min="0" max="100" step="1" value="'+m.v+'" aria-label="'+esc(m.n)+' score"><span class="val">'+m.v+'</span></div>';
+      var nm=d.querySelector(".nm"), rg=d.querySelector("input[type=range]"), val=d.querySelector(".val");
+      nm.addEventListener("input",function(){state[i].n=nm.value||("Marker "+(i+1));compute();});
+      rg.addEventListener("input",function(){state[i].v=+rg.value;val.textContent=rg.value;compute();});
+      wrap.appendChild(d);
+    });
+  }
+  function compute(){
+    var vs=state.map(function(m){return m.v;});
+    var n=vs.length, mean=vs.reduce(function(a,b){return a+b;},0)/n;
+    var max=Math.max.apply(null,vs), min=Math.min.apply(null,vs), spread=max-min;
+    var variance=vs.reduce(function(a,b){return a+(b-mean)*(b-mean);},0)/n, sd=Math.sqrt(variance);
+    document.getElementById("spread").textContent=spread;
+    document.getElementById("mean").textContent=mean.toFixed(1);
+    document.getElementById("sd").textContent=sd.toFixed(1);
+    barsEl.innerHTML="";
+    state.forEach(function(m){
+      var b=document.createElement("div"); b.className="b";
+      var bar=document.createElement("div"); bar.className="bar"; bar.style.height=Math.max(3,m.v)+"%";
+      if(spread>=15) bar.style.background="linear-gradient(180deg,#FF5470,#a13048)";
+      else if(spread>=8) bar.style.background="linear-gradient(180deg,#FFB454,#a9722c)";
+      var lab=document.createElement("div"); lab.className="bl"; lab.textContent=m.n+" · "+m.v;
+      b.appendChild(bar); b.appendChild(lab); barsEl.appendChild(b);
+    });
+    var pill=document.getElementById("pill"), msg=document.getElementById("msg");
+    if(spread<=4){pill.className="pill good";pill.textContent="Tight — calibrated";
+      msg.textContent="You're aligned. This is what you want before marking a full pile: within about 4 marks of each other.";}
+    else if(spread<=8){pill.className="pill warn";pill.textContent="Close — one more pass";
+      msg.textContent="Nearly there. Talk through the top and bottom scores, agree what the rubric means at the boundary, and re-mark.";}
+    else{pill.className="pill bad";pill.textContent="Wide — calibrate before marking";
+      msg.textContent="A "+spread+"-mark gap on the same script means students are being graded differently depending on who marks them. Discuss the outliers and re-score before releasing markers on the real pile.";}
+  }
+  render(); compute();
+})();
+</script>
+</body>
+</html>
