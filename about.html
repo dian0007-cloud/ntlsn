@@ -29,8 +29,24 @@
   .founder .ph img{width:100%;height:100%;object-fit:cover;display:block}
   .founder .fb{flex:1;min-width:240px}
   .founder .fn{font:800 20px var(--F);color:#fff}
-  .founder .fr{font:800 11px var(--F);letter-spacing:.6px;text-transform:uppercase;color:var(--teal);margin:4px 0 10px}
+  .founder .fr{font:800 11px var(--F);letter-spacing:.6px;text-transform:uppercase;color:var(--teal);margin:4px 0 6px}
+  .founder .fsub{font:600 13px var(--F);color:var(--mut);margin:0 0 10px}
   .founder .fd{font-size:14px;color:#cbd8e6}
+  .creds{font:700 12px var(--F);letter-spacing:.3px;color:var(--blue);margin:12px 0 12px}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+  .badges span{font:800 10.5px var(--F);letter-spacing:.4px;text-transform:uppercase;color:var(--teal);background:rgba(78,205,196,.10);border:1px solid rgba(78,205,196,.28);border-radius:999px;padding:5px 11px}
+  .pos{background:linear-gradient(120deg,rgba(124,156,255,.10),rgba(78,205,196,.07));border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:16px;padding:22px 24px;margin:0 0 8px}
+  .pos p{margin:0 0 12px;font-size:15px;color:#dbe6f1}.pos p:last-child{margin:0}.pos b{color:#fff}
+  .pos .sig{font:800 14px var(--F);color:var(--teal);margin:2px 0 16px}
+  .pubs{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+  .pubs li{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 15px;font-size:13px;color:#cbd8e6;line-height:1.6}
+  .pubs li em{font-style:italic;color:#dbe6f1}
+  .pubs li a{word-break:break-all}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 12px}
+  .st{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center}
+  .st .sn{font:800 30px var(--F);color:var(--teal);line-height:1;letter-spacing:-.02em}
+  .st .sl{font:700 11px var(--F);letter-spacing:.5px;text-transform:uppercase;color:var(--mut);margin-top:8px}
+  .evnote{font-size:12.5px;color:var(--mut);margin:2px 0 0}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
   .m{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:16px;padding:18px 20px}
   .m .mn{font:800 16px var(--F);color:#fff}
@@ -59,20 +75,44 @@
   <h2 class="sec">Our story</h2>
   <div class="story">
     <p>NTLSN didn't come from a grant, a committee or a strategic plan. It came from <b>lived experience</b> — the early-career years of finding your way without a map, and wishing someone would reach back and pull you up. NTLSN is that reach-back, at sector scale.</p>
-    <p>It is built and led by <b>culturally and linguistically diverse (CALD) academics</b>. People of colour remain a small minority in academic leadership — and we're not waiting for permission to change that. We build the commons, and we build our way into leadership by doing the work.</p>
-    <p>Everything here is free, for everyone — for now and for good. <b>No funding paid for it. No grant, no award, no institution owns it.</b> It was made on nights and weekends, on my own time and my own computer, because the sector deserves an open home — and because the people it's for are too often the last to be served.</p>
+    <p>It is built and led by <b>culturally and linguistically diverse (CALD) academics</b>. People of colour remain a small minority in academic leadership — and we're not waiting for permission to change that.</p>
+    <p>Everything here is free, for everyone — for now and for good. <b>No funding paid for it. No grant, no award, no institution owns it.</b> It was made on nights and weekends, on my own time and my own computer.</p>
     <p>That's the 2&nbsp;a.m. reason this exists. If it helps one educator feel less alone in their teaching, it has done its job.</p>
   </div>
 
   <h2 class="sec">The founder</h2>
   <div class="founder">
-    <div class="ph"><img src="/seb-dianati.jpg" alt="A/Prof Dr Seb Dianati" onerror="this.style.display='none';this.parentNode.textContent='SD';"></div>
+    <div class="ph"><img src="/seb-dianati.jpg" alt="Associate Professor Seb Dianati" onerror="this.style.display='none';this.parentNode.textContent='SD';"></div>
     <div class="fb">
-      <div class="fn">A/Prof Dr Seb Dianati</div>
-      <div class="fr">Founder</div>
-      <div class="fd">Academic developer and Scholarship of Teaching &amp; Learning researcher. Founder of NTLSN and maker of its free tools — the crash courses, induction kits, recognition and Fellowship supports, and the 20+ in-browser toolkits any academic developer can drop into their LMS. Built so that every educator, wherever they work, has what they need. <span style="color:var(--mut)">(Full bio to come.)</span></div>
+      <div class="fn">Associate Professor Seb Dianati</div>
+      <div class="fr">Founder &amp; Chair, NTLSN</div>
+      <div class="fsub">Academic developer · Scholarship of Teaching &amp; Learning researcher</div>
+      <div class="fd">Founder of NTLSN and maker of its free tools — the crash courses, induction kits, recognition and Fellowship supports, and the 30+ in-browser toolkits any academic developer can drop into their LMS. Built so that every educator, wherever they work, has what they need.</div>
+      <div class="creds">BSc(MedChem) · BIE(S&amp;T) · GDIBA · MBA · EdD · SFHEA</div>
+      <div class="badges"><span>SFHEA</span><span>EdD</span><span>Author</span><span>Centre for Australian Democracy</span></div>
     </div>
   </div>
+
+  <h2 class="sec">Positionality &amp; motive</h2>
+  <div class="pos">
+    <p>I build this as a critical scholar of education. My work has traced how open learning — OER, then MOOCs, then microcredentials — and even partnership itself were steadily enclosed and monetised. NTLSN is my attempt at the opposite: to keep the sector's knowledge a <b>free, open commons</b>, and to put what I learned critiquing that system to work repairing it. The paid services exist only to sustain the commons — never to gate it.</p>
+    <p class="sig">— Seb</p>
+    <p>Author of <em>The Commercialisation of MOOCs</em>; researcher in students-as-partners and Indigenous curriculum; elected (volunteer) board member of the Centre for Australian Democracy. NTLSN grew from that work — <b>a critique of commercialised education, made constructive.</b></p>
+    <ul class="pubs">
+      <li>Dianati, S. (2024). <em>The commercialisation of massive open online courses</em>. Springer. <a href="https://doi.org/10.1007/978-3-031-58184-7" target="_blank" rel="noopener">https://doi.org/10.1007/978-3-031-58184-7</a></li>
+      <li>Dianati, S., &amp; Bolt, R. (2025). Embedding Indigenous knowledge in the curriculum: Principles and strategies across the Australian higher education sector. <em>The Australian Journal of Indigenous Education, 54</em>(1). <a href="https://doi.org/10.55146/ajie.v54i1.1073" target="_blank" rel="noopener">https://doi.org/10.55146/ajie.v54i1.1073</a></li>
+      <li>Dianati, S., Ashford, T., Pearson, G., &amp; Williams, E. (2025). Evaluating student partnership models in Australian universities. <em>International Journal for Students as Partners, 9</em>(1). <a href="https://doi.org/10.15173/ijsap.v9i1.5909" target="_blank" rel="noopener">https://doi.org/10.15173/ijsap.v9i1.5909</a></li>
+    </ul>
+  </div>
+
+  <h2 class="sec">The evidence — what the data shows</h2>
+  <div class="stats">
+    <div class="st"><div class="sn">1,431</div><div class="sl">Works in the commons</div></div>
+    <div class="st"><div class="sn">30+</div><div class="sl">Free in-browser tools</div></div>
+    <div class="st"><div class="sn">$0</div><div class="sl">Cost to students &amp; staff</div></div>
+    <div class="st"><div class="sn">0</div><div class="sl">Data points stored</div></div>
+  </div>
+  <p class="evnote">Every number here is live and open: the whole commons is browsable now, nothing is behind a login, and nothing you do is stored, shared or sold.</p>
 
   <h2 class="sec">Steering committee</h2>
   <div class="grid">
@@ -81,7 +121,7 @@
     <div class="m"><div class="mn">Zablon Pingo</div><div class="mr">Steering Committee</div><div class="ma">Charles Darwin University</div></div>
     <div class="m"><div class="mn">Grant Andrews</div><div class="mr">Steering Committee</div><div class="ma">Central Queensland University</div></div>
   </div>
-  <p style="font-size:12.5px;color:var(--mut);margin:12px 0 0">A steering committee of colleagues — all people of colour — who chose to build this together. Seb Dianati is the founder; the committee guides and grows the commons.</p>
+  <p style="font-size:12.5px;color:var(--mut);margin:12px 0 0">A steering committee of colleagues who chose to build this together. Seb Dianati is the founder; the committee guides and grows the commons.</p>
 
   <h2 class="sec">What NTLSN is</h2>
   <div class="vals">
