@@ -5805,5 +5805,70 @@ section:not(#hero){content-visibility:auto;contain-intrinsic-size:auto 760px}
   ov.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('button[data-r]'):null;if(!b)return;var r=b.getAttribute('data-r');try{localStorage.setItem('ntlsn_region',r);}catch(e){}ov.style.opacity='0';setTimeout(function(){if(ov.parentNode)ov.parentNode.removeChild(ov);},350);if(r==='global')note();});
  }
  setTimeout(show,900);
-})();</script><script id="ntlsn-privacy-pill">(function(){function build(){if(document.getElementById("np-priv"))return;var d=document.createElement("div");d.id="np-priv";d.style.cssText="position:fixed;left:16px;top:14px;z-index:9997;";var b=document.createElement("button");b.type="button";b.textContent="🔒 We hold nothing on you";b.style.cssText="font:800 12px -apple-system,Segoe UI,Roboto,sans-serif;border:1px solid rgba(78,205,196,.4);background:rgba(78,205,196,.10);color:#4ECDC4;border-radius:999px;padding:7px 13px;cursor:pointer;backdrop-filter:blur(6px);";var pop=document.createElement("div");pop.style.cssText="display:none;max-width:300px;margin-top:8px;background:#0f1f3a;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;color:#cbd8e6;font:500 12.5px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.5);";pop.innerHTML="<b style=\"color:#fff;\">No account. No paywall. No tracking.</b><br>We don\u2019t store, share or sell your data \u2014 public info is read in your browser and never leaves it.<br><span style=\"color:#8aa0b6;\">What\u2019s in it for us? Nothing. That\u2019s the whole point. \ud83d\ude4c</span>";b.addEventListener("click",function(){pop.style.display=pop.style.display==="none"?"block":"none";});d.appendChild(b);d.appendChild(pop);document.body.appendChild(d);}build();setTimeout(build,1500);new MutationObserver(build).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-about-link">document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".ntlsn-topnav button");if(b&&(b.textContent||"").trim()==="About"){e.preventDefault();e.stopPropagation();window.location.href="/about.html";}},true);</script></body>
+})();</script><script id="ntlsn-privacy-pill">(function(){function build(){if(document.getElementById("np-priv"))return;var d=document.createElement("div");d.id="np-priv";d.style.cssText="position:fixed;left:16px;top:14px;z-index:9997;";var b=document.createElement("button");b.type="button";b.textContent="🔒 We hold nothing on you";b.style.cssText="font:800 12px -apple-system,Segoe UI,Roboto,sans-serif;border:1px solid rgba(78,205,196,.4);background:rgba(78,205,196,.10);color:#4ECDC4;border-radius:999px;padding:7px 13px;cursor:pointer;backdrop-filter:blur(6px);";var pop=document.createElement("div");pop.style.cssText="display:none;max-width:300px;margin-top:8px;background:#0f1f3a;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;color:#cbd8e6;font:500 12.5px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;box-shadow:0 12px 40px rgba(0,0,0,.5);";pop.innerHTML="<b style=\"color:#fff;\">No account. No paywall. No tracking.</b><br>We don\u2019t store, share or sell your data \u2014 public info is read in your browser and never leaves it.<br><span style=\"color:#8aa0b6;\">What\u2019s in it for us? Nothing. That\u2019s the whole point. \ud83d\ude4c</span>";b.addEventListener("click",function(){pop.style.display=pop.style.display==="none"?"block":"none";});d.appendChild(b);d.appendChild(pop);document.body.appendChild(d);}build();setTimeout(build,1500);new MutationObserver(build).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-about-link">document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".ntlsn-topnav button");if(b&&(b.textContent||"").trim()==="About"){e.preventDefault();e.stopPropagation();window.location.href="/about.html";}},true);</script><script id="ntlsn-two-doors">(function(){
+  var BOUND="ntlsn_doors_outside";
+  function txt(el){return (el.textContent||"").replace(/[\s▾▸]+/g," ").trim();}
+  function closeAll(){Array.prototype.forEach.call(document.querySelectorAll("#ntlsn-doorbar .nd-panel"),function(p){p.style.display="none";});}
+  function findBtn(label){
+    var nav=document.querySelector(".ntlsn-topnav"); if(!nav) return null;
+    var bs=nav.querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){ if(txt(bs[i])===label) return bs[i]; }
+    return null;
+  }
+  function go(target){
+    closeAll();
+    if(target.charAt(0)==="/"){ window.location.href=target; return; }
+    var b=findBtn(target); if(b) b.click();
+  }
+  var DOORS=[
+    {t:"🗓 Events", items:[
+      ["What’s on","Events"],["Event map","Map"],
+      ["From the sector","From the Sector"],["International","International"]
+    ]},
+    {t:"📚 Resources", items:[
+      ["Resource hub","Resources"],["Professional development","PD"],
+      ["Recognition & pathways","Pathways"],["SoTL grants","Grants"],
+      ["Frameworks","Frameworks"],["Calibration suite","/calibration-suite.html"],
+      ["Peer-Review Exchange","/peer-review-exchange.html"]
+    ]}
+  ];
+  var TRIG="font:600 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:rgba(255,255,255,.75);background:transparent;border:0;padding:8px 12px;cursor:pointer;white-space:nowrap;border-radius:8px;";
+  var ITEM="display:block;width:100%;text-align:left;font:500 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:#cbd8e6;background:transparent;border:0;border-radius:9px;padding:9px 12px;cursor:pointer;white-space:nowrap;";
+  function mkDoor(door){
+    var wrap=document.createElement("div"); wrap.style.cssText="position:relative;display:inline-block;";
+    var b=document.createElement("button"); b.type="button"; b.textContent=door.t+" ▾"; b.style.cssText=TRIG;
+    b.addEventListener("mouseenter",function(){b.style.color="#fff";b.style.background="rgba(255,255,255,.06)";});
+    b.addEventListener("mouseleave",function(){b.style.color="rgba(255,255,255,.75)";b.style.background="transparent";});
+    var panel=document.createElement("div"); panel.className="nd-panel";
+    panel.style.cssText="display:none;position:absolute;top:100%;left:0;margin-top:6px;min-width:238px;background:#0f1f3a;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:8px;box-shadow:0 16px 48px rgba(0,0,0,.55);z-index:9998;";
+    door.items.forEach(function(it){
+      var a=document.createElement("button"); a.type="button"; a.textContent=it[0]; a.style.cssText=ITEM;
+      a.addEventListener("mouseenter",function(){a.style.background="rgba(78,205,196,.12)";a.style.color="#fff";});
+      a.addEventListener("mouseleave",function(){a.style.background="transparent";a.style.color="#cbd8e6";});
+      a.addEventListener("click",function(e){e.preventDefault();go(it[1]);});
+      panel.appendChild(a);
+    });
+    b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();var open=panel.style.display==="block";closeAll();panel.style.display=open?"none":"block";});
+    wrap.appendChild(b); wrap.appendChild(panel); return wrap;
+  }
+  function build(){
+    var nav=document.querySelector(".ntlsn-topnav"); if(!nav) return;
+    if(!findBtn("Events")||!findBtn("Resources")) return;
+    if(nav.style.display!=="none") nav.style.display="none";
+    if(document.getElementById("ntlsn-doorbar")) return;
+    var bar=document.createElement("div"); bar.id="ntlsn-doorbar";
+    bar.className="hidden lg:flex items-center gap-0.5";
+    bar.appendChild(mkDoor(DOORS[0]));
+    bar.appendChild(mkDoor(DOORS[1]));
+    var about=document.createElement("button"); about.type="button"; about.textContent="About"; about.style.cssText=TRIG;
+    about.addEventListener("mouseenter",function(){about.style.color="#fff";about.style.background="rgba(255,255,255,.06)";});
+    about.addEventListener("mouseleave",function(){about.style.color="rgba(255,255,255,.75)";about.style.background="transparent";});
+    about.addEventListener("click",function(e){e.preventDefault();window.location.href="/about.html";});
+    bar.appendChild(about);
+    nav.parentNode.insertBefore(bar, nav.nextSibling);
+    if(!window[BOUND]){ window[BOUND]=true; document.addEventListener("click",closeAll); }
+  }
+  build(); setTimeout(build,800); setTimeout(build,2000);
+  new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
+})();</script></body>
 </html>
