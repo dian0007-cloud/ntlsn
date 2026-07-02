@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HERDSA 2026 × NTLSN — the program, threaded into the commons</title>
+<meta name="description" content="Every session of the HERDSA 2026 on-site program (Singapore, 7–9 July), clustered into the themes of the national teaching and learning commons — with a way to keep each thread going after the conference ends. Independent; listing implies no affiliation.">
+<link rel="canonical" href="https://ntlsn.com/herdsa-2026.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NTLSN">
+<meta property="og:title" content="HERDSA 2026 × NTLSN — the program, threaded into the commons">
+<meta property="og:description" content="447 sessions from the official HERDSA 2026 on-site program, mapped into 14 themes of the open teaching &amp; learning commons. Find your session, find your people, keep the thread going.">
+<meta property="og:url" content="https://ntlsn.com/herdsa-2026.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HERDSA 2026 × NTLSN — the program, threaded into the commons">
+<meta name="twitter:description" content="447 sessions, 14 themes, one open commons. Sessions from the official on-site program; subject to change; no affiliation implied.">
+<style>
+:root{--bg:#0A1628;--card:rgba(255,255,255,.035);--card2:rgba(255,255,255,.055);--line:rgba(255,255,255,.09);--txt:#E6EDF7;--dim:#93A4BE;--teal:#4ECDC4;--blue:#7C9CFF;--purple:#C57BFF;--amber:#FFB448}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:.75rem}
+body{background:var(--bg);color:var(--txt);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#04222b;padding:.6rem 1rem;border-radius:0 0 .5rem 0;z-index:99;font-weight:700}
+.skip:focus{left:0}
+a{color:var(--teal)}
+.wrap{max-width:64rem;margin:0 auto;padding:0 1rem 4rem}
+header.top{padding:1rem;max-width:64rem;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+header.top a.home{color:var(--dim);text-decoration:none;font-size:.9rem}
+header.top a.home:hover,header.top a.home:focus{color:var(--teal)}
+header.top .mark{font-weight:800;letter-spacing:.06em;color:var(--txt);text-decoration:none;font-size:.95rem}
+header.top .mark span{color:var(--teal)}
+.hero{padding:2.25rem 0 1.25rem}
+.hero .kicker{color:var(--amber);font-weight:700;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase}
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.6rem);line-height:1.15;margin:.4rem 0 .5rem;font-weight:800}
+.hero h1 .thread{background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lede{color:var(--dim);max-width:46rem;font-size:1.02rem}
+.note{margin:1.25rem 0;padding:.9rem 1rem;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:.6rem;background:var(--card);color:var(--dim);font-size:.88rem}
+.note strong{color:var(--txt)}
+.findwrap{position:sticky;top:0;z-index:10;background:linear-gradient(var(--bg) 82%,rgba(10,22,40,0));padding:.75rem 0 1rem}
+.find{display:block;width:100%;padding:.8rem 1rem;font-size:1rem;color:var(--txt);background:var(--card2);border:1px solid var(--line);border-radius:.75rem;outline:none}
+.find:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(78,205,196,.18)}
+.find::placeholder{color:var(--dim)}
+.status{margin-top:.45rem;font-size:.82rem;color:var(--dim)}
+nav.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0 1.5rem}
+.chip{display:inline-flex;align-items:center;gap:.45rem;padding:.42rem .75rem;border:1px solid var(--line);border-radius:2rem;background:var(--card);color:var(--txt);text-decoration:none;font-size:.84rem}
+.chip:hover,.chip:focus{border-color:var(--a);color:var(--a)}
+.chip .cn{font-size:.74rem;color:var(--a);font-weight:700}
+section.theme{margin:2.4rem 0;padding-top:.5rem;border-top:1px solid var(--line)}
+section.theme h2{font-size:1.25rem;margin:.9rem 0 .3rem;color:var(--a);display:flex;flex-wrap:wrap;align-items:baseline;gap:.6rem}
+section.theme .count{font-size:.8rem;font-weight:600;color:var(--dim);border:1px solid var(--line);border-radius:1rem;padding:.1rem .6rem}
+.tintro{color:var(--dim);font-size:.92rem;max-width:44rem;margin-bottom:1rem}
+ul.slist{list-style:none}
+li.s{display:flex;gap:.75rem;padding:.55rem .6rem;border-radius:.55rem;align-items:flex-start}
+li.s:nth-child(odd){background:var(--card)}
+li.s .sid{flex:0 0 3.4rem;text-align:right;font-variant-numeric:tabular-nums;color:var(--a);font-weight:700;font-size:.85rem;padding-top:.12rem;word-break:break-word}
+li.s .sb{min-width:0}
+li.s .st{display:block;font-size:.93rem;font-weight:600}
+li.s .sw{display:block;color:var(--dim);font-size:.82rem;margin-top:.1rem}
+.kb{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(255,180,72,.4);border-radius:.35rem;padding:.05rem .4rem;margin-bottom:.2rem}
+aside.thread{margin-top:1.1rem;padding:1rem;border:1px dashed var(--a);border-radius:.75rem;background:var(--card)}
+aside.thread h3{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--a);margin-bottom:.7rem}
+.tls{display:grid;grid-template-columns:1fr;gap:.6rem}
+@media(min-width:40rem){.tls{grid-template-columns:1fr 1fr}}
+.tl{display:block;padding:.7rem .8rem;border:1px solid var(--line);border-radius:.6rem;background:var(--card2);text-decoration:none;color:var(--txt)}
+.tl:hover,.tl:focus{border-color:var(--a)}
+.tl .tlt{display:block;font-weight:700;font-size:.9rem;color:var(--a)}
+.tl .tld{display:block;color:var(--dim);font-size:.8rem;margin-top:.15rem}
+.tl.big .tlt{font-size:1rem}
+.close{margin:3rem 0 0;padding:1.4rem;border:1px solid var(--line);border-radius:1rem;background:linear-gradient(135deg,rgba(78,205,196,.07),rgba(124,156,255,.07),rgba(197,123,255,.07))}
+.close h2{font-size:1.35rem;margin-bottom:.4rem}
+.close p{color:var(--dim);max-width:44rem;margin-bottom:1rem;font-size:.95rem}
+.close .tls{gap:.7rem}
+@media(min-width:40rem){.close .tls{grid-template-columns:1fr 1fr 1fr}}
+footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);color:var(--dim);font-size:.8rem}
+footer p{margin-bottom:.5rem;max-width:52rem}
+.hidden{display:none}
+.noresults{display:none;color:var(--dim);padding:2rem 0;text-align:center}
+noscript p{margin:1rem 0;padding:1rem;border:1px solid var(--line);border-radius:.6rem;color:var(--amber)}
+@media print{.findwrap,nav.chips,.skip{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the program</a>
+<header class="top">
+<a class="mark" href="/">NTLSN<span>.</span></a>
+<a class="home" href="/">&larr; back to the commons</a>
+</header>
+<main id="main" role="main" class="wrap">
+<div class="hero">
+<p class="kicker">HERDSA 2026 &middot; Singapore &middot; 7&ndash;9 July</p>
+<h1>The program, <span class="thread">threaded into the commons</span></h1>
+<p class="lede">Every session of the HERDSA 2026 on-site program &mdash; keynotes, papers and roundtables &mdash; clustered into the themes the commons already works in. Find your session, find your colleagues, and when the conference ends, keep each thread going on NTLSN: free, open, national.</p>
+</div>
+<div class="note" role="note">
+<strong>An honest note.</strong> Sessions below are from the official on-site program (30&nbsp;June&nbsp;2026 release) and are <strong>subject to change</strong> &mdash; check the HERDSA conference app for rooms, times and late changes. Papers and roundtables are grouped here by theme, not by timetable. NTLSN is independent of HERDSA and of every institution named; <strong>listing implies no affiliation or endorsement</strong>.
+</div>
+<noscript><p>This page uses JavaScript to list the 447 sessions and power the search. Without it, please use the HERDSA conference app for the program &mdash; and the rest of NTLSN works fine from the <a href="/">homepage</a>.</p></noscript>
+<div class="findwrap">
+<label class="skip" for="find">Find your session or colleague</label>
+<input class="find" id="find" type="search" placeholder="Find your session or colleague &mdash; try a surname, a title word, a university&hellip;" autocomplete="off" spellcheck="false">
+<p class="status" id="status" role="status" aria-live="polite">447 sessions across 14 themes.</p>
+</div>
+<nav class="chips" aria-label="Themes">
+<a class="chip" style="--a:#4ECDC4" href="#t-kn">Keynotes &amp; plenaries <span class="cn">5</span></a>
+<a class="chip" style="--a:#7C9CFF" href="#t-ai">GenAI &amp; assessment integrity <span class="cn">72</span></a>
+<a class="chip" style="--a:#C57BFF" href="#t-af">Assessment &amp; feedback <span class="cn">41</span></a>
+<a class="chip" style="--a:#FFB448" href="#t-ax">Active, experiential &amp; playful learning <span class="cn">49</span></a>
+<a class="chip" style="--a:#4ECDC4" href="#t-bw">Belonging, wellbeing &amp; student success <span class="cn">35</span></a>
+<a class="chip" style="--a:#7C9CFF" href="#t-sp">Students as Partners &amp; student voice <span class="cn">14</span></a>
+<a class="chip" style="--a:#C57BFF" href="#t-ew">Employability, WIL &amp; industry <span class="cn">33</span></a>
+<a class="chip" style="--a:#FFB448" href="#t-ad">Academic development &amp; identity <span class="cn">42</span></a>
+<a class="chip" style="--a:#4ECDC4" href="#t-sr">SoTL, research practice &amp; doctoral education <span class="cn">23</span></a>
+<a class="chip" style="--a:#7C9CFF" href="#t-dt">Digital, TEL &amp; analytics <span class="cn">38</span></a>
+<a class="chip" style="--a:#C57BFF" href="#t-iu">Inclusion, UDL &amp; equity <span class="cn">33</span></a>
+<a class="chip" style="--a:#FFB448" href="#t-ik">Indigenous knowledges &amp; decolonising <span class="cn">12</span></a>
+<a class="chip" style="--a:#4ECDC4" href="#t-it">International &amp; transnational education <span class="cn">28</span></a>
+<a class="chip" style="--a:#7C9CFF" href="#t-lg">Leadership, governance &amp; policy <span class="cn">22</span></a>
+</nav>
+<section class="theme" id="t-kn" style="--a:#4ECDC4">
+<h2>Keynotes &amp; plenaries <span class="count" data-total="5">5 sessions</span></h2>
+<p class="tintro">Three keynotes, the closing panel and the sponsored workshop — the moments the whole conference shares.</p>
+<ul class="slist" data-theme="kn"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Keynotes &amp; plenaries"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/orcid-start.html"><span class="tlt">Start with your ORCID <span aria-hidden="true">&rarr;</span></span><span class="tld">Paste your ORCID and NTLSN maps your own SoTL footprint to the commons — two minutes, nothing stored.</span></a><a class="tl" href="/whats-on.html"><span class="tlt">What&#x27;s on across the sector <span aria-hidden="true">&rarr;</span></span><span class="tld">HERDSA is one week; the sector&#x27;s events run all year. The curated calendar.</span></a><a class="tl" href="/crash-courses.html"><span class="tlt">Crash courses <span aria-hidden="true">&rarr;</span></span><span class="tld">Fifteen short courses that stitch the archive, videos and frameworks into single paths.</span></a></div></aside>
+</section>
+<section class="theme" id="t-ai" style="--a:#7C9CFF">
+<h2>GenAI &amp; assessment integrity <span class="count" data-total="72">72 sessions</span></h2>
+<p class="tintro">The biggest cluster of the program — securing assessment, teaching with (and about) GenAI, and holding onto integrity as the ground moves.</p>
+<ul class="slist" data-theme="ai"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for GenAI &amp; assessment integrity"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/genai-crash-course.html"><span class="tlt">GenAI crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">The evidence-grounded short course on generative AI in university teaching.</span></a><a class="tl" href="/academic-integrity-ai-crash-course.html"><span class="tlt">Academic integrity in the AI era <span aria-hidden="true">&rarr;</span></span><span class="tld">Integrity by design rather than detection — a practical short course.</span></a><a class="tl" href="/genai-readiness.html"><span class="tlt">GenAI readiness check <span aria-hidden="true">&rarr;</span></span><span class="tld">A self-assessment of where your course sits before you redesign.</span></a><a class="tl" href="/teaching-ai-prompts.html"><span class="tlt">Teaching AI prompts library <span aria-hidden="true">&rarr;</span></span><span class="tld">Reusable, classroom-tested prompts for teaching tasks.</span></a></div></aside>
+</section>
+<section class="theme" id="t-af" style="--a:#C57BFF">
+<h2>Assessment &amp; feedback <span class="count" data-total="41">41 sessions</span></h2>
+<p class="tintro">Design, feedback literacy, marking, workload and the quiet machinery of assessment.</p>
+<ul class="slist" data-theme="af"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Assessment &amp; feedback"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/assessment-design-crash-course.html"><span class="tlt">Assessment design crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">From constructive alignment to authentic tasks, in one sitting.</span></a><a class="tl" href="/assessment-mix.html"><span class="tlt">Assessment mix analyser <span aria-hidden="true">&rarr;</span></span><span class="tld">Paste your assessment plan and see the spread of types, weights and timing.</span></a><a class="tl" href="/rubric-builder.html"><span class="tlt">Rubric builder <span aria-hidden="true">&rarr;</span></span><span class="tld">Build criterion-referenced rubrics in the browser and export them.</span></a><a class="tl" href="/feedback-crash-course.html"><span class="tlt">Feedback crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Feedback that gets used, not just given.</span></a></div></aside>
+</section>
+<section class="theme" id="t-ax" style="--a:#FFB448">
+<h2>Active, experiential &amp; playful learning <span class="count" data-total="49">49 sessions</span></h2>
+<p class="tintro">Escape rooms, LEGO®, debate, fieldtrips, storytelling, makerspaces — learning by doing, together.</p>
+<ul class="slist" data-theme="ax"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Active, experiential &amp; playful learning"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/active-learning-crash-course.html"><span class="tlt">Active learning crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">The evidence and the moves, from think-pair-share to team-based learning.</span></a><a class="tl" href="/group-work-crash-course.html"><span class="tlt">Group work crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Designing group tasks that are fair, assessable and worth doing.</span></a><a class="tl" href="/large-classes-crash-course.html"><span class="tlt">Large classes crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Keeping learning active when the room holds four hundred.</span></a><a class="tl" href="/session-planner.html"><span class="tlt">Session planner <span aria-hidden="true">&rarr;</span></span><span class="tld">Plan a teaching session around activity, not content coverage.</span></a></div></aside>
+</section>
+<section class="theme" id="t-bw" style="--a:#4ECDC4">
+<h2>Belonging, wellbeing &amp; student success <span class="count" data-total="35">35 sessions</span></h2>
+<p class="tintro">Belonging, mental health, transition, engagement and what student success actually asks of us.</p>
+<ul class="slist" data-theme="bw"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Belonging, wellbeing &amp; student success"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/wellbeing-crash-course.html"><span class="tlt">Wellbeing crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Teaching practices that protect student (and staff) wellbeing.</span></a><a class="tl" href="/first-year-crash-course.html"><span class="tlt">First-year experience crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Transition pedagogy and the first weeks that decide the rest.</span></a><a class="tl" href="/induction-crash-course.html"><span class="tlt">Induction crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Starting students — and colleagues — well.</span></a></div></aside>
+</section>
+<section class="theme" id="t-sp" style="--a:#7C9CFF">
+<h2>Students as Partners &amp; student voice <span class="count" data-total="14">14 sessions</span></h2>
+<p class="tintro">Partnership, co-design and student voice — students as colleagues in the work of teaching.</p>
+<ul class="slist" data-theme="sp"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Students as Partners &amp; student voice"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/student-partnership.html"><span class="tlt">Students as Partners hub <span aria-hidden="true">&rarr;</span></span><span class="tld">Frameworks, agreements and honest starting points for partnership work.</span></a><a class="tl" href="/critical-learner-partnerships.html"><span class="tlt">Critical learner partnerships <span aria-hidden="true">&rarr;</span></span><span class="tld">Beyond consultation: partnership with power examined.</span></a><a class="tl" href="/partnership-agreement.html"><span class="tlt">Partnership agreement builder <span aria-hidden="true">&rarr;</span></span><span class="tld">Draft a working agreement for a staff–student partnership project.</span></a></div></aside>
+</section>
+<section class="theme" id="t-ew" style="--a:#C57BFF">
+<h2>Employability, WIL &amp; industry <span class="count" data-total="33">33 sessions</span></h2>
+<p class="tintro">Employability, work-integrated learning, industry engagement and what graduates carry out the door.</p>
+<ul class="slist" data-theme="ew"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Employability, WIL &amp; industry"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/wil-crash-course.html"><span class="tlt">Work-integrated learning crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Placements, projects and practice-based learning that hold up.</span></a><a class="tl" href="/curriculum-crash-course.html"><span class="tlt">Curriculum design crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Building capability across a whole program, not one unit at a time.</span></a><a class="tl" href="/outcome-builder.html"><span class="tlt">Learning outcome builder <span aria-hidden="true">&rarr;</span></span><span class="tld">Write measurable outcomes that connect learning to capability.</span></a></div></aside>
+</section>
+<section class="theme" id="t-ad" style="--a:#FFB448">
+<h2>Academic development &amp; identity <span class="count" data-total="42">42 sessions</span></h2>
+<p class="tintro">Academic development, teacher identity, mentoring, recognition and the lives of the people who teach.</p>
+<ul class="slist" data-theme="ad"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Academic development &amp; identity"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/reflective-practice-crash-course.html"><span class="tlt">Reflective practice crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Structured reflection that goes somewhere.</span></a><a class="tl" href="/peer-observation.html"><span class="tlt">Peer observation kit <span aria-hidden="true">&rarr;</span></span><span class="tld">Run developmental (not judgemental) peer observation of teaching.</span></a><a class="tl" href="/philosophy-builder.html"><span class="tlt">Teaching philosophy builder <span aria-hidden="true">&rarr;</span></span><span class="tld">Draft the statement every fellowship and promotion case asks for.</span></a><a class="tl" href="/fellowship-mapper.html"><span class="tlt">Fellowship mapper <span aria-hidden="true">&rarr;</span></span><span class="tld">Map your practice against Advance HE fellowship descriptors.</span></a></div></aside>
+</section>
+<section class="theme" id="t-sr" style="--a:#4ECDC4">
+<h2>SoTL, research practice &amp; doctoral education <span class="count" data-total="23">23 sessions</span></h2>
+<p class="tintro">SoTL, publishing, research skills and doctoral education — scholarship about the teaching itself.</p>
+<ul class="slist" data-theme="sr"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for SoTL, research practice &amp; doctoral education"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/reflective-sotl-crash-course.html"><span class="tlt">SoTL crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">From classroom question to publishable inquiry.</span></a><a class="tl" href="/journal-finder.html"><span class="tlt">Journal finder <span aria-hidden="true">&rarr;</span></span><span class="tld">Find the right teaching-and-learning journal for your manuscript.</span></a><a class="tl" href="/sotl-index.html"><span class="tlt">The SoTL Index <span aria-hidden="true">&rarr;</span></span><span class="tld">A DORA-aligned, field-normalised profile of teaching-and-learning scholarship.</span></a><a class="tl" href="/research-supervision-crash-course.html"><span class="tlt">Research supervision crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Supervising HDR candidates well.</span></a></div></aside>
+</section>
+<section class="theme" id="t-dt" style="--a:#7C9CFF">
+<h2>Digital, TEL &amp; analytics <span class="count" data-total="38">38 sessions</span></h2>
+<p class="tintro">Learning technology, analytics, VR and simulation, online and blended design.</p>
+<ul class="slist" data-theme="dt"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Digital, TEL &amp; analytics"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/edtech-crash-course.html"><span class="tlt">EdTech crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Choosing and using learning technology on evidence, not hype.</span></a><a class="tl" href="/online-blended-crash-course.html"><span class="tlt">Online &amp; blended crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Designing online and blended learning that holds attention.</span></a><a class="tl" href="/learning-modules.html"><span class="tlt">Learning modules <span aria-hidden="true">&rarr;</span></span><span class="tld">SCORM-exportable modules you can drop straight into your LMS.</span></a></div></aside>
+</section>
+<section class="theme" id="t-iu" style="--a:#C57BFF">
+<h2>Inclusion, UDL &amp; equity <span class="count" data-total="33">33 sessions</span></h2>
+<p class="tintro">Inclusion, universal design, accessibility, equity of access and outcome.</p>
+<ul class="slist" data-theme="iu"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Inclusion, UDL &amp; equity"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/inclusive-teaching-crash-course.html"><span class="tlt">Inclusive teaching crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">UDL and inclusive practice from day one, not as retrofit.</span></a><a class="tl" href="/inclusive-assessment-crash-course.html"><span class="tlt">Inclusive assessment crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Assessment that is fair by design.</span></a><a class="tl" href="/alt-text-helper.html"><span class="tlt">Alt-text helper <span aria-hidden="true">&rarr;</span></span><span class="tld">Write meaningful alternative text for teaching materials.</span></a><a class="tl" href="/contrast-checker.html"><span class="tlt">Contrast checker <span aria-hidden="true">&rarr;</span></span><span class="tld">Check your slides and pages against WCAG contrast ratios.</span></a></div></aside>
+</section>
+<section class="theme" id="t-ik" style="--a:#FFB448">
+<h2>Indigenous knowledges &amp; decolonising <span class="count" data-total="12">12 sessions</span></h2>
+<p class="tintro">Indigenous knowledges, culturally safe curriculum, First Nations supervision and data sovereignty.</p>
+<ul class="slist" data-theme="ik"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Indigenous knowledges &amp; decolonising"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/whats-on.html"><span class="tlt">What&#x27;s on across the sector <span aria-hidden="true">&rarr;</span></span><span class="tld">Follow custodian-led events and symposia through the sector calendar.</span></a><a class="tl" href="/crash-courses.html"><span class="tlt">Crash courses <span aria-hidden="true">&rarr;</span></span><span class="tld">NTLSN&#x27;s First Nations spaces are being developed with custodians, at the pace of trust — they are not distilled into tools here. The commons&#x27; other paths start at the hub.</span></a></div></aside>
+</section>
+<section class="theme" id="t-it" style="--a:#4ECDC4">
+<h2>International &amp; transnational education <span class="count" data-total="28">28 sessions</span></h2>
+<p class="tintro">International students, transnational delivery, intercultural practice and the academics who cross borders.</p>
+<ul class="slist" data-theme="it"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for International &amp; transnational education"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/internationalisation-crash-course.html"><span class="tlt">Internationalisation crash course <span aria-hidden="true">&rarr;</span></span><span class="tld">Internationalising curriculum and classrooms with care.</span></a><a class="tl" href="/conference-finder.html"><span class="tlt">Conference finder <span aria-hidden="true">&rarr;</span></span><span class="tld">Find the teaching-and-learning conferences worth your travel budget.</span></a><a class="tl" href="/orcid-start.html"><span class="tlt">Start with your ORCID <span aria-hidden="true">&rarr;</span></span><span class="tld">Wherever you teach, your ORCID connects you to the commons.</span></a></div></aside>
+</section>
+<section class="theme" id="t-lg" style="--a:#7C9CFF">
+<h2>Leadership, governance &amp; policy <span class="count" data-total="22">22 sessions</span></h2>
+<p class="tintro">Leadership, governance, policy and the structures that shape what teaching can be.</p>
+<ul class="slist" data-theme="lg"></ul>
+<aside class="thread" aria-label="Related NTLSN resources for Leadership, governance &amp; policy"><h3>Keep the thread going on NTLSN</h3>
+<div class="tls"><a class="tl" href="/leadership.html"><span class="tlt">Intersectional leadership <span aria-hidden="true">&rarr;</span></span><span class="tld">Leadership self-assessment across race, culture, gender, disability and more — power and privilege included.</span></a><a class="tl" href="/sector-grad-cert.html"><span class="tlt">Sector-built Grad Cert <span aria-hidden="true">&rarr;</span></span><span class="tld">A proposal: each university contributes one module of its strength.</span></a><a class="tl" href="/recognition-framework.html"><span class="tlt">Recognition framework <span aria-hidden="true">&rarr;</span></span><span class="tld">How teaching recognition can work across the sector.</span></a></div></aside>
+</section>
+<p class="noresults" id="noresults">No sessions match &mdash; try a shorter fragment (surnames and single title words work best).</p>
+<section class="close" aria-label="After the conference">
+<h2>After the last slide</h2>
+<p>A conference ends; the work doesn&rsquo;t have to. NTLSN exists so the sector&rsquo;s teaching and learning conversation has somewhere permanent to live &mdash; paid for by universities, free for every academic.</p>
+<div class="tls">
+<a class="tl big" href="/symposium.html"><span class="tlt">Share your symposium on NTLSN <span aria-hidden="true">&rarr;</span></span><span class="tld">Wish your session lived somewhere after the last slide? NTLSN streams and archives sector symposia — bring your Zoom, keep the thread going.</span></a><a class="tl big" href="/orcid-start.html"><span class="tlt">Personalise the commons with your ORCID <span aria-hidden="true">&rarr;</span></span><span class="tld">Paste your ORCID and NTLSN builds a snapshot of your SoTL footprint and matches the commons to what you teach. Client-side, nothing stored.</span></a><a class="tl big" href="/sotl-wrapped.html"><span class="tlt">Your SoTL, Wrapped <span aria-hidden="true">&rarr;</span></span><span class="tld">A playful, personalised look back at your teaching-and-learning scholarship.</span></a>
+</div>
+</section>
+<footer>
+<p><strong>Independence.</strong> NTLSN has no commercial relationship with HERDSA, the conference sponsors, or any institution or presenter listed on this page. Sessions are listed as a service to delegates; citation or listing is never affiliation or endorsement.</p>
+<p><strong>Accuracy.</strong> Parsed from the official on-site program released 30 June 2026. The program is subject to change; the HERDSA conference app is authoritative for rooms and times. Corrections: hello@ntlsn.com.</p>
+<p>NTLSN &mdash; the National Tertiary Learning &amp; SoTL Network. Free and open for all Australian academics.</p>
+</footer>
+</main>
+<script>
+(function () {
+  var DATA = `kn|100|Keynote · Tue|Pedagogical Leadership for an Unknown Future|Dr Mary C. Wright, Professor of Educational Scholarship, The University of Sydney
+kn|300|Keynote · Wed|From societal impact as an outcome to a pedagogical approach: rethinking optimism in higher education|Prof Sarah Maddison, Deputy Vice-Chancellor (Education & Student Experience), University of New South Wales
+kn|700|Keynote · Thu|Building Capabilities for a Complex Future: Habits of Mind, Mindset and Youth Leadership|Assoc Prof Chng Huang Hoon, National University of Singapore
+kn|Panel|Closing panel · Thu|Re-envisioning Higher Education for Tomorrow's Learners: how can we develop human-centric, workforce-ready graduates in the AI era|Assoc Prof Soo Yuen Jien & Prof Giovanni Russello (NUS / University of Auckland), Assoc Prof Rachel Fitzgerald (The University of Queensland), Prof Bruno Fedrizzi (University of Auckland) & Ms Akriti Sethi (Monash University Malaysia)
+kn|Workshop|Sponsored workshop · Thu|Exploring the Castlereagh Statement: Implications for AI, Education, and Society|Prof Jason Lodge (The University of Queensland) & Prof Edward Palmer (Adelaide University)
+ai|101||Focusing on the process, not just the product: Assessment to support students' learning and academic integrity|Dr Ann Parkinson & Dr Nicole Reinke, University of the Sunshine Coast
+ai|102||Evaluating Live Online Quizzing as a Response to AI Misuse in Tertiary Assessment|Dr Lee Harrison, University of Waikato
+ai|104||Thinking to learn: Designing assessments that preserve student owned thinking in the age of AI|Dr Anne-Marie Chase & Dr Kelly Galvin, Swinburne University of Technology
+ai|113||Student Voices on GenAI: Reflection, Ethics and Learning in a Time of Change|Mrs Michelle Pedlow, The University of Western Australia & Dr Justine Maldon, Edith Cowan University
+ai|147||Seeing the Thinking: Purposeful Rubric Design for assessing Critical Thought in the age of GenAI|Ms Caroline Aspden & Dr Julie McIntosh, University of Auckland
+ai|154||How can universities foster self-regulated learning (SRL) and socially shared regulation of learning (SSRL) among first-year students in an AI-shaped environment?|Ms Kria Coleman, University of Sydney
+ai|164||Beyond Essays and Slides: Can Debate Reclaim Authentic and Deep Learning in the GenAI Era?|Dr Yawen (Vivian) Zhou & Prof Zixiu Guo, UNSW Sydney
+ai|165||The Inevitable Ally: AI and the Future of Professional Competency|Dr Cecilia Anthony Das, Edith Cowan University & Mrs Malar Jayaprakash, Curtin University
+ai|204||Evaluating an online viva voce capstone assessment to strengthen authentic assessment in the GenAI era|Dr Lynda Hughes, Griffith University
+ai|205||Practical pedagogy: The impact of human-AI feedback on collaborative dynamics in group writing tasks in higher education|Dr Janice Wong, Singapore Institute of Technology
+ai|206||Student stress and uncertainty around acceptable AI use in higher education|Mrs Malar Jayaprakash, Curtin University & Dr Cecilia Anthony Das, Edith Cowan University
+ai|215||Securing assessments in the age of AI with enhanced industry engagement on a capstone course: An implementation in Vietnam|Dr Seng Kiong Kok, RMIT University Vietnam
+ai|216||Changing from Control to Critical Judgement: Presenting a data-driven model for guiding student use of GenAI|Assoc Prof Angelina Fong, Assoc Prof Saw Hoon Lim & Ms Lesi Zhu, University of Melbourne
+ai|217||Designing an AI-Mediated Viva for Authorship Verification|Ms Haeng-A (Karen) Kim, University of Queensland
+ai|230||"What am I here for?" Educator agency, institutional policy and generative AI in transnational business education|Ms Akriti Sethi, Monash University Malaysia
+ai|233||Re-envisioning Academic Integrity in the Age of Generative AI: The 3C Framework|Ms Sahaya Jesto, Torrens University Australia
+ai|236||Pedagogical Trust: Can we regain trust in assessments?|Dr Nicholas Charlton, Griffith University & Ms Diana Turnip, University of New South Wales
+ai|237||Silent Cheating: AI, Wearables, and the Evolution of Invigilated Exams and Assessments|Ms Joanna Lee Chin Ai, Mr Sri Bala Murugan Gogula Nathan & Dr Siew Lian Leong, Monash University
+ai|245||AI Resilient Assessments: Interactive Oral Assessments as Authentic Assessment in the Age of Generative AI|Dr Chris Della Vedova, Flinders University & Dr Sarah Davey, Adelaide University
+ai|251||Playing for Keeps: Building AI-Resilient Secured Assessments via Lo-Fi Gamification|Mr Pete Fernandes, RMIT University
+ai|253||Reclaiming Critical Thinking in the Age of AI — Cultivating Inquiry and Reflection in Higher Education|Ms Sharon Lau & Prof Stephen Tay, National University of Singapore
+ai|254||Foundational Critical Generative AI literacy skills for university students: A compendium of evidence-based activities informed by stakeholder input|Dr Kay Hammond, Auckland University of Technology & Dr Samantha Newell, Adelaide University
+ai|255||What Drives Student Support for Generative AI in Curriculum and Assessment?|Dr Evelyn Hui Ting Gay, Singapore University of Social Sciences
+ai|259||Developing biochemically literate graduates: Self-regulation and AI use in undergraduate learning|Dr Katherine Fernandez, Monash University & La Trobe University, Dr Jane AlKouba, University of Wollongong, Dr Julie McIntosh & Dr Kathryn Jones, University of Auckland
+ai|260||From compliance to capability: reflective assessment in AI-mediated learning|Dr Shuana Zafar Nasir, Australian Institute of Business & Mr Nasir Mahmood, Victorian Institute of Technology
+ai|301||AI Grading of Large-Scale English Placement Tests|Assoc Prof Lee Kooi Cheng, Dr Marissa Kwan Lin E & Mr David Chua, National University of Singapore
+ai|303||Assuring Learning in an AI-enabled era: An Institutional Assessment Framework|Prof Maree Dinan-Thompson & Assoc Prof Nicole Masters, University of the Sunshine Coast
+ai|304||Mandated Generative AI in Assessment: How Journalism Students Negotiate Human–AI Authorship Boundary Tensions in Creative Coursework|Ms Li Yann Long, Temasek Polytechnic
+ai|305||From Review to Redesign: Implementing GenAI-Responsive Assessment in Health Sciences|Dr Amber Moore, Dr Noosha Ehya, Dr Dhivya Rajasekaran & Dr Manisha Thakkar, Torrens University Australia
+ai|327||Meta-Analysis of AI-Supported Assessment and Feedback in Higher Education (2019–2025)|Dr Jennifer Lai, University of New South Wales
+ai|328||Assessment redesign in the generative AI era: Evaluating an 8-Step process to support professional learning for changing academic practices|Dr Gaik Bee Lim, Ngee Ann Polytechnic
+ai|333||Rights, Responsibilities, Resilience and Resistance: Dialoguing on the Nexus between Critical Thinking and Generative Artificial Intelligence in Australian Higher Education|Dr Reshmi Lahiri-Roy, Federation University
+ai|357||Redesigning Assessment: Leveraging GenAI for Authentic Learning|Dr George Joukhadar, UNSW
+ai|402||Simulating Authentic Feedback for Journalism Students in the Age of GenAI Newsrooms|Mrs Katrina McLachlan, Adelaide University
+ai|404||Integrity-by-Design: Embedding Curriculum-Aligned AI Tutors to Foster Authentic Engagement and Higher-Order Thinking|Ms Rebecca Scriven & Ms Maureen Tan, Edith Cowan University & Dr Jim Wagstaff, Noodle Factory
+ai|419||Evaluating Student Engagement with AI Guidelines Through Bloom's Taxonomy: Amplifying the Student Voice in Policy|Dr Daniel Lee, Adelaide University
+ai|428||When AI Judges: Sharing Experiences of Anxiety and Judgement in AI-Supported Oral Assessment|Mr Stephan Tseng, UNSW
+ai|435||Designing AI-resilient postgraduate learning through transdisciplinary assessment|Mr Simon Thompson, Australian National University
+ai|436||Kindness by design: Humanising learning in AI-mediated higher education|Mrs Della John McKitterick, Torrens University
+ai|438||Staff capability in the GenAI era: What do academics actually need to learn?|Assoc Prof Anju Kalluvelil Janardhanan, Southern Cross Institute
+ai|441||Transforming Teaching Culture with AI Change Champions|Dr Siew Lian Leong, Ms Joanna Lee Chin Ai & Mr Sri Bala Murugan Gogula Nathan, Monash University Malaysia
+ai|500||A Collaborative Program-wide Approach to Redeveloping Assessment in Response to Generative Artificial Intelligence|Dr Kelli Nicola-Richmond, Deakin University
+ai|503||GenAI as a low-risk social other: The rise of para-social bonding among university students|Dr Joseph Crawford, University of Tasmania
+ai|504||Securing Longform Writing Assessment in the Age of AI: Evidence from a Macro SoTL study|Prof Mary Wright, University of Sydney, Dr Bianka Malecka, Macquarie University & Dr Grant Parnell, University of Sydney
+ai|512||Evidence into Action: A Student-Informed Framework for Teaching with GenAI|Dr Hsiang Hui Lek & Dr Misty Cook, National University of Singapore
+ai|538||Building Confidence with GenAI: Strategies for Teaching Practice and Academic Tasks|Dr Chris Campbell & Dr Cherie Lucas, University of New South Wales
+ai|540||From Bloom to LEAP: Restoring Assessment Evidence in the Era of Generative Artificial Intelligence|Assoc Prof Sumesh Nair, Australian Institute of Business
+ai|602||Configuring GenAI Feedback to Scaffold Self-Regulated Learning|Dr Jennifer Z. Sun & Dr Mark Freeman, The University of Sydney
+ai|612||Is 1+1 Still 2? Designing Transformative, Reflective, and Responsible AI-Enabled Learning in STEM Higher Education|Prof Eman AbuKhousa, University of Europe for Applied Sciences
+ai|624||Boon or Bane: Generative AI Usage and Student Learning in Higher Education|Dr Ian Chan & Dr Siew Hong Lam, National University of Singapore
+ai|629||Beyond the Hype: Evidence-Based Insights on AI in University Teaching|Dr Faiza Majid, UNSW Sydney
+ai|630||Reimagining Early Assessment for GenAI-Enabled Learning|Dr Katherine Fernandez, Monash University & La Trobe University
+ai|638||Multimodal AI-Reflection System (MARS) to analyse lecture capture and promote professional conversations|Mr Teong Jin Tan, Mr Sie Wee Tan & Mark Gan Joo Seng, Centre for Teaching, Learning and Technology, National University of Singapore
+ai|639||Learning by Listening: Can Student–AI Conversations inform our practice?|Dr Julie McIntosh & Dr Suzanne Reid, University of Auckland
+ai|649||Learning how to learn in the age of AI: Reimagining Self-Regulation and Shared Regulation during transition to university|Ms Kria Coleman, University of Sydney
+ai|701||The use of artificial intelligence (AI) chatbots as a remediation strategy to support undergraduate students at risk of failure|Dr Lynda Hughes, Griffith University
+ai|705||Re-envisioning Academic Integrity Education: A student-partnered, curriculum-embedded approach to future-focused learning|Dr Suzanne Gilbey, Curtin University
+ai|716||Future-Proofing Capstones: Designing for Impact, Innovation, and Generative AI Resilience in Academic Development|Dr Ekaterina Pechenkina, Swinburne University of Technology
+ai|718||From Innovation to Leadership: Capturing Inquiry-Led Generative AI Teaching Practice Through Open, Evidence-Informed Cases|Assoc Prof Rachel Fitzgerald, University of Queensland
+ai|720||A phased approach to assessment reform: Building coherence and readiness for assurance of learning in AI-enabled higher education|Dr Manisha Thakkar, Dr Noosha Ehya, Dr Amber Moore & Dr Dhivya Rajasekaran, Torrens University
+ai|722||Sustainable AI Literacy: Why Higher Education Should Prioritise Adaptive Skills Over Tool-Chasing|Ms Emily McNamee, Curtin University
+ai|733||Scaffolding, Not Short-Cutting: GenAI in First-Year Transitions|Dr Sarah Frankland & Mr Jason Zhan, The University of Melbourne
+ai|734||Using AI to investigate teacher in-the-moment decision-making and noticing: Lessons from an exploratory study in higher education|Dr Shu Jun Lee, University of Melbourne
+ai|801||Building AI Companions that Prioritise Learning over Performance|Assoc Prof Hassan Khosravi & Prof Jason Lodge, The University of Queensland
+ai|807||Who's Doing the Judging? Rethinking Oral Assessment through AI-Mediated Evaluation|Mr Stephan Tseng, UNSW
+ai|819||AI-teammate acceptance and socially shared regulation of learning: Implications for collaborative knowledge building and critical thinking dispositions|Dr Xiao-Feng Kenan Kok, Singapore University of Social Sciences
+ai|822||Understanding Students' Epistemic Agency in the Era of Generative AI: Insights from a Co-creational Student Learning Community|Dr Kubert Tianhang Wang, The Hong Kong University of Science and Technology
+ai|825||Examining the effectiveness of GenAI-supported student–teacher feedback partnerships: A quasi-experimental study in the Chinese context|Dr Jessica To, The University of Hong Kong
+ai|839||Reframing Integrity in the GenAI Era: Insights from Students and Staff on Learning, Teaching and the Role of the University|Assoc Prof Christine Slade, The University of Queensland
+ai|844||Should universities provide premium ChatGPT access to students?|Dr Dewa Wardak & Dr Alice Huang, The University of Sydney Business School
+ai|850||Generative AI in the Classroom: Taking the Red Pill of Transformation or the Blue Pill of Augmentation?|Mr Michael Wilder, Shanghai Ocean University
+ai|854||No integrity without trust: Modelling academic integrity in rapidly changing times|Prof Michelle Picard, Flinders University
+af|106||Uncovering the reciprocal relations between student self-assessment practices and self-efficacy beliefs: a systematic review|Ms Dan Sun, EdUHK
+af|112||Making Feedback Use Visible: Using Metacognitive Assessment to Reveal Equity Gaps in Feedback Literacy|Dr Helen Harrison, Flinders University
+af|140||Mind-Mapping as a Pedagogical Tool for First-Year Assessment Support|Ms Tahmina Akhter, The University of New South Wales
+af|148||Making the case for alternative and flexible assessments in large classes|Dr Pranit Anand, University of New South Wales
+af|155||Considerations for Program-Level Assessment in generalist degree programs — an academic perspective|Assoc Prof Hayley Bugeja, University of Melbourne
+af|156||Developing student feedback literacy through human and AI-mediated feedback|Dr Lauren Butterworth & Prof Michelle Picard, Flinders University
+af|162||Integrating Competency-Based Assessment in a Diverse Faculty Setting|Dr Chris Campbell & Dr Gavin Mount, University of New South Wales
+af|203||From Fear to Fluency: Students' Perceptions of Feedback and Video Recordings on Their Own Presentations|Dr Wender Martins, University of Auckland Business School
+af|207||How can we help students develop evaluative judgement? A scoping review of pedagogical approaches|Ms Pearl (Jueun) Kang, CRADLE / Deakin University
+af|239||Mapping For Meaning: A New Assurance of Learning Model|Miss Laura Fairbrother, Charles Darwin University & Assoc Prof Alex Bannigan, Macquarie University
+af|244||Learning progressions as assessment design infrastructure: a point for debate|Dr Anne-Marie Chase & Dr Kelly Galvin, Swinburne University of Technology
+af|248||Is the elephant the only one left in the room? Rethinking attendance and participation in assessment frameworks|Prof Elizabeth Beckett & Assoc Prof Viythia Katharesan, Adelaide University
+af|302||Co-teaching, interdisciplinarity and learning-oriented assessment in higher education|Dr Alfonso Lopez-Hernandez, Comillas Pontifical University
+af|307||The Creativity Paradox: Why Our Feedback Holds Students Back|Dr Abdul Razeed & Dr John Parker, University of Sydney
+af|319||Re-envisioning Evaluation in Clinical Education: Designing Feedback Systems for Future-Ready Health Professionals|Ms Nompumelelo Mazibuko, University of the Witwatersrand
+af|338||Your Choice or Mine? Should Students Be Given a Choice of Assessment Types?|Dr Wender Martins, University of Auckland Business School
+af|339||Rehearsal for life: how can we use authentic assessment to promote student learning in real world contexts?|Dr James Mackenzie & Dr Catherine Fargher, Macquarie University
+af|344||Authenticity or Assurance? The Place of Peer Assessment in Standards-Aligned Assessment Design|Dr Justin Kitin & Assoc Prof Michael Baird, Curtin University
+af|351||Factors influencing marking consistency — a longitudinal approach|Dr Thulaisi Sivapalan & Mr Blake Pepper, UNSW
+af|401||An Appreciative Learning Inquiry to Assessment as Learning|Assoc Prof Venicia McGhie, University of the Western Cape
+af|405||Effective Assessment of Embodied Learning: Safeguarding Assessment Integrity through Gatekeeper Assessments|Ms Adina Stan & Ms Mahnaz Armat, UNSW College
+af|412||A little nudge: Encouraging practice test engagement to improve student outcomes|Dr Suzanne Bonner, University of Queensland
+af|431||Re-envisioning Authentic Assessment for Tomorrow's Learners: Integrating Dialogic Educational Technology Theory with Strategic Consulting Case Studies in Postgraduate Business Education|Dr Leonie Newnham, Torrens University Australia
+af|501||A bottom-up approach to assessment reform: Identifying academics' beliefs about the purpose of assessment|Assoc Prof Hayley Bugeja, University of Melbourne
+af|502||Exploring feedback complexity through the lived experiences of international postgraduate students in Australia|Miss Ameena Payne, Deakin University
+af|505||Constructive alignment in the era of flexible learning: An integrated curriculum model to enhance cognitive engagement and learning coherence|Dr Sarah Davey, Adelaide University
+af|518||Beyond grades: why course learning outcomes matter more than marks|Dr Anna Golab, Edith Cowan University
+af|528||The normalisation of grade inflation: systemic pressures and implications for assessment integrity|Dr Bianca Viljoen, University of Tasmania
+af|601||Towards an assessment framework for online accounting education in the age of technological advancements|Ms Saira Saqib, Adelaide University
+af|628||"I'm Not Afraid of Presentations Anymore": How In-Course Feedback Shapes the Transfer of Oral Presentation Skills to the Workplace|Dr Wender Martins, University of Auckland Business School
+af|646||Exploring students' and employer perceptions about Interactive Oral Assessments (IOAs)|Dr Pranit Anand, University of New South Wales
+af|713||Assessing conceptual complexity within a physics service teaching environment|Dr Adrian Dusting, University of Canberra
+af|800||Competency-Based Assessment in Design Education: Implementation and Insights|Ms Bronwen Williams & Ms Danielah Martinez, UNSW Sydney
+af|802||Enhancing student experience through authentic assessment in an initial teacher education Professional Learning Capstone|Dr Pip Robinson, University of Melbourne
+af|803||Exploring Storytelling Assessment and Its Impact on Student Engagement and Learning|Dr Jing Ye & Ms Nada Jarni, RMIT University
+af|806||Rehearsal for life: strategies for promoting student learning in real-world contexts — authentic assessments and capstone design|Dr James Mackenzie & Dr Catherine Fargher, Macquarie University
+af|813||Reimagining teacher readiness: Rethinking performance assessment for early childhood initial teacher education|Dr Jennifer Cutri, Swinburne University of Technology
+af|853||Co-designing a feedback-rich assessment of communication during physical examination|Dr Kalli Spencer & Mr Jackie Su, University of New South Wales
+af|857||Rethinking Student Workload and Its Impact on Teaching and Learning|Assoc Prof Bimlesh Wadhwa, Dr Anandha Gopalan & Dr Gene Segarra Navera, National University of Singapore
+af|860||Does the cost of assessment drive our decisions more than we admit?|Assoc Prof Amanda White & Mrs Audrea Warner, University of Technology Sydney
+af|871||Advancing Curriculum Coherence: Cross-Unit Assessment Alignment and Student Learning Progression in Interprofessional First-Year Health Sciences Units|Dr Grace Zeng, Curtin School of Allied Health
+ax|103||How argument mapping improves critical thinking skills: a systematic review|Dr Angelito Calma, The University of Melbourne
+ax|105||Designing for Understanding: Psychologically Informed Service-Learning and the Activation of Student Epistemic Agency|Ms Yan Xuan Lim, Ngee Ann Polytechnic
+ax|108||Arguing for deepened conceptual understanding and engagement in business education via experiential learning and authentic assessment using a physical makerspace|Prof Susan Geertshuis, University of Auckland
+ax|137||An authentic learning assignment that integrates biodiversity awareness, litter audit and community engagement to reduce littering|Dr Amy Mei Fun Choong, National University of Singapore
+ax|153||Ethical Tensions in Storytelling Pedagogies in Higher Education|Dr Cecilia Anthony Das, Edith Cowan University, Dr Padmakumar Madheswari Marayanaidu, Christ University & Mrs Malar Jayaprakash, Curtin University
+ax|200||Develop your own Campaign! — Efficacy of collaborative learning strategies for diverse higher education students|Dr Arpita Das, The University of Sydney
+ax|202||From "something we do in class" to "something we use all week": Willingness to communicate through digital storytelling in Thai|Dr Sasiwimol Klayklueng, National University of Singapore
+ax|212||Integrating student-led inquiry into undergraduate laboratory practical classes: creating new experiential learning adventures to foster job readiness|Dr Daniel Clarke & Dr Sophie Paquet-Fifield, University of Melbourne
+ax|219||Holistically designing educational escape rooms to improve student engagement and motivation|Assoc Prof Robert Ross, La Trobe University
+ax|238||A Scaffolded Authentic Learning Model for Bridging Theory and Practice|Dr George Joukhadar, UNSW
+ax|241||Reimagining Fieldtrips: Designing creative and technology-enhanced fieldtrips to bridge the classroom to the real world through authentic experiential student learning|Dr Anthony Gampell, The University of Auckland
+ax|246||Making thinking visible or just making it fun? A conversation on playful pedagogies|Dr Simran Kaur, Monash University Malaysia
+ax|250||Humor in the Classroom through Teacher and Student Agency and Its Possible Effect on the Marginalized|Ms Kimberly Florendo, University of the Philippines Open University
+ax|252||Showcasing a Transformative Postgraduate Pedagogy in South Australia: Collaborative Digital Reading and Peer Instructions for Engagement and Employability|Assoc Prof Mai Ngo, Flinders University
+ax|261||Collaborative mastery: Unleashing the power of game-based learning in interprofessional learning|Dr Bryan Low, Curtin University
+ax|263||Bridging Theory and Real-World Contexts through the CLEAR Approach for Community Engagement|Dr Eunice Ng, National University of Singapore
+ax|264||The CLEAR (Contextualising Learning via Enquiring, Answering, and Reflecting) Advantage: A six-year implementation across multiple courses in four institutes|Prof Stephen Tay, National University of Singapore
+ax|309||Developing teacher identity through experiential learning: A longitudinal study of preservice teachers in Indonesia|Mrs Delicia Mandy Nugroho, Universitas Pelita Harapan / University of Leeds
+ax|315||Digital storytelling: multi-modal, authentic experiential learning in first-year undergraduate courses|Dr Gosia Ludwichowska-Alluigi & Mrs Monica Orlovic, Adelaide University
+ax|337||Not wicked enough: signature pedagogies that hinder cross-disciplinary communication|Dr Netty Mattar & Dr Yurni Said-Sirhan, National University of Singapore
+ax|346||Experiencing Integration: simulated decision-making in an interdisciplinary first-year business course|Dr Thulaisi Sivapalan, UNSW
+ax|352||What can students learn from a death doula? Evidence from an authentic community-engaged experiential learning partnership|Dr Kalli Spencer & Assoc Prof Linda Ferrington, University of New South Wales
+ax|355||Wiki-Repair: A Design for ARG-Based Collaborative Learning|Dr Adam Ruch, Curtin University
+ax|414||Worked example strategy support in TESOL speaking: Cognitive load in academic tutorial discussions|Ms Virginia Mawer, UNSW College
+ax|425||Constructive knowledge building in groupwork|Dr Melissa Reed, Macquarie University
+ax|429||Formalising residential learning: Strategies for integrating in-classroom and out-of-classroom experiences in higher education|Ms Swapna Teckwani, National University of Singapore
+ax|433||Re-Envisioning Significant Learning: Peer-Supported and Experiential Approaches in Nursing Education|Dr Asrath Usman & Ms Wendy Newton, Torrens University Australia
+ax|507||Visual Storytelling with Comics in Higher Education: Enhancing Student Engagement and Knowledge Acquisition|Dr Hua Qian Ang, RMIT University
+ax|509||Using LEGO® SERIOUS PLAY® to Foster Engagement and Transferable Skills in High-Performance Sport Education|Assoc Prof Betul Sekendiz, International College of Management Sydney
+ax|519||Scaffolding the invisible: Designing learning for deep reasoning, not recall — a case study in teaching abstract concepts|Dr Xiaolei Feng, Nanyang Technological University
+ax|525||Meeting students where they are: because one-size-fits-all tutorials weren't working anyway|Ms Michelle Brown, Adelaide University
+ax|603||Student engagement in flipped learning: Insights from international nursing education|Mrs Kawaldeep Kaur & Ms Wendy Newton, Torrens University Australia
+ax|604||From Overload to Alignment: Practical Strategies for Improving Engagement in Large Higher Education Courses|Dr Lana Ly, University of New South Wales
+ax|607||Innovating Together: Faculty–Librarian Collaboration for Advancing Information Literacy in Undergraduate and Graduate Courses|Dr Maw Lin Foo & Dr Magdeilne Ng, National University of Singapore
+ax|637||Playful pedagogy for professional learning: building teamwork, communication and collaboration through LEGO®|Dr Gee Chong Ling, University of New South Wales
+ax|643||Learning from experience: the development of a classroom-based experiential learning toolkit for the Humanities and Social Sciences|Dr Elena Balcaite & Dr Andrea Dodo-Balu, University of Melbourne
+ax|648||Peer-to-Peer Facilitation of Learning: A Scoping Review|Miss Johara Khan & Dr Simbongile Ntwasa, Stellenbosch University
+ax|724||Teaching the Intangible: Operationalising Creative Thinking Strategies in Higher Education|Miss Corina Raduescu, University of Sydney Business School
+ax|805||Back to the Future: The Return of In-Class Worksheets in Business Tutorials|Assoc Prof Michael Baird, Curtin University
+ax|811||Cultivating a Learning Mindset in Higher Education: Mixed-Methods Insights from a Neuroscience-Informed Teaching Practice Intervention|Mrs Melissa Ann Singletary, Torrens University
+ax|814||"Interesting even at 9am": how real-world storytelling and analogical scaffolding dismantle the "fluff" perception in communication-in-the-disciplines|Mr Tony Han-Wah Goh, National University of Singapore
+ax|816||Productive Tension and Struggle of Multidisciplinary Education: Challenges, Triumphs, and Lessons Learnt from the Master of Applied Cybernetics|Dr Safiya Okai-ugbaje, Australian National University
+ax|817||Shaping future health professionals: embedding interprofessional collaborative practice in health education|Prof Sophia Xenos, RMIT University
+ax|818||Scaffolding Collaboration: Evaluating the Collaborating with Differences Module in Interdisciplinary Higher Education|Dr Jinqi Xu, University of Sydney
+ax|820||From perception to practice: Investigating early medical students' expectations, challenges, and self-reported teamwork quality|Dr Zheng-Wei Lee & Jessica Ang Yang Huey, Nanyang Technological University
+ax|821||Transforming Learning Spaces: Student Perspectives on Active Learning and Its Lasting Effects|Mrs Ingrid Sierp, Adelaide University
+ax|835||Effective Andragogical Practices for Adult Learners: Survey Evidence from University Educators|Assoc Prof Weina Zhang, National University of Singapore
+ax|848||Groupwork challenges of first-year students|Mrs Shireen Junpath, University of Auckland
+ax|851||From fragmentation to collaboration: Designing interprofessional education that works across health and education|Assoc Prof Jemma Skeat, Deakin University
+bw|111||Who is most at risk? How university experiences shape mental health and wellbeing across diverse groups of Australian undergraduates|Dr Angus Gilmore, The University of Melbourne
+bw|135||A metaphorical journey in cultural regeneration: she (the lithophytic orchid) is thriving through care and love|Ms Renee Pinkney, University of Notre Dame Australia
+bw|138||Understanding undergraduate students' sense of belonging in a military–university environment|Dr Chris Campbell, University of New South Wales
+bw|146||Pedagogy of Care in Sustainability and Environmental Science Higher Education: Trauma-informed mindfulness practice for belonging, equity, and inclusion|Dr Belinda Christie & Dr Patricia Corbett, Deakin University
+bw|163||When course content hits close to home: caring for the practitioner in training|Ms Lisa Ritchie, La Trobe University
+bw|201||Getting a Grip: The Role of Growth Mindset in Mitigating the Adverse Effect of Quant Anxiety among Students|Prof Lolita T Edralin, The Hong Kong Polytechnic University
+bw|243||Check Yourself Before You Wreck Yourself: A Student Wellbeing Temperature Check|Assoc Prof Linda Ferrington & Assoc Prof Megan Kalucy, University of New South Wales
+bw|265||Tensions, joys and challenges in student engagement: Insights from a curriculum reform case study in preservice teacher education|Dr Elizabeth Goode, Southern Cross University
+bw|310||Designing first-year programs to support student engagement and retention|Dr Jade O'Brien-Smith, The University of New South Wales
+bw|311||Belonging Is a Practice: Re-envisioning Learning and Teaching Cultures Through Staff and Student Perspectives|Assoc Prof Reva Ramiah, Dr Shuang Li & Dr Anuradhi Welhenge, Curtin University & Prof Natalie Lloyd, Edith Cowan University
+bw|314||Student grit, resilience and mindset: a shared responsibility in higher education|Ms Marlena Calo, La Trobe University
+bw|329||Enough talking! Let's do this thing: A practical framework and rubric for embedding compassion in HE|Mrs Robyn Martin, University of Sydney
+bw|348||Teaching for belonging: Pedagogical influences on student sense of belonging in higher education|Mrs Jennifer Perkins, UNSW
+bw|350.1||Learning to learn quantitatively: What predicts success in a required quantitative course?|Miss Jenn Jury, Waipapa Taumata Rau, The University of Auckland
+bw|356||Carrots, Sticks, and Shared Responsibility: Rethinking Student Attendance and Engagement in Large First-Year Courses|Dr Wender Martins, University of Auckland Business School
+bw|406||What does belonging mean to diverse Australian undergraduate students?|Dr Tracii Ryan, The University of Melbourne
+bw|426||The hidden cost of catching up in STEM and what belonging makes possible|Dr Linh Nguyen, Northern Illinois University
+bw|443||Seeking help, finding belonging: socio-spatial and temporal experiences of first-year university transition|Dr Tierney Marey, University of New South Wales
+bw|506||Designing for Belonging: Supporting Student Identities, Diversity, and Success Through Intensive First-Year Curriculum|Ms Rebecca Wospil, Victoria University
+bw|508||Reconceptualising Sense of Belonging as an Agentic, Networked Construct|Ms Rayhan Ara Zaman, Monash University
+bw|527||From Engagement to Belonging: Co-Designing a Sector-Informed System-Level Framework for Student Support and Inclusion|Ms Rani Suppiah, Swinburne College
+bw|531||Social work students' and educators' experiences and perspectives of how trauma impacts learning and teaching trauma-related content|Mrs Katerina Schmitt, Adelaide University
+bw|533||Exploring factors impacting the mental health and wellbeing of students at an Australian university|Assoc Prof Chantal Bostock, Assoc Prof Anna Rowe & Assoc Prof Chien Hoong Gooi, UNSW
+bw|537||Supporting student mental wellbeing: Designing and implementing practical strategies for tomorrow's learners|Assoc Prof HuiJun Chih, Prof Margo Brewer & Prof Natalie Gasson, Curtin University
+bw|544||From Group Assessment to Exhibition: Design and Implementation of a Virtual Gallery for First-Year Student Engagement and Belonging|Miss Jo Anne Tay, University of New South Wales
+bw|703||Can we belong when we blend? Blended learning and student sense of belonging|Mrs Emma Power & Dr Teagan Altschwager, University of Melbourne
+bw|711||Stress to Success: Embedding Financial Literacy Across Disciplines to Support Lifelong Learning and Student Wellbeing|Dr Natalie Oh, UNSW
+bw|719||Beyond Retention: Rethinking Student Success through Coaching and Contemporary Support|Prof Sabina Cerimagic, ImpactEd Global Consulting Solutions & Assoc Prof Danielle Eden, Australian National Institute of Management and Commerce
+bw|721||Student community as learning infrastructure: What should we design for, and why?|Prof Steven Warburton, University of Newcastle
+bw|727||Professional Learning in Coaching: Applying Learning Science and Positive Psychology to Support Student Wellbeing|Dr Bavani Santhra Sagaran Divo & Mr Ramesh Shahdadpuri, Singapore Institute of Technology (SIT)
+bw|804||Understanding Student Motivations for Lecture Attendance and Alignment with Performance in First-Year Mathematics and Statistics|Dr Andy Tran, University of Sydney
+bw|809||Mapping Mathematics Learning Support Across Australian Universities: Trends, Models, and Sector Priorities|Dr Fu Ken Ly, The University of Sydney
+bw|810||Social and Cultural Capital as Determinants of Self-Directed Learning Among Second-Year Management Sciences Students|Dr Rekha Maniram, Durban University of Technology
+bw|843||Student Engagement and Perceptions in Academic Learning Support at Central Queensland University|Dr Michael Dzator & Dr Portia Simelane, Central Queensland University
+bw|845||Rethinking how we measure the effectiveness of student support in higher education|Mr Moshfeque E Jahan, Swinburne College
+sp|116||Teaching Through Inquiry with Students as Partners: From Assessment to Applied Research|Mr Alistair Chong, University of Tasmania
+sp|144||Influence of national socio-cultural-educational norms on attitudes to Students as Partners in Higher Education: Extending a Japan–Australia cross-cultural research partnership|Dr Andrea Dodo-Balu, University of Melbourne & Dr Fumiko Inoue, Waseda University
+sp|342||Sustained Partnership as Relational Practice: co-creating learning through Students as Partners|Dr George Joukhadar, Dr Melody Li & Dr Gee Chong Ling, UNSW
+sp|362||Examining the practical application of a students-as-partners typology within an increasingly digital higher education context|Dr Lynda Hughes, Griffith University
+sp|400||Co-created learning as Authentic Assessment: 'International Journeys Masters Storytelling project' — connecting Media Internships with Media Masters 'Advanced Storytelling' international students|Dr Catherine Fargher, Macquarie University
+sp|432||With Students, For Students: Co-Creating an Inclusive Open Textbook in Higher Education|Dr Patricia Corbett, Deakin University
+sp|440||Student partnership: expectations versus experience|Assoc Prof Saw Hoon Lim & Dr Jiang-Li Tan, The University of Melbourne
+sp|516||Activating Student–Staff Partnership: Would You Trade Authority for Time Through Facilitation?|Dr Gee Chong Ling, UNSW Sydney
+sp|541||Onboarding packs: praxis-based insights from a student-partnered onboarding initiative|Dr Tierney Marey, University of New South Wales
+sp|545||Bridging the Gap: Reflecting on Faculty–Student Collaboration in an Undergraduate Living-and-Learning Programme in a Residential College in South-east Asia|Dr Kankana Mukhopadhyay, National University of Singapore
+sp|647||Reframing student voice and agency — a call for the epistemic expansion of Scholarship of Teaching and Learning inquiry|Assoc Prof Alice Brown, University of Southern Queensland
+sp|712||Beyond co-design in health education: Implementing lived-experience-led curriculum development and delivery|Assoc Prof Brett Scholz, The Australian National University
+sp|723||For the students, by the students: Co-designing an Interprofessional Education (IPE) tool|Dr Serena Hong, University of New South Wales
+sp|729||Student-led teaching awards as feed-forward: Thematic analysis of nominations to inform educator development|Prof Michelle Picard, Flinders University
+ew|107||Skills taxonomies in higher education|Ms Himani Chugh, The University of New South Wales
+ew|109||Embedding Employability in the Pharmaceutical Sciences: A Longitudinal Study of an Evidence-Based, Discipline-Integrated Industry Engagement Model (2017–2024)|Dr Alastair O. Pearl, Monash University
+ew|110||Who owns employability? Challenging what counts as legitimate learning|Prof Mollie Dollinger, Curtin University
+ew|121||Facilitating Reflection in Clinical Transition: Co-Designing a Digital Tool for New Graduate Registered Nurses|Ms Elizabeth Bembridge, University of Newcastle
+ew|123||From Classroom to Community: Social Learning and the Creative Community Connections (CCC) Model for Arts Employability|Dr Kim Goodwin, University of Melbourne
+ew|124||Are they prepared to practice? The experiences and perspectives of beginning teachers regarding thinking, feeling and acting like qualified professionals|Dr Stevie Hepburn, University of Queensland
+ew|149||Scaling authentic experiential learning through entrepreneurship-based skill development|Dr Anita Boey, McMaster University
+ew|211||Values Transferability: Reshaping Graduate Employability Beyond the Skills Factory|Dr Jeffrey Naqvi, RMIT University
+ew|214||Partnering for Impact: University–Community Collaboration in Health and Counselling Education|Dr Caitlin Fox-Harding, Edith Cowan University
+ew|222||Shaping Future Health Science Professionals through Scaffolded Authentic Assessments and Industry Engagement: Insights from Industry and Students|Assoc Prof Faith Kwa, Swinburne University of Technology
+ew|223||Cross-disciplinary professionalism: A practice-based educational initiative to support placement readiness in health and biomedical science education|Assoc Prof Roula Kyriacou, RMIT University
+ew|320||Rethinking Final Placements: Uncovering Anticipated Learning in Allied Health Education|Dr Grace Zeng, Curtin School of Allied Health
+ew|321||Enhancing graduate employability skills and work-readiness through research-placement and work-placement: A comparative study|Dr Siew Hong Lam, National University of Singapore
+ew|325||Holistic employability in the shadow of an employability-as-skills discourse|Mr Lincoln James, Deakin University
+ew|349||Shaping tomorrow: How future-oriented capabilities enable graduates to create impact in their professional lives|Dr Giedre Kligyte & Dr Rosemary Sainty, University of Technology Sydney
+ew|354||Partner perspectives on the conditions enabling mutual learning in transdisciplinary Work-Integrated Learning|Dr Giedre Kligyte, University of Technology Sydney
+ew|360||Assessing the short and midterm outcomes of international placements on exercise science students|Dr Donna Lu, University of New South Wales
+ew|409||From Groupwork to Teamwork: Evidence-Based Strategies for Authentic Learning and Employability Skills|Dr Estee Ch'ng, Western Sydney University Business School, Dr Linh Nguyen, University of New South Wales & Dr Chui Shiam Connie Chan, University of Sydney
+ew|411||Cultivating Agentic Professionals for the Future: Student Voices on Ethical Practice in Work-Integrated Learning|Dr Rosemary Sainty, University of Technology Sydney
+ew|415||Investigating the experiences of mentor teachers as partners of initial teacher education in Australia and Sweden|Dr Shu Jun Lee, University of Melbourne
+ew|417||Generative AI and the changing nature of entry-level work: Implications for the course curriculum, WIL and graduate employability practice|Prof Ruth Bridgstock, Swinburne University of Technology
+ew|437||Bridging Knowledge and Practice: Rethinking Industry-Integrated Project-Based Learning for Future-Ready Graduates|Dr Jing Ye, RMIT University
+ew|511||Transforming professional internship through digital pedagogy: Co-teaching, peer learning, and gamified engagement in WIL|Dr Bita Zaferanloo, Swinburne University of Technology
+ew|529||Student perspectives on AI use in their industry and their career readiness|Dr Sidrah Asif, University of Canberra
+ew|615||From Practice to Pedagogy: Making Industry-Based Experiential Learning Explicit in Business Education|Dr Pratima Majal & Ms Samantha Chern, Temasek Polytechnic
+ew|627||Building Collective Efficacy for Career Development Learning: University System-Level Conditions for Embedding at Scale|Assoc Prof Julienne Senyard & Prof Caroline Rueckert, Griffith University
+ew|709||Passport to Practice: fostering graduate capability through scaffolded, authentic and work-integrated learning experiences|Dr Krysten Blackford & Assoc Prof Gemma Crawford, Curtin University
+ew|710||Do Students Know What Graduate Qualities Are? Strategies and Insights for Educators|Dr Dewa Wardak & Dr Jennifer Z. Sun, The University of Sydney Business School
+ew|827||Beyond employability: an examination of international students' agency and employment outcomes in Australia|Mr Boya Zhao, Centre for the Study of Higher Education, University of Melbourne
+ew|829||Why Do the Two Sectors (Not) Want to Implement Teaching-Focused University–Industry Collaboration: Insights from Insiders|Assoc Prof Tengteng Zhuang, Beijing Normal University
+ew|864||"Promised Careers, Improvised Pathways": Management Graduates Navigating a Volatile Emerging Economy|Dr Aman Ullah, University of Melbourne
+ew|865||Beyond the List: Transforming Graduate Attributes for Dynamic, Real-World Workflows|Ms Rowena Ulbrick, Swinburne University of Technology
+ew|867||Industry-Engaged Teaching in a Large, Multi-Campus IT Unit: A Practice Perspective|Dr Leon Yang, Deakin University
+ad|122||Three Tiers for Clinical Educator Development: Melbourne Academy of Clinical Educators|Assoc Prof Anthea Cochrane & Mr Timothy Beaumont, The University of Melbourne
+ad|130||Re-envisioning Professional Development: Academic Coaching as a Catalyst for Transformation|Dr Matthew Arnold & Dr Hayley Mcgrice, Adelaide University
+ad|131||From Traditional Training to Networked Peer Support: A Reworking of Tutor Training for Applicability and Sustainability|Ms Alicia Jacenko, UNSW College
+ad|132||Curriculum design as scholarly work: Building design capability and community through a professional learning program|Miss Laura Fairbrother, Charles Darwin University & Assoc Prof Alex Bannigan, Macquarie University
+ad|142||From Metrics to Meaning: Reclaiming Academic Identity|Dr Cecilia Anthony Das, Edith Cowan University & Mrs Malar Jayaprakash, Curtin University
+ad|150||Beyond the Rear-View Mirror: Professional Development for Resilient and Future-Oriented Educators|Dr Gesa Ruge & Sarah Robinson, Aarhus University, Denmark
+ad|158||From Support to Success: Reframing Educator Mentoring|Mrs Mary "Ruth" Donoghue, Mater Education
+ad|225||From Consultation to Collaboration: Reimagining Course Design as Cultural Change|Mrs Natalie Beard, Curtin University
+ad|228||Reimagining Academic Development: Stakeholder-Driven Co-Design for Asynchronous Learning|Ms Cassandra Hood, Flinders University
+ad|229||Navigating Teacher Professional Identity Transformation through Perezhivanie and Workplace Tensions in Asia Pacific ESOL Teaching|Dr Biljana Ivanova-Miloshevska, Victoria University & Dr Oksana Razoumova, Swinburne University
+ad|247||Advancing Academic Development through Scalable Communities of Practice|Ms Lai Zhenyue, Curtin University Malaysia
+ad|257||Negotiating the quagmire of student evaluations: Presenting as "new academics" or performing as call-centre operators?|Dr Reshmi Lahiri-Roy, Federation University
+ad|262||The Power of Partnership: Transforming academic development across institutions|Miss Laura Fairbrother, Charles Darwin University, Assoc Prof Alex Bannigan, Macquarie University & Prof Deanne Gannaway, University of Queensland
+ad|323||From Fellowship to Partnership: A Duo-ethnographic Study of Mentoring in the HERDSA Fellowship Program|Dr Nira Rahman, University of Melbourne & Prof Rachael Hains-Wesson, RMIT
+ad|330||The discursive framing of education-focused academic roles in Australian universities|Dr Gabi Nudelman, UNSW
+ad|335||Tutor training as transgressive practice|Dr Samantha Poulos, University of Sydney
+ad|340||Moving beyond dyadic mentoring practices toward a mentoring ecosystem|Dr Maryam Heidari & Mrs Kerrie Butler, Kaplan Business School
+ad|347||Exploring the Atmosphere of "Third Spaces"|Ms Joy Jenkins, CQUniversity
+ad|361||Developing a community of knowledgeable others: A Peer Support of Educators Program in a research-intensive Australian university|Dr Daniela Castro De Jong & Prof Patsie Polly, University of New South Wales
+ad|420||Third Space personas: Emotional Labour and Identity in Academic Development|Prof Michelle Picard, Flinders University, Dr Shannon Johnston & Prof Beverley Ewens, Murdoch University
+ad|421||Linking Reflection and Action: Mapping Ecologies of Practice in Higher Education|Dr Kiruthika Ragupathi, National University of Singapore
+ad|422||Re-envisioning Higher Education through an Academic Development Lens: A Dialogic and Participatory Approach|Dr Yoko Mori, Institute of Science Tokyo
+ad|423||Blind Spots in Academic Recruitment: Examining Interviewer and Candidate Perspectives|Dr Kashmira Dave, University of New England
+ad|447||Not another meeting! How can we make our meetings purposeful, effective and efficient?|Assoc Prof Megan Kalucy & Assoc Prof Linda Ferrington, University of New South Wales
+ad|521||A professional learning opportunity framework for universities: Mapping, measuring, and improving faculty learning|Mr A B M Ahasan Raqib, Monash University
+ad|522||How to start your own TATAL (Talking About Teaching and Learning)|Mr Robert Kennelly, University of Canberra, Dr Nicole Reinke, University of the Sunshine Coast & Dr Dongmei Li, James Cook University
+ad|523||Teacher Absence: Discourse, Identity, and the Contradictions of Teaching Excellence|Prof David Spendlove, The University of Manchester
+ad|547||The Reflective Teacher Cycle: Using data-informed analytics in professional learning to support change|Ms Virginia Mawer, UNSW College
+ad|620||Re-envisioning Quality Teaching and Teaching Excellence for Tomorrow's Academic Educators in Higher Education|Prof Pauline Ross, University of Sydney
+ad|622||Building Academic Leadership through Fellowship: Individual Growth and Institutional Transformation|Ms Fiona Whittenbury, Advance HE
+ad|623||Towards a developmental model of SETs: Implications for innovation and wellbeing|Dr Cecilia Anthony Das, Edith Cowan University & Mrs Malar Jayaprakash, Curtin University
+ad|636||Digital or Doomed: Faculty Navigating the Unofficial Tech Threshold for Promotion|Dr Sidrah Asif, University of Canberra
+ad|640||Claiming legitimacy: academic identity, belonging, and counter-spaces for education-focused academics|Dr Gabi Nudelman, Dr Kalli Spencer & Mr Stephan Tseng, UNSW
+ad|644||TATAL: Navigating the complexities and challenges of being education-focused in a research-focused world|Dr Nicole Reinke & Dr Ann Parkinson, University of the Sunshine Coast, Dr Dongmei Li & Dr Josephine Pryce, James Cook University & Mary-Ann Shuker, Griffith University
+ad|645||Joy in the academy: exploring the experiences and perspectives of educators|Dr Katheryn Margaret Pascoe, University of Otago
+ad|714||The transformative potential of academic friendships|Prof Kathryn Sutherland, Te Herenga Waka — Victoria University of Wellington
+ad|731||Making change kinder: Co-designing professional learning that protects wellbeing and builds agency|Mrs Leanne Shibata, Edith Cowan University & Torrens University
+ad|836||From Accidental to Intentional: How teaching recognition shapes academic identity and motivation|Miss Laura Fairbrother, Charles Darwin University & Prof Deanne Gannaway, University of Queensland
+ad|837||Supporting educator role transitions in the age of AI: implications for professional learning design|Dr Pratima Majal, Temasek Polytechnic
+ad|838||Developing innovative interdisciplinary reflective practice for enhancing academic staff teaching through effective translation, dissemination, and sustained implementation strategies: Teaching Squares|Dr Joanne Harmon, Adelaide University
+ad|861||Conversations on lifelong learning from a university-wide scan of teaching methods|Prof Stephen Tay, National University of Singapore
+ad|870||How do we belong? Australasian and Asian Academic Identities in the GenAI Era|Mrs Audrea Warner & Dr Kay Hammond, The University of Auckland
+sr|128||Virtual mentoring and doctoral students' development over time: A longitudinal qualitative study|Dr Tatik Tatik, Indonesian National Research and Innovation Agency (BRIN), Assoc Prof Hoa T. M. Nguyen & Dr Tanya Kwee, The University of New South Wales
+sr|133||The 3 Cs Framework: Confidence, Competence, and Community in Understanding PhD Students' Development as University Teachers|Dr Jiapei Xia, The University of Sydney
+sr|134||Bridging the Research-Teaching Nexus: How a National SoTL Initiative Shapes Doctoral Professional Identity and Self-Efficacy|Assoc Prof Jason Hung-chang Chen, National Taiwan Normal University & Dr Chia-pao Hsu, HEEACT
+sr|306||Embedding a research mindedness in taught professional master's programs: Lessons learned from Nursing and Social Work|Dr Katheryn Margaret Pascoe, University of Otago
+sr|322||Industry-focused PhDs: Industry perspectives on an Industrial Transformation Training Centre|Dr Melinda Laundon, Queensland University of Technology
+sr|331||Sustaining SoTL in Teaching-Focused Contexts: SHIFT as a Scalable Faculty-Led Model|Dr Manisha Thakkar, Assoc Prof Accamma Oommen & Dr Dhivya Rajasekaran, Torrens University & Dr Dieter Schonwetter, University of Manitoba
+sr|332||GenAI in Research: An Editor-in-Chief's Rules on Trust|Dr Joseph Crawford, University of Tasmania
+sr|358||Does the Research Thesis Still Matter in the Age of Generative AI?|Assoc Prof Alistair Standish, Flinders University, College of Medicine and Public Health
+sr|403||How do we teach ethics at scale? Lessons from a blended, case-based doctoral research ethics course|Dr Rafi Rashid, National University of Singapore
+sr|424||Mirrors for meaning-making: identity, positionality and belonging as catalysts for inclusive SoTL|Dr Nira Rahman, University of Melbourne
+sr|546||Artificial Intelligence in HDR Programs: Insights from a Systematic Review|Dr Sabrina Syed, Charles Sturt University
+sr|549||From Authorship to Contributorship: Recognising Diverse Contributions to Educational Research|Dr Xin Xu, University of Oxford
+sr|619||Navigating the Academic Marathon: How Chinese Doctoral Students Develop Academic Resilience|Assoc Prof Lulu Liu, Northwestern Polytechnical University
+sr|621||Entry into SoTL Inquiry: A Structured Programme to Cultivate Reflective Teaching Practice|Dr Kiruthika Ragupathi, National University of Singapore
+sr|625||Re-envisioning complex research skills development in higher education for tomorrow's learners — what do educators say?|Assoc Prof HuiJun Chih, Curtin University
+sr|730||Sharing and learning across institutions: undergraduate research opportunities in practice (models, challenges and outcomes)|Dr Caitlin Fox-Harding, Edith Cowan University
+sr|815||Challenging Disciplinary Boundaries: A Typological Analysis of Interdisciplinary Doctoral Training Models in Chinese Research Universities|Assoc Prof Lulu Liu, Northwestern Polytechnical University
+sr|828||Your Journey in SoTL: A short practical course to support productive engagement in SoTL|Assoc Prof Angelina Fong & Assoc Prof Kwang Cham, University of Melbourne
+sr|830||Challenges and Solutions for China's Doctoral Student Attrition and Diversion Mechanism: An Ecological Niche Perspective|Dr Lingling Wang, Institute of Education, Xiamen University
+sr|832||Publishing under pressure: Doctoral publication requirements and academic integrity in Kazakhstan|Dr Duishon Shamatov, Nazarbayev University
+sr|840||'Why does your study matter?': Designing a novel approach to doctoral writing pedagogy|Mr Daniel O'Sullivan, James Cook University, Singapore Campus
+sr|842||Beyond the Ivory Tower: A Participatory Action Research Roadmap for Empowering South American Educators through SoTL Engagement|Dr Dieter Schonwetter, University of Manitoba
+sr|859||What Makes a Manuscript Publishable? Insights from a SoTL Q1 Journal Associate Editor|Dr Cherie Lucas, University of NSW
+dt|114||Student perspectives of their 'most valued' online engagement strategies in Higher Education|Assoc Prof Alice Brown, University of Southern Queensland
+dt|117||Clicks for Understanding: Piloting scalable tutor-style active learning in self-paced online education|Mr Jeremy Stothers, Monash University
+dt|118||Just-in-time learning and staying in the loop: students' mobile LMS uses in Australian universities|Dr Elena Balcaite, University of Melbourne, Dr Dongmei Li, James Cook University, Dr George Joukhadar, UNSW & Melori Visheh, Murdoch University
+dt|119||The App Development Trail: Making Students' Weekly Mobile App Progress Visible with Miro, Figma and Git|Prof Michael Cowling, RMIT University
+dt|120||Augmented Reality in Assessment Design: What Works for Learning and Guidelines for Practice|Dr Omkar Dastane, Monash University Malaysia
+dt|139||Smart Glasses: What are they and how might they impact higher education|Dr Janine Arantes, Dr Andrew Welsman & Dr Bec Marland, Victoria University
+dt|157||Reflection on strengthening blended modes in post-covid higher education|Dr Chui Shiam Connie Chan, The University of Sydney
+dt|218||Teaching in Expanded Classrooms: Rethinking Teaching Practice For Lifelong Learning Through Emerging Technologies in Higher Education|Ms Nicole Mather & Ms Melody (Pei) Li, University of New South Wales
+dt|220||Preparing for Tomorrow's Online Learning: Voices of Students, Parents, and Teachers on Their COVID-19 Experiences in Central China|Miss Mengyuan He, Adelaide University
+dt|313||Reimagining Hybrid Engagement and Relational Learning at Scale in a Large Undergraduate Course|Mrs Audrea Warner, The University of Auckland
+dt|316||Technology use and active learning — a study of learning effectiveness|Dr Ravi Seethamraju, The University of Sydney
+dt|317||Lecturers' experiences and perceptions of learning management systems (LMS) in an English as a Foreign Language (EFL) context|Ms Nining Ismiyani, Monash University
+dt|318||Longitudinal study demonstrating the effectiveness and limitations of AI-supported simulation for scalable skill development in higher education|Assoc Prof Silas Taylor, UNSW Sydney
+dt|345||Identifying patterns in student grades using repeat rate benchmarks|Mrs Anastasia Amanatidis, Adelaide University
+dt|408||Bespoke, relevant, and inclusive self-paced online modules to build tertiary mathematics engagement and confidence|Assoc Prof Natalie Warburton, Murdoch University
+dt|413||Designing Personalised, Data-Informed Student Support at Scale using Predictive Analytics: What We Learned|Prof Ruth Bridgstock, Swinburne University of Technology
+dt|446||Beyond average effects: Causal machine learning for reliable evaluation of educational AI interventions|Dr Bisan Alsalibi, Monash University
+dt|448||Re-envisioning social work curriculum enabling students to safely learn complex and challenging child protection practice through digital simulation|Dr Patricia Mackey, Charles Sturt University
+dt|510||Widening the Doors in Higher Education: Implications for Engaging and Teaching Students Online|Assoc Prof Alice Brown, The University of Southern Queensland, Prof Puspha Sinnayah & Assoc Prof Christopher Fisher, Victoria University
+dt|513||Data beyond the classroom: Using forum analytics to inform critical AI pedagogy in language education|Dr Hong Cai, Adelaide University
+dt|526||Students aren't disengaged, they're disorientated: rethinking online engagement|Dr Rachel M Campbell, University of Canberra
+dt|530||Opening the Conversation: Co-designing Learning Spaces for an AI-Enabled Future|Dr Dewa Wardak, The University of Sydney Business School, Kate Tregloan, University of Melbourne & Patrick O'Doherty, Western Sydney University
+dt|534||"Engaging with Engageli": Using a virtual classroom to enhance online engagement|Dr Lisa Beccaria, University of Southern Queensland
+dt|536||Teaching in Transition: STEM Perspectives on Flexibility and Student Success Across Diverse Learning and Teaching Delivery Modes|Dr Zeena Alsamarra'i, University of Canberra
+dt|605||Supporting Blended Learning Adoption in Practice: Complementary Perspectives from Learning Designers, Technologists, and Instructors|Ms Wei Leng Neo & Ms Divya Patteri, Singapore Management University
+dt|614||Modelling First-Year Student Success: Insights from a Systematic Literature Review and Administrative Data|Ms Victoria A. Bauer & Ms Vanessa Boyle, Leibniz University Hannover
+dt|626||Re-envisioning Simulation for Tomorrow's Learners: A Validated Framework for Ethical, AI-Driven Virtual Patients|Dr Susan Hall, Griffith University
+dt|632||Renewing UAb's Pedagogical Model for Online and Distance Higher Education in the GenAI Era|Dr Diogo Casanova, Universidade Aberta
+dt|634||Teaching Bioscience in Undergraduate Nursing with Virtual Reality — Benefits and Challenges when Integrating VR into the Curriculum|Ms Barbara Loessl, Murdoch University
+dt|704||A conceptual framework for virtual reality simulation in undergraduate nursing: Enhancing early recognition of deterioration|Ms Rajarajeswari Rajasekaran, Swinburne University of Technology
+dt|706||From analytics to action: A practice-led approach to machine learning in higher education|Assoc Prof Robyn Latimer OAM, Torrens University Australia
+dt|726||Beyond the Textbook: 3D Printing in the Classroom|Dr Margarita Medina, University of Canberra
+dt|732||Evaluating the Fieldfriend Mobile Learning App for Place-based Landscape Experiences with Augmented Reality in Melbourne, Australia|Dr Alexis Pang, University of Melbourne
+dt|808||Making Sense of Student Experience Data: A Mixed-Methods Institution-Wide Study of SEQ Interpretation and Feedback|Dr Zeena Alsamarra'i, University of Canberra
+dt|812||Promoting nursing students' self-regulatory skills for online learning: a pilot study|Assoc Prof Marion Tower, Griffith University
+dt|847||The Impact of Social Media on Student Behaviour: Machiavellian Migration|Dr Daniel Lee, Adelaide University
+dt|849||Curriculum Pathways and Cultural Realities: Optimising UNSW Programs with Process Mining|Dr Rachid Hamadi, UNSW
+dt|856||From Early Signals to Policy-Relevant Dashboards: Co-Designing Indicators for AI Literacy, Readiness and Adoption in Higher Education|Dr Stephen Tan, Murdoch University
+iu|115||Equity and Excellence in Rural Medical Education: Student Success and Experiential Learning in Regional Contexts|Ms Karan Bland, University of New South Wales
+iu|136||Gender inequity in Chinese higher education: A viewpoint of Chinese academic mothers|Ms Ling Che, The University of Hong Kong
+iu|145||Creative Critical Collective Futuring (3CF): A reparative methodology for radical hope, justice, and collective resistance in higher education|Dr Sakinah Alhadad, Griffith University
+iu|159||Suburban University Study Hubs: Themes and Tensions in College Access and Success Programs in Australia|Dr Russell Olwell
+iu|167||Developing inclusive strategies to strengthen academic reading and summarising skills among nursing students entering degree-level studies|Mrs Mudiyanselage Dinithi Ravindrika Samarakoon, Edith Cowan University Sri Lanka
+iu|210||Becoming Students Behind Bars: Identity Construction in Prison Distance Education|Mr Lexter Mangubat, University of the Philippines
+iu|221||Widening Access to Medicine in Australia: A realist evaluation|Prof Sandra Carr, The University of Western Australia
+iu|227||Reframing neurodivergent leadership as inclusive design in higher education|Ms Ezrina Fewings, University of Western Australia
+iu|231||'Imagine what we could achieve if we were supported to thrive': Neurodivergent scholars navigating academia|Prof Therese (Terry) Cumming, Ms Karen Kriss & Dr Geraldine Townend, University of New South Wales
+iu|235||English as a second language students and navigating a career in nursing: impacts, challenges, supports and using AI to assist|Dr Miranda Daly & Ms Loveness Mauwa, Western Sydney University
+iu|308||Teacher Educators' and Pre-service Teachers' Perceptions of Universal Design for Learning Incorporation in Ghanaian Teacher Education: Factor Structure and Predictors|Dr William Nketsia, Western Sydney University
+iu|312||How can dental students become structurally competent providers?|Assoc Prof Delyse Leadbeatter, The University of Sydney
+iu|334||Obvious, Simple, Impactful: Structural Change for Equity in Higher Education|Prof Ryan Naylor, The University of Sydney
+iu|343||Bridging the Gap: Why Higher Education Often Separates Spiritual Identity from 21st-Century Skills?|Mr Muhamad Maulana, Universitas Islam Internasional Indonesia
+iu|350||Inclusive vivas in enabling programs: Ethical and equity considerations in individualised assessment design|Dr Rebecca Norman, Adelaide University
+iu|407||Learning for all: A practical and scalable solution to create inclusive learning content in higher education|Mr Aylwin Sim & Mr Jon Xiating Cai, University of New South Wales
+iu|410||Enhancing Student Success Through Inclusive and Active Learning Strategies|Dr Biju Philip, La Trobe University
+iu|430||Teacher Educators' Understanding of Universal Design for Learning: Preparedness, Professional Development, and Perceived Impact|Dr William Nketsia, Western Sydney University
+iu|434||Neurodiversity and inclusion in Australian offshore universities in Singapore: emerging insights from a mixed-methods study|Dr Tarin Ong, Murdoch University Singapore
+iu|445||The Universal Conundrum: Inclusion, accessibility or cultural homogenisation?|Dr Ann Standish & Dr Gabrielle Murray, RMIT University
+iu|449||Women Academics of Colour and the Hidden Curriculum of Academic Labour|Dr Pearl Subban, Monash University
+iu|514||Predictors of academic success and completion in competitive-entry undergraduate degrees: data-informed admissions criteria and curricula to build a diverse workforce|Assoc Prof Christine Barry, Flinders University
+iu|532||Inclusive Oral Presentation Assessments: Where Does Authenticity Begin and End?|Mr Darren Wong, Deakin University
+iu|542||Education for just and sustainable futures: transformative and critical pedagogies|Dr Thomas Wanner, Adelaide University
+iu|543||Empowering inclusive learning and teaching: Can professional learning be both scalable and relational?|Dr Alyce Mason, University of Wollongong
+iu|608||Supporting the communication needs of postgraduate coursework students from English as an Additional Language or Dialect (EAL/D) backgrounds|Dr Lisa Gilanyi, University of New South Wales
+iu|613||Assessing the efficacy of class participation reasonable adjustments in equitable learning plans|Assoc Prof Chantal Bostock, Assoc Prof Anna Rowe & Assoc Prof Chien Hoong Gooi, UNSW
+iu|651||Applying enabling pedagogy to help foster students' confidence in communicating discipline-specific language and improve feelings of job readiness|Ms Michelle Brown, Adelaide University
+iu|725||Beyond One-Size-Fits-All: Differentiated Instruction and Equity-Oriented Teaching in Universities|Dr Pearl Subban & Mr Ryan Subban, Monash University
+iu|824||Participatory design at the course level: meaningful collaboration with people with lived experience of disability in a new Masters course|Assoc Prof Jemma Skeat, Deakin University
+iu|826||Supporting underrecognised students online: Raising success for all through focused, guided and active learning|Dr Elizabeth Goode, Southern Cross University
+iu|834||Cultivating Inclusive Learning & Teaching: A Critical-Relational Approach to Professional Learning|Dr Alyce Mason, University of Wollongong
+iu|866||Obstacles and enablers: A study into the factors impacting student engagement in academic language development offerings|Ms Katherine Olston & Dr Alexandra Garcia, University of Sydney
+ik|353||Implementing the Indigenous Kin & Country Framework at Scale: Deep Learning versus Low Satisfaction Scores|Dr Eva Tzschaschel, Macquarie University
+ik|359||From Classroom to Community: Trauma-informed, First Nations-engaged Work-integrated learning through a University Tax Clinic|Assoc Prof Raul David, Charles Darwin University
+ik|439||Strengthening supervision for First Nations higher degree research students: exploring experiences, challenges, and pathways forward|Dr Helen Hickson, Central Queensland University
+ik|517||Management training for First Nations employees in the Australian Public Service: Key success drivers|Prof Vinh Lu, The Australian National University
+ik|609||Culturally Safe Curriculum Transformation: Embedding Aboriginal and Torres Strait Islander Perspectives to Build Culturally Capable Exercise and Sport Science Graduates|Dr Caitlin Fox-Harding, Edith Cowan University
+ik|610||"Whether the Academy Is Willing to Hear It": Rethinking Supervision for First Nations HDR Candidates|Dr Helen Hickson, Central Queensland University
+ik|611||Current Status and Future Directions in Indigenising ICT Curriculum in Australian Universities|Dr Jianhua Li, Deakin University
+ik|702||Combining Indigenous pedagogy and slow computing to practise critical thinking skills in using GenAI|Assoc Prof Sultana Lubna Alam, University of Sydney
+ik|707||From Partnership to Pedagogy: Embedding Indigenous Knowledges Through Community-Led Experiential Learning|Dr Linh Nguyen & Dr Misol Kim, University of New South Wales
+ik|708||Weaving Knowledges: A Helix Approach to Indigenising Professional Curricula — Building Relational Accountability from Kaurna Land to Treaty Territory|Dr Pearl Panickar, Adelaide University & Dr Dieter Schonwetter, University of Manitoba
+ik|841||Student autoethnographic research addressing non-Māori cultural identity in Aotearoa New Zealand: Themes, outcomes and possible future approaches|Dr Kathryn Oxborrow Vambe, Te Wānanga o Aotearoa
+ik|862||When Community Has a Say: Embedding Indigenous Data Sovereignty Principles in Doctoral Research|Miss Courtney Theseira, Adelaide University
+it|125||Internationalisation amid Geopolitical Disruption: Evidence from the Academic Semi-Periphery|Dr Kairat Moldashev, SDU University, Kazakhstan
+it|152||Building counselling capacity in Papua New Guinea|Assoc Prof Jane Fowler, Griffith University
+it|161||Choosing Within a Structured Space: How Students' Postgraduate Transition Decisions Are Generated in Highly Institutionalised Training Pathways|Dr Xuemeng Cao, Xiamen University
+it|166||Leadership Toolkit for International Academics: Building Inclusive and Resilient Academic Communities|Assoc Prof Jasvir Kaur Nachatar Singh, La Trobe University, Assoc Prof Jason Wong, Australian Catholic University & Dr Dongmei Li, James Cook University
+it|208||Undergraduate male international nursing students' experiences of living and studying in Australia|Ms Rupali Hinge, Western Sydney University
+it|209||International students' ideas on what would help their learning|Dr Alice Huang & Dr Dewa Wardak, The University of Sydney
+it|213||Evidenced practical strategies for enabling active learning in the Chinese Transnational Education postgraduate classrooms|Dr Hongyi Liang, Flinders University
+it|226||Capacity building in transnational education|Assoc Prof Bella Butler, Curtin University
+it|232||Rethinking International Students' Quality of Life (QoL) in Australia: A Critical Analysis of Policy-practice Gaps|Mr Habibur Rahaman & Dr Shaouli Shahid, Curtin University
+it|234||Beyond the Kiasu Parent Label: A Bioecological Study on Singaporean Parents' Tensions within an Education Reform|Dr Eugenia Koh-Chua, Victoria University
+it|249||What does intercultural engagement feel like? Australian university student perspectives and implications for teaching practice|Dr Samantha Marangell, University of Melbourne & Prof Mollie Dollinger, Curtin University
+it|256||Implementation of Best Practices for Transnational Education Student Success|Dr Kathryn Jones, University of Auckland
+it|258||Nourishing Connections for Tomorrow's Learners: Re-envisioning international student engagement through shared culinary experiences and co-created digital resources|Dr Suzanne Gilbey, Curtin University
+it|336||Negotiating Identity and Belonging in Transnational Higher Education: International Doctoral Students' Experiences|Dr Sabrina Syed, Charles Sturt University
+it|520||Does student autonomy hinder student success? Student service and examination rules in Germany and their impact on graduation rates|Ms Shirin Reiter & Mr Jan-Christoph Ohnesorge, German Centre for Higher Education Research and Science Studies
+it|524||A Nuanced Understanding of the International Student: Socioeconomically Disadvantaged Chinese International Students' Motivations and Aspirations for International Higher Education|Mr Yan Zhang, University of Melbourne
+it|535||Exploring the Complex Motivations of International Doctoral Students in Australia: An Intersectional Approach|Dr Sabrina Syed, Charles Sturt University
+it|550||From orientation to exams: International students' journey across the semester|Dr Dewa Wardak & Dr Alice Huang, The University of Sydney
+it|606||Enhancing Academic Writing Self-Efficacy and Integrity among Vietnamese Science Undergraduates|Assoc Prof Lee Kooi Cheng, National University of Singapore & Dr Ngoc Thi-Nhu Bui, University of Science, VNU-HCM
+it|616||Transnational Partnership Shaping the Future of Learners in Higher Education|Dr Lucia Wuersch, Assoc Prof Alain Neher & Assoc Prof Alfred Wong, Charles Sturt University
+it|631||Empowering Chinese Postgraduate Data Science Students: A Bilingual Peer-Led Support Model|Dr Jinqi Xu, University of Sydney
+it|642||Tracing success: A national cross-institutional research project on Direct Entry (DE) ELICOS tracer studies in Australian higher education|Ms Katherine Olston, University of Sydney
+it|650||"Are We the Same?" Exploring Returnee Scholars' Different Academic Identities in China|Miss Zihan Wang, The Chinese University of Hong Kong
+it|715||Intercultural reflexivity as professional learning: A collaborative autoethnography of international academics|Assoc Prof Jason Wong, Australian Catholic University, Dr Dongmei Li, James Cook University & Assoc Prof Jasvir Kaur Nachatar Singh, La Trobe University
+it|717||Students' Perceptions and Experiences of the Chinese Doctoral Admission Process|Dr Jisun Jung, University of Hong Kong
+it|823||Transforming Sustainable Learning Outcomes through Higher Education: Topographic Landscapes across East and Southeast Asia|Ms Zhiying Zeng, The Education University of Hong Kong
+it|846||Interdisciplinary learning with material culture beyond borders: Object-Based Learning in Collaborative Online International Learning contexts|Dr Hui Ting Chng & Dr Heather Gaunt, National University of Singapore
+it|852||Identity Dilemmas and Student Development Prospects in Sino-Foreign Cooperative Universities|Mr Renjie Cai, The University of Hong Kong
+lg|126||Unsafe Workplaces, Marketed Students: How might the SHIELDS framework help to govern deepfakes and image based harm in higher education?|Dr Janine Arantes, Victoria University
+lg|127||The invisible labour of curriculum: Re-centring the human work of teaching for sustainable higher education governance|Dr Sakinah Alhadad, Griffith University
+lg|143||Reimagining the role of an L&T leader in the age of AI|Prof Tuck Wah Leong & Prof Sophia Xenos, RMIT University
+lg|151||From degrees to skills: rethinking higher education design under Australia's new policy settings|Dr James Bailey, UNSW College
+lg|160||The Literacy of Power: Mapping the Architecture of Ideology|Mrs Noorlaksmita Ramadhanty, University of Arkansas
+lg|224||Guidelines and Guardrails: Policy recommendations for implementing digital twin lecturers in higher education|Dr Lucy Andrew & Ms Lydia Richards, Adelaide University
+lg|240||Collectively imagining higher education futures: A participatory roundtable|Dr Sakinah Alhadad, Griffith University & Prof Ruth Bridgstock, Swinburne University
+lg|324||Beyond Recognition, More Than a Badge: Learning and Teaching Academies as Engines of Leadership, Learning, and Change|Prof Deanne Gannaway, University of Queensland
+lg|326||Leading AI Integration through Governance, Policy and Practice|Prof Heidi Le Sueur, International College of Management Sydney (ICMS) & Ms Joanne Gao, Crown Institute of Higher Education (CIHE)
+lg|341||If degrees no longer signal readiness, what should? Re-thinking competence and curriculum in the AI era|Prof Zixiu Guo, UNSW
+lg|427||The question of purpose: What counts as 'good' art teacher education in New South Wales, Australia and Ontario, Canada?|Assoc Prof Karen Maras, UNSW
+lg|442||GenAI on Campus: The Unseen Strain of GenAI Governance on Educators and Students|Dr Zeena Alsamarra'i, University of Canberra
+lg|539||A practical, theory-informed resource for supporting educational leader professional learning|Dr Kathleen Mahon, University of Queensland
+lg|548||Revolve, Evolve, Reimagine… Transforming psychology training in Australian higher education: Disrupting an entire academic discipline|Prof Karena Burke, University of Wollongong
+lg|600||Educating for Change or Maintaining the Status Quo? How Universities Contribute to and Combat Modern Slavery|Ms Kyla Raby, Adelaide University
+lg|617||Transformation From Within: A Study of Student Voice, Social Justice and Governance Structures in Indian Public Universities|Ms Monika Maini, National Institute of Educational Planning and Administration, New Delhi
+lg|618||Governing Generative AI in Higher Education: Insights from a National ACPHIS Study|Assoc Prof Sultana Lubna Alam, University of Sydney
+lg|633||Young People's Perception of the Value and Cost of Higher Education: Insights from a Scoping Review|Ms Mariyam Nazviya, University of Melbourne
+lg|641||Leading in the Age of AI: Revisiting Communication Theories to Understand Workplace Dynamics|Dr Ananthalakshmi (Anna) Sekhar, Torrens University Australia
+lg|728||From ESG Reporting to Decision Data: Developing Leadership Judgment for Sustainable Futures|Dr Wan Ying Tay, Singapore University of Social Sciences
+lg|833||University Closures and the Crisis of Institutional Legitimacy in East Asia: An Epistemological–Political Analysis|Bowen Song, Renmin University of China
+lg|863||Regulating the boundaries: Women leaders in higher education|Dr Wei Zhang & Prof Tanya Fitzgerald, The University of Western Australia`;
+  var find = document.getElementById('find');
+  if (!find || find.dataset.wired) return;
+  find.dataset.wired = '1';
+  var status = document.getElementById('status');
+  var noresults = document.getElementById('noresults');
+  var lists = {};
+  Array.prototype.forEach.call(document.querySelectorAll('ul.slist'), function (ul) {
+    lists[ul.getAttribute('data-theme')] = ul;
+  });
+  var rows = [];
+  DATA.split('\n').forEach(function (line) {
+    var p = line.split('|');
+    if (p.length !== 5) return;
+    var theme = p[0], sid = p[1], badge = p[2], title = p[3], who = p[4];
+    var ul = lists[theme];
+    if (!ul) return;
+    var li = document.createElement('li'); li.className = 's';
+    var idEl = document.createElement('span'); idEl.className = 'sid';
+    idEl.setAttribute('aria-hidden', 'true'); idEl.textContent = sid;
+    var box = document.createElement('div'); box.className = 'sb';
+    if (badge) {
+      var kb = document.createElement('span'); kb.className = 'kb'; kb.textContent = badge;
+      box.appendChild(kb); box.appendChild(document.createTextNode(' '));
+    }
+    var st = document.createElement('span'); st.className = 'st'; st.textContent = title;
+    var sw = document.createElement('span'); sw.className = 'sw'; sw.textContent = who;
+    box.appendChild(st); box.appendChild(sw);
+    li.appendChild(idEl); li.appendChild(box);
+    ul.appendChild(li);
+    rows.push({ el: li, text: (sid + ' ' + badge + ' ' + title + ' ' + who).toLowerCase(), theme: theme });
+  });
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.theme')).map(function (sec) {
+    return { sec: sec, count: sec.querySelector('.count'),
+      total: parseInt(sec.querySelector('.count').getAttribute('data-total'), 10) || 0,
+      theme: sec.querySelector('ul.slist') ? sec.querySelector('ul.slist').getAttribute('data-theme') : null };
+  });
+  var totalAll = rows.length;
+  var t = null;
+  function apply() {
+    var q = find.value.trim().toLowerCase();
+    var perTheme = {};
+    var shownAll = 0;
+    rows.forEach(function (r) {
+      var hit = !q || r.text.indexOf(q) !== -1;
+      r.el.classList.toggle('hidden', !hit);
+      if (hit) { shownAll++; perTheme[r.theme] = (perTheme[r.theme] || 0) + 1; }
+    });
+    sections.forEach(function (th) {
+      var shown = perTheme[th.theme] || 0;
+      th.sec.classList.toggle('hidden', q ? shown === 0 : false);
+      th.count.textContent = q ? (shown + ' of ' + th.total) : (th.total + ' sessions');
+    });
+    noresults.style.display = (q && shownAll === 0) ? 'block' : 'none';
+    status.textContent = q
+      ? (shownAll + ' of ' + totalAll + ' sessions match “' + find.value.trim() + '”.')
+      : (totalAll + ' sessions across 14 themes.');
+  }
+  apply();
+  find.addEventListener('input', function () {
+    if (t) clearTimeout(t);
+    t = setTimeout(apply, 120);
+  });
+})();
+</script>
+</body>
+</html>
