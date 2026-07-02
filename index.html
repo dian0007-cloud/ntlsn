@@ -5372,19 +5372,19 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  var F='-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Helvetica,Arial,sans-serif';
  var BLOCKS=[
   {id:'ntlsn-coming2027',yr:'2027',col:'255,180,72',eye:'Coming in 2027',title:'Symposiums & convening',
-   sub:'The bigger build \u2014 institutional features that need a backend and partner cooperation. Dated honestly; not available yet.',
-   cards:[['Symposium &amp; abstract engine','Run your own conference \u2014 registration, abstracts and programme.'],
-   ['Peer-Review Exchange','Review one, get one reviewed \u2014 a national registry across institutions.'],
-   ['Pair Review','A focused, two-person developmental review of teaching.'],
-   ['Calibration Suite','Shared rubrics and cross-marker moderation across the sector.'],
-   ['Curriculum Auditor','Map programme \u2192 course \u2192 unit outcomes, TELAS-aligned.'],
-   ['Ecosystem APIs &amp; LMS','LTI 1.3 for Moodle, Canvas, Blackboard and D2L, plus an open API.'],
+   sub:'The bigger build. Several of these already work as free tools you can try today; the full institutional versions need a backend and partner cooperation.',
+   cards:[['Symposium &amp; abstract engine','Run your own conference \u2014 registration, abstracts and programme.','symposium-streaming.html'],
+   ['Peer-Review Exchange','Review one, get one reviewed \u2014 a national registry across institutions.','peer-review-exchange.html'],
+   ['Pair Review','A focused, two-person developmental review of teaching.','peer-observation.html'],
+   ['Calibration Suite','Shared rubrics and cross-marker moderation across the sector.','calibration-suite.html'],
+   ['Curriculum Auditor','Map programme \u2192 course \u2192 unit outcomes, TELAS-aligned.','programme-map.html'],
+   ['Ecosystem APIs &amp; LMS','LTI 1.3 for Moodle, Canvas, Blackboard and D2L, plus an open API.','developers.html'],
    ['Single sign-on (AAF)','National sign-on via the Australian Access Federation.']]},
   {id:'ntlsn-coming2028',yr:'2028',col:'124,156,255',eye:'Coming in 2028',title:'Recognition & sector interoperability',
-   sub:'Portable recognition and the connective tissue between institutions. In design \u2014 not available yet.',
-   cards:[['Teaching Recognition Passport','A portable record of your teaching across all 42 universities, via My eQuals.'],
-   ['National recognition framework','Sector-wide recognition \u2014 awards, citations and certification.'],
-   ['Students-as-Partners Registry','Put your student-partnership work on the national map.'],
+   sub:'Portable recognition and the connective tissue between institutions. Several are live to try now; the sector-wide versions are still in design.',
+   cards:[['Teaching Recognition Passport','A portable record of your teaching across all 42 universities, via My eQuals.','trp.html'],
+   ['National recognition framework','Sector-wide recognition \u2014 awards, citations and certification.','recognition-framework.html'],
+   ['Students-as-Partners Registry','Put your student-partnership work on the national map.','student-partnership.html'],
    ['CRM &amp; student-system integration','Connect PeopleSoft, CourseLoop and the wider stack.'],
    ['WCAG 2.1 AA / VPAT','Accessibility conformance for procurement.'],
    ['Sector interoperability (MCP)','An open machine interface so other systems can read the commons.'],
@@ -5403,7 +5403,7 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
     b.cards.map(function(c){return '<div style="background:#0f1f3a;border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:13px 14px">'+
      '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin:0 0 5px"><span style="font:800 13px '+F+';color:#e8eef5;line-height:1.3">'+c[0]+'</span>'+
      '<span style="font:800 9px '+F+';letter-spacing:.5px;color:rgb('+b.col+');background:rgba('+b.col+',.14);border:1px solid rgba('+b.col+',.4);border-radius:999px;padding:2px 7px;flex:none">'+b.yr+'</span></div>'+
-     '<div style="font:400 12px '+F+';color:#9fb0c3;line-height:1.5">'+c[1]+'</div></div>';}).join('')+
+     '<div style="font:400 12px '+F+';color:#9fb0c3;line-height:1.5">'+c[1]+'</div>'+(c[2]?'<a href="/'+c[2]+'" style="display:inline-block;margin-top:10px;font:800 11.5px '+F+';color:#4ECDC4;text-decoration:none;letter-spacing:.2px">Try it now &rarr;</a>':'')+'</div>';}).join('')+
     '</div></div>';
    hero.parentNode.appendChild(sec);
   });
