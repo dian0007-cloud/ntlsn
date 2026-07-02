@@ -6057,5 +6057,28 @@ div[class~="p-4"][class~="border-t"][class~="space-y-2"]:has(> a[href="https://g
  go();
 })();
 </script>
+<script id="ntlsn-aboutusbtn">
+(function(){
+ if(window.__ntlsnAboutUsBtn)return; window.__ntlsnAboutUsBtn=1;
+ function go(){
+  if(document.querySelector('a.ntlsn-aboutus-btn'))return true;
+  var as=document.querySelectorAll('a[href="https://github.com/dian0007-cloud/ntlsn"]');
+  for(var i=0;i<as.length;i++){
+   var a=as[i];
+   if((a.className||'').indexOf('bg-[#4ECDC4]')>-1){
+    a.href='/about.html';
+    a.removeAttribute('target'); a.removeAttribute('rel');
+    a.textContent='About Us';
+    a.setAttribute('aria-label','About Us \u2014 who builds NTLSN, and why');
+    a.classList.add('ntlsn-aboutus-btn');
+    return true;
+   }
+  }
+  return false;
+ }
+ if(go())return;
+ [300,900,2000,4000,8000].forEach(function(ms){setTimeout(go,ms);});
+})();
+</script>
 </body>
 </html>
