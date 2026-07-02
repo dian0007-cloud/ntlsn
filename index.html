@@ -1195,7 +1195,7 @@ function injectNav(){
  if(!document.getElementById('np-launch')){var w=document.createElement('div');w.id='np-launch';w.style.cssText='position:fixed;left:16px;bottom:16px;z-index:9998;display:flex;gap:8px;flex-wrap:wrap;';
   var mk=function(t,fn,primary){var x=document.createElement('button');x.type='button';x.textContent=t;x.style.cssText='font:800 14px -apple-system,Segoe UI,Roboto,sans-serif;border-radius:999px;padding:11px 16px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.45);border:'+(primary?'none':'1px solid #4ECDC4')+';background:'+(primary?'#4ECDC4':'#0b1a30')+';color:'+(primary?'#08131f':'#4ECDC4')+';';x.addEventListener('click',fn);return x;};
   w.appendChild(mk('◆ Open the Portal',function(){openPortal('submit');},true));
-  w.appendChild(mk('Pricing',function(){var el=document.getElementById('pricing');if(el)window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-72,behavior:'smooth'});},false));
+  w.appendChild(mk('Join',function(){var el=document.getElementById('ntlsn-member');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},true));
   document.body.appendChild(w);}
  var bar=document.querySelector('.ntlsn-topnav');
  if(bar&&!bar.querySelector('[data-np]')){var mkb=function(t,fn){var x=document.createElement('button');x.setAttribute('data-np','1');x.className='px-2 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap';x.style.color='#4ECDC4';x.textContent=t;x.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();fn();});return x;};
@@ -6062,6 +6062,7 @@ div[class~="p-4"][class~="border-t"][class~="space-y-2"]:has(> a[href="https://g
  if(window.__ntlsnAboutUsBtn)return; window.__ntlsnAboutUsBtn=1;
  function go(){
   if(document.querySelector('a.ntlsn-aboutus-btn'))return true;
+  if(!document.querySelector('[data-ntlsn-join]'))return false;
   var as=document.querySelectorAll('a[href="https://github.com/dian0007-cloud/ntlsn"]');
   for(var i=0;i<as.length;i++){
    var a=as[i];
