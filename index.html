@@ -8,7 +8,7 @@
 <link rel="canonical" href="https://www.ntlsn.com/" />
 <meta name="robots" content="index,follow,max-image-preview:large">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"NTLSN — National Teaching and Learning Sector Network","alternateName":"NTLSN","url":"https://www.ntlsn.com/","description":"A free, open commons for Australian higher-education teaching and learning — mapping symposiums, recognition, partnership and open resources across the sector.","foundingDate":"2026","founder":{"@type":"Person","name":"A/Prof Seb Dianati"},"parentOrganization":{"@type":"CollegeOrUniversity","name":"University of Southern Queensland"},"areaServed":"AU","license":"https://creativecommons.org/licenses/by-nc-sa/4.0/"}
+{"@context":"https://schema.org","@type":"Organization","name":"NTLSN — National Teaching and Learning Sector Network","alternateName":"NTLSN","url":"https://www.ntlsn.com/","description":"A free, open commons for Australian higher-education teaching and learning — mapping symposiums, recognition, partnership and open resources across the sector.","foundingDate":"2026","founder":{"@type":"Person","name":"A/Prof Seb Dianati"},"areaServed":"AU","license":"https://creativecommons.org/licenses/by-nc-sa/4.0/"}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"NTLSN","url":"https://www.ntlsn.com/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.ntlsn.com/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
@@ -297,6 +297,170 @@ var n=0,iv=setInterval(function(){enhance();if(++n>10)clearInterval(iv);},400);
 try{new MutationObserver(go).observe(document.body,{childList:true,subtree:true});}catch(e){}
 })();
 </script>
+<script id="ntlsn-journey">(function(){
+ 'use strict';
+ var ROOT='ntlsn-journey-root';
+
+ var CSS=''
+ +'#ntlsn-journey-root{max-width:840px;margin:4px auto 40px;padding:0 16px;text-align:center}'
+ +'#ntlsn-journey-root .ntlsn-j-doors{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}'
+ +'#ntlsn-journey-root .ntlsn-j-door{-webkit-appearance:none;appearance:none;flex:1 1 250px;max-width:360px;cursor:pointer;border-radius:16px;padding:18px 20px 16px;background:rgba(255,255,255,.03);font-family:inherit;text-align:center;transition:background .2s ease,border-color .2s ease}'
+ +'#ntlsn-journey-root .ntlsn-j-ev{border:1.5px solid rgba(78,205,196,.55)}'
+ +'#ntlsn-journey-root .ntlsn-j-ev:hover,#ntlsn-journey-root .ntlsn-j-ev.ntlsn-j-on{background:rgba(78,205,196,.10);border-color:#4ECDC4}'
+ +'#ntlsn-journey-root .ntlsn-j-rs{border:1.5px solid rgba(197,123,255,.65)}'
+ +'#ntlsn-journey-root .ntlsn-j-rs:hover,#ntlsn-journey-root .ntlsn-j-rs.ntlsn-j-on{background:rgba(197,123,255,.10);border-color:#C57BFF}'
+ +'#ntlsn-journey-root .ntlsn-j-door:focus-visible{outline:2px solid #fff;outline-offset:3px}'
+ +'#ntlsn-journey-root .ntlsn-j-t{display:block;font-size:21px;font-weight:700;letter-spacing:.2px;line-height:1.2}'
+ +'#ntlsn-journey-root .ntlsn-j-ev .ntlsn-j-t{color:#4ECDC4}'
+ +'#ntlsn-journey-root .ntlsn-j-rs .ntlsn-j-t{color:#C57BFF}'
+ +'#ntlsn-journey-root .ntlsn-j-caret{display:inline-block;font-size:13px;vertical-align:2px;transition:transform .2s ease}'
+ +'#ntlsn-journey-root .ntlsn-j-on .ntlsn-j-caret{transform:rotate(180deg)}'
+ +'#ntlsn-journey-root .ntlsn-j-s{display:block;margin-top:5px;font-size:13.5px;font-weight:400;color:rgba(255,255,255,.68)}'
+ +'#ntlsn-journey-root .ntlsn-j-panel{margin:14px auto 0;max-width:700px;border-radius:14px;padding:16px 16px 18px;background:rgba(255,255,255,.03)}'
+ +'#ntlsn-journey-root .ntlsn-j-panel[hidden]{display:none}'
+ +'#ntlsn-journey-root .ntlsn-j-pev{border:1px solid rgba(78,205,196,.32)}'
+ +'#ntlsn-journey-root .ntlsn-j-prs{border:1px solid rgba(197,123,255,.32)}'
+ +'#ntlsn-journey-root .ntlsn-j-q{margin:0 0 12px;font-size:12.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.72)}'
+ +'#ntlsn-journey-root .ntlsn-j-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}'
+ +'#ntlsn-journey-root .ntlsn-j-chip{-webkit-appearance:none;appearance:none;display:inline-block;cursor:pointer;border-radius:999px;padding:9px 16px;font-family:inherit;font-size:14px;font-weight:600;line-height:1.2;text-decoration:none;background:transparent;transition:background .15s ease}'
+ +'#ntlsn-journey-root .ntlsn-j-cev{color:#4ECDC4;border:1px solid rgba(78,205,196,.55)}'
+ +'#ntlsn-journey-root .ntlsn-j-cev:hover{background:rgba(78,205,196,.14)}'
+ +'#ntlsn-journey-root .ntlsn-j-crs{color:#C57BFF;border:1px solid rgba(197,123,255,.70)}'
+ +'#ntlsn-journey-root .ntlsn-j-crs:hover{background:rgba(197,123,255,.14)}'
+ +'#ntlsn-journey-root .ntlsn-j-chip:focus-visible{outline:2px solid #fff;outline-offset:2px}'
+ +'#ntlsn-journey-root .ntlsn-j-orcid{margin:16px 0 0;font-size:13.5px;color:rgba(255,255,255,.55)}'
+ +'#ntlsn-journey-root .ntlsn-j-orcid a{color:#FFB448;text-decoration:underline;text-underline-offset:3px;border-radius:4px}'
+ +'#ntlsn-journey-root .ntlsn-j-orcid a:hover{color:#FFC873}'
+ +'#ntlsn-journey-root .ntlsn-j-orcid a:focus-visible{outline:2px solid #FFB448;outline-offset:2px}'
+ +'@keyframes ntlsnJIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}'
+ +'#ntlsn-journey-root .ntlsn-j-panel:not([hidden]){animation:ntlsnJIn .18s ease-out}'
+ +'@media (prefers-reduced-motion:reduce){#ntlsn-journey-root .ntlsn-j-panel:not([hidden]){animation:none}#ntlsn-journey-root .ntlsn-j-door,#ntlsn-journey-root .ntlsn-j-caret,#ntlsn-journey-root .ntlsn-j-chip{transition:none}}';
+
+ var HTML=''
+ +'<div class="ntlsn-j-doors" role="group" aria-label="Choose your path">'
+ +'<button type="button" id="ntlsn-j-door-ev" class="ntlsn-j-door ntlsn-j-ev" aria-expanded="false" aria-controls="ntlsn-j-panel-ev">'
+ +'<span class="ntlsn-j-t">Events <span class="ntlsn-j-caret" aria-hidden="true">▾<\/span><\/span>'
+ +'<small class="ntlsn-j-s">What’s on across the sector<\/small><\/button>'
+ +'<button type="button" id="ntlsn-j-door-rs" class="ntlsn-j-door ntlsn-j-rs" aria-expanded="false" aria-controls="ntlsn-j-panel-rs">'
+ +'<span class="ntlsn-j-t">Resources <span class="ntlsn-j-caret" aria-hidden="true">▾<\/span><\/span>'
+ +'<small class="ntlsn-j-s">Tools, frameworks &amp; funding<\/small><\/button>'
+ +'<\/div>'
+ +'<div id="ntlsn-j-panel-ev" class="ntlsn-j-panel ntlsn-j-pev" role="region" aria-labelledby="ntlsn-j-door-ev" hidden>'
+ +'<p class="ntlsn-j-q">What are you looking for?<\/p>'
+ +'<div class="ntlsn-j-chips">'
+ +'<button type="button" class="ntlsn-j-chip ntlsn-j-cev" data-ntlsn-j-anchor="events">Upcoming events<\/button>'
+ +'<a class="ntlsn-j-chip ntlsn-j-cev" href="/missed-it.html">Past symposium recordings<\/a>'
+ +'<a class="ntlsn-j-chip ntlsn-j-cev" href="/symposium-streaming.html">Stream your symposium<\/a>'
+ +'<button type="button" class="ntlsn-j-chip ntlsn-j-cev" data-ntlsn-j-anchor="conferences">Conferences<\/button>'
+ +'<a class="ntlsn-j-chip ntlsn-j-cev" href="/aaut-readiness.html">Awards &amp; recognition<\/a>'
+ +'<\/div><\/div>'
+ +'<div id="ntlsn-j-panel-rs" class="ntlsn-j-panel ntlsn-j-prs" role="region" aria-labelledby="ntlsn-j-door-rs" hidden>'
+ +'<p class="ntlsn-j-q">What are you looking for?<\/p>'
+ +'<div class="ntlsn-j-chips">'
+ +'<button type="button" class="ntlsn-j-chip ntlsn-j-crs" data-ntlsn-j-anchor="sotl-grants">Grants &amp; funding<\/button>'
+ +'<button type="button" class="ntlsn-j-chip ntlsn-j-crs" data-ntlsn-j-anchor="ntlsn-trynow">Toolkits &amp; tools<\/button>'
+ +'<button type="button" class="ntlsn-j-chip ntlsn-j-crs" data-ntlsn-j-anchor="frameworks">Frameworks<\/button>'
+ +'<a class="ntlsn-j-chip ntlsn-j-crs" href="/open-building-blocks.html">Open educational resources<\/a>'
+ +'<a class="ntlsn-j-chip ntlsn-j-crs" href="/crash-courses.html">Crash courses<\/a>'
+ +'<a class="ntlsn-j-chip ntlsn-j-crs" href="/fellowship-mapper.html">Recognition &amp; fellowships<\/a>'
+ +'<\/div><\/div>'
+ +'<p class="ntlsn-j-orcid">…or make it personal — <a href="/orcid-start.html">start with your ORCID <span aria-hidden="true">→<\/span><\/a><\/p>';
+
+ function wire(root){
+  var reduced=false;
+  try{reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+  var doors=root.querySelectorAll('.ntlsn-j-door');
+  function panelFor(d){return document.getElementById(d.getAttribute('aria-controls'));}
+  function closeAll(){
+   for(var i=0;i<doors.length;i++){
+    doors[i].setAttribute('aria-expanded','false');
+    doors[i].classList.remove('ntlsn-j-on');
+    var p=panelFor(doors[i]); if(p)p.hidden=true;
+   }
+  }
+  for(var i=0;i<doors.length;i++)(function(d){
+   d.addEventListener('click',function(){
+    var wasOpen=d.getAttribute('aria-expanded')==='true';
+    closeAll();
+    if(!wasOpen){
+     d.setAttribute('aria-expanded','true');
+     d.classList.add('ntlsn-j-on');
+     var p=panelFor(d); if(p)p.hidden=false;
+    }
+   });
+  })(doors[i]);
+  root.addEventListener('keydown',function(e){
+   if(e.key==='Escape'||e.key==='Esc'){
+    var open=null;
+    for(var i=0;i<doors.length;i++){if(doors[i].getAttribute('aria-expanded')==='true')open=doors[i];}
+    if(open){closeAll();try{open.focus();}catch(err){}}
+   }
+  });
+  var chips=root.querySelectorAll('[data-ntlsn-j-anchor]');
+  for(var j=0;j<chips.length;j++)(function(c){
+   /* A11y: resolve the owning door so focus is not dropped to <body> when the panel hides */
+   var pnl=c.parentNode;
+   while(pnl&&pnl!==root&&(''+pnl.className).indexOf('ntlsn-j-panel')<0)pnl=pnl.parentNode;
+   var owner=null;
+   if(pnl&&pnl.id){for(var k=0;k<doors.length;k++){if(doors[k].getAttribute('aria-controls')===pnl.id)owner=doors[k];}}
+   c.addEventListener('click',function(){
+    var id=c.getAttribute('data-ntlsn-j-anchor');
+    closeAll();
+    if(owner){try{owner.focus({preventScroll:true});}catch(e1){try{owner.focus();}catch(e2){}}}
+    var el=document.getElementById(id);
+    if(el){
+     try{el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});}
+     catch(e3){el.scrollIntoView();}
+    }else{
+     window.location.hash='#'+id;
+    }
+   });
+  })(chips[j]);
+ }
+
+ function build(){
+  if(document.getElementById(ROOT))return true; /* R1: second run = pure no-op */
+  var parent=null, beforeNode=null;
+  /* Primary mount: the hero h1, then walk past the pill + subtitle paragraphs */
+  var hs=document.querySelectorAll('h1');
+  for(var i=0;i<hs.length;i++){
+   var t=hs[i].textContent||'';
+   if(/National Teaching\s*&\s*Learning/i.test(t)){
+    var h=hs[i];
+    if(h.parentNode){
+     parent=h.parentNode;
+     var ref=h, n=h.nextElementSibling, hops=0;
+     while(n&&hops<4&&(n.tagName==='P'||(n.tagName==='DIV'&&(''+n.className).indexOf('inline-block')>-1))){
+      ref=n; n=n.nextElementSibling; hops++;
+     }
+     beforeNode=ref.nextSibling;
+    }
+    break;
+   }
+  }
+  /* Fallback mount: directly before the hero CTA row */
+  if(!parent){
+   var cta=document.querySelector('div.flex.flex-wrap.justify-center.gap-4.mb-16');
+   if(cta&&cta.parentNode){parent=cta.parentNode; beforeNode=cta;}
+  }
+  if(!parent)return false;
+  var root=document.createElement('div');
+  root.id=ROOT;
+  root.innerHTML='<style>'+CSS+'<\/style>'+HTML;
+  parent.insertBefore(root,beforeNode);
+  wire(root);
+  return true;
+ }
+
+ if(!build()&&document.body){
+  try{
+   /* R4: childList-only, builds once, then disconnects; hard-stops after 30s */
+   var mo=new MutationObserver(function(){ if(build())mo.disconnect(); });
+   mo.observe(document.body,{childList:true,subtree:true});
+   setTimeout(function(){ try{mo.disconnect();}catch(e){} build(); },30000);
+  }catch(e){}
+ }
+})();</script>
 <script id="ntlsn-aim-script">(function(){function ins(){if(document.getElementById('ntlsn-aim'))return;var ft=document.querySelector('footer');if(!ft||!ft.parentNode)return;var sec=document.createElement('section');sec.id='ntlsn-aim';sec.style.cssText='position:relative;z-index:10;padding:56px 16px;border-top:1px solid rgba(255,255,255,.06)';sec.innerHTML='<div style="max-width:46rem;margin:0 auto;text-align:center"><div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#4ECDC4;font-weight:700;margin-bottom:14px">\u25CF Our aim</div><h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin:0 0 14px;line-height:1.2">Connecting the sector \u2014 sustainably</h2><p style="color:rgba(255,255,255,.62);font-size:1.05rem;line-height:1.7;margin:0 auto">NTLSN brings together what already exists across Australian higher education \u2014 events, resources, frameworks and the sector\u2019s own voices \u2014 into one free, open place.</p><p style="color:rgba(255,255,255,.62);font-size:1.05rem;line-height:1.7;margin:14px auto 0">We hope to grow: from <em style="color:#fff;font-style:normal">watching</em> the sector, to learning <em style="color:#fff;font-style:normal">from</em> the sector, to amplifying it. For now \u2014 to keep this free, independent and sustainable \u2014 we focus on doing one thing well: connecting you to what\u2019s already out there.</p></div>';ft.parentNode.insertBefore(sec,ft);}ins();new MutationObserver(ins).observe(document.body,{childList:true,subtree:true});})();</script><style id="ntlsn-latest-style">.ntlsn-lcard{transition:border-color .2s,transform .2s}.ntlsn-lcard:hover{border-color:rgba(78,205,196,.45)!important;transform:translateY(-2px)}</style><script id="ntlsn-latest-script">(function(){
 var EP="https://script.google.com/macros/s/AKfycbw6njLFaHEJQNVqnanEoQkoMy5DN2G1zJYslgo5bqAGI20Fiidp1VowQx6UDxccBriy/exec";
 var ICON={video:"\uD83C\uDFAC",blog:"\uD83D\uDCDD",news:"\uD83D\uDCE3",journal:"\uD83D\uDCC4",podcast:"\uD83C\uDFA7"};
@@ -323,7 +487,7 @@ place(sec);
 }
 fetch(EP).then(function(r){return r.json();}).then(function(d){if(Array.isArray(d)&&d.length){DATA=d;build();}}).catch(function(){});
 new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{id:'ntlsn-nowbanner'},{id:'ntlsn-startgrid'},{id:'ntlsn-trynow'},{id:'ntlsn-glance'},{id:'yearview'},{id:'events'},{id:'sotl-grants'},{id:'ntlsn-conference'},{id:'conferences'},{id:'ntlsn-zoom'},{tag:'DIV',re:/^Due Soon/},{id:'ntlsn-archive'},{id:'ntlsn-repository'},{id:'ntlsn-oer'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-talkshub'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'ntlsn-frameworks-stage'},{id:'frameworks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'architecture'},{id:'map'},{id:'directory'},{id:'ntlsn-peakmap'},{id:'network'},{id:'ntlsn-network'},{id:'pathways'},{id:'ntlsn-scrollconnect'},{id:'benchmarks'},{id:'ntlsn-fnawards'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{id:'ntlsn-oep'},{id:'ntlsn-whatsavailable'},{id:'ntlsn-symshow'},{id:'ntlsn-coming2027'},{id:'ntlsn-coming2028'},{id:'pricing'},{id:'ntlsn-choosepackage'},{id:'ntlsn-allinone'},{id:'ntlsn-howitworks'},{id:'ntlsn-byrole'},{id:'ntlsn-tailored'},{id:'ntlsn-founding10'},{id:'ntlsn-member'},{id:'ntlsn-journal'},{id:'ntlsn-capabilities'},{id:'pd'},{id:'ntlsn-waystogrow'},{id:'ntlsn-toolkit'},{id:'ntlsn-guided'},{id:'ntlsn-principles'},{id:'ntlsn-ethos'},{id:'ntlsn-litmus'},{id:'ntlsn-challenges'},{id:'ntlsn-induction'},{id:'ntlsn-positionality'},{id:'ntlsn-advisory'},{id:'ntlsn-representation'},{id:'ntlsn-aim'},{id:'ntlsn-rebalance'},{id:'ntlsn-together'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'ntlsn-mission'},{id:'ntlsn-scope'},{id:'about'},{id:'ntlsn-prx'},{id:'ntlsn-calibrate'},{id:'ntlsn-pairreview'},{id:'ntlsn-coursecheck'},{id:'ntlsn-curriculum'},{id:'ntlsn-diagnostic'},{id:'ntlsn-academy'},{id:'ntlsn-itonboard'},{id:'ntlsn-sprintplan'},{id:'ntlsn-abstractpreview'},{id:'ntlsn-recognition'},{id:'ntlsn-showcase'},{id:'ntlsn-aaut'},{id:'ntlsn-natcert'},{id:'ntlsn-confrecognition'},{id:'ntlsn-passport'},{id:'ntlsn-pathfinder'},{id:'ntlsn-consortium'},{id:'ntlsn-sap'},{id:'ntlsn-service'},{id:'ntlsn-praise'},{id:'ntlsn-promotion'},{id:'ntlsn-rpcalc'},{id:'ntlsn-evidencelib'},{id:'ntlsn-mcp'},{id:'ntlsn-pipeline'},{id:'ntlsn-policy'},{id:'ntlsn-dashboard'},{id:'ntlsn-recovery'},{id:'ntlsn-eba'},{id:'ntlsn-copscan'},{id:'ntlsn-freshtoday'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
+})();</script><script id="ntlsn-order">(function(){var parent=null;var ORDER=[{id:'hero'},{id:'ntlsn-nowbanner'},{id:'ntlsn-startgrid'},{id:'ntlsn-trynow'},{id:'ntlsn-glance'},{id:'yearview'},{id:'events'},{id:'sotl-grants'},{id:'ntlsn-conference'},{id:'conferences'},{id:'ntlsn-zoom'},{tag:'DIV',re:/^Due Soon/},{id:'ntlsn-archive'},{id:'ntlsn-repository'},{id:'ntlsn-oer'},{id:'resources'},{id:'teaching-resources'},{id:'ntlsn-bestpractice'},{id:'ntlsn-talkshub'},{id:'sector-themes'},{id:'featured-talks'},{id:'ntlsn-latest'},{id:'international-themes'},{id:'ntlsn-frameworks-stage'},{id:'frameworks'},{tag:'SECTION',head:1,re:/What the data shows/},{id:'ntlsn-prx'},{id:'ntlsn-calibrate'},{id:'ntlsn-pairreview'},{id:'ntlsn-coursecheck'},{id:'ntlsn-curriculum'},{id:'ntlsn-diagnostic'},{id:'ntlsn-academy'},{id:'ntlsn-itonboard'},{id:'ntlsn-sprintplan'},{id:'ntlsn-abstractpreview'},{id:'ntlsn-evidencelib'},{id:'ntlsn-mcp'},{id:'ntlsn-pipeline'},{id:'ntlsn-policy'},{id:'ntlsn-dashboard'},{id:'ntlsn-recovery'},{id:'ntlsn-eba'},{id:'ntlsn-copscan'},{id:'ntlsn-journal'},{id:'ntlsn-capabilities'},{id:'pd'},{id:'ntlsn-waystogrow'},{id:'ntlsn-toolkit'},{id:'ntlsn-guided'},{id:'ntlsn-recognition'},{id:'ntlsn-showcase'},{id:'ntlsn-aaut'},{id:'ntlsn-natcert'},{id:'ntlsn-confrecognition'},{id:'ntlsn-passport'},{id:'ntlsn-pathfinder'},{id:'ntlsn-consortium'},{id:'ntlsn-sap'},{id:'ntlsn-service'},{id:'ntlsn-praise'},{id:'ntlsn-promotion'},{id:'ntlsn-rpcalc'},{id:'architecture'},{id:'map'},{id:'directory'},{id:'ntlsn-peakmap'},{id:'network'},{id:'ntlsn-network'},{id:'pathways'},{id:'ntlsn-scrollconnect'},{id:'benchmarks'},{id:'ntlsn-fnawards'},{tag:'DIV',re:/Peak Bodies.{1,4}One Network/},{id:'ntlsn-oep'},{id:'ntlsn-whatsavailable'},{id:'ntlsn-symshow'},{id:'ntlsn-principles'},{id:'ntlsn-ethos'},{id:'ntlsn-litmus'},{id:'ntlsn-challenges'},{id:'ntlsn-induction'},{id:'ntlsn-positionality'},{id:'ntlsn-advisory'},{id:'ntlsn-representation'},{id:'ntlsn-aim'},{id:'ntlsn-rebalance'},{id:'ntlsn-together'},{id:'ntlsn-distribute'},{tag:'SECTION',head:1,re:/sector works better when we can see it all/},{tag:'SECTION',head:1,re:/Sharing is caring/},{tag:'SECTION',head:1,re:/Share your Zoom/},{tag:'SECTION',head:1,re:/University of Southern Queensland/},{id:'ntlsn-mission'},{id:'ntlsn-scope'},{id:'about'},{id:'ntlsn-coming2027'},{id:'ntlsn-coming2028'},{id:'pricing'},{id:'ntlsn-choosepackage'},{id:'ntlsn-allinone'},{id:'ntlsn-howitworks'},{id:'ntlsn-byrole'},{id:'ntlsn-tailored'},{id:'ntlsn-founding10'},{id:'ntlsn-member'},{id:'ntlsn-freshtoday'}];function findParent(){var h=document.getElementById('hero');return h?h.parentNode:null;}function matchEl(el,m){if(m.id)return el.id===m.id;if(m.tag&&el.tagName!==m.tag)return false;var t;if(m.head){var hh=el.querySelector('h1,h2,h3');t=hh?hh.textContent:'';}else{t=el.textContent;}return m.re.test(t.replace(/\s+/g,' '));}function findChild(m){if(!parent)return null;var ch=parent.children;for(var i=0;i<ch.length;i++){if(matchEl(ch[i],m))return ch[i];}return null;}var moving=false;function fix(){if(moving)return;parent=findParent();if(!parent)return;var ch=parent.children,footer=null;for(var i=0;i<ch.length;i++){if(ch[i].tagName==='FOOTER'){footer=ch[i];break;}}if(!footer)return;var targets=[];for(var k=0;k<ORDER.length;k++){var el=findChild(ORDER[k]);if(el)targets.push({el:el,idx:k});}if(targets.length<18)return;var dom=[];for(var j=0;j<ch.length;j++){for(var x=0;x<targets.length;x++){if(targets[x].el===ch[j]){dom.push(targets[x].idx);break;}}}var ok=true;for(var y=1;y<dom.length;y++){if(dom[y]<dom[y-1]){ok=false;break;}}if(ok)return;moving=true;targets.sort(function(a,b){return a.idx-b.idx;});for(var z=0;z<targets.length;z++){try{parent.insertBefore(targets[z].el,footer);}catch(e){}}moving=false;}fix();new MutationObserver(fix).observe(document.body,{childList:true,subtree:true});})();</script><script id="ntlsn-distribute-script">(function(){
 var CARD="background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:18px;padding:28px;";
 var BTN="display:inline-flex;align-items:center;gap:6px;font:600 14px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#4ECDC4;border:none;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer;";
 var GHOST="display:inline-flex;align-items:center;gap:6px;font:600 14px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:9px 13px;text-decoration:none;cursor:pointer;";
@@ -876,7 +1040,7 @@ var FORMATS=['20-min paper','Workshop','3³ talk · 9 min','Lightning talk · 5 
 var TALKS=[];
 function esc(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 var T=[
- {n:'School',b:'Head of School &mdash; ideal for small schools (&lt;15 academics)',p:'$30k',c:'#378ADD',mult:'The foundation',u:[
+ {n:'School',b:'Head of School &mdash; ideal for small schools (&lt;15 academics)',p:'$30k',c:'#378ADD',mult:'Embedded practice support',u:[
   {t:'Cross-institutional peer review',h:'#ntlsn-coming2027',d:'Pair your teachers with reviewers at other universities.'},
   {t:'Assessment calibration',h:'#ntlsn-coming2027',d:'Cross-marker calibration so grades mean the same thing.'},
   {t:'Course quality &amp; UDL readiness',h:'selfcheck.html',d:'Score any course on TELAS and UDL: a spider readiness profile to act on.'},
@@ -885,8 +1049,8 @@ var T=[
   {t:'Teaching-recognition passport',h:'trp.html',d:'A portable teaching record your staff keep for life.'},
   {t:'Symposium hosting and abstracts',h:'#ntlsn-capabilities',s:1,d:'Run your own Teaching and Learning Week on the Portal.'}
  ]},
- {n:'Institution',b:'DVCA portfolio · whole-of-institution',p:'$50k',c:'#7C9CFF',mult:'Uncapped · not pay-per-user',u:[
-  {t:'Everything in School, institution-wide',meta:1,d:'Every School feature, across all faculties and campuses &mdash; uncapped students, never pay-per-user. You buy the platform, not seats: among the lowest whole-of-institution costs in the sector.'},
+ {n:'Institution',b:'DVCA portfolio · whole-of-institution',p:'$50k',c:'#7C9CFF',mult:'Assurance &amp; sector visibility',u:[
+  {t:'Everything in School, institution-wide',meta:1,d:'Every School feature, across all faculties and campuses &mdash; uncapped students, never pay-per-user. You buy the platform, not seats.'},
   {t:'Teaching &amp; learning assurance &mdash; TEQSA-mapped',h:'teqsa-readiness.html',d:'Build evidence for your council &amp; regulator: RAG-rate each faculty against TEQSA, track improvement across years, benchmark against sector. Compliance and confidence in one dashboard.'},
   {t:'National moderation and calibration',h:'#ntlsn-coming2027',d:'Calibrate across the sector, not just in-house.'},
   {t:'Conference and symposium management',h:'#ntlsn-capabilities',s:1,d:'Run portfolio-wide events: abstracts, reviews, programs.'},
@@ -910,7 +1074,7 @@ function tierCard(t){
   +'<div style="display:flex;flex-direction:column;gap:8px;">'+t.u.map(function(x){
      if(x.meta) return '<div style="border-left:2px solid '+t.c+';padding:1px 0 1px 10px;"><span style="font:700 14px '+F+';color:#e8f0f7;">'+x.t+'</span><div style="font:400 12px/1.45 '+F+';color:#8499ad;margin-top:1px;">'+x.d+'</div></div>';
      var ext=x.h.charAt(0)!=='#';
-     var tag=x.s?'<span style="font:700 9px '+F+';letter-spacing:.5px;color:#FFB448;border:1px solid rgba(255,180,72,.45);border-radius:999px;padding:1px 6px;margin-left:6px;">2027</span>':'<span style="font:700 9px '+F+';letter-spacing:.5px;color:#4ECDC4;border:1px solid rgba(78,205,196,.45);border-radius:999px;padding:1px 6px;margin-left:6px;">LIVE</span>';
+     var tag=(x.s||x.h.indexOf('#ntlsn-coming')===0)?'<span style="font:700 9px '+F+';letter-spacing:.5px;color:#FFB448;border:1px solid rgba(255,180,72,.45);border-radius:999px;padding:1px 6px;margin-left:6px;">IN DESIGN</span>':'<span style="font:700 9px '+F+';letter-spacing:.5px;color:#4ECDC4;border:1px solid rgba(78,205,196,.45);border-radius:999px;padding:1px 6px;margin-left:6px;">LIVE</span>';
      return '<a class="ptl" href="'+x.h+'"'+(ext?' target="_blank" rel="noopener noreferrer"':'')+' style="display:block;text-decoration:none;border-left:2px solid '+t.c+';padding:2px 0 2px 10px;border-radius:0 6px 6px 0;">'
        +'<span class="ptt" style="font:700 14px '+F+';color:#e8f0f7;">'+x.t+'</span>'+tag+' <span style="color:'+t.c+';font-weight:800;">→</span>'
        +'<div style="font:400 12px/1.45 '+F+';color:#8499ad;margin-top:1px;">'+x.d+'</div>'
@@ -921,9 +1085,9 @@ function tierCard(t){
 function build(){
  var sec=document.createElement('section');sec.id='pricing';
  sec.style.cssText='max-width:1140px;margin:0 auto;padding:64px 24px;';
- var head='<div style="text-align:center;color:#4ECDC4;font:700 13px/1 '+F+';letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9678; Pricing</div>'
-  +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 '+F+';color:#fff;margin:0 0 12px;">Free for everyone. Paid only if you run your own.</h2>'
-  +'<p style="text-align:center;color:#9fb3c8;max-width:740px;margin:0 auto 30px;font:400 17px/1.6 '+F+';">The whole navigator &mdash; every event, the map, 2,000+ resources, the sector archive &mdash; is <b style="color:#cfe9e5;">free, forever, no login</b>, as Open Educational Practice. Universities, symposiums and associations pay only to <i>run their own</i>. An open API/MCP is there for anyone who wants to build on it &mdash; second to the commons, never the price of entry.</p>'+'<div style="max-width:1000px;margin:0 auto 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px 24px;">'+[['Reach','Surface your work to all 42 universities, not just your campus.'],['Scalability','One platform that grows from a school to the whole institution.'],['Promotion','Your events, awards and people, featured across the national network.'],['Simplification','Abstracts, registration, recognition and reporting in one place.'],['Streamlining','Replace scattered spreadsheets, forms and inboxes.'],['All connected','Every part links to the rest &mdash; data flows, nothing re-keyed.']].map(function(b){return '<div style="display:flex;gap:9px;align-items:flex-start;"><span style="color:#4ECDC4;font-weight:800;line-height:1.4;">&#9670;</span><div><div style="font:700 14px '+F+';color:#e8f0f7;">'+b[0]+'</div><div style="font:400 12.5px/1.45 '+F+';color:#8499ad;">'+b[1]+'</div></div></div>';}).join('')+'</div>';
+ var head='<div style="text-align:center;color:#4ECDC4;font:700 13px/1 '+F+';letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">&#9678; For schools &amp; institutions</div>'
+  +'<h2 style="text-align:center;font:800 clamp(28px,4vw,44px)/1.1 '+F+';color:#fff;margin:0 0 12px;">NTLSN is free for every educator, forever. Institutions can go further.</h2>'
+  +'<p style="text-align:center;color:#9fb3c8;max-width:740px;margin:0 auto 30px;font:400 17px/1.6 '+F+';">The whole navigator &mdash; every event, the map, 2,000+ resources, the sector archive &mdash; is <b style="color:#cfe9e5;">free, forever, no login</b>, as Open Educational Practice. No individual educator will ever be asked to pay &mdash; that guarantee is the point. Schools, institutions and associations partner with NTLSN to <i>run their own</i>: embedded practice support for schools, assurance and sector visibility for institutions. An open API/MCP is there for anyone who wants to build on it &mdash; second to the commons, never the price of entry.</p>'+'<div style="max-width:1000px;margin:0 auto 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px 24px;">'+[['Reach','Surface your work to all 42 universities, not just your campus.'],['Scalability','One platform that grows from a school to the whole institution.'],['Promotion','Your events, awards and people, featured across the national network.'],['Simplification','Abstracts, registration, recognition and reporting in one place.'],['Streamlining','Replace scattered spreadsheets, forms and inboxes.'],['All connected','Every part links to the rest &mdash; data flows, nothing re-keyed.']].map(function(b){return '<div style="display:flex;gap:9px;align-items:flex-start;"><span style="color:#4ECDC4;font-weight:800;line-height:1.4;">&#9670;</span><div><div style="font:700 14px '+F+';color:#e8f0f7;">'+b[0]+'</div><div style="font:400 12.5px/1.45 '+F+';color:#8499ad;">'+b[1]+'</div></div></div>';}).join('')+'</div>';
  var CHIPS=['42 universities mapped','94 sector events','23 conferences','Watch every university&rsquo;s conferences','369 sector videos','59 PD opportunities','320 SoTL resources','184 university resources','280 frameworks','43 grants &amp; fellowships','126 career pathways','78 international SoTL','80 best-practice guides','1,431-work sector archive','25 benchmarks','41 UDL resources','Peer-Review Exchange','Students-as-Partners Registry','Calibration Suite','Teaching Recognition Passport','Course Quality Self-Check','Reflective Coach','School Needs Diagnostic','TEQSA Gen AI Readiness','Interactive sector map','National T&L network','Year-at-a-glance calendar','3-year capability roadmap','Weekly digest + ICS feed','Embeddable widgets','Acknowledgement-of-Country widget','Open MCP / API'];
  var oep='<div id="pt-oep" style="background:linear-gradient(135deg,rgba(78,205,196,.12),rgba(124,156,255,.05));border:1px solid rgba(78,205,196,.32);border-radius:18px;padding:34px 28px;text-align:center;margin-bottom:34px;">'
   +'<div style="font:700 12px '+F+';letter-spacing:2px;color:#4ECDC4;text-transform:uppercase;margin-bottom:10px;">&#9825; OEP &middot; Open Educational Practices &middot; free, open, forever</div>'
@@ -951,7 +1115,7 @@ function build(){
  +'</div>';
  var sympP='<div id="pt-symp" class="pt-panel" style="display:none;">'+sympVal+run+'</div>';
  var ac=function(nm,ben,tag,href){
- var sp=function(c,bg,t){return '<span style="font:700 9px '+F+';letter-spacing:.5px;color:'+c+';border:1px solid '+bg+';border-radius:999px;padding:1px 6px;margin-left:4px;">'+t+'</span>';};var tg=tag==='live'?sp('#4ECDC4','rgba(78,205,196,.45)','LIVE'):(tag==='2028'?sp('#C9A962','rgba(201,169,98,.45)','2028'):sp('#FFB448','rgba(255,180,72,.45)','2027'));
+ var sp=function(c,bg,t){return '<span style="font:700 9px '+F+';letter-spacing:.5px;color:'+c+';border:1px solid '+bg+';border-radius:999px;padding:1px 6px;margin-left:4px;">'+t+'</span>';};var tg=tag==='live'?sp('#4ECDC4','rgba(78,205,196,.45)','LIVE'):(tag==='2028'?sp('#C9A962','rgba(201,169,98,.45)','2028'):sp('#FFB448','rgba(255,180,72,.45)','IN DESIGN'));
  var ext=href.charAt(0)!=='#';
  return '<a href="'+href+'"'+(ext?' target="_blank" rel="noopener noreferrer"':'')+' style="display:block;text-decoration:none;background:#0f1f38;border:1px solid rgba(124,156,255,.22);border-radius:14px;padding:15px;transition:border-color .15s;" onmouseover="this.style.borderColor=\'rgba(124,156,255,.5)\'" onmouseout="this.style.borderColor=\'rgba(124,156,255,.22)\'"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px;"><span style="font:800 15px '+F+';color:#fff;">'+nm+'</span><span style="font:800 13px '+F+';color:#7C9CFF;white-space:nowrap;">$5k/yr</span></div><div style="font:400 12px/1.5 '+F+';color:#9fb3c8;">'+ben+' '+tg+'</div></a>';
 };
@@ -964,7 +1128,7 @@ var assocP='<div id="pt-assoc" class="pt-panel" style="display:none;">'
  +ac('Advance HE','A Fellowship pipeline &mdash; the Teaching Recognition Passport mapped to PSF 2023.','live','trp.html')
  +ac('WIL Australia &middot; ACEN','The Placement Commons &mdash; broker work-integrated-learning placements sector-wide.','soon','#ntlsn-coming2028')
  +ac('ePortfolios Forum','Portfolio interoperability &mdash; member eportfolios connected to the TRP &amp; My eQuals.','soon','#ntlsn-capabilities')
- +ac('Students-as-Partners Network','Host your members&rsquo; partnership work on the National SaP Registry.','live','#ntlsn-coming2028')
+ +ac('Students-as-Partners Network','Host your members&rsquo; partnership work on the National SaP Registry.','2028','#ntlsn-coming2028')
  +ac('CAUL','An OER connector &mdash; surface member OER alongside the 1,431-work national archive.','live','#ntlsn-archive')
  +'</div>'
  +'</div>';
@@ -1055,7 +1219,7 @@ function ensure(){
 ensure(); new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script><script id="ntlsn-pricelinks-script">(function(){document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("#pricing a[href^=\"#\"]");if(!a)return;var id=a.getAttribute("href").slice(1),t=document.getElementById(id);if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-72,behavior:"smooth"});}},true);})();</script><script id="ntlsn-ethos-script">(function(){
 var F="-apple-system,Segoe UI,Roboto,sans-serif";
-function build(){var sec=document.createElement('section');sec.id='ntlsn-ethos';sec.style.cssText='max-width:1100px;margin:0 auto;padding:66px 22px;';sec.innerHTML='<div style="max-width:760px;margin:0 auto;text-align:center;">'+'<div style="font:800 13px '+F+';letter-spacing:2px;color:#FF6B6B;text-transform:uppercase;margin-bottom:18px;">About &middot; the question behind NTLSN</div>'+'<div style="font:800 clamp(28px,5vw,44px)/1.15 '+F+';color:#fff;margin-bottom:18px;">&ldquo;Who doesn&rsquo;t get to partner?&rdquo;</div>'+'<p style="font:600 17px/1.65 '+F+';color:#cbd8e6;margin:0 auto 18px;max-width:660px;">Everything on this site says <i>open to everyone</i>. This is the question that tests whether that is true &mdash; and the one that keeps the whole project honest.</p>'+'<p style="font:400 16px/1.75 '+F+';color:#9fb3c8;margin:0 auto 16px;max-width:680px;">NTLSN grows out of A/Prof Seb Dianati&rsquo;s scholarship on <b style="color:#cbd8e6;">Students as Partners</b>. Partnership promises shared authorship of teaching and learning; in practice the invitation is uneven. It reaches some students and not others, and too rarely the casualised teacher, the regional or under-resourced institution, or those whose identities intersect at the margins of who universities were built for.</p>'+'<p style="font:400 16px/1.75 '+F+';color:#9fb3c8;margin:0 auto 22px;max-width:680px;">A free, open commons is one answer. When the sector&rsquo;s knowledge, events and evidence are rationed by neither budget nor status, the threshold to take part drops for everyone &mdash; which is why the commons stays free, forever. First Nations teaching and learning is held here as work to learn from, never to rank. The question above is not something we have solved; it is the conscience we hold the whole project to.</p>'+'<a href="#ntlsn-coming2028" style="display:inline-block;font:700 14px '+F+';color:#4ECDC4;text-decoration:none;margin-bottom:22px;">See the national partnership work &rarr;</a>'+'<div style="border-top:1px solid rgba(255,255,255,.1);padding-top:16px;font:400 14px/1.6 '+F+';color:#8aa0b6;max-width:540px;margin:0 auto;">Founded by A/Prof Seb Dianati, University of Southern Queensland &middot; grounded in Students as Partners pedagogy and scholarship.</div>'+'</div>';return sec;}
+function build(){var sec=document.createElement('section');sec.id='ntlsn-ethos';sec.style.cssText='max-width:1100px;margin:0 auto;padding:66px 22px;';sec.innerHTML='<div style="max-width:760px;margin:0 auto;text-align:center;">'+'<div style="font:800 13px '+F+';letter-spacing:2px;color:#FF6B6B;text-transform:uppercase;margin-bottom:18px;">About &middot; the question behind NTLSN</div>'+'<div style="font:800 clamp(28px,5vw,44px)/1.15 '+F+';color:#fff;margin-bottom:18px;">&ldquo;Who doesn&rsquo;t get to partner?&rdquo;</div>'+'<p style="font:600 17px/1.65 '+F+';color:#cbd8e6;margin:0 auto 18px;max-width:660px;">Everything on this site says <i>open to everyone</i>. This is the question that tests whether that is true &mdash; and the one that keeps the whole project honest.</p>'+'<p style="font:400 16px/1.75 '+F+';color:#9fb3c8;margin:0 auto 16px;max-width:680px;">NTLSN grows out of A/Prof Seb Dianati&rsquo;s scholarship on <b style="color:#cbd8e6;">Students as Partners</b>. Partnership promises shared authorship of teaching and learning; in practice the invitation is uneven. It reaches some students and not others, and too rarely the casualised teacher, the regional or under-resourced institution, or those whose identities intersect at the margins of who universities were built for.</p>'+'<p style="font:400 16px/1.75 '+F+';color:#9fb3c8;margin:0 auto 22px;max-width:680px;">A free, open commons is one answer. When the sector&rsquo;s knowledge, events and evidence are rationed by neither budget nor status, the threshold to take part drops for everyone &mdash; which is why the commons stays free, forever. First Nations teaching and learning is held here as work to learn from, never to rank. The question above is not something we have solved; it is the conscience we hold the whole project to.</p>'+'<a href="#ntlsn-coming2028" style="display:inline-block;font:700 14px '+F+';color:#4ECDC4;text-decoration:none;margin-bottom:22px;">See the national partnership work &rarr;</a>'+'<div style="border-top:1px solid rgba(255,255,255,.1);padding-top:16px;font:400 14px/1.6 '+F+';color:#8aa0b6;max-width:540px;margin:0 auto;">Founded by A/Prof Seb Dianati &middot; independent of any single institution &middot; grounded in Students as Partners pedagogy and scholarship.</div>'+'</div>';return sec;}
 function ensure(){var hero=document.getElementById('hero');if(!hero)return;if(document.getElementById('ntlsn-ethos'))return;var sec=build();hero.parentNode.appendChild(sec);}
 ensure();new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
 })();</script>
@@ -1371,7 +1535,7 @@ function build(){
    +'<div style="font:400 clamp(15px,2vw,21px)/1.55 '+F+';color:rgba(255,255,255,.86);max-width:700px;margin-top:14px;text-shadow:0 2px 14px rgba(0,0,0,.45);">'+sl.s+'</div>'
    +'</div>';
  });
- html+='<div style="position:absolute;top:14px;left:0;right:0;text-align:center;z-index:4"><span style="display:inline-block;font:800 12px '+F+';letter-spacing:2px;text-transform:uppercase;color:#06121f;background:#FFB448;border-radius:999px;padding:5px 15px;box-shadow:0 4px 18px rgba(255,180,72,.45)">Coming soon &middot; 2027</span></div>';html+='<div style="position:absolute;top:50px;left:0;right:0;text-align:center;z-index:3;font:700 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:rgba(255,247,235,.84);text-shadow:0 1px 8px rgba(0,0,0,.6);"><span style="color:#FFB448;">&#9670;</span> A University of Southern Queensland academic-development initiative</div>';html+=(RM?'':'<button id="ntlsn-ss-toggle" aria-label="Pause background video" title="Pause background video" style="position:absolute;bottom:14px;right:16px;z-index:4;width:34px;height:34px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(8,18,31,.5);color:#fff;font:700 12px '+F+';line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;letter-spacing:1px;">&#10073;&#10073;</button>');html+='<div id="ntlsn-ss-dots" style="position:absolute;bottom:18px;left:0;right:0;display:flex;gap:9px;justify-content:center;z-index:2;">';
+ html+='<div style="position:absolute;top:14px;left:0;right:0;text-align:center;z-index:4"><span style="display:inline-block;font:800 12px '+F+';letter-spacing:2px;text-transform:uppercase;color:#06121f;background:#FFB448;border-radius:999px;padding:5px 15px;box-shadow:0 4px 18px rgba(255,180,72,.45)">Coming soon &middot; 2027</span></div>';html+='<div style="position:absolute;top:50px;left:0;right:0;text-align:center;z-index:3;font:700 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:rgba(255,247,235,.84);text-shadow:0 1px 8px rgba(0,0,0,.6);"><span style="color:#FFB448;">&#9670;</span> An independent teaching &amp; learning commons</div>';html+=(RM?'':'<button id="ntlsn-ss-toggle" aria-label="Pause background video" title="Pause background video" style="position:absolute;bottom:14px;right:16px;z-index:4;width:34px;height:34px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(8,18,31,.5);color:#fff;font:700 12px '+F+';line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;letter-spacing:1px;">&#10073;&#10073;</button>');html+='<div id="ntlsn-ss-dots" style="position:absolute;bottom:18px;left:0;right:0;display:flex;gap:9px;justify-content:center;z-index:2;">';
  SLIDES.forEach(function(_,i){html+='<span data-i="'+i+'" style="width:9px;height:9px;border-radius:999px;background:'+(i===0?'#fff':'rgba(255,255,255,.4)')+';transition:background .3s,transform .3s;cursor:pointer;"></span>';});
  html+='</div>';
  sec.innerHTML=html;
@@ -1657,7 +1821,7 @@ function build(){
    +'<div style="font:400 14.5px/1.62 '+F+';color:#aebfce;">'+c.d+'</div></div>';
  }).join('');
  sec.innerHTML='<div style="text-align:center;max-width:800px;margin:0 auto 34px;">'
-  +'<div style="display:inline-block;font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:#F4B223;border:1px solid rgba(244,178,35,.5);border-radius:999px;padding:5px 13px;margin-bottom:15px;">◆ Founding Sponsor &middot; University of Southern Queensland</div>'
+  +'<div style="display:inline-block;font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:#F4B223;border:1px solid rgba(244,178,35,.5);border-radius:999px;padding:5px 13px;margin-bottom:15px;">◆ NTLSN Academy &middot; independent</div>'
   +'<h2 style="font:800 clamp(26px,3.6vw,40px)/1.15 '+F+';color:#fff;margin:0 0 13px;">A place to think, in the heart of the city.</h2>'
   +'<p style="font:400 clamp(15px,1.8vw,18px)/1.6 '+F+';color:#aebfce;margin:0;">Teaching can be isolating &mdash; more so after a restructure. The <b style="color:#fff;">UniSQ Academy</b> is the human face of the commons: a standing presence in Brisbane city, with the kettle on. It begins as open drop-in days and grows into a full training centre for the sector &mdash; academic development, done in the city.</p>'+'<p style="font:italic 600 13.5px '+F+';color:#FBD27A;margin:14px auto 0;max-width:580px;">Connecting every Tuesday and Wednesday. Workshops, drop-ins and CoPs. No doors, no need to book. Just come.</p>'
   +'</div>'
@@ -1798,7 +1962,7 @@ var GROUPS=[
  {h:'Available now \u00b7 learn & explore',c:'#4ECDC4',items:[['At a glance','ntlsn-glance'],['Academic Induction','ntlsn-induction'],['PD & programs','pd'],['From the sector','sector-themes'],['International','international-themes'],['Featured talks','featured-talks'],['Latest','ntlsn-latest']]},
  {h:'Coming 2027 \u00b7 symposiums',c:'#FFB448',items:[['The Portal (preview)','ntlsn-symshow'],['Symposium engine','ntlsn-coming2027'],['Peer-Review Exchange','ntlsn-coming2027'],['Calibration suite','ntlsn-coming2027'],['See all 2027 \u2192','ntlsn-coming2027']]},
  {h:'Coming 2028 \u00b7 recognition',c:'#7C9CFF',items:[['Recognition passport','ntlsn-coming2028'],['Awards & citations','ntlsn-coming2028'],['Sector interoperability','ntlsn-coming2028'],['See all 2028 \u2192','ntlsn-coming2028']]},
- {h:'About & join',c:'#9fb0c3',items:[['About','about'],['Pricing','pricing'],['All-in-one bundle','pricing'],['UniSQ Academy','pricing'],['Roadmap','ntlsn-capabilities'],['Advisory & alliance','ntlsn-advisory'],['Get involved','ntlsn-network']]}
+ {h:'About & join',c:'#9fb0c3',items:[['About','about'],['Pricing','pricing'],['All-in-one bundle','pricing'],['Roadmap','ntlsn-capabilities'],['Advisory & alliance','ntlsn-advisory'],['Get involved','ntlsn-network']]}
 ];
 function esc(e){if(e.key==='Escape')closeMenu();}
 function go(id){var el=document.getElementById(id);closeMenu();if(el){var y=el.getBoundingClientRect().top+window.scrollY-78;window.scrollTo({top:y,behavior:'smooth'});}}
@@ -4239,7 +4403,9 @@ var TOOLS=[{i:"🩺",n:"The NTLSN Teaching Diagnostic",d:"One review across alig
  {i:"📜",n:"Students-as-Partners Certificate",d:"Generate a partnership certificate, print-ready, in your browser.",u:"/cert.html",t:""},
  {i:"🤝",n:"Student-Partner Contribution Record",d:"Students who partner with staff deserve recognition too &mdash; record the work, capabilities &amp; reflection, and keep it.",u:"/student-partnership.html",t:"New"},
  {i:"🧭",n:"School Needs Diagnostic",d:"Map a team&rsquo;s development needs to the right NTLSN tools.",u:"/school-needs-diagnostic.html",t:"Prototype"},
- {i:"🪞",n:"Reflective Coach",d:"Structured reflective prompts for your own teaching practice.",u:"/reflective-coach.html",t:"Prototype"}
+ {i:"🪞",n:"Reflective Coach",d:"Structured reflective prompts for your own teaching practice.",u:"/reflective-coach.html",t:"Prototype"},
+ {i:"🤝",n:"Peer-Review Exchange",d:"Review one, get one &mdash; get matched with a colleague at another university for cross-institution, developmental peer review of teaching.",u:"/peer-review-exchange.html",t:"New"},
+ {i:"🎚️",n:"Calibration Suite",d:"Run the calibration ritual before marking starts &mdash; everyone scores the same sample, see the spread, talk until it closes.",u:"/calibration-suite.html",t:"New"}
 ];
 function build(){
  if(document.getElementById('ntlsn-trynow'))return;
@@ -4565,7 +4731,7 @@ try{new MutationObserver(build).observe(document.body,{childList:true,subtree:tr
       +'<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" style="color:#4ECDC4;text-decoration:none;">Creative Commons Attribution&ndash;NonCommercial&ndash;ShareAlike 4.0 International licence</a>. '
       +'Third-party and embedded resources retain their own licences. Culturally sensitive Aboriginal and Torres Strait Islander materials remain under the custodianship of their communities and are not covered by this licence.'
     +'</div>'
-    +'<div style="font:400 11.5px '+FS+';color:#6b7e90;margin-top:15px;">&copy;&nbsp;2026 NTLSN &mdash; National Teaching and Learning Sector Network. A University of Southern Queensland academic-development initiative.</div>';
+    +'<div style="font:400 11.5px '+FS+';color:#6b7e90;margin-top:15px;">&copy;&nbsp;2026 NTLSN &mdash; National Teaching and Learning Sector Network.</div>';
    document.body.appendChild(bar);
  }
  build();
@@ -5560,20 +5726,7 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  }
  build(); setTimeout(build,600); setTimeout(build,2200); setTimeout(build,5000);
 })();</script>
-<script id="ntlsn-usqa-banner-script">(function(){
- if(window.__ntlsnUsqa)return; window.__ntlsnUsqa=1;
- function build(){
-  if(document.getElementById('ntlsn-usqa-band')) return;
-  var footer=document.querySelector('footer'); if(!footer) return;
-  var s=document.createElement('div'); s.id='ntlsn-usqa-band'; s.setAttribute('role','note'); s.setAttribute('aria-label','Incubated at the University of Southern Queensland — UniSQ Academy');
-  s.style.cssText="background:linear-gradient(100deg,#25102A,#3D1A39 55%,#50244A);border-top:2px solid #F4B223;padding:15px 22px;margin-top:20px;display:flex;align-items:center;gap:15px;flex-wrap:wrap;justify-content:center";
-  s.innerHTML="<span style='flex:none' aria-hidden='true'><svg width='36' height='44' viewBox='0 0 100 120' xmlns='http://www.w3.org/2000/svg'><path d='M50 5 L91 19 V58 C91 88 72 106 50 115 C28 106 9 88 9 58 V19 Z' fill='none' stroke='#F4B223' stroke-width='2.6'></path><polygon points='27,93 73,93 50,74' fill='#F4B223'></polygon><polygon points='31,79 69,79 50,60' fill='#F4B223'></polygon><polygon points='36,65 64,65 50,48' fill='#F4B223'></polygon><polygon points='40,53 60,53 50,38' fill='#F4B223'></polygon><rect x='47.6' y='92' width='4.8' height='11' fill='#F4B223'></rect></svg></span>"
-   +"<span style='text-align:left;min-width:0'><span style=\"display:block;font:600 19px/1 Georgia,'Times New Roman',serif;color:#FAF5EC;letter-spacing:.3px\">UniSQ <span style='color:#F4B223'>Academy</span></span><span style=\"display:block;font:500 12px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#E2CFDC;margin-top:3px\">NTLSN is incubated at the <a href='https://www.unisq.edu.au' target='_blank' rel='noopener' style='color:#FBD27A;text-decoration:none'>University of Southern Queensland</a>.</span></span>";
-  footer.appendChild(s);
- }
- build(); setTimeout(build,800); setTimeout(build,2500); setTimeout(build,6000);
- var t=null; try{ new MutationObserver(function(){ if(t)return; t=setTimeout(function(){t=null; build();},800); }).observe(document.body,{childList:true,subtree:true}); }catch(e){}
-})();</script>
+
 <script id="ntlsn-startgrid-script">(function(){
  if(window.__ntlsnStartGrid)return; window.__ntlsnStartGrid=1;
  var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
@@ -5603,7 +5756,10 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
   ['📺','Webinars & Talks','286 recordings from the sector','#ntlsn-talkshub'],
   ['🧑‍🏫','Mentoring & Coaching','Grow with the sector','#ntlsn-waystogrow'],
   ['👥','Communities & SIGs','SIGs, themes, networks & people','#network'],
-  ['🗃️','SoTL Archive','1,431 funded works, searchable','#ntlsn-archive']
+  ['🗃️','SoTL Archive','1,431 funded works, searchable','#ntlsn-archive'],
+  ['📌','What\u2019s On','Conferences, calls & CFPs across the sector','/whats-on.html'],
+  ['🌐','The Sector in 3D','43 universities, states & alliances in 3D','/network-3d.html'],
+  ['📈','Publication Profile','Your open research footprint, in the open','/publication-profile.html']
  ];
  function card(c,i){
   var lock=c[4]==='lock';
@@ -5651,6 +5807,35 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  build(); hideOld();
  var t=null; new MutationObserver(function(){clearTimeout(t);t=setTimeout(function(){build();hideOld();},150);}).observe(document.body,{childList:true,subtree:true});
  [500,1500,3000,6000].forEach(function(ms){setTimeout(function(){build();hideOld();},ms);});
+})();</script>
+<script id="ntlsn-starthere-card">(function(){
+ if(window.__ntlsnStartHereCard)return; window.__ntlsnStartHereCard=1;
+ var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+ function build(){
+  if(document.getElementById('ntlsn-starthere-tile'))return true;
+  var grid=document.querySelector('#ntlsn-startgrid .ntlsn-sg-grid'); if(!grid)return false;
+  var a=document.createElement('a');
+  a.id='ntlsn-starthere-tile'; a.href='/start-here.html'; a.className='ntlsn-sg-card';
+  a.style.cssText='--d:0;text-decoration:none;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:5px;background:rgba(255,255,255,.025);border:1px solid rgba(78,205,196,.35);border-radius:16px;padding:22px 12px;transition:transform .15s,border-color .15s,background .15s';
+  a.innerHTML='<div class="ntlsn-sg-ic" style="font-size:34px;line-height:1;margin-bottom:5px">🫧</div>'
+   +'<div style="font:800 15.5px '+F+';color:#fff;line-height:1.2">Start Here</div>'
+   +'<div style="font:400 12px '+F+';color:rgba(255,255,255,.45);line-height:1.35">Pick your interests, get your path</div>';
+  grid.insertBefore(a,grid.children[1]||null);
+  try{
+   var p=grid.parentNode.querySelector('p');
+   if(p&&/\d+ ways into the commons/.test(p.textContent||'')){
+    p.textContent=(p.textContent||'').replace(/\d+(?= ways into the commons)/,String(grid.querySelectorAll('.ntlsn-sg-card').length));
+   }
+  }catch(e){}
+  return true;
+ }
+ if(build())return;
+ [400,1200,2500,5000,8000,12000].forEach(function(ms){setTimeout(build,ms);});
+ try{
+  var mo=new MutationObserver(function(){ if(build()){ try{mo.disconnect();}catch(e){} } });
+  mo.observe(document.body,{childList:true,subtree:true});
+  setTimeout(function(){try{mo.disconnect();}catch(e){}},20000);
+ }catch(e){}
 })();</script>
 <style id="ntlsn-seamless-style">
 #ntlsn-startgrid{background:transparent!important;border-top:0!important;border-bottom:0!important}
@@ -5835,5 +6020,42 @@ section:not(#hero){content-visibility:auto;contain-intrinsic-size:auto 760px}
   ov.addEventListener('click',function(e){var b=e.target.closest?e.target.closest('button[data-r]'):null;if(!b)return;var r=b.getAttribute('data-r');try{localStorage.setItem('ntlsn_region',r);}catch(e){}ov.style.opacity='0';setTimeout(function(){if(ov.parentNode)ov.parentNode.removeChild(ov);},350);if(r==='global')note();});
  }
  setTimeout(show,900);
-})();</script></body>
+})();</script><style id="ntlsn-ghmove">
+/* ntlsn-ghmove — GitHub presence moved from top nav to footer.
+   Hides ONLY the two top-nav instances: (1) desktop teal GitHub button inside the
+   fixed nav, (2) its mobile counterpart in the portalled Radix Sheet drawer.
+   Exact-href guard excludes the 7 third-party github.com archive links; [class~=]
+   word-token guards uniquely pick these two among the five rendered repo anchors
+   (verified: bg-[#4ECDC4] and text-white/50 each occur on exactly one).
+   Footer Connect "GitHub" link, About GitHub chip and "Contribute on GitHub" CTA
+   remain untouched. Pure CSS: no DOM writes, no observers, survives React
+   re-renders (R1-R5 safe). !important beats the md:inline-flex media-query class. */
+a[href="https://github.com/dian0007-cloud/ntlsn"][class~="bg-[#4ECDC4]"],
+a[href="https://github.com/dian0007-cloud/ntlsn"][class~="text-white/50"]{display:none !important}
+/* Optional cosmetic (kept as a SEPARATE rule so engines without :has() cannot
+   invalidate the core rule above): collapse the drawer's now-empty bottom strip
+   (div.p-4.border-t.space-y-2 whose only child was the GitHub entry). The footer
+   Connect column is `space-y-2` without p-4/border-t, so it cannot match. */
+div[class~="p-4"][class~="border-t"][class~="space-y-2"]:has(> a[href="https://github.com/dian0007-cloud/ntlsn"]){display:none !important}
+</style>
+<script id="ntlsn-aboutlink">
+(function(){
+ if(window.__ntlsnAboutLink)return; window.__ntlsnAboutLink=1;
+ var tries=0;
+ function go(){
+   if(document.getElementById('ntlsn-aboutlink-a'))return;
+   var why=document.getElementById('ntlsn-why');
+   if(!why){ if(++tries<40)setTimeout(go,250); return; }
+   var wrap=why.firstElementChild||why;
+   var a=document.createElement('a');
+   a.id='ntlsn-aboutlink-a';
+   a.href='/about.html';
+   a.textContent='Our story \u2014 who builds NTLSN, and why \u2192';
+   a.style.cssText='display:inline-block;margin-top:26px;font:800 14px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#4ECDC4;text-decoration:none;border:1px solid rgba(78,205,196,.35);border-radius:999px;padding:10px 20px;';
+   wrap.appendChild(a);
+ }
+ go();
+})();
+</script>
+</body>
 </html>

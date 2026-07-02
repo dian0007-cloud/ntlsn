@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — The Portal · share your live session with the sector</title>
+<meta name="description" content="Drop your Zoom link and put your live teaching session on the sector's noticeboard — your symposium, showcase, conference, festival or teaching & learning week. Share one, get the whole sector's calendar back. Free, in your browser, nothing stored.">
+<meta property="og:title" content="NTLSN — The Portal · share your live session with the sector">
+<meta property="og:description" content="Drop your Zoom link, put your live session on the sector's noticeboard, and get everyone else's back. The live inter-university symposium portal.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ntlsn.com/portal.html">
+<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.ntlsn.com/portal.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--blue:#7C9CFF;--purple:#C57BFF;--pink:#FF6FB5;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#9DD649;--live:#FF5470;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:var(--F);line-height:1.5;min-height:100vh;
+    background:
+      radial-gradient(800px 420px at 12% 0%,rgba(78,205,196,.16),transparent 60%),
+      radial-gradient(760px 420px at 92% 8%,rgba(197,123,255,.16),transparent 60%),
+      radial-gradient(900px 500px at 50% 100%,rgba(124,156,255,.12),transparent 60%),
+      var(--navy);
+    background-attachment:fixed}
+  .wrap{max-width:1040px;margin:0 auto;padding:30px 20px 60px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font:800 11px/1 var(--F);letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin:0 0 18px;background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);padding:7px 12px;border-radius:999px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,84,112,.6);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,84,112,.6)}70%{box-shadow:0 0 0 9px rgba(255,84,112,0)}100%{box-shadow:0 0 0 0 rgba(255,84,112,0)}}
+  .hero h1{font-size:clamp(34px,7vw,72px);line-height:1.02;margin:0 0 8px;font-weight:800;letter-spacing:-.03em;color:#fff}
+  .dyn{color:var(--teal);white-space:nowrap}
+  .cur{display:inline-block;width:3px;height:.92em;background:var(--teal);margin-left:4px;vertical-align:-2px;animation:blink 1s steps(1) infinite;border-radius:2px}
+  @keyframes blink{50%{opacity:0}}
+  .hero .sub{font-size:clamp(16px,2.3vw,21px);color:#cbd8e6;max-width:680px;margin:16px 0 26px}
+  .hero .sub b{color:#fff}
+  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#06251f;border:0;border-radius:999px;padding:15px 26px;font:800 16px var(--F);text-decoration:none;cursor:pointer}
+  .btn.big{font-size:17px;padding:16px 30px}
+  .btn.ghost{background:rgba(255,255,255,.05);color:#fff;border:1px solid var(--line)}
+  .btn:focus-visible,a:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .micro{font-size:13px;color:var(--mut)}
+  .recip{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:34px 0 0;padding:16px 20px;background:linear-gradient(100deg,rgba(78,205,196,.12),rgba(197,123,255,.1));border:1px solid var(--line);border-radius:16px}
+  .recip b{font:800 22px var(--F);color:#fff} .recip span{color:#cbd8e6;font-size:14px}
+  h2.sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.4px;color:var(--mut);margin:40px 0 16px}
+  .live{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:13px}
+  .ses{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px 17px;position:relative;overflow:hidden}
+  .ses .tag{display:inline-flex;align-items:center;gap:6px;font:800 10px var(--F);text-transform:uppercase;letter-spacing:.6px;padding:4px 9px;border-radius:999px;margin:0 0 10px}
+  .ses .tag.on{background:rgba(255,84,112,.16);color:var(--live)}
+  .ses .tag.up{background:rgba(124,156,255,.16);color:var(--blue)}
+  .ses .st{font:700 15.5px var(--F);color:#fff;margin:0 0 4px;line-height:1.25}
+  .ses .sm{font-size:12.5px;color:var(--mut);margin:0 0 12px}
+  .ses .sj{font:800 12.5px var(--F);color:var(--teal);text-decoration:none}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .step{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:18px}
+  .step .si{font-size:26px} .step .sn{font:800 11px var(--F);color:var(--teal);letter-spacing:.5px;margin-top:8px} .step .st{font:800 16px var(--F);color:#fff;margin:4px 0 6px} .step .sd{font-size:13px;color:var(--mut)}
+  .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .wc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .wc .wt{font:800 14.5px var(--F);color:#fff;margin:0 0 5px} .wc .wd{font-size:12.5px;color:var(--mut)}
+  .bigcta{text-align:center;background:linear-gradient(120deg,rgba(78,205,196,.14),rgba(197,123,255,.14));border:1px solid rgba(78,205,196,.35);border-radius:20px;padding:34px 22px;margin:40px 0 0}
+  .bigcta h3{font:800 clamp(22px,3.4vw,30px) var(--F);color:#fff;margin:0 0 8px;letter-spacing:-.01em}
+  .bigcta p{color:#cbd8e6;font-size:15px;margin:0 0 18px}
+  .foot{color:#7d8da0;font-size:11.5px;margin:34px 0 0;line-height:1.65;border-top:1px solid var(--line);padding-top:16px}
+  .foot b{color:#cbd8e6} a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){.dot,.cur{animation:none}*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <span class="eyebrow"><span class="dot"></span> The Portal · live across the sector</span>
+    <h1>Share your Zoom for your<br><span class="dyn" id="dyn">symposium</span><span class="cur" id="cur"></span></h1>
+    <p class="sub">Run something live? <b>Drop your Zoom link and we put it on the sector's noticeboard.</b> Colleagues across every university can see it and join — and you get a calendar of everyone else's, free. One shared session, the whole sector in the room.</p>
+    <div class="ctas">
+      <a class="btn big" href="mailto:hello@ntlsn.com?subject=Share%20my%20live%20session%20on%20The%20Portal&amp;body=Title:%0ADate%20%26%20time%20(with%20timezone):%0AHost%20%26%20institution:%0AZoom%20link:%0AOne-line%20description:">＋ Share your session</a>
+      <a class="btn ghost" href="#live">See what's live →</a>
+    </div>
+    <p class="micro">Free · your Zoom, your room · nothing to install · we list it, we host nothing, we store nothing.</p>
+    <div class="recip"><b>Share one.</b> <span>Get the whole sector's calendar back. The more who share, the bigger the room for everyone.</span></div>
+  </div>
+
+  <h2 class="sec" id="live">On now &amp; coming up</h2>
+  <div class="live" id="sessions"></div>
+  <p class="micro" style="margin-top:10px">A live, curated noticeboard. <a href="mailto:hello@ntlsn.com?subject=Share%20my%20live%20session%20on%20The%20Portal">Add yours →</a></p>
+
+  <h2 class="sec">How it works</h2>
+  <div class="steps">
+    <div class="step"><div class="si">🎥</div><div class="sn">01 · YOU</div><div class="st">Drop your Zoom</div><div class="sd">Send your session title, time and Zoom link. Any live thing — a seminar, a panel, your whole symposium.</div></div>
+    <div class="step"><div class="si">📡</div><div class="sn">02 · US</div><div class="st">We put it on the board</div><div class="sd">It goes on the sector noticeboard — curated, timezone-aware, open to every university.</div></div>
+    <div class="step"><div class="si">🌏</div><div class="sn">03 · THE SECTOR</div><div class="st">Everyone can join</div><div class="sd">Colleagues across Australasia and beyond click and join. Your room, suddenly national.</div></div>
+  </div>
+
+  <h2 class="sec">Why share?</h2>
+  <div class="why">
+    <div class="wc"><div class="wt">Reciprocity</div><div class="wd">Share one session; see hundreds. A commons grows by what people put in.</div></div>
+    <div class="wc"><div class="wt">Your platform, your control</div><div class="wd">It's your Zoom, your recording, your room. We just point people to it.</div></div>
+    <div class="wc"><div class="wt">No platform to learn</div><div class="wd">No new tool, no logins, no migration. If you can run a Zoom, you can do this.</div></div>
+    <div class="wc"><div class="wt">Free &amp; open</div><div class="wd">Free for everyone, always. The sector's events, in one place.</div></div>
+  </div>
+
+  <div class="bigcta">
+    <h3>Make your session a sector event.</h3>
+    <p>Your next symposium, showcase, conference, festival or teaching &amp; learning week — shared live with everyone.</p>
+    <a class="btn big" href="mailto:hello@ntlsn.com?subject=Share%20my%20live%20session%20on%20The%20Portal">Share your session →</a>
+  </div>
+
+  <div class="foot">
+    <b>How "no data" works here.</b> The Portal is a <b>noticeboard of links</b>, not a platform. Sessions run on your own Zoom; NTLSN hosts nothing, records nothing and stores no attendee data — we list publicly-shared session details so the sector can find them. Submitting a session shares the details you choose to send. NTLSN is independent of Zoom and all vendors. &nbsp;·&nbsp; <a href="/whats-on.html">What's on</a> &nbsp;·&nbsp; <a href="/symposium.html">Run a symposium</a> &nbsp;·&nbsp; <a href="/">← NTLSN</a>
+  </div>
+</div>
+<script>
+(function(){
+  // ---- typewriter: cycle the kind of live thing you're sharing ----
+  var WORDS=["symposium","showcase","conference","festival","teaching & learning week","masterclass","public lecture","panel","workshop","research seminar","graduation","open day"];
+  var dyn=document.getElementById("dyn");
+  var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(dyn && !RM){
+    var wi=0,ci=0,del=false;
+    function step(){
+      var w=WORDS[wi];
+      if(!del){ci++;dyn.textContent=w.slice(0,ci);if(ci>=w.length){del=true;return setTimeout(step,1500);}}
+      else{ci--;dyn.textContent=w.slice(0,ci);if(ci<=0){del=false;wi=(wi+1)%WORDS.length;return setTimeout(step,450);}}
+      setTimeout(step,del?45:90);
+    }
+    step();
+  }
+
+  // ---- live noticeboard: reads /data/events.json if present, else shows examples ----
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function safeUrl(u,f){if(!u)return f;var s=String(u).trim();if(/^(https?:|\/\/|\/|#)/i.test(s))return s;if(/^[a-z][a-z0-9+.\-]*:/i.test(s))return f;return s;}
+  var EX=[
+    {title:"Re-imagining assessment in the age of AI",host:"cross-sector panel",when:"Today · 2:00pm AEST",live:true,url:"#"},
+    {title:"Students-as-partners showcase",host:"national network",when:"Tomorrow · 12:00pm ACST",live:false,url:"#"},
+    {title:"First-year belonging — a teaching & learning week",host:"multi-university",when:"Thu · 10:00am AWST",live:false,url:"#"},
+    {title:"Work-integrated learning festival",host:"ACEN community",when:"Next week",live:false,url:"#"}
+  ];
+  function card(s){
+    return '<div class="ses"><span class="tag '+(s.live?'on':'up')+'">'+(s.live?'● Live now':'◷ Upcoming')+'</span>'+
+      '<div class="st">'+esc(s.title)+'</div>'+
+      '<div class="sm">'+esc(s.host||"")+(s.when?(' · '+esc(s.when)):'')+'</div>'+
+      '<a class="sj" href="'+esc(safeUrl(s.url,"#"))+'"'+(s.url==="#"?' onclick="return false"':' target="_blank" rel="noopener"')+'>Join the room →</a></div>';
+  }
+  var box=document.getElementById("sessions");
+  function paint(list){box.innerHTML=list.slice(0,8).map(card).join("");}
+  paint(EX);
+  // try the live feed; keep examples if it fails
+  if(window.fetch){
+    fetch("/data/events.json").then(function(r){return r.ok?r.json():Promise.reject();})
+      .then(function(d){if(Array.isArray(d)&&d.length){paint(d.map(function(e){return {title:e.title,host:e.uni||e.type||"",when:e.date,live:false,url:e.url};}));}})
+      .catch(function(){});
+  }
+})();
+</script>
+</body>
+</html>

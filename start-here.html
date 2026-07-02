@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Start here: what brings you here?</title>
+<meta name="description" content="Pick the teaching topics you care about and get a personalised path through NTLSN's free, open commons — crash courses, in-browser tools and sector events. It all runs in your browser: nothing is sent to us, stored on our servers, or sold.">
+<style>
+:root{
+  --bg:#0A1628; --panel:rgba(255,255,255,.03); --line:rgba(255,255,255,.09);
+  --teal:#4ECDC4; --purple:#C57BFF; --amber:#FFB448; --coral:#FF6B6B;
+  --ink:#FFFFFF; --ink-soft:rgba(255,255,255,.78); --ink-mute:#9FB0C3;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--font);min-height:100vh}
+a{color:var(--teal)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+
+header.site{padding:18px 0;border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:baseline;gap:9px;text-decoration:none}
+.brand b{font:800 19px var(--font);color:#fff;letter-spacing:.4px}
+.brand span{font:500 12px var(--font);color:var(--ink-mute)}
+.backlink{font:600 13.5px var(--font);color:var(--ink-mute);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:7px 14px;transition:border-color .15s,color .15s}
+.backlink:hover{border-color:var(--teal);color:#fff}
+
+.hero{padding:58px 0 8px;text-align:center}
+.eyebrow{font:800 12px var(--font);letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+h1{font:800 clamp(30px,5vw,46px)/1.12 var(--font);letter-spacing:-.015em;margin-bottom:14px}
+.sub{color:var(--ink-mute);font-size:16.5px;max-width:620px;margin:0 auto}
+
+.bubblefield{padding:34px 0 4px}
+.bubbles{display:flex;flex-wrap:wrap;justify-content:center;gap:11px;max-width:900px;margin:0 auto}
+.bubble{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--panel);border:1.5px solid var(--line);border-radius:999px;
+  color:var(--ink-soft);font:600 15px var(--font);padding:12px 19px;min-height:48px;
+  transition:border-color .15s,background .15s,color .15s,transform .12s;
+}
+.bubble .ic{font-size:19px;line-height:1}
+.bubble .tick{display:none;font-weight:800;color:var(--teal)}
+.bubble:hover{border-color:rgba(78,205,196,.55);color:#fff;transform:translateY(-2px)}
+.bubble[aria-pressed="true"]{background:rgba(78,205,196,.13);border-color:var(--teal);color:#fff}
+.bubble[aria-pressed="true"] .tick{display:inline}
+.count{ text-align:center;color:var(--ink-mute);font:500 14.5px var(--font);margin:22px 0 4px;min-height:1.6em }
+.count b{color:var(--teal);font-weight:800}
+
+.ctabar{position:sticky;bottom:0;z-index:10;padding:16px 0 22px;text-align:center;
+  background:linear-gradient(180deg,rgba(10,22,40,0) 0%,rgba(10,22,40,.92) 38%,#0A1628 100%)}
+.cta{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background:var(--teal);color:#06222a;border:0;border-radius:999px;
+  font:800 17px var(--font);padding:15px 34px;min-height:52px;
+  box-shadow:0 6px 26px rgba(78,205,196,.28);transition:transform .12s,box-shadow .15s,opacity .15s;
+}
+.cta:hover:not([disabled]){transform:translateY(-2px);box-shadow:0 10px 32px rgba(78,205,196,.38)}
+.cta[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+.ctahint{display:block;color:var(--ink-mute);font:500 12.5px var(--font);margin-top:9px}
+
+#path{padding:26px 0 10px}
+#path[hidden]{display:none}
+.path-head{text-align:center;margin-bottom:26px}
+.path-head h2{font:800 clamp(24px,3.6vw,34px)/1.15 var(--font);letter-spacing:-.01em}
+.path-head p{color:var(--ink-mute);font-size:15px;margin-top:8px}
+.repick{appearance:none;background:transparent;border:1px solid var(--line);border-radius:99px;color:var(--ink-mute);
+  font:600 13px var(--font);padding:8px 16px;margin-top:14px;cursor:pointer;transition:border-color .15s,color .15s}
+.repick:hover{border-color:var(--teal);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.cards{grid-template-columns:1fr}}
+.card{
+  display:flex;flex-direction:column;gap:8px;text-decoration:none;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 18px;
+  transition:transform .15s,border-color .15s,background .15s;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(78,205,196,.6);background:rgba(78,205,196,.07)}
+.card .tag{font:800 10.5px var(--font);letter-spacing:1.6px;text-transform:uppercase;color:var(--purple)}
+.card .tag.tool{color:var(--amber)}
+.card .tag.event{color:var(--coral)}
+.card h3{font:800 16.5px/1.3 var(--font);color:#fff}
+.card p{color:var(--ink-mute);font-size:13.5px;line-height:1.5}
+.card .go{margin-top:auto;font:700 13px var(--font);color:var(--teal)}
+.card .why{font:500 11.5px var(--font);color:rgba(255,255,255,.55)}
+
+.orcid-band{margin:52px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(120deg,rgba(78,205,196,.07),rgba(197,123,255,.07));padding:44px 0;text-align:center}
+.orcid-band h2{font:800 clamp(21px,3vw,28px)/1.25 var(--font);max-width:640px;margin:0 auto 10px}
+.orcid-band p{color:var(--ink-mute);font-size:15px;max-width:560px;margin:0 auto 22px}
+.orcid-cta{display:inline-block;text-decoration:none;background:transparent;border:1.5px solid var(--teal);color:var(--teal);
+  border-radius:999px;font:800 15.5px var(--font);padding:13px 28px;transition:background .15s,color .15s}
+.orcid-cta:hover{background:var(--teal);color:#06222a}
+.honest{display:block;margin-top:18px;color:var(--ink-mute);font:500 13px var(--font)}
+.honest .dot{color:var(--teal)}
+
+footer.site{padding:34px 0 44px;text-align:center}
+footer.site nav{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:14px}
+footer.site a{font:600 13.5px var(--font);color:var(--ink-mute);text-decoration:none}
+footer.site a:hover{color:var(--teal)}
+footer.site .fine{color:rgba(255,255,255,.55);font-size:12px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="NTLSN home">
+      <b>NTLSN</b><span>National Tertiary Learning &amp; Scholarship Network</span>
+    </a>
+    <a class="backlink" href="/">&#8592; Back to the commons</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-h">
+    <p class="eyebrow">Start here</p>
+    <h1 id="hero-h">What brings you here?</h1>
+    <p class="sub">Tap the topics you care about — as many as you like — and we'll lay out a path through the commons: crash courses, free in-browser tools and what's on across the sector.</p>
+  </section>
+
+  <section class="bubblefield wrap" aria-labelledby="bubbles-h">
+    <h2 id="bubbles-h" class="visually-hidden">Choose your interests</h2>
+    <div class="bubbles" id="bubbles" role="group" aria-label="Teaching and scholarship interests — select any that apply"></div>
+    <p class="count" id="count" aria-live="polite">No topics picked yet.</p>
+    <div class="ctabar">
+      <button class="cta" id="show-path" type="button" disabled>Show my path &#8594;</button>
+      <span class="ctahint" id="cta-hint">Pick at least one topic to build your path.</span>
+    </div>
+  </section>
+
+  <section id="path" class="wrap" hidden aria-labelledby="path-h">
+    <div class="path-head">
+      <h2 id="path-h" tabindex="-1">Your path through the commons</h2>
+      <p id="path-sub"></p>
+      <button class="repick" id="repick" type="button">&#8593; Change my picks</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="orcid-band" aria-labelledby="orcid-h">
+    <div class="wrap">
+      <h2 id="orcid-h">Want this personalised from your actual scholarship?</h2>
+      <p>Paste your ORCID and the commons reshapes around your published teaching-and-learning work — a snapshot, a SoTL footprint, and picks matched to what you teach.</p>
+      <a class="orcid-cta" href="/orcid-start.html">Start with your ORCID &#8594;</a>
+      <span class="honest"><span class="dot">&#9679;</span> Nothing is sent to us, stored on our servers, or sold — it runs in your browser.</span>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/crash-courses.html">Crash courses</a>
+      <a href="/#ntlsn-trynow">Free tools</a>
+      <a href="/whats-on.html">What's on</a>
+      <a href="/orcid-start.html">Start with your ORCID</a>
+    </nav>
+    <p class="fine">NTLSN is a free, open commons for tertiary learning and teaching. No logins, no tracking on this page — your topic picks are saved only in your browser.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---- interests ---- */
+  var INTERESTS = [
+    { id: 'assessment',   ic: '📝', label: 'Assessment' },
+    { id: 'feedback',     ic: '💬', label: 'Feedback' },
+    { id: 'genai',        ic: '🤖', label: 'GenAI & teaching' },
+    { id: 'firstyear',    ic: '🌱', label: 'First year & transition' },
+    { id: 'inclusive',    ic: '🌈', label: 'Inclusive teaching' },
+    { id: 'largeclasses', ic: '🏟️', label: 'Large classes & lecturing' },
+    { id: 'sotl',         ic: '📚', label: 'SoTL & publishing' },
+    { id: 'grants',       ic: '💰', label: 'Grants & funding' },
+    { id: 'recognition',  ic: '🏅', label: 'Recognition & fellowships' },
+    { id: 'peerreview',   ic: '🔍', label: 'Peer review of teaching' },
+    { id: 'curriculum',   ic: '🧩', label: 'Curriculum design' },
+    { id: 'partnership',  ic: '🤝', label: 'Student partnership' },
+    { id: 'online',       ic: '💻', label: 'Online & blended' },
+    { id: 'tutorials',    ic: '🧑‍🏫', label: 'Tutorials & small groups' },
+    { id: 'wellbeing',    ic: '🌿', label: 'Student wellbeing' },
+    { id: 'events',       ic: '🗓️', label: 'Events & symposia' }
+  ];
+
+  /* ---- destinations: every href verified against the site tree ----
+     tag: course | tool | page | event  */
+  var PATHS = {
+    assessment: [
+      ['Authentic Assessment: a crash course', 'A short, self-paced path on assessment that holds up — stitched from the open commons.', '/assessment-crash-course.html', 'course'],
+      ['Designing Assessment: a crash course', 'From intended learning outcomes to the task sheet — the design end of assessment.', '/assessment-design-crash-course.html', 'course']
+    ],
+    feedback: [
+      ['Feedback That Works: a crash course', 'What the evidence says about feedback students actually use.', '/feedback-crash-course.html', 'course'],
+      ['Feedback & Feedforward Builder', 'An in-browser tool for drafting student feedback that helps — no login.', '/feedback-builder.html', 'tool']
+    ],
+    genai: [
+      ['Generative AI: a crash course for academics', 'A grounded starting point on GenAI in teaching — no hype.', '/genai-crash-course.html', 'course'],
+      ['Academic Integrity in the Age of AI', 'A crash course on integrity when generative tools are everywhere.', '/academic-integrity-ai-crash-course.html', 'course']
+    ],
+    firstyear: [
+      ['First-Year Success & Belonging', 'A crash course on transition, belonging and the first-year experience.', '/first-year-crash-course.html', 'course'],
+      ['New to Teaching & Marking', 'A free starter kit for casual and new academic staff.', '/casual-teaching.html', 'page']
+    ],
+    inclusive: [
+      ['Inclusive & Accessible Teaching', 'A crash course on teaching that works for every student.', '/inclusive-teaching-crash-course.html', 'course'],
+      ['Inclusive & Equitable Assessment', 'The assessment end of inclusion — a crash course.', '/inclusive-assessment-crash-course.html', 'course']
+    ],
+    largeclasses: [
+      ['Teaching Large Classes: a crash course', 'Keeping learning active when the room holds hundreds.', '/large-classes-crash-course.html', 'course'],
+      ['Effective Lecturing: a crash course', 'Making the lecture format earn its place.', '/lecturing-crash-course.html', 'course']
+    ],
+    sotl: [
+      ['Where to Publish Your SoTL', 'An open-access journal finder for teaching-and-learning scholarship.', '/journal-finder.html', 'tool'],
+      ['Open-Access Finder', 'Find the free, legal version of any paper.', '/oa-finder.html', 'tool'],
+      ['The SoTL Index', 'A DORA-aligned profile of your teaching-and-learning scholarship.', '/sotl-index.html', 'tool']
+    ],
+    grants: [
+      ['SoTL grants on the homepage', 'The grants and funding section of the commons.', '/#sotl-grants', 'page'],
+      ['SoTL Grant Pitch Builder', 'Scaffold a teaching grant application in your browser.', '/grant-pitch.html', 'tool']
+    ],
+    recognition: [
+      ['Fellowship Category Mapper', 'Map your practice to fellowship categories — HEA, AAUT, citations.', '/fellowship-mapper.html', 'tool'],
+      ['Recognition Credit Framework', 'How recognition for teaching can be structured and evidenced.', '/recognition-framework.html', 'page']
+    ],
+    peerreview: [
+      ['Peer Observation of Teaching', 'A crash course on observing — and being observed — well.', '/peer-observation-crash-course.html', 'course'],
+      ['Peer Review of Teaching Template', 'A ready-to-use template for structured peer review.', '/peer-review-teaching.html', 'tool']
+    ],
+    curriculum: [
+      ['Designing Your Course: a crash course', 'From blank page to coherent course design.', '/curriculum-crash-course.html', 'course'],
+      ['Constructive Alignment & Curriculum Design', 'The alignment thinking underneath good curriculum — a crash course.', '/constructive-alignment-crash-course.html', 'course']
+    ],
+    partnership: [
+      ['Student-Partner Contribution Record', 'A tool for recording and recognising student-partner contributions.', '/student-partnership.html', 'tool'],
+      ['Critical Learner Partnerships', 'A diamond open-access journal on students as partners — in design.', '/critical-learner-partnerships.html', 'page']
+    ],
+    online: [
+      ['Online & Blended Teaching', 'A crash course on teaching well across modes.', '/online-blended-crash-course.html', 'course'],
+      ['Teaching with Technology', 'A crash course on edtech that serves the pedagogy.', '/edtech-crash-course.html', 'course']
+    ],
+    tutorials: [
+      ['Tutorials & Small-Group Teaching', 'A crash course on the room where most learning happens.', '/tutorials-crash-course.html', 'course'],
+      ['Group Work & Collaborative Learning', 'Making group work fair, structured and worth it — a crash course.', '/group-work-crash-course.html', 'course']
+    ],
+    wellbeing: [
+      ['Supporting Student Wellbeing', 'A crash course on wellbeing in and around your teaching.', '/wellbeing-crash-course.html', 'course'],
+      ['Inclusive & Accessible Teaching', 'Teaching that works for every student — a close companion to wellbeing.', '/inclusive-teaching-crash-course.html', 'course']
+    ],
+    events: [
+      ["What's On across the sector", 'Upcoming conferences, workshops and webinars.', '/whats-on.html', 'event'],
+      ['Missed it? Catch up on the sector', 'Recordings and programs from past events.', '/missed-it.html', 'event'],
+      ['Find your SoTL conference', 'Three questions, the right event for you.', '/conference-finder.html', 'tool']
+    ]
+  };
+
+  var EXTRAS = [
+    ['All 15+ crash courses', 'The full set of short, self-paced paths distilled from the commons.', '/crash-courses.html', 'page'],
+    ['Free in-browser tools', 'Every NTLSN tool — no login, nothing leaves your browser.', '/#ntlsn-trynow', 'tool']
+  ];
+
+  var TAG_LABEL = { course: 'Crash course', tool: 'Free tool', page: 'On the commons', event: 'Events' };
+
+  var LS_KEY = 'ntlsn_starthere_interests';
+  var selected = {};
+
+  /* ---- restore previous picks (optional, graceful) ---- */
+  try {
+    var saved = JSON.parse(localStorage.getItem(LS_KEY) || '[]');
+    if (Object.prototype.toString.call(saved) === '[object Array]') {
+      for (var si = 0; si < saved.length; si++) {
+        if (PATHS[saved[si]]) selected[saved[si]] = true;
+      }
+    }
+  } catch (e) { /* private mode etc. — carry on without memory */ }
+
+  function persist() {
+    try {
+      var keys = [];
+      for (var k in selected) { if (selected[k]) keys.push(k); }
+      localStorage.setItem(LS_KEY, JSON.stringify(keys));
+    } catch (e) { /* fine — selection just won't survive a reload */ }
+  }
+
+  function countSelected() {
+    var n = 0;
+    for (var k in selected) { if (selected[k]) n++; }
+    return n;
+  }
+
+  /* ---- render bubbles ---- */
+  var field = document.getElementById('bubbles');
+  var countEl = document.getElementById('count');
+  var cta = document.getElementById('show-path');
+  var ctaHint = document.getElementById('cta-hint');
+
+  INTERESTS.forEach(function (it) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'bubble';
+    b.setAttribute('data-id', it.id);
+    b.setAttribute('aria-pressed', selected[it.id] ? 'true' : 'false');
+    var ic = document.createElement('span');
+    ic.className = 'ic'; ic.setAttribute('aria-hidden', 'true'); ic.textContent = it.ic;
+    var tx = document.createElement('span');
+    tx.textContent = it.label;
+    var tick = document.createElement('span');
+    tick.className = 'tick'; tick.setAttribute('aria-hidden', 'true'); tick.textContent = '✓';
+    b.appendChild(ic); b.appendChild(tx); b.appendChild(tick);
+    b.addEventListener('click', function () {
+      selected[it.id] = !selected[it.id];
+      b.setAttribute('aria-pressed', selected[it.id] ? 'true' : 'false');
+      persist();
+      refresh();
+    });
+    field.appendChild(b);
+  });
+
+  function refresh() {
+    var n = countSelected();
+    if (n === 0) {
+      countEl.textContent = 'No topics picked yet.';
+      cta.disabled = true;
+      ctaHint.textContent = 'Pick at least one topic to build your path.';
+      if (pathSec && !pathSec.hidden) pathSec.hidden = true;
+    } else {
+      countEl.innerHTML = '<b>' + n + '</b> topic' + (n === 1 ? '' : 's') + ' picked.';
+      cta.disabled = false;
+      ctaHint.textContent = 'You can add or remove topics any time.';
+    }
+  }
+
+  /* ---- build the path ---- */
+  var pathSec = document.getElementById('path');
+  var pathH = document.getElementById('path-h');
+  var pathSub = document.getElementById('path-sub');
+  var cardsEl = document.getElementById('cards');
+
+  function makeCard(item, why) {
+    var a = document.createElement('a');
+    a.className = 'card';
+    a.href = item[2];
+    var tag = document.createElement('span');
+    tag.className = 'tag' + (item[3] === 'tool' ? ' tool' : (item[3] === 'event' ? ' event' : ''));
+    tag.textContent = TAG_LABEL[item[3]] || 'On the commons';
+    var h = document.createElement('h3');
+    h.textContent = item[0];
+    var p = document.createElement('p');
+    p.textContent = item[1];
+    a.appendChild(tag); a.appendChild(h); a.appendChild(p);
+    if (why) {
+      var w = document.createElement('span');
+      w.className = 'why'; w.textContent = 'Because you picked: ' + why;
+      a.appendChild(w);
+    }
+    var go = document.createElement('span');
+    go.className = 'go'; go.setAttribute('aria-hidden', 'true'); go.textContent = 'Open →';
+    a.appendChild(go);
+    return a;
+  }
+
+  cta.addEventListener('click', function () {
+    var n = countSelected();
+    if (n === 0) return;
+    cardsEl.textContent = '';
+    var seen = {};
+    var labels = [];
+    INTERESTS.forEach(function (it) {
+      if (!selected[it.id]) return;
+      labels.push(it.label);
+      (PATHS[it.id] || []).forEach(function (item) {
+        if (seen[item[2]]) return;
+        seen[item[2]] = true;
+        cardsEl.appendChild(makeCard(item, it.label));
+      });
+    });
+    EXTRAS.forEach(function (item) {
+      if (seen[item[2]]) return;
+      seen[item[2]] = true;
+      cardsEl.appendChild(makeCard(item, null));
+    });
+    pathSub.textContent = 'Curated from your ' + n + ' pick' + (n === 1 ? '' : 's') + ': ' + labels.join(' · ');
+    pathSec.hidden = false;
+    pathSec.scrollIntoView({ block: 'start' });
+    pathH.focus({ preventScroll: true });
+  });
+
+  document.getElementById('repick').addEventListener('click', function () {
+    document.getElementById('bubbles-h').parentNode.scrollIntoView({ block: 'start' });
+    var first = field.querySelector('.bubble');
+    if (first) first.focus({ preventScroll: true });
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
