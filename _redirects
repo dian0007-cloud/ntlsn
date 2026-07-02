@@ -1,9 +1,7 @@
 # Bot / vulnerability-scanner hygiene — junk paths return a real 404 (keeps
 # Web Analytics clean and stops scanners showing up as "top pages"). No exposure
 # either way: the site is static and none of these files exist.
-/.git/wilcrashcourse.html /wil-crash-course.html 301
-/wellbeingcrashcourse.html /wellbeing-crash-course.html 301
-/*                   /404.html   404
+/.git/*                   /404.html   404
 /.env                     /404.html   404
 /.env.*                   /404.html   404
 /wp-admin/*               /404.html   404
@@ -15,6 +13,10 @@
 /service-account.json     /404.html   404
 /firebase-adminsdk.json   /404.html   404
 /gcp-credentials.json     /404.html   404
+
+# Legacy concatenated course URLs
+/wilcrashcourse.html      /wil-crash-course.html       301
+/wellbeingcrashcourse.html /wellbeing-crash-course.html 301
 
 # SPA fallback — real routes serve index.html so deep links and refreshes work
 /*    /index.html   200
