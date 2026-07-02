@@ -622,47 +622,7 @@ function ensure(){
 }
 ensure();
 new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-gradcert-bench"><script id="ntlsn-integrations-cards">(function(){
-var CARD="background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:18px;padding:28px;";
-var SOON="background:#0f1f38;border:1px dashed rgba(255,180,72,.35);border-radius:18px;padding:28px;";
-var BTN="display:inline-flex;align-items:center;gap:6px;font:600 14px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#0A1628;background:#4ECDC4;border:none;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer;";
-var PILL="display:inline-block;font:700 11px/1 -apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#FFB448;border:1px solid rgba(255,180,72,.4);border-radius:999px;padding:5px 10px;margin:0 8px 14px 0;";
-var LIVEPILL="display:inline-block;font:700 11px/1 -apple-system,Segoe UI,Roboto,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#4ECDC4;border:1px solid rgba(78,205,196,.4);border-radius:999px;padding:5px 10px;margin:0 0 14px;";
-var TITLE="font:700 20px/1.2 -apple-system,Segoe UI,Roboto,sans-serif;color:#fff;margin-bottom:6px;";
-var BODY="color:#9fb3c8;font:400 15px/1.55 sans-serif;margin:0 0 14px;";
-var FOOT="color:#5b6b7e;font:400 13px/1.5 sans-serif;margin:0;";
-function card(style,html){var d=document.createElement("div");d.style.cssText=style;d.setAttribute("data-ntlsn-integrations","1");d.innerHTML=html;return d;}
-function build(){
- var f=document.createDocumentFragment();
- f.appendChild(card(SOON,''
-  +'<span style="'+PILL+'">Coming 2027</span>'
-  +'<div style="'+TITLE+'">&#128275; Open API</div>'
-  +'<p style="'+BODY+'">Every public dataset on NTLSN &mdash; events, the resource library, the talks archive &mdash; as documented, read-only JSON endpoints for institutional dashboards, researchers and builders. In design now; planned as free, no key required.</p>'
-  +'<p style="'+FOOT+'">Open by default already: the calendar feed (.ics) and RSS in this section are the first open endpoints, live today.</p>'));
- f.appendChild(card(SOON,''
-  +'<span style="'+PILL+'">Coming 2027</span>'
-  +'<div style="'+TITLE+'">&#129513; Embed SDK</div>'
-  +'<p style="'+BODY+'">A small component kit for university L&amp;T pages &mdash; live what&rsquo;s-on lists, resource picks and the sector map, each added with a single script tag. In design now.</p>'
-  +'<p style="'+FOOT+'">The events widget and Acknowledgement-of-Country widget in this section are the first two components, live today.</p>'));
- f.appendChild(card(CARD,''
-  +'<span style="'+PILL+'">Coming soon</span>'
-  +'<span style="'+LIVEPILL+'">Modules export today</span>'
-  +'<div style="'+TITLE+'">&#128230; &ldquo;SCORM for ALL&rdquo;</div>'
-  +'<p style="'+BODY+'">Every resource on NTLSN as a quick-download SCORM package that drops straight into Moodle, Canvas or Blackboard. Coming soon site-wide &mdash; and already live for one collection: every Learn-from-the-Sector module exports SCORM&nbsp;1.2 today, with completion and quiz scores reporting to your gradebook.</p>'
-  +'<a style="'+BTN+'" href="/learning-modules.html">Try a live SCORM export &rarr;</a>'));
- return f;
-}
-function ensure(){
- var sec=document.getElementById("ntlsn-distribute");if(!sec)return;
- if(sec.querySelector("[data-ntlsn-integrations]"))return;
- var grids=sec.querySelectorAll("div");var grid=null;
- for(var i=0;i<grids.length;i++){if((grids[i].style.display==="grid")||/grid-template-columns/.test(grids[i].getAttribute("style")||"")){grid=grids[i];break;}}
- if(!grid)return;
- grid.appendChild(build());
-}
-ensure();
-new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
-})();</script>(function(){
+})();</script><script id="ntlsn-gradcert-bench">(function(){
 var U=[["Institution 01","y","HEA Fellowship pathway"],["Institution 02","y","Grad Cert in HE; 24 units; CSP; free for staff"],["Institution 03","y","24 CP; staff fee waivers"],["Institution 04","y","FULT pathway; 24 UOC"],["Institution 05","y","Grad Cert in University Teaching Practice; FHEA"],["Institution 06","y","SEDA accredited; 24 CP"],["Institution 07","y","HEA Fellowship guidance"],["Institution 08","y","Stackable micro-cred model"],["Institution 09","s","Suspended 2025-2026"],["Institution 10","y","Peer Partnerships model"],["Institution 11","y","Cross-sectoral HE/VET/Health"],["Institution 12","y","Integrates LLMs; 24 CP"],["Institution 13","n","No dedicated Grad Cert found"],["Institution 14","n","No dedicated Grad Cert found"],["Institution 15","y","Innovative pedagogies; online"],["Institution 16","y","Cloud-first; FHEA pathway"],["Institution 17","y","Aboriginal learning model"],["Institution 18","y","Grad Cert in HE Curriculum, Teaching & Learning"],["Institution 19","y","40 CP; micro-credentialed"],["Institution 20","n","Merged into another university (2023)"],["Institution 21","y","Award-winning; 24 CP"],["Institution 22","y","Global perspectives; 18 units"],["Institution 23","n","No dedicated Grad Cert found"],["Institution 24","n","No dedicated Grad Cert found"],["Institution 25","n","No dedicated Grad Cert found"],["Institution 26","y","Micro-subjects; CSP"],["Institution 27","y","CSP-eligible; 24 CP"],["Institution 28","n","No dedicated Grad Cert found"],["Institution 29","n","No dedicated Grad Cert found"],["Institution 30","y","40 CP; SoTL focus"],["Institution 31","y","Fully online; flexible entry"]];
 var COL={y:"#34d399",s:"#FFB448",n:"#FF6B6B"};
 function pctOf(k){return U.filter(function(u){return u[1]===k;}).length/U.length*100;}
@@ -6215,5 +6175,21 @@ function go(){
 go();
 })();
 </script>
+<script id="ntlsn-herdsabanner">(function(){
+ if(window.__ntlsnHerdsaBanner)return; window.__ntlsnHerdsaBanner=1;
+ var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";
+ var tries=0;
+ function go(){
+  if(document.getElementById('ntlsn-herdsa-banner'))return;
+  var hero=document.getElementById('hero');
+  if(!hero){ if(++tries<40)setTimeout(go,300); return; }
+  var a=document.createElement('a');
+  a.id='ntlsn-herdsa-banner'; a.href='/herdsa-2026.html';
+  a.style.cssText='display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:680px;margin:0 auto 18px;padding:10px 20px;background:linear-gradient(90deg,rgba(78,205,196,.14),rgba(124,156,255,.14),rgba(197,123,255,.14));border:1px solid rgba(78,205,196,.45);border-radius:999px;text-decoration:none;font:700 13.5px '+F+';color:#fff';
+  a.innerHTML='<span style="font-size:16px">\uD83C\uDDF8\uD83C\uDDEC</span><span>At HERDSA 2026? The whole program, threaded into the commons</span><span style="color:#4ECDC4;font-weight:800">Open it \u2192</span>';
+  hero.insertBefore(a, hero.firstChild);
+ }
+ go();
+})();</script>
 </body>
 </html>
