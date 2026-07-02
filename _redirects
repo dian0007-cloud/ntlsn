@@ -18,5 +18,9 @@
 /wilcrashcourse.html      /wil-crash-course.html       301
 /wellbeingcrashcourse.html /wellbeing-crash-course.html 301
 
-# SPA fallback — real routes serve index.html so deep links and refreshes work
-/*    /index.html   200
+# Convenience entries
+/events.html     /whats-on.html   301
+/resources.html  /tools.html      301
+
+# Everything else that isn't a real file is a real 404 (no more homepage-in-disguise)
+/*    /404.html   404

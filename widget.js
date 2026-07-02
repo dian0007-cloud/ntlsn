@@ -1,6 +1,6 @@
 /*!
  * NTLSN embed widget — drop-in "upcoming sector events" list for any site.
- * Usage:  <script src="https://www.ntlsn.com/widget.js" data-limit="5" data-uni="usq"></script>
+ * Usage:  <script src="https://ntlsn.com/widget.js" data-limit="5" data-uni="usq"></script>
  *   data-limit : how many events to show (default 5)
  *   data-uni   : optional university id (e.g. usq, unimelb, curtin) — omit for sector-wide
  * Renders into a scoped shadow root so it never clashes with the host page's CSS.
@@ -10,7 +10,7 @@
   var s = document.currentScript;
   if (!s) return;
   var origin;
-  try { origin = new URL(s.src).origin; } catch (e) { origin = 'https://www.ntlsn.com'; }
+  try { origin = new URL(s.src).origin; } catch (e) { origin = 'https://ntlsn.com'; }
   var uni = (s.getAttribute('data-uni') || '').toLowerCase().trim();
   var limit = parseInt(s.getAttribute('data-limit') || '5', 10);
   if (isNaN(limit) || limit < 1) limit = 5;

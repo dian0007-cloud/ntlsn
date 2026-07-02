@@ -2,8 +2,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
   <title>NTLSN — Australian HE Teaching &amp; Learning Events</title>
-  <link>https://www.ntlsn.com/</link>
-  <atom:link href="https://www.ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <link>https://ntlsn.com/</link>
+  <atom:link href="https://ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Upcoming symposiums, workshops and PD across all 42 Australian universities.</description>
   <language>en-au</language>
   <lastBuildDate>Tue, 09 Jun 2026 22:22:41 GMT</lastBuildDate>
@@ -30,7 +30,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Pearson, Le Busque &amp; Richardson (2026-06-25)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-80</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipients. Details to be announced.</description>
@@ -93,14 +93,14 @@
   </item>
   <item>
     <title>Bond Innovation in Education Forum (2026-08-20)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-53</guid>
     <category>conference</category>
     <description>Bond · Personalised learning, small-group pedagogy.</description>
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Dr Miao Li (CSU) (2026-08-20)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-81</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipient. Details to be announced.</description>
@@ -114,14 +114,14 @@
   </item>
   <item>
     <title>CDU Northern Teaching Symposium (2026-08-26)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-39</guid>
     <category>symposium</category>
     <description>CDU · First Nations pedagogies, remote learning.</description>
   </item>
   <item>
     <title>AAUT &amp; HERDSA Webinar Session 4 (2026-08-27)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-77</guid>
     <category>webinar</category>
     <description>Details to be announced.</description>
@@ -142,14 +142,14 @@
   </item>
   <item>
     <title>Newcastle Education Innovation Symposium (2026-09-09)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-34</guid>
     <category>symposium</category>
     <description>Newcastle · Regional engagement, WIL, STEM reform.</description>
   </item>
   <item>
     <title>Swinburne Innovation in Teaching Day (2026-09-09)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-55</guid>
     <category>showcase</category>
     <description>Swinburne · Technology-enhanced teaching.</description>
@@ -163,21 +163,21 @@
   </item>
   <item>
     <title>VU Block Model Symposium (2026-09-16)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-41</guid>
     <category>symposium</category>
     <description>VU · VU Block Model Academy.</description>
   </item>
   <item>
     <title>ACU Teaching &amp; Service Symposium (2026-09-17)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-52</guid>
     <category>symposium</category>
     <description>ACU · Teaching excellence with community service.</description>
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Spencer &amp; Jones (RMIT) (2026-09-17)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-82</guid>
     <category>webinar</category>
     <description>Adelaide · Teaching Excellence Award recipients. Details to be announced.</description>
@@ -191,21 +191,21 @@
   </item>
   <item>
     <title>AAUT &amp; HERDSA Webinar Session 5 (2026-09-24)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-78</guid>
     <category>webinar</category>
     <description>Details to be announced.</description>
   </item>
   <item>
     <title>Macquarie Learning Innovation Week (2026-09-28 – 2026-10-02)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-36</guid>
     <category>week</category>
     <description>Macquarie · Five days of workshops and showcases.</description>
   </item>
   <item>
     <title>UC Teaching Innovation Forum (2026-09-30)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-43</guid>
     <category>conference</category>
     <description>UC · Connected learning, micro-credentials.</description>
@@ -219,84 +219,84 @@
   </item>
   <item>
     <title>Curtin Teaching Excellence Week (2026-10-05 – 2026-10-09)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-32</guid>
     <category>week</category>
     <description>Curtin · Workshops, masterclasses, and awards.</description>
   </item>
   <item>
     <title>Monash Education Academy Showcase (2026-10-07 – 2026-10-08)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-23</guid>
     <category>showcase</category>
     <description>Monash · MEA fellowship projects and teaching innovations.</description>
   </item>
   <item>
     <title>La Trobe Teaching Excellence Day (2026-10-08)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-33</guid>
     <category>showcase</category>
     <description>La Trobe · Teaching innovation and student success.</description>
   </item>
   <item>
     <title>JCU Tropical Teaching Week (2026-10-12 – 2026-10-16)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-44</guid>
     <category>week</category>
     <description>JCU · Place-based education, marine science pedagogy.</description>
   </item>
   <item>
     <title>Deakin Teaching &amp; Learning Conference (2026-10-14 – 2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-22</guid>
     <category>conference</category>
     <description>Deakin · DTeach conference on inclusive teaching.</description>
   </item>
   <item>
     <title>Adelaide University T&amp;L Showcase (2026-10-14 – 2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-37</guid>
     <category>showcase</category>
     <description>Adelaide · First full-year showcase post-merger.</description>
   </item>
   <item>
     <title>ANU Teaching Celebration (2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-27</guid>
     <category>showcase</category>
     <description>ANU · Outstanding teaching contributions.</description>
   </item>
   <item>
     <title>Notre Dame Teaching Colloquium (2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-54</guid>
     <category>symposium</category>
     <description>Notre Dame · Values-based education, ethics, mentoring.</description>
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Dr Amanda Gigliotti (UOW) (2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-83</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipient. Details to be announced.</description>
   </item>
   <item>
     <title>Griffith L&amp;T Week (2026-10-19 – 2026-10-23)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-29</guid>
     <category>week</category>
     <description>Griffith · Workshops, awards, and community events.</description>
   </item>
   <item>
     <title>UniMelb Teaching &amp; Learning Showcase (2026-10-21 – 2026-10-22)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-24</guid>
     <category>showcase</category>
     <description>UniMelb · Annual showcase of teaching practice.</description>
   </item>
   <item>
     <title>UOW Teaching &amp; Learning Forum (2026-10-22)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-35</guid>
     <category>conference</category>
     <description>UOW · Authentic assessment, digital literacy.</description>
@@ -310,7 +310,7 @@
   </item>
   <item>
     <title>QUT L&amp;T Symposium (2026-10-28)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-26</guid>
     <category>symposium</category>
     <description>QUT · Learning design, digital pedagogy, first-year experience.</description>
@@ -324,14 +324,14 @@
   </item>
   <item>
     <title>WSU Teaching Showcase (2026-10-29)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-42</guid>
     <category>showcase</category>
     <description>WSU · Community-engaged teaching.</description>
   </item>
   <item>
     <title>UQ Teaching &amp; Learning Week (2026-11-02 – 2026-11-06)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-20</guid>
     <category>week</category>
     <description>UQ · ITaLI's flagship week celebrating teaching excellence.</description>
@@ -345,28 +345,28 @@
   </item>
   <item>
     <title>CSU Regional Education Showcase (2026-11-04)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-45</guid>
     <category>showcase</category>
     <description>CSU · Regional, rural, remote education.</description>
   </item>
   <item>
     <title>SCU Teaching Innovation Day (2026-11-04)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-49</guid>
     <category>showcase</category>
     <description>SCU · Regenerative education, sustainability.</description>
   </item>
   <item>
     <title>UTAS Teaching Matters (2026-11-11)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-28</guid>
     <category>conference</category>
     <description>UTAS · Annual conference on teaching and learning.</description>
   </item>
   <item>
     <title>UNE Teaching Excellence Showcase (2026-11-11)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-46</guid>
     <category>showcase</category>
     <description>UNE · Online and distance education innovation.</description>
@@ -387,21 +387,21 @@
   </item>
   <item>
     <title>Flinders Teaching Awards &amp; Showcase (2026-11-18)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-38</guid>
     <category>showcase</category>
     <description>Flinders · Teaching awards and poster showcase.</description>
   </item>
   <item>
     <title>FedUni Teaching &amp; Learning Showcase (2026-11-18)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-48</guid>
     <category>showcase</category>
     <description>FedUni · Teaching across campuses.</description>
   </item>
   <item>
     <title>Murdoch Teaching Excellence Showcase (2026-11-18)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-51</guid>
     <category>showcase</category>
     <description>Murdoch · Health, engineering, humanities.</description>
@@ -415,7 +415,7 @@
   </item>
   <item>
     <title>USC Teaching Forum (2026-11-25)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://ntlsn.com/</link>
     <guid isPermaLink="false">ntlsn-50</guid>
     <category>conference</category>
     <description>USC · Growth, teaching quality, student experience.</description>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,13 +8,13 @@
 <meta property="og:title" content="Open Data &amp; API · NTLSN — connect the sector's teaching &amp; learning data to anything">
 <meta property="og:description" content="NTLSN's open, CORS-enabled data: events, the 1,431-work SoTL archive, frameworks and the 42-university directory — free to query, embed, or wire into any AI via MCP. CC BY-NC-SA 4.0.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.ntlsn.com/developers.html">
-<meta property="og:image" content="https://www.ntlsn.com/og-image.png">
+<meta property="og:url" content="https://ntlsn.com/developers.html">
+<meta property="og:image" content="https://ntlsn.com/og-image.png">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Open Data &amp; API · NTLSN — connect the sector's teaching &amp; learning data to anything">
 <meta name="twitter:description" content="NTLSN's open, CORS-enabled data: events, the 1,431-work SoTL archive, frameworks and the 42-university directory — free to query, embed, or wire into any AI via MCP. CC BY-NC-SA 4.0.">
-<meta name="twitter:image" content="https://www.ntlsn.com/og-image.png">
+<meta name="twitter:image" content="https://ntlsn.com/og-image.png">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;}
@@ -70,7 +70,7 @@
   </div>
 
   <h2><span class="n">01</span>The endpoints</h2>
-  <p class="body">Base URL <code>https://www.ntlsn.com/data/</code>. Everything is a plain static JSON file — fast, cacheable, and impossible to take down with traffic.</p>
+  <p class="body">Base URL <code>https://ntlsn.com/data/</code>. Everything is a plain static JSON file — fast, cacheable, and impossible to take down with traffic.</p>
   <div class="grid">
     <div class="ep">
       <div class="u">/data/events.json</div>
@@ -112,8 +112,8 @@
 
   <h2><span class="n">02</span>Quick start — fetch it</h2>
   <p class="body">No setup. From a browser, a Node script, a notebook — anywhere:</p>
-  <pre><button class="copy" data-c="fetch('https://www.ntlsn.com/data/events.json')&#10;  .then(r =&gt; r.json())&#10;  .then(events =&gt; {&#10;    const soon = events&#10;      .filter(e =&gt; e.date &gt;= new Date().toISOString().slice(0,10))&#10;      .sort((a,b) =&gt; a.date.localeCompare(b.date));&#10;    console.log(soon.slice(0,5));&#10;  });">Copy</button><span class="c">// the next five sector events, anywhere</span>
-<span class="fn">fetch</span>(<span class="s">'https://www.ntlsn.com/data/events.json'</span>)
+  <pre><button class="copy" data-c="fetch('https://ntlsn.com/data/events.json')&#10;  .then(r =&gt; r.json())&#10;  .then(events =&gt; {&#10;    const soon = events&#10;      .filter(e =&gt; e.date &gt;= new Date().toISOString().slice(0,10))&#10;      .sort((a,b) =&gt; a.date.localeCompare(b.date));&#10;    console.log(soon.slice(0,5));&#10;  });">Copy</button><span class="c">// the next five sector events, anywhere</span>
+<span class="fn">fetch</span>(<span class="s">'https://ntlsn.com/data/events.json'</span>)
   .then(r =&gt; r.json())
   .then(events =&gt; {
     <span class="k">const</span> soon = events
@@ -124,19 +124,19 @@
 
   <h2><span class="n">03</span>Embed live events on your site</h2>
   <p class="body">One line. A self-contained, shadow-DOM widget that never clashes with your CSS — sector-wide, or filtered to one university. ~5 KB, no dependencies.</p>
-  <pre><button class="copy" data-c='&lt;script src="https://www.ntlsn.com/widget.js" data-limit="5" data-uni="usq"&gt;&lt;/script&gt;'>Copy</button><span class="k">&lt;script</span> <span class="fn">src</span>=<span class="s">"https://www.ntlsn.com/widget.js"</span> <span class="fn">data-limit</span>=<span class="s">"5"</span> <span class="fn">data-uni</span>=<span class="s">"usq"</span><span class="k">&gt;&lt;/script&gt;</span></pre>
+  <pre><button class="copy" data-c='&lt;script src="https://ntlsn.com/widget.js" data-limit="5" data-uni="usq"&gt;&lt;/script&gt;'>Copy</button><span class="k">&lt;script</span> <span class="fn">src</span>=<span class="s">"https://ntlsn.com/widget.js"</span> <span class="fn">data-limit</span>=<span class="s">"5"</span> <span class="fn">data-uni</span>=<span class="s">"usq"</span><span class="k">&gt;&lt;/script&gt;</span></pre>
   <p class="sub"><code>data-limit</code> = how many to show (default 5). <code>data-uni</code> = optional university id (e.g. <code>usq</code>, <code>unimelb</code>, <code>curtin</code>) — omit for sector-wide. It reads <code>/data/events.json</code> and links back here.</p>
 
   <h2><span class="n">04</span>Wire it into AI — the MCP server</h2>
   <p class="body">This is the part that turns NTLSN into <b style="color:var(--ink)">infrastructure</b>: a small <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a> server wraps these open endpoints into <b>tools</b> any AI assistant (Claude, etc.) can call — "what teaching conferences are coming up in WA?", "search the archive for work on academic integrity." MCP is the USB-C standard for AI ↔ data; NTLSN is the sector's plug.</p>
   <div class="note" style="border-color:rgba(78,205,196,.55);background:rgba(78,205,196,.10)"><b>⚡ Zero setup — we host it for you.</b> Point any MCP-compatible AI client straight at <code>https://ntlsn.com/.netlify/functions/mcp</code> (MCP over HTTP, JSON-RPC 2.0 — tools: <code>upcoming_events</code>, <code>search_archive</code>, <code>universities</code>). No Python, no install, no key. <a href="/.netlify/functions/mcp" target="_blank" rel="noopener">See it live →</a> &nbsp;·&nbsp; or run your own copy below for offline/custom tools.</div>
   <div class="note"><b>Run it in three steps.</b> <code>pip install "mcp[cli]" httpx</code> → save the file below as <code>ntlsn_mcp.py</code> → register it in your client (<code>claude mcp add ntlsn -- python /path/to/ntlsn_mcp.py</code>). No NTLSN credentials needed — it only reads the public open data.</div>
-  <pre><button class="copy" data-c='# ntlsn_mcp.py — expose NTLSN&#39;s open sector data to any AI assistant via MCP.&#10;# pip install "mcp[cli]" httpx&#10;import httpx&#10;from mcp.server.fastmcp import FastMCP&#10;&#10;BASE = "https://www.ntlsn.com/data"&#10;mcp = FastMCP("ntlsn")&#10;&#10;@mcp.tool()&#10;def upcoming_events(uni: str = "", limit: int = 10) -&gt; list:&#10;    """Upcoming Australian higher-ed teaching &amp; learning events. Optional uni id, e.g. usq."""&#10;    data = httpx.get(f"{BASE}/events.json", timeout=15).json()&#10;    today = __import__("datetime").date.today().isoformat()&#10;    data = [e for e in data if e.get("date","") &gt;= today]&#10;    if uni: data = [e for e in data if e.get("uni") == uni.lower()]&#10;    return sorted(data, key=lambda e: e["date"])[:limit]&#10;&#10;@mcp.tool()&#10;def search_archive(query: str, limit: int = 15) -&gt; list:&#10;    """Search the 1,431-work ALTC/OLT teaching-scholarship archive (1994-2025) by title or author."""&#10;    q = query.lower()&#10;    data = httpx.get(f"{BASE}/ltr.json", timeout=30).json()&#10;    hits = [w for w in data if q in (w.get("t","") + " " + w.get("a","")).lower()]&#10;    return hits[:limit]&#10;&#10;@mcp.tool()&#10;def universities() -&gt; list:&#10;    """All 42 Australian universities: L&amp;T team pages, alliance group, Traditional Country."""&#10;    return httpx.get(f"{BASE}/universities.json", timeout=15).json()&#10;&#10;if __name__ == "__main__":&#10;    mcp.run()'>Copy</button><span class="c"># ntlsn_mcp.py — expose NTLSN's open sector data to any AI assistant via MCP.</span>
+  <pre><button class="copy" data-c='# ntlsn_mcp.py — expose NTLSN&#39;s open sector data to any AI assistant via MCP.&#10;# pip install "mcp[cli]" httpx&#10;import httpx&#10;from mcp.server.fastmcp import FastMCP&#10;&#10;BASE = "https://ntlsn.com/data"&#10;mcp = FastMCP("ntlsn")&#10;&#10;@mcp.tool()&#10;def upcoming_events(uni: str = "", limit: int = 10) -&gt; list:&#10;    """Upcoming Australian higher-ed teaching &amp; learning events. Optional uni id, e.g. usq."""&#10;    data = httpx.get(f"{BASE}/events.json", timeout=15).json()&#10;    today = __import__("datetime").date.today().isoformat()&#10;    data = [e for e in data if e.get("date","") &gt;= today]&#10;    if uni: data = [e for e in data if e.get("uni") == uni.lower()]&#10;    return sorted(data, key=lambda e: e["date"])[:limit]&#10;&#10;@mcp.tool()&#10;def search_archive(query: str, limit: int = 15) -&gt; list:&#10;    """Search the 1,431-work ALTC/OLT teaching-scholarship archive (1994-2025) by title or author."""&#10;    q = query.lower()&#10;    data = httpx.get(f"{BASE}/ltr.json", timeout=30).json()&#10;    hits = [w for w in data if q in (w.get("t","") + " " + w.get("a","")).lower()]&#10;    return hits[:limit]&#10;&#10;@mcp.tool()&#10;def universities() -&gt; list:&#10;    """All 42 Australian universities: L&amp;T team pages, alliance group, Traditional Country."""&#10;    return httpx.get(f"{BASE}/universities.json", timeout=15).json()&#10;&#10;if __name__ == "__main__":&#10;    mcp.run()'>Copy</button><span class="c"># ntlsn_mcp.py — expose NTLSN's open sector data to any AI assistant via MCP.</span>
 <span class="c"># pip install "mcp[cli]" httpx</span>
 <span class="k">import</span> httpx
 <span class="k">from</span> mcp.server.fastmcp <span class="k">import</span> FastMCP
 
-BASE = <span class="s">"https://www.ntlsn.com/data"</span>
+BASE = <span class="s">"https://ntlsn.com/data"</span>
 mcp = <span class="fn">FastMCP</span>(<span class="s">"ntlsn"</span>)
 
 <span class="fn">@mcp.tool()</span>

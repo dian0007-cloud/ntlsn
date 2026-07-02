@@ -1,128 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.ntlsn.com/</loc><lastmod>2026-06-28</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.ntlsn.com/research-search.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/conference-finder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/oa-finder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/journal-finder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/atec-curriculum-qa.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/aaut-readiness.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/abstract-builder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/accessibility-preflight.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/ai-disclosure.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/ai-policy.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/alt-text-helper.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/assessment-mix.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/autc-criteria.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/cert.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/citation.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/consent-builder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/constructive-alignment.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/contrast-checker.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/cop-landscape.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/cop-starter.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/course-quality.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/credential-checker.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/critical-learner-partnerships.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/developers.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/ethics-check.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/evidence-crosswalk.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/feedback-action.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/feedback-builder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/fellowship-mapper.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/find-your-path.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/genai-crash-course.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/genai-readiness.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/grading.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/grant-pitch.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/group-work.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/induction-builder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/induction-crash-course.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/mcq-checker.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/microcredential.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/outcomes.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/partnership-agreement.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/peer-observation.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/philosophy-builder.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/program-review.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/programme-map.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/promotion-case.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/psf-evidence-audit.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/readability.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/recognition-framework.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/recognition-ledger.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/recognition-navigator.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/recognition-points.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/recognition-roi.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/reflective-coach.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/reflective-prompt.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/research-question.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/rubric.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/sample-size.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/school-audit.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/school-needs-diagnostic.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/sector-grad-cert.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/selfcheck.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/session-planner.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/sessional-recognition.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/sotl-placement.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/student-partnership.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/survey-checker.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/teaching-hubs.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/teqsa-readiness.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/test-blueprint.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/thematic-analysis.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/tools.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/trp.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/viva.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/workload.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://www.ntlsn.com/symposium-streaming.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.ntlsn.com/diagnostic.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.ntlsn.com/assignment-redesign.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/teaching-ai-prompts.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/learning-modules.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/leadership.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/missed-it.html</loc><lastmod>2026-06-28</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.ntlsn.com/school-leadership.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/casual-teaching.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.ntlsn.com/academic-year.html</loc><lastmod>2026-06-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.ntlsn.com/crash-courses.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/assessment-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/feedback-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/inclusive-teaching-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/first-year-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/curriculum-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/integrity-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/wil-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/large-class-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/supervision-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/reflective-sotl-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/marking-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/internationalisation-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/edtech-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/tutorials-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/lecturing-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/peer-observation-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/criticalthinking-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/wellbeing-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/prompting-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/claudecode-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/ai-research-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/buildtools-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/ai-marking-crash-course.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/rubric-builder.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/widgets.html</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/sotl-index.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/responsible-assessment.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/sotl-index-methodology.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/narrative-cv.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.ntlsn.com/school-package.html</loc><changefreq>monthly</changefreq></url>
-<url><loc>https://www.ntlsn.com/about.html</loc></url>
-<url><loc>https://www.ntlsn.com/start-here.html</loc></url>
-<url><loc>https://www.ntlsn.com/whats-on.html</loc></url>
-<url><loc>https://www.ntlsn.com/peer-review-exchange.html</loc></url>
-<url><loc>https://www.ntlsn.com/calibration-suite.html</loc></url>
-<url><loc>https://www.ntlsn.com/portal.html</loc></url>
-<url><loc>https://www.ntlsn.com/symposium.html</loc></url>
-<url><loc>https://www.ntlsn.com/publication-profile.html</loc></url>
+<url><loc>https://ntlsn.com/</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/aaut-readiness.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/about.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/abstract-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/academic-home.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/academic-integrity-ai-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/academic-year.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/accessibility-preflight.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/active-learning-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/ai-disclosure.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/ai-marking-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/ai-policy.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/ai-research-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/alt-text-helper.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/assessment-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/assessment-design-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/assessment-mix.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/assessment-spread.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/assignment-redesign.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/atec-curriculum-qa.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/autc-criteria.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/buildtools-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/calibration-suite.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/casual-teaching.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/cert.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/citation.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/claudecode-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/conference-finder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/consent-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/constructive-alignment-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/constructive-alignment.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/contrast-checker.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/cop-landscape.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/cop-starter.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/course-quality.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/crash-courses.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/credential-checker.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/critical-learner-partnerships.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/criticalthinking-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/curriculum-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/developers.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/diagnostic.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/edtech-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/ethics-check.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/evidence-crosswalk.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/feedback-action.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/feedback-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/feedback-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/feedbackcrashcourse.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/fellowship-mapper.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/find-your-path.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/first-year-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/genai-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/genai-readiness.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/grading.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/grant-pitch.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/group-work-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/group-work.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/inclusive-assessment-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/inclusive-teaching-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/induction-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/induction-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/internationalisation-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/journal-finder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/large-classes-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/leadership.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/learning-modules.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/lecturing-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/marking-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/mcq-checker.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/microcredential.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/missed-it.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/narrative-cv.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/network-3d.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/network-sector.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/network-themes.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/oa-finder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/online-blended-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/open-building-blocks.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/orcid-start.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/outcome-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/outcomes.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/partnership-agreement.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/peer-observation-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/peer-observation.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/peer-review-exchange.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/peer-review-teaching.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/philosophy-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/portal.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/program-review.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/programme-map.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/promotion-case.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/prompting-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/psf-evidence-audit.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/publication-profile.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/readability.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/reading-load.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/recognition-framework.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/recognition-ledger.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/recognition-navigator.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/recognition-points.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/recognition-roi.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/reflective-coach.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/reflective-practice-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/reflective-prompt.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/research-question.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/research-search.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/research-supervision-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/responsible-assessment.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/rubric-builder.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/rubric.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/rubrics-marking-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sample-size.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/school-audit.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/school-dashboard.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/school-leadership.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/school-needs-diagnostic.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/school-package.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sector-grad-cert.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/selfcheck.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/session-planner.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sessional-recognition.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sotl-index-methodology.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sotl-index.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sotl-placement.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/sotl-wrapped.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/start-here.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/student-partnership.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/survey-checker.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/symposium-streaming.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/symposium.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/teaching-ai-prompts.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/teaching-hubs.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/teaching-with-ai-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/teqsa-readiness.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/test-blueprint.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/thematic-analysis.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/threshold-concepts-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/tools.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/trp.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/tutorials-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/viva.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/wellbeing-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/whats-on.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/widgets.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/wil-crash-course.html</loc><lastmod>2026-07-02</lastmod></url>
+<url><loc>https://ntlsn.com/workload.html</loc><lastmod>2026-07-02</lastmod></url>
 </urlset>

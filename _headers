@@ -20,8 +20,6 @@
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
 
-/sw.js
-  Cache-Control: no-cache
 
 /events.ics
   Content-Type: text/calendar; charset=utf-8
@@ -34,5 +32,5 @@
   Cache-Control: public, max-age=3600
 
 /data/*
-  Cache-Control: public, max-age=60, must-revalidate
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400, must-revalidate
   Access-Control-Allow-Origin: *

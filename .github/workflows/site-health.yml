@@ -1,0 +1,31 @@
+name: Site health
+on:
+  schedule:
+    - cron: '17 */6 * * *'   # every 6 hours
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Homepage serves the journey
+        run: curl -sf --compressed https://ntlsn.com/ | grep -q 'id="ntlsn-journey"'
+      - name: Start Here is itself (not a soft-404)
+        run: curl -sf --compressed https://ntlsn.com/start-here.html | grep -q 'Start here'
+      - name: ORCID front door is itself
+        run: curl -sf --compressed https://ntlsn.com/orcid-start.html | grep -qi 'orcid'
+      - name: About page is itself
+        run: curl -sf --compressed https://ntlsn.com/about.html | grep -q 'Our Story'
+      - name: events.json parses and has a future event
+        run: |
+          curl -sf https://ntlsn.com/data/events.json -o events.json
+          python3 - <<'PY'
+          import json,datetime
+          d=json.load(open('events.json'))
+          evs=d if isinstance(d,list) else d.get('events',[])
+          today=datetime.date.today().isoformat()
+          assert any(e.get('date','')>=today for e in evs), 'no future events'
+          PY
+      - name: Real 404s are real
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://ntlsn.com/definitely-not-a-page.html)
+          [ "$code" = "404" ]
