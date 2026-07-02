@@ -76,6 +76,21 @@ footer p{margin-bottom:.5rem;max-width:52rem}
 .noresults{display:none;color:var(--dim);padding:2rem 0;text-align:center}
 noscript p{margin:1rem 0;padding:1rem;border:1px solid var(--line);border-radius:.6rem;color:var(--amber)}
 @media print{.findwrap,nav.chips,.skip{display:none}body{background:#fff;color:#000}}
+
+.nodes{position:relative}
+.nodes::before{content:"";position:absolute;inset:-1rem -2rem;z-index:-1;opacity:.5;pointer-events:none;
+background-image:
+ radial-gradient(2px 2px at 12% 30%,var(--teal) 50%,transparent 51%),
+ radial-gradient(2px 2px at 28% 70%,var(--blue) 50%,transparent 51%),
+ radial-gradient(2.5px 2.5px at 45% 25%,var(--purple) 50%,transparent 51%),
+ radial-gradient(2px 2px at 62% 60%,var(--teal) 50%,transparent 51%),
+ radial-gradient(2.5px 2.5px at 78% 35%,var(--blue) 50%,transparent 51%),
+ radial-gradient(2px 2px at 90% 72%,var(--purple) 50%,transparent 51%),
+ linear-gradient(105deg,transparent 24%,rgba(78,205,196,.14) 24.5%,transparent 25%),
+ linear-gradient(65deg,transparent 55%,rgba(124,156,255,.12) 55.5%,transparent 56%),
+ linear-gradient(15deg,transparent 74%,rgba(197,123,255,.10) 74.5%,transparent 75%)}
+@media (prefers-reduced-motion:no-preference){.nodes::before{animation:nodefloat 14s ease-in-out infinite alternate}}
+@keyframes nodefloat{from{transform:translateY(0)}to{transform:translateY(-6px)}}
 </style>
 </head>
 <body>
@@ -85,10 +100,10 @@ noscript p{margin:1rem 0;padding:1rem;border:1px solid var(--line);border-radius
 <a class="home" href="/">&larr; back to the commons</a>
 </header>
 <main id="main" role="main" class="wrap">
-<div class="hero">
+<div class="hero nodes">
 <p class="kicker">HERDSA 2026 &middot; Singapore &middot; 7&ndash;9 July</p>
 <h1>The program, <span class="thread">threaded into the commons</span></h1>
-<p class="lede">Every session of the HERDSA 2026 on-site program &mdash; keynotes, papers and roundtables &mdash; clustered into the themes the commons already works in. Find your session, find your colleagues, and when the conference ends, keep each thread going on NTLSN: free, open, national.</p>
+<p class="lede">Every presenter here is a node in the same network. Every session of the HERDSA 2026 on-site program &mdash; keynotes, papers and roundtables &mdash; clustered into the themes the commons already works in. Find your session, find your colleagues, and when the conference ends, keep each thread going on NTLSN: free, open, national.</p>
 </div>
 <div class="note" role="note">
 <strong>An honest note.</strong> Sessions below are from the official on-site program (30&nbsp;June&nbsp;2026 release) and are <strong>subject to change</strong> &mdash; check the HERDSA conference app for rooms, times and late changes. Papers and roundtables are grouped here by theme, not by timetable. NTLSN is independent of HERDSA and of every institution named; <strong>listing implies no affiliation or endorsement</strong>.
