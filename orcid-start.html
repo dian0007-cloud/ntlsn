@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://api.openalex.org">
 <title>NTLSN — Start with your ORCID</title>
 <meta name="description" content="Paste your ORCID iD and NTLSN reads your public scholarly record — entirely in your browser — to build a personalised starting point: a snapshot of your work, your SoTL footprint, and the commons resources most likely to help. Free. Nothing is sent to us, stored, or sold.">
 <meta property="og:title" content="Start with your ORCID — NTLSN">
 <meta property="og:description" content="Paste your ORCID iD and we personalise the commons for you — in your browser. Nothing sent to us, stored, or sold.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/orcid-start.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Start with your ORCID — NTLSN">
@@ -79,11 +80,14 @@
   .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;border-top:1px solid var(--line);padding-top:14px}
   a{color:var(--teal)}
   @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}.pick:hover{transform:none}}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="top" role="banner">
     <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
     <a class="back" href="/">&larr; Back to the commons</a>
   </div>
@@ -117,7 +121,7 @@
   <div class="attrib">
     <b>How the picks are chosen.</b> We read your public works from <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (an open scholarly index), summarise your fields, and detect education- and teaching-related scholarship to estimate your SoTL footprint. Recommendations blend your field with universally useful practice — they're a starting point, not a verdict, and the quality depends on how complete your public record is. Crash courses are practitioner syntheses of sector good practice, honestly attributed on each page.
   </div>
-  <div class="foot">A free NTLSN front door · everything runs in your browser; nothing is stored or sent to us. &nbsp;·&nbsp; <a href="/sotl-index.html">The SoTL Index</a> &nbsp;·&nbsp; <a href="/crash-courses.html">All crash courses</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+  <div class="foot" role="contentinfo">A free NTLSN front door · everything runs in your browser; nothing is stored or sent to us. &nbsp;·&nbsp; <a href="/sotl-index.html">The SoTL Index</a> &nbsp;·&nbsp; <a href="/crash-courses.html">All crash courses</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
 </div>
 
 <script>
@@ -143,7 +147,7 @@
     threshold:{tag:"Concepts",t:"Threshold concepts",d:"Help students through the gateway ideas where they get stuck.",u:"/threshold-concepts-crash-course.html"},
     inclusive:{tag:"Inclusion",t:"Inclusive & equitable assessment",d:"A clear, accessible task that lets every student show what they know.",u:"/inclusive-assessment-crash-course.html"},
     supervision:{tag:"Supervision",t:"Supervising research students",d:"Teaching one-to-one over years — relationship, expectations, feedback.",u:"/research-supervision-crash-course.html"},
-    wil:{tag:"WIL",t:"Work-integrated learning",d:"Design the learning, not just the placement.",u:"/wilcrashcourse.html"}
+    wil:{tag:"WIL",t:"Work-integrated learning",d:"Design the learning, not just the placement.",u:"/wil-crash-course.html"}
   };
   var SOTL_TOOL={tag:"Tool",t:"Reflective coach",d:"A prototype reflective-practice coach for your teaching.",u:"/reflective-coach.html"};
 

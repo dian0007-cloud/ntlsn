@@ -9,12 +9,12 @@
 <meta property="og:description" content="Couldn't make a workshop, webinar or conference? Catch up here — NTLSN points you to the recordings, programs and slides the sector posts after recent events. Free, no login.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/missed-it.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Missed it? Catch up on the sector — recordings &amp; programs · NTLSN">
 <meta name="twitter:description" content="Couldn't make a workshop, webinar or conference? Catch up here — NTLSN points you to the recordings, programs and slides the sector posts after recent events. Free, no login.">
-<meta name="twitter:image" content="https://ntlsn.com/og-image.png">
+<meta name="twitter:image" content="https://ntlsn.com/og-image.jpg">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#C0593A;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
@@ -56,11 +56,14 @@
   .disc{background:rgba(111,207,151,.07);border:1px solid rgba(111,207,151,.3);border-radius:12px;padding:14px 16px;margin:18px 0 0;font-size:12.5px;color:#cfeede;line-height:1.6}
   .disc b{color:#9be7bd}
   .foot{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="top" role="banner">
     <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
     <a class="back" href="/">&larr; Back to the commons</a>
   </div>
@@ -97,11 +100,11 @@
   <div class="count" id="count">Loading recent events…</div>
   <div id="list"></div>
 
-  <div class="ptr">📺 Looking for individual talks instead? The <a href="/#ntlsn-talkshub">From the Sector talks hub</a> has 286 curated recordings by theme — and the <a href="/learning-modules.html">learning modules</a> turn them into something you can finish. What's coming up is on the <a href="/#events">events calendar</a>.</div>
+  <div class="ptr">📺 Looking for individual talks instead? The <a href="/#ntlsn-talkshub">From the Sector talks hub</a> has 286 curated recordings by theme — and the <a href="/learning-modules.html">learning modules</a> turn them into something you can finish. What's coming up is on the <a href="/whats-on.html">events calendar</a>.</div>
 
   <div class="disc"><b>◇ How this works — in plain terms.</b> NTLSN doesn't host these recordings. We point you to the <b>original organiser's page</b>, where any program, slides, recording or photos live. We're <b>independent</b> of the events and organisers listed, with no commercial, solicited or unsolicited connection, no conflict of interest, and no IP engagement. Not every event records or posts materials — links go to the host, so please check there, and confirm details with them.</div>
 
-  <div class="foot">
+  <div class="foot" role="contentinfo">
     A free NTLSN catch-up service. Recent past events are drawn from NTLSN's open events data; assets remain with their organisers. Pair with the <a href="/conference-finder.html">conference finder</a> for what's next. CC BY-NC-SA 4.0.
   </div>
 </div>

@@ -9,12 +9,12 @@
 <meta property="og:description" content="A free, curated library of copy-paste AI prompts for the real work of higher-education teaching and SoTL: assessment design, constructive alignment, feedback, reflective practice, accessibility, curriculum and teaching portfolios. Use with any assistant. Nothing stored.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/teaching-ai-prompts.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Prompts for Teaching &amp; Learning — copy-paste prompts for educators · NTLSN">
 <meta name="twitter:description" content="A free, curated library of copy-paste AI prompts for the real work of higher-education teaching and SoTL: assessment design, constructive alignment, feedback, reflective practice, accessibility, curriculum and teaching portfolios. Use with any assistant. Nothing stored.">
-<meta name="twitter:image" content="https://ntlsn.com/og-image.png">
+<meta name="twitter:image" content="https://ntlsn.com/og-image.jpg">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
@@ -57,11 +57,14 @@
   .empty{padding:30px;text-align:center;color:var(--mut);border:1px dashed var(--line);border-radius:11px;margin-top:6px}
   .foot{margin-top:38px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
   @media(max-width:560px){.pbox{flex-wrap:wrap}.copy{margin-top:9px}}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="top" role="banner">
     <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
     <a class="back" href="/">&larr; Back to the commons</a>
   </div>
@@ -78,7 +81,7 @@
   <div class="count" id="count"></div>
   <div id="grid"></div>
 
-  <div class="foot">
+  <div class="foot" role="contentinfo">
     An NTLSN open resource — prompts you can use anywhere. Pair them with the in-browser tools like the <a href="/assignment-redesign.html">GenAI Assignment Redesign</a> and the <a href="/reflective-coach.html">Reflective Coach</a>. Prompt-craft patterns adapted for higher-education teaching. CC BY-NC-SA 4.0.
   </div>
 </div>

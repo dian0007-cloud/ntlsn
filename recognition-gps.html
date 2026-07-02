@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Recognition GPS</title>
+<meta name="description" content="Paste your ORCID iD and Recognition GPS maps your public scholarly record against recognition-framework criteria — Advance HE PSF 2023 and the AAUT — then builds an exportable evidence-pack draft. It maps evidence; it does not assess, score, or decide anything. Runs entirely in your browser; nothing stored or sold.">
+<meta property="og:title" content="Recognition GPS — NTLSN">
+<meta property="og:description" content="See where your scholarship already speaks to recognition criteria — and export the evidence draft. In your browser; nothing stored or sold.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntlsn.com/recognition-gps.html">
+<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Recognition GPS — NTLSN">
+<meta name="twitter:description" content="See where your scholarship already speaks to recognition criteria — and export the evidence draft. Nothing stored or sold.">
+<link rel="canonical" href="https://ntlsn.com/recognition-gps.html">
+<link rel="preconnect" href="https://api.openalex.org">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;
+    --teal:#4ECDC4;--purple:#C57BFF;--amber:#FFB448;--blue:#7C9CFF;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.12);--orcid:#A6CE39;
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 560px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px;min-height:100vh}
+  .wrap{max-width:920px;margin:0 auto}
+  a{color:var(--teal)}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+  .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue) 55%,var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:13px}
+  .back{font-size:13px;color:var(--mut);text-decoration:none;padding:10px 6px;display:inline-block}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-size:clamp(28px,4.5vw,44px);margin:0 0 12px;font-weight:800;letter-spacing:-.015em;line-height:1.06}
+  h1 .grad{background:linear-gradient(110deg,var(--teal),var(--blue) 45%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lead{color:#cbd8e6;font-size:16.5px;margin:0 0 8px;max-width:66ch;font-weight:600}
+  .lead2{color:var(--mut);font-size:14.5px;margin:0 0 22px;max-width:72ch}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:0 0 16px}
+  .isnot{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 16px}
+  .isnot .cell{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:15px 17px;font-size:13.5px;color:#d4def0}
+  .isnot .cell b{display:block;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;margin:0 0 7px}
+  .isnot .maps b{color:var(--teal)}
+  .isnot .not b{color:var(--amber)}
+  .isnot .strand b{color:var(--purple)}
+  .privacy{background:linear-gradient(180deg,rgba(166,206,57,.08),rgba(166,206,57,.02));border:1px solid rgba(166,206,57,.28);border-radius:14px;padding:15px 17px;margin:0 0 16px;font-size:13.5px;color:#d4def0}
+  .privacy b{color:var(--orcid)}
+  .privacy ul{margin:9px 0 0;padding:0 0 0 4px;list-style:none}
+  .privacy li{padding:4px 0 4px 22px;position:relative;color:var(--mut)}
+  .privacy li:before{content:"\2713";position:absolute;left:0;color:var(--orcid);font-weight:800}
+  .orcidrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .orcidrow label{font:700 13px var(--F);display:flex;align-items:center;gap:8px;width:100%;margin-bottom:4px}
+  .oicon{width:18px;height:18px;border-radius:4px;background:var(--orcid);color:#08131f;font:800 10px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
+  input[type=text]{flex:1;min-width:220px;min-height:44px;background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font:600 16px var(--F);letter-spacing:.02em}
+  input[type=text]::placeholder{color:#8aa0b8;opacity:1}
+  input[type=text]:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 2px rgba(78,205,196,.35)}
+  .btn{background:var(--teal);color:#06251f;border:0;border-radius:10px;padding:12px 20px;min-height:44px;font:800 14px var(--F);cursor:pointer;white-space:nowrap}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn:active{transform:translateY(1px)}
+  .btn2{background:transparent;color:var(--teal);border:1px solid rgba(78,205,196,.45);border-radius:10px;padding:12px 20px;min-height:44px;font:800 14px var(--F);cursor:pointer;white-space:nowrap}
+  .btn2:hover{background:rgba(78,205,196,.10)}
+  .demo{background:none;border:0;color:var(--teal);font:700 13px var(--F);cursor:pointer;padding:10px 0;text-decoration:underline;text-underline-offset:2px;min-height:44px}
+  .demo:disabled{opacity:.5;cursor:default}
+  .remember{display:flex;align-items:center;gap:9px;margin-top:8px;font-size:13px;color:var(--mut)}
+  .remember input{width:18px;height:18px;accent-color:var(--teal)}
+  .err{color:#FF9B9B;font-size:13.5px;margin:10px 0 0;min-height:0}
+  .loading{display:flex;align-items:center;gap:11px;color:var(--mut);font-size:14px;padding:8px 0}
+  .spin{width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;flex:none}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  /* results */
+  #results{display:none}
+  #results.on{display:block}
+  .who{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:26px 0 4px}
+  .who h2{font-size:24px;margin:0;font-weight:800;letter-spacing:-.01em}
+  .who a{font-size:12.5px;color:var(--mut)}
+  .sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:26px 0 12px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+  .stat{background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+  .stat b{font:800 28px/1 var(--F);color:#fff;letter-spacing:-.02em;display:block;margin-bottom:4px}
+  .stat span{font-size:12px;color:var(--mut)}
+  .mapnote{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:13px;padding:14px 17px;font-size:13.5px;color:var(--mut);margin:0 0 8px}
+  .mapnote b{color:#d4def0}
+  .grp{margin:30px 0 0}
+  .grp h3{font-size:19px;margin:0 0 3px;font-weight:800;letter-spacing:-.01em}
+  .grp .gsub{font-size:12.5px;color:var(--mut);margin:0 0 14px}
+  .crit{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:17px 19px;margin:0 0 13px}
+  .chead{display:flex;align-items:flex-start;gap:11px;margin:0 0 8px}
+  .ccode{flex:none;font:800 12px/1 var(--F);color:#08131f;border-radius:7px;padding:6px 9px;margin-top:2px;letter-spacing:.4px}
+  .chead h4{font-size:15.5px;margin:0;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+  .cpara{font-size:13px;color:var(--mut);margin:0 0 11px;font-style:italic}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 11px}
+  .chip{background:rgba(124,156,255,.10);border:1px solid rgba(124,156,255,.32);color:#b8c8ff;border-radius:999px;padding:5px 12px;font:700 12px var(--F)}
+  .cworks{list-style:none;margin:0 0 4px;padding:0}
+  .cworks li{padding:7px 0 7px 20px;position:relative;font-size:13.5px;border-top:1px solid rgba(255,255,255,.06)}
+  .cworks li:first-child{border-top:0}
+  .cworks li:before{content:"◇";position:absolute;left:2px;color:var(--teal);font-size:11px;top:9px}
+  .wt{color:#e8eef5;font-weight:600}
+  .wm{color:var(--mut);font-size:12px;display:block;margin-top:1px}
+  .more{font-size:12px;color:var(--mut);margin:6px 0 2px}
+  .gap{font-size:13.5px;color:var(--mut);margin:0 0 4px;padding:10px 13px;background:rgba(255,180,72,.06);border:1px dashed rgba(255,180,72,.35);border-radius:10px}
+  .gap b{color:var(--amber)}
+  .cnote{font-size:12.5px;color:var(--mut);font-style:italic;margin:9px 0 2px}
+  details.kinds{margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:9px}
+  details.kinds summary{font:700 12.5px var(--F);color:var(--mut);cursor:pointer;padding:7px 0;list-style:none;display:flex;align-items:center;gap:7px;min-height:30px}
+  details.kinds summary::-webkit-details-marker{display:none}
+  details.kinds summary:before{content:"+";font-weight:800;color:var(--teal)}
+  details.kinds[open] summary:before{content:"−"}
+  details.kinds ul{margin:6px 0 8px;padding-left:20px;font-size:12.5px;color:var(--mut)}
+  details.kinds li{margin:3px 0}
+  details.kinds .src{font-size:12px;color:var(--mut);margin:4px 0 2px}
+  /* export */
+  .export{background:linear-gradient(180deg,rgba(78,205,196,.08),rgba(78,205,196,.02));border:1px solid rgba(78,205,196,.30);border-radius:16px;padding:20px 22px;margin:28px 0 0}
+  .export h3{font-size:18px;margin:0 0 6px;font-weight:800}
+  .export p{font-size:13.5px;color:var(--mut);margin:0 0 14px;max-width:70ch}
+  .export .draftflag{display:inline-block;background:rgba(255,180,72,.14);border:1px solid rgba(255,180,72,.45);color:var(--amber);border-radius:7px;font:800 11px var(--F);letter-spacing:1.2px;text-transform:uppercase;padding:5px 10px;margin:0 0 10px}
+  .packrow{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0}
+  #packwrap{display:none;margin-top:16px}
+  #packwrap.on{display:block}
+  #packwrap label{font:700 13px var(--F);display:block;margin:0 0 7px}
+  textarea{width:100%;min-height:320px;background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px;font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;resize:vertical}
+  textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 2px rgba(78,205,196,.35)}
+  @media (max-width:480px){textarea{font-size:16px}}
+  /* next steps */
+  .next{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:13px}
+  .pick{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+  .pick:hover{transform:translateY(-3px);border-color:rgba(78,205,196,.45)}
+  .pick:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .pick .tag{font:800 10px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 7px}
+  .pick h4{font:700 15px var(--F);margin:0 0 5px;letter-spacing:-.01em}
+  .pick p{color:var(--mut);font-size:12.5px;margin:0 0 11px;flex:1}
+  .pick .go{font:700 12.5px var(--F);color:var(--teal)}
+  /* footer */
+  .attrib{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:12px;padding:16px 18px;font-size:12px;color:var(--mut);margin:30px 0 0;line-height:1.65}
+  .attrib b{color:var(--ink)}
+  .attrib ul{margin:8px 0 0;padding-left:18px}
+  .attrib li{margin:6px 0}
+  .foot{color:#8496ab;font-size:11.5px;margin:18px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}.pick:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="logo" aria-hidden="true">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </header>
+
+  <main>
+    <p class="eyebrow">◇ Recognition · in your browser · nothing stored</p>
+    <h1><span class="grad">Recognition GPS.</span></h1>
+    <p class="lead">See where your scholarship already speaks to recognition criteria — and export the evidence draft. Runs in your browser; nothing stored or sold.</p>
+    <p class="lead2">Paste your ORCID iD and Recognition GPS reads your public scholarly record, then maps it against the Advance HE Professional Standards Framework (PSF 2023) and the criteria of the Australian Awards for University Teaching (AAUT). It maps evidence you could point to — it does not assess your practice, score you, or promise any outcome.</p>
+
+    <div class="isnot">
+      <div class="cell maps"><b>It maps</b>The outputs in your public record that speak to each criterion — real titles, with DOIs, gathered where a fellowship or award writer would want them.</div>
+      <div class="cell not"><b>It doesn't assess</b>No scores and no “you qualify”. Fellowship categories and awards are decided holistically by the awarding bodies against their own criteria — no tool can tell you whether you qualify.</div>
+      <div class="cell strand"><b>Publications are one strand</b>Most criteria are evidenced mainly through practice, student outcomes and peer testimony — things a bibliographic database cannot see. A thin signal here is not a gap in your practice.</div>
+    </div>
+
+    <div class="privacy">
+      <b>◌ Free, and genuinely private.</b> We don't sell, on-sell, profile, or store your data — this exists only to help you see your own evidence.
+      <ul>
+        <li>The lookup runs entirely in your browser against OpenAlex's <b>public</b> API.</li>
+        <li>Your ORCID iD is <b>never sent to NTLSN</b>, never stored on our servers, never sold.</li>
+        <li>Nothing is saved unless you tick “remember on this device” — and that uses your browser's local storage only.</li>
+        <li>Honest caveat: to look up your public record, your browser does send your iD to OpenAlex. That's the only place it goes.</li>
+      </ul>
+    </div>
+
+    <form class="panel" id="gpsform" novalidate>
+      <div class="orcidrow">
+        <label for="orcid"><span class="oicon" aria-hidden="true">iD</span> Your ORCID iD</label>
+        <input type="text" id="orcid" name="orcid" placeholder="0000-0002-1825-0097  ·  or paste the full orcid.org link" autocomplete="off" spellcheck="false">
+        <button class="btn" type="submit" id="go">Map my evidence →</button>
+      </div>
+      <div class="remember">
+        <input type="checkbox" id="remember">
+        <label for="remember">Remember my iD on this device (your browser's local storage only — never our servers)</label>
+      </div>
+      <div style="margin-top:4px"><button class="demo" type="button" id="demo">Don't have it handy? Try a live demo profile</button></div>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+
+    <p class="vh" id="status" role="status" aria-live="polite"></p>
+
+    <div id="results"></div>
+
+    <section aria-labelledby="nextsteps">
+      <h2 class="sec" id="nextsteps" style="font-size:12px">Next steps — turn the map into a case</h2>
+      <div class="next">
+        <a class="pick" href="/psf-evidence-audit.html"><span class="tag">PSF 2023</span><h4>PSF Evidence Self-Audit</h4><p>Map how well your <i>whole</i> evidence base — practice included, not just publications — covers the 15 PSF Dimensions. A coverage map, not a score.</p><span class="go">Audit your coverage →</span></a>
+        <a class="pick" href="/fellowship-mapper.html"><span class="tag">Fellowship</span><h4>Fellowship Category Mapper</h4><p>An illustrative guide to which Advance HE fellowship category best fits your current practice. Indicative only — the awarding body decides.</p><span class="go">Find your bearing →</span></a>
+        <a class="pick" href="/narrative-cv.html"><span class="tag">Writing</span><h4>Narrative CV Builder</h4><p>Write the DORA-aligned narrative CV — the alternative to the publication-list CV — around the evidence you've just mapped.</p><span class="go">Write the narrative →</span></a>
+        <a class="pick" href="/promotion-case.html"><span class="tag">Promotion</span><h4>Teaching Promotion Case Builder</h4><p>Assemble a promotion case across the seven Australian teaching criteria — strongest claim and evidence per criterion.</p><span class="go">Build the case →</span></a>
+        <a class="pick" href="/orcid-start.html"><span class="tag">Start</span><h4>Start with your ORCID</h4><p>The wider front door: a snapshot of your work, your SoTL footprint, and the commons resources most likely to help your teaching.</p><span class="go">Personalise the commons →</span></a>
+      </div>
+    </section>
+
+    <section class="attrib" aria-label="Disclaimers and attribution">
+      <b>Read this before you rely on the map.</b>
+      <ul>
+        <li>Recognition GPS maps your public scholarship record against recognition-framework criteria. It does not assess your practice, score you, or determine any outcome — it surfaces evidence you could point to.</li>
+        <li>Criterion titles on this page are quoted from the official frameworks so you can locate them; the plain-language descriptions are honest paraphrases written by NTLSN, not official framework text. Always work from the official sources: <a href="https://www.advance-he.ac.uk/teaching-learning/professional-standards-framework" target="_blank" rel="noopener">Advance HE's Professional Standards Framework (PSF 2023)</a> and the <a href="https://universitiesaustralia.edu.au/policy-submissions/teaching-learning-funding/australian-awards-for-university-teaching/" target="_blank" rel="noopener">Universities Australia AAUT nomination materials</a>.</li>
+        <li>A publication record is one strand of evidence among many. Most PSF Dimensions and AAUT criteria are evidenced primarily through practice, student outcomes and peer testimony — things a bibliographic database cannot see. A thin signal here is not a gap in your practice.</li>
+        <li>Fellowship categories and awards are decided holistically by the awarding bodies against their own criteria. No tool — including this one — can tell you whether you qualify.</li>
+        <li>Everything runs in your browser using the public <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> record for the ORCID iD you paste. Nothing is stored, sent or sold by NTLSN; the optional save uses your browser's local storage only.</li>
+        <li>NTLSN is independent of Advance HE, Universities Australia, ORCID and OpenAlex. Referencing their frameworks and services implies no affiliation or endorsement; criterion titles are quoted for identification only, and no other framework text is reproduced.</li>
+      </ul>
+    </section>
+
+    <p class="foot">A free NTLSN tool · everything runs in your browser; nothing is stored or sent to us. &nbsp;·&nbsp; <a href="/sotl-index.html">The SoTL Index</a> &nbsp;·&nbsp; <a href="/sotl-wrapped.html">Your SoTL, Wrapped</a> &nbsp;·&nbsp; <a href="/crash-courses.html">Crash courses</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></p>
+  </main>
+</div>
+
+<noscript><div style="max-width:920px;margin:0 auto;padding:16px;border:1px solid rgba(255,180,72,.45);border-radius:12px;color:#FFB448;font-family:sans-serif">Recognition GPS runs entirely in your browser and needs JavaScript turned on. Nothing runs on our servers either way.</div></noscript>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- elements ---------- */
+  var form=document.getElementById("gpsform"),orcidIn=document.getElementById("orcid"),goBtn=document.getElementById("go"),
+      demoBtn=document.getElementById("demo"),errEl=document.getElementById("err"),results=document.getElementById("results"),
+      statusEl=document.getElementById("status"),rememberEl=document.getElementById("remember");
+  var DEMO="0000-0002-1428-2921", LS_KEY="ntlsn_gps_orcid";
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function safeHttp(u){u=String(u==null?"":u);return /^https?:\/\//i.test(u)?u:"";}
+  function normaliseOrcid(v){v=String(v||"").trim();var m=v.match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);return m?m[1].toUpperCase():"";}
+
+  /* ---------- framework data ----------
+     Criterion titles (label) are quoted from the official frameworks for identification only;
+     the plain-language descriptions (para) are NTLSN's honest paraphrases. Sources are official. */
+  var PSF_SRC="Advance HE — Professional Standards Framework (PSF 2023)";
+  var PSF_URL="https://www.advance-he.ac.uk/teaching-learning/professional-standards-framework";
+  var AAUT_SRC="Universities Australia — Australian Awards for University Teaching (AAUT)";
+  var AAUT_URL="https://universitiesaustralia.edu.au/policy-submissions/teaching-learning-funding/australian-awards-for-university-teaching/";
+
+  var C={
+    "psf-a1":{code:"A1",label:"Design and plan learning activities and/or programmes",para:"In plain terms: planning and designing learning activities, sessions or whole programmes.",kinds:["publications on curriculum, course or learning design","OER and learning resources published with DOIs","conference papers describing programme or module design"],src:PSF_SRC,url:PSF_URL},
+    "psf-a2":{code:"A2",label:"Teach and/or support learning through appropriate approaches and environments",para:"In plain terms: teaching and supporting learning using approaches and environments suited to your learners.",kinds:["SoTL publications describing or evaluating your teaching approaches","practice-based case studies of teaching in different environments (online, blended, on-campus)"],src:PSF_SRC,url:PSF_URL},
+    "psf-a3":{code:"A3",label:"Assess and give feedback for learning",para:"In plain terms: assessing learners and giving feedback that supports their learning.",kinds:["publications on assessment design, feedback or academic integrity","SoTL outputs whose topics match assessment and feedback"],src:PSF_SRC,url:PSF_URL},
+    "psf-a4":{code:"A4",label:"Support and guide learners",para:"In plain terms: supporting and guiding learners through their studies.",kinds:["publications on student support, transition, retention or wellbeing","note: this Dimension is evidenced mainly through practice rather than publications — a thin publication signal here is normal"],src:PSF_SRC,url:PSF_URL},
+    "psf-a5":{code:"A5",label:"Enhance practice through your own continuing professional development",para:"In plain terms: improving your own practice through ongoing professional development.",kinds:["sustained scholarly output over time","recent SoTL publications showing continuing engagement","conference participation visible in published proceedings"],src:PSF_SRC,url:PSF_URL},
+    "psf-k1":{code:"K1",label:"How learners learn, generally and within specific subjects",para:"In plain terms: understanding how learners learn, both in general and within your subject.",kinds:["publications engaging with learning theory or how students learn","discipline-based education research outputs"],src:PSF_SRC,url:PSF_URL},
+    "psf-k2":{code:"K2",label:"Approaches to teaching / supporting learning, appropriate for the subject and level",para:"In plain terms: knowing which teaching and learning-support approaches fit your subject and level of study.",kinds:["discipline-specific pedagogy publications","breadth of teaching-related topics across your outputs"],src:PSF_SRC,url:PSF_URL},
+    "psf-k3":{code:"K3",label:"Critical evaluation as a basis for effective practice",para:"In plain terms: using critical evaluation of what works as the basis for your practice.",kinds:["published evaluation studies of your own teaching","SoTL outputs reporting evidence and data on practice"],src:PSF_SRC,url:PSF_URL},
+    "psf-k4":{code:"K4",label:"Appropriate use of digital and/or other technologies, and resources for learning",para:"In plain terms: using digital and other technologies and resources appropriately for learning.",kinds:["educational-technology and online-learning publications","openly published digital learning resources"],src:PSF_SRC,url:PSF_URL},
+    "psf-k5":{code:"K5",label:"Requirements for quality assurance and enhancement, and their implications for practice",para:"In plain terms: understanding quality-assurance and enhancement requirements and what they mean for your practice.",kinds:["publications on quality assurance, standards, accreditation or curriculum governance","note: often evidenced through institutional roles rather than publications"],src:PSF_SRC,url:PSF_URL},
+    "psf-v1":{code:"V1",label:"Respect individual learners and diverse groups of learners",para:"In plain terms: respecting individual learners and the diversity of learning communities.",kinds:["publications on inclusive teaching, universal design or diverse learner cohorts"],src:PSF_SRC,url:PSF_URL},
+    "psf-v2":{code:"V2",label:"Promote engagement in learning and equity of opportunity for all to reach their potential",para:"In plain terms: promoting engagement in learning and equity of opportunity so every learner can reach their potential.",kinds:["publications on equity, widening participation or student engagement","open-access publishing practice (making your scholarship freely available)"],src:PSF_SRC,url:PSF_URL},
+    "psf-v3":{code:"V3",label:"Use scholarship, or research, or professional learning, or other evidence-informed approaches",para:"In plain terms: grounding your practice in scholarship, research or other evidence-informed approaches.",kinds:["peer-reviewed SoTL publications","citation uptake of your scholarship","grants attached to teaching-and-learning projects"],src:PSF_SRC,url:PSF_URL},
+    "psf-v4":{code:"V4",label:"Respond to the wider context in which higher education operates",para:"In plain terms: responding to the wider policy, social and sector context around higher education.",kinds:["publications on higher-education policy, employability or sector context","open-access practice as engagement with the open-knowledge context"],src:PSF_SRC,url:PSF_URL},
+    "psf-v5":{code:"V5",label:"Collaborate with others to enhance practice",para:"In plain terms: working with others to enhance practice.",kinds:["co-authorship networks — breadth of collaborators and institutions","cross-institutional and cross-disciplinary SoTL projects"],src:PSF_SRC,url:PSF_URL},
+    "aaut-1":{code:"AAUT 1",label:"Approaches to teaching and the support of learning that influence, motivate and inspire students to learn",para:"In plain terms: teaching and learning-support approaches that genuinely engage, motivate and inspire students.",kinds:["SoTL publications describing or evaluating your teaching approaches","published outputs on student engagement and motivation","educational-technology and learning-design outputs where they underpin your approach"],src:AAUT_SRC,url:AAUT_URL},
+    "aaut-2":{code:"AAUT 2",label:"Development of curricula, resources or services that reflect a command of the field",para:"In plain terms: developing curricula, resources or services that demonstrate deep command of your field.",kinds:["publications and OER on curriculum, course and resource development","breadth and depth of topics across your scholarly record (command of the field)","textbooks, learning resources or services published with DOIs"],src:AAUT_SRC,url:AAUT_URL},
+    "aaut-3":{code:"AAUT 3",label:"Evaluation practices that bring about improvements in teaching and learning",para:"In plain terms: evaluating your teaching and using what you learn to improve teaching and learning.",kinds:["published evaluation studies of your own practice","SoTL outputs reporting student-learning data and what changed as a result","publications on assessment and feedback where they evidence an improvement cycle"],src:AAUT_SRC,url:AAUT_URL},
+    "aaut-4":{code:"AAUT 4",label:"Innovation, leadership or scholarship that has influenced and enhanced learning and teaching and/or the student experience",para:"In plain terms: innovation, leadership or scholarship whose influence has demonstrably enhanced teaching or the student experience.",kinds:["citation uptake of your scholarship","peer-reviewed SoTL publications and their reach","grants for teaching-and-learning projects","co-authorship network breadth as a trace of leadership and influence","sustained scholarly output over three or more years"],src:AAUT_SRC,url:AAUT_URL}
+  };
+
+  var GROUPS=[
+    {name:"Areas of Activity",fw:"Advance HE PSF 2023 · Dimensions A1–A5",colour:"var(--teal)",srcUrl:PSF_URL,srcName:PSF_SRC,ids:["psf-a1","psf-a2","psf-a3","psf-a4","psf-a5"]},
+    {name:"Core Knowledge",fw:"Advance HE PSF 2023 · Dimensions K1–K5",colour:"var(--purple)",srcUrl:PSF_URL,srcName:PSF_SRC,ids:["psf-k1","psf-k2","psf-k3","psf-k4","psf-k5"]},
+    {name:"Professional Values",fw:"Advance HE PSF 2023 · Dimensions V1–V5",colour:"var(--amber)",srcUrl:PSF_URL,srcName:PSF_SRC,ids:["psf-v1","psf-v2","psf-v3","psf-v4","psf-v5"]},
+    {name:"AAUT criteria",fw:"Universities Australia · Australian Awards for University Teaching",colour:"var(--blue)",srcUrl:AAUT_URL,srcName:AAUT_SRC,ids:["aaut-1","aaut-2","aaut-3","aaut-4"]}
+  ];
+
+  /* ---------- signal matching ----------
+     Work-level matching is deliberately restricted to outputs that already look education/teaching-related:
+     recognition frameworks speak to teaching practice, so a discipline paper with no teaching angle isn't mapped. */
+  var SOTL_RE=/teach|learn|pedagog|curricul|assessment|student|education|scholarship of teaching|higher education|classroom|academic (development|practice)|feedback|supervis|graduate attribute|employab/i;
+  var ML_STRIP=/machine[\s-]?learning|deep[\s-]?learning|reinforcement learning|federated learning|transfer learning|supervised learning|unsupervised learning|self[\s-]supervised learning|representation learning|contrastive learning|ensemble learning|statistical learning|q[\s-]learning|learning algorithm|learning[\s-]based|learning rate/g;
+  function eduTest(s){return SOTL_RE.test(String(s==null?"":s).toLowerCase().replace(ML_STRIP," "));}
+
+  var MATCH={
+    "psf-a1":/curricul|course design|learning design|instructional design|program(me)? design|learning outcome|graduate attribute|open educational|\boer\b|module design|unit design|syllabus|course development|educational resource/,
+    "psf-a2":/teaching approach|teaching practice|teaching method|teaching strateg|pedagog|active learning|flipped|peer instruction|team[\s-]based learning|problem[\s-]based|blended|online (teaching|learning)|classroom|tutorial|work[\s-]integrated/,
+    "psf-a3":/assess|feedback|grading|marking|rubric|academic integrity|examination|moderation|plagiar|contract cheating/,
+    "psf-a4":/student support|transition|retention|wellbeing|well-being|belonging|first[\s-]year experience|academic advis|mentor|student success|pastoral/,
+    "psf-a5":null, /* special-cased: recent education-related outputs */
+    "psf-k1":/how (students|learners) learn|learning theor|cognitiv|metacogni|self[\s-]regulat|motivation|conceptual change|threshold concept|misconception|educational psycholog|approaches to learning|learning science/,
+    "psf-k2":/pedagog|signature pedagog|teaching method|didactic|discipline[\s-]based education|simulation|laboratory|clinical education|studio|teaching approach/,
+    "psf-k3":/evaluat|action research|efficacy|effectiveness|impact|evidence[\s-](based|informed)|learning gain|learning analytic|scholarship of teaching/,
+    "psf-k4":/educational technolog|e[\s-]?learning|online learning|blended|mooc|learning analytic|digital|virtual|augmented reality|simulation|mobile learning|learning management|technology[\s-]enhanced|artificial intelligence|chatgpt|generative ai/,
+    "psf-k5":/quality assurance|quality enhancement|accreditat|academic standards|benchmark|curriculum governance|teqsa|academic governance|course approval/,
+    "psf-v1":/inclusi|universal design|diversity|diverse learners|culturally|indigenous|first nations|international students|neurodiver|disabilit|multicultural/,
+    "psf-v2":/equity|widening participation|student engagement|access to higher education|participation|low[\s-]ses|first[\s-]in[\s-]family|disadvantage/,
+    "psf-v3":/[\s\S]/,
+    "psf-v4":/policy|employab|graduate outcome|labour market|internationali[sz]|sustainab|massification|sector|work[\s-]integrated/,
+    "psf-v5":/collaborat|cross[\s-]institutional|interdisciplinar|inter[\s-]disciplinar|partnership|co[\s-]creat|co[\s-]design|students as partners/,
+    "aaut-1":/engag|motivat|inspir|active learning|flipped|peer instruction|student experience|teaching approach|teaching practice|pedagog|educational technolog|online learning|blended/,
+    "aaut-2":/curricul|course design|learning design|instructional design|program(me)? design|learning outcome|open educational|\boer\b|textbook|learning resource|module design|course development/,
+    "aaut-3":/evaluat|assess|feedback|action research|effectiveness|efficacy|improv|learning gain/,
+    "aaut-4":/[\s\S]/
+  };
+  /* Profile-level signals mapped per the framework mapping (not per work) */
+  var CHIPS={
+    "psf-v2":["oa"],"psf-v4":["oa"],"psf-v5":["co"],
+    "psf-v3":["cite","grant"],"psf-a5":["sustain","grant"],
+    "psf-k1":["breadth"],"psf-k2":["breadth"],
+    "aaut-2":["breadth"],"aaut-4":["cite","co","grant","sustain"]
+  };
+
+  var STATE=null; /* holds computed analysis for export */
+  var reqSeq=0;   /* in-flight request token: stale responses are ignored */
+
+  /* ---------- storage (optional, guarded) ---------- */
+  function lsGet(){try{return localStorage.getItem(LS_KEY)||"";}catch(e){return "";}}
+  function lsSet(v){try{localStorage.setItem(LS_KEY,v);}catch(e){}}
+  function lsDel(){try{localStorage.removeItem(LS_KEY);}catch(e){}}
+
+  /* ---------- flow ---------- */
+  function say(msg){statusEl.textContent=msg;}
+  function busy(on){ goBtn.disabled=on; demoBtn.disabled=on; goBtn.textContent=on?"Reading…":"Map my evidence →";
+    if(on){results.setAttribute("aria-busy","true");}else{results.removeAttribute("aria-busy");} }
+  function setLoading(msg){
+    results.className="on";
+    results.innerHTML='<div class="loading"><span class="spin" aria-hidden="true"></span><span>'+esc(msg)+'</span></div>';
+    say(msg);
+  }
+  function fail(msg){
+    errEl.textContent=msg; say("");
+    results.className=""; results.innerHTML="";
+    busy(false);
+  }
+
+  function run(raw,persist){
+    errEl.textContent="";
+    var id=normaliseOrcid(raw);
+    if(!id){ fail("That doesn't look like an ORCID iD. It should look like 0000-0002-1825-0097."); return; }
+    if(persist){ if(rememberEl.checked) lsSet(id); else lsDel(); }
+    busy(true);
+    setLoading("Reading your public record from OpenAlex…");
+    var seq=++reqSeq;
+    var sel="id,doi,title,publication_year,cited_by_count,topics,keywords,authorships,open_access,primary_location,awards,funders";
+    var url="https://api.openalex.org/works?filter=author.orcid:"+encodeURIComponent(id)+"&per-page=200&sort=publication_year:desc&select="+sel;
+    fetch(url,{headers:{Accept:"application/json"}})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(data){
+        if(seq!==reqSeq) return;
+        var works=(data&&data.results)||[];
+        if(!works.length){ fail("No public works found for that ORCID on OpenAlex. Double-check the iD, or your record may be private or new."); return; }
+        analyse(id, works, (data.meta&&data.meta.count)||works.length);
+      })
+      .catch(function(){ if(seq!==reqSeq) return; fail("Couldn't fetch your record just now — OpenAlex may be busy, or your connection dropped. Try again in a moment; nothing was sent to us either way."); });
+  }
+
+  /* ---------- analysis ---------- */
+  function analyse(id, works, total){
+    var name="";
+    works.forEach(function(w){
+      (w.authorships||[]).forEach(function(a){
+        var au=a.author||{};
+        if(!name&&au.orcid&&au.orcid.indexOf(id)>-1) name=au.display_name||"";
+      });
+    });
+
+    var years=[], totalCites=0, oa=0, grantN=0, coauthors={}, insts={}, topicSet={};
+    works.forEach(function(w){
+      var bits=[w.title||""];
+      (w.topics||[]).forEach(function(t){
+        if(t.display_name){ bits.push(t.display_name); if(eduTest(t.display_name)) topicSet[t.display_name]=1; }
+        if(t.subfield&&t.subfield.display_name) bits.push(t.subfield.display_name);
+        if(t.field&&t.field.display_name) bits.push(t.field.display_name);
+      });
+      (w.keywords||[]).forEach(function(k){ if(k.display_name){ bits.push(k.display_name); if(eduTest(k.display_name)) topicSet[k.display_name]=1; } });
+      var txt=bits.join(" ; ").toLowerCase().replace(ML_STRIP," ");
+      w._txt=txt;
+      w._sotl=SOTL_RE.test(txt);
+      if(w.publication_year) years.push(w.publication_year);
+      totalCites+=(w.cited_by_count||0);
+      if(w.open_access&&w.open_access.is_oa) oa++;
+      if((w.awards&&w.awards.length)||(w.funders&&w.funders.length)) grantN++;
+      (w.authorships||[]).forEach(function(a){
+        var au=a.author||{};
+        if(au.display_name && !(au.orcid&&au.orcid.indexOf(id)>-1)) coauthors[au.display_name]=1;
+        (a.institutions||[]).forEach(function(inst){ if(inst.display_name) insts[inst.display_name]=1; });
+      });
+    });
+
+    var analysed=works.length, full=total<=analysed;
+    var minY=years.length?Math.min.apply(null,years):null, maxY=years.length?Math.max.apply(null,years):null;
+    var sotlWorks=works.filter(function(w){return w._sotl;});
+    /* strongest evidence first: uptake, then recency */
+    sotlWorks.sort(function(a,b){ return (b.cited_by_count||0)-(a.cited_by_count||0) || (b.publication_year||0)-(a.publication_year||0); });
+
+    var oaPct=analysed?Math.round(oa/analysed*100):0;
+    var coN=Object.keys(coauthors).length, instN=Object.keys(insts).length, topicN=Object.keys(topicSet).length;
+
+    /* per-criterion mapped works */
+    var mapById={};
+    Object.keys(C).forEach(function(cid){
+      var list;
+      if(cid==="psf-a5"){
+        list=sotlWorks.filter(function(w){ return maxY&&w.publication_year&&w.publication_year>=maxY-2; })
+                      .slice().sort(function(a,b){ return (b.publication_year||0)-(a.publication_year||0); });
+      } else {
+        list=sotlWorks.filter(function(w){ return MATCH[cid].test(w._txt); });
+      }
+      mapById[cid]=list;
+    });
+    var mappedTotal=0, seenW={};
+    Object.keys(mapById).forEach(function(cid){ mapById[cid].forEach(function(w){ if(!seenW[w.id]){seenW[w.id]=1;mappedTotal++;} }); });
+
+    STATE={id:id,name:name,total:total,analysed:analysed,full:full,minY:minY,maxY:maxY,
+           sotlN:sotlWorks.length,oaPct:oaPct,coN:coN,instN:instN,topicN:topicN,
+           totalCites:totalCites,grantN:grantN,mapById:mapById,mappedTotal:mappedTotal};
+
+    render();
+  }
+
+  /* ---------- profile-level signal chips ---------- */
+  function chipText(key){
+    var s=STATE;
+    if(key==="oa"&&s.oaPct>0) return s.oaPct+"% of your analysed works are open access";
+    if(key==="co"&&s.coN>0) return s.coN+" co-authors"+(s.instN>1?" · "+s.instN+" institutions":"");
+    if(key==="cite"&&s.totalCites>0) return "cited "+s.totalCites.toLocaleString()+" times in OpenAlex — an uptake trace, not a quality score";
+    if(key==="sustain"&&s.minY&&s.maxY&&(s.maxY-s.minY)>=1) return "output across "+(s.maxY-s.minY+1)+(s.full?"":"+")+" years ("+s.minY+"–"+s.maxY+")";
+    if(key==="grant"&&s.grantN>0) return s.grantN+" work"+(s.grantN===1?" carries":"s carry")+" funder acknowledgements";
+    if(key==="breadth"&&s.topicN>0) return s.topicN+" distinct teaching-related topics across your outputs";
+    return null;
+  }
+
+  /* ---------- render ---------- */
+  function workLine(w){
+    var meta=[];
+    if(w.publication_year) meta.push(w.publication_year);
+    if(w.cited_by_count) meta.push("cited "+w.cited_by_count);
+    if(w.open_access&&w.open_access.is_oa) meta.push("open access");
+    var src=w.primary_location&&w.primary_location.source;
+    if(src&&src.display_name) meta.push(src.display_name);
+    var doiUrl=safeHttp(w.doi);
+    var doi=doiUrl?' · <a href="'+esc(doiUrl)+'" target="_blank" rel="noopener">DOI ↗</a>':"";
+    return '<li><span class="wt">'+esc(w.title||"Untitled work")+'</span><span class="wm">'+esc(meta.join(" · "))+doi+'</span></li>';
+  }
+
+  function critCard(cid,colour){
+    var c=C[cid], list=STATE.mapById[cid]||[];
+    var chips=(CHIPS[cid]||[]).map(chipText).filter(Boolean);
+    var note=c.kinds.filter(function(k){return k.indexOf("note:")===0;}).map(function(k){return k.slice(5).trim();});
+    var kinds=c.kinds.filter(function(k){return k.indexOf("note:")!==0;});
+    var h='<article class="crit">';
+    h+='<div class="chead"><span class="ccode" style="background:'+colour+'">'+esc(c.code)+'</span><h4>'+esc(c.label)+'</h4></div>';
+    h+='<p class="cpara">'+esc(c.para)+'</p>';
+    if(chips.length) h+='<div class="chips">'+chips.map(function(t){return '<span class="chip">'+esc(t)+'</span>';}).join("")+'</div>';
+    if(list.length){
+      h+='<ul class="cworks">'+list.slice(0,3).map(workLine).join("")+'</ul>';
+      if(list.length>3) h+='<p class="more">+ '+(list.length-3)+' more matching output'+(list.length-3===1?"":"s")+' in your record (all included in the export)</p>';
+    } else if(!chips.length){
+      h+='<p class="gap"><b>No mapped evidence found yet</b> — this often lives outside publications: teaching practice, leadership, student feedback and peer testimony. Not a gap in your practice; just not visible to a bibliographic database.</p>';
+    } else {
+      h+='<p class="gap"><b>No individual works mapped yet</b> — but the profile-level signals above still speak here. The rest of this evidence usually lives in practice rather than publications.</p>';
+    }
+    note.forEach(function(n){ h+='<p class="cnote">Note: '+esc(n)+'</p>'; });
+    h+='<details class="kinds"><summary>What typically counts as evidence here</summary><ul>'+kinds.map(function(k){return '<li>'+esc(k)+'</li>';}).join("")+'</ul><p class="src">Criterion title quoted from the framework; the description is NTLSN’s paraphrase — always work from the official source: <a href="'+esc(c.url)+'" target="_blank" rel="noopener">'+esc(c.src)+' ↗</a></p></details>';
+    h+='</article>';
+    return h;
+  }
+
+  function render(){
+    var s=STATE;
+    busy(false);
+    var h="";
+    h+='<div class="who"><h2 id="reshead">'+(s.name?esc(s.name):"Your evidence map")+'</h2>'+
+       '<a href="https://orcid.org/'+esc(s.id)+'" target="_blank" rel="noopener">orcid.org/'+esc(s.id)+' ↗</a></div>';
+
+    h+='<h3 class="sec">Your snapshot</h3><div class="stats">'+
+       '<div class="stat"><b>'+s.total+'</b><span>public works indexed</span></div>'+
+       '<div class="stat"><b>'+s.sotlN+'</b><span>look education / teaching-related</span></div>'+
+       '<div class="stat"><b>'+s.oaPct+'%</b><span>open access</span></div>'+
+       (s.coN?'<div class="stat"><b>'+s.coN+'</b><span>co-authors</span></div>':'')+
+       (s.totalCites?'<div class="stat"><b>'+s.totalCites.toLocaleString()+'</b><span>citations recorded</span></div>':'')+
+       (s.minY&&s.maxY?'<div class="stat"><b>'+(s.maxY-s.minY+1)+(s.full?"":"+")+'</b><span>years publishing</span></div>':'')+
+       '</div>';
+
+    h+='<h3 class="sec">Your evidence map</h3>';
+    h+='<div class="mapnote"><b>How to read this.</b> The map lists only the outputs in your record that look education- or teaching-related — recognition frameworks speak to teaching practice, so discipline papers without a teaching angle aren’t mapped. Criterion titles are quoted from the frameworks; the plain-language descriptions are honest paraphrases by NTLSN, not framework text. A criterion with nothing mapped is <b>not</b> a gap in your practice: most criteria are evidenced mainly through practice, student outcomes and peer testimony.'+
+       (s.full?'':' Mapped from your <b>'+s.analysed+'</b> most recent works (of '+s.total+').')+
+       (s.sotlN===0?' <b>No education-flagged outputs were detected</b> — your recognition evidence most likely lives in practice rather than publications, and the self-audit tools below are built for exactly that.':'')+
+       '</div>';
+
+    GROUPS.forEach(function(g){
+      h+='<section class="grp" aria-label="'+esc(g.name)+'"><h3 style="color:'+g.colour+'">'+esc(g.name)+'</h3>'+
+         '<p class="gsub">'+esc(g.fw)+' · <a href="'+esc(g.srcUrl)+'" target="_blank" rel="noopener">official source ↗</a></p>'+
+         g.ids.map(function(cid){return critCard(cid,g.colour);}).join("")+
+         '</section>';
+    });
+
+    h+='<section class="export" aria-labelledby="exphead">'+
+       '<span class="draftflag">Draft — yours to edit</span>'+
+       '<h3 id="exphead">Export the evidence pack</h3>'+
+       '<p>One structured Markdown draft: every criterion, the works mapped to it (with DOIs), and honest gap notes where nothing was found. It’s a starting scaffold for a fellowship claim, award nomination or promotion case — check every item, rewrite it in your own voice, and add the practice-based evidence no database can see.</p>'+
+       '<div class="packrow"><button type="button" class="btn" id="buildPack">Build the evidence pack (draft) →</button></div>'+
+       '<div id="packwrap"><label for="pack">Your evidence pack draft (Markdown) — edit freely</label>'+
+       '<textarea id="pack" spellcheck="false"></textarea>'+
+       '<div class="packrow"><button type="button" class="btn" id="copyPack">Copy to clipboard</button>'+
+       '<button type="button" class="btn2" id="dlPack">Download as .md</button></div></div>'+
+       '</section>';
+
+    results.className="on";
+    results.innerHTML=h;
+    say("Evidence map ready — "+s.mappedTotal+" of your works mapped to recognition criteria. Export is available below the map.");
+    var head=document.getElementById("reshead");
+    if(head){ head.setAttribute("tabindex","-1"); head.focus(); }
+  }
+
+  /* ---------- markdown export ---------- */
+  function mdWork(w){
+    var line="- "+(w.title||"Untitled work");
+    if(w.publication_year) line+=" ("+w.publication_year+")";
+    var src=w.primary_location&&w.primary_location.source;
+    if(src&&src.display_name) line+=". *"+src.display_name+"*";
+    line+=".";
+    if(w.doi) line+=" "+w.doi+".";
+    var extra=[];
+    if(w.cited_by_count) extra.push("cited "+w.cited_by_count+" times");
+    if(w.open_access&&w.open_access.is_oa) extra.push("open access");
+    if(extra.length) line+=" ("+extra.join("; ")+")";
+    return line;
+  }
+
+  function buildPack(){
+    var s=STATE; if(!s) return "";
+    var today=new Date().toLocaleDateString("en-AU",{year:"numeric",month:"long",day:"numeric"});
+    var L=[];
+    L.push("# Recognition evidence pack — DRAFT");
+    L.push("");
+    L.push("_Generated "+today+" by NTLSN Recognition GPS (https://ntlsn.com/recognition-gps.html) from the public OpenAlex record for ORCID "+s.id+(s.name?" ("+s.name+")":"")+"._");
+    L.push("");
+    L.push("> **This is a draft evidence map, not an application.** It maps a public publication record against recognition-framework criteria. It does not assess practice, score anyone, or determine any outcome — it surfaces evidence you could point to. Criterion titles are quoted from the official frameworks for identification; the plain-language descriptions are honest paraphrases by NTLSN, not official framework text. Check every item, rewrite everything in your own voice, and work from the official sources: Advance HE's Professional Standards Framework (PSF 2023) and the Universities Australia AAUT nomination materials.");
+    L.push("");
+    L.push("## Snapshot");
+    L.push("");
+    L.push("- Public works indexed: "+s.total+(s.full?"":" (the "+s.analysed+" most recent were analysed)"));
+    L.push("- Education / teaching-related outputs detected: "+s.sotlN);
+    L.push("- Open access share of analysed works: "+s.oaPct+"%");
+    if(s.coN) L.push("- Co-authors: "+s.coN+(s.instN>1?" across "+s.instN+" institutions":""));
+    if(s.totalCites) L.push("- Citations recorded in OpenAlex: "+s.totalCites.toLocaleString()+" (an uptake trace, not a quality score)");
+    if(s.minY&&s.maxY) L.push("- Publishing span: "+s.minY+"–"+s.maxY+" ("+(s.maxY-s.minY+1)+(s.full?"":"+")+" years)");
+    if(s.grantN) L.push("- Works carrying funder acknowledgements: "+s.grantN);
+    L.push("");
+
+    GROUPS.forEach(function(g){
+      L.push("## "+g.name+" — "+g.fw.replace(" · "," — "));
+      L.push("");
+      L.push("Official source: "+g.srcName+" — "+g.srcUrl);
+      L.push("");
+      g.ids.forEach(function(cid){
+        var c=C[cid], list=s.mapById[cid]||[];
+        var chips=(CHIPS[cid]||[]).map(chipText).filter(Boolean);
+        var notes=c.kinds.filter(function(k){return k.indexOf("note:")===0;}).map(function(k){return k.slice(5).trim();});
+        L.push("### "+c.code+" — "+c.label);
+        L.push("");
+        L.push("_"+c.para+"_");
+        L.push("");
+        if(list.length){
+          L.push("**Mapped from your public record** (check each item — keep only what genuinely evidences this criterion):");
+          L.push("");
+          list.forEach(function(w){ L.push(mdWork(w)); });
+        } else {
+          L.push("**No mapped evidence found in your publication record yet.** This often lives outside publications — teaching practice, leadership, student feedback and peer testimony. Add it yourself:");
+          L.push("");
+          L.push("- [add your practice-based evidence here]");
+        }
+        if(chips.length){
+          L.push("");
+          L.push("**Profile-level signals:** "+chips.join("; ")+".");
+        }
+        notes.forEach(function(n){ L.push(""); L.push("_Note: "+n+"_"); });
+        L.push("");
+        L.push("**Gap notes / to add in my own words:** [what this criterion looks like in my practice, and the non-publication evidence I would point to]");
+        L.push("");
+      });
+    });
+
+    L.push("## Important notes");
+    L.push("");
+    L.push("1. Recognition GPS maps your public scholarship record against recognition-framework criteria. It does not assess your practice, score you, or determine any outcome — it surfaces evidence you could point to.");
+    L.push("2. Criterion titles in this pack are quoted from the official frameworks for identification; the descriptions are honest paraphrases written by NTLSN, not official framework text. Always work from the official sources: Advance HE's Professional Standards Framework (PSF 2023) and the Universities Australia AAUT nomination materials.");
+    L.push("3. A publication record is one strand of evidence among many. Most PSF Dimensions and AAUT criteria are evidenced primarily through practice, student outcomes and peer testimony — things a bibliographic database cannot see. A thin signal here is not a gap in your practice.");
+    L.push("4. Fellowship categories and awards are decided holistically by the awarding bodies against their own criteria. No tool — including this one — can tell you whether you qualify.");
+    L.push("5. Everything ran in your browser using the public OpenAlex record for the ORCID iD you pasted. Nothing was stored, sent or sold by NTLSN.");
+    L.push("6. NTLSN is independent of Advance HE, Universities Australia, ORCID and OpenAlex. Referencing their frameworks and services implies no affiliation or endorsement; criterion titles are quoted for identification only, and no other framework text is reproduced.");
+    L.push("");
+    L.push("Next steps in the free NTLSN commons: PSF Evidence Self-Audit (https://ntlsn.com/psf-evidence-audit.html) · Fellowship Category Mapper (https://ntlsn.com/fellowship-mapper.html) · Narrative CV Builder (https://ntlsn.com/narrative-cv.html) · Teaching Promotion Case Builder (https://ntlsn.com/promotion-case.html).");
+    L.push("");
+    return L.join("\n");
+  }
+
+  /* ---------- export wiring (delegated: buttons are injected) ---------- */
+  results.addEventListener("click",function(ev){
+    var t=ev.target;
+    if(!t||!t.id) return;
+    if(t.id==="buildPack"){
+      var wrapEl=document.getElementById("packwrap"), ta=document.getElementById("pack");
+      if(wrapEl&&ta){ ta.value=buildPack(); wrapEl.className="on"; say("Evidence pack draft built and placed in the text area below. Copy or download it."); ta.focus(); }
+    }
+    if(t.id==="copyPack"){
+      var ta2=document.getElementById("pack"); if(!ta2) return;
+      var done=function(){ t.textContent="✓ Copied — now make it yours"; say("Evidence pack copied to your clipboard."); setTimeout(function(){t.textContent="Copy to clipboard";},2600); };
+      var fallback=function(){ ta2.focus(); ta2.select(); try{ if(document.execCommand("copy")) done(); }catch(e){} };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(ta2.value).then(done,fallback); }
+      else { fallback(); }
+    }
+    if(t.id==="dlPack"){
+      var ta3=document.getElementById("pack"); if(!ta3) return;
+      var blob=new Blob([ta3.value],{type:"text/markdown;charset=utf-8"});
+      var a=document.createElement("a");
+      a.href=URL.createObjectURL(blob);
+      a.download="recognition-evidence-pack-DRAFT.md";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){URL.revokeObjectURL(a.href);},4000);
+      say("Evidence pack downloading as recognition-evidence-pack-DRAFT.md");
+    }
+  });
+
+  /* ---------- input wiring ---------- */
+  form.addEventListener("submit",function(e){ e.preventDefault(); run(orcidIn.value,true); });
+  demoBtn.addEventListener("click",function(){ orcidIn.value=DEMO; run(DEMO,false); });
+
+  /* prefill from optional local save, or deep-link ?orcid=… (deep links never touch storage) */
+  var saved=lsGet();
+  if(saved){ orcidIn.value=saved; rememberEl.checked=true; }
+  var q=(location.search.match(/[?&]orcid=([^&]+)/)||[])[1];
+  if(q){
+    var dq="";
+    try{ dq=decodeURIComponent(q); }catch(e){ dq=q; }
+    if(dq){ orcidIn.value=dq; run(dq,false); }
+  }
+})();
+</script>
+</body>
+</html>

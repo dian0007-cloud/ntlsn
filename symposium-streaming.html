@@ -9,12 +9,12 @@
 <meta property="og:description" content="Connect your university's own Zoom once and NTLSN handles symposium registration, the live watch-page, and the replay — for IT and academics alike. Sign in with ORCID. A pilot, built on Zoom's official APIs.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/symposium-streaming.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Drop your Zoom, we'll stream your symposium · NTLSN">
 <meta name="twitter:description" content="Connect your university's own Zoom once and NTLSN handles symposium registration, the live watch-page, and the replay — for IT and academics alike. Sign in with ORCID. A pilot, built on Zoom's official APIs.">
-<meta name="twitter:image" content="https://ntlsn.com/og-image.png">
+<meta name="twitter:image" content="https://ntlsn.com/og-image.jpg">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace;}
@@ -71,11 +71,14 @@
   .reg input:focus{outline:none;border-color:var(--teal)}
   .reg button{background:var(--teal);color:#06251f;border:0;border-radius:9px;padding:11px 22px;font:800 14px var(--sans);cursor:pointer}
   .reg .done{display:none;background:rgba(111,207,151,.1);border:1px solid rgba(111,207,151,.4);border-radius:10px;padding:13px 15px;font-size:14px;color:#cde9d8}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="top" role="banner">
     <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
     <a class="back" href="/">&larr; Back to the commons</a>
   </div>
@@ -138,7 +141,7 @@
     <p style="font-size:13px;color:var(--mut);margin:12px 0 0">Want to be a founding pilot university? <a href="/#ntlsn-zoom">Tell us about your symposium</a> and we'll set up the connection.</p>
   </div>
 
-  <div class="foot">
+  <div class="foot" role="contentinfo">
     Built on Zoom's official OAuth, Meeting SDK &amp; webhooks and ORCID's OpenID Connect. NTLSN streams <em>your</em> Zoom — it does not resell or rehost Zoom. A pilot interface; cross-institution connection is in design with founding universities. CC BY-NC-SA 4.0.
   </div>
 </div>

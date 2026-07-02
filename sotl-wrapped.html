@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://api.openalex.org">
 <title>NTLSN — Your SoTL, Wrapped</title>
 <meta name="description" content="Paste your ORCID iD and NTLSN reads your public scholarly record — in your browser — to tell your teaching-scholarship story back to you: your turn toward teaching, your signature themes, your most-cited idea, your open footprint. Free. Nothing stored or sent to us.">
 <meta property="og:title" content="Your SoTL, Wrapped — NTLSN">
 <meta property="og:description" content="Your teaching-scholarship year, told back to you. Paste your ORCID — in-browser, nothing stored.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/sotl-wrapped.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your SoTL, Wrapped — NTLSN">
@@ -78,13 +79,16 @@
   .share{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
   .brandline{margin-top:18px;font-size:12px;opacity:.7;text-align:center}
   @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.slide .inner{opacity:1;transform:none}}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
+<a class="skip" href="#gate">Skip to content</a>
 <a class="back" href="/">&larr; NTLSN</a>
 
 <!-- GATE -->
-<section id="gate">
+<section id="gate" role="main">
   <div class="card">
     <div class="eyebrow">◇ NTLSN · in your browser · 30 seconds</div>
     <h1>Your SoTL,<br>Wrapped.</h1>
@@ -100,7 +104,7 @@
 </section>
 
 <!-- STORY -->
-<section id="story">
+<section id="story" role="main">
   <div class="dots" id="dots" aria-hidden="true"></div>
   <div class="slides" id="slides"></div>
 </section>

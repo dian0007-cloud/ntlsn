@@ -9,12 +9,12 @@
 <meta property="og:description" content="Add widgets like you add skills. The next event, deadlines closing soon, your place in the academic year, a daily prompt, a focus timer — the commons at a glance.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/widgets.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Your NTLSN — a teaching dashboard you build from widgets · NTLSN">
 <meta name="twitter:description" content="Add widgets like you add skills. The commons at a glance.">
-<meta name="twitter:image" content="https://ntlsn.com/og-image.png">
+<meta name="twitter:image" content="https://ntlsn.com/og-image.jpg">
 <link rel="canonical" href="https://ntlsn.com/widgets.html">
 <style>
   :root{--navy:#0A1628;--card:#0f2034;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#FFB448;--blue:#7C9CFF;--purple:#C57BFF;--green:#6FCF97;--red:#FF6B6B;--terra:#FF8A65;--ink:#e8eef5;--mut:#9fb0c3;--line:#1f3350;
@@ -99,11 +99,14 @@
   .foot b{color:#cbd8e6}
   .empty{grid-column:1/-1;text-align:center;padding:50px 20px;border:1px dashed var(--line);border-radius:18px;color:var(--mut)}
   @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.w:hover{transform:none}}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="top" role="banner">
     <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
     <a class="back" href="/">&larr; Back to the commons</a>
   </div>
@@ -122,7 +125,7 @@
 
   <div id="board"></div>
 
-  <div class="foot">
+  <div class="foot" role="contentinfo">
     <b>How this works.</b> Every widget draws on the live commons — the events feed updates automatically; the daily widgets rotate each day. Your selection is saved only in this browser (no account, no tracking). This is a working prototype of a personalisation layer for NTLSN: the same idea as adding skills, applied to glanceable teaching content.<br>
     <span style="color:var(--mut)">Add or remove widgets any time. Hover a card and click ✕ to remove it; use “＋ Add widgets” to bring others back.</span>
   </div>
@@ -323,8 +326,8 @@
          {t:"Reflective practice & SoTL",u:"/reflective-practice-crash-course.html"},
          {t:"Inclusive & equitable assessment",u:"/inclusive-assessment-crash-course.html"},
          {t:"Supervising research students",u:"/research-supervision-crash-course.html"},
-         {t:"Work-integrated learning",u:"/wilcrashcourse.html"},
-         {t:"Supporting student wellbeing",u:"/wellbeingcrashcourse.html"}
+         {t:"Work-integrated learning",u:"/wil-crash-course.html"},
+         {t:"Supporting student wellbeing",u:"/wellbeing-crash-course.html"}
        ];
        var c=pick(COURSES);
        el.innerHTML='<div class="wh"><span class="ic">🎓</span><span class="cat">Crash course</span></div>'+

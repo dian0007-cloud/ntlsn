@@ -9,12 +9,12 @@
 <meta property="og:description" content="Creative-Commons teaching & learning resources you can legally embed, link, harvest or adapt — each with its exact licence and what it permits. Plus a CSP-safe video-embed code generator. Verified June 2026.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ntlsn.com/open-building-blocks.html">
-<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
 <meta property="og:site_name" content="NTLSN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Open Building Blocks — licence-cleared resources & embeds · NTLSN">
 <meta name="twitter:description" content="Creative-Commons teaching & learning resources you can legally embed, link, harvest or adapt — each with its exact licence and what it permits. Plus a CSP-safe video-embed code generator. Verified June 2026.">
-<meta name="twitter:image" content="https://ntlsn.com/og-image.png">
+<meta name="twitter:image" content="https://ntlsn.com/og-image.jpg">
 <style>
   :root{
     --navy:#0A1628;--navy2:#0e1d33;--card:#10223b;--teal:#4ECDC4;--teal-d:#2f9e96;
@@ -89,12 +89,15 @@
   .foot a{color:var(--mut)}
   .back{display:inline-flex;align-items:center;gap:6px;color:var(--teal);text-decoration:none;font-size:14px;font-weight:600;margin-bottom:22px}
   .back:hover{text-decoration:underline}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
   <a class="back" href="/">‹ NTLSN.com</a>
-  <header class="top">
+  <header class="top" role="banner">
     <svg class="logo" viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#4ECDC4" stroke-width="1.4" opacity=".4"/><circle cx="18" cy="18" r="4" fill="#4ECDC4"/><g stroke="#4ECDC4" stroke-width="1.2"><line x1="18" y1="14" x2="18" y2="6"/><line x1="22" y1="18" x2="30" y2="18"/><line x1="18" y1="22" x2="18" y2="30"/><line x1="14" y1="18" x2="6" y2="18"/></g></svg>
     <div class="brand">NTLSN<b>.com</b></div>
   </header>
@@ -141,7 +144,7 @@
     <div class="res" style="border-left:3px solid var(--gold)"><h3>🪶 Screen for First Nations content</h3><p class="desc">Indigenous teaching material is custodian-led — <b style="color:var(--ink)">do not auto-integrate</b>, even from a CC-BY-SA corpus. Seek Indigenous governance first (NLA ICIP Protocol).</p></div>
   </div>
 
-  <div class="foot">
+  <div class="foot" role="contentinfo">
     NTLSN — the National Teaching and Learning Sector Network · a free, open commons. This page links to and explains third-party open resources; each carries its own licence and attribution, shown above. Nothing here is endorsed by the listed organisations.
   </div>
 </div>

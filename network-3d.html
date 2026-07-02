@@ -43,10 +43,13 @@
   .legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
   .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:13px}
   a{color:var(--teal)}
+.skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
   <div class="eyebrow">NTLSN · A journey through the sector · 3D</div>
   <h1>The sector, in three dimensions</h1>
   <p class="lead">The Australian university teaching sector as a <b>rotating 3D network</b>: <b>43 universities</b> clustered by <b>state</b>, linked to their <b>alliances</b> and the <b>national associations</b> that connect them. <b>Drag to orbit</b>, scroll to zoom, or watch the journey fly through it.</p>
@@ -67,7 +70,7 @@
     </div>
   </div>
   <div class="legend" id="legend"></div>
-  <div class="foot">
+  <div class="foot" role="contentinfo">
     <b>Illustrative.</b> Universities, states and alliances are real (NTLSN's open directory of 43 institutions); links from a university to its state and alliance are real. National associations are shown as sector-wide bodies. First Nations governance is custodian-led and not modelled. Vanilla 3D — no libraries; runs entirely in your browser. &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
   </div>
 </div>
