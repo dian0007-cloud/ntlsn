@@ -6181,13 +6181,15 @@ go();
  var tries=0;
  function go(){
   if(document.getElementById('ntlsn-herdsa-banner'))return;
-  var hero=document.getElementById('hero');
-  if(!hero){ if(++tries<40)setTimeout(go,300); return; }
-  var a=document.createElement('a');
-  a.id='ntlsn-herdsa-banner'; a.href='/herdsa-2026.html';
-  a.style.cssText='display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:680px;margin:0 auto 18px;padding:10px 20px;background:linear-gradient(90deg,rgba(78,205,196,.14),rgba(124,156,255,.14),rgba(197,123,255,.14));border:1px solid rgba(78,205,196,.45);border-radius:999px;text-decoration:none;font:700 13.5px '+F+';color:#fff';
-  a.innerHTML='<span style="font-size:16px">\uD83C\uDDF8\uD83C\uDDEC</span><span>At HERDSA 2026? The whole program, threaded into the commons</span><span style="color:#4ECDC4;font-weight:800">Open it \u2192</span>';
-  hero.insertBefore(a, hero.firstChild);
+  var target=null;
+  var els=document.querySelectorAll('a,button');
+  for(var k=0;k<els.length;k++){ if(/Explore events/.test(els[k].textContent||'')){ target=els[k]; break; } }
+  if(!target||!target.parentNode){ if(++tries<40)setTimeout(go,300); return; }
+  var wrap=document.createElement('div');
+  wrap.id='ntlsn-herdsa-banner';
+  wrap.style.cssText='text-align:center;margin:0 auto 22px;max-width:720px';
+  wrap.innerHTML='<a href="/herdsa-2026.html" style="display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:11px 22px;background:linear-gradient(90deg,rgba(78,205,196,.14),rgba(124,156,255,.14),rgba(197,123,255,.14));border:1px solid rgba(78,205,196,.45);border-radius:999px;text-decoration:none;font:700 13.5px '+F+';color:#fff"><span style="font-size:16px">\uD83C\uDDF8\uD83C\uDDEC</span><span>At HERDSA 2026? The whole program, threaded into the commons</span><span style="color:#4ECDC4;font-weight:800">Open it \u2192</span></a>';
+  target.parentNode.insertBefore(wrap, target);
  }
  go();
 })();</script>
