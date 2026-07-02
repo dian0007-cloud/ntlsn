@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — How we handle your data (the receipts)</title>
+<meta name="description" content="No accounts, no analytics scripts, no ad tech. Your work in NTLSN tools is saved only in your browser. This page lists — from the actual code — every case where anything leaves your browser, and where it goes.">
+<meta property="og:title" content="How NTLSN handles your data — the receipts">
+<meta property="og:description" content="No accounts, no analytics scripts, no ad tech. Your work stays in your browser — and every exception is listed here, from the actual code.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntlsn.com/privacy.html">
+<meta property="og:image" content="https://ntlsn.com/og-image.png">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How NTLSN handles your data — the receipts">
+<meta name="twitter:description" content="No accounts, no analytics scripts, no ad tech. Every exception listed, from the actual code.">
+<link rel="canonical" href="https://ntlsn.com/privacy.html">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;
+    --teal:#4ECDC4;--amber:#FFB448;--purple:#C57BFF;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.12);
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --M:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 560px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.65;padding:28px 18px 64px;min-height:100vh}
+  .wrap{max-width:880px;margin:0 auto}
+  a{color:var(--teal)}
+  a:hover{text-decoration-thickness:2px}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+  .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:var(--navy);padding:8px 14px;border-radius:0 0 8px 0;font-weight:700;z-index:99}
+  .skip:focus{left:0}
+  header.site{display:flex;align-items:center;gap:12px;margin-bottom:34px;flex-wrap:wrap}
+  .home{font-weight:800;letter-spacing:.04em;color:var(--ink);text-decoration:none;font-size:15px}
+  .home span{color:var(--teal)}
+  .crumb{color:var(--mut);font-size:13px}
+  h1{font-size:clamp(26px,4.6vw,38px);line-height:1.18;margin:0 0 10px;font-weight:800}
+  h1 em{font-style:normal;color:var(--teal)}
+  .sub{color:var(--mut);font-size:16px;max-width:64ch;margin:0 0 8px}
+  .verified{display:inline-block;margin:14px 0 0;padding:6px 12px;border:1px solid rgba(78,205,196,.35);border-radius:999px;background:rgba(78,205,196,.08);color:var(--teal);font-size:12.5px;letter-spacing:.02em}
+  nav.toc{margin:26px 0 8px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card2)}
+  nav.toc strong{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+  nav.toc ol{margin:0;padding-left:20px;font-size:14.5px}
+  nav.toc li{margin:3px 0}
+  section{margin-top:44px}
+  h2{font-size:21px;margin:0 0 6px;font-weight:800}
+  h2 .n{color:var(--teal);font-family:var(--M);font-size:15px;margin-right:8px}
+  .lede{color:var(--mut);margin:0 0 16px;max-width:66ch}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+  .card h3{margin:0 0 6px;font-size:16px}
+  .card h3 .to{font-weight:400;color:var(--mut);font-size:13px}
+  .card p{margin:6px 0;font-size:14.5px}
+  .card p.meta{color:var(--mut);font-size:13.5px}
+  ul.plain{margin:8px 0;padding-left:20px;font-size:14.5px}
+  ul.plain li{margin:5px 0}
+  code{font-family:var(--M);font-size:.86em;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:#cfe9e6;word-break:break-all}
+  .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:14px 0}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+  caption{text-align:left;padding:12px 14px 4px;color:var(--mut);font-size:13px}
+  th,td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+  thead th{border-top:0;background:rgba(255,255,255,.04);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+  .ok{color:var(--teal);font-weight:700}
+  .note{border-left:3px solid var(--amber);background:rgba(255,180,72,.07);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .note strong{color:var(--amber)}
+  .honest{border-left:3px solid var(--teal);background:rgba(78,205,196,.06);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--mut);font-size:13.5px}
+  footer a{color:var(--teal)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div class="wrap">
+
+<header class="site">
+  <a class="home" href="/">NTLSN<span>.</span></a>
+  <span class="crumb">/ privacy</span>
+</header>
+
+<main id="main" role="main">
+
+  <h1>How NTLSN handles your data — <em>the receipts</em></h1>
+  <p class="sub">Most privacy pages are written by lawyers, about intentions. This one is written from the site's actual code, about behaviour. Every claim below can be checked with your browser's developer tools — and we tell you how.</p>
+  <p class="verified">Last verified against the code: 2 July 2026</p>
+
+  <nav class="toc" aria-label="On this page">
+    <strong>On this page</strong>
+    <ol>
+      <li><a href="#promise">The promise</a></li>
+      <li><a href="#browser">What runs entirely in your browser</a></li>
+      <li><a href="#leaves">What leaves your browser, and when</a></li>
+      <li><a href="#nothave">What we don't have</a></li>
+      <li><a href="#hosting">Hosting</a></li>
+      <li><a href="#questions">Questions</a></li>
+    </ol>
+  </nav>
+
+  <section id="promise" aria-labelledby="h-promise">
+    <h2 id="h-promise"><span class="n">01</span>The promise</h2>
+    <p class="lede">In plain English:</p>
+    <ul class="plain">
+      <li><strong>We never sell your data.</strong> Nobody pays us for your attention: no advertising, no ad tech, no sponsored placement.</li>
+      <li><strong>We never track or profile you.</strong> There are no analytics scripts, no tracking pixels and no fingerprinting anywhere on this site, and our own code never sets a cookie. (One third party we embed <em>could</em> track you — the YouTube player. We call it out plainly in <a href="#leaves">3.4</a>, because you deserve to know.)</li>
+      <li><strong>Your work stays on your device.</strong> Everything you write in our tools — passports, reflections, self-checks, plans — is saved only in your own browser's storage. There are no accounts, no logins and no user database. The only personal data NTLSN ever ends up holding is what you deliberately submit through a form (<a href="#forms">3.2</a>) — a small moderation spreadsheet, not a database of visitors.</li>
+      <li><strong>Some things do leave your browser</strong> — a lookup you run, a form you submit, a video player a page loads. Every one of those cases is listed in <a href="#leaves">section 3</a>, with where the data goes. None of it is sent to a server we run; the one narrow backstop involving our host is disclosed in <a href="#forms">3.2</a>.</li>
+    </ul>
+    <p class="honest">If this page and the code ever disagree, the code is the truth and this page is the bug — <a href="#questions">tell us</a> and we'll fix whichever is wrong.</p>
+  </section>
+
+  <section id="browser" aria-labelledby="h-browser">
+    <h2 id="h-browser"><span class="n">02</span>What runs entirely in your browser</h2>
+    <p class="lede">Our interactive tools save your work to <strong>localStorage</strong> — a storage area inside your own browser, on your own device. Pages read it back to restore your work; it is never placed in any network request and we never see it. Each tool has a Clear button, and you can wipe everything at any time via your browser's site-data settings. Exports (PDF, SCORM, JSON) are generated on your device as downloads.</p>
+
+    <div class="tbl">
+      <table>
+        <caption>Every stored item, by name — so you can check it yourself (browser dev tools → Application → Local Storage → ntlsn.com).</caption>
+        <thead>
+          <tr><th scope="col">Tool</th><th scope="col">What it stores</th><th scope="col">Storage key</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Homepage region choice</td><td>Whether you picked Australia or global view</td><td><code>ntlsn_region</code></td></tr>
+          <tr><td>Acknowledgement of Country strip</td><td>That you dismissed it (clears when the tab closes)</td><td><code>ntlsn_ack_seen</code> (sessionStorage)</td></tr>
+          <tr><td><a href="/start-here.html">Start Here</a></td><td>The interest bubbles you picked</td><td><code>ntlsn_starthere_interests</code></td></tr>
+          <tr><td><a href="/trp.html">Teaching Recognition Passport</a></td><td>Name, institution, discipline, ORCID iD, teaching philosophy, recognition entries</td><td><code>ntlsn_trp</code></td></tr>
+          <tr><td><a href="/narrative-cv.html">Narrative CV builder</a></td><td>Name, role and your CV narrative drafts</td><td><code>ntlsn_narrative_cv_v1</code></td></tr>
+          <tr><td><a href="/learning-modules.html">Learning modules</a></td><td>Which modules you completed, plus your written reflections</td><td><code>ntlsn_lm_done_v1</code>, <code>ntlsn_lm_reflect_*</code></td></tr>
+          <tr><td><a href="/reflective-coach.html">Reflective Coach</a></td><td>Your saved reflections; and, only if you opt in, your bring-your-own-AI settings including your API key (see <a href="#byoai">3.5</a>)</td><td><code>aletheia_*</code>, <code>aletheia_model</code></td></tr>
+          <tr><td><a href="/recognition-gps.html">Recognition GPS</a></td><td>Your ORCID iD — only if you tick "Remember my iD on this device"</td><td><code>ntlsn_gps_orcid</code></td></tr>
+          <tr><td><a href="/selfcheck.html">Crash-course self-checks</a></td><td>Which items you ticked</td><td><code>ntlsn_selfcheck</code></td></tr>
+          <tr><td><a href="/casual-teaching.html">Casual teaching checklist</a></td><td>Checklist ticks</td><td><code>ntlsn_casual_v1</code></td></tr>
+          <tr><td><a href="/teqsa-readiness.html">TEQSA readiness</a></td><td>Your red/amber/green self-ratings</td><td><code>teqsa_rag</code></td></tr>
+          <tr><td><a href="/sessional-recognition.html">Sessional recognition wallet</a></td><td>Activities, hours, dates and notes you log</td><td><code>ntlsn-sessional-wallet-v1</code></td></tr>
+          <tr><td><a href="/constructive-alignment.html">Constructive alignment matrix</a></td><td>Your outcomes and assessment items</td><td><code>ntlsn-ca-matrix-v1</code></td></tr>
+          <tr><td><a href="/programme-map.html">Programme map</a></td><td>Your courses and programme learning outcomes</td><td><code>ntlsn-prog-map-v1</code></td></tr>
+          <tr><td><a href="/school-needs-diagnostic.html">School needs diagnostic</a></td><td>Your answers and ranked results. Saved in this browser only today — but this tool's save code is built to talk to a future shared NTLSN back-end. If that ever goes live, saving would send results off your device, and this page will be rewritten <em>before</em> that switch is flipped.</td><td><code>shared:ndiag:*</code></td></tr>
+          <tr><td><a href="/widgets.html">Widgets board</a></td><td>Which widgets you enabled (the list of widget IDs, nothing else)</td><td><code>ntlsn_widgets_v1</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Most search is client-side.</strong> The homepage site search filters data already built into the page; the archive, best-practice, tools and prompts searches filter JSON files fetched from ntlsn.com itself. Your keystrokes in those boxes never leave your browser. Two kinds of search are different, deliberately: the scholarly research tools, and the OER search box on the homepage, which sends your query to OER Commons — both spelled out in <a href="#lookups">3.1</a>.</p>
+  </section>
+
+  <section id="leaves" aria-labelledby="h-leaves">
+    <h2 id="h-leaves"><span class="n">03</span>What leaves your browser, and when</h2>
+    <p class="lede">This is the complete list. In every case the request goes straight from your browser to the service named — and, like any web request, the receiving service sees your IP address and browser signature.</p>
+
+    <div class="card" id="lookups">
+      <h3>3.1 Public scholarly lookups <span class="to">→ OpenAlex, ORCID, DOAJ, OER Commons</span></h3>
+      <p><strong>When:</strong> you paste an ORCID iD into ORCID Start, the SoTL Index, SoTL Wrapped, Recognition GPS, Publication Profile or Academic Home; or you run a search in Research Search or the Journal Finder, check DOIs in the OA Finder, or use the OER search box on the homepage.</p>
+      <p><strong>What's sent:</strong> exactly what you typed — the iD, query or DOIs — direct from your browser to <a href="https://openalex.org/OpenAlex_privacy_policy" target="_blank" rel="noopener">OpenAlex<span class="sr"> (opens in new tab)</span></a> (run by the non-profit OurResearch), <a href="https://info.orcid.org/privacy-policy/" target="_blank" rel="noopener">ORCID<span class="sr"> (opens in new tab)</span></a>, <a href="https://doaj.org/privacy/" target="_blank" rel="noopener">DOAJ<span class="sr"> (opens in new tab)</span></a>, or (in a new tab, as part of the web address) OER Commons. These are public, open scholarly databases; the lookups return public records. Those services see your IP address alongside what you typed, and may keep their own logs.</p>
+      <p class="meta">Nothing you type here is sent to any NTLSN system. One nuance: if you open a shared link that carries an iD or query in the address (like <code>?orcid=…</code>), that address appears in standard hosting logs (<a href="#hosting">section 5</a>), as every visited URL does.</p>
+    </div>
+
+    <div class="card" id="forms">
+      <h3>3.2 The share &amp; register forms <span class="to">→ a Google Sheet our moderators read</span></h3>
+      <p><strong>When:</strong> you press submit on any of the three forms that are live on the homepage today: <em>share a symposium</em> (institution, symposium title, link, email, type), the <em>peer-review exchange</em> (name, email, institution, discipline, preferences), and the <em>students-as-partners registry</em> (institution, program, level, URL, name, email).</p>
+      <p><strong>What's sent:</strong> the fields you typed — including your email address if you choose to give it — to a Google Apps Script, which stores them in a Google-hosted spreadsheet. A human moderator reads it before anything appears on the site. Used only for curation and to say thanks; never for marketing, never sold. Google is the processor (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy<span class="sr"> (opens in new tab)</span></a>). This spreadsheet is the one place where NTLSN itself holds personal data you typed.</p>
+      <p class="meta"><strong>One backstop, disclosed:</strong> the symposium form is also registered with our host's form service (Netlify Forms), so that if our own script ever failed, a submission could be captured by Netlify instead of Google and would sit in our Netlify dashboard. Same fields, different processor (<a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Netlify's privacy policy<span class="sr"> (opens in new tab)</span></a>). Either way, nothing is ever sent until you press submit.</p>
+    </div>
+
+    <div class="card">
+      <h3>3.3 Automatic homepage requests <span class="to">→ Google Apps Script</span></h3>
+      <p><strong>When:</strong> the homepage loads — no typing, no clicking. Four small requests go to <code>script.google.com</code>: the "shared symposiums" feed, the "latest from the sector" feed, and two registration counts, all served by the same Google Apps Script that holds moderated submissions.</p>
+      <p><strong>What's sent:</strong> nothing you typed — but Google's servers see the standard request metadata (IP address, browser signature) for every homepage visitor, as with any page that loads a remote resource. If "no request to Google at all" matters to you, that's a reason to know this — which is why it's listed.</p>
+    </div>
+
+    <div class="card">
+      <h3>3.4 Embedded video <span class="to">→ YouTube / Vimeo</span></h3>
+      <p><strong>When — and this part needs no click from you:</strong> the homepage pre-opens connections to three YouTube/Google domains as it loads, video thumbnail images load from YouTube's image servers with the page, and the homepage showcase video currently loads and autoplays from <code>www.youtube.com</code> as soon as it scrolls into view. Other videos on the site load when you play them.</p>
+      <p><strong>What's sent:</strong> the standard player and image requests. Because the homepage embed uses the full <code>www.youtube.com</code> player (not the privacy-enhanced one), YouTube can set its own cookies, may recognise a signed-in Google account, and can use the visit in Google's profiling, under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy<span class="sr"> (opens in new tab)</span></a>. Vimeo players appear on some pages too and can likewise set cookies, under <a href="https://vimeo.com/privacy" target="_blank" rel="noopener">Vimeo's policy<span class="sr"> (opens in new tab)</span></a>.</p>
+      <p class="note"><strong>Being straight with you:</strong> this is the one place on ntlsn.com where a third party could track a visitor who typed and clicked nothing. Our own <a href="/open-building-blocks.html">embed-code generator</a> already uses and recommends YouTube's <a href="https://support.google.com/youtube/answer/171780" target="_blank" rel="noopener">privacy-enhanced (youtube-nocookie) player<span class="sr"> (opens in new tab)</span></a> — moving the homepage embed to it is on our list, and until it's done, "never tracked" is a promise about <em>our</em> code, not YouTube's.</p>
+    </div>
+
+    <div class="card" id="byoai">
+      <h3>3.5 Reflective Coach — only if you connect your own AI <span class="to">→ the endpoint YOU configure</span></h3>
+      <p><strong>Default:</strong> fully local. Your reflections are saved in this browser and sent nowhere.</p>
+      <p><strong>If you opt in</strong> with your own OpenAI-compatible endpoint and API key: while it's enabled, <em>each answer you submit</em> is sent verbatim to that endpoint, with your key, under that provider's terms — never to NTLSN. Your previously saved reflections are never sent, only the answer you just wrote. Your key is stored unencrypted in this browser's localStorage (<code>aletheia_model</code>): don't enable this on a shared machine, and clear it when you're done.</p>
+    </div>
+
+    <div class="card">
+      <h3>3.6 Things you click that open elsewhere <span class="to">→ your choice, your client</span></h3>
+      <p>"Add to Google Calendar" links in the conference finder carry only the public event details, and only when you click them. Contact and "share your session" buttons open <em>your own</em> email app with a pre-filled draft — nothing is sent unless you send it. External resource links leave the site in the ordinary way.</p>
+    </div>
+
+    <p class="note"><strong>Built but switched off:</strong> the code also contains an email-subscribe form (Buttondown) and a founders-circle form, both currently disabled — their endpoints are empty, so they send nothing today — and two unconfigured serverless function stubs (ORCID sign-in, Zoom) that store nothing. If any of these are ever switched on, this page gets rewritten first. That's the rule this page exists to enforce.</p>
+  </section>
+
+  <section id="nothave" aria-labelledby="h-nothave">
+    <h2 id="h-nothave"><span class="n">04</span>What we don't have</h2>
+    <ul class="plain">
+      <li><span class="ok">No accounts or logins</span> — there is nothing to sign up for, so there is no user database to breach, sell or subpoena.</li>
+      <li><span class="ok">No analytics scripts</span> — no Google Analytics, no Plausible, no Hotjar, no Matomo, none. Search the source of any page. (Our host gives us aggregate, cookieless page counts server-side — <a href="#hosting">section 5</a>.)</li>
+      <li><span class="ok">No ad tech or pixels</span> — no advertising, no retargeting, no social-media beacons.</li>
+      <li><span class="ok">No NTLSN cookies</span> — our own code never sets a cookie. The YouTube and Vimeo players in <a href="#leaves">3.4</a> are the only cookie-capable third parties we embed, and they're disclosed.</li>
+      <li><span class="ok">No third-party scripts in our pages</span> — every script tag on this site loads from ntlsn.com; our <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" rel="noopener">Content-Security-Policy<span class="sr"> (opens in new tab)</span></a> allows script <em>files</em> from ntlsn.com only, so a script file from any other domain would be refused. (The YouTube and Vimeo players in 3.4 run their own scripts inside their own frames — that's what an embed is.)</li>
+    </ul>
+    <p class="honest"><strong>Two honest technical caveats</strong> about that policy, because a receipts page shouldn't oversell its own armour: it currently allows inline scripts (<code>'unsafe-inline'</code> — our tools are built as self-contained pages), so it is not a defence against a script <em>injected into</em> a page; and it does not yet restrict where a page may <em>connect</em> (<code>connect-src 'self' https:</code>), so the "what leaves" list above is enforced by the code itself — which is public and inspectable — not yet by the browser. Tightening both is on our list, because a promise the browser enforces beats a promise you have to take on trust.</p>
+  </section>
+
+  <section id="hosting" aria-labelledby="h-hosting">
+    <h2 id="h-hosting"><span class="n">05</span>Hosting</h2>
+    <p>ntlsn.com is a static site served by <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Netlify<span class="sr"> (opens in new tab)</span></a>. There is no NTLSN application server holding user data. Like every web host, Netlify keeps standard server logs (IP address, browser signature, URL requested) to serve and secure the site, retained under Netlify's own policy — that's the host's baseline, not something we can switch off. We use Netlify's server-side Web Analytics, which is cookieless and adds nothing to the page: it gives us aggregate page counts derived from those logs. We can see that a page was read; we cannot see who read it — and that's how we want it.</p>
+  </section>
+
+  <section id="questions" aria-labelledby="h-questions">
+    <h2 id="h-questions"><span class="n">06</span>Questions</h2>
+    <p>Who we are and why NTLSN is free is on the <a href="/about.html">about page</a>. If you have a privacy question, or you've found something this page doesn't disclose, email <a href="mailto:hello@ntlsn.com">hello@ntlsn.com</a> — we treat a gap on this page as a bug and we'll fix it.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>NTLSN — free for every educator. No logins, no paywalls. <a href="/">Back to the network</a>.</p>
+  <p>This page loads nothing from anyone: no fonts, no scripts, no images from other servers. Open your browser's Network tab and check.</p>
+</footer>
+
+</div>
+</body>
+</html>
