@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0"><head><title>NTLSN — Sector Reads (higher education feeds)</title></head><body>
+<outline text="NTLSN Sector Reads" title="NTLSN Sector Reads">
+<outline type="rss" text="Campus Morning Mail" title="Campus Morning Mail" xmlUrl="https://campusmorningmail.com.au/feed/" htmlUrl="https://campusmorningmail.com.au/"/>
+<outline type="rss" text="Future Campus" title="Future Campus" xmlUrl="https://futurecampus.com.au/feed/" htmlUrl="https://futurecampus.com.au/"/>
+<outline type="rss" text="The Conversation — Education (AU)" title="The Conversation — Education (AU)" xmlUrl="https://theconversation.com/au/education/articles.atom" htmlUrl="https://theconversation.com/au/education"/>
+<outline type="rss" text="Teche — Macquarie University" title="Teche — Macquarie University" xmlUrl="https://teche.mq.edu.au/feed/" htmlUrl="https://teche.mq.edu.au/"/>
+<outline type="rss" text="Wonkhe" title="Wonkhe" xmlUrl="https://wonkhe.com/feed/" htmlUrl="https://wonkhe.com/"/>
+<outline type="rss" text="HEPI" title="HEPI" xmlUrl="https://www.hepi.ac.uk/feed/" htmlUrl="https://www.hepi.ac.uk/"/>
+<outline type="rss" text="Inside Higher Ed" title="Inside Higher Ed" xmlUrl="https://www.insidehighered.com/rss.xml" htmlUrl="https://www.insidehighered.com/"/>
+<outline type="rss" text="Faculty Focus" title="Faculty Focus" xmlUrl="https://www.facultyfocus.com/feed/" htmlUrl="https://www.facultyfocus.com/"/>
+<outline type="rss" text="EDUCAUSE Review" title="EDUCAUSE Review" xmlUrl="https://er.educause.edu/rss" htmlUrl="https://er.educause.edu/"/>
+<outline type="rss" text="Tony Bates" title="Tony Bates" xmlUrl="https://www.tonybates.ca/feed/" htmlUrl="https://www.tonybates.ca/"/>
+<outline type="rss" text="NTLSN — Fresh today" title="NTLSN" xmlUrl="https://ntlsn.com/feed.xml" htmlUrl="https://ntlsn.com/"/>
+</outline></body></opml>
