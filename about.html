@@ -151,7 +151,15 @@ ul.rlist .rc{float:right;background:rgba(124,156,255,.14);border:1px solid rgba(
 ul.rlist details{margin-top:8px}
 ul.rlist summary{cursor:pointer;color:var(--teal);font:700 12.5px var(--F)}
 ul.rlist details li{background:transparent;border:0;border-left:2px solid var(--line);border-radius:0;padding:4px 0 4px 12px;margin:4px 0;list-style:none}
+details.rlwrap{margin:0 0 6px}
+details.rlwrap>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);color:var(--teal);font:800 13px var(--F);padding:11px 18px;border-radius:999px;min-height:42px}
+details.rlwrap>summary::-webkit-details-marker{display:none}
+details.rlwrap>summary::before{content:"\25BE";font-size:11px}
+details.rlwrap[open]>summary::before{content:"\25B4"}
+details.rlwrap>summary span{color:var(--mut);font-weight:600}
+details.rlwrap[open]>summary{margin-bottom:14px}
 </style>
+<details class="rlwrap"><summary>See all publications <span>(46 works)</span></summary>
 <ul class="rlist" id="rlist">
 <li data-t="mooc"><span class="rc">the why</span><b>The Commercialisation of Massive Open Online Courses</b> (book)<br><span class="rv">Springer Nature, 2024 — the critique NTLSN answers: what open learning became, and what a free commons could be instead.</span>
 <details><summary>10 chapters — reading ideologies in MOOCs</summary><ul>
@@ -193,7 +201,7 @@ ul.rlist details li{background:transparent;border:0;border-left:2px solid var(--
 <li data-t="lang"><span class="rc">13</span><b>Factors that influence translation and interpreting technology adoption by university instructors (TAM)</b><br><span class="rv">Journal of Translation and Language Studies, 2022 — with Taptamat, Uchiyama &amp; Akagawa</span></li>
 <li data-t="lang"><span class="rc">6</span><b>Rapid response redevelopment: an English-to-Chinese translation course moving online</b><br><span class="rv">Journal of China Computer-Assisted Language Learning, 2023 — with Cook, Spinelli &amp; Lai</span></li>
 <li data-t="lang"><span class="rc">3</span><b>Applications of technologies in T&amp;I courses in Australia: perceptions of T&amp;I academics</b><br><span class="rv">Journal of Translation and Language Studies, 2022 — with Uchiyama &amp; Akagawa</span></li>
-</ul>
+</ul></details>
 <p style="font:400 12px var(--F);color:var(--mut);margin-top:14px">Selected from 46 works · counts per <a href="https://scholar.google.com.au/citations?hl=en&amp;user=nCEg58QAAAAJ" target="_blank" rel="noopener" style="color:var(--teal)">Google Scholar</a>, July 2026 (citation counts change over time) · also convenor/chair, ICCE sub-conference on Advanced Learning Technologies (2023, 2024). Citation of published work does not imply any co-author endorses NTLSN.</p>
 <script>
 (function(){
@@ -203,6 +211,7 @@ ul.rlist details li{background:transparent;border:0;border-left:2px solid var(--
    chips.forEach(function(x){x.setAttribute('aria-pressed', x===c ? 'true':'false');});
    var f=c.getAttribute('data-f');
    items.forEach(function(li){ li.style.display=(f==='all'||li.getAttribute('data-t')===f)?'':'none'; });
+   var w=document.querySelector('.rlwrap'); if(w) w.open=true;
  });});
 })();
 </script>
