@@ -2384,7 +2384,6 @@ function build(){
    +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;">'+cards+'</div>'
   +'<p style="text-align:center;font:400 12px/1.55 '+F+';color:#8aa0b6;margin:18px auto 0;max-width:680px;">OER Commons is an independent open library run by the nonprofit ISKME. NTLSN links you straight to it &mdash; every result is free and openly licensed. Searches and links open on oercommons.org.</p>'
  +'</div>';
-  sec.innerHTML='<details style="max-width:1060px;margin:0 auto"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px -apple-system,Segoe UI,Roboto,sans-serif;padding:13px;min-height:44px">Open Educational Resources &mdash; browse the library &#9662;</summary><div>'+sec.innerHTML+'</div></details>';
  hero.parentNode.appendChild(sec);
  (function(){
   var dwrap=document.createElement('div'); dwrap.style.cssText='max-width:880px;margin:36px auto 0;';
@@ -3531,7 +3530,6 @@ function build(){
    +'<div style="flex:1;min-width:240px;font:500 13.5px/1.55 '+F+';color:#cbd8e6;">Complete one, <a href="/recognition-points.html" style="color:#2DD4BF;text-decoration:none;">log it</a>, and it counts. Your growth, your service and your scholarship become recognition points on one portable record.</div></div>'
   +'<p style="text-align:center;font:400 12px/1.55 '+F+';color:#8aa0b6;margin:16px auto 0;max-width:720px;">An open, growing directory of independent professional learning from across the sector. Links are provided for the community; listing here is not affiliation with or endorsement by NTLSN, and these organisations do not endorse NTLSN. Open-source tools are linked under their own licences.</p>'
  +'</div>';
-  sec.innerHTML='<details style="max-width:1060px;margin:0 auto"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px -apple-system,Segoe UI,Roboto,sans-serif;padding:13px;min-height:44px">Ways to grow &mdash; browse PD opportunities &#9662;</summary><div>'+sec.innerHTML+'</div></details>';
  hero.parentNode.appendChild(sec);
  function applyFilter(f){
   sec.querySelectorAll('.grow-fchip').forEach(function(c){var on=c.getAttribute('data-f')===f;c.style.background=on?'#2DD4BF':'rgba(255,255,255,.06)';c.style.color=on?'#06243a':'#cbd8e6';c.style.borderColor=on?'#2DD4BF':'rgba(255,255,255,.14)';});
@@ -3638,7 +3636,6 @@ function build(){
   +'</div>'
   +'<p style="text-align:center;font:400 12px/1.55 '+F+';color:#8aa0b6;margin:22px auto 0;max-width:760px;">Illustrative examples drawn from the domains most Australian academic-promotion frameworks share. Every institution sets its own criteria, weights them differently, and makes every decision. Tick what you have done—most promotion cases rest on 15–20 well-evidenced items in strong domains—then <a href="/recognition-navigator.html" style="color:#2DD4BF;text-decoration:none;">map them to your level</a> to see your case take shape.</p>'
  +'</div>';
-  sec.innerHTML='<details style="max-width:1060px;margin:0 auto"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px -apple-system,Segoe UI,Roboto,sans-serif;padding:13px;min-height:44px">Map your evidence of impact &mdash; self-assess across 6 domains &#9662;</summary><div>'+sec.innerHTML+'</div></details>';
  hero.parentNode.appendChild(sec);
  var lists=document.getElementById('ev-lists');
  function update(){
@@ -6199,5 +6196,6 @@ go();
 })();</script>
 <style id="ntlsn-roadmapboxfix">#ntlsn-coming2027 [data-uic],#ntlsn-coming2028 [data-uic]{border:none!important;background:transparent!important;padding:0!important;color:inherit!important;text-decoration:none!important}</style>
 <script id="ntlsn-herodeclutter">(function(){if(window.__ntlsnHD)return;window.__ntlsnHD=1;function go(){var all=document.querySelectorAll("div,span,p");for(var i=0;i<all.length;i++){var el=all[i];if(el.children.length===0&&(el.textContent||"").indexOf("The open home for connecting university teaching")>-1){el.style.display="none";}}var as=document.querySelectorAll("a");for(var j=0;j<as.length;j++){if((as[j].textContent||"").indexOf("Place yourself in SoTL")>-1){as[j].style.display="none";}}}go();[300,900,2000,4000].forEach(function(ms){setTimeout(go,ms);});})();</script>
+<script id="ntlsn-nestle-fold">(function(){if(window.__ntlsnNestle)return;window.__ntlsnNestle=1;var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";var FOLDS=[['ntlsn-oer','Open Educational Resources \u2014 browse the library'],['ntlsn-evidencelib','Map your evidence of impact \u2014 self-assess across 6 domains'],['ntlsn-waystogrow','Ways to grow \u2014 browse PD opportunities']];function nestle(id,title){var sec=document.getElementById(id);if(!sec||sec.__nestled)return;if((sec.textContent||'').length<80)return;var det=document.createElement('details');det.style.cssText='margin:0 auto';var sum=document.createElement('summary');sum.style.cssText="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px "+F+";padding:13px;min-height:44px";sum.innerHTML=title+' \u25BE';det.appendChild(sum);while(sec.firstChild){det.appendChild(sec.firstChild);}sec.appendChild(det);sec.__nestled=true;}function go(){FOLDS.forEach(function(f){nestle(f[0],f[1]);});}[1700,3700,6500,9000].forEach(function(ms){setTimeout(go,ms);});})();</script>
 </body>
 </html>
