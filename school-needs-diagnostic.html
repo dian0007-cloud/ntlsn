@@ -17,6 +17,7 @@
 <script src="/lib/babel.min.js"></script>
 </head>
 <body>
+<a href="/" style="display:inline-block;color:#4ECDC4;text-decoration:none;font:600 13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin:0 0 12px">‹ NTLSN.com</a>
 <div id="root"></div>
 <script type="text/babel">
 if(!window.storage){window.storage={async get(k,s){const p=s?"shared:":"local:";const v=localStorage.getItem(p+k);if(v===null)throw new Error("nf");return{key:k,value:v}},async set(k,v,s){localStorage.setItem((s?"shared:":"local:")+k,v);return{key:k}},async delete(k,s){localStorage.removeItem((s?"shared:":"local:")+k)},async list(pre,s){const sp=s?"shared:":"local:";const fp=sp+(pre||"");const keys=[];for(let i=0;i<localStorage.length;i++){const kk=localStorage.key(i);if(kk.startsWith(fp))keys.push(kk.slice(sp.length))}return{keys}}}}
