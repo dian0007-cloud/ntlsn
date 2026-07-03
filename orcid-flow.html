@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://api.openalex.org">
+<title>NTLSN — See your path through the commons</title>
+<meta name="description" content="Paste your ORCID iD and watch NTLSN read your public scholarly record — in your browser — and light up the single best path through the commons for your discipline. Free. Nothing sent to us, stored, or sold.">
+<meta property="og:title" content="See your path through the commons — NTLSN">
+<meta property="og:description" content="Paste your ORCID and the network re-computes around you, lighting up your best next step. In your browser. Nothing stored or sent to us.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ntlsn.com/orcid-flow.html">
+<meta property="og:image" content="https://ntlsn.com/og-image.jpg">
+<meta property="og:site_name" content="NTLSN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="See your path through the commons — NTLSN">
+<meta name="twitter:description" content="Paste your ORCID and the network re-computes around you, lighting up your best next step. In your browser.">
+<link rel="canonical" href="https://ntlsn.com/orcid-flow.html">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--good:#9DD649;--orcid:#A6CE39;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1100px 560px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px;min-height:100vh}
+  .wrap{max-width:880px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--teal),#7C9CFF 55%,#C57BFF);display:flex;align-items:center;justify-content:center;font-weight:800;color:#06251f;font-size:13px}
+  .back{font-size:13px;color:var(--mut);text-decoration:none}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  h1{font-size:clamp(26px,4vw,40px);margin:0 0 12px;font-weight:800;letter-spacing:-.015em;line-height:1.08}
+  .lead{color:#cbd8e6;font-size:16px;margin:0 0 22px;max-width:64ch}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:0 0 16px}
+  .orcidrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .orcidrow label{font:700 13px var(--F);display:flex;align-items:center;gap:8px;width:100%;margin-bottom:4px}
+  .oicon{width:18px;height:18px;border-radius:4px;background:var(--orcid);color:#fff;font:800 10px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
+  input[type=text]{flex:1;min-width:220px;background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:600 15px var(--F);letter-spacing:.02em}
+  input[type=text]:focus{outline:none;border-color:var(--teal)}
+  .btn{background:var(--teal);color:#06251f;border:0;border-radius:10px;padding:12px 20px;font:800 14px var(--F);cursor:pointer;white-space:nowrap}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn:active{transform:translateY(1px)}
+  .demo{background:none;border:0;color:var(--teal);font:700 13px var(--F);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
+  .err{color:#FF8A8A;font-size:13px;margin:10px 0 0;min-height:0}
+  .facrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+  .facrow .fl{font:700 12px var(--F);color:var(--mut);margin-right:2px}
+  .fac{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.30);color:var(--gold);border-radius:999px;padding:6px 13px;font:700 12.5px var(--F);cursor:pointer}
+  .fac:hover{background:rgba(201,169,98,.16)}
+  .fac:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .privacy{background:linear-gradient(180deg,rgba(166,206,57,.08),rgba(166,206,57,.02));border:1px solid rgba(166,206,57,.28);border-radius:14px;padding:15px 17px;margin:0 0 16px;font-size:13.5px;color:#d4def0}
+  .privacy b{color:var(--orcid)}
+  .privacy ul{margin:9px 0 0;padding:0 0 0 4px;list-style:none}
+  .privacy li{padding:4px 0 4px 22px;position:relative;color:var(--mut)}
+  .privacy li:before{content:"\2713";position:absolute;left:0;color:var(--orcid);font-weight:800}
+  /* stage */
+  .stagewrap{background:linear-gradient(180deg,#0b1c33,#0a1628);border:1px solid var(--line);border-radius:16px;padding:6px;margin:0 0 14px;position:relative}
+  .stage{position:relative;width:100%}
+  canvas#flow{display:block;width:100%;border-radius:12px;cursor:default}
+  .tip{position:absolute;pointer-events:none;background:#0a1628;border:1px solid rgba(78,205,196,.45);border-radius:9px;padding:8px 11px;font:600 12px var(--F);color:var(--ink);max-width:230px;box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;z-index:5}
+  .tip.on{opacity:1;transform:translateY(0)}
+  .tip .ttag{color:var(--teal);font:800 10px var(--F);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:3px}
+  .tip .twhy{color:var(--mut);font-weight:500;font-style:italic;margin-top:4px;display:block}
+  .caption{color:#cbd8e6;font-size:14px;margin:2px 2px 0;min-height:0;line-height:1.55}
+  .caption b{color:#fff}
+  .caption .verdict{color:#8aa0b6;font-style:italic}
+  .loading{display:flex;align-items:center;gap:11px;color:var(--mut);font-size:14px;padding:8px 4px}
+  .spin{width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;flex:none}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .attrib{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:12px;color:var(--mut);margin:22px 0 0;line-height:1.6}
+  .attrib b{color:var(--ink)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+  /* OpenAlex explainer channel */
+  .explain{background:var(--card2);border:1px solid var(--line);border-radius:14px;margin:0 0 16px;overflow:hidden}
+  .explain>summary{cursor:pointer;list-style:none;padding:13px 17px;font:700 13.5px var(--F);color:var(--ink);display:flex;align-items:center;gap:8px;user-select:none}
+  .explain>summary::-webkit-details-marker{display:none}
+  .explain>summary .chev{margin-left:auto;color:var(--mut);transition:transform .18s;font-size:16px;line-height:1}
+  .explain[open]>summary .chev{transform:rotate(90deg)}
+  .explain>summary:hover{color:var(--teal)}
+  .explain>summary:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:14px}
+  .explain .body{padding:2px 17px 16px;line-height:1.6;font-size:13.5px;color:#d4def0}
+  .explain .body p{margin:0 0 10px}
+  .explain .body b{color:#eef4fb}
+  .explain ul{margin:2px 0 12px;padding:0;list-style:none}
+  .explain li{padding:4px 0 4px 22px;position:relative;color:var(--mut);font-size:13px}
+  .explain li:before{content:"\2713";position:absolute;left:0;color:var(--teal);font-weight:800}
+  .explain .enote{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.28);border-radius:10px;padding:11px 13px;font-size:12.5px;color:#cbd8e6;margin:0}
+  .explain .enote b{color:var(--gold)}
+  /* signals readout + framing */
+  .signals{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin:14px 0 0}
+  .signals .sighd{font:800 11px var(--F);text-transform:uppercase;letter-spacing:1.2px;color:var(--mut);margin:0 0 10px}
+  .sigrow{display:flex;flex-wrap:wrap;gap:8px}
+  .sig{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font:600 12.5px var(--F);color:var(--ink)}
+  .sig i{color:var(--mut);font-style:normal;font-weight:700;margin-right:7px;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+  .frame{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0 0}
+  .fstep{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+  .fstep h4{margin:0 0 6px;font:800 13px var(--F);color:var(--teal);letter-spacing:.02em}
+  .fstep h4 span{color:var(--mut);font-weight:600;font-size:11.5px;display:block;margin-top:2px;text-transform:none;letter-spacing:0}
+  .fstep p{margin:0;font-size:12.5px;color:var(--mut);line-height:1.55}
+  .frame .sib{grid-column:1/-1;font-size:12.5px;color:#cbd8e6;background:linear-gradient(180deg,rgba(201,169,98,.08),rgba(201,169,98,.02));border:1px solid rgba(201,169,98,.28);border-radius:12px;padding:12px 15px;margin:0}
+  .frame .sib b{color:var(--gold)}
+  .countline{font-size:12.5px;color:var(--mut);margin:12px 2px 0}
+  .countline b{color:var(--teal)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+  .skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="top" role="banner">
+    <div class="brand"><span class="logo">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
+    <a class="back" href="/">&larr; Back to the commons</a>
+  </div>
+
+  <div class="eyebrow">◇ Personalise · the network re-computes around you</div>
+  <h1>See your path through the commons.</h1>
+  <p class="lead">The homepage map shows how the whole sector connects. This one is different: paste your ORCID iD and — right here in your browser — NTLSN reads your public record, aggregates your discipline, and lights up the single <i>best path</i> through the commons for you. Every glowing destination is a real page.</p>
+
+  <div class="privacy">
+    <b>◌ Free, and genuinely private.</b> We don't sell, on-sell, profile, or store your data — this is only to personalise <i>your</i> view of the commons.
+    <ul>
+      <li>The lookup runs entirely in your browser against OpenAlex's <b>public</b> API.</li>
+      <li>Your ORCID iD is <b>never sent to NTLSN</b>, never stored on our servers, never sold.</li>
+      <li>Nothing is saved unless you choose to — close the tab and it's gone.</li>
+      <li>Prefer not to look anything up? Pick a faculty below and the path is computed with <b>no network call at all</b>.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <div class="orcidrow">
+      <label for="orcid"><span class="oicon">iD</span> Your ORCID iD</label>
+      <input type="text" id="orcid" placeholder="0000-0002-1825-0097  ·  or paste the full orcid.org link" autocomplete="off" spellcheck="false">
+      <button class="btn" id="go">Show my path →</button>
+    </div>
+    <div style="margin-top:11px"><button class="demo" id="demo">Don't have it handy? Try a live demo profile</button></div>
+    <div class="facrow" id="facrow">
+      <span class="fl">Or see a typical path by faculty:</span>
+    </div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <details class="explain">
+    <summary>◇ New to OpenAlex? What it is, and why this is safe<span class="chev">›</span></summary>
+    <div class="body">
+      <p><b>OpenAlex</b> is a free, open catalogue of the world's research — over 250 million papers, books and datasets and who wrote them. It's run by a non-profit (OurResearch) and was built as the open successor to Microsoft's academic index. NTLSN simply looks up what you've published there, reads the topics, and matches them to teaching resources — the same way a library catalogue helps you find a book.</p>
+      <ul>
+        <li>Free — no cost, ever. OpenAlex is a public good, and so is everything on NTLSN.</li>
+        <li><b>No login, no account, nothing to sign up for.</b> You paste your iD; that's the whole ask.</li>
+        <li>It reads only your <b>public</b> record — the same works anyone can already see on your ORCID page. Nothing private is touched.</li>
+        <li><b>Nothing is sent to NTLSN, stored, or sold.</b> The lookup happens in your browser and vanishes when you close the tab.</li>
+        <li><b>DORA-aligned:</b> we never score your ‘impact’. No citation counts, no h-index, no journal rankings — those don't measure teaching.</li>
+      </ul>
+      <p class="enote"><b>Record looks thin or wrong?</b> That's normal — OpenAlex is built automatically, so new academics, name changes, or works published under a different name can be missing or misfiled. It's not a judgement of your work. You can claim and correct your record for free at <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> or <a href="https://orcid.org" target="_blank" rel="noopener">ORCID</a>, and it flows through over time. Or skip the lookup entirely — pick your faculty above and the path is built with no data from you at all.</p>
+    </div>
+  </details>
+
+  <div class="stagewrap">
+    <div class="stage" id="stage">
+      <canvas id="flow" width="840" height="380" role="img" aria-label="A flow diagram routing your ORCID through NTLSN to your best-fit commons resources"></canvas>
+      <div class="tip" id="tip"></div>
+    </div>
+  </div>
+  <div class="caption" id="caption">Paste your ORCID above, or pick a faculty, to light your path. Hover any node to see why it's there; click it to open the real page.</div>
+
+  <div class="signals" id="signals" hidden></div>
+
+  <div class="frame">
+    <div class="fstep"><h4>Contextualise<span>we read your real context</span></h4><p>NTLSN reads your public record from OpenAlex — your discipline down to its sub-field, the topics you actually publish on, your career stage and how you collaborate. Not a survey you fill in; the record you already have.</p></div>
+    <div class="fstep"><h4>Standardise<span>the same rules for everyone</span></h4><p>Every academic is read with the identical, published rules. Nobody is ranked against anyone else — no citation counts, no h-index, no journal prestige. The same DORA-aligned principle behind our <a href="/sotl-index.html">SoTL Index</a>: a fair signal, never a league table.</p></div>
+    <div class="fstep"><h4>Personalise<span>your best next step</span></h4><p>From your context we light the one path through the commons most likely to help your teaching next — and the strands around it, honestly labelled by why they're there. A starting point, not a verdict.</p></div>
+    <p class="sib"><b>Same philosophy as the SoTL Index</b> — a field-normalised, DORA-aligned 0–100 read of your teaching scholarship. This front door routes you; the Index scores your footprint.</p>
+  </div>
+  <p class="countline">Live now: <b>250+</b> discipline signals · <b><span id="signalcount">—</span></b> contextual <span id="signalnoun">reads</span> for you · more coming.</p>
+
+  <div class="attrib">
+    <b>How the path is chosen.</b> We read your public works from <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> (an open scholarly index), summarise your fields, and detect education- and teaching-related scholarship. The bright path is the resource your own topics match most strongly; fainter lines are relevant to your field. It's a starting point, not a verdict — the quality depends on how complete your public record is. Crash courses are practitioner syntheses of sector good practice, honestly attributed on each page.
+  </div>
+  <p class="ntlsn-emdash-gag" style="font:italic 400 12px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#7d8da0;margin:18px auto 0;max-width:64ch"><span style="color:#4ECDC4;font-style:normal;font-weight:700">◇ AI field guide</span> — the current flowing along your best path is animated, not intelligent — much like the em-dashes (—) a chatbot leaves behind. Real signal, honest tell.</p>
+  <div class="foot" role="contentinfo">A free NTLSN front door · everything runs in your browser; nothing is stored or sent to us. &nbsp;·&nbsp; <a href="/orcid-start.html">The full ORCID snapshot</a> &nbsp;·&nbsp; <a href="/sotl-index.html">The SoTL Index</a> &nbsp;·&nbsp; <a href="/crash-courses.html">All crash courses</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var orcidIn=document.getElementById("orcid"),goBtn=document.getElementById("go"),demoBtn=document.getElementById("demo"),
+      errEl=document.getElementById("err"),facrow=document.getElementById("facrow"),
+      canvas=document.getElementById("flow"),ctx=canvas.getContext("2d"),stage=document.getElementById("stage"),
+      tip=document.getElementById("tip"),caption=document.getElementById("caption");
+  var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ===================== THE BRAIN (verbatim from orcid-start.html) ===================== */
+  var COURSES={
+    feedback:{tag:"Feedback",t:"Giving better feedback",d:"Make feedback usable — timely, specific, acted on.",u:"/feedbackcrashcourse.html"},
+    assessment:{tag:"Assessment",t:"Designing assessment",d:"Align it, make it valid and reliable, make it authentic.",u:"/assessment-design-crash-course.html"},
+    integrity:{tag:"Integrity",t:"Academic integrity in the age of AI",d:"Design for integrity, don't just police it.",u:"/academic-integrity-ai-crash-course.html"},
+    active:{tag:"Active",t:"Active learning",d:"Students learn by doing, not by listening.",u:"/active-learning-crash-course.html"},
+    alignment:{tag:"Curriculum",t:"Constructive alignment",d:"Point outcomes, teaching and assessment the same way.",u:"/constructive-alignment-crash-course.html"},
+    rubrics:{tag:"Marking",t:"Rubrics & marking",d:"Fairer, faster, clearer — rubrics as a teaching tool.",u:"/rubrics-marking-crash-course.html"},
+    large:{tag:"Large class",t:"Teaching large classes",d:"Structure makes a 300-seat room feel active.",u:"/large-classes-crash-course.html"},
+    online:{tag:"Online",t:"Online & blended teaching",d:"Design for presence and interaction, not video lectures.",u:"/online-blended-crash-course.html"},
+    reflective:{tag:"Practice",t:"Reflective practice & SoTL",d:"Study your own teaching; share what you learn.",u:"/reflective-practice-crash-course.html"},
+    group:{tag:"Group work",t:"Group work & collaborative learning",d:"Design for interdependence and accountability.",u:"/group-work-crash-course.html"},
+    lecturing:{tag:"Lecturing",t:"Effective lecturing",d:"A designed experience for attention and understanding.",u:"/lecturing-crash-course.html"},
+    ai:{tag:"AI",t:"Teaching with AI",d:"A tool for thinking, used deliberately and critically.",u:"/teaching-with-ai-crash-course.html"},
+    threshold:{tag:"Concepts",t:"Threshold concepts",d:"Help students through the gateway ideas where they get stuck.",u:"/threshold-concepts-crash-course.html"},
+    inclusive:{tag:"Inclusion",t:"Inclusive & equitable assessment",d:"A clear, accessible task that lets every student show what they know.",u:"/inclusive-assessment-crash-course.html"},
+    supervision:{tag:"Supervision",t:"Supervising research students",d:"Teaching one-to-one over years — relationship, expectations, feedback.",u:"/research-supervision-crash-course.html"},
+    wil:{tag:"WIL",t:"Work-integrated learning",d:"Design the learning, not just the placement.",u:"/wil-crash-course.html"}
+  };
+  var TEACH_KW={
+    feedback:["feedback"],
+    assessment:["assessment","grading","examination","marking"],
+    integrity:["academic integrity","plagiar","contract cheating","misconduct","cheating"],
+    active:["active learning","student engagement","peer instruction","flipped classroom"],
+    alignment:["constructive alignment","curriculum design","learning outcome","programme design","program design","graduate attribute"],
+    rubrics:["rubric","moderation"],
+    large:["large class","large cohort","massification","lecture hall"],
+    online:["online learning","blended learning","e-learning","distance education","flipped learning","mooc","community of inquiry","educational technology"],
+    reflective:["scholarship of teaching","sotl","reflective practice","teaching portfolio","academic development","faculty development"],
+    group:["group work","collaborative learning","cooperative learning","teamwork","peer learning"],
+    lecturing:["lecturing","lecture"],
+    ai:["generative ai","artificial intelligence","chatgpt","large language model","machine learning"],
+    threshold:["threshold concept","troublesome knowledge","misconception"],
+    inclusive:["inclusive education","equity","accessibility","universal design for learning"," udl","widening participation","diversity and inclusion"],
+    supervision:["doctoral supervision","research supervision","postgraduate research","hdr","phd supervision","thesis"],
+    wil:["work-integrated learning","work integrated learning","placement","internship","practicum","professional experience","employability"]
+  };
+  var FIELD_HEURISTIC=[
+    {re:/health|medic|nurs|clinical|pharma|dent|midwif|allied health|public health/,keys:["wil","large","supervision"],label:"health disciplines"},
+    {re:/engineer|comput|software|information systems|data science|technolog|mathematic|physics/,keys:["large","active","group"],label:"STEM disciplines"},
+    {re:/business|management|account|economic|marketing|finance/,keys:["group","wil","assessment"],label:"business disciplines"},
+    {re:/law|legal/,keys:["lecturing","assessment"],label:"law"},
+    {re:/art|humanit|histor|languag|philosoph|literatur/,keys:["lecturing","threshold","feedback"],label:"the humanities"},
+    {re:/biolog|chemi|environ|geolog|agricultur|ecolog|veterin/,keys:["large","active","threshold"],label:"the sciences"}
+  ];
+  var SOTL_RE=/teach|learn|pedagog|curricul|assessment|student|education|scholarship of teaching|higher education|classroom|academic (development|practice)|feedback literacy/i;
+
+  // OpenAlex sub-fields (of 252) -> teaching-context keys. Seeded for the sub-fields common in Australian HE;
+  // any unmapped sub-field falls back to the 6-bucket FIELD_HEURISTIC, honestly labelled "field-level".
+  var SUBFIELD_MAP={
+    "Nursing":["wil","large","supervision"],
+    "Nursing (miscellaneous)":["wil","large","supervision"],
+    "Health Professions (miscellaneous)":["wil","large","supervision"],
+    "Public Health, Environmental and Occupational Health":["wil","large","inclusive"],
+    "Medicine (miscellaneous)":["supervision","large","wil"],
+    "Physical Therapy, Sports Therapy and Rehabilitation":["wil","active","supervision"],
+    "Pharmacology, Toxicology and Pharmaceutics (miscellaneous)":["large","wil","assessment"],
+    "Pharmacy":["wil","large","assessment"],
+    "Dentistry (miscellaneous)":["wil","supervision","rubrics"],
+    "Emergency Nursing":["wil","supervision","large"],
+    "Education":["reflective","feedback","assessment"],
+    "Education, Scientific Disciplines":["reflective","feedback","assessment"],
+    "Developmental and Educational Psychology":["reflective","feedback","inclusive"],
+    "Social Psychology":["group","active","feedback"],
+    "Clinical Psychology":["supervision","assessment","reflective"],
+    "Psychology (miscellaneous)":["assessment","active","supervision"],
+    "Sociology and Political Science":["lecturing","threshold","feedback"],
+    "Social Work":["wil","supervision","inclusive"],
+    "Anthropology":["lecturing","threshold","feedback"],
+    "Information Systems and Management":["online","active","assessment"],
+    "Information Systems":["online","active","assessment"],
+    "Computer Science Applications":["online","ai","active"],
+    "Artificial Intelligence":["ai","online","threshold"],
+    "Software":["online","group","active"],
+    "Human-Computer Interaction":["online","active","group"],
+    "Computer Networks and Communications":["online","active","large"],
+    "Engineering (miscellaneous)":["large","active","group"],
+    "Civil and Structural Engineering":["active","group","wil"],
+    "Electrical and Electronic Engineering":["large","active","threshold"],
+    "Mechanical Engineering":["active","group","threshold"],
+    "Building and Construction":["wil","group","active"],
+    "Mathematics (miscellaneous)":["large","threshold","active"],
+    "Applied Mathematics":["large","threshold","active"],
+    "Statistics and Probability":["large","threshold","assessment"],
+    "Physics and Astronomy (miscellaneous)":["large","threshold","active"],
+    "Chemistry (miscellaneous)":["large","active","threshold"],
+    "Biochemistry":["large","active","threshold"],
+    "Molecular Biology":["large","active","supervision"],
+    "Ecology, Evolution, Behavior and Systematics":["active","threshold","wil"],
+    "Agricultural and Biological Sciences (miscellaneous)":["wil","active","large"],
+    "Environmental Science (miscellaneous)":["active","wil","threshold"],
+    "Business, Management and Accounting (miscellaneous)":["group","wil","assessment"],
+    "Strategy and Management":["group","assessment","alignment"],
+    "Marketing":["group","active","assessment"],
+    "Accounting":["assessment","alignment","rubrics"],
+    "Finance":["assessment","large","alignment"],
+    "Economics and Econometrics":["large","lecturing","threshold"],
+    "Tourism, Leisure and Hospitality Management":["wil","group","active"],
+    "Law":["lecturing","assessment","integrity"],
+    "History":["lecturing","threshold","feedback"],
+    "Philosophy":["lecturing","threshold","feedback"],
+    "Literature and Literary Theory":["lecturing","feedback","threshold"],
+    "Linguistics and Language":["active","feedback","assessment"],
+    "Language and Linguistics":["active","feedback","assessment"],
+    "Visual Arts and Performing Arts":["active","feedback","rubrics"],
+    "Communication":["group","active","online"],
+    "Geography, Planning and Development":["active","wil","threshold"]
+  };
+
+  function normaliseOrcid(v){ v=String(v||"").trim(); var m=v.match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/); return m?m[1].toUpperCase():""; }
+
+  /* ===================== ROUTER: brain output -> flow model =====================
+     Takes an aggregate object; scores teaching buckets by OpenAlex confidence (topics[].score),
+     routes discipline via the real modal sub-field (falls back to the 6 field buckets),
+     and derives honest contextual indicators. No citation/impact metric is ever read. */
+  function buildFlow(agg){
+    agg=agg||{};
+    var allText=(agg.allText||"").toLowerCase();
+    var WT=agg.WT||[];                       // [{t:lowercased term, s:confidence score}]
+    var scores={}, hits={};
+    Object.keys(TEACH_KW).forEach(function(k){
+      var s=0,hit=null,wsum=0;
+      TEACH_KW[k].forEach(function(kw){
+        if(allText.indexOf(kw)>-1){ s++; if(!hit) hit=kw.trim(); }
+        for(var i=0;i<WT.length;i++){ if(WT[i].t.indexOf(kw)>-1) wsum+=WT[i].s; }  // weight by confidence, not count
+      });
+      if(s>0){ scores[k]= wsum>0? wsum : s; hits[k]=hit; }
+    });
+    var direct=Object.keys(scores).sort(function(a,b){return scores[b]-scores[a];});
+    // discipline: prefer the person's real modal OpenAlex sub-field, else the 6-bucket field heuristic
+    var fieldKeys=[], fieldLabel="", topSub=(agg.subRanked&&agg.subRanked.length)?agg.subRanked[0]:"";
+    if(topSub && SUBFIELD_MAP[topSub]){ fieldLabel=topSub; SUBFIELD_MAP[topSub].forEach(function(k){ if(fieldKeys.indexOf(k)<0) fieldKeys.push(k); }); }
+    else { FIELD_HEURISTIC.forEach(function(h){ if(h.re.test(allText)){ if(!fieldLabel) fieldLabel=h.label; h.keys.forEach(function(k){ if(fieldKeys.indexOf(k)<0) fieldKeys.push(k); }); } }); }
+    var disciplineLabel = topSub || fieldLabel;                 // shown to the user (real sub-field when we have one)
+    var subKnown = !!topSub;                                    // did OpenAlex give us a real sub-field?
+    var picked=[], seen={}, origin={};
+    function add(k,src){ if(!seen[k]&&COURSES[k]){ seen[k]=1; picked.push(k); origin[k]=src; } }
+    direct.forEach(function(k){ add(k,"direct"); });
+    fieldKeys.forEach(function(k){ add(k,"field"); });
+    ["feedback","assessment","reflective"].forEach(function(k){ add(k,"backbone"); });
+    picked=picked.slice(0,6);
+    var analysed=agg.analysed||0, sotlHits=agg.sotlHits||0;
+    var sotlPct= analysed? Math.round((sotlHits/analysed)*100):0;
+    var sotlStrong= sotlHits>=3||sotlPct>=15;
+    var strands=picked.map(function(k){
+      var c=COURSES[k];
+      var w = origin[k]==="direct" ? (2+(scores[k]||1)) : origin[k]==="field" ? 1.2 : 0.7;
+      var wh = origin[k]==="direct" ? ('Your work touches “'+hits[k]+'”')
+             : origin[k]==="field" ? ('Common in '+(fieldLabel||"your field"))
+             : 'A high-value foundation for any teacher';
+      return {key:k, tag:c.tag, title:c.t, desc:c.d, url:c.u, weight:w, why:wh, origin:origin[k]};
+    });
+    if(strands.length) strands[0].best=true;
+    var topics=direct.slice(0,3).map(function(k){return hits[k];});
+    // ---- derived contextual indicators (only those we can honestly compute) ----
+    var ind=[];
+    if(disciplineLabel) ind.push({key:"discipline", label:"Discipline", value: disciplineLabel + (subKnown?" · OpenAlex sub-field":" · field-level")});
+    if(agg.careerStage) ind.push({key:"career", label:"Career stage", value: agg.careerStage + (agg.minY?(" · first work "+agg.minY):"")});
+    if(agg.leadShare!=null) ind.push({key:"collab", label:"Collaboration", value:(agg.leadShare>=0.5?"mostly lead author":"mostly contributing author")});
+    if(agg.oaPct!=null) ind.push({key:"oa", label:"Open access", value: agg.oaPct+"% of your works are open"});
+    if(agg.concentration!=null) ind.push({key:"focus", label:"Focus", value:(agg.concentration>=0.5?"specialist · one main area":"generalist · broad across areas")});
+    return {
+      name: agg.name||"Your ORCID", disciplines: disciplineLabel?[disciplineLabel]:[], topics:topics,
+      strands:strands, sotlStrong:sotlStrong, sotlPct:sotlPct, sotlHits:sotlHits,
+      bestOrigin: strands[0]?strands[0].origin:null, bestTitle: strands[0]?strands[0].title:null,
+      fieldLabel:fieldLabel, indicators:ind
+    };
+  }
+
+  /* ===================== ORCID LOOKUP (verbatim fetch from orcid-start.html) ===================== */
+  function setLoading(msg){ caption.innerHTML='<span class="loading"><span class="spin"></span><span>'+esc(msg)+'</span></span>'; }
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function fail(msg){ errEl.textContent=msg; goBtn.disabled=false; goBtn.textContent="Show my path →";
+    caption.innerHTML='Couldn’t read that record — but you can still <b>pick a faculty</b> above to see a typical path (no network needed).'; }
+
+  function run(orcid){
+    errEl.textContent="";
+    var id=normaliseOrcid(orcid);
+    if(!id){ fail("That doesn't look like an ORCID iD. It should look like 0000-0002-1825-0097."); return; }
+    goBtn.disabled=true; goBtn.textContent="Reading…";
+    setLoading("Reading your public record from OpenAlex…");
+    // NB: cited_by_count / fwci are deliberately NOT requested — no impact metric ever enters the browser (DORA guardrail).
+    var url="https://api.openalex.org/works?filter=author.orcid:"+id+"&per-page=200&sort=publication_year:desc&select=id,title,publication_year,topics,keywords,authorships,primary_topic,type,open_access,sustainable_development_goals,countries_distinct_count";
+    fetch(url,{headers:{"Accept":"application/json"}})
+      .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+      .then(function(data){
+        var works=(data&&data.results)||[];
+        if(!works.length){ fail("No public works found for that ORCID on OpenAlex. Double-check the iD, or your record may be private or new."); return; }
+        goBtn.disabled=false; goBtn.textContent="Show my path →";
+        // ---- aggregate the public record into signals (all client-side) ----
+        var topicText=[], WT=[], subScore={}, sotlHits=0, name="", years=[], oaCount=0, leadCount=0, authored=0;
+        works.forEach(function(w){
+          if(w.publication_year) years.push(w.publication_year);
+          var mine=false, myLead=false;
+          (w.authorships||[]).forEach(function(a){
+            var au=a.author||{};
+            if(au.orcid&&au.orcid.indexOf(id)>-1){ mine=true; if(!name) name=au.display_name||""; if(a.author_position==="first"||a.is_corresponding) myLead=true; }
+          });
+          if(mine){ authored++; if(myLead) leadCount++; }
+          if(w.open_access&&w.open_access.is_oa) oaCount++;
+          var isSotl=SOTL_RE.test(w.title||"");
+          (w.topics||[]).forEach(function(t){
+            var sc=(typeof t.score==="number"?t.score:0.5);
+            if(t.display_name){ topicText.push(t.display_name); WT.push({t:t.display_name.toLowerCase(),s:sc}); if(SOTL_RE.test(t.display_name)) isSotl=true; }
+            if(t.subfield&&t.subfield.display_name){ var sf=t.subfield.display_name; topicText.push(sf); WT.push({t:sf.toLowerCase(),s:sc}); subScore[sf]=(subScore[sf]||0)+sc; }
+            if(t.field&&t.field.display_name){ topicText.push(t.field.display_name); WT.push({t:t.field.display_name.toLowerCase(),s:sc*0.5}); }
+          });
+          (w.keywords||[]).forEach(function(k){ if(k.display_name){ var ks=(typeof k.score==="number"?k.score:0.5); topicText.push(k.display_name); WT.push({t:k.display_name.toLowerCase(),s:ks}); if(SOTL_RE.test(k.display_name)) isSotl=true; } });
+          if(isSotl) sotlHits++;
+        });
+        var subRanked=Object.keys(subScore).sort(function(a,b){return subScore[b]-subScore[a];});
+        var subTotal=0; subRanked.forEach(function(k){subTotal+=subScore[k];});
+        var minY=years.length?Math.min.apply(null,years):null, maxY=years.length?Math.max.apply(null,years):null;
+        var span=(minY!=null&&maxY!=null)?(maxY-minY):null;
+        var flow=buildFlow({
+          allText: topicText.join(" ; ").toLowerCase(), WT:WT, name:name, sotlHits:sotlHits, analysed:works.length,
+          subRanked:subRanked,
+          careerStage: span==null?null:(span<6?"early-career":span<15?"mid-career":"senior"),
+          minY:minY,
+          leadShare: authored?(leadCount/authored):null,
+          oaPct: works.length?Math.round(100*oaCount/works.length):null,
+          concentration: (subTotal>0&&subRanked.length)?(subScore[subRanked[0]]/subTotal):null
+        });
+        flow.orcid=id;
+        show(flow);
+      })
+      .catch(function(){ fail("Couldn't reach OpenAlex just now. Check your connection and try again — nothing was sent to us either way."); });
+  }
+
+  /* ===================== FACULTY FALLBACK (no network) ===================== */
+  var FAC={
+    Health:"health nursing clinical medicine allied health public health placement",
+    STEM:"engineering computer software data science technology mathematics physics",
+    Business:"business management accounting economics marketing finance",
+    Law:"law legal",
+    Humanities:"art humanities history language philosophy literature",
+    Sciences:"biology chemistry environmental geology agriculture ecology"
+  };
+  Object.keys(FAC).forEach(function(label){
+    var b=document.createElement("button"); b.className="fac"; b.type="button"; b.textContent=label;
+    b.addEventListener("click",function(){
+      errEl.textContent="";
+      var flow=buildFlow({allText:FAC[label], name:label+" academic"});   // no lookup → discipline is field-level only, honestly
+      flow.faculty=label;
+      show(flow);
+    });
+    facrow.appendChild(b);
+  });
+
+  /* ===================== CANVAS FLOW RENDERER ===================== */
+  var flow=null, nodes=null, DPR=Math.min(window.devicePixelRatio||1,2), W=840, H=380, raf=null, startT=0, hoverKey=null, narrow=false;
+
+  function sizeCanvas(){
+    var rect=stage.getBoundingClientRect();
+    W=Math.max(320,rect.width);
+    H=Math.round(Math.max(320,Math.min(390,W*0.46)));
+    canvas.style.height=H+"px";
+    canvas.width=Math.round(W*DPR); canvas.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+
+  function layout(){
+    if(!flow){ nodes=null; return; }
+    narrow = W<600;
+    var sx=W*(narrow?0.10:0.11), hx=W*(narrow?0.31:0.375), tx=W*(narrow?0.45:0.585);
+    var midY=H/2;
+    var n=flow.strands.length||1;
+    var pad=narrow?28:34, span=H-2*pad;
+    var sr=narrow?20:24, hr=narrow?23:28, br=narrow?13:15, nr=narrow?9:10;
+    nodes={
+      source:{x:sx,y:midY,r:sr},
+      hub:{x:hx,y:midY,r:hr},
+      strands:flow.strands.map(function(s,i){
+        var y=pad+span*((i+0.5)/n);
+        return {ref:s, x:tx, y:y, r:(s.best?br:nr)};
+      })
+    };
+  }
+
+  function bez(p0,p1,p2,p3,t){var m=1-t;return{
+    x:m*m*m*p0.x+3*m*m*t*p1.x+3*m*t*t*p2.x+t*t*t*p3.x,
+    y:m*m*m*p0.y+3*m*m*t*p1.y+3*m*t*t*p2.y+t*t*t*p3.y};}
+  function edgeCtrl(a,b){var dx=b.x-a.x;return[{x:a.x+dx*0.45,y:a.y},{x:a.x+dx*0.55,y:b.y}];}
+
+  function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function truncate(s,max){s=String(s);return s.length>max?s.slice(0,max-1)+"…":s;}
+  function ease(t){return t<0?0:t>1?1:t*t*(3-2*t);}
+
+  var EDGE_BASE=900, EDGE_STAG=95, EDGE_DUR=420;
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    // subtle column guides
+    if(!flow){
+      // idle scene
+      var sx=W*0.11,hx=W*0.375,tx=W*0.585,midY=H/2;
+      drawEdgeGhost({x:sx,y:midY},{x:hx,y:midY});
+      for(var i=0;i<5;i++){var y=34+(H-68)*((i+0.5)/5);drawEdgeGhost({x:hx,y:midY},{x:tx,y:y});ctx.globalAlpha=.5;dot(tx,y,8,"#1e3350");ctx.globalAlpha=1;}
+      dot(sx,midY,20,"#12314f");ring(sx,midY,20,"rgba(78,205,196,.4)");
+      dot(hx,midY,24,"#122a44");ring(hx,midY,24,"rgba(255,255,255,.14)");
+      ctx.fillStyle="#5f728a";ctx.font="600 13px "+cssF();ctx.textAlign="center";
+      ctx.fillText("Paste your ORCID — the network lights your path",W/2,H-16);
+      ctx.textAlign="left";
+      return;
+    }
+    if(!nodes) layout();
+    var S=nodes.source,Hb=nodes.hub;
+    var pulseP=ease((t-260)/420);         // source->hub pulse
+    var hubP=ease((t-300)/380);
+    var chipP=ease((t-680)/380);
+
+    // ---- edges hub -> strands (revealed, weighted) ----
+    nodes.strands.forEach(function(sn,i){
+      var s=sn.ref, cc=edgeCtrl(Hb,sn), start=EDGE_BASE+i*EDGE_STAG, p=RM?1:ease((t-start)/EDGE_DUR);
+      if(p<=0) return;
+      var col=s.best?"78,205,196":(s.origin==="direct"?"78,205,196":s.origin==="field"?"140,170,200":"120,140,160");
+      var lw=s.best?3.2:(s.origin==="direct"?2:s.origin==="field"?1.4:1.1);
+      var al=s.best?0.95:(s.origin==="direct"?0.6:s.origin==="field"?0.42:0.3);
+      if(hoverKey&&s.key===hoverKey){al=Math.min(1,al+0.3);lw+=0.6;}
+      drawBez(Hb,cc[0],cc[1],sn,p,"rgba("+col+","+al+")",lw, s.best&&!RM ? t : null);
+    });
+
+    // ---- source -> hub edge ----
+    var sc=edgeCtrl(S,Hb);
+    drawBez(S,sc[0],sc[1],Hb,1,"rgba(78,205,196,0.55)",2.4,null);
+
+    // ---- best-path particle ----
+    if(!RM && flow.strands.length){
+      var best=nodes.strands.filter(function(x){return x.ref.best;})[0];
+      if(best){
+        var bc=edgeCtrl(Hb,best), ph=((t%1500)/1500);
+        var pt=bez(Hb,bc[0],bc[1],best,ph);
+        glowDot(pt.x,pt.y,3.2,"rgba(120,255,240,0.95)");
+      }
+    }
+
+    // ---- source pulse dot ----
+    if(!RM && pulseP>0 && pulseP<1){
+      var pp=bez(S,sc[0],sc[1],Hb,pulseP);
+      glowDot(pp.x,pp.y,4,"rgba(120,255,240,0.9)");
+    }
+    // ---- source wave (intro) ----
+    if(!RM && t<520){ var wr=ease(t/520); ring(S.x,S.y,S.r+wr*46,"rgba(78,205,196,"+(0.5*(1-wr))+")"); }
+
+    // ---- nodes ----
+    // source
+    dot(S.x,S.y,S.r,"#123253");ring(S.x,S.y,S.r,"rgba(78,205,196,.85)");
+    ctx.fillStyle="#dff6f3";ctx.font="800 12px "+cssF();ctx.textAlign="center";
+    ctx.fillText("iD",S.x,S.y+4);
+    var nm=truncate(flow.name,narrow?14:18);
+    ctx.font="700 12px "+cssF();
+    var ncx=Math.max(S.x, ctx.measureText(nm).width/2+4);   // keep label off the left edge
+    ctx.fillStyle="#cbd8e6";ctx.fillText(nm,ncx,S.y+S.r+18);
+    ctx.fillStyle="#7d8da0";ctx.font="500 10.5px "+cssF();
+    ctx.fillText(flow.faculty?"selected faculty":(flow.orcid?"your ORCID":"you"),ncx,S.y+S.r+33);
+    ctx.textAlign="left";
+
+    // hub
+    var hs=0.6+0.4*(RM?1:hubP);
+    dot(Hb.x,Hb.y,Hb.r*hs,"#0e2c22");
+    var hg=ctx.createRadialGradient(Hb.x,Hb.y,2,Hb.x,Hb.y,Hb.r*hs);
+    hg.addColorStop(0,"rgba(78,205,196,.35)");hg.addColorStop(1,"rgba(78,205,196,0)");
+    ctx.fillStyle=hg;ctx.beginPath();ctx.arc(Hb.x,Hb.y,Hb.r*hs,0,7);ctx.fill();
+    ring(Hb.x,Hb.y,Hb.r*hs,"rgba(78,205,196,.9)");
+    ctx.fillStyle="#eafffb";ctx.font="800 11px "+cssF();ctx.textAlign="center";
+    ctx.fillText("NTLSN",Hb.x,Hb.y+4);
+    ctx.textAlign="left";
+
+    // chips around hub (disciplines gold below, topics teal above)
+    if(chipP>0){
+      ctx.globalAlpha=RM?1:chipP;
+      var ty=Hb.y-Hb.r-14;
+      flow.topics.slice(0,3).forEach(function(tp,i){ chip(Hb.x, ty-i*22, tp, "78,205,196"); });
+      flow.disciplines.slice(0,1).forEach(function(dp,i){ chip(Hb.x, Hb.y+Hb.r+18+i*22, truncate(dp,narrow?14:24), "201,169,98"); });
+      ctx.globalAlpha=1;
+    }
+
+    // strand nodes + labels
+    nodes.strands.forEach(function(sn,i){
+      var s=sn.ref, start=EDGE_BASE+i*EDGE_STAG+120, p=RM?1:ease((t-start)/EDGE_DUR);
+      if(p<=0) return;
+      ctx.globalAlpha=p;
+      var col=s.best?"78,205,196":(s.origin==="direct"?"120,200,190":s.origin==="field"?"150,175,205":"120,140,160");
+      var fill=s.best?"#0e3a30":"#12253c";
+      dot(sn.x,sn.y,sn.r,fill);ring(sn.x,sn.y,sn.r,"rgba("+col+",.95)");
+      if(s.best){ glowDot(sn.x,sn.y,sn.r+1,"rgba(78,205,196,.18)"); }
+      // label to the right
+      var lx=sn.x+sn.r+9;
+      var maxc=narrow?(s.best?18:15):(s.best?30:26), fs=narrow?(s.best?12:11):(s.best?13.5:12);
+      ctx.textAlign="left";
+      ctx.fillStyle=s.best?"#eafffb":"#cbd8e6";
+      ctx.font=(s.best?"800 ":"600 ")+fs+"px "+cssF();
+      ctx.fillText(truncate(s.title, maxc), lx, sn.y-(s.best?1:2));
+      ctx.fillStyle=s.best?"#4ECDC4":"#7d8da0";
+      ctx.font=(s.best?"800 ":"500 ")+(narrow?9.5:10.5)+"px "+cssF();
+      ctx.fillText(s.best?"Start here →":s.tag, lx, sn.y+13);
+      ctx.globalAlpha=1;
+    });
+  }
+
+  function drawBez(p0,p1,p2,p3,p,stroke,lw,flowT){
+    ctx.save();ctx.lineWidth=lw;ctx.strokeStyle=stroke;ctx.lineCap="round";
+    if(flowT!=null){ctx.setLineDash([7,9]);ctx.lineDashOffset=-(flowT*0.05);}
+    var N=34;ctx.beginPath();
+    for(var i=0;i<=N;i++){var tt=(i/N)*p;var q=bez(p0,p1,p2,p3,tt);if(i===0)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y);}
+    ctx.stroke();ctx.restore();
+  }
+  function drawEdgeGhost(a,b){var cc=edgeCtrl(a,b);drawBez(a,cc[0],cc[1],b,1,"rgba(255,255,255,.06)",1.2,null);}
+  function dot(x,y,r,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();}
+  function ring(x,y,r,stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.stroke();}
+  function glowDot(x,y,r,fill){ctx.save();ctx.shadowColor=fill;ctx.shadowBlur=12;ctx.fillStyle=fill;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();ctx.restore();}
+  function chip(cx,cy,text,rgb){
+    ctx.font="700 11px "+cssF();var w=ctx.measureText(text).width+18,h=19,x=cx-w/2,y=cy-h/2;
+    ctx.fillStyle="rgba("+rgb+",.10)";roundRect(x,y,w,h,9);ctx.fill();
+    ctx.strokeStyle="rgba("+rgb+",.45)";ctx.lineWidth=1;roundRect(x,y,w,h,9);ctx.stroke();
+    ctx.fillStyle="rgb("+rgb+")";ctx.textAlign="center";ctx.fillText(text,cx,cy+4);ctx.textAlign="left";
+  }
+  function cssF(){return '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif';}
+
+  function frame(now){
+    if(!startT) startT=now;
+    draw(now-startT);
+    raf=requestAnimationFrame(frame);
+  }
+  function startAnim(){
+    if(raf) cancelAnimationFrame(raf);
+    startT=0;
+    layout();
+    draw(999999);                                   // paint a static final frame immediately (background tabs, reduced-motion, pre-rAF)
+    if(!RM && !document.hidden){ raf=requestAnimationFrame(frame); }  // then animate when visible
+  }
+
+  function captionFor(f){
+    if(!f.strands.length) return "No path found — try a faculty above.";
+    var b=f.bestTitle, o=f.bestOrigin, html;
+    if(o==="direct" && f.topics.length) html='Because your work touches <b>“'+esc(f.topics[0])+'”</b>, your best next step is <b>'+esc(b)+'</b>.';
+    else if(o==="field") html='Common in <b>'+esc(f.fieldLabel||"your field")+'</b>, your best next step is <b>'+esc(b)+'</b>.';
+    else html='A high-value foundation for any teacher: <b>'+esc(b)+'</b>.';
+    if(f.sotlStrong) html+=' You already have a SoTL footprint — the <a href="/sotl-index.html">SoTL Index</a> scores it.';
+    html+=' <span class="verdict">Fainter lines are also relevant to your field — hover any node to see why. A starting point, not a verdict.</span>';
+    return html;
+  }
+
+  function renderSignals(f){
+    var el=document.getElementById("signals"), sc=document.getElementById("signalcount"), nn=document.getElementById("signalnoun");
+    var n=(f.indicators&&f.indicators.length)||0;
+    if(sc) sc.textContent = n? String(n) : "—";
+    if(nn) nn.textContent = n===1?"read":"reads";
+    if(!el) return;
+    if(!n){ el.hidden=true; el.innerHTML=""; return; }
+    var rows=f.indicators.map(function(x){ return '<span class="sig"><i>'+esc(x.label)+'</i>'+esc(x.value)+'</span>'; }).join("");
+    el.innerHTML='<div class="sighd">◇ Signals we read from your public record</div><div class="sigrow">'+rows+'</div>';
+    el.hidden=false;
+  }
+
+  function show(f){
+    flow=f; hoverKey=null;
+    layout();
+    caption.innerHTML=captionFor(f);
+    renderSignals(f);
+    startAnim();
+  }
+
+  /* ---- hover + click hit-testing ---- */
+  function hit(mx,my){
+    if(!nodes) return null;
+    for(var i=0;i<nodes.strands.length;i++){var sn=nodes.strands[i];
+      // extend hit box to include the label to the right
+      if(mx>=sn.x-sn.r-4 && mx<=sn.x+sn.r+210 && Math.abs(my-sn.y)<=Math.max(sn.r+4,16)) return sn;
+    }
+    return null;
+  }
+  function toLocal(e){var r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left),y:(e.clientY-r.top)};}
+  canvas.addEventListener("mousemove",function(e){
+    var m=toLocal(e),sn=hit(m.x,m.y);
+    if(sn){
+      var s=sn.ref;hoverKey=s.key;canvas.style.cursor="pointer";
+      tip.innerHTML='<span class="ttag">'+esc(s.tag)+(s.best?' · best path':'')+'</span>'+esc(s.title)+'<span class="twhy">'+esc(s.why)+' — click to open</span>';
+      var st=stage.getBoundingClientRect();
+      var left=Math.min(sn.x+sn.r+14, st.width-240); if(left<6)left=6;
+      tip.style.left=left+"px"; tip.style.top=Math.max(4,sn.y-18)+"px"; tip.classList.add("on");
+    } else { hoverKey=null;canvas.style.cursor="default";tip.classList.remove("on"); }
+  });
+  canvas.addEventListener("mouseleave",function(){hoverKey=null;tip.classList.remove("on");canvas.style.cursor="default";});
+  canvas.addEventListener("click",function(e){
+    var m=toLocal(e),sn=hit(m.x,m.y);
+    if(sn){ window.open(sn.ref.url,"_blank","noopener"); }
+  });
+
+  /* ---- wiring ---- */
+  goBtn.addEventListener("click",function(){ run(orcidIn.value); });
+  orcidIn.addEventListener("keydown",function(e){ if(e.key==="Enter") run(orcidIn.value); });
+  demoBtn.addEventListener("click",function(){ orcidIn.value="0000-0002-1428-2921"; run(orcidIn.value); });
+  window.addEventListener("resize",function(){ sizeCanvas(); layout(); if(RM||document.hidden||!raf){ draw(999999); } });
+
+  // when the tab becomes visible again, (re)start the animation from the top
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden){ if(raf) cancelAnimationFrame(raf); raf=null; draw(999999); }
+    else if(!RM){ startT=0; if(raf) cancelAnimationFrame(raf); raf=requestAnimationFrame(frame); }
+  });
+
+  // init
+  sizeCanvas(); layout(); draw(999999);
+  if(!RM && !document.hidden){ raf=requestAnimationFrame(frame); }
+})();
+</script>
+</body>
+</html>
