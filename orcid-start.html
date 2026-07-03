@@ -80,6 +80,20 @@
   .foot{color:#7d8da0;font-size:11.5px;margin:18px 0 0;border-top:1px solid var(--line);padding-top:14px}
   a{color:var(--teal)}
   @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}.pick:hover{transform:none}}
+.explain{background:var(--card2);border:1px solid var(--line);border-radius:14px;margin:0 0 16px;overflow:hidden}
+.explain>summary{cursor:pointer;list-style:none;padding:13px 17px;font:700 13.5px var(--F);color:var(--ink);display:flex;align-items:center;gap:8px;user-select:none}
+.explain>summary::-webkit-details-marker{display:none}
+.explain>summary .chev{margin-left:auto;color:var(--mut);transition:transform .18s;font-size:16px;line-height:1}
+.explain[open]>summary .chev{transform:rotate(90deg)}
+.explain>summary:hover{color:var(--teal)}
+.explain>summary:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;border-radius:14px}
+.explain .body{padding:2px 17px 16px;line-height:1.6;font-size:13.5px;color:#d4def0}
+.explain .body p{margin:0 0 10px}.explain .body b{color:#eef4fb}
+.explain ul{margin:2px 0 12px;padding:0;list-style:none}
+.explain li{padding:4px 0 4px 22px;position:relative;color:var(--mut);font-size:13px}
+.explain li:before{content:"\2713";position:absolute;left:0;color:var(--teal);font-weight:800}
+.explain .enote{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.28);border-radius:10px;padding:11px 13px;font-size:12.5px;color:#cbd8e6;margin:0}
+.explain .enote b{color:var(--gold)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
 .skip:focus{left:0}
 </style>
@@ -99,10 +113,10 @@
   <div class="privacy">
     <b>◌ Free, and genuinely private.</b> We don't sell, on-sell, profile, or store your data — this is only to personalise <i>your</i> view of the commons.
     <ul>
-      <li>The lookup runs entirely in your browser against ORCID's and OpenAlex's <b>public</b> APIs.</li>
+      <li>The lookup runs entirely in your browser against OpenAlex's <b>public</b> API.</li>
       <li>Your ORCID iD is <b>never sent to NTLSN</b>, never stored on our servers, never sold.</li>
       <li>Nothing is saved unless you choose to — close the tab and it's gone.</li>
-      <li>Honest caveat: to look up your public record, your browser does send your iD to ORCID/OpenAlex. That's the only place it goes.</li>
+      <li>Honest caveat: to look up your public record, your browser does send your iD to OpenAlex. That's the only place it goes.</li>
     </ul>
   </div>
 
@@ -115,6 +129,21 @@
     <div style="margin-top:11px"><button class="demo" id="demo">Don't have it handy? Try a live demo profile</button></div>
     <div class="err" id="err"></div>
   </div>
+
+  <details class="explain">
+    <summary>◇ New to OpenAlex? What it is, and why this is safe<span class="chev">›</span></summary>
+    <div class="body">
+      <p><b>OpenAlex</b> is a free, open catalogue of the world's research — over 250 million papers, books and datasets and who wrote them. It's run by a non-profit (OurResearch) and was built as the open successor to Microsoft's academic index. NTLSN simply looks up what you've published there, reads the topics, and matches them to teaching resources — the same way a library catalogue helps you find a book.</p>
+      <ul>
+        <li>Free — no cost, ever. OpenAlex is a public good, and so is everything on NTLSN.</li>
+        <li><b>No login, no account, nothing to sign up for.</b> You paste your iD; that's the whole ask.</li>
+        <li>It reads only your <b>public</b> record — the same works anyone can already see on your ORCID page. Nothing private is touched.</li>
+        <li><b>Nothing is sent to NTLSN, stored, or sold.</b> The lookup happens in your browser and vanishes when you close the tab.</li>
+        <li><b>DORA-aligned:</b> we never score your ‘impact’. No citation counts, no h-index, no journal rankings — those don't measure teaching.</li>
+      </ul>
+      <p class="enote"><b>Record looks thin or wrong?</b> That's normal — OpenAlex is built automatically, so new academics, name changes, or works published under a different name can be missing or misfiled. It's not a judgement of your work, and you can claim and correct your record for free at <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a> or <a href="https://orcid.org" target="_blank" rel="noopener">ORCID</a> — it flows through over time. Either way, the picks below are a starting point, not a verdict.</p>
+    </div>
+  </details>
 
   <div id="results"></div>
 
@@ -184,6 +213,68 @@
   // signals that a work is education / SoTL flavoured
   var SOTL_RE=/teach|learn|pedagog|curricul|assessment|student|education|scholarship of teaching|higher education|classroom|academic (development|practice)|feedback literacy/i;
 
+  // OpenAlex sub-fields (of 252) -> teaching-context keys. Seeded for Australian HE; unmapped sub-fields
+  // fall back to the 6-bucket FIELD_HEURISTIC ("field-level"). Kept byte-identical to orcid-flow.html.
+  var SUBFIELD_MAP={
+    "Nursing":["wil","large","supervision"],
+    "Nursing (miscellaneous)":["wil","large","supervision"],
+    "Health Professions (miscellaneous)":["wil","large","supervision"],
+    "Public Health, Environmental and Occupational Health":["wil","large","inclusive"],
+    "Medicine (miscellaneous)":["supervision","large","wil"],
+    "Physical Therapy, Sports Therapy and Rehabilitation":["wil","active","supervision"],
+    "Pharmacology, Toxicology and Pharmaceutics (miscellaneous)":["large","wil","assessment"],
+    "Pharmacy":["wil","large","assessment"],
+    "Dentistry (miscellaneous)":["wil","supervision","rubrics"],
+    "Emergency Nursing":["wil","supervision","large"],
+    "Education":["reflective","feedback","assessment"],
+    "Education, Scientific Disciplines":["reflective","feedback","assessment"],
+    "Developmental and Educational Psychology":["reflective","feedback","inclusive"],
+    "Social Psychology":["group","active","feedback"],
+    "Clinical Psychology":["supervision","assessment","reflective"],
+    "Psychology (miscellaneous)":["assessment","active","supervision"],
+    "Sociology and Political Science":["lecturing","threshold","feedback"],
+    "Social Work":["wil","supervision","inclusive"],
+    "Anthropology":["lecturing","threshold","feedback"],
+    "Information Systems and Management":["online","active","assessment"],
+    "Information Systems":["online","active","assessment"],
+    "Computer Science Applications":["online","ai","active"],
+    "Artificial Intelligence":["ai","online","threshold"],
+    "Software":["online","group","active"],
+    "Human-Computer Interaction":["online","active","group"],
+    "Computer Networks and Communications":["online","active","large"],
+    "Engineering (miscellaneous)":["large","active","group"],
+    "Civil and Structural Engineering":["active","group","wil"],
+    "Electrical and Electronic Engineering":["large","active","threshold"],
+    "Mechanical Engineering":["active","group","threshold"],
+    "Building and Construction":["wil","group","active"],
+    "Mathematics (miscellaneous)":["large","threshold","active"],
+    "Applied Mathematics":["large","threshold","active"],
+    "Statistics and Probability":["large","threshold","assessment"],
+    "Physics and Astronomy (miscellaneous)":["large","threshold","active"],
+    "Chemistry (miscellaneous)":["large","active","threshold"],
+    "Biochemistry":["large","active","threshold"],
+    "Molecular Biology":["large","active","supervision"],
+    "Ecology, Evolution, Behavior and Systematics":["active","threshold","wil"],
+    "Agricultural and Biological Sciences (miscellaneous)":["wil","active","large"],
+    "Environmental Science (miscellaneous)":["active","wil","threshold"],
+    "Business, Management and Accounting (miscellaneous)":["group","wil","assessment"],
+    "Strategy and Management":["group","assessment","alignment"],
+    "Marketing":["group","active","assessment"],
+    "Accounting":["assessment","alignment","rubrics"],
+    "Finance":["assessment","large","alignment"],
+    "Economics and Econometrics":["large","lecturing","threshold"],
+    "Tourism, Leisure and Hospitality Management":["wil","group","active"],
+    "Law":["lecturing","assessment","integrity"],
+    "History":["lecturing","threshold","feedback"],
+    "Philosophy":["lecturing","threshold","feedback"],
+    "Literature and Literary Theory":["lecturing","feedback","threshold"],
+    "Linguistics and Language":["active","feedback","assessment"],
+    "Language and Linguistics":["active","feedback","assessment"],
+    "Visual Arts and Performing Arts":["active","feedback","rubrics"],
+    "Communication":["group","active","online"],
+    "Geography, Planning and Development":["active","wil","threshold"]
+  };
+
   function normaliseOrcid(v){
     v=String(v||"").trim();
     var m=v.match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);
@@ -203,8 +294,8 @@
     goBtn.disabled=true; goBtn.textContent="Reading…";
     setLoading("Reading your public record from OpenAlex…");
 
-    // OpenAlex: all works by this ORCID, with topics/keywords, newest first.
-    var url="https://api.openalex.org/works?filter=author.orcid:"+id+"&per-page=200&sort=publication_year:desc&select=id,title,publication_year,topics,keywords,authorships";
+    // OpenAlex: all works by this ORCID, newest first. cited_by_count/fwci deliberately NOT requested — no impact metric enters the browser (DORA).
+    var url="https://api.openalex.org/works?filter=author.orcid:"+id+"&per-page=200&sort=publication_year:desc&select=id,title,publication_year,topics,keywords,authorships,primary_topic,type,open_access,sustainable_development_goals,countries_distinct_count";
     fetch(url,{headers:{"Accept":"application/json"}})
       .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
       .then(function(data){
@@ -227,37 +318,54 @@
       });
     }
 
-    // --- aggregate fields/topics/keywords ---
-    var fieldCount={}, topicText=[], years=[], sotlHits=0;
+    // --- aggregate fields/topics/keywords + weighted signals (mirrors orcid-flow.html) ---
+    var fieldCount={}, topicText=[], WT=[], subScore={}, years=[], sotlHits=0, oaCount=0, leadCount=0, authored=0;
     works.forEach(function(w){
       if(w.publication_year) years.push(w.publication_year);
+      var mine=false, myLead=false;
+      (w.authorships||[]).forEach(function(a){
+        var au=a.author||{};
+        if(au.orcid&&au.orcid.indexOf(id)>-1){ mine=true; if(a.author_position==="first"||a.is_corresponding) myLead=true; }
+      });
+      if(mine){ authored++; if(myLead) leadCount++; }
+      if(w.open_access&&w.open_access.is_oa) oaCount++;
       var isSotl=SOTL_RE.test(w.title||"");
       (w.topics||[]).forEach(function(t){
-        if(t.display_name) topicText.push(t.display_name);
-        if(t.field&&t.field.display_name){ var f=t.field.display_name; fieldCount[f]=(fieldCount[f]||0)+1; topicText.push(f); }
-        if(t.subfield&&t.subfield.display_name) topicText.push(t.subfield.display_name);
-        if(SOTL_RE.test(t.display_name||"")) isSotl=true;
+        var sc=(typeof t.score==="number"?t.score:0.5);
+        if(t.display_name){ topicText.push(t.display_name); WT.push({t:t.display_name.toLowerCase(),s:sc}); if(SOTL_RE.test(t.display_name)) isSotl=true; }
+        if(t.field&&t.field.display_name){ var f=t.field.display_name; fieldCount[f]=(fieldCount[f]||0)+1; topicText.push(f); WT.push({t:f.toLowerCase(),s:sc*0.5}); }
+        if(t.subfield&&t.subfield.display_name){ var sf=t.subfield.display_name; topicText.push(sf); WT.push({t:sf.toLowerCase(),s:sc}); subScore[sf]=(subScore[sf]||0)+sc; }
       });
-      (w.keywords||[]).forEach(function(k){ if(k.display_name){ topicText.push(k.display_name); if(SOTL_RE.test(k.display_name)) isSotl=true; } });
+      (w.keywords||[]).forEach(function(k){ if(k.display_name){ var ks=(typeof k.score==="number"?k.score:0.5); topicText.push(k.display_name); WT.push({t:k.display_name.toLowerCase(),s:ks}); if(SOTL_RE.test(k.display_name)) isSotl=true; } });
       if(isSotl) sotlHits++;
     });
     var allText=topicText.join(" ; ").toLowerCase();
     var topFields=Object.keys(fieldCount).sort(function(a,b){return fieldCount[b]-fieldCount[a];}).slice(0,4);
+    var subRanked=Object.keys(subScore).sort(function(a,b){return subScore[b]-subScore[a];});
+    var subTotal=0; subRanked.forEach(function(k){subTotal+=subScore[k];});
     var analysed=works.length;              // works actually fetched & analysed (<=200)
     var full=total<=analysed;               // did we see the whole record?
     var minY=(full&&years.length)?Math.min.apply(null,years):null, maxY=years.length?Math.max.apply(null,years):null;
+    var firstY=years.length?Math.min.apply(null,years):null, lastY=years.length?Math.max.apply(null,years):null;
+    var span=(firstY!=null&&lastY!=null)?(lastY-firstY):null;
 
-    // --- match courses: (1) direct teaching-topic hits, (2) field heuristic, (3) universal backbone ---
+    // --- match courses: weighted teaching-topic hits (OpenAlex confidence) + real sub-field routing + backbone ---
     var why={}, scores={};
     Object.keys(TEACH_KW).forEach(function(k){
-      var s=0,hit=null;
-      TEACH_KW[k].forEach(function(kw){ if(allText.indexOf(kw)>-1){ s++; if(!hit) hit=kw.trim(); } });
-      if(s>0){ scores[k]=s; why[k]='Your work touches “'+hit+'”'; }
+      var s=0,hit=null,wsum=0;
+      TEACH_KW[k].forEach(function(kw){
+        if(allText.indexOf(kw)>-1){ s++; if(!hit) hit=kw.trim(); }
+        for(var wi=0;wi<WT.length;wi++){ if(WT[wi].t.indexOf(kw)>-1) wsum+=WT[wi].s; }
+      });
+      if(s>0){ scores[k]= wsum>0?wsum:s; why[k]='Your work touches “'+hit+'”'; }
     });
     var direct=Object.keys(scores).sort(function(a,b){return scores[b]-scores[a];});
 
-    var fieldKeys=[], fieldLabel="";
-    FIELD_HEURISTIC.forEach(function(h){ if(h.re.test(allText)){ if(!fieldLabel) fieldLabel=h.label; h.keys.forEach(function(k){ if(fieldKeys.indexOf(k)<0) fieldKeys.push(k); }); } });
+    // discipline: prefer the person's real modal OpenAlex sub-field, else the 6-bucket field heuristic
+    var fieldKeys=[], fieldLabel="", topSub=(subRanked.length?subRanked[0]:"");
+    if(topSub && SUBFIELD_MAP[topSub]){ fieldLabel=topSub; SUBFIELD_MAP[topSub].forEach(function(k){ if(fieldKeys.indexOf(k)<0) fieldKeys.push(k); }); }
+    else { FIELD_HEURISTIC.forEach(function(h){ if(h.re.test(allText)){ if(!fieldLabel) fieldLabel=h.label; h.keys.forEach(function(k){ if(fieldKeys.indexOf(k)<0) fieldKeys.push(k); }); } }); }
+    var disciplineLabel=topSub||fieldLabel, subKnown=!!topSub;
 
     var picked=[], seen={};
     function add(k,reason){ if(!seen[k]&&COURSES[k]){ seen[k]=1; picked.push(k); if(!why[k]) why[k]=reason; } }
@@ -268,6 +376,14 @@
 
     var sotlPct=Math.round((sotlHits/works.length)*100);
     var sotlStrong=sotlHits>=3||sotlPct>=15;
+
+    // derived contextual indicators (same set as orcid-flow.html; DORA-safe — no citation/impact metric)
+    var IND=[];
+    if(disciplineLabel) IND.push(["Discipline", disciplineLabel+(subKnown?" · OpenAlex sub-field":" · field-level")]);
+    if(span!=null) IND.push(["Career stage", (span<6?"early-career":span<15?"mid-career":"senior")+(firstY?(" · first work "+firstY):"")]);
+    if(authored) IND.push(["Collaboration", (leadCount/authored>=0.5?"mostly lead author":"mostly contributing author")]);
+    if(works.length) IND.push(["Open access", Math.round(100*oaCount/works.length)+"% of your works are open"]);
+    if(subTotal>0&&subRanked.length) IND.push(["Focus", (subScore[subRanked[0]]/subTotal>=0.5?"specialist · one main area":"generalist · broad across areas")]);
 
     // --- build markup ---
     var html="";
@@ -285,6 +401,11 @@
     }
     if(!full){
       html+='<div class="sub" style="color:var(--mut);font-size:12px;margin-top:12px">Your fields and SoTL footprint below are read from your <b style="color:#cbd8e6">'+analysed+'</b> most recent works (of '+total+').</div>';
+    }
+    if(IND.length){
+      html+='<div class="sec">Signals we read from your public record</div><div class="fields">'+
+        IND.map(function(x){return '<span class="chip" style="background:rgba(255,255,255,.03);border-color:var(--line);color:var(--ink)"><b style="color:var(--mut);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;margin-right:6px">'+esc(x[0])+'</b>'+esc(x[1])+'</span>';}).join("")+
+        '</div><div class="sub" style="color:var(--mut);font-size:11.5px;margin-top:8px">Read with the same transparent, DORA-aligned rules for everyone — no citation counts, no h-index, nobody ranked against anyone.</div>';
     }
 
     // SoTL footprint -> ties to the SoTL Index
