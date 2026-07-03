@@ -6196,6 +6196,119 @@ go();
 })();</script>
 <style id="ntlsn-roadmapboxfix">#ntlsn-coming2027 [data-uic],#ntlsn-coming2028 [data-uic]{border:none!important;background:transparent!important;padding:0!important;color:inherit!important;text-decoration:none!important}</style>
 <script id="ntlsn-herodeclutter">(function(){if(window.__ntlsnHD)return;window.__ntlsnHD=1;function go(){var all=document.querySelectorAll("div,span,p");for(var i=0;i<all.length;i++){var el=all[i];if(el.children.length===0&&(el.textContent||"").indexOf("The open home for connecting university teaching")>-1){el.style.display="none";}}var as=document.querySelectorAll("a");for(var j=0;j<as.length;j++){if((as[j].textContent||"").indexOf("Place yourself in SoTL")>-1){as[j].style.display="none";}}}go();[300,900,2000,4000].forEach(function(ms){setTimeout(go,ms);});})();</script>
-<script id="ntlsn-nestle-fold">(function(){if(window.__ntlsnNestle)return;window.__ntlsnNestle=1;var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif";var FOLDS=[['ntlsn-oer','Open Educational Resources \u2014 browse the library'],['ntlsn-waystogrow','Ways to grow \u2014 browse PD opportunities']];function nestle(id,title){var sec=document.getElementById(id);if(!sec||sec.__nestled)return;if((sec.textContent||'').length<80)return;var det=document.createElement('details');det.style.cssText='margin:0 auto';var sum=document.createElement('summary');sum.style.cssText="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px "+F+";padding:13px;min-height:44px";sum.innerHTML=title+' \u25BE';det.appendChild(sum);while(sec.firstChild){det.appendChild(sec.firstChild);}sec.appendChild(det);sec.__nestled=true;}function go(){FOLDS.forEach(function(f){nestle(f[0],f[1]);});}[1700,3700,6500,9000].forEach(function(ms){setTimeout(go,ms);});})();</script>
+<script id="ntlsn-collapseall">(function(){
+  if(window.__ntlsnCollapseAll)return; window.__ntlsnCollapseAll=1;
+  var SANS="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+  // Front-door sections that stay OPEN (the landing + primary journey)
+  var KEEP={'hero':1,'ntlsn-startgrid':1,'ntlsn-nowbanner':1};
+  // Sections that break when reparented (SVG/canvas-geometry) or are pure decoration
+  var NOFOLD={'ntlsn-evidencelib':1,'ntlsn-scrollconnect':1,'ntlsn-litmus':1,'network':1,
+    'ntlsn-glance':1,'ntlsn-peakmap':1,'ntlsn-network':1,'map':1};
+
+  // ---- collapsed sections as CONNECTED NODES (a spine down the left, a node per section) ----
+  var css=document.createElement('style'); css.id='ntlsn-cfold-css';
+  css.textContent=
+    ".ntlsn-cfolded{min-height:0!important;height:auto!important;max-height:none!important;padding:0!important;margin:0!important;border:0!important;content-visibility:visible!important;contain-intrinsic-size:auto!important;transition:none!important;background:transparent!important;transform:none!important;left:auto!important;right:auto!important;float:none!important;position:relative!important;box-sizing:border-box!important}"+
+    ".ntlsn-cfolded>*:not(.ntlsn-cfold){display:none!important}"+
+    // the fold row: a faint left scrim so text stays legible over the network map, network peeks on the right
+    // full-width + left-aligned so the spine is ONE continuous rail and every node lines up
+    ".ntlsn-cfold{position:relative;width:100%!important;max-width:none!important;margin:0!important;box-sizing:border-box;background:linear-gradient(90deg,rgba(9,20,37,.6),rgba(9,20,37,.18) 60%,rgba(9,20,37,0))}"+
+    // the connecting spine (segments join across contiguous sections into one line)
+    ".ntlsn-cfold::before{content:'';position:absolute;left:41px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,rgba(78,205,196,.05),rgba(78,205,196,.22),rgba(78,205,196,.05));pointer-events:none}"+
+    ".ntlsn-cfold>summary{position:relative;list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;padding:18px 26px 18px 70px;min-height:44px;transition:background .18s}"+
+    ".ntlsn-cfold>summary::-webkit-details-marker{display:none}"+
+    ".ntlsn-cfold>summary:hover{background:rgba(78,205,196,.05)}"+
+    ".ntlsn-cfold>summary:focus-visible{outline:2px solid #4ECDC4;outline-offset:-2px}"+
+    // the NODE on the spine (fixed left → aligns across every row)
+    ".cf-node{position:absolute;left:35px;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(78,205,196,.55);background:#0b1c33;transition:background .2s,border-color .2s,box-shadow .2s,transform .2s;z-index:2}"+
+    ".ntlsn-cfold>summary:hover .cf-node{border-color:#4ECDC4;box-shadow:0 0 0 5px rgba(78,205,196,.10)}"+
+    ".ntlsn-cfold[open]>summary .cf-node{background:#4ECDC4;border-color:#4ECDC4;box-shadow:0 0 14px rgba(78,205,196,.55)}"+
+    ".cf-h{flex:1 1 auto;min-width:0;max-width:940px;display:flex;flex-direction:column;gap:3px}"+
+    ".cf-t{font:700 clamp(15px,1.7vw,18px)/1.25 "+SANS+";color:#e8eef5;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}"+
+    ".cf-z{font:400 13px/1.4 "+SANS+";color:#8aa0b6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:74ch}"+
+    ".ntlsn-cfold .cf-t,.ntlsn-cfold .cf-z{border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important}"+
+    ".cf-x{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.16);color:#4ECDC4;display:flex;align-items:center;justify-content:center;font:300 21px/1 "+SANS+";transition:transform .22s ease,background .22s,border-color .22s}"+
+    ".ntlsn-cfold>summary:hover .cf-x{border-color:rgba(78,205,196,.5)}"+
+    ".ntlsn-cfold[open]>summary{background:rgba(78,205,196,.04)}"+
+    ".ntlsn-cfold[open]>summary .cf-x{transform:rotate(45deg);background:rgba(78,205,196,.14);border-color:transparent}"+
+    ".cf-body{padding:2px 26px 26px 70px;animation:cfIn .28s ease}"+
+    "@keyframes cfIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}"+
+    "@media(prefers-reduced-motion:reduce){.cf-x,.cf-node{transition:none}.cf-body{animation:none}}";
+  (document.head||document.documentElement).appendChild(css);
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  // normalise whitespace + strip emoji/symbol glyphs that make teasers look broken
+  function clean(s){
+    s=String(s==null?'':s).replace(/\s+/g,' ').trim();
+    try{ s=s.replace(/[\u{1F000}-\u{1FAFF}\u{1F1E6}-\u{1F1FF}\u{2190}-\u{21FF}\u{2300}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE00}-\u{FE0F}\u{200D}]/gu,''); }catch(e){}
+    return s.replace(/\s{2,}/g,' ').trim();
+  }
+  // like textContent but inserts spaces between child ELEMENTS, so "Conferences"+"<span>Updated</span>"
+  // reads "Conferences Updated" not "ConferencesUpdated"
+  function textOf(el){
+    var s='';
+    [].slice.call(el.childNodes).forEach(function(n){
+      if(n.nodeType===3) s+=n.textContent;
+      else if(n.nodeType===1) s+=' '+textOf(n)+' ';
+    });
+    return s;
+  }
+  function labelOf(sec){
+    var h=sec.querySelector('h1,h2,h3'); if(h){var t=clean(textOf(h)); if(t)return t;}
+    var e=sec.querySelector('h4,[class*=eyebrow],[class*=kicker],[class*=label]'); if(e){var t2=clean(textOf(e)); if(t2.length>2&&t2.length<70)return t2;}
+    var st=sec.querySelector('strong,b'); if(st){var t3=clean(textOf(st)); if(t3.length>4&&t3.length<70)return t3;}
+    var p=sec.querySelector('p'); if(p){var t4=clean(textOf(p)); if(t4.length>8)return t4.length>60?t4.slice(0,58).replace(/\s\S*$/,'')+'…':t4;}
+    return '';
+  }
+  // a clean one-line teaser: the first real paragraph, first sentence, no run-on, no emoji
+  function teaserOf(sec,lab){
+    var cands=[].slice.call(sec.querySelectorAll('p')).map(function(p){return clean(textOf(p));})
+      .filter(function(x){return x.length>16 && x!==lab;});
+    // prefer a paragraph that reads like a real sentence (has end punctuation + spacing), not a concatenated list
+    var t=cands.filter(function(x){return /[.!?]/.test(x) && (x.match(/ /g)||[]).length>=4;})[0] || cands[0] || '';
+    if(!t){var all=clean(textOf(sec)); if(lab)all=clean(all.split(lab).join(' ')); t=all;}
+    var m=t.search(/[.!?](\s|$)/); if(m>=22&&m<104)t=t.slice(0,m+1);          // stop at first sentence
+    t=t.replace(/^[–—\-·•:;\s]+/,'').trim();
+    return t.length>108?t.slice(0,106).replace(/\s\S*$/,'')+'…':t;
+  }
+  function fold(sec){
+    if(!sec||sec.__cfold)return;
+    var id=sec.id||'';
+    if(KEEP[id]||NOFOLD[id])return;
+    if(sec.querySelector('canvas'))return;                       // animated/decorative
+    if(sec.parentElement&&sec.parentElement.closest('section'))return; // nested inside another section
+    if(sec.closest('details'))return;                            // already inside a fold
+    if(sec.querySelector('details.ntlsn-cfold')){sec.__cfold=1;return;}
+    var lab=labelOf(sec); if(!lab)return;                        // need a title to collapse under
+    var txt=(sec.textContent||'').replace(/\s+/g,' ').trim(); if(txt.length<70)return;
+    var tz=teaserOf(sec,lab);
+    var d=document.createElement('details'); d.className='ntlsn-cfold';
+    var s=document.createElement('summary');
+    s.innerHTML='<span class="cf-node" aria-hidden="true"></span><span class="cf-h"><span class="cf-t">'+esc(lab)+'</span>'+(tz?'<span class="cf-z">'+esc(tz)+'</span>':'')+'</span><span class="cf-x" aria-hidden="true">+</span>';
+    d.appendChild(s);
+    var body=document.createElement('div'); body.className='cf-body';
+    var kids=[].slice.call(sec.childNodes);
+    kids.forEach(function(n){ if(n!==d) body.appendChild(n); });
+    // un-hide anything the scroll-reveal left at opacity:0 so the expanded view is complete
+    [].slice.call(body.querySelectorAll('*')).forEach(function(el){
+      if(el.style){ if(el.style.opacity==='0')el.style.opacity=''; if(el.style.visibility==='hidden')el.style.visibility=''; if(/translate/.test(el.style.transform||''))el.style.transform=''; }
+    });
+    d.appendChild(body);
+    sec.appendChild(d);
+    sec.classList.add('ntlsn-cfolded'); sec.__cfold=1;
+  }
+  // hide the full-width "Due Soon" registration ticker (a stray <div>, not a <section>) that breaks the node rail
+  function hideExtras(){
+    var main=document.querySelector('#root .min-h-screen')||document.querySelector('.min-h-screen');
+    if(!main)return;
+    [].slice.call(main.children).forEach(function(el){
+      if(el.__cfhide||el.tagName!=='DIV')return;
+      var t=el.textContent||'';
+      if(/DUE SOON/i.test(t)&&/all dates/i.test(t)&&!el.querySelector('section')){ el.style.display='none'; el.__cfhide=1; }
+    });
+  }
+  function sweep(){ hideExtras(); [].slice.call(document.querySelectorAll('section')).forEach(fold); }
+  [1000,2200,3800,5800,8500,12000,16000].forEach(function(ms){setTimeout(sweep,ms);});
+})();</script>
 </body>
 </html>
