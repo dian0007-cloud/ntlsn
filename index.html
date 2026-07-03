@@ -1021,7 +1021,7 @@ function build(){
  var hook='<div style="text-align:center;margin-top:38px;padding:22px;background:#0f1f38;border:1px solid rgba(78,205,196,.18);border-radius:14px;max-width:680px;margin-left:auto;margin-right:auto;">'
   +'<div style="font:700 17px '+F+';color:#fff;margin-bottom:4px;">An association, employer or university that wants in?</div>'
   +'<div style="font:400 14px/1.6 '+F+';color:#9fb3c8;">Founding partners help shape the sequence and the protocols. <a href="mailto:sdianati@live.com.au?subject=NTLSN%20founding%20partner%20interest" style="color:#4ECDC4;font-weight:600;text-decoration:none;">Register your interest &rarr;</a></div></div>';
- sec.innerHTML=head+ribbon+goalLabel+growth+bridge+body+vision+hook;
+ sec.innerHTML=head+ribbon+goalLabel+growth+bridge+'<details style="max-width:900px;margin:12px auto 0"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13px -apple-system,Segoe UI,Roboto,sans-serif;padding:11px;min-height:40px">See the 2027&ndash;2029 roadmap &amp; founding-partner path &#9662;</summary>'+body+vision+hook+'</details>';
  return sec;
 }
 function animate(sec){
@@ -2384,6 +2384,7 @@ function build(){
    +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;">'+cards+'</div>'
   +'<p style="text-align:center;font:400 12px/1.55 '+F+';color:#8aa0b6;margin:18px auto 0;max-width:680px;">OER Commons is an independent open library run by the nonprofit ISKME. NTLSN links you straight to it &mdash; every result is free and openly licensed. Searches and links open on oercommons.org.</p>'
  +'</div>';
+  sec.innerHTML='<details style="max-width:1060px;margin:0 auto"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px -apple-system,Segoe UI,Roboto,sans-serif;padding:13px;min-height:44px">Open Educational Resources &mdash; browse the library &#9662;</summary><div>'+sec.innerHTML+'</div></details>';
  hero.parentNode.appendChild(sec);
  (function(){
   var dwrap=document.createElement('div'); dwrap.style.cssText='max-width:880px;margin:36px auto 0;';
@@ -3530,6 +3531,7 @@ function build(){
    +'<div style="flex:1;min-width:240px;font:500 13.5px/1.55 '+F+';color:#cbd8e6;">Complete one, <a href="/recognition-points.html" style="color:#2DD4BF;text-decoration:none;">log it</a>, and it counts. Your growth, your service and your scholarship become recognition points on one portable record.</div></div>'
   +'<p style="text-align:center;font:400 12px/1.55 '+F+';color:#8aa0b6;margin:16px auto 0;max-width:720px;">An open, growing directory of independent professional learning from across the sector. Links are provided for the community; listing here is not affiliation with or endorsement by NTLSN, and these organisations do not endorse NTLSN. Open-source tools are linked under their own licences.</p>'
  +'</div>';
+  sec.innerHTML='<details style="max-width:1060px;margin:0 auto"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px -apple-system,Segoe UI,Roboto,sans-serif;padding:13px;min-height:44px">Ways to grow &mdash; browse PD opportunities &#9662;</summary><div>'+sec.innerHTML+'</div></details>';
  hero.parentNode.appendChild(sec);
  function applyFilter(f){
   sec.querySelectorAll('.grow-fchip').forEach(function(c){var on=c.getAttribute('data-f')===f;c.style.background=on?'#2DD4BF':'rgba(255,255,255,.06)';c.style.color=on?'#06243a':'#cbd8e6';c.style.borderColor=on?'#2DD4BF':'rgba(255,255,255,.14)';});
@@ -3636,6 +3638,7 @@ function build(){
   +'</div>'
   +'<p style="text-align:center;font:400 12px/1.55 '+F+';color:#8aa0b6;margin:22px auto 0;max-width:760px;">Illustrative examples drawn from the domains most Australian academic-promotion frameworks share. Every institution sets its own criteria, weights them differently, and makes every decision. Tick what you have done—most promotion cases rest on 15–20 well-evidenced items in strong domains—then <a href="/recognition-navigator.html" style="color:#2DD4BF;text-decoration:none;">map them to your level</a> to see your case take shape.</p>'
  +'</div>';
+  sec.innerHTML='<details style="max-width:1060px;margin:0 auto"><summary style="cursor:pointer;list-style:none;text-align:center;color:#4ECDC4;font:800 13.5px -apple-system,Segoe UI,Roboto,sans-serif;padding:13px;min-height:44px">Map your evidence of impact &mdash; self-assess across 6 domains &#9662;</summary><div>'+sec.innerHTML+'</div></details>';
  hero.parentNode.appendChild(sec);
  var lists=document.getElementById('ev-lists');
  function update(){
