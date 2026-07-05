@@ -25,3 +25,14 @@ jobs:
           for f in events.ics feed.xml sitemap.xml events-ld.json; do
             test -s "/tmp/build-check/$f" && echo "ok: $f" || (echo "MISSING: $f" && exit 1)
           done
+
+  functions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Install deps
+        run: npm ci
+      - name: Test Netlify functions (node:test)
+        run: npm test

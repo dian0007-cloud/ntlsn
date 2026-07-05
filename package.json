@@ -1,0 +1,17 @@
+{
+  "name": "ntlsn",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NTLSN — National Teaching and Learning Sector Navigator. Static site + Netlify serverless backend.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test netlify/functions/test/*.test.js",
+    "build": "echo 'NTLSN is a static site — no build step'"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
+  }
+}

@@ -5,3 +5,8 @@ node_modules/
 
 # stray editor/backup snapshots
 *.bak-*
+
+# local secrets — never commit (functions read these from Netlify env, not files)
+.env
+.env.*
+.netlify/

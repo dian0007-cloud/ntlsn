@@ -109,6 +109,18 @@
     <div class="demo-tag">Sample embed — your Zoom, live on your NTLSN page</div>
     <div class="demo-bar"><span>🎤</span><span>📹</span><span>💬</span><span>✋</span><span>⛶</span></div>
   </div>
+
+  <!-- Real Meeting-SDK watch embed. Dormant until a meeting number is configured
+       (NTLSN_SYMPOSIUM.meetingNumber below) AND that meeting is live AND the viewer is
+       signed in with ORCID. With no meeting number set, nothing here loads. -->
+  <div id="ntlsn-watch" hidden>
+    <div id="ntlsn-watch-cta" style="text-align:center;margin:10px 0">
+      <span class="live" style="position:static;display:inline-flex"><span class="dot"></span> LIVE now</span>
+      <button class="btn btn-orcid" id="watch-btn" type="button" style="margin-left:10px">▶ Watch the symposium</button>
+      <p class="note" id="watch-note" style="margin-top:8px"></p>
+    </div>
+    <div id="ntlsn-zoom-root" style="max-width:920px;margin:0 auto"></div>
+  </div>
   <div class="reg">
     <div class="r-h">Register to attend (sample)</div>
     <div id="reg-form">
@@ -148,34 +160,115 @@
 
 <script>
 (function(){
- // --- Config: set these to go live (free ORCID app at orcid.org/developer-tools) ---
- var ORCID={ clientId:'', env:'sandbox', redirectUri:location.origin+'/.netlify/functions/orcid-callback' };
-
- // Handle the return from ORCID / Zoom
  var p=new URLSearchParams(location.search);
  var esc=function(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
- if(p.get('orcid')){
-   var s=document.getElementById('signed');
-   s.style.display='block';
-   var nm='researcher'; try{ if(p.get('name')) nm=decodeURIComponent(p.get('name')); }catch(e){}
-   var oid=p.get('orcid')||''; if(!/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(oid)) oid='(unverified)';
-   s.innerHTML='✓ Signed in as <b>'+esc(nm)+'</b> &middot; ORCID <b>'+esc(oid)+'</b>. You can now add your symposium.';
- }
- if(p.get('connected')){
-   var z=document.getElementById('zoom-btn'); z.textContent='✓ Zoom connected'; z.style.pointerEvents='none'; z.style.opacity='.8';
- }
 
- // ORCID sign-in — redirect to the server-side start so the CSRF state lives in an HttpOnly cookie.
+ // Signed-in state comes from the server-verified session cookie (via /me), never the URL —
+ // so it cannot be spoofed by editing the query string. The callback redirects here with
+ // ?signed_in=1 after minting the HttpOnly session; we then ask /me who that is.
+ function showSignedIn(orcid,name){
+   var s=document.getElementById('signed'); if(!s) return;
+   s.style.display='block';
+   var oid=orcid||''; if(!/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(oid)) oid='(unverified)';
+   s.innerHTML='✓ Signed in as <b>'+esc(name||'researcher')+'</b> &middot; ORCID <b>'+esc(oid)+'</b>. You can now add your symposium.';
+ }
+ function checkSession(){
+   fetch('/.netlify/functions/me',{credentials:'same-origin'})
+     .then(function(r){return r.ok?r.json():null;})
+     .then(function(d){ if(d&&d.signedIn){ showSignedIn(d.orcid,d.name); } })
+     .catch(function(){});
+ }
+ checkSession();
+
+ if(p.get('connected')){
+   var z=document.getElementById('zoom-btn'); if(z){ z.textContent='✓ Zoom connected'; z.style.pointerEvents='none'; z.style.opacity='.8'; }
+ }
+ var note=document.getElementById('note');
+ if(p.get('auth_error')==='orcid_unconfigured'&&note){
+   note.innerHTML='<b style="color:var(--gold)">Sign-in with ORCID is wired and ready</b> — add a free ORCID client ID (orcid.org/developer-tools) to switch it on. The flow, callback function and security are already built.';
+ }
+ if(p.get('zoom_error')==='unconfigured'&&note){
+   note.innerHTML='<b style="color:var(--gold)">Connect-your-Zoom is wired and ready</b> — add the Zoom OAuth app credentials to switch it on.';
+ }
+ // Tidy the URL (drop transient flags) without a reload.
+ if(location.search){ try{ history.replaceState(null,'',location.pathname); }catch(e){} }
+
+ // ORCID sign-in — always hand off to the server-side start, which sets the CSRF state +
+ // PKCE verifier in HttpOnly cookies (client JS deliberately cannot) and, if unconfigured,
+ // bounces back here with ?auth_error so the note above explains what's missing.
  document.getElementById('orcid-btn').onclick=function(){
-   if(!ORCID.clientId){
-     document.getElementById('note').innerHTML='<b style="color:var(--gold)">Sign-in with ORCID is wired and ready</b> — add a free ORCID client ID (orcid.org/developer-tools) to switch it on. The flow, callback function and security are already built.';
-     return;
-   }
-   // Client JS deliberately cannot set HttpOnly cookies — the function sets the state and verifies it on callback.
    location.assign('/.netlify/functions/orcid-oauth-start');
  };
 })();
 </script>
 <script>(function(){var rg=document.getElementById('r-go');if(!rg)return;rg.onclick=function(){var nm=(document.getElementById('r-name').value||'there').split(' ')[0].replace(/[<>]/g,'');document.getElementById('reg-form').style.display='none';var d=document.getElementById('reg-done');d.style.display='block';d.innerHTML='✓ You’re registered, '+nm+'! Your unique join link would arrive by email and show here: <b>https://zoom.us/j/…?tk=…</b><br><span style="color:#9fb0c3;font-size:12px">Sample only — real registration activates once a university connects its Zoom.</span>';};})();</script>
+<script>
+/* Real Meeting-SDK watch embed. Dormant by default: with an empty meetingNumber nothing
+   below runs — no Zoom SDK is fetched and the page is unchanged. Set NTLSN_SYMPOSIUM.meetingNumber
+   to a live symposium's Zoom meeting number to activate. Then it: polls /zoom-live, reveals a
+   "Watch" CTA only while live, requires an ORCID session, fetches an attendee signature from
+   /zoom-meeting-signature, and joins Zoom's Component View. */
+(function(){
+  var NTLSN_SYMPOSIUM = { meetingNumber: '', title: '' };
+  var ZOOM_SDK_VERSION = '3.11.0'; // Zoom Meeting SDK (Component View) — bump as Zoom releases.
+
+  var mn = String(NTLSN_SYMPOSIUM.meetingNumber || '').trim();
+  if(!/^[0-9]{9,11}$/.test(mn)) return; // dormant unless a valid meeting number is configured
+
+  var wrap=document.getElementById('ntlsn-watch'),
+      btn=document.getElementById('watch-btn'),
+      wnote=document.getElementById('watch-note'),
+      cta=document.getElementById('ntlsn-watch-cta'),
+      root=document.getElementById('ntlsn-zoom-root');
+  if(!wrap||!btn||!root) return;
+  var setNote=function(t){ if(wnote) wnote.textContent=t; };
+
+  function poll(){
+    fetch('/.netlify/functions/zoom-live?meetingNumber='+encodeURIComponent(mn))
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(d){ wrap.hidden = !(d && d.live); })
+      .catch(function(){});
+  }
+  poll(); setInterval(poll, 30000);
+
+  function whoAmI(){
+    return fetch('/.netlify/functions/me',{credentials:'same-origin'})
+      .then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+  }
+  function loadScript(src){
+    return new Promise(function(res,rej){
+      var s=document.createElement('script'); s.src=src; s.async=true;
+      s.onload=res; s.onerror=function(){rej(new Error('script load failed'));};
+      document.head.appendChild(s);
+    });
+  }
+
+  var joined=false, sdkLoaded=false;
+  btn.onclick=function(){
+    if(joined) return;
+    setNote('Checking your sign-in…');
+    whoAmI().then(function(u){
+      if(!u || !u.signedIn){ setNote('Sign in with ORCID above to watch the live session.'); return; }
+      btn.disabled=true; setNote('Loading the live session…');
+      return fetch('/.netlify/functions/zoom-meeting-signature',{
+        method:'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ meetingNumber: mn })
+      }).then(function(r){return r.json();}).then(function(sig){
+        if(!sig || !sig.signature || !sig.sdkKey){ setNote('The live session isn’t available right now.'); btn.disabled=false; return; }
+        return (sdkLoaded ? Promise.resolve()
+          : loadScript('https://source.zoom.us/'+ZOOM_SDK_VERSION+'/zoom-meeting-embedded-'+ZOOM_SDK_VERSION+'.min.js'))
+          .then(function(){
+            sdkLoaded=true;
+            if(!window.ZoomMtgEmbedded) throw new Error('SDK unavailable');
+            var client=window.ZoomMtgEmbedded.createClient();
+            client.init({ zoomAppRoot: root, language:'en-US' });
+            return client.join({ sdkKey:sig.sdkKey, signature:sig.signature, meetingNumber:mn, userName:(u.name||'NTLSN viewer') });
+          }).then(function(){ joined=true; setNote(''); if(cta) cta.style.display='none'; });
+      });
+    }).catch(function(){ setNote('Couldn’t start the live session — please try again shortly.'); btn.disabled=false; });
+  };
+})();
+</script>
 </body>
 </html>
