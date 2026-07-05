@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Built to connect — NTLSN's integration front door</title>
+<meta name="description" content="The NTLSN integration front door for IT leads, enterprise architects and learning-and-teaching leaders: what you can connect to today (MCP endpoint, open JSON datasets, SCORM exports, open scholarly APIs), what is in design (Open Badges 3.0, a CASE-modelled recognition crosswalk), and what is staged for the first institutional contract (LTI 1.3, SSO via AAF). Every live claim is verifiable from a terminal.">
+<meta property="og:title" content="Built to connect — NTLSN's integration front door">
+<meta property="og:description" content="What you can connect to today, what is in design, and what is staged for the first institutional contract. No account, no key, no conversation required — verify every live claim from a terminal.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--staged:#8FB8E0;
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --M:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
+  .wrap{max-width:880px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(34px,5.4vw,56px);margin:0 0 8px;font-weight:800;letter-spacing:-.018em;line-height:1.02}
+  h1 .g{background:linear-gradient(100deg,var(--teal),#86ece3 60%,var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tagline{font:700 17px var(--F);color:var(--ink);margin:0 0 14px;max-width:680px}
+  .hublink{display:inline-flex;align-items:center;gap:7px;background:rgba(201,169,98,.1);border:1px solid rgba(201,169,98,.28);border-radius:20px;padding:6px 13px;font:700 12.5px var(--F);color:var(--gold);margin:0 0 20px;text-decoration:none}
+  .hublink:hover{background:rgba(201,169,98,.16)}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 18px;max-width:730px}
+  a{color:var(--teal)}
+  h2{font:800 clamp(22px,3.4vw,28px)/1.15 var(--F);letter-spacing:-.014em;margin:40px 0 8px}
+  h3{font:800 18px/1.3 var(--F);margin:0 0 10px;letter-spacing:-.008em}
+  h4{font:800 15.5px/1.35 var(--F);margin:24px 0 8px}
+  p{margin:0 0 12px}
+  ul{margin:0 0 12px;padding-left:20px}
+  li{margin:4px 0}
+  .seclead{color:var(--mut);font-size:14.5px;margin:0 0 16px;max-width:730px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 16px}
+  .principle{border-left:3px solid var(--teal)}
+  .principle .ph{font:800 14.5px var(--F);margin:0 0 6px}
+  .tag{display:inline-block;font:700 11px/1 var(--F);letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid;vertical-align:2px;margin-left:8px;white-space:nowrap}
+  .tag.live{color:var(--teal);border-color:rgba(78,205,196,.35);background:rgba(78,205,196,.12)}
+  .tag.design{color:var(--gold);border-color:rgba(201,169,98,.35);background:rgba(201,169,98,.12)}
+  .tag.staged{color:var(--staged);border-color:rgba(143,184,224,.35);background:rgba(143,184,224,.12)}
+  .statuskey{border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin:0 0 8px;background:rgba(255,255,255,.02);font-size:13.5px;color:var(--mut)}
+  .statuskey div{margin:5px 0}
+  .statuskey .tag{margin-left:0;margin-right:8px}
+  pre{background:#0a1830;border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font:13px/1.55 var(--M);color:#cfe3f5;margin:12px 0}
+  code{font-family:var(--M);font-size:.93em;color:#cfe3f5}
+  .dataurl{display:block;overflow-x:auto;white-space:nowrap;background:#0a1830;border:1px solid var(--line);border-radius:8px;padding:9px 13px;font:700 13.5px/1.4 var(--M);color:var(--teal);margin:0 0 12px}
+  .tblwrap{overflow-x:auto;margin:10px 0 12px;border:1px solid var(--line);border-radius:10px}
+  table{width:100%;min-width:560px;border-collapse:collapse;font-size:13.3px}
+  th{font:800 11px var(--F);letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03)}
+  td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{font-family:var(--M);font-size:12.5px;color:var(--teal);white-space:nowrap}
+  td:nth-child(2){color:var(--mut);white-space:nowrap}
+  .fdcap{font:800 11px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:14px 0 0}
+  .smallprint{color:var(--mut);font-size:12.5px;line-height:1.55;margin:12px 0 0}
+  .note{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px 15px;font-size:13px;color:var(--mut);margin:14px 0 0}.note b{color:var(--ink)}
+  .lnote{background:rgba(201,169,98,.06);border:1px solid rgba(201,169,98,.22);border-radius:12px;padding:14px 16px;font-size:13.5px;color:#ece4d2;line-height:1.6;margin:12px 0}
+  .lnote b{color:var(--gold)}
+  .pill{display:inline-block;background:rgba(78,205,196,.12);color:var(--teal);font:700 11px var(--F);padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .foot{color:#7d8da0;font-size:11.5px;margin:28px 0 0;border-top:1px solid var(--line);padding-top:14px;line-height:1.6}
+  .foot a{color:var(--teal)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+  .skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+
+  <div class="eyebrow">NTLSN · Interoperability</div>
+  <h1>Built to <span class="g">connect</span></h1>
+  <p class="tagline">The integration front door for the National Teaching &amp; Learning Support Network.</p>
+  <a class="hublink" href="/">← ntlsn.com</a>
+  <p class="lead">This page is written for the people who have to make systems talk to each other — IT leads, enterprise architects, CIOs, and the learning-and-teaching leaders who work alongside them. It states plainly what you can connect to today, what is in design, and what is staged for the first institutional contract. Nothing in the live section requires an account, a key, or a conversation with us. You can verify every claim from a terminal while you read.</p>
+
+  <div class="statuskey" role="note" aria-label="Status key">
+    <div><span class="tag live">Live</span> Running now on ntlsn.com; testable as you read.</div>
+    <div><span class="tag design">In design</span> Specified and being prototyped; not yet published.</div>
+    <div><span class="tag staged">Staged</span> Built to be switched on under an institutional contract; deliberately not running on the free commons.</div>
+  </div>
+
+  <!-- ═══════════════ LIVE NOW ═══════════════ -->
+  <h2 id="live-now">Live now</h2>
+
+  <section class="panel" id="mcp" aria-labelledby="h-mcp">
+    <h3 id="h-mcp">MCP endpoint <span class="tag live">Live</span></h3>
+    <p>NTLSN runs a public Model Context Protocol (MCP) server. MCP is an open, JSON-RPC 2.0-based protocol for connecting AI assistants and other clients to external tools and data sources. Our server is read-only, requires no authentication, holds no state about you, and fails closed. It exposes three tools:</p>
+    <ul>
+      <li><code>upcoming_events</code> — curated sector events, with an optional university filter and a result limit.</li>
+      <li><code>search_archive</code> — search over the rescued ALTC/OLT teaching-scholarship archive: 1,431 works, 1994–2025.</li>
+      <li><code>universities</code> — the 42 Australian universities whose learning-and-teaching team pages are indexed in the network directory.</li>
+    </ul>
+    <p style="margin-bottom:6px"><b>Endpoint:</b></p>
+    <span class="dataurl">https://ntlsn.com/.netlify/functions/mcp</span>
+    <p>Try it from a terminal:</p>
+<pre># List the available tools
+curl -s https://ntlsn.com/.netlify/functions/mcp \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+
+# Call one: the next three sector events
+curl -s https://ntlsn.com/.netlify/functions/mcp \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"upcoming_events","arguments":{"limit":3}}}'</pre>
+    <p>Any MCP-capable client can point at this URL as a remote server. A fuller walkthrough, including client configuration, is on the MCP page — <a href="/mcp.html">full walkthrough →</a>.</p>
+    <p class="smallprint">MCP is an open protocol originally developed by Anthropic. NTLSN is independent of, and not affiliated with or endorsed by, Anthropic.</p>
+  </section>
+
+  <!-- ═══════════════ OPEN DATA (merged section) ═══════════════ -->
+  <section class="panel" id="open-data" aria-labelledby="h-open-data">
+    <div class="eyebrow">Open data</div>
+    <h3 id="h-open-data" style="font-size:22px">The data behind the commons <span class="tag live">Live</span></h3>
+    <p class="lead" style="margin-bottom:12px">NTLSN publishes the datasets that power this site as plain JSON files at stable URLs. They are served with open CORS headers, so any page, script, or notebook can fetch them directly — no key, no sign-up, no registration. What this site reads, you can read.</p>
+    <p><span class="tag live" style="margin-left:0;margin-right:8px">Live</span><span class="smallprint" style="margin:0">Both files below are in production and power pages on this site today.</span></p>
+
+    <h4>1. Curated sector events</h4>
+    <span class="dataurl">https://ntlsn.com/data/events.json</span>
+    <p>A hand-curated calendar of learning and teaching events across Australian higher education — conferences, symposia, webinars, workshops, showcases, and themed weeks. The file holds 94 curated sector events, 53 of them verified against the organiser's page as of 5 July 2026; every record carries a <code>verified</code> flag. New entries enter as <code>verified: false</code> and are flipped to <code>true</code> only after a maintainer has checked the listing against the organiser's page — so you can filter on trust rather than take our word for it.</p>
+    <p>A static iCalendar snapshot of the dataset is also published at <a href="https://ntlsn.com/events.ics">https://ntlsn.com/events.ics</a>, and an RSS feed of upcoming events at <a href="https://ntlsn.com/feed.xml">https://ntlsn.com/feed.xml</a> — both are static snapshots of the dataset, not live feeds.</p>
+
+    <p class="fdcap">Field dictionary</p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>id</td><td>number</td><td>Stable unique identifier.</td></tr>
+          <tr><td>title</td><td>string</td><td>The event's public name.</td></tr>
+          <tr><td>uni</td><td>string</td><td>Host-institution id, joining to <code>/data/universities.json</code> (the site's list of the 42 Australian universities and their learning-and-teaching team pages). The value <code>national</code> marks sector-wide events with no single host.</td></tr>
+          <tr><td>date</td><td>string</td><td>Start date, ISO 8601 (YYYY-MM-DD).</td></tr>
+          <tr><td>endDate</td><td>string, optional</td><td>End date, ISO 8601. Omitted for single-day events (defaults to <code>date</code>).</td></tr>
+          <tr><td>type</td><td>string</td><td>One of: conference, symposium, workshop, webinar, seminar, forum, summit, masterclass, roundtable, showcase, week. Six of these appear in the current file.</td></tr>
+          <tr><td>desc</td><td>string</td><td>One or two sentences: what it is, who it is for, the theme.</td></tr>
+          <tr><td>url</td><td>string, optional</td><td>The official event or registration page.</td></tr>
+          <tr><td>verified</td><td>boolean</td><td><code>true</code> only after a maintainer has confirmed the URL resolves and the dates match the organiser's page.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="smallprint">The maintainer-side data dictionary, validation rules, and contribution checklist live at <a href="https://ntlsn.com/DATA.md">https://ntlsn.com/DATA.md</a>.</p>
+
+    <h4>2. ALTC/OLT archive — metadata index (1994–2025)</h4>
+    <span class="dataurl">https://ntlsn.com/data/ltr.json</span>
+    <p>A metadata index of 1,431 records from Australia's national learning and teaching grant and fellowship programs — the Australian Learning and Teaching Council (ALTC), the Office for Learning and Teaching (OLT), and related schemes — spanning 1994 to 2025. Each record carries a title, the lead author where one was recorded, the year, and a link to the full public record at ltr.edu.au.</p>
+    <p>This file is an index, not the works themselves. The reports and resources it points to belong to their authors and institutions; every record links back to its source so that credit and access stay where they should. The file is a single 276&nbsp;KB array with four compact keys and no pagination.</p>
+
+    <p class="fdcap">Field dictionary</p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>t</td><td>string</td><td>Title of the work. Present on all 1,431 records.</td></tr>
+          <tr><td>a</td><td>string</td><td>Lead author, "Surname, Given". 53 records have no recorded author and carry an empty value.</td></tr>
+          <tr><td>y</td><td>string</td><td>Year of publication, 1994–2025. 5 records have no recorded year and carry an empty value.</td></tr>
+          <tr><td>u</td><td>string</td><td>URL of the full record at ltr.edu.au.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="smallprint">NTLSN is independent of, and not affiliated with, ltr.edu.au or the Australian Government bodies that ran the ALTC and OLT programs. Inclusion in this index is a matter of public record, not an endorsement by NTLSN or by those bodies.</p>
+
+    <h4>Using the data</h4>
+    <p>Both files are ordinary JSON over HTTPS with open CORS, so they work from a browser, a notebook, or the command line:</p>
+<pre>// In any web page or browser console
+const events = await fetch('https://ntlsn.com/data/events.json').then(r => r.json());
+const upcoming = events.filter(e => e.verified &amp;&amp; e.date >= '2026-07-05');</pre>
+<pre># From the command line
+curl -s https://ntlsn.com/data/events.json | python3 -c "import json,sys; d=json.load(sys.stdin); print(len(d), 'events')"</pre>
+    <p>The same data also sits behind the NTLSN MCP endpoint documented above: the JSON files are the raw layer; the MCP tools (<code>upcoming_events</code>, <code>search_archive</code>, <code>universities</code>) are the queryable layer. Use whichever suits your tooling.</p>
+
+    <h4>Licence and attribution</h4>
+    <div class="lnote">
+      The written content of this site is published under CC BY-NC-SA 4.0 (see <a href="https://ntlsn.com/LICENSE">https://ntlsn.com/LICENSE</a>). A <b>formal licence statement in progress</b> — one specific to these two data files — will be published on this page once settled. The machine-readable descriptions below deliberately omit a licence field until then; we would rather state nothing than state something not yet decided.
+    </div>
+    <p>In the meantime: you are welcome to read, query, cite, and link to both files. If you intend to redistribute them or build a service on them, please write to <a href="mailto:hello@ntlsn.com">hello@ntlsn.com</a> first.</p>
+    <p>If these datasets contribute to your work, please cite NTLSN and link back to this page. Suggested forms:</p>
+<pre>NTLSN. (2026). Curated Australian higher-education learning and teaching events [Data set]. https://ntlsn.com/data/events.json
+
+NTLSN. (2026). ALTC/OLT learning and teaching archive — metadata index (1994–2025) [Data set]. https://ntlsn.com/data/ltr.json</pre>
+
+    <h4>Machine-readable descriptions</h4>
+    <p>This page embeds a schema.org Dataset description of each file (JSON-LD, in the page source), which makes both datasets eligible for indexing by dataset search services such as Google Dataset Search. NTLSN is independent of, and not affiliated with, Google or schema.org; the markup follows the open schema.org vocabulary so that any indexer can use it.</p>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"NTLSN curated Australian higher-education learning and teaching events","description":"A hand-curated, machine-readable calendar of Australian higher-education learning and teaching sector events (conferences, symposia, webinars, workshops, showcases and themed weeks). Each record carries a stable numeric id, title, host-institution slug, ISO 8601 start and end dates, an event type, a short description, the official event URL, and a per-record verification flag set only after a maintainer has checked the listing against the organiser's page.","url":"https://ntlsn.com/interop.html#open-data","creator":{"@type":"Organization","name":"NTLSN","url":"https://ntlsn.com/"},"publisher":{"@type":"Organization","name":"NTLSN","url":"https://ntlsn.com/"},"keywords":["higher education","learning and teaching","academic development","events","Australia","SoTL"],"spatialCoverage":"Australia","inLanguage":"en-AU","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://ntlsn.com/data/events.json"},{"@type":"DataDownload","encodingFormat":"text/calendar","contentUrl":"https://ntlsn.com/events.ics"},{"@type":"DataDownload","encodingFormat":"application/rss+xml","contentUrl":"https://ntlsn.com/feed.xml"}]}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"ALTC/OLT learning and teaching archive — metadata index (1994–2025)","description":"A metadata index of 1,431 records from Australia's national learning and teaching grant and fellowship programs (the Australian Learning and Teaching Council, the Office for Learning and Teaching, and related schemes), spanning 1994–2025. Each record holds a title, lead author where recorded, year, and a link to the full public record at ltr.edu.au. Metadata only: the underlying reports and resources belong to their authors and institutions, and every record links back to its source. NTLSN is independent of, and not affiliated with, ltr.edu.au or the Australian Government bodies that ran these programs.","url":"https://ntlsn.com/interop.html#open-data","creator":{"@type":"Organization","name":"NTLSN","url":"https://ntlsn.com/"},"publisher":{"@type":"Organization","name":"NTLSN","url":"https://ntlsn.com/"},"keywords":["ALTC","OLT","learning and teaching","higher education","grants","fellowships","Australia","metadata"],"spatialCoverage":"Australia","temporalCoverage":"1994/2025","inLanguage":"en-AU","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://ntlsn.com/data/ltr.json"}]}
+</script>
+  </section>
+
+  <section class="panel" id="scorm" aria-labelledby="h-scorm">
+    <h3 id="h-scorm">SCORM export <span class="tag live">Live</span></h3>
+    <p>The self-paced <a href="/learning-modules.html">learning modules on this site</a> export as SCORM 1.2 packages, generated entirely in the browser. A staff member can assemble a module and import the package into any SCORM 1.2-conformant learning management system without NTLSN being involved in, or aware of, the import.</p>
+    <p class="smallprint">SCORM is maintained by the ADL Initiative. NTLSN is independent of, and not affiliated with or endorsed by, the ADL Initiative. "SCORM 1.2 package" describes the export format; no formal conformance certification is claimed.</p>
+  </section>
+
+  <section class="panel" id="client-side" aria-labelledby="h-client">
+    <h3 id="h-client">The client-side pattern: open scholarly APIs <span class="tag live">Live</span></h3>
+    <p>The research tools on this site — the conference, open-access and journal finders, the ORCID-personalised pages, the SoTL profile tools — run in your browser and call open scholarly APIs directly: OpenAlex, DOAJ, and the ORCID public API. No NTLSN server sits between your browser and those services. We do not proxy, log, or store the queries.</p>
+    <p>What this means for an IT team: the entire network footprint of the free commons is ntlsn.com plus a short, published allowlist of open scholarly APIs, enforced by the site's own Content-Security-Policy header. There is no hidden telemetry endpoint to discover later.</p>
+    <p class="smallprint">OpenAlex is a service of OurResearch; DOAJ is the Directory of Open Access Journals; ORCID is ORCID, Inc. NTLSN is independent of, and not affiliated with or endorsed by, any of them.</p>
+  </section>
+
+  <!-- ═══════════════ IN DESIGN ═══════════════ -->
+  <h2 id="in-design">In design</h2>
+  <p class="seclead">These are specified and being prototyped. They are not live, and this page will say so until they are.</p>
+
+  <section class="panel" id="open-badges" aria-labelledby="h-badges">
+    <h3 id="h-badges">Open Badges 3.0 portable recognition <span class="tag design">In design</span></h3>
+    <p>Recognition earned through the commons should be a credential the scholar holds, not a row in a database we hold. We are prototyping issuance and verification of portable credentials against the 1EdTech Open Badges 3.0 specification, which is built on the W3C Verifiable Credentials model. Nothing is issued today, and no conformance certification is claimed or implied.</p>
+  </section>
+
+  <section class="panel" id="case-crosswalk" aria-labelledby="h-case">
+    <h3 id="h-case">A machine-readable recognition crosswalk, modelled on CASE <span class="tag design">In design</span></h3>
+    <p>The recognition crosswalk in design — mapping AAUT citation criteria, the Professional Standards Framework, HERDSA Fellowship criteria and the ACODE benchmarks against one another — is being modelled on 1EdTech's CASE approach to publishing frameworks in machine-readable form, so that institutions can consume the mapping rather than re-key it. It is not yet published as a CASE package, and no conformance is claimed.</p>
+    <p class="smallprint">Open Badges, CASE and LTI are specifications of 1EdTech (formerly IMS Global). AAUT is administered by the Australian Government; the Professional Standards Framework by Advance HE; the Fellowship scheme by HERDSA; the benchmarks by ACODE. NTLSN is independent of, and not affiliated with or endorsed by, any of these organisations; naming a framework here is a statement of design intent, not certification.</p>
+  </section>
+
+  <!-- ═══════════════ STAGED ═══════════════ -->
+  <h2 id="staged">Staged for the first institutional contract</h2>
+  <p class="seclead">Two integrations are deliberately absent from the free commons, because they require server-side infrastructure, key custody and contractual accountability that only make sense inside an institutional agreement. They are staged, not live.</p>
+
+  <section class="panel" id="lti" aria-labelledby="h-lti">
+    <h3 id="h-lti">LTI 1.3 <span class="tag staged">Staged</span></h3>
+    <p>LTI 1.3 launch into the commons from an institutional LMS is staged for the first institutional contract, delivered through middleware rather than through changes to the free site. We do not describe this site as "LTI-ready": LTI is only meaningfully claimed when a real deployment is configured against a real LMS tenancy, and that happens per contract, with the institution's own keys.</p>
+  </section>
+
+  <section class="panel" id="sso" aria-labelledby="h-sso">
+    <h3 id="h-sso">Single sign-on via AAF (OpenID Connect) <span class="tag staged">Staged</span></h3>
+    <p>Single sign-on through the Australian Access Federation, using OpenID Connect, is staged for the first institutional contract. It exists so an institution can give staff a signed-in experience on its own terms. The free commons itself will remain usable without any login — that is a design commitment, not a temporary state.</p>
+    <p class="smallprint">The Australian Access Federation is an independent organisation; NTLSN is independent of, and not affiliated with or endorsed by, the AAF.</p>
+  </section>
+
+  <!-- ═══════════════ PRINCIPLES ═══════════════ -->
+  <h2 id="principles">How we build integrations</h2>
+
+  <section class="panel principle">
+    <p class="ph">Open standards, not proprietary hooks.</p>
+    <p style="margin:0;color:var(--mut);font-size:14px">Every rail on this page is an open specification or plain JSON over HTTP: MCP, SCORM, Open Badges, CASE, LTI, OpenID Connect. If we ever ship an integration that only works with NTLSN, treat it as a defect and tell us.</p>
+  </section>
+
+  <section class="panel principle">
+    <p class="ph">You can leave at any time.</p>
+    <p style="margin:0;color:var(--mut);font-size:14px">The datasets are flat JSON files you can copy today. The modules export to SCORM. Recognition, when it ships, will be a credential the scholar carries. Exit is a feature of the architecture, not a negotiation with us.</p>
+  </section>
+
+  <section class="panel principle">
+    <p class="ph">We never hold what we don't need.</p>
+    <p style="margin:0;color:var(--mut);font-size:14px">The free commons has no accounts, no tracking of individual scholars, and no server-side store of queries. Integrations are designed so that data stays where it already lives — in your LMS, in ORCID, in the open scholarly record.</p>
+  </section>
+
+  <!-- ═══════════════ CONTACT ═══════════════ -->
+  <h2 id="contact">Talk to a person</h2>
+  <p>If you are evaluating a connection to NTLSN, write to us: <a href="mailto:hello@ntlsn.com">hello@ntlsn.com</a>. It is a plain email address — there is no form, no capture of your institution's details, and no follow-up sequence.</p>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <div class="foot" role="contentinfo">
+    <p style="margin:0 0 10px">NTLSN is a free and open national teaching-and-learning commons, funded so that it is free for all academics and academic developers. This page names external organisations and specifications — Anthropic and the Model Context Protocol; OurResearch (OpenAlex); DOAJ; ORCID; 1EdTech (Open Badges 3.0, CASE, LTI); the ADL Initiative (SCORM); the Australian Access Federation; Advance HE; HERDSA; ACODE; the Australian Government and ltr.edu.au — solely to describe technical facts and design intent. NTLSN is independent of, and not affiliated with or endorsed by, any of them. Naming a standard is not a claim of certified conformance unless expressly stated.</p>
+    <p style="margin:0 0 10px"><a href="/">← Back to NTLSN</a> &nbsp;·&nbsp; <a href="/mcp.html">MCP walkthrough</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy</a></p>
+    <p style="margin:0">Page last verified against the live services: 5 July 2026.</p>
+  </div>
+
+</div>
+</body>
+</html>

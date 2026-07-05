@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connect your AI to the commons — NTLSN's hosted MCP server</title>
+<meta name="description" content="NTLSN operates a hosted Model Context Protocol (MCP) server. Any MCP-capable AI client can query the national teaching-and-learning commons directly — upcoming sector events, the rescued ALTC/OLT archive, and the Learning &amp; Teaching landscape across 42 Australian universities. Read-only, open data, no account or key required.">
+<meta property="og:title" content="Connect your AI to the commons — NTLSN's hosted MCP server">
+<meta property="og:description" content="A live, read-only MCP server over NTLSN's open commons data: sector events, the ALTC/OLT archive, and 42 universities' L&amp;T landscape. No account required.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --M:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;padding:28px 18px}
+  .wrap{max-width:880px;margin:0 auto}
+  h1{font-size:clamp(34px,5.4vw,56px);margin:0 0 10px;font-weight:800;letter-spacing:-.018em;line-height:1.02}
+  h1 .sotl{background:linear-gradient(100deg,var(--teal),#86ece3 60%,var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  h2{font-size:clamp(20px,3.2vw,25px);font-weight:800;letter-spacing:-.012em;margin:42px 0 10px;line-height:1.2}
+  h3{font:800 16px var(--F);margin:28px 0 8px;letter-spacing:-.005em}
+  h3.mono{font-family:var(--M);font-size:15px;color:var(--teal);letter-spacing:0}
+  h3.step{font:800 12px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--teal);margin:26px 0 8px}
+  p{color:var(--mut);font-size:15px;margin:0 0 14px;max-width:730px}
+  p b,li b{color:var(--ink)}
+  a{color:var(--teal)}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 18px;max-width:730px}
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .pill{display:inline-block;background:rgba(78,205,196,.12);color:var(--teal);font:700 11px var(--F);letter-spacing:.8px;padding:4px 11px;border-radius:20px}
+  .pill.mut{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--mut)}
+  code{font-family:var(--M);font-size:.92em;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink);word-break:break-word}
+  .code{position:relative;background:#0a1830;border:1px solid var(--line);border-radius:12px;margin:10px 0 0;max-width:730px}
+  .code pre{margin:0;padding:14px 76px 14px 16px;overflow-x:auto;font:500 13px/1.55 var(--M);color:var(--ink)}
+  .code pre code{background:none;border:0;padding:0;font-size:inherit}
+  .copy{position:absolute;top:9px;right:9px;background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.32);color:var(--teal);font:700 11px var(--F);padding:4px 10px;border-radius:14px;cursor:pointer}
+  .copy:hover{background:rgba(78,205,196,.2)}
+  .copy.ok{background:rgba(78,205,196,.25);color:#c9f6f1}
+  .cap{color:var(--mut);font-size:12.5px;margin:8px 0 0;max-width:730px}
+  .cap code{font-size:11.5px}
+  ol,ul{color:var(--mut);font-size:15px;margin:0 0 14px;padding-left:22px;max-width:730px}
+  li{margin:0 0 10px}
+  li .code{margin-top:8px}
+  ul.ask{list-style:none;padding-left:0}
+  ul.ask li{border-left:3px solid rgba(78,205,196,.4);padding-left:13px;color:var(--ink);font-size:14.5px}
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:10px 0 0;background:var(--card);max-width:730px}
+  table{width:100%;border-collapse:collapse;min-width:520px;font-size:13.5px}
+  caption{position:absolute;left:-9999px}
+  th{text-align:left;font:800 11px var(--F);letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);padding:10px 14px;border-bottom:1px solid var(--line)}
+  td{padding:10px 14px;border-bottom:1px solid var(--line);color:var(--mut);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td:first-child{font-family:var(--M);font-size:12.5px;color:var(--ink);white-space:nowrap}
+  .notegold{background:linear-gradient(180deg,rgba(201,169,98,.14),rgba(201,169,98,.04));border:1px solid rgba(201,169,98,.36);border-radius:13px;padding:15px 18px;margin:20px 0 0;font-size:13.8px;color:#ece4d2;line-height:1.62;max-width:730px}
+  .notegold .h{display:inline-block;background:rgba(201,169,98,.16);border:1px solid rgba(201,169,98,.4);border-radius:14px;font:800 10.5px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);padding:3px 10px;margin:0 0 8px}
+  .notegold b{color:var(--gold)}
+  .honesty{background:linear-gradient(180deg,rgba(78,205,196,.10),rgba(78,205,196,.02));border:1px solid rgba(78,205,196,.32);border-radius:15px;padding:20px 22px;margin:44px 0 0}
+  .honesty h2{margin:0 0 12px;font-size:clamp(18px,2.8vw,22px)}
+  .honesty ul{margin:0}
+  .honesty li{font-size:14.3px}
+  .indep{background:rgba(201,169,98,.06);border:1px solid rgba(201,169,98,.22);border-radius:12px;padding:15px 17px;font-size:12.7px;color:var(--mut);margin:28px 0 0;line-height:1.62;max-width:730px}
+  .indep h2{display:block;font:800 11px var(--F);letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);margin:0 0 7px}
+  .indep p{font-size:12.7px;margin:0;max-width:none}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  .foot a{color:var(--teal)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+  .skip:focus{left:0}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+  @media print{
+    body{background:#fff;color:#000;padding:0}
+    .skip,.copy{display:none}
+    .code pre{overflow-x:visible;white-space:pre-wrap;word-break:break-all;padding-right:16px}
+    a{color:#000}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+
+  <div class="pillrow"><span class="pill">LIVE</span><span class="pill mut">READ-ONLY</span><span class="pill mut">NO ACCOUNT REQUIRED</span></div>
+
+  <h1>Connect your AI to the <span class="sotl">commons</span></h1>
+
+  <p class="lead">NTLSN operates a hosted Model Context Protocol (MCP) server. Any MCP-capable AI client — Claude Code, Claude Desktop, or any other compliant tool — can query the national teaching-and-learning commons directly: upcoming sector events, the rescued ALTC/OLT archive, and the Learning &amp; Teaching landscape across 42 Australian universities. It is read-only, uses only the open data already published on this site, and requires no account or key.</p>
+
+  <h2>What is the Model Context Protocol?</h2>
+  <p>The Model Context Protocol is an open standard, originally released by Anthropic in 2024, that lets AI assistants call external tools and data sources in a structured, auditable way. Where a chatbot ordinarily answers from its training data — which may be stale or wrong — an MCP-connected assistant can put a live, verifiable question to a real data source and cite what comes back. For an academic audience the useful analogy is interlibrary loan rather than memory: the assistant requests the record, receives it, and works from the actual document. NTLSN publishes its commons data through MCP so that the sector's increasingly AI-mediated workflows draw on curated, current, openly published information rather than approximation.</p>
+
+  <h2>The endpoint</h2>
+  <div class="code"><button class="copy" type="button" aria-label="Copy the endpoint URL to the clipboard">Copy</button><pre><code>https://ntlsn.com/.netlify/functions/mcp</code></pre></div>
+  <p style="margin-top:14px">The server speaks JSON-RPC 2.0 over HTTPS. A POST carries MCP requests (<code>initialize</code>, <code>tools/list</code>, <code>tools/call</code>, <code>ping</code>); a plain GET returns a machine- and human-readable description of the server and its tools, so the URL is self-documenting. Responses are JSON. Cross-origin requests are permitted.</p>
+
+  <h2>Try it now from a terminal</h2>
+  <p>These three commands work today, unchanged, from any machine with curl. They are the ground truth for this server: if a particular client's configuration ever gives trouble, what these commands return is what the server actually does.</p>
+
+  <h3 class="step">1. Initialise a session</h3>
+  <div class="code"><button class="copy" type="button" aria-label="Copy the initialize command to the clipboard">Copy</button><pre><code>curl -s -X POST https://ntlsn.com/.netlify/functions/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"curl","version":"0.0.1"}}}'</code></pre></div>
+  <p class="cap">Returns the server identity: <code>{"serverInfo":{"name":"ntlsn","version":"1.0.0"}}</code> with protocol version 2024-11-05.</p>
+
+  <h3 class="step">2. List the available tools</h3>
+  <div class="code"><button class="copy" type="button" aria-label="Copy the tools/list command to the clipboard">Copy</button><pre><code>curl -s -X POST https://ntlsn.com/.netlify/functions/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/list"}'</code></pre></div>
+  <p class="cap">Returns the three tools documented below, with their full input schemas.</p>
+
+  <h3 class="step">3. Call a tool — the next two sector events</h3>
+  <div class="code"><button class="copy" type="button" aria-label="Copy the tools/call command to the clipboard">Copy</button><pre><code>curl -s -X POST https://ntlsn.com/.netlify/functions/mcp \
+  -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"upcoming_events","arguments":{"limit":2}}}'</code></pre></div>
+  <p class="cap">At the time of writing this returns HERDSA Conference 2026 and the ACODE Benchmarking Summit 2026, drawn live from the same curated events dataset that powers this site. Your result will reflect the calendar on the day you run it.</p>
+
+  <h2>Connect an AI client</h2>
+
+  <h3>Claude Code (terminal)</h3>
+  <p>Claude Code supports remote HTTP MCP servers directly. One command:</p>
+  <div class="code"><button class="copy" type="button" aria-label="Copy the Claude Code command to the clipboard">Copy</button><pre><code>claude mcp add --transport http ntlsn https://ntlsn.com/.netlify/functions/mcp</code></pre></div>
+  <p style="margin-top:14px">Or, for a project-scoped setup, add this to the project's <code>.mcp.json</code>:</p>
+  <div class="code"><button class="copy" type="button" aria-label="Copy the .mcp.json configuration to the clipboard">Copy</button><pre><code>{
+  "mcpServers": {
+    "ntlsn": {
+      "type": "http",
+      "url": "https://ntlsn.com/.netlify/functions/mcp"
+    }
+  }
+}</code></pre></div>
+
+  <h3>Claude Desktop and claude.ai</h3>
+  <p>Claude Desktop's configuration file (<code>claude_desktop_config.json</code>) accepts only locally launched servers — it does not take a remote URL directly. Two documented routes work for a remote server such as this one:</p>
+  <ol>
+    <li><b>Custom connector (no installation).</b> In Claude's settings, open Connectors, choose "Add custom connector", and paste the endpoint URL above. No authentication is required — leave the OAuth fields empty.</li>
+    <li><b>The mcp-remote bridge (requires Node.js).</b> Add the following to <code>claude_desktop_config.json</code>; it launches a small community-maintained proxy that speaks HTTP to this server on the client's behalf:
+      <div class="code"><button class="copy" type="button" aria-label="Copy the claude_desktop_config.json configuration to the clipboard">Copy</button><pre><code>{
+  "mcpServers": {
+    "ntlsn": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://ntlsn.com/.netlify/functions/mcp"]
+    }
+  }
+}</code></pre></div>
+    </li>
+  </ol>
+
+  <div class="notegold"><span class="h">Note</span><br>These client configurations follow the vendors' current published documentation. Every claim on this page was verified against the live endpoint on <b>5 July 2026</b>; client software changes on its own schedule. If a client-side step fails, the curl commands above remain the definitive test of the server.</div>
+
+  <h3>Any other MCP client</h3>
+  <p>Any client that supports remote MCP servers over HTTP can use the endpoint URL as-is. The server implements <code>initialize</code>, <code>tools/list</code>, <code>tools/call</code>, and <code>ping</code>, accepts standard MCP notifications, and returns conventional JSON-RPC errors for anything else.</p>
+
+  <h2>What the server offers</h2>
+  <p>Three read-only tools, each drawing on data openly published on this site.</p>
+
+  <h3 class="mono">upcoming_events</h3>
+  <p>Upcoming Australian higher-education teaching-and-learning events — conferences, showcases, workshops and webinars — from NTLSN's curated events dataset (each record carries a verified flag).</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the upcoming_events tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>uni</td><td>string</td><td>no</td><td>Filter to one university by short id, e.g. "usq"</td></tr>
+        <tr><td>limit</td><td>integer</td><td>no</td><td>Maximum results; default 10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mono">search_archive</h3>
+  <p>Searches the rescued archive of 1,431 ALTC- and OLT-funded teaching-scholarship works (1994–2025) by title or author. This is the national grant-funded teaching-scholarship record that NTLSN preserves and republishes as open data.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the search_archive tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>query</td><td>string</td><td>yes</td><td>Title or author search terms</td></tr>
+        <tr><td>limit</td><td>integer</td><td>no</td><td>Maximum results; default 15</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mono">universities</h3>
+  <p>Returns the 42 Australian universities in the commons, each with its central Learning &amp; Teaching team page and alliance-group membership. Takes no arguments.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the universities tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>—</td><td>—</td><td>—</td><td>No arguments</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Things worth asking, once connected</h3>
+  <ul class="ask">
+    <li>"What teaching and learning conferences are coming up in Australia in the next two months?"</li>
+    <li>"Search the ALTC/OLT archive for work on peer review of teaching."</li>
+    <li>"Which universities' Learning &amp; Teaching teams should I look at, and where are their pages?"</li>
+  </ul>
+
+  <div class="honesty">
+    <h2>What this server does — and does not do</h2>
+    <ul>
+      <li><b>Read-only.</b> The server answers questions. It cannot create, modify, or delete anything, and it accepts no uploads.</li>
+      <li><b>Public data only.</b> Every response is drawn from the two open datasets already published on this site — <code>/data/events.json</code> and <code>/data/ltr.json</code> — plus the public university directory. Nothing is available through MCP that is not available in a browser.</li>
+      <li><b>No accounts, no keys.</b> There is no sign-up, no token, and no way to identify yourself to the server even if you wanted to.</li>
+      <li><b>Nothing stored.</b> The server keeps no database and writes no application-level record of your queries. Requests pass through Netlify's hosting platform, which maintains routine operational logs as any host does.</li>
+      <li><b>Fair use.</b> The endpoint is subject to the hosting platform's standard rate limits. It exists for genuine scholarly and educational use; please build considerate clients.</li>
+    </ul>
+  </div>
+
+  <h2>The data behind the tools</h2>
+  <p>Both source datasets are published open access: <a href="/data/events.json">/data/events.json</a> (the curated national events calendar) and <a href="/data/ltr.json">/data/ltr.json</a> (the ALTC/OLT archive metadata). A formal licence statement for these datasets is in progress; until it is published, they are offered for scholarly and educational use, and we ask that you <a href="mailto:hello@ntlsn.com">contact us</a> before large-scale redistribution.</p>
+
+  <div class="indep">
+    <h2>Independence</h2>
+    <p>NTLSN is independent of, and not affiliated with, Anthropic — originators of the Model Context Protocol — or any other AI vendor. MCP is an open standard, and this server works with any compliant client; the configuration examples above name specific products solely because they are widely used, and imply no endorsement in either direction. The mcp-remote bridge referenced above is community-maintained software, likewise unaffiliated with NTLSN. NTLSN receives nothing from any vendor named on this page.</p>
+  </div>
+
+  <div class="foot" role="contentinfo">
+    NTLSN is independent of, and not affiliated with, Anthropic or any AI vendor. MCP is an open standard; this server works with any compliant client.<br>
+    Server status: a plain GET to the endpoint returns its self-description — the simplest health check there is.<br>
+    <a href="/">← Back to NTLSN</a> &nbsp;·&nbsp; <a href="/interop.html">Built to connect →</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy →</a> &nbsp;·&nbsp; <a href="mailto:hello@ntlsn.com">hello@ntlsn.com</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function fallbackCopy(text){
+    var ta=document.createElement("textarea");
+    ta.value=text;
+    ta.setAttribute("readonly","");
+    ta.style.position="fixed";
+    ta.style.left="-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok=false;
+    try{ok=document.execCommand("copy");}catch(e){ok=false;}
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function flash(btn,ok){
+    btn.textContent=ok?"Copied":"Copy failed";
+    if(ok)btn.classList.add("ok");
+    setTimeout(function(){btn.textContent="Copy";btn.classList.remove("ok");},1600);
+  }
+  var btns=document.querySelectorAll(".copy"),i;
+  function bind(btn){
+    btn.addEventListener("click",function(){
+      var pre=btn.parentNode.querySelector("pre");
+      var text=pre?pre.textContent:"";
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){flash(btn,true);},function(){flash(btn,fallbackCopy(text));});
+      }else{
+        flash(btn,fallbackCopy(text));
+      }
+    });
+  }
+  for(i=0;i<btns.length;i++)bind(btns[i]);
+})();
+</script>
+</body>
+</html>
