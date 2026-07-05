@@ -1,0 +1,16 @@
+# NTLSN — Netlify config. The site is a static, pre-built single-file artefact: there is
+# no build step, so the "build" is a no-op and the repo root is published as-is.
+# Functions live in netlify/functions and are bundled with esbuild (traces the shared
+# helpers in netlify/lib). Node is pinned so `fetch`/`base64url` (Node 18+/15+) are always
+# available and a platform default can't silently downgrade the runtime.
+
+[build]
+  command = "echo 'NTLSN is a static site — no build step'"
+  publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

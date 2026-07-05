@@ -148,30 +148,43 @@
 
 <script>
 (function(){
- // --- Config: set these to go live (free ORCID app at orcid.org/developer-tools) ---
- var ORCID={ clientId:'', env:'sandbox', redirectUri:location.origin+'/.netlify/functions/orcid-callback' };
-
- // Handle the return from ORCID / Zoom
  var p=new URLSearchParams(location.search);
  var esc=function(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
- if(p.get('orcid')){
-   var s=document.getElementById('signed');
-   s.style.display='block';
-   var nm='researcher'; try{ if(p.get('name')) nm=decodeURIComponent(p.get('name')); }catch(e){}
-   var oid=p.get('orcid')||''; if(!/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(oid)) oid='(unverified)';
-   s.innerHTML='✓ Signed in as <b>'+esc(nm)+'</b> &middot; ORCID <b>'+esc(oid)+'</b>. You can now add your symposium.';
- }
- if(p.get('connected')){
-   var z=document.getElementById('zoom-btn'); z.textContent='✓ Zoom connected'; z.style.pointerEvents='none'; z.style.opacity='.8';
- }
 
- // ORCID sign-in — redirect to the server-side start so the CSRF state lives in an HttpOnly cookie.
+ // Signed-in state comes from the server-verified session cookie (via /me), never the URL —
+ // so it cannot be spoofed by editing the query string. The callback redirects here with
+ // ?signed_in=1 after minting the HttpOnly session; we then ask /me who that is.
+ function showSignedIn(orcid,name){
+   var s=document.getElementById('signed'); if(!s) return;
+   s.style.display='block';
+   var oid=orcid||''; if(!/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(oid)) oid='(unverified)';
+   s.innerHTML='✓ Signed in as <b>'+esc(name||'researcher')+'</b> &middot; ORCID <b>'+esc(oid)+'</b>. You can now add your symposium.';
+ }
+ function checkSession(){
+   fetch('/.netlify/functions/me',{credentials:'same-origin'})
+     .then(function(r){return r.ok?r.json():null;})
+     .then(function(d){ if(d&&d.signedIn){ showSignedIn(d.orcid,d.name); } })
+     .catch(function(){});
+ }
+ checkSession();
+
+ if(p.get('connected')){
+   var z=document.getElementById('zoom-btn'); if(z){ z.textContent='✓ Zoom connected'; z.style.pointerEvents='none'; z.style.opacity='.8'; }
+ }
+ var note=document.getElementById('note');
+ if(p.get('auth_error')==='orcid_unconfigured'&&note){
+   note.innerHTML='<b style="color:var(--gold)">Sign-in with ORCID is wired and ready</b> — add a free ORCID client ID (orcid.org/developer-tools) to switch it on. The flow, callback function and security are already built.';
+ }
+ if(p.get('zoom_error')==='unconfigured'&&note){
+   note.innerHTML='<b style="color:var(--gold)">Connect-your-Zoom is wired and ready</b> — add the Zoom OAuth app credentials to switch it on.';
+ }
+ // Tidy the URL (drop transient flags) without a reload.
+ if(location.search){ try{ history.replaceState(null,'',location.pathname); }catch(e){} }
+
+ // ORCID sign-in — always hand off to the server-side start, which sets the CSRF state +
+ // PKCE verifier in HttpOnly cookies (client JS deliberately cannot) and, if unconfigured,
+ // bounces back here with ?auth_error so the note above explains what's missing.
  document.getElementById('orcid-btn').onclick=function(){
-   if(!ORCID.clientId){
-     document.getElementById('note').innerHTML='<b style="color:var(--gold)">Sign-in with ORCID is wired and ready</b> — add a free ORCID client ID (orcid.org/developer-tools) to switch it on. The flow, callback function and security are already built.';
-     return;
-   }
-   // Client JS deliberately cannot set HttpOnly cookies — the function sets the state and verifies it on callback.
    location.assign('/.netlify/functions/orcid-oauth-start');
  };
 })();
