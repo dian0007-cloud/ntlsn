@@ -109,6 +109,18 @@
     <div class="demo-tag">Sample embed — your Zoom, live on your NTLSN page</div>
     <div class="demo-bar"><span>🎤</span><span>📹</span><span>💬</span><span>✋</span><span>⛶</span></div>
   </div>
+
+  <!-- Real Meeting-SDK watch embed. Dormant until a meeting number is configured
+       (NTLSN_SYMPOSIUM.meetingNumber below) AND that meeting is live AND the viewer is
+       signed in with ORCID. With no meeting number set, nothing here loads. -->
+  <div id="ntlsn-watch" hidden>
+    <div id="ntlsn-watch-cta" style="text-align:center;margin:10px 0">
+      <span class="live" style="position:static;display:inline-flex"><span class="dot"></span> LIVE now</span>
+      <button class="btn btn-orcid" id="watch-btn" type="button" style="margin-left:10px">▶ Watch the symposium</button>
+      <p class="note" id="watch-note" style="margin-top:8px"></p>
+    </div>
+    <div id="ntlsn-zoom-root" style="max-width:920px;margin:0 auto"></div>
+  </div>
   <div class="reg">
     <div class="r-h">Register to attend (sample)</div>
     <div id="reg-form">
@@ -190,5 +202,73 @@
 })();
 </script>
 <script>(function(){var rg=document.getElementById('r-go');if(!rg)return;rg.onclick=function(){var nm=(document.getElementById('r-name').value||'there').split(' ')[0].replace(/[<>]/g,'');document.getElementById('reg-form').style.display='none';var d=document.getElementById('reg-done');d.style.display='block';d.innerHTML='✓ You’re registered, '+nm+'! Your unique join link would arrive by email and show here: <b>https://zoom.us/j/…?tk=…</b><br><span style="color:#9fb0c3;font-size:12px">Sample only — real registration activates once a university connects its Zoom.</span>';};})();</script>
+<script>
+/* Real Meeting-SDK watch embed. Dormant by default: with an empty meetingNumber nothing
+   below runs — no Zoom SDK is fetched and the page is unchanged. Set NTLSN_SYMPOSIUM.meetingNumber
+   to a live symposium's Zoom meeting number to activate. Then it: polls /zoom-live, reveals a
+   "Watch" CTA only while live, requires an ORCID session, fetches an attendee signature from
+   /zoom-meeting-signature, and joins Zoom's Component View. */
+(function(){
+  var NTLSN_SYMPOSIUM = { meetingNumber: '', title: '' };
+  var ZOOM_SDK_VERSION = '3.11.0'; // Zoom Meeting SDK (Component View) — bump as Zoom releases.
+
+  var mn = String(NTLSN_SYMPOSIUM.meetingNumber || '').trim();
+  if(!/^[0-9]{9,11}$/.test(mn)) return; // dormant unless a valid meeting number is configured
+
+  var wrap=document.getElementById('ntlsn-watch'),
+      btn=document.getElementById('watch-btn'),
+      wnote=document.getElementById('watch-note'),
+      cta=document.getElementById('ntlsn-watch-cta'),
+      root=document.getElementById('ntlsn-zoom-root');
+  if(!wrap||!btn||!root) return;
+  var setNote=function(t){ if(wnote) wnote.textContent=t; };
+
+  function poll(){
+    fetch('/.netlify/functions/zoom-live?meetingNumber='+encodeURIComponent(mn))
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(d){ wrap.hidden = !(d && d.live); })
+      .catch(function(){});
+  }
+  poll(); setInterval(poll, 30000);
+
+  function whoAmI(){
+    return fetch('/.netlify/functions/me',{credentials:'same-origin'})
+      .then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+  }
+  function loadScript(src){
+    return new Promise(function(res,rej){
+      var s=document.createElement('script'); s.src=src; s.async=true;
+      s.onload=res; s.onerror=function(){rej(new Error('script load failed'));};
+      document.head.appendChild(s);
+    });
+  }
+
+  var joined=false, sdkLoaded=false;
+  btn.onclick=function(){
+    if(joined) return;
+    setNote('Checking your sign-in…');
+    whoAmI().then(function(u){
+      if(!u || !u.signedIn){ setNote('Sign in with ORCID above to watch the live session.'); return; }
+      btn.disabled=true; setNote('Loading the live session…');
+      return fetch('/.netlify/functions/zoom-meeting-signature',{
+        method:'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ meetingNumber: mn })
+      }).then(function(r){return r.json();}).then(function(sig){
+        if(!sig || !sig.signature || !sig.sdkKey){ setNote('The live session isn’t available right now.'); btn.disabled=false; return; }
+        return (sdkLoaded ? Promise.resolve()
+          : loadScript('https://source.zoom.us/'+ZOOM_SDK_VERSION+'/zoom-meeting-embedded-'+ZOOM_SDK_VERSION+'.min.js'))
+          .then(function(){
+            sdkLoaded=true;
+            if(!window.ZoomMtgEmbedded) throw new Error('SDK unavailable');
+            var client=window.ZoomMtgEmbedded.createClient();
+            client.init({ zoomAppRoot: root, language:'en-US' });
+            return client.join({ sdkKey:sig.sdkKey, signature:sig.signature, meetingNumber:mn, userName:(u.name||'NTLSN viewer') });
+          }).then(function(){ joined=true; setNote(''); if(cta) cta.style.display='none'; });
+      });
+    }).catch(function(){ setNote('Couldn’t start the live session — please try again shortly.'); btn.disabled=false; });
+  };
+})();
+</script>
 </body>
 </html>
