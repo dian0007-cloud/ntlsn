@@ -200,7 +200,7 @@
     if(mostCited && (mostCited.cited_by_count||0)>0) S.push({ac:"var(--gold)",kick:"Your most-cited idea",bigsm:'&ldquo;'+esc((mostCited.title||"").slice(0,90))+(mostCited.title&&mostCited.title.length>90?'…':'')+'&rdquo;',sub:"cited "+mostCited.cited_by_count+" times",foot:totalCites?(totalCites.toLocaleString()+" citations across your work"):""});
     if(sparkYears.length>=3) S.push({ac:"var(--blue)",kick:"Your rhythm",spark:sparkYears.map(function(y){return {y:y,v:byYear[y].all,h:byYear[y].sotl>0&&byYear[y].sotl/byYear[y].all>=0.5,max:sparkMax};}),sub:"works per year — the bars where teaching led are brightest"});
     if(!isNaN(oaPct)) S.push({ac:"var(--green)",kick:"Open by default",big:oaPct+"%",sub:"of your work is open access — read by anyone, anywhere",foot:"The commons way. NTLSN is built on the same principle."});
-    S.push({ac:"var(--teal)",kick:"Your SoTL footprint",big:sotlPct+"%",sub:sotlPct>=40?"You're not just teaching. You're studying it.":"A scholarship-of-teaching footprint, and growing.",cta:{t:"See it scored on the SoTL Index →",u:"/sotl-index.html"},foot:sotlHits+" of "+(full?"your":"your recent")+" "+analysed+" works look education-related"});
+    S.push({ac:"var(--teal)",kick:"Your SoTL footprint",big:sotlPct+"%",sub:sotlPct>=40?"You're not just teaching. You're studying it.":"A scholarship-of-teaching footprint, and growing.",cta:{t:"See it described on the SoTL Index →",u:"/sotl-index.html"},foot:sotlHits+" of "+(full?"your":"your recent")+" "+analysed+" works look education-related"});
     if(coN>0) S.push({ac:"var(--purple)",kick:"You don't work alone",big:String(coN),sub:coN===1?"co-author across the sector":"co-authors across the sector",foot:"Teaching scholarship is a team sport."});
     S.push({ac:"var(--navy)",summary:{name:name,arche:arche,id:id,total:total,sotlPct:sotlPct,themes:themes,oaPct:oaPct,coN:coN,cites:totalCites}});
 
@@ -232,7 +232,7 @@
         '</div>'+
         '<div class="share">'+
         '<button class="cta" id="shareBtn">Copy my Wrapped</button>'+
-        '<a class="cta" href="/sotl-index.html">Score it on the SoTL Index →</a>'+
+        '<a class="cta" href="/sotl-index.html">Read it on the SoTL Index →</a>'+
         '<a class="cta" href="/orcid-start.html">Personalise the commons →</a>'+
         '</div>'+
         '<p class="foot" style="margin-top:18px">Made with the free NTLSN commons · nothing stored or sent. Share yours and bring a colleague.</p>'+
