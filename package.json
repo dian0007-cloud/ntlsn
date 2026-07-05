@@ -10,5 +10,8 @@
   "scripts": {
     "test": "node --test netlify/functions/test/*.test.js",
     "build": "echo 'NTLSN is a static site — no build step'"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0"
   }
 }

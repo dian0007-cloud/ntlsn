@@ -7,9 +7,43 @@
 "use strict";
 
 const { readCookie, safeEqual } = require("../lib/cookies");
+const { store, durable } = require("../lib/store");
+const enc = require("../lib/crypto");
 
 // Clear the transient state cookie on every exit path (success or failure).
 const CLEAR = ["ntlsn_zoom_state=; Path=/; Max-Age=0"];
+
+// Persist the tenant's refresh token (encrypted) keyed by Zoom account_id, so the connection
+// survives access-token expiry. Best-effort: a storage/lookup failure must not break the
+// user-facing redirect (the flow still verified end-to-end; it just won't auto-refresh).
+async function persistTenant(t) {
+  if (!durable() || !enc.configured() || !t || !t.refresh_token) return;
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
+    let me;
+    try {
+      me = await fetch("https://api.zoom.us/v2/users/me", {
+        headers: { Authorization: `Bearer ${t.access_token}` },
+        signal: ctrl.signal,
+      });
+    } finally {
+      clearTimeout(timer);
+    }
+    if (!me || !me.ok) return;
+    const acct = await me.json();
+    const accountId = acct && (acct.account_id || acct.id);
+    if (!accountId) return;
+    const tokens = await store("zoom-tokens");
+    await tokens.setJSON(String(accountId), {
+      refresh_token_enc: enc.encrypt(t.refresh_token),
+      scope: t.scope || "",
+      updated_at: Math.floor(Date.now() / 1000),
+    });
+  } catch (_e) {
+    // swallow — persistence is best-effort at this layer
+  }
+}
 
 exports.handler = async (event) => {
   const q = event.queryStringParameters || {};
@@ -53,15 +87,12 @@ exports.handler = async (event) => {
       clearTimeout(timer);
     }
     if (!r.ok) return J(502, { error: "token exchange failed", status: r.status });
-    await r.json(); // { access_token, refresh_token, expires_in, scope, ... } — not logged.
+    const t = await r.json(); // { access_token, refresh_token, expires_in, scope, ... } — never logged.
+    // Persist the encrypted refresh token per tenant (best-effort; won't block the redirect).
+    await persistTenant(t);
   } catch (_e) {
     return J(502, { error: "token exchange unreachable" });
   }
-
-  // TODO(token store): look up the account via GET https://api.zoom.us/v2/users/me with the
-  // access_token, then UPSERT { account_id -> encrypted refresh_token } and rotate on every
-  // refresh. For now, confirm success without persisting (the connection won't survive
-  // token expiry). See the Phase 3 proposal in docs/backend-audit.md.
 
   return {
     statusCode: 302,

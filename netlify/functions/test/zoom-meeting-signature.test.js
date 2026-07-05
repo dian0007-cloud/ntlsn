@@ -66,6 +66,19 @@ test("403 when meetingNumber is not on the allowlist", async () => {
   assert.strictEqual(res.statusCode, 403);
 });
 
+test("rate limit: the 21st mint in a window is rejected with 429", async () => {
+  setup();
+  const { handler } = load();
+  const cookie = validSessionCookie("0000-0009-0009-0009");
+  const req = () => handler({ httpMethod: "POST", headers: { origin: "https://www.ntlsn.com", cookie }, body: JSON.stringify({ meetingNumber: "88812345678" }) });
+  for (let i = 0; i < 20; i++) {
+    const r = await req();
+    assert.strictEqual(r.statusCode, 200, `request ${i + 1} should succeed`);
+  }
+  const over = await req();
+  assert.strictEqual(over.statusCode, 429);
+});
+
 test("signed-in user gets a role-0 attendee JWT", async () => {
   setup();
   const { handler } = load();

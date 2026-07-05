@@ -12,6 +12,7 @@
 const crypto = require("crypto");
 const { readCookie } = require("../lib/cookies");
 const session = require("../lib/session");
+const { store, durable } = require("../lib/store");
 
 // CORS: only NTLSN origins may make a *cross-origin* request. The same-origin page needs no
 // ACAO. Disallowed cross-origins are rejected (403) rather than silently served the wrong ACAO.
@@ -36,17 +37,31 @@ function corsHeaders(origin) {
 const b64url = (o) => Buffer.from(typeof o === "string" ? o : JSON.stringify(o)).toString("base64url");
 const MEETING_RE = /^[0-9]{9,11}$/;
 
-// Best-effort in-memory throttle (per warm instance): caps a single signed-in user's mint
-// rate. Not a global limiter across instances — the real controls are the session gate and
-// the optional allowlist; a durable limiter is a Phase 3 item (see docs/backend-audit.md).
-const HITS = new Map();
-const WINDOW_MS = 60 * 1000;
+// Rate limit: durable across instances via Blobs (fixed 60s window per signed-in user), with
+// an in-memory fallback when Blobs isn't available. Caps a single user minting a flood of join
+// tokens; the session gate + allowlist remain the primary controls.
+const WINDOW_SECONDS = 60;
 const MAX_PER_WINDOW = 20;
-function rateLimited(key) {
-  const now = Date.now();
-  const arr = (HITS.get(key) || []).filter((t) => now - t < WINDOW_MS);
-  arr.push(now);
-  HITS.set(key, arr);
+const _mem = new Map();
+async function rateLimited(orcid) {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const windowId = Math.floor(nowSec / WINDOW_SECONDS);
+  const key = `${orcid}:${windowId}`;
+  if (durable()) {
+    try {
+      const rl = await store("ratelimit");
+      const rec = await rl.get(key, { type: "json" });
+      const count = (rec && rec.n) || 0;
+      if (count >= MAX_PER_WINDOW) return true;
+      await rl.setJSON(key, { n: count + 1 });
+      return false;
+    } catch (_e) {
+      // fall through to in-memory
+    }
+  }
+  const arr = (_mem.get(orcid) || []).filter((t) => nowSec - t < WINDOW_SECONDS);
+  arr.push(nowSec);
+  _mem.set(orcid, arr);
   return arr.length > MAX_PER_WINDOW;
 }
 
@@ -72,7 +87,7 @@ exports.handler = async (event) => {
   const user = sessionSecret ? session.verify(readCookie(cookie, session.COOKIE_NAME), sessionSecret) : null;
   if (!user) return { statusCode: 401, headers: CORS, body: JSON.stringify({ error: "sign in with ORCID to watch" }) };
 
-  if (rateLimited(user.orcid || "anon"))
+  if (await rateLimited(user.orcid || "anon"))
     return { statusCode: 429, headers: CORS, body: JSON.stringify({ error: "rate limited" }) };
 
   let body = {};

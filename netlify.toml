@@ -14,3 +14,6 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  # @netlify/blobs is ESM and provided by the Functions runtime; keep it external so esbuild
+  # leaves the dynamic import() in place instead of trying to inline it.
+  external_node_modules = ["@netlify/blobs"]
