@@ -97,8 +97,23 @@ const ld = {
 fs.writeFileSync(path.join(OUT, 'events-ld.json'), JSON.stringify(ld));
 
 // ---------- Sitemap ----------
+// Merge-generate: scan the repo's standalone pages, keep each page's existing
+// lastmod, stamp pages new to the sitemap with TODAY, and drop entries whose
+// file no longer exists. The canonical host is ntlsn.com (see robots.txt).
+const SITE = 'https://ntlsn.com';
+const SM_EXCLUDE = new Set(['404.html']);
+const pages = fs.readdirSync('.').filter(f => f.endsWith('.html') && !SM_EXCLUDE.has(f)).sort();
+const prevLastmod = {};
+const prevSitemap = [path.join(OUT, 'sitemap.xml'), 'sitemap.xml'].find(p => fs.existsSync(p));
+if (prevSitemap) {
+  for (const m of fs.readFileSync(prevSitemap, 'utf8').matchAll(/<loc>\s*([^<]+?)\s*<\/loc>\s*<lastmod>\s*([^<]+?)\s*<\/lastmod>/g)) {
+    try { prevLastmod[new URL(m[1]).pathname] = m[2]; } catch { /* skip malformed loc */ }
+  }
+}
+const smEntry = p => '<url><loc>' + SITE + p + '</loc><lastmod>' + (prevLastmod[p] || TODAY) + '</lastmod></url>';
+const smUrls = ['/'].concat(pages.filter(f => f !== 'index.html').map(f => '/' + f));
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  '  <url><loc>https://www.ntlsn.com/</loc><lastmod>' + TODAY + '</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>\n</urlset>\n');
+  smUrls.map(smEntry).join('\n') + '\n</urlset>\n');
 
-console.log('build-feeds: ' + events.length + ' events → events.ics | ' + upcoming.length + ' upcoming → feed.xml | ' + upcoming.length + ' → JSON-LD | sitemap refreshed');
+console.log('build-feeds: ' + events.length + ' events → events.ics | ' + upcoming.length + ' upcoming → feed.xml | ' + upcoming.length + ' → JSON-LD | sitemap: ' + smUrls.length + ' URLs');
