@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Badges — issue yourself a portable, verifiable teaching-recognition claim · NTLSN</title>
+<meta name="description" content="Create a self-issued, cryptographically verifiable record of your teaching-scholarship milestones, structured as an Open Badges 3.0 credential. Keys are generated in your browser and never leave it; NTLSN stores nothing. Verify any badge's integrity on the same page.">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--d6:#E2B266;
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --M:ui-monospace,"SF Mono",Menlo,Consolas,monospace
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;font-size:16px;padding:28px 18px}
+  .wrap{max-width:880px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(30px,5vw,48px);margin:0 0 8px;font-weight:800;letter-spacing:-.018em;line-height:1.06}
+  h1 .g{background:linear-gradient(100deg,var(--teal),#86ece3 60%,var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lead{color:var(--mut);font-size:15.5px;margin:0 0 18px;max-width:70ch}
+  .lead b{color:var(--ink)}
+  a{color:var(--teal)}
+  .pill{display:inline-block;background:rgba(78,205,196,.12);color:var(--teal);font:700 11px var(--F);padding:3px 9px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .honesty{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.32);border-radius:14px;padding:16px 18px;margin:0 0 22px;font-size:13.5px;color:#ece4d2;line-height:1.6}
+  .honesty b{color:var(--gold)}
+  .tabs{display:flex;gap:6px;margin:0 0 14px;border:1px solid var(--line);border-radius:12px;padding:5px;background:var(--card);max-width:380px}
+  .tab{flex:1;text-align:center;padding:9px 10px;border-radius:8px;font:700 13.5px var(--F);color:var(--mut);cursor:pointer;border:0;background:transparent}
+  .tab.on{background:rgba(78,205,196,.15);color:var(--teal)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 18px}
+  label{display:block;font:700 12.5px var(--F);color:var(--ink);margin:14px 0 6px}
+  label:first-child{margin-top:0}
+  input[type=text],select,textarea{width:100%;background:#0a1830;border:1px solid var(--line);border-radius:10px;color:var(--ink);font:500 14.5px var(--F);padding:11px 13px;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+  textarea{min-height:70px;resize:vertical}
+  .hint{color:var(--mut);font-size:12px;margin:5px 0 0}
+  .btn{background:var(--teal);color:#06222b;border:0;border-radius:10px;font:800 14px var(--F);padding:12px 20px;cursor:pointer;margin-top:16px}
+  .btn:hover{filter:brightness(1.07)}
+  .btn.alt{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .keybox{background:rgba(255,255,255,.03);border:1px dashed rgba(159,176,195,.4);border-radius:12px;padding:13px 15px;font-size:12.8px;color:var(--mut);margin-top:14px}
+  .keybox b{color:var(--ink)}
+  .out{display:none;margin-top:16px}
+  .out h3{font-size:15px;margin:0 0 8px}
+  pre{background:#0a1830;border:1px solid var(--line);border-radius:10px;padding:13px;overflow-x:auto;font:12px/1.5 var(--M);color:#cdd9e5;margin:0 0 10px;max-height:340px}
+  .ok{color:#7de3b6;font-weight:700}
+  .bad{color:#f3a09a;font-weight:700}
+  .verdict{border-radius:12px;padding:13px 16px;font-size:14px;margin:0 0 12px;display:none}
+  .verdict.pass{background:rgba(125,227,182,.1);border:1px solid rgba(125,227,182,.4)}
+  .verdict.fail{background:rgba(243,160,154,.1);border:1px solid rgba(243,160,154,.4)}
+  .note{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px 15px;font-size:12.8px;color:var(--mut);margin:16px 0 0}
+  .note b{color:var(--ink)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:22px 0 0;border-top:1px solid var(--line);padding-top:14px}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+  .skip:focus{left:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+  <div class="eyebrow">Recognition · portable by design · in development</div>
+  <h1>Issue yourself a <span class="g">verifiable badge</span> <span class="pill">runs in your browser · stores nothing</span></h1>
+  <p class="lead">Turn a teaching-scholarship milestone into a <b>portable, cryptographically verifiable record</b>, structured as an Open Badges 3.0 credential. Your signing key is generated <b>in this browser tab</b> and never leaves it; NTLSN has no server in this loop and keeps nothing. Anyone can check the badge's integrity — on this page, or with standard tooling.</p>
+
+  <div class="honesty"><b>What this is, said plainly.</b> This is a <b>self-issued claim</b>: you are the issuer, and the cryptography proves the badge hasn't been altered and was made by the holder of your key — it does not make NTLSN or anyone else vouch for the content. That is the same philosophy as the SoTL Index's self-declared recognition, upgraded to a portable standard format. Institutional issuance — where a university signs badges its committees stand behind — is the roadmap this page is the free proof-of-concept for. Wallet and platform import support for Open Badges 3.0 varies today; the JSON payload is standards-shaped, and this page verifies any badge it issued. NTLSN is independent of and not affiliated with 1EdTech; no conformance certification is claimed.</div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab on" id="tab-issue" role="tab" aria-selected="true">Issue a badge</button>
+    <button class="tab" id="tab-verify" role="tab" aria-selected="false">Verify a badge</button>
+  </div>
+
+  <div class="panel" id="panel-issue">
+    <label for="ach">Milestone</label>
+    <select id="ach">
+      <option value="custom">Custom (write your own below)</option>
+      <option>Mapped my practice to the PSF 2023 dimensions (self-assessed via Recognition GPS)</option>
+      <option>Completed an NTLSN crash course</option>
+      <option>Peer-reviewed for a teaching-and-learning venue</option>
+      <option>Contributed an open resource to the commons</option>
+      <option>Sustained SoTL practice milestone (self-declared)</option>
+    </select>
+    <label for="achname">Achievement name</label>
+    <input type="text" id="achname" placeholder="e.g. Mapped my practice to the PSF 2023 dimensions" autocomplete="off">
+    <label for="achdesc">What you did (the criteria narrative)</label>
+    <textarea id="achdesc" placeholder="One or two honest sentences: what the milestone was and what evidences it."></textarea>
+    <label for="who">Your name</label>
+    <input type="text" id="who" placeholder="e.g. Dr Alex Chen" autocomplete="off">
+    <label for="orcid">Your ORCID iD <span style="color:var(--mut);font-weight:500">(optional — becomes the badge's subject identifier)</span></label>
+    <input type="text" id="orcid" placeholder="0000-0002-1825-0097" autocomplete="off" spellcheck="false">
+
+    <div class="keybox" id="keybox">
+      <b>Your signing key:</b> <span id="keystate">none yet — one will be generated when you issue.</span>
+      <div class="row">
+        <button class="btn alt" id="dlkey" style="display:none">Download key backup (JSON)</button>
+        <button class="btn alt" id="loadkey">Load a key backup…</button>
+        <input type="file" id="keyfile" accept="application/json" style="display:none">
+      </div>
+      <div class="hint">Keep the backup if you want future badges to come from the same identity. Nothing is stored on this device unless you download it yourself.</div>
+    </div>
+
+    <button class="btn" id="issue">Issue the badge</button>
+
+    <div class="out" id="issued">
+      <h3>Your badge (compact JWS — this is the portable artefact)</h3>
+      <pre id="jwsout" style="white-space:pre-wrap;word-break:break-all"></pre>
+      <div class="row">
+        <button class="btn alt" id="copyjws">Copy badge</button>
+        <button class="btn alt" id="dljws">Download badge (.txt)</button>
+        <button class="btn alt" id="dlcred">Download credential JSON</button>
+      </div>
+      <h3 style="margin-top:14px">Decoded credential</h3>
+      <pre id="credout"></pre>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-verify" style="display:none">
+    <label for="jwsin">Paste a badge (the compact JWS)</label>
+    <textarea id="jwsin" style="min-height:110px;font-family:var(--M);font-size:12px" spellcheck="false"></textarea>
+    <button class="btn" id="verify">Verify integrity</button>
+    <div class="verdict" id="verdict"></div>
+    <div class="out" id="verified">
+      <h3>Decoded credential</h3>
+      <pre id="vcredout"></pre>
+    </div>
+  </div>
+
+  <div class="note"><b>How the cryptography works, in one breath:</b> your browser generates a P-256 keypair; the issuer identity is a <code>did:jwk</code> derived from your public key; the credential is signed as a compact JWS (ES256). Verification re-derives the public key from the issuer identifier inside the badge and checks the signature, so a badge carries everything needed to verify it — no registry, no lookup, no NTLSN involvement. Integrity, portably.</div>
+
+  <p class="foot" role="contentinfo">A free NTLSN reflection tool, in development · nothing you type leaves this page · NTLSN is independent of and not affiliated with 1EdTech, ORCID or any wallet vendor &nbsp;·&nbsp; <a href="/recognition-gps.html">Recognition GPS →</a> &nbsp;·&nbsp; <a href="/interop.html">Built to connect →</a> &nbsp;·&nbsp; <a href="/open-model.html">The open model →</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a></p>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+function b64u(buf){var b=String.fromCharCode.apply(null,new Uint8Array(buf));return btoa(b).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");}
+function b64uStr(s){return b64u(new TextEncoder().encode(s));}
+function fromB64u(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";var bin=atob(s),a=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a;}
+function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+
+var KEYS=null, PUBJWK=null;
+
+function didFromJwk(jwk){
+  var min={crv:jwk.crv,kty:jwk.kty,x:jwk.x,y:jwk.y};
+  return "did:jwk:"+b64uStr(JSON.stringify(min));
+}
+function jwkFromDid(did){
+  if(did.indexOf("did:jwk:")!==0)throw new Error("not a did:jwk identifier");
+  return JSON.parse(new TextDecoder().decode(fromB64u(did.slice(8))));
+}
+async function ensureKeys(){
+  if(KEYS)return;
+  KEYS=await crypto.subtle.generateKey({name:"ECDSA",namedCurve:"P-256"},true,["sign","verify"]);
+  PUBJWK=await crypto.subtle.exportKey("jwk",KEYS.publicKey);
+  $("keystate").textContent="generated in this tab ("+didFromJwk(PUBJWK).slice(0,34)+"…) — it never leaves your browser.";
+  $("dlkey").style.display="inline-block";
+}
+$("dlkey").onclick=async function(){
+  var priv=await crypto.subtle.exportKey("jwk",KEYS.privateKey);
+  var blob=new Blob([JSON.stringify({privateKeyJwk:priv,publicKeyJwk:PUBJWK,note:"NTLSN badge signing key backup. Keep private. Load it on the badges page to issue from the same identity."},null,2)],{type:"application/json"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="ntlsn-badge-key.json";a.click();
+};
+$("loadkey").onclick=function(){$("keyfile").click();};
+$("keyfile").onchange=function(e){
+  var f=e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=async function(){
+    try{
+      var j=JSON.parse(r.result);
+      var priv=await crypto.subtle.importKey("jwk",j.privateKeyJwk,{name:"ECDSA",namedCurve:"P-256"},true,["sign"]);
+      var pub=await crypto.subtle.importKey("jwk",j.publicKeyJwk,{name:"ECDSA",namedCurve:"P-256"},true,["verify"]);
+      KEYS={privateKey:priv,publicKey:pub};PUBJWK=j.publicKeyJwk;
+      $("keystate").textContent="loaded from backup ("+didFromJwk(PUBJWK).slice(0,34)+"…).";
+      $("dlkey").style.display="inline-block";
+    }catch(err){alert("That file doesn't look like a key backup: "+err.message);}
+  };
+  r.readAsText(f);
+};
+$("ach").onchange=function(){
+  if(this.value!=="custom")$("achname").value=this.value;
+};
+$("issue").onclick=async function(){
+  var name=$("achname").value.trim(), desc=$("achdesc").value.trim(), who=$("who").value.trim();
+  if(!name||!who){alert("Please fill in the achievement name and your name.");return;}
+  $("issue").disabled=true;
+  try{
+    await ensureKeys();
+    var did=didFromJwk(PUBJWK);
+    var now=new Date().toISOString().replace(/\.\d+Z$/,"Z");
+    var orcid=($("orcid").value.match(/\d{4}-\d{4}-\d{4}-\d{3}[\dxX]/)||[])[0];
+    var subject={type:["AchievementSubject"],name:who,
+      achievement:{type:["Achievement"],name:name,
+        description:desc||"Self-declared teaching-scholarship milestone.",
+        criteria:{narrative:(desc||"Self-declared by the badge holder.")+" (Self-issued: the issuer and the recipient are the same person; cryptography attests integrity, not third-party endorsement.)"}}};
+    if(orcid)subject.id="https://orcid.org/"+orcid.toUpperCase();
+    var cred={
+      "@context":["https://www.w3.org/ns/credentials/v2","https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json"],
+      "type":["VerifiableCredential","OpenBadgeCredential"],
+      "issuer":{"id":did,"type":"Profile","name":who+" (self-issued)"},
+      "validFrom":now,
+      "name":name,
+      "credentialSubject":subject
+    };
+    var header={alg:"ES256",typ:"vc+jwt",kid:did+"#0"};
+    var signingInput=b64uStr(JSON.stringify(header))+"."+b64uStr(JSON.stringify(cred));
+    var sig=await crypto.subtle.sign({name:"ECDSA",hash:"SHA-256"},KEYS.privateKey,new TextEncoder().encode(signingInput));
+    var jws=signingInput+"."+b64u(sig);
+    $("jwsout").textContent=jws;
+    $("credout").textContent=JSON.stringify(cred,null,2);
+    $("issued").style.display="block";
+    $("dljws").onclick=function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([jws],{type:"text/plain"}));a.download="badge.jws.txt";a.click();};
+    $("dlcred").onclick=function(){var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(cred,null,2)],{type:"application/json"}));a.download="badge-credential.json";a.click();};
+    $("copyjws").onclick=function(){
+      (navigator.clipboard?navigator.clipboard.writeText(jws):Promise.reject()).then(function(){$("copyjws").textContent="Copied ✓";setTimeout(function(){$("copyjws").textContent="Copy badge";},1600);},function(){
+        var t=document.createElement("textarea");t.value=jws;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);
+        $("copyjws").textContent="Copied ✓";setTimeout(function(){$("copyjws").textContent="Copy badge";},1600);});
+    };
+  }catch(err){alert("Issuing failed: "+err.message);}
+  $("issue").disabled=false;
+};
+$("verify").onclick=async function(){
+  var jws=$("jwsin").value.trim();
+  var v=$("verdict");v.style.display="block";$("verified").style.display="none";
+  try{
+    var parts=jws.split(".");
+    if(parts.length!==3)throw new Error("a compact JWS has three dot-separated parts");
+    var header=JSON.parse(new TextDecoder().decode(fromB64u(parts[0])));
+    var cred=JSON.parse(new TextDecoder().decode(fromB64u(parts[1])));
+    if(header.alg!=="ES256")throw new Error("unsupported algorithm: "+header.alg+" (this page verifies ES256)");
+    var did=(cred.issuer&&cred.issuer.id)||String(header.kid||"").split("#")[0];
+    var jwk=jwkFromDid(did);
+    var pub=await crypto.subtle.importKey("jwk",{kty:jwk.kty,crv:jwk.crv,x:jwk.x,y:jwk.y},{name:"ECDSA",namedCurve:"P-256"},true,["verify"]);
+    var okSig=await crypto.subtle.verify({name:"ECDSA",hash:"SHA-256"},pub,fromB64u(parts[2]),new TextEncoder().encode(parts[0]+"."+parts[1]));
+    if(!okSig){v.className="verdict fail";v.innerHTML="<span class='bad'>✕ Signature invalid.</span> The badge has been altered, or wasn't signed by the key it names.";return;}
+    v.className="verdict pass";
+    v.innerHTML="<span class='ok'>✓ Integrity verified.</span> Signed by the holder of <code style='font-family:var(--M);font-size:11px'>"+esc(did.slice(0,44))+"…</code> and unaltered since. Remember: for a self-issued badge this attests <b>integrity</b>, not third-party endorsement — read the criteria narrative below.";
+    $("vcredout").textContent=JSON.stringify(cred,null,2);
+    $("verified").style.display="block";
+  }catch(err){
+    v.className="verdict fail";
+    v.innerHTML="<span class='bad'>✕ Could not verify:</span> "+esc(err.message);
+  }
+};
+$("tab-issue").onclick=function(){sel(true);};
+$("tab-verify").onclick=function(){sel(false);};
+function sel(issue){
+  $("tab-issue").className=issue?"tab on":"tab";$("tab-verify").className=issue?"tab":"tab on";
+  $("tab-issue").setAttribute("aria-selected",issue);$("tab-verify").setAttribute("aria-selected",!issue);
+  $("panel-issue").style.display=issue?"block":"none";$("panel-verify").style.display=issue?"none":"block";
+}
+})();
+</script>
+</body>
+</html>
