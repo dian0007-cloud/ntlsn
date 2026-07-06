@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The open model — why NTLSN is free, and how it stays that way</title>
+<meta name="description" content="NTLSN's open model, explained: the free commons is free by architecture, institutions pay for integration and assurance — never for access — and the whole thing holds together because you could leave at any time, and nothing is stopping you.">
+<meta property="og:title" content="The open model — NTLSN">
+<meta property="og:description" content="There are two kinds of lock-in, and they are moral opposites. NTLSN builds the second: a rail, not a wall. Openness is the lock-in.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --navy:#0A1628;--card:#0f1f3a;--card2:#13243f;--teal:#4ECDC4;--gold:#C9A962;
+    --ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);
+    --F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.6;font-size:16px}
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+  a{color:var(--teal)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
+  .skip:focus{left:0}
+
+  /* ---- hero: the thesis over a living rail ---- */
+  header{padding:64px 0 26px;position:relative;overflow:hidden}
+  h1{font-size:clamp(34px,6vw,58px);margin:0 0 14px;font-weight:800;letter-spacing:-.02em;line-height:1.04;max-width:15ch}
+  h1 .g{background:linear-gradient(100deg,var(--teal),#86ece3 60%,var(--teal));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lede{color:var(--mut);font-size:clamp(15.5px,2vw,18px);max-width:62ch;margin:0 0 8px}
+  .lede b{color:var(--ink)}
+  /* the hero rail: a line with stations, one node gently travelling */
+  .heroline{position:relative;height:64px;margin:26px 0 6px}
+  .heroline .track{position:absolute;left:0;right:0;top:31px;height:2px;background:linear-gradient(90deg,transparent,rgba(78,205,196,.55) 12%,rgba(78,205,196,.55) 88%,transparent)}
+  .heroline .stn{position:absolute;top:26px;width:12px;height:12px;border-radius:50%;background:var(--navy);border:2px solid var(--teal)}
+  .heroline .rider{position:absolute;top:23px;width:18px;height:18px;border-radius:50%;background:var(--teal);box-shadow:0 0 18px rgba(78,205,196,.8);animation:ride 9s ease-in-out infinite}
+  @keyframes ride{0%{left:6%}45%{left:88%}55%{left:88%;transform:translateY(0)}70%{left:72%;transform:translateY(-26px)}82%{left:60%;transform:translateY(-26px)}92%{left:52%;transform:translateY(0)}100%{left:6%}}
+  @media(prefers-reduced-motion:reduce){.heroline .rider{animation:none;left:40%}}
+  .herocap{font-size:12px;color:var(--mut);font-style:italic}
+
+  /* ---- sections ---- */
+  section{padding:44px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(22px,3.4vw,30px);margin:0 0 10px;font-weight:800;letter-spacing:-.015em}
+  .sub{color:var(--mut);max-width:64ch;margin:0 0 22px;font-size:15px}
+  .sub b{color:var(--ink)}
+
+  /* ---- the two kinds of lock-in ---- */
+  .twoup{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .kind{border-radius:16px;padding:22px;position:relative;overflow:hidden;min-height:290px;display:flex;flex-direction:column}
+  .kind h3{margin:0 0 4px;font-size:18px}
+  .kind .tag{font:800 10px var(--F);letter-spacing:1.6px;text-transform:uppercase;margin:0 0 10px}
+  .kind p{font-size:13.5px;line-height:1.55;margin:0 0 10px}
+  .kind .scene{margin-top:auto;position:relative;height:110px}
+  .wall{background:#141a24;border:1px solid rgba(255,255,255,.08)}
+  .wall h3{color:#c8ccd4}.wall .tag{color:#8b93a0}.wall p{color:#9aa2ae}
+  .wall .box{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:110px;height:82px;border:2px solid #6b7482;border-radius:8px}
+  .wall .box::after{content:"";position:absolute;right:-2px;top:26px;width:10px;height:26px;border:2px solid #6b7482;border-left:none;border-radius:0 6px 6px 0;background:#141a24}
+  .wall .captive{position:absolute;left:50%;top:46px;width:16px;height:16px;border-radius:50%;background:#8b93a0;transform:translateX(-50%);animation:strain 3.2s ease-in-out infinite}
+  @keyframes strain{0%,100%{transform:translate(-50%,0)}30%{transform:translate(calc(-50% + 26px),0)}45%{transform:translate(calc(-50% + 30px),0)}60%{transform:translate(-50%,0)}}
+  .rail{background:linear-gradient(160deg,#0d2b33,#0f1f3a 70%);border:1px solid rgba(78,205,196,.35)}
+  .rail h3{color:var(--ink)}.rail .tag{color:var(--teal)}.rail p{color:#c4d2dd}
+  .rail .track2{position:absolute;left:6%;right:6%;top:52px;height:2px;background:rgba(78,205,196,.6)}
+  .rail .s{position:absolute;top:47px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid var(--teal)}
+  .rail .free{position:absolute;top:44px;width:16px;height:16px;border-radius:50%;background:var(--teal);box-shadow:0 0 14px rgba(78,205,196,.75);animation:freely 7s ease-in-out infinite}
+  @keyframes freely{0%{left:10%;transform:translateY(0)}30%{left:74%;transform:translateY(0)}45%{left:84%;transform:translateY(-34px);opacity:.55}58%{left:70%;transform:translateY(-34px);opacity:.55}72%{left:58%;transform:translateY(0);opacity:1}100%{left:10%}}
+  @media(prefers-reduced-motion:reduce){.wall .captive,.rail .free{animation:none}.rail .free{left:45%}}
+  .kind .cap{font-size:11.5px;color:var(--mut);font-style:italic;margin:8px 0 0}
+  @media(max-width:680px){.twoup{grid-template-columns:1fr}}
+
+  /* ---- the chain ---- */
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px 8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-family:var(--F)}
+  .chain b{font-size:14px;color:var(--ink);white-space:nowrap}
+  .chain span{color:var(--teal);font-weight:700}
+  .chain i{color:var(--mut);font-style:normal;font-size:13px;white-space:nowrap}
+
+  /* ---- the ledger ---- */
+  .ledger{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .col{border-radius:16px;padding:20px 22px;border:1px solid var(--line)}
+  .col.free2{background:linear-gradient(160deg,#0d2b33,var(--card) 75%);border-color:rgba(78,205,196,.3)}
+  .col.paid2{background:var(--card)}
+  .col h3{margin:0 0 2px;font-size:17px}
+  .col .who{font:700 11px var(--F);letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:0 0 12px}
+  .free2 .who{color:var(--teal)}
+  .col ul{margin:0;padding:0;list-style:none}
+  .col li{padding:8px 0 8px 22px;border-top:1px solid var(--line);font-size:13.5px;line-height:1.5;position:relative;color:#c4d2dd}
+  .col li::before{content:"";position:absolute;left:2px;top:14px;width:8px;height:8px;border-radius:2px}
+  .free2 li::before{background:var(--teal)}
+  .paid2 li::before{background:var(--gold)}
+  .col li b{color:var(--ink)}
+  .pill{display:inline-block;font:800 9px var(--F);letter-spacing:.8px;text-transform:uppercase;border-radius:3px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+  .pill.live{color:#06282f;background:var(--teal)}
+  .pill.design{color:#3f3213;background:var(--gold)}
+  .colfoot{margin-top:12px;font-size:12.5px;color:var(--mut);font-style:italic}
+  @media(max-width:680px){.ledger{grid-template-columns:1fr}}
+
+  /* ---- proof you can leave ---- */
+  .proof{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .pf{background:var(--card);padding:16px 18px}
+  .pf b{display:block;font-size:14px;margin:0 0 4px;color:var(--ink)}
+  .pf p{margin:0;font-size:12.8px;color:var(--mut);line-height:1.5}
+  .pf a{font-size:12.8px}
+  @media(max-width:680px){.proof{grid-template-columns:1fr}}
+
+  /* ---- the close ---- */
+  .close{background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid rgba(78,205,196,.3);border-left:4px solid var(--teal);border-radius:16px;padding:26px 28px}
+  .close p{margin:0;font-size:clamp(17px,2.4vw,21px);line-height:1.5;max-width:46ch}
+  .close b{color:var(--teal)}
+  .note{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.3);border-radius:12px;padding:13px 16px;font-size:12.8px;color:#ece4d2;margin:22px 0 0}
+  .note b{color:var(--gold)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:0;padding:26px 0 40px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
+
+  <header>
+    <div class="eyebrow">The open model · how NTLSN works, and why</div>
+    <h1>Openness is the <span class="g">lock-in.</span></h1>
+    <p class="lede">Everything for an individual academic on this site is free, without a login, forever. That is not a promotional period and it is not generosity — it is <b>architecture</b>, and this page explains the model plainly: what stays free, what institutions pay for, and why the whole thing only works because <b>you could leave at any time</b>.</p>
+    <div class="heroline" aria-hidden="true">
+      <div class="track"></div>
+      <span class="stn" style="left:6%"></span><span class="stn" style="left:27%"></span><span class="stn" style="left:48%"></span><span class="stn" style="left:69%"></span><span class="stn" style="left:88%"></span>
+      <span class="rider"></span>
+    </div>
+    <p class="herocap">The node leaves the line and comes back. Nothing makes it stay. That is the whole idea.</p>
+  </header>
+
+  <section>
+    <h2>There are two kinds of lock-in, and they are moral opposites.</h2>
+    <p class="sub">Most education platforms hold you by making leaving expensive: your data in their format, your work behind their login, your courses welded to their system. There is another way to be indispensable.</p>
+    <div class="twoup">
+      <div class="kind wall">
+        <div class="tag">Enclosure lock-in</div>
+        <h3>The wall</h3>
+        <p>You stay because you can't get out. Proprietary formats, sign-in gates, export fees, contracts that outlive their usefulness. The vendor's incentive is to make the door smaller.</p>
+        <div class="scene" aria-hidden="true"><div class="box"></div><div class="captive"></div></div>
+        <p class="cap">The node pushes at the door. The door is the business model.</p>
+      </div>
+      <div class="kind rail">
+        <div class="tag">Rail lock-in</div>
+        <h3>The rail</h3>
+        <p>You stay because it is the most connected, most trusted line through the sector — and every station speaks open standards, so stepping off costs you nothing. The operator's incentive is to be worth coming back to.</p>
+        <div class="scene" aria-hidden="true">
+          <div class="track2"></div>
+          <span class="s" style="left:8%"></span><span class="s" style="left:34%"></span><span class="s" style="left:62%"></span><span class="s" style="left:88%"></span>
+          <span class="free"></span>
+        </div>
+        <p class="cap">The node leaves whenever it likes. It comes back because the line is good.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The model, in one line.</h2>
+    <p class="sub">NTLSN runs on a deliberately simple split: the boundary between free and paid is <b>architectural</b>, not commercial. Free is anything that runs in your own browser against open data. Paid is the server-scale work of connecting an institution's systems — work a browser physically cannot do.</p>
+    <div class="chain" role="img" aria-label="The free tools bring people in; interoperability sustains the network; the neutral open hub is what holds it together; openness is the lock-in.">
+      <b>Free tools</b><span>→</span><i>bring the sector in</i><span>·</span>
+      <b>interoperability</b><span>→</span><i>sustains the network</i><span>·</span>
+      <b>neutral open hub</b><span>→</span><i>holds it together</i><span>·</span>
+      <b>openness IS the lock-in</b>
+    </div>
+  </section>
+
+  <section>
+    <h2>What stays free — and what institutions pay for.</h2>
+    <p class="sub">Individuals never pay, and the free side is incapable of charging you by design: it stores nothing, needs no account, and runs on your machine. Institutions pay for labour and plumbing — <b>never for access to the commons</b>.</p>
+    <div class="ledger">
+      <div class="col free2">
+        <h3>Free, forever, by architecture</h3>
+        <div class="who">For every academic · no login · stores nothing</div>
+        <ul>
+          <li><b>The commons</b> — 150+ pages of tools, crash courses, frameworks and the rescued ALTC/OLT archive <span class="pill live">live</span></li>
+          <li><b>The ORCID tools</b> — paste your iD, see your footprint; nothing leaves your browser <span class="pill live">live</span></li>
+          <li><b>The SoTL Index</b> — a described, DORA-aligned reading of teaching scholarship; no scores, no rankings, by construction <span class="pill live">live</span></li>
+          <li><b>The open data and machine endpoints</b> — datasets, feeds and a hosted MCP server, openly documented <span class="pill live">live</span></li>
+        </ul>
+        <p class="colfoot">"We can't leak what we never held" — the free side runs client-side and keeps nothing.</p>
+      </div>
+      <div class="col paid2">
+        <h3>What institutions pay for</h3>
+        <div class="who">Integration · scale · assurance — the plumbing</div>
+        <ul>
+          <li><b>Institution-scale aggregation</b> — a whole school's teaching-scholarship picture, cohort-level only, never a person ranking <span class="pill design">in design</span></li>
+          <li><b>Assurance reporting</b> — the evidence a DORA-signatory institution can actually defend <span class="pill design">in design</span></li>
+          <li><b>Integration into institutional systems</b> — the connective, server-side engineering, built on open standards <span class="pill design">in design</span></li>
+        </ul>
+        <p class="colfoot">Paying institutions fund the free commons. They buy labour and plumbing — never access, and never other people's data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Proof you can leave.</h2>
+    <p class="sub">A rail only earns trust if the exits are real. These are checkable today, not promised:</p>
+    <div class="proof">
+      <div class="pf"><b>No login exists</b><p>There is no account to close because none was ever created. Arrive, use, leave.</p></div>
+      <div class="pf"><b>Open standards throughout</b><p>ORCID for identity, OpenAlex for scholarship, SCORM out of the learning modules, MCP for machines — nothing proprietary sits between you and your work. <a href="/interop.html">See the integration surface →</a></p></div>
+      <div class="pf"><b>Your data is already yours</b><p>The tools read open data about you; they hold none of it. There is nothing to export because nothing was kept.</p></div>
+      <div class="pf"><b>The datasets are open</b><p>The events calendar and archive index are published as documented, machine-readable files anyone may build on. <a href="/interop.html#open-data">The open data →</a></p></div>
+      <div class="pf"><b>Take the courses with you</b><p>Every learning module exports as a SCORM package that runs in any LMS — including away from NTLSN entirely. <a href="/learning-modules.html">Learning modules →</a></p></div>
+      <div class="pf"><b>The methods are published</b><p>How the instruments work — and what they refuse to do — is documented in the open, citable and contestable. <a href="/sotl-index-methodology.html">The methodology →</a></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Why it holds.</h2>
+    <p class="sub">Three quiet forces, none of which requires trapping anyone:</p>
+    <div class="proof">
+      <div class="pf"><b>Network effects, non-extractive</b><p>Every scholar and event connected makes the line more useful for the next one. That value is created by participation — it cannot be bought, and it does not require holding anyone's data hostage.</p></div>
+      <div class="pf"><b>Neutrality</b><p>NTLSN does not sell the systems being connected, so it can sit between them in a way no systems vendor can. Independence is expensive to keep and impossible to fake.</p></div>
+      <div class="pf"><b>Open standards as commitment</b><p>Building only on open rails is a promise with teeth: anyone can verify it, and anyone could replicate it. The work is staying worth choosing.</p></div>
+    </div>
+    <div class="close" style="margin-top:22px">
+      <p>The moat isn't a wall you can't leave. <b>It's that you can leave, and nobody wants to.</b></p>
+    </div>
+    <div class="note"><b>Said honestly:</b> the free commons is live today; the institutional layer is in design and is described that way everywhere it appears. NTLSN sells design partnerships and working software, never phantoms — and the day the free side gets worse to sell the paid side, this page becomes false and you should hold us to it.</div>
+  </section>
+
+  <p class="foot" role="contentinfo">NTLSN · anti-enclosure by design · independent of and not affiliated with ORCID, OpenAlex, DORA, 1EdTech or any vendor named by implication. &nbsp;·&nbsp; <a href="/interop.html">Built to connect →</a> &nbsp;·&nbsp; <a href="/mcp.html">Connect your AI →</a> &nbsp;·&nbsp; <a href="/about.html">About NTLSN →</a> &nbsp;·&nbsp; <a href="/">← Back to the commons</a></p>
+</div>
+</body>
+</html>
