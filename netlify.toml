@@ -5,7 +5,10 @@
 # available and a platform default can't silently downgrade the runtime.
 
 [build]
-  command = "echo 'NTLSN is a static site — no build step'"
+  # The site is static (no build step), but run the Functions test suite as the build command so a
+  # failing test BLOCKS the deploy. GitHub Actions runs in parallel and does not gate Netlify, so
+  # without this a function regression can ship to production before CI turns red (audit v2 config).
+  command = "npm test"
   publish = "."
 
 [build.environment]
