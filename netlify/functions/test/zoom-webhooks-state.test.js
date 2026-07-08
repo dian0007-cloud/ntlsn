@@ -57,3 +57,22 @@ test("recording.completed is stored account-scoped and wiped on app_deauthorized
   recs = await store("zoom-recordings");
   assert.strictEqual((await recs.list({ prefix: "ACCT2:" })).blobs.length, 0, "deauthorized account's recordings are wiped");
 });
+
+test("meeting.started indexes by account; app_deauthorized clears that account's zoom-live only", async () => {
+  // Phase 3 #2 (audit v2 M2): zoom-live is keyed by meeting id with no account link, so an
+  // account->meetings index is the only way to find and clear a deauthorized account's live state.
+  process.env.ZOOM_WEBHOOK_SECRET_TOKEN = SECRET;
+  const { handler } = load();
+  await post(handler, { event: "meeting.started", payload: { account_id: "ACCT3", object: { id: "55500000001" } } });
+  await post(handler, { event: "meeting.started", payload: { account_id: "ACCT3", object: { id: "55500000002" } } });
+  await post(handler, { event: "meeting.started", payload: { account_id: "ACCT9", object: { id: "55500000099" } } });
+  let live = await store("zoom-live");
+  assert.strictEqual((await live.get("55500000001", { type: "json" })).live, true);
+  assert.strictEqual((await live.get("55500000099", { type: "json" })).live, true);
+
+  await post(handler, { event: "app_deauthorized", payload: { account_id: "ACCT3" } });
+  live = await store("zoom-live");
+  assert.strictEqual(await live.get("55500000001"), null, "ACCT3 meeting 1 cleared from zoom-live on deauth");
+  assert.strictEqual(await live.get("55500000002"), null, "ACCT3 meeting 2 cleared from zoom-live on deauth");
+  assert.ok((await live.get("55500000099", { type: "json" })).live, "a different account's live meeting is untouched");
+});

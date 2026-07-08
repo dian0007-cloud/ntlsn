@@ -35,6 +35,28 @@ async function wipeByPrefix(storeName, prefix) {
   }
 }
 
+// Clear a deauthorized account's zoom-live entries using the account->meetings index written on
+// meeting.started (audit v2 M2). zoom-live is keyed by bare meetingNumber and read by zoom-live.js
+// with no account context, so the index is the only way to find an account's live meetings. Also
+// drops the index entries themselves. Bounded-parallel; best-effort.
+async function cleanAccountLive(acct) {
+  try {
+    const idx = await store("zoom-account-meetings");
+    const { blobs } = await idx.list({ prefix: `${acct}:` });
+    const meetings = (blobs || []).map((b) => b.key.slice(acct.length + 1)).filter(Boolean);
+    if (meetings.length) {
+      const live = await store("zoom-live");
+      for (let i = 0; i < meetings.length; i += DELETE_BATCH) {
+        const batch = meetings.slice(i, i + DELETE_BATCH);
+        await Promise.all(batch.map((m) => live.delete(m).catch(() => {})));
+      }
+    }
+    await wipeByPrefix("zoom-account-meetings", `${acct}:`);
+  } catch (_e) {
+    // best-effort; never fail the webhook on cleanup
+  }
+}
+
 async function applyEvent(msg) {
   const p = (msg && msg.payload) || {};
   const obj = p.object || {};
@@ -42,9 +64,16 @@ async function applyEvent(msg) {
   try {
     switch (msg.event) {
       case "meeting.started":
-      case "webinar.started":
-        if (meeting) await (await store("zoom-live")).setJSON(meeting, { live: true, at: obj.start_time || null });
+      case "webinar.started": {
+        if (meeting) {
+          await (await store("zoom-live")).setJSON(meeting, { live: true, at: obj.start_time || null });
+          // Index the meeting under its account so app_deauthorized can also clear zoom-live
+          // (audit v2 M2 — zoom-live is otherwise keyed by meeting id with no account link).
+          const startAcct = String(p.account_id || "acct");
+          await (await store("zoom-account-meetings")).setJSON(`${startAcct}:${meeting}`, { at: obj.start_time || null });
+        }
         break;
+      }
       case "meeting.ended":
       case "webinar.ended":
         if (meeting) await (await store("zoom-live")).setJSON(meeting, { live: false, at: obj.end_time || null });
@@ -73,15 +102,15 @@ async function applyEvent(msg) {
         break;
       }
       case "app_deauthorized": {
-        // A university removed us: delete their tokens, registrant PII, and recording share
-        // URLs for that account (Zoom Marketplace data-compliance). zoom-live is keyed by
-        // meeting id only and read via zoom-live.js with no account context, so cleaning it
-        // needs an account->meetings index — Phase 3 (audit v2 M2).
+        // A university removed us: delete their tokens, registrant PII, recording share URLs,
+        // and live state for that account (Zoom Marketplace data-compliance). zoom-live is
+        // recovered via the account->meetings index written on meeting.started (audit v2 M2).
         const acct = String(p.account_id || "");
         if (acct) {
           await (await store("zoom-tokens")).delete(acct);
           await wipeByPrefix("zoom-registrants", `${acct}:`);
           await wipeByPrefix("zoom-recordings", `${acct}:`);
+          await cleanAccountLive(acct);
         }
         break;
       }
