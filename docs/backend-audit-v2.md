@@ -137,11 +137,11 @@ mock per-URL, and asserts the stored blob round-trips through `enc.decrypt`.
 - Signature endpoint session-gate + allowlist + role-0-only + rate-limit. ✅
 - AES-256-GCM at-rest (random IV, auth-tag, tamper throws). ✅
 
-## Phase 3 proposals (need Seb's sign-off before building)
-1. **Zoom deauth as a Background Function** — ack the webhook in <100 ms, do the wipe asynchronously so large accounts can't timeout (full fix for M1/L4).
-2. **Account→meetings index** so `app_deauthorized` can also clean `zoom-live` (completes M2) and so recordings/live are fully account-scoped.
-3. **Decode `account_id` from the Zoom access-token JWT** to skip the `/users/me` round-trip in `persistTenant` (verify Zoom's current token format first) — removes the critical-path network call (L15).
-4. **Edge/CDN rate-limiting** for the signature endpoint — atomic, vs the current best-effort racy counter (L7).
-5. **Bump Functions runtime Node 20 → 22 LTS** (Node 20 is EOL).
-6. **Epic 1 source rebuild** → drop CSP `'unsafe-inline'`/`'unsafe-eval'` (I1).
-7. **ORCID commercial-relationship wall**: the Public API is non-commercial; confirm ORCID membership before any *paid* gate depends on ORCID sign-in (carry from v1).
+## Phase 3 proposals — status (built with Seb's greenlight)
+1. ✅ **Zoom deauth Background Function** — built as the *reliability-preserving hybrid*: the webhook still runs the synchronous wipe (guaranteed for normal accounts) AND writes a tombstone a scheduled `zoom-deauth-sweep` finishes if the sync wipe times out on a huge account. Cleanup is idempotent (`netlify/lib/deauth.js`), so double-execution is safe. **The schedule is opt-in** — add `[functions."zoom-deauth-sweep"] schedule = "*/5 * * * *"` to `netlify.toml` when ready; until then the synchronous wipe is the guaranteed path.
+2. ✅ **Account→meetings index** — `meeting.started` indexes `${account_id}:${meeting}`; `app_deauthorized` now also clears `zoom-live` for that account (completes M2). Other accounts untouched.
+3. ✅ **Decode `account_id` from the access-token JWT** — `persistTenant` keys off it and skips `/users/me`; falls back to `/users/me` only if the token isn't a JWT (format-agnostic, so no format assumption).
+5. ✅ **Node 20 → 22 LTS** — `netlify.toml` `NODE_VERSION = "22"` (20 is EOL).
+4. ⬜ **Edge/CDN atomic rate-limiting** for the signature endpoint (L7) — not built; the Blobs counter remains best-effort by design (documented). Needs an edge rate-limit product.
+6. ⬜ **Epic 1 source rebuild** → drop CSP `'unsafe-inline'`/`'unsafe-eval'` (I1) — large, separate workstream.
+7. ⬜ **ORCID non-commercial check** before any paid gate depends on ORCID sign-in — carry from v1.
