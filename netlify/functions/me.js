@@ -17,8 +17,16 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "GET only" }) };
 
   const secret = process.env.NTLSN_SESSION_SECRET;
+  if (!secret) {
+    // A missing session secret is a deploy misconfiguration (env typo / rotation gap), not a
+    // normal unsigned-in request. Surface it as 5xx + configured:false so status-code alerting
+    // catches it — the old 200 signedIn:false was byte-for-byte identical to the normal case
+    // and silently logged everyone out with no signal (audit v2 L11). The page treats non-2xx
+    // as "not signed in", so UX degrades gracefully either way.
+    return { statusCode: 503, headers, body: JSON.stringify({ signedIn: false, configured: false }) };
+  }
   const cookie = (event.headers && (event.headers.cookie || event.headers.Cookie)) || "";
-  const payload = secret ? session.verify(readCookie(cookie, session.COOKIE_NAME), secret) : null;
+  const payload = session.verify(readCookie(cookie, session.COOKIE_NAME), secret);
 
   if (!payload) return { statusCode: 200, headers, body: JSON.stringify({ signedIn: false }) };
   return {

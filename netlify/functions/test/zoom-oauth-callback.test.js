@@ -99,3 +99,17 @@ test("persistTenant durable path: encrypts the refresh token, keyed by account_i
   assert.strictEqual(enc.decrypt(rec.refresh_token_enc), "secret-refresh", "round-trips through enc.decrypt");
   delete process.env.NTLSN_TOKEN_ENC_KEY;
 });
+
+test("env unset (valid state, secret missing) → 302 to zoom_error, clears state cookie", async () => {
+  // Regression for audit v2 L13: the callback returned 200 JSON on a partial misconfig, unlike
+  // the start endpoint. start guards id/redirect only, so dropping just ZOOM_CLIENT_SECRET lets
+  // the user reach this branch after consent.
+  process.env.ZOOM_CLIENT_ID = "cid";
+  process.env.ZOOM_REDIRECT_URI = "https://www.ntlsn.com/.netlify/functions/zoom-oauth-callback";
+  delete process.env.ZOOM_CLIENT_SECRET;
+  const { handler } = load();
+  const res = await handler({ queryStringParameters: { code: "c", state: "S" }, headers: { cookie: "ntlsn_zoom_state=S" } });
+  assert.strictEqual(res.statusCode, 302);
+  assert.match(res.headers.Location, /zoom_error=unconfigured/);
+  assert.ok(res.multiValueHeaders["Set-Cookie"].some((c) => /ntlsn_zoom_state=; .*Max-Age=0/.test(c)));
+});

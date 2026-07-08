@@ -25,7 +25,11 @@ exports.handler = async (event) => {
   try {
     const rec = await (await store("zoom-live")).get(meetingNumber, { type: "json" });
     live = !!(rec && rec.live);
-  } catch (_e) {
+  } catch (e) {
+    // Fail-safe (report not-live) but make a store error observable so an operator can tell a
+    // Blobs outage from a genuinely-ended meeting at the exact moment the LIVE badge matters
+    // (audit v2 L14). Previously the error was swallowed with no server-side trace.
+    console.error("[ntlsn/zoom-live] store read failed for", meetingNumber, (e && e.message) || e);
     live = false;
   }
   return { statusCode: 200, headers, body: JSON.stringify({ meetingNumber, live }) };

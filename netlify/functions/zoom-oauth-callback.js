@@ -80,7 +80,17 @@ exports.handler = async (event) => {
   const id = process.env.ZOOM_CLIENT_ID,
     secret = process.env.ZOOM_CLIENT_SECRET,
     redirect = process.env.ZOOM_REDIRECT_URI;
-  if (!id || !secret || !redirect) return J(200, { error: "Set ZOOM_CLIENT_ID / ZOOM_CLIENT_SECRET / ZOOM_REDIRECT_URI", configured: false });
+  if (!id || !secret || !redirect) {
+    // Reached by a top-level navigation (Zoom's 302 back here after consent). Mirror the start
+    // endpoint: bounce to the page with an error flag instead of raw JSON, and clear the state
+    // cookie (audit v2 L13).
+    return {
+      statusCode: 302,
+      headers: { Location: "/symposium-streaming.html?zoom_error=unconfigured" },
+      multiValueHeaders: { "Set-Cookie": CLEAR },
+      body: "",
+    };
+  }
 
   const basic = Buffer.from(`${id}:${secret}`).toString("base64");
   try {
