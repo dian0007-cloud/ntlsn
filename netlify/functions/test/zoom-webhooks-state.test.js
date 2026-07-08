@@ -44,3 +44,16 @@ test("app_deauthorized deletes the tenant's tokens and registrant PII", async ()
   reg = await store("zoom-registrants");
   assert.strictEqual((await reg.list({ prefix: "ACCT1:" })).blobs.length, 0);
 });
+
+test("recording.completed is stored account-scoped and wiped on app_deauthorized (data-compliance)", async () => {
+  // Regression for audit v2 M2: recordings were keyed by bare meeting id with no account, so the
+  // deauth wipe (which matches by `${acct}:` prefix) could not find or delete them.
+  process.env.ZOOM_WEBHOOK_SECRET_TOKEN = SECRET;
+  const { handler } = load();
+  await post(handler, { event: "recording.completed", payload: { account_id: "ACCT2", object: { id: "77700000000", share_url: "https://zoom.us/rec/share/xyz" } } });
+  let recs = await store("zoom-recordings");
+  assert.strictEqual((await recs.list({ prefix: "ACCT2:" })).blobs.length, 1, "recording stored under an account-scoped key");
+  await post(handler, { event: "app_deauthorized", payload: { account_id: "ACCT2" } });
+  recs = await store("zoom-recordings");
+  assert.strictEqual((await recs.list({ prefix: "ACCT2:" })).blobs.length, 0, "deauthorized account's recordings are wiped");
+});

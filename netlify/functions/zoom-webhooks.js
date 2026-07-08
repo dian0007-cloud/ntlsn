@@ -16,6 +16,25 @@ const HEADERS = { "Content-Type": "application/json", "X-Content-Type-Options": 
 // Persist the verified event into durable state. Best-effort — a storage hiccup must not turn
 // into a non-200 (Zoom would retry/disable the endpoint). Meeting id + account id come from the
 // standard Zoom payload shape ({ payload: { account_id, object: { id, ... } } }).
+const DELETE_BATCH = 50;
+// Delete every key under `prefix` in a store, in bounded-parallel batches (Promise.all per
+// chunk) so a large account can't run the webhook past its wall-clock timeout before Zoom gets
+// its ack (audit v2 M1/L4). Best-effort — errors are swallowed so a storage hiccup never turns
+// into a non-200. The full fix offloads this to a Background Function (Phase 3).
+async function wipeByPrefix(storeName, prefix) {
+  try {
+    const s = await store(storeName);
+    const { blobs } = await s.list({ prefix });
+    const keys = (blobs || []).map((b) => b.key);
+    for (let i = 0; i < keys.length; i += DELETE_BATCH) {
+      const batch = keys.slice(i, i + DELETE_BATCH);
+      await Promise.all(batch.map((k) => s.delete(k).catch(() => {})));
+    }
+  } catch (_e) {
+    // best-effort; never fail the webhook on cleanup
+  }
+}
+
 async function applyEvent(msg) {
   const p = (msg && msg.payload) || {};
   const obj = p.object || {};
@@ -42,21 +61,27 @@ async function applyEvent(msg) {
         }
         break;
       }
-      case "recording.completed":
+      case "recording.completed": {
+        // Account-scoped key so app_deauthorized can find and delete a deauthorized tenant's
+        // recording share URLs (audit v2 M2). zoom-recordings has no reader yet, so re-keying
+        // is safe; the value shape is unchanged.
+        const recAcct = String(p.account_id || "acct");
         if (meeting)
-          await (await store("zoom-recordings")).setJSON(meeting, {
+          await (await store("zoom-recordings")).setJSON(`${recAcct}:${meeting}`, {
             share_url: obj.share_url || "", at: Math.floor(Date.now() / 1000),
           });
         break;
+      }
       case "app_deauthorized": {
-        // A university removed us: delete their tokens and every registrant PII record for that
-        // account (Zoom Marketplace data-compliance requirement).
+        // A university removed us: delete their tokens, registrant PII, and recording share
+        // URLs for that account (Zoom Marketplace data-compliance). zoom-live is keyed by
+        // meeting id only and read via zoom-live.js with no account context, so cleaning it
+        // needs an account->meetings index — Phase 3 (audit v2 M2).
         const acct = String(p.account_id || "");
         if (acct) {
           await (await store("zoom-tokens")).delete(acct);
-          const reg = await store("zoom-registrants");
-          const { blobs } = await reg.list({ prefix: `${acct}:` });
-          for (const b of blobs || []) await reg.delete(b.key);
+          await wipeByPrefix("zoom-registrants", `${acct}:`);
+          await wipeByPrefix("zoom-recordings", `${acct}:`);
         }
         break;
       }
@@ -106,10 +131,12 @@ exports.handler = async (event) => {
   const message = `v0:${ts}:${raw}`;
   const hash = crypto.createHmac("sha256", secret).update(message).digest("hex");
   const expected = `v0=${hash}`;
-  const ok =
-    typeof sig === "string" &&
-    sig.length === expected.length &&
-    crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected));
+  // Compare BYTE lengths, not UTF-16 code-unit lengths: a non-ASCII sig of the same character
+  // count encodes to more UTF-8 bytes, which would make timingSafeEqual throw RangeError ->
+  // an opaque 500 instead of a clean 401, trivially triggerable by any caller (audit v2 L3).
+  const sigBuf = typeof sig === "string" ? Buffer.from(sig) : null;
+  const expBuf = Buffer.from(expected);
+  const ok = !!(sigBuf && sigBuf.length === expBuf.length && crypto.timingSafeEqual(sigBuf, expBuf));
   // replay protection: reject timestamps older than 5 minutes (x-zm-request-timestamp is seconds).
   const fresh = ts && Math.abs(Date.now() / 1000 - Number(ts)) < 300;
   if (!ok || !fresh)
