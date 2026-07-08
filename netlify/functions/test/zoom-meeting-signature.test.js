@@ -66,6 +66,15 @@ test("403 when meetingNumber is not on the allowlist", async () => {
   assert.strictEqual(res.statusCode, 403);
 });
 
+test("allowlist: a meeting ON the list is accepted (acceptance, not only rejection)", async () => {
+  // Audit v2 L20: the allowlist was tested only for rejection. Pin the acceptance path too.
+  setup();
+  process.env.ZOOM_ALLOWED_MEETINGS = "88812345678,99999999999";
+  const { handler } = load();
+  const res = await handler({ httpMethod: "POST", headers: { origin: "https://www.ntlsn.com", cookie: validSessionCookie() }, body: JSON.stringify({ meetingNumber: "88812345678" }) });
+  assert.strictEqual(res.statusCode, 200);
+});
+
 test("rate limit: the 21st mint in a window is rejected with 429", async () => {
   setup();
   const { handler } = load();
