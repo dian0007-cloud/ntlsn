@@ -31,6 +31,17 @@ test it."
 ### Disposition legend
 🔧 = fixing in Phase 2 (this PR) · 📋 = Phase 3 proposal (needs Seb's sign-off) · 📝 = document only
 
+### Phase 2 outcome (all 🔧 items landed; test suite 55 → 73, all green)
+Every 🔧 finding below is fixed on branch `backend-security-audit` (7 commits, base `origin/main @ c2b306d`),
+each with a regression test. Documented/Phase-3 items carry their disposition. The Netlify build now runs
+`npm test`, so a function regression blocks deploy. Net new behaviour to flag for review:
+- `me.js` returns **503** (was 200) when `NTLSN_SESSION_SECRET` is unset — surfaces a broken deploy to
+  5xx alerting. The page already treats non-2xx as "not signed in", so UX is unchanged.
+- `netlify.toml` build command is now `npm test` (was a no-op echo) — **production deploys now fail on a
+  red test suite**. Revert to the echo if you'd rather gate via CI status checks instead.
+- `recording.completed` keys changed from `${meeting}` to `${account_id}:${meeting}` (enables deauth
+  cleanup; no reader exists, so no downstream impact).
+
 ---
 
 ## Medium
