@@ -7,7 +7,7 @@
 "use strict";
 
 const { readCookie, safeEqual } = require("../lib/cookies");
-const { store, durable } = require("../lib/store");
+const { open } = require("../lib/store");
 const enc = require("../lib/crypto");
 
 // Clear the transient state cookie on every exit path (success or failure).
@@ -16,34 +16,45 @@ const CLEAR = ["ntlsn_zoom_state=; Path=/; Max-Age=0"];
 // Persist the tenant's refresh token (encrypted) keyed by Zoom account_id, so the connection
 // survives access-token expiry. Best-effort: a storage/lookup failure must not break the
 // user-facing redirect (the flow still verified end-to-end; it just won't auto-refresh).
-async function persistTenant(t) {
-  if (!durable() || !enc.configured() || !t || !t.refresh_token) return;
-  try {
+// Gated on the REAL durability of the store (open().durable), not an env-var guess — and
+// bound by a hard ceiling so it can never blow the function budget after the single-use code
+// is consumed (audit v2 L2 / L15).
+async function persistTenant(t, openFn) {
+  if (!enc.configured() || !t || !t.refresh_token) return;
+  const { store: tokens, durable } = await (openFn || open)("zoom-tokens");
+  if (!durable) return; // no durable store -> refresh token can't survive a cold start; don't pretend
+  const work = (async () => {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 8000);
-    let me;
+    const timer = setTimeout(() => ctrl.abort(), 3000);
     try {
-      me = await fetch("https://api.zoom.us/v2/users/me", {
+      const me = await fetch("https://api.zoom.us/v2/users/me", {
         headers: { Authorization: `Bearer ${t.access_token}` },
         signal: ctrl.signal,
+      });
+      if (!me || !me.ok) return;
+      const acct = await me.json();
+      const accountId = acct && (acct.account_id || acct.id);
+      if (!accountId) return;
+      await tokens.setJSON(String(accountId), {
+        refresh_token_enc: enc.encrypt(t.refresh_token),
+        scope: t.scope || "",
+        updated_at: Math.floor(Date.now() / 1000),
       });
     } finally {
       clearTimeout(timer);
     }
-    if (!me || !me.ok) return;
-    const acct = await me.json();
-    const accountId = acct && (acct.account_id || acct.id);
-    if (!accountId) return;
-    const tokens = await store("zoom-tokens");
-    await tokens.setJSON(String(accountId), {
-      refresh_token_enc: enc.encrypt(t.refresh_token),
-      scope: t.scope || "",
-      updated_at: Math.floor(Date.now() / 1000),
-    });
+  })();
+  try {
+    await Promise.race([
+      work,
+      new Promise((_resolve, reject) => setTimeout(() => reject(new Error("persist timeout")), 3500)),
+    ]);
   } catch (_e) {
     // swallow — persistence is best-effort at this layer
   }
 }
+
+exports.persistTenant = persistTenant;
 
 exports.handler = async (event) => {
   const q = event.queryStringParameters || {};
