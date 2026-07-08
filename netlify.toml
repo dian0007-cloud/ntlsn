@@ -12,7 +12,9 @@
   publish = "."
 
 [build.environment]
-  NODE_VERSION = "20"
+  # Node 22 LTS. (Was 20 — EOL 2026-04-30. Code uses only fetch/base64url/node:test/crypto,
+  # all supported on 22; tests run green on 22 locally.) Phase 3 #5.
+  NODE_VERSION = "22"
 
 [functions]
   directory = "netlify/functions"

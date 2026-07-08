@@ -19,30 +19,54 @@ const CLEAR = ["ntlsn_zoom_state=; Path=/; Max-Age=0"];
 // Gated on the REAL durability of the store (open().durable), not an env-var guess — and
 // bound by a hard ceiling so it can never blow the function budget after the single-use code
 // is consumed (audit v2 L2 / L15).
+
+// Best-effort extraction of account_id from a Zoom access-token JWT (Phase 3 #3): Zoom OAuth
+// access tokens are JWTs carrying an account_id claim, so we can key the stored refresh token
+// WITHOUT a /users/me round-trip on the critical redirect path. Decode without verifying — the
+// token came from a direct server-to-server TLS exchange with Zoom, so its authenticity is
+// already established; we only need the keying field. Returns null for a non-JWT / a token
+// without the claim, in which case the caller falls back to /users/me.
+function accountFromTokenJwt(accessToken) {
+  try {
+    const parts = String(accessToken || "").split(".");
+    if (parts.length < 2) return null;
+    const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString("utf8"));
+    return payload && payload.account_id ? String(payload.account_id) : null;
+  } catch (_e) {
+    return null;
+  }
+}
+
 async function persistTenant(t, openFn) {
   if (!enc.configured() || !t || !t.refresh_token) return;
   const { store: tokens, durable } = await (openFn || open)("zoom-tokens");
   if (!durable) return; // no durable store -> refresh token can't survive a cold start; don't pretend
   const work = (async () => {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 3000);
-    try {
-      const me = await fetch("https://api.zoom.us/v2/users/me", {
-        headers: { Authorization: `Bearer ${t.access_token}` },
-        signal: ctrl.signal,
-      });
-      if (!me || !me.ok) return;
-      const acct = await me.json();
-      const accountId = acct && (acct.account_id || acct.id);
-      if (!accountId) return;
-      await tokens.setJSON(String(accountId), {
-        refresh_token_enc: enc.encrypt(t.refresh_token),
-        scope: t.scope || "",
-        updated_at: Math.floor(Date.now() / 1000),
-      });
-    } finally {
-      clearTimeout(timer);
+    // Prefer the account_id carried in the access-token JWT — avoids the /users/me round-trip
+    // on the critical redirect path. Fall back to /users/me only if the token isn't a JWT or
+    // carries no account_id (Phase 3 #3).
+    let accountId = accountFromTokenJwt(t.access_token);
+    if (!accountId) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 3000);
+      try {
+        const me = await fetch("https://api.zoom.us/v2/users/me", {
+          headers: { Authorization: `Bearer ${t.access_token}` },
+          signal: ctrl.signal,
+        });
+        if (!me || !me.ok) return;
+        const acct = await me.json();
+        accountId = acct && (acct.account_id || acct.id);
+      } finally {
+        clearTimeout(timer);
+      }
     }
+    if (!accountId) return;
+    await tokens.setJSON(String(accountId), {
+      refresh_token_enc: enc.encrypt(t.refresh_token),
+      scope: t.scope || "",
+      updated_at: Math.floor(Date.now() / 1000),
+    });
   })();
   try {
     await Promise.race([

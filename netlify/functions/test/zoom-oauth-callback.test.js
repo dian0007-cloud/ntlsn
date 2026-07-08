@@ -100,6 +100,32 @@ test("persistTenant durable path: encrypts the refresh token, keyed by account_i
   delete process.env.NTLSN_TOKEN_ENC_KEY;
 });
 
+test("persistTenant prefers the account_id in the access-token JWT (no /users/me call)", async () => {
+  // Phase 3 #3: when the Zoom access token is a JWT carrying account_id, key off it directly and
+  // skip the /users/me round-trip on the critical redirect path.
+  configure();
+  process.env.NTLSN_TOKEN_ENC_KEY = "a".repeat(64);
+  const { persistTenant } = load();
+  const payload = Buffer.from(JSON.stringify({ account_id: "JWT-ACCT" })).toString("base64url");
+  const accessToken = `hdr.${payload}.sig`;
+  let fetchCalled = false;
+  const orig = global.fetch;
+  global.fetch = async () => { fetchCalled = true; return { ok: false }; };
+  const writes = new Map();
+  const fakeOpen = async () => ({
+    durable: true,
+    store: { setJSON: async (k, v) => { writes.set(k, v); }, get: async () => null },
+  });
+  try {
+    await persistTenant({ access_token: accessToken, refresh_token: "rt", scope: "s" }, fakeOpen);
+  } finally {
+    global.fetch = orig;
+  }
+  assert.strictEqual(fetchCalled, false, "/users/me must NOT be called when the JWT carries account_id");
+  assert.ok(writes.has("JWT-ACCT"), "keyed by the JWT account_id");
+  delete process.env.NTLSN_TOKEN_ENC_KEY;
+});
+
 test("env unset (valid state, secret missing) → 302 to zoom_error, clears state cookie", async () => {
   // Regression for audit v2 L13: the callback returned 200 JSON on a partial misconfig, unlike
   // the start endpoint. start guards id/redirect only, so dropping just ZOOM_CLIENT_SECRET lets
