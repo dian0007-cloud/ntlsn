@@ -3,6 +3,7 @@ const { test } = require("node:test");
 const assert = require("node:assert");
 const crypto = require("crypto");
 const { store } = require("../../lib/store");
+const { getDeauth } = require("../../lib/deauth");
 
 const SECRET = "webhook-secret-test";
 function load() {
@@ -43,6 +44,7 @@ test("app_deauthorized deletes the tenant's tokens and registrant PII", async ()
   assert.strictEqual(await (await store("zoom-tokens")).get("ACCT1"), null);
   reg = await store("zoom-registrants");
   assert.strictEqual((await reg.list({ prefix: "ACCT1:" })).blobs.length, 0);
+  assert.strictEqual((await getDeauth("ACCT1")).status, "done", "deauth tombstone marked done after the synchronous wipe");
 });
 
 test("recording.completed is stored account-scoped and wiped on app_deauthorized (data-compliance)", async () => {

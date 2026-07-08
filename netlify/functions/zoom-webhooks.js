@@ -11,52 +11,13 @@
 
 const crypto = require("crypto");
 const { store } = require("../lib/store");
+const { deauthAccount, markDeauth } = require("../lib/deauth");
 const HEADERS = { "Content-Type": "application/json", "X-Content-Type-Options": "nosniff" };
 
-// Persist the verified event into durable state. Best-effort — a storage hiccup must not turn
-// into a non-200 (Zoom would retry/disable the endpoint). Meeting id + account id come from the
-// standard Zoom payload shape ({ payload: { account_id, object: { id, ... } } }).
-const DELETE_BATCH = 50;
-// Delete every key under `prefix` in a store, in bounded-parallel batches (Promise.all per
-// chunk) so a large account can't run the webhook past its wall-clock timeout before Zoom gets
-// its ack (audit v2 M1/L4). Best-effort — errors are swallowed so a storage hiccup never turns
-// into a non-200. The full fix offloads this to a Background Function (Phase 3).
-async function wipeByPrefix(storeName, prefix) {
-  try {
-    const s = await store(storeName);
-    const { blobs } = await s.list({ prefix });
-    const keys = (blobs || []).map((b) => b.key);
-    for (let i = 0; i < keys.length; i += DELETE_BATCH) {
-      const batch = keys.slice(i, i + DELETE_BATCH);
-      await Promise.all(batch.map((k) => s.delete(k).catch(() => {})));
-    }
-  } catch (_e) {
-    // best-effort; never fail the webhook on cleanup
-  }
-}
-
-// Clear a deauthorized account's zoom-live entries using the account->meetings index written on
-// meeting.started (audit v2 M2). zoom-live is keyed by bare meetingNumber and read by zoom-live.js
-// with no account context, so the index is the only way to find an account's live meetings. Also
-// drops the index entries themselves. Bounded-parallel; best-effort.
-async function cleanAccountLive(acct) {
-  try {
-    const idx = await store("zoom-account-meetings");
-    const { blobs } = await idx.list({ prefix: `${acct}:` });
-    const meetings = (blobs || []).map((b) => b.key.slice(acct.length + 1)).filter(Boolean);
-    if (meetings.length) {
-      const live = await store("zoom-live");
-      for (let i = 0; i < meetings.length; i += DELETE_BATCH) {
-        const batch = meetings.slice(i, i + DELETE_BATCH);
-        await Promise.all(batch.map((m) => live.delete(m).catch(() => {})));
-      }
-    }
-    await wipeByPrefix("zoom-account-meetings", `${acct}:`);
-  } catch (_e) {
-    // best-effort; never fail the webhook on cleanup
-  }
-}
-
+// applyEvent persists the verified event into durable state. Best-effort — a storage hiccup must
+// not turn into a non-200 (Zoom would retry/disable the endpoint). Deauthorization cleanup (tokens,
+// registrant PII, recordings, live state) AND its tombstone for the scheduled sweep live in
+// netlify/lib/deauth.js, shared with the zoom-deauth-sweep scheduled function (audit v2 M1/M2, Phase 3 #1).
 async function applyEvent(msg) {
   const p = (msg && msg.payload) || {};
   const obj = p.object || {};
@@ -102,15 +63,14 @@ async function applyEvent(msg) {
         break;
       }
       case "app_deauthorized": {
-        // A university removed us: delete their tokens, registrant PII, recording share URLs,
-        // and live state for that account (Zoom Marketplace data-compliance). zoom-live is
-        // recovered via the account->meetings index written on meeting.started (audit v2 M2).
+        // A university removed us (Zoom Marketplace data-compliance). Tombstone FIRST (it survives
+        // a timeout), then the synchronous wipe — idempotent, so the scheduled sweep finishing a
+        // timed-out large account is safe. Mark done when the sync wipe completes (Phase 3 #1).
         const acct = String(p.account_id || "");
         if (acct) {
-          await (await store("zoom-tokens")).delete(acct);
-          await wipeByPrefix("zoom-registrants", `${acct}:`);
-          await wipeByPrefix("zoom-recordings", `${acct}:`);
-          await cleanAccountLive(acct);
+          await markDeauth(acct, "pending");
+          await deauthAccount(acct);
+          await markDeauth(acct, "done");
         }
         break;
       }
