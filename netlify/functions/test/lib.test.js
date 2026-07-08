@@ -46,6 +46,20 @@ test("session verify rejects an expired token", () => {
   assert.strictEqual(session.verify(token, secret), null);
 });
 
+test("session verify rejects missing / non-numeric exp (never silently non-expiring)", () => {
+  const secret = "s";
+  // exp:0 is a number but 1970 (past) -> rejected; the old truthiness gate treated 0 as non-expiring.
+  assert.strictEqual(session.verify(session.sign({ orcid: "x", exp: 0 }, secret), secret), null);
+  // missing exp -> rejected (numeric expiry is mandatory)
+  assert.strictEqual(session.verify(session.sign({ orcid: "x" }, secret), secret), null);
+  // non-numeric exp -> rejected
+  assert.strictEqual(session.verify(session.sign({ orcid: "x", exp: "abc" }, secret), secret), null);
+  // sanity: a valid future exp still verifies
+  const future = Math.floor(Date.now() / 1000) + 3600;
+  const p = session.verify(session.sign({ orcid: "x", exp: future }, secret), secret);
+  assert.ok(p && p.orcid === "x", "a valid future-exp token must still verify");
+});
+
 test("pkce challenge is deterministic S256 base64url and verifier is >=43 chars", () => {
   const v = createVerifier();
   assert.ok(v.length >= 43);
