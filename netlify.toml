@@ -22,3 +22,10 @@
   # @netlify/blobs is ESM and provided by the Functions runtime; keep it external so esbuild
   # leaves the dynamic import() in place instead of trying to inline it.
   external_node_modules = ["@netlify/blobs"]
+
+# Scheduled safety-net for the webhook's synchronous Zoom deauth wipe (Phase 3 #1). Every 5 min;
+# the handler is bounded (MAX_PER_RUN accounts) so a long tail can't stall a single run. The sync
+# wipe in netlify/functions/zoom-webhooks.js remains the GUARANTEED path — this only finishes
+# tombstones left "pending" when that wipe times out on a large account.
+[functions."zoom-deauth-sweep"]
+  schedule = "*/5 * * * *"

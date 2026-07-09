@@ -4,12 +4,10 @@
 // run. Cleanup is idempotent (netlify/lib/deauth.js), so repeating the webhook's work is safe.
 // (audit v2 M1, Phase 3 #1.)
 //
-// To ENABLE the schedule, add to netlify.toml (deliberately left to the maintainer so nothing
-// build-breaking ships before review):
-//   [functions."zoom-deauth-sweep"]
-//     schedule = "*/5 * * * *"
-// Until then this function is unit-tested and callable but not cron-triggered; the synchronous wipe
-// in the webhook remains the GUARANTEED path, so reliability does not depend on the schedule.
+// Schedule ENABLED in netlify.toml (every 5 min, "*/5 * * * *"). This is a SAFETY-NET only — the
+// synchronous wipe in zoom-webhooks.js is the GUARANTEED path; this just finishes any "pending"
+// tombstone left behind when that wipe times out on a large account. Cleanup is idempotent
+// (netlify/lib/deauth.js), so repeating the webhook's work is safe. (Phase 3 #1.)
 "use strict";
 
 const { deauthAccount, markDeauth, listPendingDeauths } = require("../lib/deauth");
