@@ -1,0 +1,12 @@
+{
+ "generated": "2026-07-09",
+ "_schema": {
+  "issuer": "The platform's LTI issuer (iss claim), e.g. https://your-institution.moodlecloud.com",
+  "clientId": "Client ID this platform issued NTLSN when the tool was registered",
+  "authLoginUrl": "Platform's OIDC authorization endpoint (from its LTI Advantage tool-registration page)",
+  "jwksUrl": "Platform's public JWKS URL, used to verify launch id_tokens",
+  "deploymentIds": "Array of deployment_id values the platform issued for this registration",
+  "name": "Human-readable label shown on the NTLSN launch confirmation page"
+ },
+ "platforms": []
+}

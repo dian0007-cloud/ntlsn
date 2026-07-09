@@ -46,6 +46,7 @@ Event `type` values in use: `conference`, `workshop`, `symposium`, `webinar`, et
 - Two Google Apps Script endpoints (share-form intake; "Latest" feed). They are rate-limited and slow-cold-start — never block render on them; both patch scripts already fail soft. If replacing, the moderation workflow (Google Sheet review → approved rows surface in feed) must be preserved.
 - Google s2 favicon service for conference logos.
 - YouTube/Vimeo embeds (CSP `frame-src` already allows both).
+- LTI 1.3 Deep Linking (`netlify/functions/lti-login.js`, `lti-launch.js`, `lti-jwks.js`) — lets an LMS embed links to the free commons. Deep Linking only (no Resource Link/NRPS/AGS — never reads institutional data by design). Platform registry: `data/lti-platforms.json`. Setup: `docs/lti-setup.md`. Needs env `NTLSN_LTI_PRIVATE_KEY` (`scripts/generate-lti-keypair.mjs`). Status: Phase A (validated pipeline, no content picker yet).
 
 ## Conventions
 
