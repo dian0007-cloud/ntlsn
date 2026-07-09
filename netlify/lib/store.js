@@ -2,8 +2,8 @@
 //   • zoom-tokens   — per-account encrypted Zoom refresh tokens
 //   • zoom-live     — per-meeting LIVE flag (drives the embed)
 //   • zoom-registrants — per-registrant PII (deleted on app_deauthorized)
-//   • zoom-recordings  — per-meeting replay links
-//   • ratelimit     — best-effort durable counters
+//   • zoom-recordings  — per-account replay links (account-scoped; deleted on deauth)
+//   • ratelimit     — best-effort per-user counters (one record per user)
 //
 // Production uses the GLOBAL store (persists across deploys); previews/branch deploys use a
 // DEPLOY-scoped store so pilot/test data never lands in the production namespace. Off Netlify
@@ -54,25 +54,39 @@ function memStore(name) {
   };
 }
 
-// Return a store instance. Uses Netlify Blobs on the platform, in-memory otherwise.
-async function store(name) {
+// Construct a store. Returns { store, durable } where `durable` is TRUE only when a real
+// Netlify Blobs store was actually constructed — NOT merely when a NETLIFY* env var is set.
+// (The old durable() helper returned onNetlify, which lied whenever Blobs failed to import or
+// getStore/getDeployStore threw: store() silently fell back to per-instance _mem while callers
+// gating on durability believed they had durable storage — encrypted refresh tokens written to
+// ephemeral memory, rate limits enforced per-instance, live state split-brained across
+// instances, all masked by healthy 200s. Audit v2 L2.)
+async function open(name) {
   if (onNetlify) {
     const mod = await blobsMod();
     if (mod) {
       try {
-        return isProd ? mod.getStore({ name, consistency: "strong" }) : mod.getDeployStore({ name });
-      } catch (_e) {
-        // fall through to in-memory
+        const s = isProd
+          ? mod.getStore({ name, consistency: "strong" })
+          : mod.getDeployStore({ name });
+        return { store: s, durable: true };
+      } catch (e) {
+        // Blobs is configured-ish (a NETLIFY* env var is set) but unusable for this request
+        // (missing site/deploy context, bad region, partial import). Surface it so the silent
+        // fallback to per-instance _mem is observable — otherwise monitoring sees healthy 200s
+        // while durable state is effectively absent.
+        console.error("[ntlsn/store] Blobs unavailable — using in-memory fallback for", name, "::", (e && e.message) || e);
       }
     }
   }
-  return memStore(name);
+  return { store: memStore(name), durable: false };
 }
 
-// True only when durable Blobs storage is actually available (used to decide whether to
-// advertise persistence vs. degrade gracefully).
-function durable() {
-  return onNetlify;
+// Back-comat: return just the store object. Use this only from callers that do NOT gate on
+// durability (applyEvent writes best-effort; zoom-live reads best-effort; unit tests). Callers
+// that decide whether to persist/rate-limit MUST use open() and read the returned `durable`.
+async function store(name) {
+  return (await open(name)).store;
 }
 
-module.exports = { store, durable };
+module.exports = { store, open };

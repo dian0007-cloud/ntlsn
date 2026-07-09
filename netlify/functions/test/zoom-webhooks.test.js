@@ -75,3 +75,26 @@ test("stale timestamp is rejected even with a valid signature", async () => {
   const res = await handler({ httpMethod: "POST", headers: { "x-zm-request-timestamp": String(ts), "x-zm-signature": sign(ts, raw) }, body: raw });
   assert.strictEqual(res.statusCode, 401);
 });
+
+test("non-ASCII x-zm-signature of matching char length → 401 (no unhandled throw/500)", async () => {
+  // Regression for audit v2 L3: the old length guard compared UTF-16 code units while
+  // timingSafeEqual compared UTF-8 bytes, so a 67-code-unit sig containing one é (68 bytes)
+  // passed the guard then threw RangeError -> opaque 500. Must now be a clean 401.
+  process.env.ZOOM_WEBHOOK_SECRET_TOKEN = SECRET;
+  const { handler } = load();
+  const raw = JSON.stringify({ event: "meeting.started" });
+  const ts = Math.floor(Date.now() / 1000);
+  const sig = "v0=" + "A".repeat(63) + "é"; // 67 code units (== expected), 68 UTF-8 bytes
+  const res = await handler({ httpMethod: "POST", headers: { "x-zm-request-timestamp": String(ts), "x-zm-signature": sig }, body: raw });
+  assert.strictEqual(res.statusCode, 401);
+  assert.match(JSON.parse(res.body).error, /bad signature/);
+});
+
+test("missing signature header → 401 (not 500)", async () => {
+  process.env.ZOOM_WEBHOOK_SECRET_TOKEN = SECRET;
+  const { handler } = load();
+  const raw = JSON.stringify({ event: "meeting.started" });
+  const ts = Math.floor(Date.now() / 1000);
+  const res = await handler({ httpMethod: "POST", headers: { "x-zm-request-timestamp": String(ts) }, body: raw });
+  assert.strictEqual(res.statusCode, 401);
+});

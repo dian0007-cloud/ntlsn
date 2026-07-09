@@ -49,3 +49,21 @@ test("store: in-memory fallback supports get/set/setJSON/delete/list(prefix)", a
   await s.delete("k1");
   assert.strictEqual(await s.get("k1"), null);
 });
+
+test("store: open() reports durable:false when NETLIFY is set but Blobs context is missing (honest, not env-guessed)", async () => {
+  // Regression for audit v2 L2: the old durable() returned onNetlify (true whenever ANY NETLIFY*
+  // env var was set), so callers believed they had durable storage while store() silently fell
+  // back to per-instance _mem. open() must report the TRUTH: getStore throws without context.
+  const path = require.resolve("../../lib/store");
+  delete require.cache[path];
+  process.env.NETLIFY = "1";
+  delete process.env.NETLIFY_BLOBS_CONTEXT;
+  const { open } = require("../../lib/store");
+  const res = await open("honesty-check");
+  assert.strictEqual(res.durable, false, "getStore throws without Blobs context -> durable must be false");
+  assert.ok(res.store && typeof res.store.setJSON === "function", "still returns a usable fallback store");
+  // Restore the module to its default (off-Netlify) state for any later tests in this process.
+  delete process.env.NETLIFY;
+  delete require.cache[path];
+  require("../../lib/store");
+});

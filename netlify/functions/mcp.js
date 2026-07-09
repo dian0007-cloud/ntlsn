@@ -70,7 +70,10 @@ async function callTool(name, args) {
   if (name === "upcoming_events") {
     let d = await getJSON("events.json");
     const today = new Date().toISOString().slice(0, 10);
-    d = d.filter((e) => (e.date || "") >= today);
+    // Keep an event while it is still RUNNING, not only before it starts: compare against the
+    // END of its span (endDate), falling back to its start date (audit v2 L8 — previously a
+    // multi-day event was dropped from "what's on" on its own second day).
+    d = d.filter((e) => (e.endDate || e.date || "") >= today);
     if (args.uni) d = d.filter((e) => e.uni === String(args.uni).toLowerCase());
     d.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
     return d.slice(0, clampLimit(args.limit, 10));
@@ -90,6 +93,8 @@ async function callTool(name, args) {
   err.code = -32602;
   throw err;
 }
+
+exports.clampLimit = clampLimit;
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: CORS, body: "" };
@@ -139,6 +144,9 @@ exports.handler = async (event) => {
         // Argument errors surface as JSON-RPC protocol errors; genuine tool/runtime
         // failures come back as an MCP tool result with isError so the client can show it.
         if (e && e.code === -32602) return fail(-32602, String(e.message || "invalid params"));
+        // The client-facing message references server logs — actually write one so the failure
+        // (upstream data fetch, timeout) is diagnosable instead of silently swallowed (audit v2 L9).
+        console.error("[ntlsn/mcp] tool error", params && params.name, (e && e.message) || e);
         return ok({ content: [{ type: "text", text: "tool error — see server logs" }], isError: true });
       }
     }

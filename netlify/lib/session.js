@@ -34,7 +34,14 @@ function verify(token, secret) {
   } catch (_e) {
     return null;
   }
-  if (payload && payload.exp && Math.floor(Date.now() / 1000) > Number(payload.exp)) return null;
+  if (!payload || typeof payload !== "object") return null;
+  // A session token MUST carry a numeric expiry. The MAC already binds the body so an
+  // attacker cannot flip their own exp — this guards against a future signer bug: a token
+  // minted with exp:0 / a missing exp / a non-numeric exp is REJECTED rather than silently
+  // accepted as never-expiring (the old truthiness gate did the opposite — L1, audit v2).
+  const exp = payload.exp;
+  if (typeof exp !== "number" || !Number.isFinite(exp)) return null;
+  if (Math.floor(Date.now() / 1000) > exp) return null;
   return payload;
 }
 
