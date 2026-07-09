@@ -18,6 +18,7 @@ const CORS = {
   "Content-Type": "application/json",
   "X-Content-Type-Options": "nosniff",
 };
+const SD = "https://schema.org/";
 
 const TOOLS = [
   {
@@ -26,14 +27,42 @@ const TOOLS = [
     inputSchema: { type: "object", properties: { uni: { type: "string" }, limit: { type: "integer", default: 10 } } },
   },
   {
+    name: "events_by_type",
+    description: "Upcoming Australian higher-education events of one type (e.g. 'conference', 'workshop', 'webinar', 'symposium', 'showcase'). Returned chronologically. Optional limit.",
+    inputSchema: { type: "object", properties: { type: { type: "string" }, limit: { type: "integer", default: 10 } }, required: ["type"] },
+  },
+  {
+    name: "event_detail",
+    description: "One NTLSN event by its numeric id, returned as a Schema.org Event (JSON-LD): name, dates, description, organiser institution and place. Call upcoming_events / events_by_type first to find ids.",
+    inputSchema: { type: "object", properties: { id: { type: "integer" } }, required: ["id"] },
+  },
+  {
     name: "search_archive",
     description: "Search the rescued archive of 1,431 ALTC- and OLT-funded teaching-scholarship works (1994-2025) by title or author.",
+    inputSchema: { type: "object", properties: { query: { type: "string" }, limit: { type: "integer", default: 15 } }, required: ["query"] },
+  },
+  {
+    name: "best_practice",
+    description: "Search 80 curated higher-education learning-&-teaching best-practice works (the LTR best-practice collection) by title or author.",
     inputSchema: { type: "object", properties: { query: { type: "string" }, limit: { type: "integer", default: 15 } }, required: ["query"] },
   },
   {
     name: "universities",
     description: "All 42 Australian universities with their Learning & Teaching team pages, alliance group, and the Traditional Country each stands on.",
     inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "recognition_framework",
+    description: "The NTLSN Recognition Credit Framework v1.0 — recognition tiers, point thresholds and domains for sector teaching-and-learning scholarship. Editorial draft (evidence-informed; not a sector-ratified standard).",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "scholarly_lookup",
+    description: "Look up one scholarly entity via its public API: an ORCID iD (researcher profile), a DOI (Crossref work record) or a ROR id (research institution). Pass exactly ONE of orcid / doi / ror. Cached and rate-limited.",
+    inputSchema: {
+      type: "object",
+      properties: { orcid: { type: "string" }, doi: { type: "string" }, ror: { type: "string" } },
+    },
   },
 ];
 
@@ -65,6 +94,257 @@ function clampLimit(v, dflt) {
   return Math.min(Math.max(1, Math.floor(n)), 100);
 }
 
+// --- Schema.org Event shaping ----------------------------------------------
+// Mirrors the shape scripts/build-feeds.mjs emits in events-ld.json so the agent payload
+// and the web-page JSON-LD are the same object where fields overlap. events.json carries no
+// per-event stream URL or attendance mode, so VirtualLocation / eventAttendanceMode are
+// omitted here rather than fabricated (they extend trivially once that data exists).
+function toSchemaOrgEvent(ev, uniMap) {
+  if (!ev) return null;
+  const uni = (uniMap && uniMap.get(ev.uni)) || {};
+  const out = { "@type": "Event", name: ev.title };
+  if (ev.date) out.startDate = ev.date;
+  if (ev.endDate) out.endDate = ev.endDate;
+  out.eventStatus = `${SD}EventScheduled`;
+  if (ev.desc) out.description = ev.desc;
+  if (ev.url) out.url = ev.url;
+  if (uni.name) {
+    const address = { "@type": "PostalAddress", addressCountry: "AU" };
+    if (uni.city) address.addressLocality = uni.city;
+    if (uni.state) address.addressRegion = uni.state;
+    out.location = { "@type": "Place", name: uni.name, address };
+    out.organizer = { "@type": "CollegeOrUniversity", name: uni.name };
+    if (uni.tlUrl) out.organizer.url = uni.tlUrl;
+  }
+  return out;
+}
+
+// --- External scholarly look-ups (ORCID / Crossref / ROR) ------------------
+// Cost controls (mirrors the patterns verified in academic-tools-mcp): a fail-fast
+// per-provider concurrency cap (backpressure), single-flight coalescing of identical
+// concurrent requests, one transparent retry honouring Retry-After, an 8s timeout, and a
+// 24h NEGATIVE cache of definitive 404s so retry-happy agents can't burn invocations looking
+// up the same bad DOI/ORCID. All state is in-process per warm instance (no edge product needed).
+const NEG_TTL_MS = 24 * 60 * 60 * 1000;
+const negCache = new Map();      // `${provider}:${url}` -> expiry ms (404s only)
+const inflight = new Map();       // `${provider}:${url}` -> Promise (single-flight)
+const providerSlots = new Map(); // provider -> {active, max}
+const PROVIDER_MAX = { orcid: 3, crossref: 4, ror: 3 };
+const EXT_TIMEOUT_MS = 8000;
+const MAX_RETRY_WAIT_MS = 5000;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function parseRetryAfter(v) {
+  if (!v) return 0;
+  const n = Number(v);
+  if (Number.isFinite(n)) return Math.min(n * 1000, MAX_RETRY_WAIT_MS); // delta-seconds
+  const t = Date.parse(v);
+  if (Number.isFinite(t)) return Math.min(Math.max(0, t - Date.now()), MAX_RETRY_WAIT_MS); // HTTP-date
+  return 0;
+}
+
+function acquireSlot(provider) {
+  const max = PROVIDER_MAX[provider] || 3;
+  let s = providerSlots.get(provider);
+  if (!s) {
+    s = { active: 0, max };
+    providerSlots.set(provider, s);
+  }
+  if (s.active >= s.max) return null; // backpressure — fail fast, tell the agent to retry
+  s.active++;
+  return () => {
+    s.active--;
+  };
+}
+
+async function fetchExternal(provider, url) {
+  const key = `${provider}:${url}`;
+  const neg = negCache.get(key);
+  if (neg && neg > Date.now()) {
+    const e = new Error(`${provider}: not found (cached)`);
+    e.code = 404;
+    e.retryable = false;
+    throw e;
+  }
+  // Single-flight: identical concurrent look-ups share one fetch.
+  let p = inflight.get(key);
+  if (!p) {
+    p = doFetchExternal(provider, url, key).finally(() => inflight.delete(key));
+    inflight.set(key, p);
+  }
+  return p;
+}
+
+async function doFetchExternal(provider, url, key) {
+  const release = acquireSlot(provider);
+  if (!release) {
+    const e = new Error(`${provider}: busy, retry shortly`);
+    e.code = 503;
+    e.retryable = true;
+    e.backpressure = true;
+    throw e;
+  }
+  try {
+    let lastErr;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), EXT_TIMEOUT_MS);
+      try {
+        const r = await fetch(url, { headers: { Accept: "application/json" }, signal: ctrl.signal });
+        if (r.status === 404) {
+          negCache.set(key, Date.now() + NEG_TTL_MS);
+          const e = new Error(`${provider}: not found`);
+          e.code = 404;
+          e.retryable = false;
+          throw e;
+        }
+        if (r.status === 429 || r.status >= 500) {
+          const e = new Error(`${provider}: upstream ${r.status}`);
+          e.code = r.status;
+          e.retryable = true;
+          e.backpressure = true;
+          if (attempt === 0) {
+            const wait = parseRetryAfter(r.headers.get("retry-after"));
+            if (wait > 0) await sleep(wait);
+            else throw e; // nothing to honour — surface as retryable now
+            continue;
+          }
+          throw e;
+        }
+        if (!r.ok) {
+          const e = new Error(`${provider}: upstream ${r.status}`);
+          e.code = r.status;
+          e.retryable = false;
+          throw e;
+        }
+        return await r.json();
+      } catch (e) {
+        if (e && e.code) throw e; // already classified (404 / 4xx / 5xx / backpressure)
+        // Network/timeout: one transparent retry, then fail-soft as unreachable.
+        lastErr = e;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    const e = new Error(`${provider}: unreachable`);
+    e.code = 502;
+    e.retryable = true;
+    e.cause = lastErr && lastErr.message;
+    throw e;
+  } finally {
+    release();
+  }
+}
+
+// A clean "not found" result for an expected 404 — the agent reads this and stops retrying,
+// rather than the generic isError path which implies a server fault.
+function notFound(type, identifier) {
+  return { "@type": type, identifier, notFound: true };
+}
+
+// Condense each provider's record to the fields an agent actually needs.
+async function lookupOrcid(raw) {
+  const orcid = String(raw || "").trim();
+  if (!/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/.test(orcid)) {
+    const e = new Error("orcid must be 16 digits in ####-####-####-### format");
+    e.code = -32602;
+    throw e;
+  }
+  let rec;
+  try {
+    rec = await fetchExternal("orcid", `https://pub.orcid.org/v3.0/${orcid}/person`);
+  } catch (e) {
+    if (e.code === 404) return notFound("Person", `https://orcid.org/${orcid}`);
+    throw e;
+  }
+  const name = rec.name || {};
+  const urls = (rec["researcher-urls"] && rec["researcher-urls"]["researcher-url"]) || [];
+  return {
+    "@type": "Person",
+    identifier: `https://orcid.org/${orcid}`,
+    name: [name["given-names"], name["family-name"]].filter(Boolean).join(" ") || undefined,
+    biography: rec.biography && rec.biography.content,
+    keywords: (rec.keywords && rec.keywords.keyword || []).map((k) => k.content).filter(Boolean),
+    researcherUrls: urls.map((u) => u.url && u.url.value).filter(Boolean),
+  };
+}
+
+async function lookupDoi(raw) {
+  const doi = String(raw || "").trim().replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
+  if (!/^10\./.test(doi)) {
+    const e = new Error("doi must start with '10.' (bare or as a doi.org URL)");
+    e.code = -32602;
+    throw e;
+  }
+  let rec;
+  try {
+    rec = await fetchExternal("crossref", `https://api.crossref.org/works/${encodeURIComponent(doi)}`);
+  } catch (e) {
+    if (e.code === 404) return notFound("ScholarlyArticle", `https://doi.org/${doi}`);
+    throw e;
+  }
+  const m = rec.message || {};
+  const first = (a) => (Array.isArray(a) ? a[0] : a);
+  const dateParts = (m.published && m.published["date-parts"] && m.published["date-parts"][0]) || [];
+  return {
+    "@type": "ScholarlyArticle",
+    identifier: `https://doi.org/${doi}`,
+    name: first(m.title),
+    author: (m.author || []).map((a) => [a.given, a.family].filter(Boolean).join(" ")).filter(Boolean),
+    isPartOf: first(m["container-title"]) ? { name: first(m["container-title"]) } : undefined,
+    datePublished: dateParts.length ? dateParts.join("-") : undefined,
+    publisher: m.publisher,
+    url: m.URL,
+    type: m.type,
+  };
+}
+
+async function lookupRor(raw) {
+  let ror = String(raw || "").trim();
+  if (/^https?:\/\/ror\.org\//i.test(ror)) ror = ror.replace(/^https?:\/\/ror\.org\//i, "");
+  if (!/^[0-9a-z]+$/.test(ror)) {
+    const e = new Error("ror must be a ROR id (e.g. '0489m5b54' or its ror.org URL)");
+    e.code = -32602;
+    throw e;
+  }
+  let rec;
+  try {
+    rec = await fetchExternal("ror", `https://api.ror.org/v2/organizations/${ror}`);
+  } catch (e) {
+    if (e.code === 404) return notFound("EducationalOrganization", `https://ror.org/${ror}`);
+    throw e;
+  }
+  return {
+    "@type": "EducationalOrganization",
+    identifier: rec.id || `https://ror.org/${ror}`,
+    name: rec.name,
+    aliases: rec.aliases,
+    acronyms: rec.acronyms,
+    types: rec.types,
+    country: rec.country && rec.country.country_name,
+    url: (rec.links && rec.links[0]) || undefined,
+  };
+}
+
+// Exactly one identifier per call.
+async function scholarlyLookup(args) {
+  args = args || {};
+  const ids = ["orcid", "doi", "ror"].filter((k) => args[k] != null && args[k] !== "");
+  if (ids.length !== 1) {
+    const e = new Error(
+      ids.length === 0
+        ? "provide exactly one of: orcid, doi, ror"
+        : `provide exactly ONE of orcid/doi/ror (got ${ids.length}: ${ids.join(", ")})`
+    );
+    e.code = -32602;
+    throw e;
+  }
+  if (ids[0] === "orcid") return lookupOrcid(args.orcid);
+  if (ids[0] === "doi") return lookupDoi(args.doi);
+  return lookupRor(args.ror);
+}
+
 async function callTool(name, args) {
   args = args || {};
   if (name === "upcoming_events") {
@@ -78,6 +358,31 @@ async function callTool(name, args) {
     d.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
     return d.slice(0, clampLimit(args.limit, 10));
   }
+  if (name === "events_by_type") {
+    const type = String(args.type == null ? "" : args.type).toLowerCase().trim();
+    if (!type) {
+      const err = new Error("type is required (e.g. conference, workshop, webinar, symposium)");
+      err.code = -32602;
+      throw err;
+    }
+    let d = await getJSON("events.json");
+    const today = new Date().toISOString().slice(0, 10);
+    d = d.filter((e) => String(e.type || "").toLowerCase() === type && (e.endDate || e.date || "") >= today);
+    d.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    return d.slice(0, clampLimit(args.limit, 10));
+  }
+  if (name === "event_detail") {
+    const id = Number(args.id);
+    if (!Number.isInteger(id)) {
+      const err = new Error("id (integer) is required");
+      err.code = -32602;
+      throw err;
+    }
+    const [events, unis] = await Promise.all([getJSON("events.json"), getJSON("universities.json")]);
+    const uniMap = new Map(unis.map((u) => [u.id, u]));
+    const ev = events.find((e) => e.id === id);
+    return toSchemaOrgEvent(ev, uniMap); // null when not found
+  }
   if (name === "search_archive") {
     const q = String(args.query == null ? "" : args.query).toLowerCase().trim();
     if (!q) {
@@ -88,13 +393,27 @@ async function callTool(name, args) {
     const d = await getJSON("ltr.json");
     return d.filter((w) => ((w.t || "") + " " + (w.a || "")).toLowerCase().includes(q)).slice(0, clampLimit(args.limit, 15));
   }
+  if (name === "best_practice") {
+    const q = String(args.query == null ? "" : args.query).toLowerCase().trim();
+    if (!q) {
+      const err = new Error("query is required");
+      err.code = -32602;
+      throw err;
+    }
+    const d = await getJSON("ltr-bestpractice.json");
+    return d.filter((w) => ((w.t || "") + " " + (w.a || "")).toLowerCase().includes(q)).slice(0, clampLimit(args.limit, 15));
+  }
   if (name === "universities") return getJSON("universities.json");
+  if (name === "recognition_framework") return getJSON("rcf.json");
+  if (name === "scholarly_lookup") return scholarlyLookup(args);
   const err = new Error(`unknown tool: ${name}`);
   err.code = -32602;
   throw err;
 }
 
 exports.clampLimit = clampLimit;
+exports.toSchemaOrgEvent = toSchemaOrgEvent;
+exports.scholarlyLookup = scholarlyLookup;
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers: CORS, body: "" };
@@ -131,7 +450,7 @@ exports.handler = async (event) => {
 
   try {
     if (method === "initialize")
-      return ok({ protocolVersion: "2024-11-05", capabilities: { tools: {} }, serverInfo: { name: "ntlsn", version: "1.0.0" } });
+      return ok({ protocolVersion: "2024-11-05", capabilities: { tools: {} }, serverInfo: { name: "ntlsn", version: "1.1.0" } });
     if (method === "notifications/initialized" || method === "notifications/cancelled")
       return { statusCode: 202, headers: CORS, body: "" };
     if (method === "ping") return ok({});
