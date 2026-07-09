@@ -57,6 +57,11 @@ const TOOLS = [
     inputSchema: { type: "object", properties: {} },
   },
   {
+    name: "recognition_crosswalk",
+    description: "Illustrative cross-walk of teaching-recognition evidence (e.g. student feedback data, a teaching award, SoTL publications) against four Australian HE recognition pathways — PSF 2023 fellowship, AAUT national awards, a promotion case, and Scholarship of T&L. Not an official equivalence. Optional keyword matches evidence names; omit to return every evidence type and both frameworks.",
+    inputSchema: { type: "object", properties: { evidence: { type: "string" } } },
+  },
+  {
     name: "scholarly_lookup",
     description: "Look up one scholarly entity via its public API: an ORCID iD (researcher profile), a DOI (Crossref work record) or a ROR id (research institution). Pass exactly ONE of orcid / doi / ror. Cached and rate-limited.",
     inputSchema: {
@@ -405,6 +410,12 @@ async function callTool(name, args) {
   }
   if (name === "universities") return getJSON("universities.json");
   if (name === "recognition_framework") return getJSON("rcf.json");
+  if (name === "recognition_crosswalk") {
+    const cw = await getJSON("recognition-crosswalk.json");
+    const q = String(args.evidence == null ? "" : args.evidence).toLowerCase().trim();
+    const evidence = q ? cw.evidence.filter((e) => e.name.toLowerCase().includes(q)) : cw.evidence;
+    return { frameworks: cw.frameworks, evidence, disclaimer: cw.disclaimer, license: cw.license };
+  }
   if (name === "scholarly_lookup") return scholarlyLookup(args);
   const err = new Error(`unknown tool: ${name}`);
   err.code = -32602;

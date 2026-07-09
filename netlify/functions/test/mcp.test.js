@@ -143,11 +143,11 @@ function mockUrls(map) {
   return { calls, restore: () => { global.fetch = orig; } };
 }
 
-test("tools/list advertises all eight tools", async () => {
+test("tools/list advertises all nine tools", async () => {
   const { handler } = load();
   const res = await rpc(handler, { jsonrpc: "2.0", id: 1, method: "tools/list" });
   const names = JSON.parse(res.body).result.tools.map((t) => t.name);
-  for (const n of ["upcoming_events", "events_by_type", "event_detail", "search_archive", "best_practice", "universities", "recognition_framework", "scholarly_lookup"]) {
+  for (const n of ["upcoming_events", "events_by_type", "event_detail", "search_archive", "best_practice", "universities", "recognition_framework", "recognition_crosswalk", "scholarly_lookup"]) {
     assert.ok(names.includes(n), `tools/list missing ${n}`);
   }
 });
@@ -229,6 +229,45 @@ test("recognition_framework returns the framework document", async () => {
     const doc = JSON.parse(JSON.parse(res.body).result.content[0].text);
     assert.strictEqual(doc.framework, "NTLSN Recognition Credit Framework");
     assert.ok(Array.isArray(doc.tiers));
+  });
+});
+
+test("recognition_crosswalk returns all evidence + frameworks when no keyword given", async () => {
+  const { handler } = load();
+  const cw = {
+    frameworks: [{ key: "PSF", name: "PSF 2023", cells: [{ key: "A", label: "Areas of Activity" }] }],
+    evidence: [
+      { id: "a", name: "A teaching award or nomination", maps: { PSF: ["A"] } },
+      { id: "b", name: "Mentoring records", maps: { PSF: ["A"] } },
+    ],
+    disclaimer: "Illustrative only.",
+    license: "CC-BY-4.0",
+  };
+  await withData({ "recognition-crosswalk.json": cw }, async () => {
+    const res = await rpc(handler, { jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "recognition_crosswalk", arguments: {} } });
+    const doc = JSON.parse(JSON.parse(res.body).result.content[0].text);
+    assert.strictEqual(doc.evidence.length, 2);
+    assert.strictEqual(doc.frameworks.length, 1);
+    assert.strictEqual(doc.disclaimer, "Illustrative only.");
+  });
+});
+
+test("recognition_crosswalk filters evidence by keyword, case-insensitively", async () => {
+  const { handler } = load();
+  const cw = {
+    frameworks: [],
+    evidence: [
+      { id: "a", name: "A teaching award or nomination", maps: {} },
+      { id: "b", name: "Mentoring records", maps: {} },
+    ],
+    disclaimer: "d",
+    license: "CC-BY-4.0",
+  };
+  await withData({ "recognition-crosswalk.json": cw }, async () => {
+    const res = await rpc(handler, { jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "recognition_crosswalk", arguments: { evidence: "AWARD" } } });
+    const doc = JSON.parse(JSON.parse(res.body).result.content[0].text);
+    assert.strictEqual(doc.evidence.length, 1);
+    assert.strictEqual(doc.evidence[0].id, "a");
   });
 });
 
