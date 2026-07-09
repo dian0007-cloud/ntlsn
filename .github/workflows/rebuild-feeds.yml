@@ -1,0 +1,56 @@
+name: Rebuild feeds + archive past events
+
+# Regenerates events.ics / feed.xml / events-ld.json / sitemap.xml from
+# data/events.json every day, and archives events that have slipped into the
+# past (TASKS.md 3.2 — auto-expiry + archive). Without this, the feeds drift
+# stale purely from the passage of time: events cross into the past daily but
+# nothing rebuilds the feeds on a schedule. Any resulting change is committed
+# straight back to main by the default GITHUB_TOKEN.
+#
+# This is a standing write-to-main capability — reviewed at the PR that adds
+# this file. It only ever regenerates already-reviewed data, so a direct
+# commit (not a PR per run) is appropriate and matches TASKS.md 3.2.
+
+on:
+  schedule:
+    - cron: '17 0 * * *'   # daily 00:17 UTC (~10:17 AEST); off-the-hour to spread load
+  workflow_dispatch:        # manual run from the Actions tab
+
+permissions:
+  contents: write           # job-scoped: lets the default GITHUB_TOKEN push the regenerated files
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+
+      - name: Archive past events
+        run: node scripts/archive-events.mjs --apply
+
+      - name: Validate data
+        run: node scripts/validate-data.mjs
+
+      - name: Build feeds
+        run: node scripts/build-feeds.mjs
+
+      - name: Commit regenerated feeds + archived data (if anything changed)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Stage ONLY the files this job legitimately regenerates/mutates —
+          # never a blanket `git add -A`, so a stray file in the runner can't
+          # ride along into main.
+          git add events.ics feed.xml events-ld.json sitemap.xml data/events.json
+          for f in data/archive-*.json; do [ -e "$f" ] && git add "$f"; done
+          if [ -z "$(git status --porcelain --staged)" ]; then
+            echo "No changes — feeds are fresh."
+            exit 0
+          fi
+          git commit -m "chore: scheduled feed rebuild + archive [skip ci]"
+          # Push with the default GITHUB_TOKEN (no PAT / secret). If branch
+          # protection or a concurrent commit rejects this, the job fails
+          # loudly here — never force-push over main.
+          git push

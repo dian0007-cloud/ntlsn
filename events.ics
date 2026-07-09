@@ -9,118 +9,8 @@ X-WR-CALDESC:Every symposium\, workshop & PD opportunity across all 42 Au
 X-WR-TIMEZONE:Australia/Brisbane
 REFRESH-INTERVAL;VALUE=DURATION:P1D
 BEGIN:VEVENT
-UID:ntlsn-94@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260205
-DTEND;VALUE=DATE:20260207
-SUMMARY:WA Teaching & Learning Forum (WATLF)
-DESCRIPTION:35th annual cross-institutional WA forum\, hosted at Curtin 
- — theme "Co-creating the Future". Three streams per day.\nhttps://www.
- wateachingandlearningforum.org/
-LOCATION:Curtin University — Perth\, WA
-URL:https://www.wateachingandlearningforum.org/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-1@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260224
-DTEND;VALUE=DATE:20260227
-SUMMARY:Universities Australia Solutions Summit
-DESCRIPTION:National summit at the National Convention Centre\, Canberra.
-  AAUT awards announced 24 Feb.\nhttps://events.uniaus.edu.au/2026solutio
- nssummit/home
-LOCATION:Australian National University — Canberra\, ACT
-URL:https://events.uniaus.edu.au/2026solutionssummit/home
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-2@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260224
-DTEND;VALUE=DATE:20260225
-SUMMARY:AAUT National Teaching Awards
-DESCRIPTION:Australian Awards for University Teaching announced at UA Sol
- utions Summit.\nhttps://universitiesaustralia.edu.au/event/2026-universi
- ties-australia-solutions-summit/
-LOCATION:Australian National University — Canberra\, ACT
-URL:https://universitiesaustralia.edu.au/event/2026-universities-australi
- a-solutions-summit/
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-3@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260313
-DTEND;VALUE=DATE:20260314
-SUMMARY:CAULLT Grant Information Webinar
-DESCRIPTION:Online webinar on the 2026 round of CAULLT grants.\nhttps://w
- ww.caullt.edu.au/grants/
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://www.caullt.edu.au/grants/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-4@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260417
-DTEND;VALUE=DATE:20260418
-SUMMARY:CAULLT Annual General Meeting
-DESCRIPTION:Virtual AGM via Zoom\, 11am-12pm AEST.\nhttps://www.caullt.ed
- u.au/events-and-learning/
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://www.caullt.edu.au/events-and-learning/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-5@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260603
-DTEND;VALUE=DATE:20260605
-SUMMARY:EDUtech Australia 2026
-DESCRIPTION:Australia's largest education conference at ICC Sydney.\nhttp
- s://www.terrapinn.com/exhibition/edutech-australia/index.stm
-LOCATION:University of Technology Sydney — Sydney\, NSW
-URL:https://www.terrapinn.com/exhibition/edutech-australia/index.stm
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-6@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260629
-DTEND;VALUE=DATE:20260702
-SUMMARY:STARS Student Success Conference
-DESCRIPTION:In-person conference at Novotel Sunshine Coast.\nhttps://unis
- tars.org/
-LOCATION:University of the Sunshine Coast — Sippy Downs\, QLD
-URL:https://unistars.org/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-7@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260630
-DTEND;VALUE=DATE:20260703
-SUMMARY:Advance HE Teaching & Learning Conference
-DESCRIPTION:'Success by Design: The Future of Learning Now' - University 
- of Sheffield\, UK.\nhttps://www.advance-he.ac.uk/Programmes-events/confe
- rences/Teaching-Learning-2026
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://www.advance-he.ac.uk/Programmes-events/conferences/Teaching-L
- earning-2026
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:ntlsn-8@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20260706
 DTEND;VALUE=DATE:20260710
 SUMMARY:HERDSA Conference 2026
@@ -132,169 +22,36 @@ CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-9@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260903
-DTEND;VALUE=DATE:20260905
-SUMMARY:National Education Summit - Melbourne
-DESCRIPTION:Melbourne Convention and Exhibition Centre.\nhttps://national
- educationsummit.com.au/
+UID:ntlsn-58@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260709
+DTEND;VALUE=DATE:20260711
+SUMMARY:ACODE Benchmarking Summit 2026
+DESCRIPTION:University of Melbourne. New Accessibility benchmark.\nhttps:
+ //acode.edu.au/activities/workshops/inter-institutional-benchmarking-sum
+ mits
 LOCATION:University of Melbourne — Melbourne\, VIC
-URL:https://nationaleducationsummit.com.au/
+URL:https://acode.edu.au/activities/workshops/inter-institutional-benchma
+ rking-summits
 CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-10@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261027
-DTEND;VALUE=DATE:20261031
-SUMMARY:AIEC 2026
-DESCRIPTION:40th anniversary in Sydney. Theme: 'Future Thinking'.\nhttps:
- //aiec.idp.com/
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://aiec.idp.com/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-11@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261129
-DTEND;VALUE=DATE:20261203
-SUMMARY:ASCILITE 2026
-DESCRIPTION:Rydges Southbank\, Brisbane.\nhttps://2026conference.ascilite
- .org/
+UID:ntlsn-68@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260714
+DTEND;VALUE=DATE:20260715
+SUMMARY:ASCILITE x Turnitin: Authentic Assessment
+DESCRIPTION:Authentic assessments at scale with AI-era tools.\nhttps://as
+ cilite.org/30-03-2026-bulletin/
 LOCATION:Queensland University of Technology — Brisbane\, QLD
-URL:https://2026conference.ascilite.org/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-12@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260209
-DTEND;VALUE=DATE:20260214
-SUMMARY:UQ Ready to Teach Week (Sem 1)
-DESCRIPTION:ITaLI-run preparation week for Semester 1 teaching.\nhttps://
- itali.uq.edu.au/event/11813/ready-teach-week-sem-1-2026
-LOCATION:University of Queensland — Brisbane\, QLD
-URL:https://itali.uq.edu.au/event/11813/ready-teach-week-sem-1-2026
-CATEGORIES:WEEK
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-13@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260515
-DTEND;VALUE=DATE:20260516
-SUMMARY:Monash TransformED Conference
-DESCRIPTION:Monash University Malaysia's L&T Conference.\nhttps://www.mon
- ash.edu.my/education-excellence/transformed
-LOCATION:Monash University — Melbourne\, VIC
-URL:https://www.monash.edu.my/education-excellence/transformed
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-14@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261116
-DTEND;VALUE=DATE:20261126
-SUMMARY:UNSW Education Festival
-DESCRIPTION:Annual festival. Cross-faculty showcases.\nhttps://www.educat
- ion.unsw.edu.au/news-events/unsw-education-festival
-LOCATION:UNSW Sydney — Sydney\, NSW
-URL:https://www.education.unsw.edu.au/news-events/unsw-education-festival
-CATEGORIES:WEEK
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-20@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261102
-DTEND;VALUE=DATE:20261107
-SUMMARY:UQ Teaching & Learning Week
-DESCRIPTION:ITaLI's flagship week celebrating teaching excellence.
-LOCATION:University of Queensland — Brisbane\, QLD
-CATEGORIES:WEEK
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-21@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260527
-DTEND;VALUE=DATE:20260529
-SUMMARY:UniSQ L&T Showcase
-DESCRIPTION:Featuring LIFT Fellows\, SoTL projects\, and regional teachin
- g innovation.
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-22@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261014
-DTEND;VALUE=DATE:20261016
-SUMMARY:Deakin Teaching & Learning Conference
-DESCRIPTION:DTeach conference on inclusive teaching.
-LOCATION:Deakin University — Geelong\, VIC
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-23@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261007
-DTEND;VALUE=DATE:20261009
-SUMMARY:Monash Education Academy Showcase
-DESCRIPTION:MEA fellowship projects and teaching innovations.
-LOCATION:Monash University — Melbourne\, VIC
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-24@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261021
-DTEND;VALUE=DATE:20261023
-SUMMARY:UniMelb Teaching & Learning Showcase
-DESCRIPTION:Annual showcase of teaching practice.
-LOCATION:University of Melbourne — Melbourne\, VIC
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-25@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260916
-DTEND;VALUE=DATE:20260918
-SUMMARY:Sydney Teaching Symposium
-DESCRIPTION:USyd's annual symposium — practical\, transferable\, studen
- t-centred teaching (Educational Innovation). Date TBC.\nhttps://educatio
- nal-innovation.sydney.edu.au/teaching@sydney/about-educational-innovatio
- n/workshops-and-events/
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://educational-innovation.sydney.edu.au/teaching@sydney/about-ed
- ucational-innovation/workshops-and-events/
-CATEGORIES:SYMPOSIUM
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-26@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261028
-DTEND;VALUE=DATE:20261029
-SUMMARY:QUT L&T Symposium
-DESCRIPTION:Learning design\, digital pedagogy\, first-year experience.
-LOCATION:Queensland University of Technology — Brisbane\, QLD
-CATEGORIES:SYMPOSIUM
+URL:https://ascilite.org/30-03-2026-bulletin/
+CATEGORIES:WORKSHOP
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ntlsn-95@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20260721
 DTEND;VALUE=DATE:20260722
 SUMMARY:UNE L&T Symposium: Student Voice & Engagement
@@ -309,8 +66,243 @@ CATEGORIES:SYMPOSIUM
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:ntlsn-92@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260724
+DTEND;VALUE=DATE:20260725
+SUMMARY:CAULLT: Distributed Leadership for Academic Integrity
+DESCRIPTION:Perspectives from diverse leaders on distributed leadership t
+ hat supports academic integrity in higher education.\nhttps://www.caullt
+ .edu.au/distributed-leadership-that-supports-academic-integrity-in-highe
+ r-education-perspectives-from-diverse-leaders-2/
+LOCATION:
+URL:https://www.caullt.edu.au/distributed-leadership-that-supports-academ
+ ic-integrity-in-higher-education-perspectives-from-diverse-leaders-2/
+CATEGORIES:WEBINAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-69@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260807
+DTEND;VALUE=DATE:20260808
+SUMMARY:ASCILITE x Turnitin: Assurance of Learning
+DESCRIPTION:Assurance of learning and generative AI.\nhttps://ascilite.or
+ g/30-03-2026-bulletin/
+LOCATION:Queensland University of Technology — Brisbane\, QLD
+URL:https://ascilite.org/30-03-2026-bulletin/
+CATEGORIES:WORKSHOP
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-53@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260820
+DTEND;VALUE=DATE:20260821
+SUMMARY:Bond Innovation in Education Forum
+DESCRIPTION:Personalised learning\, small-group pedagogy.
+LOCATION:Bond University — Gold Coast\, QLD
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-81@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260820
+DTEND;VALUE=DATE:20260821
+SUMMARY:AU & AAUT Breakfast: Dr Miao Li (CSU)
+DESCRIPTION:Citation recipient. Details to be announced.
+LOCATION:Adelaide University — Adelaide\, SA
+CATEGORIES:WEBINAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-47@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260825
+DTEND;VALUE=DATE:20260828
+SUMMARY:CQU Tertiary Teaching Online Conference
+DESCRIPTION:Three-day online conference — "Teaching practice becomes sc
+ holarship by learning through design." Five themes (Collaboration & Belo
+ nging\, AI-Enhanced L&T\, Contemporary Assessment\, Professional Identit
+ y\, Students as Partners)\; live-streamed + recorded. Hosted by Academic
+  Board & Learning & Teaching Futures.\nhttps://lts.cqu.edu.au/conf/
+LOCATION:CQUniversity — Rockhampton\, QLD
+URL:https://lts.cqu.edu.au/conf/
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-39@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260826
+DTEND;VALUE=DATE:20260827
+SUMMARY:CDU Northern Teaching Symposium
+DESCRIPTION:First Nations pedagogies\, remote learning.
+LOCATION:Charles Darwin University — Darwin\, NT
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-77@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260827
+DTEND;VALUE=DATE:20260828
+SUMMARY:AAUT & HERDSA Webinar Session 4
+DESCRIPTION:Details to be announced.
+LOCATION:
+CATEGORIES:WEBINAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-9@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260903
+DTEND;VALUE=DATE:20260905
+SUMMARY:National Education Summit - Melbourne
+DESCRIPTION:Melbourne Convention and Exhibition Centre.\nhttps://national
+ educationsummit.com.au/
+LOCATION:University of Melbourne — Melbourne\, VIC
+URL:https://nationaleducationsummit.com.au/
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-59@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260907
+DTEND;VALUE=DATE:20260910
+SUMMARY:ASCILITE Spring into Excellence
+DESCRIPTION:3-day intensive at RMIT Melbourne.\nhttps://ascilite.org/get-
+ involved/spring-into-excellence-research-school/
+LOCATION:RMIT University — Melbourne\, VIC
+URL:https://ascilite.org/get-involved/spring-into-excellence-research-sch
+ ool/
+CATEGORIES:WORKSHOP
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-34@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260909
+DTEND;VALUE=DATE:20260910
+SUMMARY:Newcastle Education Innovation Symposium
+DESCRIPTION:Regional engagement\, WIL\, STEM reform.
+LOCATION:University of Newcastle — Newcastle\, NSW
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-55@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260909
+DTEND;VALUE=DATE:20260910
+SUMMARY:Swinburne Innovation in Teaching Day
+DESCRIPTION:Technology-enhanced teaching.
+LOCATION:Swinburne University of Technology — Melbourne\, VIC
+CATEGORIES:SHOWCASE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-25@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260918
+SUMMARY:Sydney Teaching Symposium
+DESCRIPTION:USyd's annual symposium — practical\, transferable\, studen
+ t-centred teaching (Educational Innovation). Date TBC.\nhttps://educatio
+ nal-innovation.sydney.edu.au/teaching@sydney/about-educational-innovatio
+ n/workshops-and-events/
+LOCATION:University of Sydney — Sydney\, NSW
+URL:https://educational-innovation.sydney.edu.au/teaching@sydney/about-ed
+ ucational-innovation/workshops-and-events/
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-41@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:VU Block Model Symposium
+DESCRIPTION:VU Block Model Academy.
+LOCATION:Victoria University — Melbourne\, VIC
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-52@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260917
+DTEND;VALUE=DATE:20260918
+SUMMARY:ACU Teaching & Service Symposium
+DESCRIPTION:Teaching excellence with community service.
+LOCATION:Australian Catholic University — North Sydney\, NSW
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-82@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260917
+DTEND;VALUE=DATE:20260918
+SUMMARY:AU & AAUT Breakfast: Spencer & Jones (RMIT)
+DESCRIPTION:Teaching Excellence Award recipients. Details to be announced
+ .
+LOCATION:Adelaide University — Adelaide\, SA
+CATEGORIES:WEBINAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-30@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260923
+DTEND;VALUE=DATE:20260924
+SUMMARY:RMIT Learning & Teaching Festival
+DESCRIPTION:Multi-day cross-campus festival (Melbourne + Vietnam) — inn
+ ovative teaching and GenAI responses. Date TBC.\nhttps://www.rmit.edu.au
+ /events
+LOCATION:RMIT University — Melbourne\, VIC
+URL:https://www.rmit.edu.au/events
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-78@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260925
+SUMMARY:AAUT & HERDSA Webinar Session 5
+DESCRIPTION:Details to be announced.
+LOCATION:
+CATEGORIES:WEBINAR
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-36@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260928
+DTEND;VALUE=DATE:20261003
+SUMMARY:Macquarie Learning Innovation Week
+DESCRIPTION:Five days of workshops and showcases.
+LOCATION:Macquarie University — Sydney\, NSW
+CATEGORIES:WEEK
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-43@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:UC Teaching Innovation Forum
+DESCRIPTION:Connected learning\, micro-credentials.
+LOCATION:University of Canberra — Canberra\, ACT
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:ntlsn-96@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261003
 SUMMARY:Global Students as Partners Roundtable 2026
@@ -326,51 +318,74 @@ CATEGORIES:SYMPOSIUM
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-97@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261213
-DTEND;VALUE=DATE:20261217
-SUMMARY:AAEE 2026 — Make the Impossible\, Possible
-DESCRIPTION:37th Australasian Association for Engineering Education confe
- rence at UNSW — scholarly engineering education\, innovative teaching 
- practices and workshops.\nhttps://aaee.net.au/
-LOCATION:UNSW Sydney — Sydney\, NSW
-URL:https://aaee.net.au/
+UID:ntlsn-32@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261005
+DTEND;VALUE=DATE:20261010
+SUMMARY:Curtin Teaching Excellence Week
+DESCRIPTION:Workshops\, masterclasses\, and awards.
+LOCATION:Curtin University — Perth\, WA
+CATEGORIES:WEEK
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-23@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261009
+SUMMARY:Monash Education Academy Showcase
+DESCRIPTION:MEA fellowship projects and teaching innovations.
+LOCATION:Monash University — Melbourne\, VIC
+CATEGORIES:SHOWCASE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-33@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261009
+SUMMARY:La Trobe Teaching Excellence Day
+DESCRIPTION:Teaching innovation and student success.
+LOCATION:La Trobe University — Melbourne\, VIC
+CATEGORIES:SHOWCASE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-44@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261017
+SUMMARY:JCU Tropical Teaching Week
+DESCRIPTION:Place-based education\, marine science pedagogy.
+LOCATION:James Cook University — Townsville\, QLD
+CATEGORIES:WEEK
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-22@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261016
+SUMMARY:Deakin Teaching & Learning Conference
+DESCRIPTION:DTeach conference on inclusive teaching.
+LOCATION:Deakin University — Geelong\, VIC
 CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-98@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260623
-DTEND;VALUE=DATE:20260624
-SUMMARY:Engaging ALL Students through Employability (Deakin)
-DESCRIPTION:Dr Michael Healy (Swinburne) & David Eckstein (Deakin) on int
- egrating employability & career development for all students\, including
-  equity cohorts. Online\; recording available.\nhttps://www.eventbrite.c
- om.au/e/1989352795764
-LOCATION:Deakin University — Geelong\, VIC
-URL:https://www.eventbrite.com.au/e/1989352795764
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-99@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260618
-DTEND;VALUE=DATE:20260619
-SUMMARY:JANZSSA: Ethics for Writing About Your Practice
-DESCRIPTION:Free JANZSSA webinar with Dr Abbe Winter (SFHEA) on when ethi
- cs approval is needed when publishing program data — for student servi
- ces professionals.\nhttps://janzssa.scholasticahq.com/post/3920
-LOCATION:
-URL:https://janzssa.scholasticahq.com/post/3920
-CATEGORIES:WEBINAR
+UID:ntlsn-37@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261016
+SUMMARY:Adelaide University T&L Showcase
+DESCRIPTION:First full-year showcase post-merger.
+LOCATION:Adelaide University — Adelaide\, SA
+CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ntlsn-27@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261015
 DTEND;VALUE=DATE:20261016
 SUMMARY:ANU Teaching Celebration
@@ -380,19 +395,30 @@ CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-28@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261111
-DTEND;VALUE=DATE:20261112
-SUMMARY:UTAS Teaching Matters
-DESCRIPTION:Annual conference on teaching and learning.
-LOCATION:University of Tasmania — Hobart\, TAS
-CATEGORIES:CONFERENCE
+UID:ntlsn-54@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
+SUMMARY:Notre Dame Teaching Colloquium
+DESCRIPTION:Values-based education\, ethics\, mentoring.
+LOCATION:University of Notre Dame Australia — Fremantle\, WA
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-83@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
+SUMMARY:AU & AAUT Breakfast: Dr Amanda Gigliotti (UOW)
+DESCRIPTION:Citation recipient. Details to be announced.
+LOCATION:Adelaide University — Adelaide\, SA
+CATEGORIES:WEBINAR
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ntlsn-29@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261019
 DTEND;VALUE=DATE:20261024
 SUMMARY:Griffith L&T Week
@@ -402,22 +428,89 @@ CATEGORIES:WEEK
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-30@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260923
-DTEND;VALUE=DATE:20260924
-SUMMARY:RMIT Learning & Teaching Festival
-DESCRIPTION:Multi-day cross-campus festival (Melbourne + Vietnam) — inn
- ovative teaching and GenAI responses. Date TBC.\nhttps://www.rmit.edu.au
- /events
-LOCATION:RMIT University — Melbourne\, VIC
-URL:https://www.rmit.edu.au/events
+UID:ntlsn-24@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261021
+DTEND;VALUE=DATE:20261023
+SUMMARY:UniMelb Teaching & Learning Showcase
+DESCRIPTION:Annual showcase of teaching practice.
+LOCATION:University of Melbourne — Melbourne\, VIC
+CATEGORIES:SHOWCASE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-35@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+SUMMARY:UOW Teaching & Learning Forum
+DESCRIPTION:Authentic assessment\, digital literacy.
+LOCATION:University of Wollongong — Wollongong\, NSW
 CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:ntlsn-10@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261027
+DTEND;VALUE=DATE:20261031
+SUMMARY:AIEC 2026
+DESCRIPTION:40th anniversary in Sydney. Theme: 'Future Thinking'.\nhttps:
+ //aiec.idp.com/
+LOCATION:University of Sydney — Sydney\, NSW
+URL:https://aiec.idp.com/
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-26@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261029
+SUMMARY:QUT L&T Symposium
+DESCRIPTION:Learning design\, digital pedagogy\, first-year experience.
+LOCATION:Queensland University of Technology — Brisbane\, QLD
+CATEGORIES:SYMPOSIUM
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-62@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261101
+SUMMARY:ISSoTL 2026 Conference
+DESCRIPTION:University of Saskatchewan\, Canada.\nhttps://issotl.com/isso
+ tl26/
+LOCATION:University of Sydney — Sydney\, NSW
+URL:https://issotl.com/issotl26/
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-42@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261029
+DTEND;VALUE=DATE:20261030
+SUMMARY:WSU Teaching Showcase
+DESCRIPTION:Community-engaged teaching.
+LOCATION:Western Sydney University — Penrith\, NSW
+CATEGORIES:SHOWCASE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-20@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261102
+DTEND;VALUE=DATE:20261107
+SUMMARY:UQ Teaching & Learning Week
+DESCRIPTION:ITaLI's flagship week celebrating teaching excellence.
+LOCATION:University of Queensland — Brisbane\, QLD
+CATEGORIES:WEEK
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:ntlsn-31@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261104
 DTEND;VALUE=DATE:20261106
 SUMMARY:UTS Learning & Teaching Forum
@@ -432,74 +525,77 @@ CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-32@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261005
-DTEND;VALUE=DATE:20261010
-SUMMARY:Curtin Teaching Excellence Week
-DESCRIPTION:Workshops\, masterclasses\, and awards.
-LOCATION:Curtin University — Perth\, WA
-CATEGORIES:WEEK
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-33@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261008
-DTEND;VALUE=DATE:20261009
-SUMMARY:La Trobe Teaching Excellence Day
-DESCRIPTION:Teaching innovation and student success.
-LOCATION:La Trobe University — Melbourne\, VIC
+UID:ntlsn-45@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:CSU Regional Education Showcase
+DESCRIPTION:Regional\, rural\, remote education.
+LOCATION:Charles Sturt University — Wagga Wagga\, NSW
 CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-34@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260909
-DTEND;VALUE=DATE:20260910
-SUMMARY:Newcastle Education Innovation Symposium
-DESCRIPTION:Regional engagement\, WIL\, STEM reform.
-LOCATION:University of Newcastle — Newcastle\, NSW
-CATEGORIES:SYMPOSIUM
+UID:ntlsn-49@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:SCU Teaching Innovation Day
+DESCRIPTION:Regenerative education\, sustainability.
+LOCATION:Southern Cross University — Lismore\, NSW
+CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-35@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261022
-DTEND;VALUE=DATE:20261023
-SUMMARY:UOW Teaching & Learning Forum
-DESCRIPTION:Authentic assessment\, digital literacy.
-LOCATION:University of Wollongong — Wollongong\, NSW
+UID:ntlsn-28@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:UTAS Teaching Matters
+DESCRIPTION:Annual conference on teaching and learning.
+LOCATION:University of Tasmania — Hobart\, TAS
 CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-36@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260928
-DTEND;VALUE=DATE:20261003
-SUMMARY:Macquarie Learning Innovation Week
-DESCRIPTION:Five days of workshops and showcases.
-LOCATION:Macquarie University — Sydney\, NSW
-CATEGORIES:WEEK
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-37@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261014
-DTEND;VALUE=DATE:20261016
-SUMMARY:Adelaide University T&L Showcase
-DESCRIPTION:First full-year showcase post-merger.
-LOCATION:Adelaide University — Adelaide\, SA
+UID:ntlsn-46@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:UNE Teaching Excellence Showcase
+DESCRIPTION:Online and distance education innovation.
+LOCATION:University of New England — Armidale\, NSW
 CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:ntlsn-14@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261116
+DTEND;VALUE=DATE:20261126
+SUMMARY:UNSW Education Festival
+DESCRIPTION:Annual festival. Cross-faculty showcases.\nhttps://www.educat
+ ion.unsw.edu.au/news-events/unsw-education-festival
+LOCATION:UNSW Sydney — Sydney\, NSW
+URL:https://www.education.unsw.edu.au/news-events/unsw-education-festival
+CATEGORIES:WEEK
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-63@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261117
+DTEND;VALUE=DATE:20261121
+SUMMARY:POD 51st Annual Conference
+DESCRIPTION:Baltimore\, USA.\nhttps://podnetwork.org/annual-conference/
+LOCATION:University of Sydney — Sydney\, NSW
+URL:https://podnetwork.org/annual-conference/
+CATEGORIES:CONFERENCE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:ntlsn-38@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:Flinders Teaching Awards & Showcase
@@ -509,19 +605,30 @@ CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-39@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260826
-DTEND;VALUE=DATE:20260827
-SUMMARY:CDU Northern Teaching Symposium
-DESCRIPTION:First Nations pedagogies\, remote learning.
-LOCATION:Charles Darwin University — Darwin\, NT
-CATEGORIES:SYMPOSIUM
+UID:ntlsn-48@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261119
+SUMMARY:FedUni Teaching & Learning Showcase
+DESCRIPTION:Teaching across campuses.
+LOCATION:Federation University — Ballarat\, VIC
+CATEGORIES:SHOWCASE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ntlsn-51@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261118
+DTEND;VALUE=DATE:20261119
+SUMMARY:Murdoch Teaching Excellence Showcase
+DESCRIPTION:Health\, engineering\, humanities.
+LOCATION:Murdoch University — Perth\, WA
+CATEGORIES:SHOWCASE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:ntlsn-40@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
 SUMMARY:ECUlture 2026
@@ -534,112 +641,8 @@ CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-41@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260916
-DTEND;VALUE=DATE:20260917
-SUMMARY:VU Block Model Symposium
-DESCRIPTION:VU Block Model Academy.
-LOCATION:Victoria University — Melbourne\, VIC
-CATEGORIES:SYMPOSIUM
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-42@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261029
-DTEND;VALUE=DATE:20261030
-SUMMARY:WSU Teaching Showcase
-DESCRIPTION:Community-engaged teaching.
-LOCATION:Western Sydney University — Penrith\, NSW
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-43@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260930
-DTEND;VALUE=DATE:20261001
-SUMMARY:UC Teaching Innovation Forum
-DESCRIPTION:Connected learning\, micro-credentials.
-LOCATION:University of Canberra — Canberra\, ACT
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-44@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261012
-DTEND;VALUE=DATE:20261017
-SUMMARY:JCU Tropical Teaching Week
-DESCRIPTION:Place-based education\, marine science pedagogy.
-LOCATION:James Cook University — Townsville\, QLD
-CATEGORIES:WEEK
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-45@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261104
-DTEND;VALUE=DATE:20261105
-SUMMARY:CSU Regional Education Showcase
-DESCRIPTION:Regional\, rural\, remote education.
-LOCATION:Charles Sturt University — Wagga Wagga\, NSW
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-46@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261111
-DTEND;VALUE=DATE:20261112
-SUMMARY:UNE Teaching Excellence Showcase
-DESCRIPTION:Online and distance education innovation.
-LOCATION:University of New England — Armidale\, NSW
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-47@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260825
-DTEND;VALUE=DATE:20260828
-SUMMARY:CQU Tertiary Teaching Online Conference
-DESCRIPTION:Three-day online conference — "Teaching practice becomes sc
- holarship by learning through design." Five themes (Collaboration & Belo
- nging\, AI-Enhanced L&T\, Contemporary Assessment\, Professional Identit
- y\, Students as Partners)\; live-streamed + recorded. Hosted by Academic
-  Board & Learning & Teaching Futures.\nhttps://lts.cqu.edu.au/conf/
-LOCATION:CQUniversity — Rockhampton\, QLD
-URL:https://lts.cqu.edu.au/conf/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-48@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261118
-DTEND;VALUE=DATE:20261119
-SUMMARY:FedUni Teaching & Learning Showcase
-DESCRIPTION:Teaching across campuses.
-LOCATION:Federation University — Ballarat\, VIC
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-49@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261104
-DTEND;VALUE=DATE:20261105
-SUMMARY:SCU Teaching Innovation Day
-DESCRIPTION:Regenerative education\, sustainability.
-LOCATION:Southern Cross University — Lismore\, NSW
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
 UID:ntlsn-50@ntlsn.com
-DTSTAMP:20260709T105809Z
+DTSTAMP:20260709T162255Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:USC Teaching Forum
@@ -649,551 +652,29 @@ CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-51@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261118
-DTEND;VALUE=DATE:20261119
-SUMMARY:Murdoch Teaching Excellence Showcase
-DESCRIPTION:Health\, engineering\, humanities.
-LOCATION:Murdoch University — Perth\, WA
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-52@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260917
-DTEND;VALUE=DATE:20260918
-SUMMARY:ACU Teaching & Service Symposium
-DESCRIPTION:Teaching excellence with community service.
-LOCATION:Australian Catholic University — North Sydney\, NSW
-CATEGORIES:SYMPOSIUM
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-53@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260820
-DTEND;VALUE=DATE:20260821
-SUMMARY:Bond Innovation in Education Forum
-DESCRIPTION:Personalised learning\, small-group pedagogy.
-LOCATION:Bond University — Gold Coast\, QLD
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-54@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261015
-DTEND;VALUE=DATE:20261016
-SUMMARY:Notre Dame Teaching Colloquium
-DESCRIPTION:Values-based education\, ethics\, mentoring.
-LOCATION:University of Notre Dame Australia — Fremantle\, WA
-CATEGORIES:SYMPOSIUM
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-55@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260909
-DTEND;VALUE=DATE:20260910
-SUMMARY:Swinburne Innovation in Teaching Day
-DESCRIPTION:Technology-enhanced teaching.
-LOCATION:Swinburne University of Technology — Melbourne\, VIC
-CATEGORIES:SHOWCASE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-56@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260203
-DTEND;VALUE=DATE:20260204
-SUMMARY:USyd AI in Higher Education Symposium
-DESCRIPTION:Creative uses of GenAI in T&L.\nhttps://educational-innovatio
- n.sydney.edu.au/teaching@sydney/2026-ai-in-higher-education-symposium-re
- sources/
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://educational-innovation.sydney.edu.au/teaching@sydney/2026-ai-
- in-higher-education-symposium-resources/
-CATEGORIES:SYMPOSIUM
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-57@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260606
-SUMMARY:AIATSIS Summit 2026
-DESCRIPTION:Gold Coast. GLAM\, Research and Indigenous streams.\nhttps://
- aiatsis.gov.au/whats-new/events/aiatsis-summit-2026
-LOCATION:Griffith University — Brisbane\, QLD
-URL:https://aiatsis.gov.au/whats-new/events/aiatsis-summit-2026
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-58@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260709
-DTEND;VALUE=DATE:20260711
-SUMMARY:ACODE Benchmarking Summit 2026
-DESCRIPTION:University of Melbourne. New Accessibility benchmark.\nhttps:
- //acode.edu.au/activities/workshops/inter-institutional-benchmarking-sum
- mits
-LOCATION:University of Melbourne — Melbourne\, VIC
-URL:https://acode.edu.au/activities/workshops/inter-institutional-benchma
- rking-summits
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-59@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260907
-DTEND;VALUE=DATE:20260910
-SUMMARY:ASCILITE Spring into Excellence
-DESCRIPTION:3-day intensive at RMIT Melbourne.\nhttps://ascilite.org/get-
- involved/spring-into-excellence-research-school/
-LOCATION:RMIT University — Melbourne\, VIC
-URL:https://ascilite.org/get-involved/spring-into-excellence-research-sch
- ool/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-60@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260416
-DTEND;VALUE=DATE:20260417
-SUMMARY:NTLSN Open Forum: Democratic Student Partnership
-DESCRIPTION:Open online workshop exploring democratic student partnership
- .
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-61@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260624
-DTEND;VALUE=DATE:20260627
-SUMMARY:ICED 2026 Conference
-DESCRIPTION:University of Salamanca\, Spain.\nhttps://iced26.es/
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://iced26.es/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-62@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261028
-DTEND;VALUE=DATE:20261101
-SUMMARY:ISSoTL 2026 Conference
-DESCRIPTION:University of Saskatchewan\, Canada.\nhttps://issotl.com/isso
- tl26/
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://issotl.com/issotl26/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-63@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261117
-DTEND;VALUE=DATE:20261121
-SUMMARY:POD 51st Annual Conference
-DESCRIPTION:Baltimore\, USA.\nhttps://podnetwork.org/annual-conference/
-LOCATION:University of Sydney — Sydney\, NSW
-URL:https://podnetwork.org/annual-conference/
-CATEGORIES:CONFERENCE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-64@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260430
-DTEND;VALUE=DATE:20260501
-SUMMARY:AAUT & HERDSA: WIL Partnerships Webinar
-DESCRIPTION:Building Sustainable Collaborative WIL Partnerships.\nhttps:/
- /tinyurl.com/bdhfwcde
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://tinyurl.com/bdhfwcde
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-65@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260423
-DTEND;VALUE=DATE:20260424
-SUMMARY:AAUT/AU T&L Breakfast: GenAI Simulations
-DESCRIPTION:Enhancing Situated Learning with GenAI Simulations.
-LOCATION:Adelaide University — Adelaide\, SA
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-66@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260424
-DTEND;VALUE=DATE:20260425
-SUMMARY:CAULLT Webinar: Inclusive Curricula
-DESCRIPTION:Drawing on National Student Ombudsman data.\nhttps://www.caul
- lt.edu.au/events-and-learning/
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://www.caullt.edu.au/events-and-learning/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-67@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260505
-DTEND;VALUE=DATE:20260506
-SUMMARY:ASCILITE x Turnitin: Transparent Writing
-DESCRIPTION:Transparent writing processes and academic integrity.\nhttps:
- //ascilite.org/30-03-2026-bulletin/
+UID:ntlsn-11@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261203
+SUMMARY:ASCILITE 2026
+DESCRIPTION:Rydges Southbank\, Brisbane.\nhttps://2026conference.ascilite
+ .org/
 LOCATION:Queensland University of Technology — Brisbane\, QLD
-URL:https://ascilite.org/30-03-2026-bulletin/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-68@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260714
-DTEND;VALUE=DATE:20260715
-SUMMARY:ASCILITE x Turnitin: Authentic Assessment
-DESCRIPTION:Authentic assessments at scale with AI-era tools.\nhttps://as
- cilite.org/30-03-2026-bulletin/
-LOCATION:Queensland University of Technology — Brisbane\, QLD
-URL:https://ascilite.org/30-03-2026-bulletin/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-69@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260807
-DTEND;VALUE=DATE:20260808
-SUMMARY:ASCILITE x Turnitin: Assurance of Learning
-DESCRIPTION:Assurance of learning and generative AI.\nhttps://ascilite.or
- g/30-03-2026-bulletin/
-LOCATION:Queensland University of Technology — Brisbane\, QLD
-URL:https://ascilite.org/30-03-2026-bulletin/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-70@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260421
-DTEND;VALUE=DATE:20260422
-SUMMARY:TEFAN Cross-Border Conversation
-DESCRIPTION:Developing national and international profile. Free.\nhttps:/
- /events.humanitix.com/acrossborders
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://events.humanitix.com/acrossborders
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-71@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260415
-DTEND;VALUE=DATE:20260416
-SUMMARY:Advance HE Elevate: AI-Enabled Assessment
-DESCRIPTION:Advance HE Australasia Spotlight Series.\nhttps://advance-he.
- org/australasia
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://advance-he.org/australasia
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-72@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260512
-DTEND;VALUE=DATE:20260513
-SUMMARY:Advance HE Elevate: Student Success
-DESCRIPTION:Advance HE Australasia Spotlight Series.\nhttps://advance-he.
- org/australasia
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://advance-he.org/australasia
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-73@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260423
-DTEND;VALUE=DATE:20260424
-SUMMARY:Advance HE Pathway: Inclusive Learning
-DESCRIPTION:Advance HE Australasia Elevate Pathways.\nhttps://advance-he.
- org/australasia
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://advance-he.org/australasia
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-74@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260528
-DTEND;VALUE=DATE:20260529
-SUMMARY:Advance HE Pathway: ESD
-DESCRIPTION:Education for Sustainable Development.\nhttps://advance-he.or
- g/australasia
-LOCATION:University of Southern Queensland — Toowoomba\, QLD
-URL:https://advance-he.org/australasia
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-75@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260326
-DTEND;VALUE=DATE:20260327
-SUMMARY:AAUT & HERDSA: Indigenous Knowledges in Action
-DESCRIPTION:Recording available. 200+ attendees. Moving beyond including 
- Indigenous content toward systemic transformation.
-LOCATION:
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-76@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260528
-DTEND;VALUE=DATE:20260529
-SUMMARY:AAUT & HERDSA: Designing Inclusive Student Experiences
-DESCRIPTION:Approaches to designing curriculum\, assessment\, and co-curr
- icular experiences that foster belonging and equity.
-LOCATION:
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-77@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260827
-DTEND;VALUE=DATE:20260828
-SUMMARY:AAUT & HERDSA Webinar Session 4
-DESCRIPTION:Details to be announced.
-LOCATION:
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-78@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260924
-DTEND;VALUE=DATE:20260925
-SUMMARY:AAUT & HERDSA Webinar Session 5
-DESCRIPTION:Details to be announced.
-LOCATION:
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-79@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260521
-DTEND;VALUE=DATE:20260522
-SUMMARY:AU & AAUT Breakfast: Cultural Advocacy in Health Education
-DESCRIPTION:Presented by Ms Ellie White (UoM). Neville Bonner Award recip
- ient on culturally responsive care.
-LOCATION:Adelaide University — Adelaide\, SA
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-80@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260625
-DTEND;VALUE=DATE:20260626
-SUMMARY:AU & AAUT Breakfast: Pearson\, Le Busque & Richardson
-DESCRIPTION:Citation recipients. Details to be announced.
-LOCATION:Adelaide University — Adelaide\, SA
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-81@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260820
-DTEND;VALUE=DATE:20260821
-SUMMARY:AU & AAUT Breakfast: Dr Miao Li (CSU)
-DESCRIPTION:Citation recipient. Details to be announced.
-LOCATION:Adelaide University — Adelaide\, SA
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-82@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260917
-DTEND;VALUE=DATE:20260918
-SUMMARY:AU & AAUT Breakfast: Spencer & Jones (RMIT)
-DESCRIPTION:Teaching Excellence Award recipients. Details to be announced
- .
-LOCATION:Adelaide University — Adelaide\, SA
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-83@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20261015
-DTEND;VALUE=DATE:20261016
-SUMMARY:AU & AAUT Breakfast: Dr Amanda Gigliotti (UOW)
-DESCRIPTION:Citation recipient. Details to be announced.
-LOCATION:Adelaide University — Adelaide\, SA
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-84@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260602
-SUMMARY:CAULLT Enhancing Program Leadership
-DESCRIPTION:Online 4-module program for Program Directors. PSF 2023 align
- ed. Delivered by Advance HE.\nhttps://www.caullt.edu.au/professionallear
- ning/contemporary-approaches-to-university-teaching/
-LOCATION:
-URL:https://www.caullt.edu.au/professionallearning/contemporary-approache
- s-to-university-teaching/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-85@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260216
-DTEND;VALUE=DATE:20260217
-SUMMARY:CAULLT CAUT MOOC
-DESCRIPTION:Free MOOC with 24 modules across 4 pathways. Digital badges. 
- 800-1000 enrolments per semester.\nhttps://www.caullt.edu.au/professiona
- llearning/contemporary-approaches-to-university-teaching/
-LOCATION:
-URL:https://www.caullt.edu.au/professionallearning/contemporary-approache
- s-to-university-teaching/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-86@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260301
-DTEND;VALUE=DATE:20260302
-SUMMARY:CRADLE Seminar Series 2026
-DESCRIPTION:World-leading free monthly series on assessment and digital l
- earning. AI and feedback\, preparing graduates for AI.\nhttps://www.deak
- in.edu.au/cradle
-LOCATION:Deakin University — Geelong\, VIC
-URL:https://www.deakin.edu.au/cradle
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-87@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260501
-DTEND;VALUE=DATE:20260502
-SUMMARY:ICAI Summer Intensive Webinar Series
-DESCRIPTION:5-session biweekly series on AI-based challenges and human du
- rable skills. Free for ICAI members.
-LOCATION:
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-88@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260601
-DTEND;VALUE=DATE:20260602
-SUMMARY:TEQSA: Gen AI and Tomorrow's Professionals
-DESCRIPTION:Joint webinar with National AI Centre and Jobs and Skills Aus
- tralia on AI impacts on education.
-LOCATION:
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-89@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260301
-DTEND;VALUE=DATE:20260302
-SUMMARY:CGHE Webinar Series: AI in Higher Education
-DESCRIPTION:Centre for Global Higher Education (Oxford). AI products\, po
- licy\, knowledge production\, governance.
-LOCATION:
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-90@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260519
-DTEND;VALUE=DATE:20260520
-SUMMARY:2026 QILT Symposium — Using Student Feedback to Strengthen Teac
- hing & Curriculum
-DESCRIPTION:Explores how national student survey data can inform teaching
-  quality\, curriculum design\, and institutional strategy.\nhttps://www.
- caullt.edu.au/2026-qilt-symposium-using-student-feedback-to-strengthen-t
- eaching-curriculum/
-LOCATION:
-URL:https://www.caullt.edu.au/2026-qilt-symposium-using-student-feedback-
- to-strengthen-teaching-curriculum/
+URL:https://2026conference.ascilite.org/
 CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
-UID:ntlsn-91@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260424
-DTEND;VALUE=DATE:20260425
-SUMMARY:HERDSA Academic Development SIG Meetup #2
-DESCRIPTION:Second 2026 meetup for academic developers. Practical outcome
- s from networking and collaborative discussions.\nhttps://www.caullt.edu
- .au/join-the-second-herdsa-academic-development-sig-meetup-of-2026/
-LOCATION:
-URL:https://www.caullt.edu.au/join-the-second-herdsa-academic-development
- -sig-meetup-of-2026/
-CATEGORIES:WORKSHOP
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-92@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260724
-DTEND;VALUE=DATE:20260725
-SUMMARY:CAULLT: Distributed Leadership for Academic Integrity
-DESCRIPTION:Perspectives from diverse leaders on distributed leadership t
- hat supports academic integrity in higher education.\nhttps://www.caullt
- .edu.au/distributed-leadership-that-supports-academic-integrity-in-highe
- r-education-perspectives-from-diverse-leaders-2/
-LOCATION:
-URL:https://www.caullt.edu.au/distributed-leadership-that-supports-academ
- ic-integrity-in-higher-education-perspectives-from-diverse-leaders-2/
-CATEGORIES:WEBINAR
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:ntlsn-93@ntlsn.com
-DTSTAMP:20260709T105809Z
-DTSTART;VALUE=DATE:20260501
-DTEND;VALUE=DATE:20260502
-SUMMARY:ACSES Insights Report: Disability in Higher Education
-DESCRIPTION:First in a series of ACSES Insights Reports on disability in 
- higher education from the Australian Centre for Student Equity and Succe
- ss.\nhttps://www.caullt.edu.au/2026-qilt-symposium-using-student-feedbac
- k-to-strengthen-teaching-curriculum-2/
-LOCATION:
-URL:https://www.caullt.edu.au/2026-qilt-symposium-using-student-feedback-
- to-strengthen-teaching-curriculum-2/
+UID:ntlsn-97@ntlsn.com
+DTSTAMP:20260709T162255Z
+DTSTART;VALUE=DATE:20261213
+DTEND;VALUE=DATE:20261217
+SUMMARY:AAEE 2026 — Make the Impossible\, Possible
+DESCRIPTION:37th Australasian Association for Engineering Education confe
+ rence at UNSW — scholarly engineering education\, innovative teaching 
+ practices and workshops.\nhttps://aaee.net.au/
+LOCATION:UNSW Sydney — Sydney\, NSW
+URL:https://aaee.net.au/
 CATEGORIES:CONFERENCE
 TRANSP:TRANSPARENT
 END:VEVENT
