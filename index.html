@@ -5410,6 +5410,73 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  }
  build(); [700,1800,3500,6000].forEach(function(ms){setTimeout(build,ms);});
 })();</script>
+<script id="ntlsn-coming2027-script">(function(){
+ /* Roadmap header for #ntlsn-coming2027. ntlsn-comingblocks-script (above) already builds
+    this section as a feature-card grid; this script enriches its header into a grounded
+    "today -> 2027" milestone band and leaves the cards untouched. Additive only; reversible
+    by deleting this one script. */
+ if(window.__ntlsnRoadmap2027)return; window.__ntlsnRoadmap2027=1;
+ var F="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
+ var COL='255,180,72'; /* amber #FFB448 — 2027, matches the site megamenu + comingblocks */
+ /* Grounded figures, verified against data/*.json on 2026-07-10: 43 institutions in
+    data/universities.json; 94 events in data/events.json. Update if the data changes.
+    Nothing here is aspirational; future items are labelled as goals below. */
+ function enhance(){
+  var sec=document.getElementById('ntlsn-coming2027'); if(!sec)return;
+  if(sec.getAttribute('data-roadmap'))return;
+  var inner=sec.firstElementChild; if(!inner)return;            /* comingblocks' 1100px wrapper */
+  var k=inner.children;
+  /* comingblocks builds [div eyebrow, h2, p sub, div grid]. Replace the first three
+     header nodes; keep the card grid. Verify tag order first so we degrade safely. */
+  if(k.length>=4 && k[0].tagName==='DIV' && k[1].tagName==='H2' && k[2].tagName==='P'){
+   var c0=k[0],c1=k[1],c2=k[2];           /* capture by reference: removal order no longer matters */
+   inner.removeChild(c0); inner.removeChild(c1); inner.removeChild(c2);
+  }
+  var hdr=document.createElement('div'); hdr.innerHTML=
+   '<div style="font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:rgb('+COL+');margin:0 0 6px;">The road ahead &middot; 2027</div>'+
+   '<h2 style="font:800 clamp(21px,3vw,29px)/1.2 '+F+';margin:0 0 8px;letter-spacing:-.01em;color:#e8eef5;">From a directory to infrastructure you can convene on.</h2>'+
+   '<p style="color:#9fb0c3;font:400 13.5px/1.6 '+F+';margin:0 0 14px;max-width:720px;">Today NTLSN is live, free and open-source &mdash; <b style="color:#cbd8e6;">43 institutions</b> mapped and 94 verified events on the 2026 calendar (as of July 2026), all readable through a CORS-open data API. The 2027 phase turns a navigator into something you can run things on. Several of the pieces below already work as free tools you can try now; the institutional versions are what we are building toward, and they need a backend and partner cooperation.</p>'+
+   '<div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;">'+
+    '<span style="font:700 11.5px '+F+';color:#2DD4BF;background:rgba(45,212,191,.10);border:1px solid rgba(45,212,191,.32);border-radius:999px;padding:5px 11px;">43 institutions mapped</span>'+
+    '<span style="font:700 11.5px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 11px;">Free &middot; open-source &middot; live</span>'+
+    '<span style="font:700 11.5px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 11px;">Open data API (CORS)</span>'+
+    '<span style="font:700 11.5px '+F+';color:rgb('+COL+');background:rgba('+COL+',.12);border:1px solid rgba('+COL+',.38);border-radius:999px;padding:5px 11px;">Building toward 2027 &middot; some features already live</span>'+
+   '</div>';
+  inner.insertBefore(hdr, inner.firstChild);
+  sec.setAttribute('data-roadmap','1');
+ }
+ enhance(); [400,1200,2500,4500,7000].forEach(function(ms){setTimeout(enhance,ms);});
+ try{ new MutationObserver(enhance).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+})();</script>
+<script id="ntlsn-coming2028-script">(function(){
+ /* Roadmap header for #ntlsn-coming2028 — same pattern as the 2027 script above.
+    Enhances comingblocks' header in place; leaves the card grid intact. */
+ if(window.__ntlsnRoadmap2028)return; window.__ntlsnRoadmap2028=1;
+ var F="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
+ var COL='124,156,255'; /* blue #7C9CFF — 2028, matches the site megamenu + comingblocks */
+ function enhance(){
+  var sec=document.getElementById('ntlsn-coming2028'); if(!sec)return;
+  if(sec.getAttribute('data-roadmap'))return;
+  var inner=sec.firstElementChild; if(!inner)return;
+  var k=inner.children;
+  if(k.length>=4 && k[0].tagName==='DIV' && k[1].tagName==='H2' && k[2].tagName==='P'){
+   var c0=k[0],c1=k[1],c2=k[2];           /* capture by reference: removal order no longer matters */
+   inner.removeChild(c0); inner.removeChild(c1); inner.removeChild(c2);
+  }
+  var hdr=document.createElement('div'); hdr.innerHTML=
+   '<div style="font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:rgb('+COL+');margin:0 0 6px;">The road ahead &middot; 2028</div>'+
+   '<h2 style="font:800 clamp(21px,3vw,29px)/1.2 '+F+';margin:0 0 8px;letter-spacing:-.01em;color:#e8eef5;">Portable recognition, and the connective tissue between institutions.</h2>'+
+   '<p style="color:#9fb0c3;font:400 13.5px/1.6 '+F+';margin:0 0 14px;max-width:720px;">The further-out build sits on the 2027 foundations: making teaching work count wherever an educator goes, and wiring institutions together on open standards so any system can read the commons. Several pieces are live to try now; the sector-wide versions are still in design &mdash; and we will only claim them as they land.</p>'+
+   '<div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;">'+
+    '<span style="font:700 11.5px '+F+';color:rgb('+COL+');background:rgba('+COL+',.12);border:1px solid rgba('+COL+',.38);border-radius:999px;padding:5px 11px;">Vision for 2028 &middot; in design</span>'+
+    '<span style="font:700 11.5px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 11px;">Open standards &middot; no lock-in</span>'+
+   '</div>';
+  inner.insertBefore(hdr, inner.firstChild);
+  sec.setAttribute('data-roadmap','1');
+ }
+ enhance(); [400,1200,2500,4500,7000].forEach(function(ms){setTimeout(enhance,ms);});
+ try{ new MutationObserver(enhance).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+})();</script>
 <script id="ntlsn-nowbanner-script">(function(){
  if(window.__ntlsnNow)return; window.__ntlsnNow=1;
  var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
