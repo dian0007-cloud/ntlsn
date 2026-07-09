@@ -537,6 +537,97 @@ function ensure(){
 }
 ensure();
 new MutationObserver(ensure).observe(document.body,{childList:true,subtree:true});
+})();</script><script id="ntlsn-submodal-script">(function(){
+/* Subscribe modal: the one piece TASKS 2.1 calls for that the existing
+   ntlsn-distribute card (inline Add-to-Google / Apple-Outlook / .ics / RSS buttons)
+   and ntlsn-addcal per-event pills do NOT provide — a modal with per-platform
+   (Google / Apple / Outlook) step-by-step subscribe instructions + copyable URL.
+   Adds a "How to subscribe" trigger to #ntlsn-distribute; dialog is WCAG 2.2 AA
+   (role=dialog, aria-modal, labelledby/describedby, focus trap, Esc, focus restore). */
+var F="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
+var ICS_HTTPS="https://ntlsn.com/events.ics";
+var ICS_WEBCAL="webcal://ntlsn.com/events.ics";
+var GCAL_ADD="https://calendar.google.com/calendar/render?cid="+encodeURIComponent(ICS_WEBCAL);
+var BTN="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 "+F+";color:#06243a;background:#4ECDC4;border:none;border-radius:9px;padding:9px 13px;text-decoration:none;cursor:pointer;";
+var GHOST="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 "+F+";color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:8px 12px;text-decoration:none;cursor:pointer;";
+var HOW="display:inline-flex;align-items:center;gap:6px;font:600 13px/1 "+F+";color:#cfe9e5;background:transparent;border:1px solid rgba(78,205,196,.35);border-radius:9px;padding:8px 12px;text-decoration:none;cursor:pointer;";
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+var overlay=null,prevFocus=null;
+function platforms(){
+ return [
+  {clr:"#4ECDC4",name:"Google Calendar",action:'<a href="'+GCAL_ADD+'" target="_blank" rel="noopener noreferrer" style="'+BTN+'">Add to Google →</a>',
+   steps:["<b>Easiest:</b> click “Add to Google” — it opens Google Calendar and adds the sector calendar instantly.","Prefer manual? Next to <b>Other calendars</b> click <b>＋ → From URL</b>, paste the calendar link below, then <b>Add calendar</b>."]},
+  {clr:"#C57BFF",name:"Apple Calendar (Mac, iPhone, iPad)",action:'<a href="'+ICS_WEBCAL+'" style="'+GHOST+'">Open in Calendar</a>',
+   steps:["<b>Mac:</b> click “Open in Calendar” — macOS Calendar subscribes and auto-updates.","<b>iPhone / iPad:</b> <b>Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar</b>, paste the link, then <b>Next → Save</b>."]},
+  {clr:"#7C9CFF",name:"Outlook (web & desktop)",action:'<a href="'+ICS_HTTPS+'" target="_blank" rel="noopener noreferrer" style="'+GHOST+'">Open .ics</a>',
+   steps:["<b>Outlook on the web:</b> open Calendar → <b>Add calendar → Subscribe from web</b>, paste the link, name it, then <b>Import</b>.","<b>Outlook desktop:</b> <b>Home → Open Calendar → From Internet</b>, paste the link, then <b>OK</b>."]}
+ ];
+}
+function build(){
+ if(overlay)return;
+ overlay=document.createElement("div");
+ overlay.id="ntlsn-submodal-ov";
+ overlay.style.cssText="position:fixed;inset:0;z-index:99990;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(5,11,22,.72);";
+ var box=document.createElement("div");
+ box.setAttribute("role","dialog");
+ box.setAttribute("aria-modal","true");
+ box.setAttribute("aria-labelledby","ntlsn-submodal-title");
+ box.setAttribute("aria-describedby","ntlsn-submodal-desc");
+ box.style.cssText="max-width:560px;width:100%;max-height:88vh;overflow:auto;background:#0f1f38;border:1px solid rgba(78,205,196,.28);border-radius:18px;padding:24px 22px 20px;box-shadow:0 30px 80px rgba(0,0,0,.55);";
+ var cards=platforms().map(function(p){
+  var lis=p.steps.map(function(t){return '<li style="margin:5px 0;color:#aebfce;font:400 14px/1.55 '+F+';">'+t+'</li>';}).join("");
+  return '<div style="background:#0A1628;border:1px solid rgba(255,255,255,.07);border-left:3px solid '+p.clr+';border-radius:12px;padding:13px 14px;margin-bottom:11px;">'
+   +'<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:7px;">'
+   +'<div style="font:700 15px/1.2 '+F+';color:#fff;">'+esc(p.name)+'</div><div style="flex:0 0 auto;">'+p.action+'</div></div>'
+   +'<ol style="margin:0;padding-left:18px;">'+lis+'</ol></div>';
+ }).join("");
+ box.innerHTML=''+
+  '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px;">'
+   +'<h2 id="ntlsn-submodal-title" tabindex="-1" style="font:800 21px/1.2 '+F+';color:#fff;margin:0;">Subscribe to the sector calendar</h2>'
+   +'<button type="button" id="ntlsn-submodal-x" aria-label="Close subscribe instructions" style="flex:0 0 auto;font:700 18px/1 '+F+';color:#9fb3c8;background:transparent;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;">✕</button>'
+  +'</div>'
+  +'<p id="ntlsn-submodal-desc" style="color:#9fb3c8;font:400 14px/1.6 '+F+';margin:6px 0 14px;">Add the sector calendar once and every new symposium, workshop and event lands in your diary automatically — it stays in sync. Pick your calendar app:</p>'
+  +cards
+  +'<div style="background:#0A1628;border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:13px 14px;">'
+   +'<div style="font:700 13px/1.2 '+F+';color:#cfe9e5;margin-bottom:7px;">Calendar link (paste this for manual set-up)</div>'
+   +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">'
+    +'<code id="ntlsn-submodal-url" style="flex:1 1 auto;min-width:0;background:#06101f;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px 11px;color:#9fe6dd;font:500 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;">'+esc(ICS_HTTPS)+'</code>'
+    +'<button type="button" id="ntlsn-submodal-copy" style="'+BTN+'">Copy link</button>'
+   +'</div>'
+   +'<div style="color:#7e93a8;font:400 12px/1.5 '+F+';margin-top:8px;">On Mac, iPhone or Android, <code style="color:#9fe6dd;">'+esc(ICS_WEBCAL)+'</code> usually opens your default calendar app directly.</div>'
+  +'</div>';
+ overlay.appendChild(box);
+ document.body.appendChild(overlay);
+ function fallbackCopy(t){try{var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.top="-9999px";document.body.appendChild(ta);ta.focus();ta.select();document.execCommand("copy");document.body.removeChild(ta);}catch(e){}}
+ var x=box.querySelector("#ntlsn-submodal-x"),cp=box.querySelector("#ntlsn-submodal-copy"),urlEl=box.querySelector("#ntlsn-submodal-url");
+ if(x)x.addEventListener("click",closeModal);
+ if(cp&&urlEl)cp.addEventListener("click",function(){
+  var t=urlEl.textContent,done=function(){cp.textContent="✓ Copied";setTimeout(function(){cp.textContent="Copy link";},1600);};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done).catch(function(){fallbackCopy(t);done();});}else{fallbackCopy(t);done();}}catch(e){fallbackCopy(t);done();}
+ });
+ overlay.addEventListener("click",function(e){if(e.target===overlay)closeModal();});
+ box.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){e.preventDefault();closeModal();return;}
+  if(e.key==="Tab"){
+   var f=box.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])');
+   if(f.length){f=[].slice.call(f);var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+  }
+ });
+}
+function openModal(){build();if(!overlay)return;overlay.style.display="flex";document.body.style.overflow="hidden";prevFocus=document.activeElement;var t=overlay.querySelector("#ntlsn-submodal-title");if(t){try{t.focus();}catch(e){}}}
+function closeModal(){if(!overlay||overlay.style.display==="none")return;overlay.style.display="none";document.body.style.overflow="";if(prevFocus){try{prevFocus.focus();}catch(e){}prevFocus=null;}}
+function wire(){
+ var sec=document.getElementById("ntlsn-distribute");if(!sec)return;
+ var g=sec.querySelector('a[href*="calendar.google.com/calendar/render?cid="]');if(!g)return;
+ var row=g.parentElement;if(!row||row.getAttribute("data-submodal")==="1")return;
+ if(sec.querySelector("#ntlsn-submodal-trigger")){row.setAttribute("data-submodal","1");return;}
+ var b=document.createElement("button");b.type="button";b.id="ntlsn-submodal-trigger";b.setAttribute("aria-haspopup","dialog");b.style.cssText=HOW;b.innerHTML="ⓘ How to subscribe";b.addEventListener("click",openModal);
+ row.appendChild(b);row.setAttribute("data-submodal","1");
+}
+wire();
+new MutationObserver(wire).observe(document.body,{childList:true,subtree:true});
 })();</script><script id="ntlsn-addcal-script">(function(){
 var MAP=null;
 function norm(u){return (u||"").replace(/\/+$/,"").toLowerCase();}
