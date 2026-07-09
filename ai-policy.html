@@ -83,8 +83,8 @@
   var rows=document.getElementById('rows');
   function addRow(name,lv){
     var d=document.createElement('div');d.className='row';
-    d.innerHTML='<input type="text" placeholder="Assessment name (e.g. Essay, Exam, Reflective journal)" value="'+(name||'')+'">'
-      +'<select><option value="red">🔴 No AI</option><option value="amber">🟠 Prep only</option><option value="green">🟢 With acknowledgement</option><option value="blue">🔵 Integral</option></select>';
+    d.innerHTML='<input type="text" placeholder="Assessment name (e.g. Essay, Exam, Reflective journal)" value="'+(name||'')+'" aria-label="Assessment name">'
+      +'<select aria-label="AI policy for this assessment"><option value="red">🔴 No AI</option><option value="amber">🟠 Prep only</option><option value="green">🟢 With acknowledgement</option><option value="blue">🔵 Integral</option></select>';
     rows.appendChild(d);
     if(lv)d.querySelector('select').value=lv;
     d.querySelector('input').addEventListener('input',build);

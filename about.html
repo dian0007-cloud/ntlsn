@@ -14,6 +14,8 @@
 <link rel="canonical" href="https://ntlsn.com/about.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:var(--navy);padding:8px 14px;border-radius:0 0 8px 0;font-weight:700;z-index:99;text-decoration:none}
+  .skip:focus{left:0}
   :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px;min-height:100vh}
@@ -67,7 +69,8 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to main content</a>
+<div class="wrap" id="main" role="main">
   <div class="eyebrow">About NTLSN · Our story</div>
   <h1>Built from the edges — for the whole sector.</h1>
   <p class="lead">National Teaching &amp; Learning Sector Network — the open home for connecting university teaching in Australia. Free, independent, open-source. <b style="color:#fff">NTLSN, everywhere you work.</b></p>
@@ -82,7 +85,7 @@
 
   <h2 class="sec">The founder</h2>
   <div class="founder">
-    <div class="ph"><img src="/seb-dianati.jpg" alt="Associate Professor Seb Dianati" onerror="this.style.display='none';this.parentNode.textContent='SD';"></div>
+    <div class="ph"><img src="/seb-dianati.jpg" alt="Associate Professor Seb Dianati" loading="lazy" width="512" height="512" onerror="this.style.display='none';this.parentNode.textContent='SD';"></div>
     <div class="fb">
       <div class="fn">Associate Professor Seb Dianati</div>
       <div class="fr">Founder, NTLSN</div>
@@ -95,7 +98,7 @@
 
   <h2 class="sec">Chair</h2>
   <div class="founder">
-    <div class="ph"><img src="/kashmira-dave.jpg" alt="Dr Kashmira Davé" onerror="this.style.display='none';this.parentNode.textContent='KD';"></div>
+    <div class="ph"><img src="/kashmira-dave.jpg" alt="Dr Kashmira Davé" loading="lazy" width="480" height="480" onerror="this.style.display='none';this.parentNode.textContent='KD';"></div>
     <div class="fb">
       <div class="fn">Dr Kashmira Davé</div>
       <div class="fr">Chair and CALD Lead, NTLSN</div>
