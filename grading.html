@@ -61,19 +61,19 @@
     <div>
       <fieldset>
         <legend>Cohort</legend>
-        <div class="row"><label>Number of students</label><input type="number" id="students" value="120" min="0"></div>
+        <div class="row"><label for="students">Number of students</label><input type="number" id="students" value="120" min="0"></div>
       </fieldset>
       <fieldset>
         <legend>Assessments &middot; minutes to mark one script</legend>
-        <div class="arow"><input type="text" class="name" id="a1n" value="Essay" placeholder="Assessment name"><input type="number" id="a1m" value="20" min="0"><span class="mins">min/script</span></div>
-        <div class="arow"><input type="text" class="name" id="a2n" value="Final report" placeholder="Assessment name"><input type="number" id="a2m" value="30" min="0"><span class="mins">min/script</span></div>
-        <div class="arow"><input type="text" class="name" id="a3n" value="" placeholder="Assessment name"><input type="number" id="a3m" value="0" min="0"><span class="mins">min/script</span></div>
-        <div class="arow"><input type="text" class="name" id="a4n" value="" placeholder="Assessment name"><input type="number" id="a4m" value="0" min="0"><span class="mins">min/script</span></div>
+        <div class="arow"><input type="text" class="name" id="a1n" value="Essay" placeholder="Assessment name" aria-label="Assessment 1 name"><input type="number" id="a1m" value="20" min="0" aria-label="Assessment 1: minutes to mark one script"><span class="mins">min/script</span></div>
+        <div class="arow"><input type="text" class="name" id="a2n" value="Final report" placeholder="Assessment name" aria-label="Assessment 2 name"><input type="number" id="a2m" value="30" min="0" aria-label="Assessment 2: minutes to mark one script"><span class="mins">min/script</span></div>
+        <div class="arow"><input type="text" class="name" id="a3n" value="" placeholder="Assessment name" aria-label="Assessment 3 name"><input type="number" id="a3m" value="0" min="0" aria-label="Assessment 3: minutes to mark one script"><span class="mins">min/script</span></div>
+        <div class="arow"><input type="text" class="name" id="a4n" value="" placeholder="Assessment name" aria-label="Assessment 4 name"><input type="number" id="a4m" value="0" min="0" aria-label="Assessment 4: minutes to mark one script"><span class="mins">min/script</span></div>
       </fieldset>
       <fieldset>
         <legend>Adjustments</legend>
-        <div class="row"><label>Moderation / second-marking <span class="sub">extra share of scripts re-marked</span></label><input type="number" id="mod" value="10" min="0" max="100"> <span style="color:var(--mut);font:600 13px var(--F)">%</span></div>
-        <div class="row"><label>Working day length <span class="sub">for the days conversion</span></label><input type="number" id="day" value="7.5" min="1" step="0.5"> <span style="color:var(--mut);font:600 13px var(--F)">h</span></div>
+        <div class="row"><label for="mod">Moderation / second-marking <span class="sub">extra share of scripts re-marked</span></label><input type="number" id="mod" value="10" min="0" max="100"> <span style="color:var(--mut);font:600 13px var(--F)">%</span></div>
+        <div class="row"><label for="day">Working day length <span class="sub">for the days conversion</span></label><input type="number" id="day" value="7.5" min="1" step="0.5"> <span style="color:var(--mut);font:600 13px var(--F)">h</span></div>
       </fieldset>
     </div>
     <div>

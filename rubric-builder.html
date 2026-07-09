@@ -16,6 +16,8 @@
 <meta name="twitter:description" content="Build an analytic marking rubric and copy it as HTML or Markdown.">
 <link rel="canonical" href="https://ntlsn.com/rubric-builder.html">
 <style>
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:var(--navy);padding:8px 14px;border-radius:0 0 8px 0;font-weight:700;z-index:99;text-decoration:none}
+  .skip:focus{left:0}
   :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--bad:#FF8A8A;--good:#9DD649;--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   *{box-sizing:border-box}
   body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.5;padding:28px 18px}
@@ -43,7 +45,7 @@
   .lvl-in:focus{outline:1px dashed var(--teal)}
   .rm{background:rgba(255,138,138,.10);color:var(--bad);border:1px solid rgba(255,138,138,.30);border-radius:6px;font:700 13px var(--F);cursor:pointer;padding:2px 8px;margin-top:6px}
   .rm:hover{background:rgba(255,138,138,.18)}
-  .colrm{position:absolute;top:4px;right:5px;background:rgba(255,138,138,.10);color:var(--bad);border:1px solid rgba(255,138,138,.30);border-radius:6px;font:700 11px var(--F);cursor:pointer;padding:1px 6px}
+  .colrm{position:absolute;top:4px;right:5px;background:rgba(255,138,138,.10);color:var(--bad);border:1px solid rgba(255,138,138,.30);border-radius:6px;font:700 11px var(--F);cursor:pointer;padding:1px 6px;min-width:24px;min-height:24px;display:inline-flex;align-items:center;justify-content:center}
   .lbl{font:700 10px var(--F);text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
   .export{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
   .export h2{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin:0 0 10px}
@@ -54,7 +56,8 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap" id="main" role="main">
   <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
   <h1>Rubric Builder</h1>
   <p class="lead">Build a clear analytic rubric — criteria down the side, performance levels across the top, a descriptor in every cell — then copy it as an HTML table or Markdown to paste into your LMS, assignment brief or moderation pack. Sharing the rubric with students up front is one of the highest-value things you can do. Nothing is stored or sent.</p>
