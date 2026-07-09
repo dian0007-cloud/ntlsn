@@ -1,0 +1,436 @@
+{
+ "generated": "2026-07-07",
+ "method": "web-documented + curl-verified (9-agent research pass)",
+ "rows": [
+  {
+   "id": "anu",
+   "name": "Australian National University",
+   "pattern": "https://virtual.anu.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://libguides.anu.edu.au/c.php?g=814723&p=6967570",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "ANU calls it the 'Reverse Proxy Login' at virtual.anu.edu.au (documented across ANU LibGuides off-campus pages and services.anu.edu.au/information-technology/login-access/reverse-proxy-login; the full login?url= prefix is printed on Paperpile's ANU page). curl to https://virtual.anu.edu.au/login?url=<doi> returned HTTP 200 with header 'Server: EZproxy', confirming it is a live EZproxy instance accepting the standard login?url= syntax. ANU docs note it does not work with Google Scholar."
+  },
+  {
+   "id": "unimelb",
+   "name": "University of Melbourne",
+   "pattern": "https://go.openathens.net/redirector/unimelb.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://library.unimelb.edu.au/search-tools/linking-guide/redirector-link-generator",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UniMelb switched from EZproxy to OpenAthens in 2020 (unimelb.libguides.com/higher-ed/accessing-fulltext: 'Our authentication system is Open Athens'). The library publishes an 'OpenAthens Redirector link generator' page (evidence URL; exact-phrase search confirms the redirector prefix appears there, and the library's own generator instance is https://go.openathens.net/generate/unimelb.edu.au/71685714), though library.unimelb.edu.au returns 403 to automated fetchers so the prefix could not be quoted directly from the page. Live verification: go.openathens.net responded 200 for redirector/unimelb.edu.au, while a bogus domain returns an 'OpenAthens: 403' error page — confirming unimelb.edu.au is a registered redirector domain. URL value should be percent-encoded. Legacy host ezp.lib.unimelb.edu.au still resolves/TCP-connects but hangs without an HTTP response — deprecated, do not use."
+  },
+  {
+   "id": "unsw",
+   "name": "UNSW Sydney",
+   "pattern": "https://login.wwwproxy1.library.unsw.edu.au/login?qurl=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-unsw/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Documented as https://login.wwwproxy1.library.unsw.edu.au/login?qurl= on Paperpile's UNSW page and in libproxy-db.org. curl to the login path returned HTTP 200 with header 'Server: EZproxy'; the standard '?url=' variant also returned 200, so either works (qurl= expects a percent-encoded target per EZproxy convention). UNSW Library's own public pages (library.unsw.edu.au/using-the-library/access-to-online-resources) describe zID sign-on and VPN in general terms without printing the prefix."
+  },
+  {
+   "id": "usyd",
+   "name": "University of Sydney",
+   "pattern": "https://go.openathens.net/redirector/sydney.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://www.library.sydney.edu.au/support/teaching/reading-lists-for-academic-staff/go-openathens",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "USyd now uses 'Go OpenAthens' links (evidence page notes old EZproxy links can be converted). Strong live confirmation: curl to the legacy prefix https://ezproxy.library.usyd.edu.au/login?url=https://doi.org/10.1000/1 returned HTTP 301 with Location: https://go.openathens.net/redirector/sydney.edu.au?url=https%3A%2F%2Fdoi.org%2F10.1000%2F1 — the university itself rewrites legacy EZproxy links into this redirector, so the legacy ezproxy.library.usyd.edu.au/login?url= prefix (documented on Paperpile) still functions as a working alias. Both hosts responded to curl. URL value should be percent-encoded."
+  },
+  {
+   "id": "uq",
+   "name": "University of Queensland",
+   "pattern": "https://go.openathens.net/redirector/uq.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://guides.library.uq.edu.au/how-to-find/using-library-search/access-issues",
+   "hostVerified": true,
+   "confidence": "medium",
+   "notes": "UQ moved to OpenAthens on 26 June 2023 and retired EZproxy on 9 Jan 2024 (confirmed live: https://ezproxy.library.uq.edu.au/login?url=<doi> now 302s to web.library.uq.edu.au/link-has-expired — do NOT use the old EZproxy prefix). UQ's public guides document OpenAthens membership and a 'UQ Library OpenAthens Link Generator' (guides.library.uq.edu.au/teaching/link-embed-resources) but do not print the raw prefix on-page, hence medium confidence. Live verification supports the pattern: go.openathens.net/redirector/uq.edu.au responded 200, whereas a bogus domain returns an 'OpenAthens: 403' error page, confirming uq.edu.au is a registered redirector domain; this matches OpenAthens' documented redirector syntax (docs.openathens.net/libraries/the-redirector-and-non-standard-link-syntaxes). URL value should be percent-encoded."
+  },
+  {
+   "id": "uwa",
+   "name": "University of Western Australia",
+   "pattern": "https://go.openathens.net/redirector/uwa.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://paperpile.com/p/proxy-openathens-uwa/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UWA migrated from EZproxy to OpenAthens. Prefix documented on Paperpile's UWA page and corroborated by UWA's own guides (guides.library.uwa.edu.au EndNote guide and askUWA give the same redirector). curl to the redirector URL with a test DOI returned HTTP 200 (server: oaws)."
+  },
+  {
+   "id": "monash",
+   "name": "Monash University",
+   "pattern": "https://go.openathens.net/redirector/www.monash.edu?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://www.monash.edu/library/collections/eresources/openathens/link-generator-tool",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Monash retired EZproxy links (25 Jul 2022; legacy prefix was https://monash.idm.oclc.org/login?url=). The Library's Link Generator page documents the OpenAthens format with example https://go.openathens.net/redirector/www.monash.edu?url=https://onlinelibrary.wiley.com/doi/10.1111/joes.12214, and the library bookmarklet uses the same prefix. Note the org id is www.monash.edu (with www). curl to the redirector returned HTTP 200."
+  },
+  {
+   "id": "adelaide",
+   "name": "Adelaide University",
+   "pattern": "https://go.openathens.net/redirector/adelaideuni.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://au.libguides.com/EndNote/addedit/attachfile",
+   "hostVerified": true,
+   "confidence": "medium",
+   "notes": "Adelaide University (the new merged Adelaide/UniSA entity, adelaideuni.edu.au) documents this prefix as the ISI Base URL in its own EndNote LibGuide (au.libguides.com). The legacy University of Adelaide pattern https://go.openathens.net/redirector/adelaide.edu.au?url= is still documented (Paperpile) and may work for legacy accounts. Confidence medium only because the merger means two documented redirector org-ids coexist; adelaideuni.edu.au is the one on the university's current guide. curl to the redirector returned HTTP 200 (note: the redirector answers 200 generically, so verification is of the host, not the org-id)."
+  },
+  {
+   "id": "rmit",
+   "name": "RMIT University",
+   "pattern": "https://go.openathens.net/redirector/rmit.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://rmit.libguides.com/openathens",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "RMIT's own OpenAthens LibGuide documents the redirector format https://go.openathens.net/redirector/rmit.edu.au?url= and states that old '.ezproxy.lib.rmit.edu.au' links no longer work (OpenAthens replaced EZproxy). RMIT also publishes a Link Generator (rmit.libguides.com/Library_Link_Generator). curl to the redirector returned HTTP 200."
+  },
+  {
+   "id": "uts",
+   "name": "University of Technology Sydney",
+   "pattern": "https://ezproxy.lib.uts.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-uts/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UTS still runs classic EZproxy. Prefix documented on Paperpile's UTS page (as http://; https works and is preferred). curl -sI https://ezproxy.lib.uts.edu.au/login returned HTTP 200 with header 'Server: EZproxy', and live rewritten proxy hostnames (e.g. dx-doi-org.ezproxy.lib.uts.edu.au) are observable in the wild, confirming an active EZproxy deployment."
+  },
+  {
+   "id": "qut",
+   "name": "Queensland University of Technology",
+   "pattern": "https://go.openathens.net/redirector/qut.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://www.library.qut.edu.au/search/status/linking/openathens/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "QUT's linking guide states the OpenAthens Redirector is used for most online resources; QUT publishes its own OpenAthens link generator page. Redirector path curl-verified: HTTP 200 from go.openathens.net with a DOI appended. No EZproxy prefix currently documented (legacy ezp01/gateway hostnames appear only in old reading lists)."
+  },
+  {
+   "id": "curtin",
+   "name": "Curtin University",
+   "pattern": "https://go.openathens.net/redirector/curtin.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://www.curtin.edu.au/library/collections/authentication/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Curtin's library authentication page explicitly documents the new format 'https://go.openathens.net/redirector/curtin.edu.au?url=' and marks the old EZproxy-era links (curtin.edu.au/library/gw?url=, *.lis.curtin.edu.au rewrites) as no longer used. dbgw.lis.curtin.edu.au still resolves (HTTP 400) but is retired — do not use it. Redirector path curl-verified HTTP 200."
+  },
+  {
+   "id": "deakin",
+   "name": "Deakin University",
+   "pattern": "https://ezproxy.deakin.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://deakin.edu.au/library/help/improve-access-and-linking/add-browser-bookmarklet",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Deakin's own bookmarklet page prints the exact prefix in its JavaScript ('https://ezproxy.deakin.edu.au/login?url='+location.href); Deakin also publishes an 'Ezproxy link generator' widget. curl to /login returned HTTP 302 with 'Server: EZproxy' header — positive confirmation of a live EZproxy."
+  },
+  {
+   "id": "newcastle",
+   "name": "University of Newcastle",
+   "pattern": "https://login.ezproxy.newcastle.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-university-of-newcastle/",
+   "hostVerified": true,
+   "confidence": "medium",
+   "notes": "Prefix documented on Paperpile's University of Newcastle (Australia) proxy page (third-party but purpose-built public documentation); Newcastle's own libguides reference their 'Libauth' EZproxy setup. Host curl-verified: HTTP 403 from an AWS load balancer at login.ezproxy.newcastle.edu.au (host resolves and responds; 403 on bare /login without a target URL is normal for hosted EZproxy). Confidence medium only because the printed prefix comes from Paperpile rather than a newcastle.edu.au page."
+  },
+  {
+   "id": "flinders",
+   "name": "Flinders University",
+   "pattern": "https://go.openathens.net/redirector/flinders.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://library.flinders.edu.au/openathens",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Flinders Library's OpenAthens page documents remote access via OpenAthens (bookmarklet + a 'Create a link to an online resource' generator at go.openathens.net/generate/flinders.edu.au/80340359, which emits redirector links). The redirector prefix itself appears in public indexed links and curl-verified HTTP 200 with a DOI appended. Flinders does not publish an EZproxy prefix — OpenAthens is the remote-access route."
+  },
+  {
+   "id": "griffith",
+   "name": "Griffith University",
+   "pattern": "https://libraryproxy.griffith.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-griffith/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "curl HEAD on https://libraryproxy.griffith.edu.au/login?url=https://doi.org/ returned 200 with 'Server: EZproxy'. Prefix also documented on Griffith's Services@Griffith help ('What is library proxy', staffhelp.secure.griffith.edu.au) and used in hyphenated form (doi-org.libraryproxy.griffith.edu.au) in the wild."
+  },
+  {
+   "id": "jcu",
+   "name": "James Cook University",
+   "pattern": "https://go.openathens.net/redirector/jcu.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://libguides.jcu.edu.au/az.php",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "JCU decommissioned EZproxy (elibrary.jcu.edu.au — verified: every login?url= request now 302s to libanswers.jcu.edu.au) and went live on OpenAthens 29 Aug 2024 (libguides.jcu.edu.au/OpenAthens; official link generator go.openathens.net/generate/jcu.edu.au/80999704). Redirector links with this exact prefix appear throughout JCU's own A-Z database list; curl on the redirector returned 200 (server: oaws). URL in the query string is typically percent-encoded but plain URLs also work per OpenAthens docs."
+  },
+  {
+   "id": "latrobe",
+   "name": "La Trobe University",
+   "pattern": "https://ez.library.latrobe.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-latrobe/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "curl HEAD on https://ez.library.latrobe.edu.au/login?url=https://doi.org/ returned 200 with 'Server: EZproxy' (live today). Prefix documented on Paperpile's La Trobe off-campus page; La Trobe's own access-issues LibGuide (latrobe.libguides.com/problems-with-access) corroborates the EZproxy setup."
+  },
+  {
+   "id": "murdoch",
+   "name": "Murdoch University",
+   "pattern": "https://go.openathens.net/redirector/murdoch.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://paperpile.com/p/proxy-openathens-murdoch/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Murdoch uses OpenAthens, not EZproxy. The exact redirector prefix is documented on Paperpile's Murdoch page (quoted verbatim, used before PubMed/Scopus/WoS links) and also appears in Murdoch's own LibGuides (e.g. Vancouver referencing guide). curl on the redirector with a doi.org target returned 200 (server: oaws)."
+  },
+  {
+   "id": "wsu",
+   "name": "Western Sydney University",
+   "pattern": "https://go.openathens.net/redirector/westernsydney.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://subjectguides.library.westernsydney.edu.au/atozresources/libj",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "WSU replaced EZproxy with OpenAthens (library.westernsydney.edu.au/collections/open-athens: 'It is replacing EZProxy'; the library also hosts an EZproxy-to-OpenAthens link converter). This exact redirector prefix is observable on many links in WSU's own A-Z resource subject guides; curl returned 200 (server: oaws), while the sibling redirector/uws.edu.au 403s (confirming westernsydney.edu.au is the registered org). Legacy ezproxy.uws.edu.au still resolves and accepts TCP but never completes a TLS/HTTP response from outside — do not use the old EZproxy prefix."
+  },
+  {
+   "id": "canberra",
+   "name": "University of Canberra",
+   "pattern": "https://login.ezproxy.canberra.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-university-canberra/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UC's own pages (canberra.libanswers.com/faq/192755 and the Login Help LibGuide) confirm EZproxy is the off-campus auth system but don't print the prefix; Paperpile documents the exact prefix. curl to https://login.ezproxy.canberra.edu.au/ returned 302 with 'Server: EZproxy', and the full login?url=<DOI> path returned 200 from the same EZproxy server."
+  },
+  {
+   "id": "csu",
+   "name": "Charles Sturt University",
+   "pattern": "https://ezproxy.csu.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-csu/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Paperpile documents the prefix (published as http://; normalized to https, which the host serves). curl to https://ezproxy.csu.edu.au/ returned 302 with 'Server: EZproxy'; login?url=<DOI> path returned 200."
+  },
+  {
+   "id": "cqu",
+   "name": "CQUniversity",
+   "pattern": "https://go.openathens.net/redirector/cqu.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://go.openathens.net/redirector/cqu.edu.au?url=https%3A%2F%2Facumen.architecture.com.au%2F",
+   "hostVerified": true,
+   "confidence": "medium",
+   "notes": "CQU has migrated to OpenAthens: the legacy ezproxy.cqu.edu.au still resolves in DNS (138.77.5.179) but times out on HTTPS, and the old Paperpile CQU page is now 404. The OpenAthens redirector for cqu.edu.au is observable in the wild (Google-indexed live link, cited as evidence) and curl of the redirector with an appended DOI returned HTTP 200 from go.openathens.net. Medium confidence only because no CQU library help page printing the prefix verbatim was found."
+  },
+  {
+   "id": "federation",
+   "name": "Federation University",
+   "pattern": "https://go.openathens.net/redirector/federation.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://paperpile.com/p/proxy-openathens-federation/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Federation's own library page (federation.edu.au/library/teach/update-your-library-links) documents the EZproxy-to-OpenAthens migration (EZproxy links unsupported since 1 Dec 2022; 'links containing ezproxy.federation.edu.au need updating'), and ezproxy.federation.edu.au no longer resolves (curl exit 6, NXDOMAIN). Paperpile documents the exact redirector prefix; curl of the redirector with an appended DOI returned HTTP 200."
+  },
+  {
+   "id": "scu",
+   "name": "Southern Cross University",
+   "pattern": "https://ezproxy.scu.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-scu/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Paperpile documents the prefix (published as http://; normalized to https, which the host serves). curl to https://ezproxy.scu.edu.au/ returned 302 with 'Server: EZproxy'; login?url=<DOI> path returned 200."
+  },
+  {
+   "id": "une",
+   "name": "University of New England",
+   "pattern": "https://ezproxy.une.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://www.une.edu.au/library/teaching-staff/durable-linking-with-dois/rewriting-ezproxy-links",
+   "hostVerified": false,
+   "confidence": "medium",
+   "notes": "Prefix documented on UNE's own library page (search-indexed examples: https://ezproxy.une.edu.au/login?url=https://doi.org/10.1080/09687760701673568). Host DNS-resolves (129.180.1.217) and accepts TCP:443, but the TLS handshake never completes from a US vantage point (likely geo-restricted or WAF-filtered), so hostVerified=false per the rules. CAUTION: une.idm.oclc.org/login?url= is the US University of New England (Maine) — its login POSTs to une.okta.com and is documented at library.une.edu — do NOT use it for the Australian UNE."
+  },
+  {
+   "id": "usq",
+   "name": "University of Southern Queensland",
+   "pattern": "https://ezproxy.usq.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://www.unisq.edu.au/-/media/usq/library/teaching-support/usq-ezproxy-guidelines.ashx?la=en",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Documented in UniSQ's own 'USQ EZproxy Guidelines' and in the UniSQ EndNote libguide (Authenticate-with URL http://ezproxy.usq.edu.au/login). Despite the 2022 rebrand to UniSQ, the proxy host keeps the usq.edu.au domain: curl of https://ezproxy.usq.edu.au/login returns 302 to uauth.unisq.edu.au (UniSQ F5 SSO), confirming it is live and UniSQ-operated. Bare / returns 404 (BigIP) — the /login path is the working endpoint."
+  },
+  {
+   "id": "usc",
+   "name": "University of the Sunshine Coast",
+   "pattern": "https://ezproxy.usc.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-university-of-sunshine-coast/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Paperpile documents the prefix (as http://ezproxy.usc.edu.au:2048/login?url=) and UniSC's own libguides.usc.edu.au pages embed ezproxy.usc.edu.au:2048/login?url= links. Verified live: https://ezproxy.usc.edu.au/login?url=... returns 200 with Server: EZproxy on standard port 443; the legacy :2048 port no longer responds, so the normalized 443 form is the one to use."
+  },
+  {
+   "id": "macquarie",
+   "name": "Macquarie University",
+   "pattern": "https://simsrad.net.ocs.mq.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://www.mq.edu.au/about/facilities/library/resources/accessing-online-resources",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Macquarie's own 'Accessing online resources' library page states off-campus links need the extension https://simsrad.net.ocs.mq.edu.au/login?url= at the front (page 403s to automated fetchers but the prefix is in its indexed content; also on paperpile.com/p/proxy-macquarie). Verified live: curl of https://simsrad.net.ocs.mq.edu.au/login returns 200 with Server: EZproxy. Unusual hostname (simsrad.net.ocs) but it is Macquarie's long-standing EZproxy host."
+  },
+  {
+   "id": "uow",
+   "name": "University of Wollongong",
+   "pattern": "https://go.openathens.net/redirector/uow.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://uow.libguides.com/open-athens/open-athens-links",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UOW migrated from EZproxy to OpenAthens (EZproxy retired ~June 2025). The library's own OpenAthens-links guide documents the redirector prefix https://go.openathens.net/redirector/uow.edu.au?url= and instructs converting old https://ezproxy.uow.edu.au/login?url= links to it. Verified live: curl of the redirector with a target URL returns HTTP 201 from go.openathens.net (server: oaws). Legacy host ezproxy.uow.edu.au now fails TLS (sslv3 alert handshake failure) — do not use the old EZproxy prefix."
+  },
+  {
+   "id": "swinburne",
+   "name": "Swinburne University of Technology",
+   "pattern": "https://go.openathens.net/redirector/swin.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://paperpile.com/p/proxy-openathens-swinburne/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Swinburne retired EZproxy and moved to OpenAthens; the redirector prefix is printed repeatedly on the Paperpile off-campus-access page for Swinburne (e.g. prefixed PubMed/Scopus links). curl to https://go.openathens.net/ responded (HTTP 404 from server 'oaws', host alive; 404 on bare root is expected for the redirector service). Append a DOI/resource URL after ?url=."
+  },
+  {
+   "id": "vu",
+   "name": "Victoria University",
+   "pattern": "http://wallaby.vu.edu.au:5678/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://paperpile.com/p/proxy-victoria/",
+   "hostVerified": true,
+   "confidence": "medium",
+   "notes": "Documented only on Paperpile's VU page (vu.edu.au's own pages describe MyVU login but publish no prefix). curl http://wallaby.vu.edu.au:5678/login?url=<doi> responded HTTP 301 (nginx) redirecting to https://wallaby.vu.edu.au/login?url=<doi> with the url parameter preserved — consistent with a live EZproxy behind a TLS front. The https:443 endpoint did not complete a TLS handshake from this network (possibly geo/IP-restricted), so the canonical https form could not be independently confirmed; the :5678 entry point itself is live."
+  },
+  {
+   "id": "ecu",
+   "name": "Edith Cowan University",
+   "pattern": "https://ezproxy.ecu.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://ecu.au.libguides.com/c.php?g=662036&p=6863293",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "ECU's own LibGuides page 'Link format for off campus access' documents the ezproxy.ecu.edu.au/login?url= prefix for staff building reading-list links. curl https://ezproxy.ecu.edu.au/login responded HTTP 200 with Server: EZproxy. Login is federated (Shibboleth) behind the EZproxy front."
+  },
+  {
+   "id": "cdu",
+   "name": "Charles Darwin University",
+   "pattern": "https://go.openathens.net/redirector/cdu.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://www.cdu.edu.au/library/openathens-link-generator",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "CDU library publishes its own 'OpenAthens Link Generator' page documenting the https://go.openathens.net/redirector/cdu.edu.au prefix (append ?url=<target/DOI>). The legacy ezproxy.cdu.edu.au host in third-party proxy databases is now NXDOMAIN — do not use it. go.openathens.net responded to curl (host alive)."
+  },
+  {
+   "id": "utas",
+   "name": "University of Tasmania",
+   "pattern": "https://ezproxy.utas.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://www.utas.edu.au/library-resources/find/databases2/off-campus-access/ezproxy",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UTAS library's own EZproxy help page documents the ezproxy.utas.edu.au/login?url= format; live proxied hostnames (e.g. www-onetrust-com.ezproxy.utas.edu.au) also appear in the wild, confirming active use. curl https://ezproxy.utas.edu.au/login responded HTTP 200 with Server: EZproxy."
+  },
+  {
+   "id": "acu",
+   "name": "Australian Catholic University",
+   "pattern": "https://go.openathens.net/redirector/acu.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://library.acu.edu.au/research/search-tools/openathens",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "ACU migrated from EZproxy to OpenAthens in July 2022; EZproxy retired end-2022 (documented on the evidence page and libguides.acu.edu.au/librarylinking). The redirector prefix is observable in live ACU links (e.g. go.openathens.net/redirector/acu.edu.au?url=... indexed in search). Legacy https://ezproxy.acu.edu.au/login?url= still listed in libproxy-db.org but deprecated — do not use. Curl: redirector path returned HTTP 200 (server: oaws)."
+  },
+  {
+   "id": "bond",
+   "name": "Bond University",
+   "pattern": "https://go.openathens.net/redirector/bond.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://paperpile.com/p/proxy-openathens-bond/",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Bond uses OpenAthens SSO; its own off-campus page (library.bond.edu.au/using-library/library-technology/off-campus-technical-support) says links are pre-configured via SSO and doesn't print the prefix, but the redirector prefix is documented on Paperpile's Bond proxy page and appears in live Bond redirector links in the wild. Curl: redirector path returned HTTP 200 (server: oaws)."
+  },
+  {
+   "id": "notre-dame",
+   "name": "University of Notre Dame Australia",
+   "pattern": "https://go.openathens.net/redirector/nd.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://library.nd.edu.au/instruction/referencing/apa7/video",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UNDA's own LibGuides (referencing/EndNote guides on library.nd.edu.au) use this redirector prefix throughout. Caution: the library's OpenAthens page (library.nd.edu.au/home/about/openathens) still shows a legacy example http://ipacez.nd.edu.au/login?url= — that host is NXDOMAIN (curl/DNS failed), so the EZproxy-style prefix is dead; use the redirector. Curl: redirector path returned HTTP 200 (server: oaws)."
+  },
+  {
+   "id": "torrens",
+   "name": "Torrens University Australia",
+   "pattern": "https://go.openathens.net/redirector/torrens.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://library.torrens.edu.au/permalinks",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Torrens uses OpenAthens; the redirector prefix is referenced in Torrens' own permalinks guide and FAQ (faq.torrens.edu.au/faq/277983 'What is a permalink?') and documented on Paperpile (paperpile.com/p/proxy-openathens-torrens/). Curl: redirector path returned HTTP 200 (server: oaws)."
+  },
+  {
+   "id": "avondale",
+   "name": "Avondale University",
+   "pattern": "https://databases.avondale.edu.au/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://libguides.avondale.edu.au/az.php",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Classic EZproxy still in use: Avondale's own LibGuides databases A-Z page uses databases.avondale.edu.au/login?url= as the prefix on its database links. Curl confirmed the host responds with 'Server: EZproxy' headers (302 at root, 200 at /login?url=...)."
+  },
+  {
+   "id": "divinity",
+   "name": "University of Divinity",
+   "pattern": "https://divinity.idm.oclc.org/login?url=",
+   "patternType": "ezproxy-login-url",
+   "evidenceUrl": "https://library.divinity.edu.au/linking.html",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "OCLC-hosted EZproxy. The Library Hub linking guide documents the prefix explicitly with the example https://divinity.idm.oclc.org/login?url=https://ebookcentral.proquest.com/... and states 'Every correct permalink should include divinity.idm.oclc.org'. curl -sI https://divinity.idm.oclc.org/login returned HTTP 200 with header 'Server: EZproxy'."
+  },
+  {
+   "id": "unisa",
+   "name": "University of South Australia",
+   "pattern": "https://go.openathens.net/redirector/unisa.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://guides.library.unisa.edu.au/OnlineTeachingResources/Videos",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "UniSA retired EZproxy and moved to OpenAthens: the old proxy login page (login.access.library.unisa.edu.au) now displays a transition notice, so the two EZproxy prefixes still listed in libproxy-db.org (login.ezlibproxy.unisa.edu.au, access.library.unisa.edu.au) are stale. The redirector prefix is documented verbatim in UniSA's own Online Teaching Resources LibGuide; the live guide currently 404s (likely mid-migration after the Adelaide University merger) but the Nov 2025 Wayback snapshot (web.archive.org/web/20251122023421/...) contains the exact prefix, and Google's index of the live URL still shows it. curl to https://go.openathens.net/redirector/unisa.edu.au?url=... returned HTTP 200 (server: oaws). Post-merger this may eventually shift to an adelaide.edu.au entity."
+  },
+  {
+   "id": "batchelor",
+   "name": "Batchelor Institute",
+   "pattern": "",
+   "patternType": "none-found",
+   "evidenceUrl": "https://www.batchelor.edu.au/explore/library/",
+   "hostVerified": false,
+   "confidence": "low",
+   "notes": "No public proxy/redirector prefix found. The library pages (main library page and information-for-students) say online resources 'can be accessed on or off campus' by signing into your library account, and that the Institute subscribes to EBSCO and Informit, but publish no proxy URL, EZproxy prefix, or OpenAthens link. Candidate hostnames probed by curl (ezproxy.batchelor.edu.au, proxy.batchelor.edu.au, batchelor.idm.oclc.org) all failed to respond/resolve, and Batchelor is absent from the libproxy-db.org community database. Access appears to be per-user database credentials via library membership (contact library@batchelor.edu.au) rather than a URL-rewriting proxy."
+  }
+ ]
+}
