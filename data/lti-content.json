@@ -1,0 +1,96 @@
+{
+ "generated": "2026-07-09",
+ "_schema": {
+  "id": "Stable slug used as the checkbox value in the LTI content picker — never reuse or repurpose one",
+  "title": "Title shown in the picker and sent to the LMS as the link's title",
+  "description": "One-line plain-text description (Australian English) shown in the picker and sent as the link's text",
+  "url": "Absolute https://www.ntlsn.com/... URL of a real page at repo root — free, public, no login",
+  "icon": "Optional absolute https icon URL sent with the content item"
+ },
+ "items": [
+  {
+   "id": "crash-courses",
+   "title": "Crash Courses",
+   "description": "Short, self-paced crash courses on core teaching practice — assessment, feedback, curriculum, GenAI and more.",
+   "url": "https://www.ntlsn.com/crash-courses.html"
+  },
+  {
+   "id": "genai-crash-course",
+   "title": "Generative AI: A Crash Course for Academics",
+   "description": "A practical introduction to generative AI for university teaching — what it is, what it changes, and what to do about it.",
+   "url": "https://www.ntlsn.com/genai-crash-course.html"
+  },
+  {
+   "id": "whats-on",
+   "title": "What's On across the sector",
+   "description": "Live listing of symposia, workshops and professional development across all 42 Australian universities.",
+   "url": "https://www.ntlsn.com/whats-on.html"
+  },
+  {
+   "id": "rubric-builder",
+   "title": "Rubric Builder",
+   "description": "Build a criterion-referenced marking rubric step by step, then export it for your LMS or unit outline.",
+   "url": "https://www.ntlsn.com/rubric-builder.html"
+  },
+  {
+   "id": "outcome-builder",
+   "title": "Learning Outcome Builder",
+   "description": "Draft measurable, constructively aligned learning outcomes with verb guidance mapped to AQF levels.",
+   "url": "https://www.ntlsn.com/outcome-builder.html"
+  },
+  {
+   "id": "session-planner",
+   "title": "Active-Learning Session Planner",
+   "description": "Turn a class into a timed run-sheet with active-learning segments sized to your session length.",
+   "url": "https://www.ntlsn.com/session-planner.html"
+  },
+  {
+   "id": "feedback-builder",
+   "title": "Feedback and Feedforward Builder",
+   "description": "Compose student feedback that actually helps — structured feed-up, feedback and feedforward comments.",
+   "url": "https://www.ntlsn.com/feedback-builder.html"
+  },
+  {
+   "id": "mcq-checker",
+   "title": "MCQ Quality Checker",
+   "description": "Check multiple-choice questions against item-writing rules and fix common flaws before the exam does.",
+   "url": "https://www.ntlsn.com/mcq-checker.html"
+  },
+  {
+   "id": "calibration-suite",
+   "title": "Calibration Suite",
+   "description": "Run a marking-calibration session with colleagues — shared samples, blind marks, and a live spread of results.",
+   "url": "https://www.ntlsn.com/calibration-suite.html"
+  },
+  {
+   "id": "peer-review-exchange",
+   "title": "Peer-Review Exchange",
+   "description": "Structured peer review of teaching: pair up, observe, and exchange evidence-ready reports.",
+   "url": "https://www.ntlsn.com/peer-review-exchange.html"
+  },
+  {
+   "id": "evidence-crosswalk",
+   "title": "Evidence Cross-Walk",
+   "description": "Map one piece of teaching evidence across promotion, fellowship and award frameworks in a single pass.",
+   "url": "https://www.ntlsn.com/evidence-crosswalk.html"
+  },
+  {
+   "id": "recognition-gps",
+   "title": "Recognition GPS",
+   "description": "Plot a route through teaching-recognition options — awards, fellowships and promotion — from where you are now.",
+   "url": "https://www.ntlsn.com/recognition-gps.html"
+  },
+  {
+   "id": "open-badges",
+   "title": "Open Badges",
+   "description": "Issue yourself a portable, verifiable teaching-recognition claim as an Open Badge.",
+   "url": "https://www.ntlsn.com/open-badges.html"
+  },
+  {
+   "id": "accessibility-preflight",
+   "title": "Accessibility Pre-flight",
+   "description": "Pre-flight checklist for slides, PDFs and LMS pages against WCAG 2.2 AA before students see them.",
+   "url": "https://www.ntlsn.com/accessibility-preflight.html"
+  }
+ ]
+}

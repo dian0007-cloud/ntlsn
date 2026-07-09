@@ -1,9 +1,31 @@
 # LTI 1.3 Deep Linking — setup & testing
 
-Status: **Phase A (foundation)** — OIDC login, JWT/JWKS signature verification, platform
-registry, and launch validation are implemented and tested. There is no content picker yet
-(Phase B): a successful launch currently renders a confirmation page proving the crypto
-pipeline is correct, not the real "add to course" UI.
+Status: **Phase A + B** — OIDC login, JWT/JWKS signature verification, platform registry
+and launch validation (Phase A), plus the full Deep Linking round trip (Phase B): a
+verified launch renders a content picker of curated free-commons resources
+(`data/lti-content.json`), and `netlify/functions/lti-deeplink-return.js` signs the
+`LtiDeepLinkingResponse` and form_posts it back to the platform. Validated end to end
+against synthetic keypairs in the test suite; a real-LMS (MoodleCloud/saltire) end-to-end
+test is still pending.
+
+### What the instructor sees
+
+From a course, the instructor clicks the NTLSN placement in their LMS's activity/content
+chooser. After the (invisible) OIDC handshake they land on a plain NTLSN page listing the
+free commons resources — Crash Courses, Rubric Builder, Recognition GPS and so on — each
+with a one-line description and a checkbox. Ticking some and pressing **Add to course**
+sends them straight back to the LMS with those links added; submitting with nothing ticked
+just returns them with nothing added. No NTLSN account, no student data — the links are the
+same free, public pages anyone can open.
+
+### How the round trip stays honest
+
+The platform's `deep_linking_settings` claim (its return URL and opaque `data` token) is
+never trusted from the browser: `lti-launch.js` seals it inside a 5-minute session JWT
+signed with NTLSN's own key, carried through the picker as a hidden field, and
+`lti-deeplink-return.js` verifies that signature before using any of it. Selections are
+ids resolved server-side against `data/lti-content.json` — client-supplied titles or URLs
+are ignored, and unknown ids are silently dropped.
 
 Scope, deliberately: NTLSN supports **Deep Linking only** (`LtiDeepLinkingRequest`). No
 Resource Link launches, no roster (NRPS), no grades (AGS) — this integration is
@@ -52,8 +74,9 @@ LTI-configurable, no institution needed to test the full loop end to end.
 
 `netlify/functions/test/lti.test.js` exercises the entire pipeline (login redirect, JWKS
 caching + kid-rotation refetch, signature/state/nonce/deployment/message-type validation,
-replay rejection) against synthetic platform keypairs — `npm test` is the fast path to
-confirm nothing regressed.
+replay rejection, picker rendering, session-JWT tamper/expiry rejection, and the signed
+`LtiDeepLinkingResponse` itself) against synthetic platform keypairs — `npm test` is the
+fast path to confirm nothing regressed.
 
 For an external, spec-conformance check before touching a real LMS, IMS's public reference
 tool ([saltire.lti.app](https://saltire.lti.app)) can act as a platform and drive a real

@@ -628,41 +628,111 @@ function wire(){
 }
 wire();
 new MutationObserver(wire).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-addcal-script">(function(){
-var MAP=null;
+})();</script><script id="ntlsn-addcal-script">
+(function(){
+/* Per-event "Add to calendar" (TASKS 2.1, per-event half).
+   For every event card in #events / #conferences: a Google Calendar deep-link
+   + a single-event .ics download, built from canonical /data/events.json
+   (+ /data/universities.json for LOCATION). Cards are matched by event URL
+   first, then by title (h5) for events with no URL. decorate() is stateless
+   and self-healing: React re-renders re-use DOM nodes, so each pass verifies
+   the pill next to a card still belongs to that card's event (data-ntcal-for)
+   and removes stale ones. Fails soft; WCAG 2.2 AA: real links, aria-labels
+   carry the event title, focus-visible via the global CSS. */
+if(window.__ntlsnAddCal)return;window.__ntlsnAddCal=1;
+var byUrl=null,byTitle=null,LOC={};
 function norm(u){return (u||"").replace(/\/+$/,"").toLowerCase();}
+function normT(t){return (t||"").replace(/\s+/g," ").trim().toLowerCase();}
 function plusOne(d){var t=new Date(d+"T00:00:00Z");t.setUTCDate(t.getUTCDate()+1);return t.toISOString().slice(0,10).replace(/-/g,"");}
+function esc(x){return String(x||"").replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+function fold(s){var out="";while(s.length>73){var cut=73;if(/[\uD800-\uDBFF]/.test(s.charAt(cut-1)))cut--;out+=s.slice(0,cut)+"\r\n ";s=s.slice(cut);}return out+s;}
 function gcal(e){
- var start=e.date.replace(/-/g,""),end=plusOne(e.endDate||e.date);
  var det=((e.desc||"")+(e.url?("\n\n"+e.url):"")).slice(0,900);
- return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(e.title)+"&dates="+start+"/"+end+"&details="+encodeURIComponent(det);
+ var q="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(e.title)+"&dates="+e.date.replace(/-/g,"")+"/"+plusOne(e.endDate||e.date)+"&details="+encodeURIComponent(det);
+ if(LOC[e.uni])q+="&location="+encodeURIComponent(LOC[e.uni]);
+ return q;
 }
 function icsUri(e){
- var start=e.date.replace(/-/g,""),end=plusOne(e.endDate||e.date);
- function esc(x){return String(x||"").replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
- var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//NTLSN//EN","CALSCALE:GREGORIAN","BEGIN:VEVENT","UID:ntlsn-"+e.id+"@ntlsn.com","DTSTART;VALUE=DATE:"+start,"DTEND;VALUE=DATE:"+end,"SUMMARY:"+esc(e.title),"DESCRIPTION:"+esc((e.desc||"")+(e.url?(" "+e.url):"")),e.url?("URL:"+esc(e.url)):"","END:VEVENT","END:VCALENDAR"].filter(Boolean).join("\r\n");
+ var stamp=new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z";
+ var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//NTLSN//Sector Events//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+  "BEGIN:VEVENT","UID:ntlsn-"+e.id+"@ntlsn.com","DTSTAMP:"+stamp,
+  "DTSTART;VALUE=DATE:"+e.date.replace(/-/g,""),"DTEND;VALUE=DATE:"+plusOne(e.endDate||e.date),
+  fold("SUMMARY:"+esc(e.title)),
+  fold("DESCRIPTION:"+esc((e.desc||"")+(e.url?("\n"+e.url):""))),
+  LOC[e.uni]?fold("LOCATION:"+esc(LOC[e.uni])):"",
+  e.url?fold("URL:"+e.url):"",
+  "END:VEVENT","END:VCALENDAR"].filter(Boolean).join("\r\n")+"\r\n";
  return "data:text/calendar;charset=utf-8,"+encodeURIComponent(L);
 }
 var PILL="display:inline-flex;align-items:center;gap:4px;font:600 12px/1 -apple-system,Segoe UI,Roboto,sans-serif;color:#4ECDC4;background:rgba(78,205,196,.10);border:1px solid rgba(78,205,196,.3);border-radius:7px;padding:4px 8px;text-decoration:none;margin:6px 8px 0 0;cursor:pointer;";
+function ui(e){
+ var wrap=document.createElement("span");wrap.setAttribute("data-ntcal-ui","1");wrap.setAttribute("data-ntcal-for",String(e.id));wrap.style.cssText="display:inline-flex;flex-wrap:wrap;align-items:center;";
+ var g=document.createElement("a");g.href=gcal(e);g.target="_blank";g.rel="noopener noreferrer";g.style.cssText=PILL;g.textContent="📅 Add to Google";g.setAttribute("aria-label","Add to Google Calendar: "+e.title);g.title="Add "+e.title+" to Google Calendar";
+ var ic=document.createElement("a");ic.href=icsUri(e);ic.setAttribute("download","ntlsn-"+e.id+".ics");ic.style.cssText=PILL;ic.textContent="⤓ .ics";ic.setAttribute("aria-label","Download .ics calendar file: "+e.title);ic.title="Download .ics for Apple Calendar or Outlook";
+ wrap.appendChild(g);wrap.appendChild(ic);return wrap;
+}
 function decorate(){
- if(!MAP)return;
- var links=document.querySelectorAll('a[href^="http"]:not([data-ntcal])');
- for(var i=0;i<links.length;i++){
-  var a=links[i];if(!a.closest("#events,#conferences")){a.setAttribute("data-ntcal","0");continue;}var e=MAP[norm(a.href)];a.setAttribute("data-ntcal",e?"1":"0");
-  if(!e)continue;
-  var wrap=document.createElement("span");wrap.setAttribute("data-ntcal-ui","1");wrap.style.cssText="display:inline-flex;flex-wrap:wrap;align-items:center;";
-  var g=document.createElement("a");g.href=gcal(e);g.target="_blank";g.rel="noopener noreferrer";g.style.cssText=PILL;g.textContent="📅 Add to Google";g.title="Add "+e.title+" to Google Calendar";
-  var ic=document.createElement("a");ic.href=icsUri(e);ic.setAttribute("download","ntlsn-"+e.id+".ics");ic.style.cssText=PILL;ic.textContent="⤓ .ics";ic.title="Download .ics (Apple/Outlook)";
-  wrap.appendChild(g);wrap.appendChild(ic);
-  a.parentNode.insertBefore(wrap,a.nextSibling);
+ if(!byUrl)return;
+ var secs=[document.getElementById("events"),document.getElementById("conferences")];
+ for(var s=0;s<secs.length;s++){
+  var sec=secs[s];if(!sec)continue;
+  /* Pass 1 — match by event URL: verify/repair the pill sitting after each link. */
+  var links=sec.querySelectorAll('a[href^="http"]');
+  for(var i=0;i<links.length;i++){
+   var a=links[i];
+   if(a.closest("[data-ntcal-ui]"))continue;
+   var e=byUrl[norm(a.href)];
+   var sib=a.nextElementSibling;
+   var sibIsPill=!!(sib&&sib.hasAttribute&&sib.hasAttribute("data-ntcal-ui"));
+   if(!e){if(sibIsPill)sib.parentNode.removeChild(sib);continue;}
+   if(sibIsPill){if(sib.getAttribute("data-ntcal-for")===String(e.id))continue;sib.parentNode.removeChild(sib);}
+   a.parentNode.insertBefore(ui(e),a.nextSibling);
+  }
+  /* Pass 2 — match by title for events with no URL (day-detail cards, h5).
+     For each card work out which event ids are legitimate (URL match of its
+     links, plus the title match), drop pills for anything else (React node
+     re-use), then add the title pill only if the card has none left. */
+  if(sec.id!=="events")continue;
+  var hs=sec.querySelectorAll("h5");
+  for(var j=0;j<hs.length;j++){
+   var h=hs[j];
+   var card=h.closest(".group")||h.parentElement.parentElement;
+   if(!card)continue;
+   var ev=byTitle[normT(h.textContent)];
+   var okIds={};if(ev)okIds[String(ev.id)]=1;
+   var as=card.querySelectorAll('a[href^="http"]');
+   for(var k=0;k<as.length;k++){if(as[k].closest("[data-ntcal-ui]"))continue;var ue=byUrl[norm(as[k].href)];if(ue)okIds[String(ue.id)]=1;}
+   var pills=card.querySelectorAll("[data-ntcal-ui]");
+   var have=false;
+   for(var p=0;p<pills.length;p++){
+    if(okIds[pills[p].getAttribute("data-ntcal-for")]){have=true;}
+    else{pills[p].parentNode.removeChild(pills[p]);}
+   }
+   if(have||!ev)continue;
+   var act=card.querySelector('a[href^="http"],button');
+   var host=act?act.parentElement:(h.parentElement.parentElement||card);
+   host.appendChild(ui(ev));
+  }
  }
 }
-fetch("/data/events.json").then(function(r){return r.json();}).then(function(evs){
- MAP={};evs.forEach(function(e){if(e.url)MAP[norm(e.url)]=e;});
+Promise.all([
+ fetch("/data/events.json").then(function(r){if(!r.ok)throw new Error("events");return r.json();}),
+ fetch("/data/universities.json").then(function(r){return r.ok?r.json():[];}).catch(function(){return [];})
+]).then(function(res){
+ var evs=res[0],unis=res[1];
+ if(!Array.isArray(evs))return;
+ (Array.isArray(unis)?unis:[]).forEach(function(u){if(u&&u.id&&u.name)LOC[u.id]=u.name+(u.city?" — "+u.city+", "+u.state:"");});
+ byUrl={};byTitle={};
+ evs.forEach(function(e){
+  if(!e||!e.title||!e.date)return;
+  if(e.url&&!byUrl[norm(e.url)])byUrl[norm(e.url)]=e;
+  if(!byTitle[normT(e.title)])byTitle[normT(e.title)]=e;
+ });
  decorate();
  var t=null;new MutationObserver(function(){clearTimeout(t);t=setTimeout(decorate,120);}).observe(document.body,{childList:true,subtree:true});
 }).catch(function(){});
-})();</script><script id="ntlsn-search-url">(function(){
+})();
+</script><script id="ntlsn-search-url">(function(){
 var SEL='input[placeholder^="Search symposiums"]';
 function reactSet(inp,val){var d=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,"value");d.set.call(inp,val);inp.dispatchEvent(new Event("input",{bubbles:true}));}
 function getQ(){try{return new URLSearchParams(location.search).get("q")||"";}catch(e){return "";}}
