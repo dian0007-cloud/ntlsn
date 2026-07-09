@@ -1,8 +1,13 @@
 // NTLSN — LTI 1.3 launch endpoint. Receives the platform's signed id_token (form_post),
 // validates it end-to-end (state, signature via the platform's own JWKS, aud, nonce
-// single-use, deployment_id, message type), and — for Phase A — renders a confirmation
-// page proving the pipeline is correct. Phase B replaces this with the real content
-// picker + a signed LtiDeepLinkingResponse.
+// single-use, deployment_id, message type), then — Phase B — renders the content picker:
+// a server-rendered checkbox list of data/lti-content.json items that POSTs to
+// lti-deeplink-return, which signs the LtiDeepLinkingResponse back to the platform.
+//
+// The platform's deep_linking_settings claim (deep_link_return_url + opaque data) must
+// survive the picker round trip WITHOUT trusting the browser: it's embedded in a
+// short-lived session JWT signed with NTLSN's own key, and lti-deeplink-return verifies
+// that signature before using any of it. The client carries the token; it can't mint one.
 //
 // Scope, deliberately: NTLSN supports LtiDeepLinkingRequest ONLY. No LtiResourceLinkRequest,
 // no NRPS (roster), no AGS (grades) — this endpoint is structurally incapable of reading
@@ -10,12 +15,15 @@
 "use strict";
 
 const { readCookie, safeEqual } = require("../lib/cookies");
-const { verifyWithJwksUrl } = require("../lib/lti-jwt");
+const { verifyWithJwksUrl, sign } = require("../lib/lti-jwt");
 const { lookupPlatform } = require("../lib/lti-platforms");
+const { load: loadContent } = require("../lib/lti-content");
 const { store } = require("../lib/store");
 
 const DEPLOY_ID_CLAIM = "https://purl.imsglobal.org/spec/lti/claim/deployment_id";
 const MSG_TYPE_CLAIM = "https://purl.imsglobal.org/spec/lti/claim/message_type";
+const DL_SETTINGS_CLAIM = "https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings";
+const SESSION_TTL_S = 5 * 60; // picker session JWT lifetime
 
 function decodeUnverified(token) {
   const parts = String(token || "").split(".");
@@ -101,17 +109,76 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: "unsupported message type: " + messageType + " — NTLSN currently supports Deep Linking only" };
   }
 
+  // Deep Linking requires the platform to say where (and with what opaque `data`) to send
+  // the response. A launch without a usable https return URL can't complete the round trip.
+  const dlSettings = payload[DL_SETTINGS_CLAIM] || {};
+  const returnUrl = dlSettings.deep_link_return_url;
+  let returnUrlOk = false;
+  try {
+    returnUrlOk = new URL(returnUrl).protocol === "https:";
+  } catch (_e) {
+    /* fall through */
+  }
+  if (!returnUrlOk) {
+    return { statusCode: 400, body: "deep_linking_settings.deep_link_return_url missing or not https" };
+  }
+
+  // Round-trip state the return endpoint needs, signed with NTLSN's own key so the
+  // browser can carry it but never alter it. `purpose` pins this token to the picker
+  // flow — no other NTLSN-signed JWT (e.g. a Deep Linking response) can stand in for it.
+  const now = Math.floor(Date.now() / 1000);
+  const session = {
+    purpose: "lti-dl-session",
+    iss: payload.iss,
+    clientId: platform.clientId,
+    deploymentId,
+    deep_link_return_url: returnUrl,
+    iat: now,
+    exp: now + SESSION_TTL_S,
+  };
+  if (typeof dlSettings.data === "string" && dlSettings.data) session.data = dlSettings.data;
+
+  let sessionJwt;
+  try {
+    sessionJwt = sign(session);
+  } catch (_e) {
+    return { statusCode: 503, body: "LTI signing key not configured" };
+  }
+
+  let items;
+  try {
+    items = await loadContent();
+  } catch (e) {
+    return { statusCode: 502, body: "content registry unavailable: " + (e.message || e) };
+  }
+
+  const list = items
+    .map(
+      (it) =>
+        `<li style="margin:0 0 .75rem"><label style="display:block;cursor:pointer">` +
+        `<input type="checkbox" name="item" value="${esc(it.id)}"> <b>${esc(it.title)}</b>` +
+        `<br><span style="color:#555">${esc(it.description)}</span></label></li>`
+    )
+    .join("");
+
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/html; charset=utf-8" },
     multiValueHeaders: { "Set-Cookie": ["ntlsn_lti_state=; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=0"] },
     body: html(
-      "LTI launch verified",
-      `<h1>LTI launch verified ✓</h1>
-       <p><b>Platform:</b> ${esc(platform.name || platform.issuer)}</p>
-       <p><b>Deployment:</b> ${esc(deploymentId)}</p>
-       <p><b>Message type:</b> ${esc(messageType)}</p>
-       <p style="color:#666">The content picker isn't wired up yet (Phase B) — this page confirms the OIDC login + JWT signature-verification pipeline is correct end to end.</p>`
+      "Add NTLSN resources to your course",
+      `<h1>Add NTLSN resources</h1>
+       <p>Launched from <b>${esc(platform.name || platform.issuer)}</b>. Choose the free, public
+       NTLSN resources to add to your course — links only, no student data leaves your LMS.</p>
+       <form method="post" action="/.netlify/functions/lti-deeplink-return">
+         <input type="hidden" name="session" value="${esc(sessionJwt)}">
+         <fieldset style="border:0;padding:0;margin:1.5rem 0">
+           <legend style="font-weight:600;margin-bottom:.75rem">Free commons resources</legend>
+           <ul style="list-style:none;padding:0;margin:0">${list}</ul>
+         </fieldset>
+         <button type="submit" style="font-size:1rem;padding:.5rem 1.25rem">Add to course</button>
+         <p style="color:#666;font-size:.875rem">Selecting nothing and submitting returns you to your LMS without adding anything.</p>
+       </form>`
     ),
   };
 };

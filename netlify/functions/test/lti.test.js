@@ -269,30 +269,35 @@ test("lti-login: valid request redirects to the platform's auth endpoint with st
 
 // --- functions/lti-launch.js ---------------------------------------------------
 
+// What a real platform sends in the deep_linking_settings claim — the return URL the
+// LtiDeepLinkingResponse must be form_posted to, plus an opaque `data` token to echo back.
+const DL_SETTINGS = {
+  deep_link_return_url: "https://moodle.example/course/dl-return",
+  accept_types: ["link"],
+  accept_multiple: true,
+  data: "opaque-data-123",
+};
+
 // Builds a full, valid launch POST event: signs an id_token as "the platform", stashes the
 // matching nonce in the (in-memory, test-mode) store, and sets the matching state cookie —
 // i.e. exactly what a real platform + browser round trip would produce.
-async function buildLaunchEvent({ platform, kid, nonce, state, extraClaims, deploymentId = "1", messageType = "LtiDeepLinkingRequest" }) {
+async function buildLaunchEvent({ platform, kid, nonce, state, extraClaims, deploymentId = "1", messageType = "LtiDeepLinkingRequest", dlSettings = DL_SETTINGS }) {
   const { store } = require("../../lib/store");
   const s = await store("lti-nonce");
   await s.set(nonce, String(Date.now() + 600000));
 
-  const idToken = signAsPlatform(
-    Object.assign(
-      {
-        iss: platform.issuer,
-        aud: platform.clientId,
-        nonce,
-        exp: Math.floor(Date.now() / 1000) + 60,
-        iat: Math.floor(Date.now() / 1000),
-        "https://purl.imsglobal.org/spec/lti/claim/deployment_id": deploymentId,
-        "https://purl.imsglobal.org/spec/lti/claim/message_type": messageType,
-      },
-      extraClaims
-    ),
-    platform._privateKey,
-    kid
-  );
+  const claims = {
+    iss: platform.issuer,
+    aud: platform.clientId,
+    nonce,
+    exp: Math.floor(Date.now() / 1000) + 60,
+    iat: Math.floor(Date.now() / 1000),
+    "https://purl.imsglobal.org/spec/lti/claim/deployment_id": deploymentId,
+    "https://purl.imsglobal.org/spec/lti/claim/message_type": messageType,
+  };
+  if (dlSettings) claims["https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings"] = dlSettings;
+
+  const idToken = signAsPlatform(Object.assign(claims, extraClaims), platform._privateKey, kid);
 
   return {
     httpMethod: "POST",
@@ -320,23 +325,63 @@ function makeTestPlatform() {
   };
 }
 
+// Curated deep-linkable resources, mocked the same way lti-platforms.json is: the picker
+// and the return endpoint must only ever see THESE items, whatever the client claims.
+const SAMPLE_CONTENT = {
+  items: [
+    { id: "rubric-builder", title: "Rubric Builder", description: "Build a marking rubric step by step.", url: "https://www.ntlsn.com/rubric-builder.html" },
+    { id: "crash-courses", title: "Crash Courses", description: "Short, self-paced crash courses.", url: "https://www.ntlsn.com/crash-courses.html" },
+    { id: "open-badges", title: "Open Badges", description: "Portable teaching-recognition claims.", url: "https://www.ntlsn.com/open-badges.html", icon: "https://www.ntlsn.com/badge-icon.png" },
+  ],
+};
+
 function launchFetchMap(platform) {
   return {
     "lti-platforms.json": { body: { platforms: [{ issuer: platform.issuer, clientId: platform.clientId, authLoginUrl: platform.authLoginUrl, jwksUrl: platform.jwksUrl, deploymentIds: platform.deploymentIds, name: platform.name }] } },
     "mod/lti/certs.php": { body: { keys: [platformJwk(platform._publicKey, platform.kid)] } },
+    "lti-content.json": { body: SAMPLE_CONTENT },
   };
 }
 
-test("lti-launch: full valid launch -> 200, confirms platform + clears the state cookie", async () => {
+test("lti-launch: full valid launch -> 200 picker with content items + a signed session JWT, clears the state cookie", async () => {
+  const platform = makeTestPlatform();
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, () =>
+    withFetch(launchFetchMap(platform), async () => {
+      const { handler } = loadFn("lti-launch");
+      const event = await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n1", state: "s1" });
+      const res = await handler(event);
+      assert.strictEqual(res.statusCode, 200);
+      assert.match(res.body, /Example Moodle/);
+      assert.match(res.body, /Rubric Builder/);
+      assert.match(res.body, /Crash Courses/);
+      assert.match(res.body, /action="\/\.netlify\/functions\/lti-deeplink-return"/);
+      // Hidden session field carries a three-part JWT (signed by NTLSN, verified server-side on return).
+      assert.match(res.body, /name="session" value="[^"]+\.[^"]+\.[^"]+"/);
+      assert.match(res.multiValueHeaders["Set-Cookie"][0], /Max-Age=0/);
+    })
+  );
+});
+
+test("lti-launch: Deep Linking launch without a usable deep_link_return_url -> 400", async () => {
+  const platform = makeTestPlatform();
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, () =>
+    withFetch(launchFetchMap(platform), async () => {
+      const { handler } = loadFn("lti-launch");
+      const event = await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n1b", state: "s1b", dlSettings: null });
+      const res = await handler(event);
+      assert.strictEqual(res.statusCode, 400);
+      assert.match(res.body, /deep_link_return_url/);
+    })
+  );
+});
+
+test("lti-launch: signing key unconfigured -> 503 (launch validated but picker session can't be minted)", async () => {
   const platform = makeTestPlatform();
   await withFetch(launchFetchMap(platform), async () => {
     const { handler } = loadFn("lti-launch");
-    const event = await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n1", state: "s1" });
+    const event = await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n1c", state: "s1c" });
     const res = await handler(event);
-    assert.strictEqual(res.statusCode, 200);
-    assert.match(res.body, /LTI launch verified/);
-    assert.match(res.body, /Example Moodle/);
-    assert.match(res.multiValueHeaders["Set-Cookie"][0], /Max-Age=0/);
+    assert.strictEqual(res.statusCode, 503);
   });
 });
 
@@ -353,14 +398,16 @@ test("lti-launch: state cookie mismatch -> 400", async () => {
 
 test("lti-launch: nonce is single-use — replaying the same launch is rejected", async () => {
   const platform = makeTestPlatform();
-  await withFetch(launchFetchMap(platform), async () => {
-    const { handler } = loadFn("lti-launch");
-    const event = await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n3", state: "s3" });
-    const first = await handler(event);
-    assert.strictEqual(first.statusCode, 200);
-    const replay = await handler(event);
-    assert.strictEqual(replay.statusCode, 400);
-  });
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, () =>
+    withFetch(launchFetchMap(platform), async () => {
+      const { handler } = loadFn("lti-launch");
+      const event = await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n3", state: "s3" });
+      const first = await handler(event);
+      assert.strictEqual(first.statusCode, 200);
+      const replay = await handler(event);
+      assert.strictEqual(replay.statusCode, 400);
+    })
+  );
 });
 
 test("lti-launch: unregistered deployment_id -> 400", async () => {
@@ -401,4 +448,154 @@ test("lti-launch: tampered id_token payload fails signature verification (iss/au
     assert.strictEqual(res.statusCode, 400);
     assert.match(res.body, /invalid id_token signature/);
   });
+});
+
+// --- functions/lti-deeplink-return.js ------------------------------------------
+
+const DL_DATA_CLAIM = "https://purl.imsglobal.org/spec/lti-dl/claim/data";
+const DL_ITEMS_CLAIM = "https://purl.imsglobal.org/spec/lti-dl/claim/content_items";
+
+// Signs a picker session the way lti-launch.js does — same shape, same key (from env).
+function makeSessionJwt(jwtLib, overrides) {
+  const now = Math.floor(Date.now() / 1000);
+  return jwtLib.sign(
+    Object.assign(
+      {
+        purpose: "lti-dl-session",
+        iss: "https://moodle.example",
+        clientId: "abc123",
+        deploymentId: "1",
+        deep_link_return_url: "https://moodle.example/course/dl-return",
+        data: "opaque-data-123",
+        iat: now,
+        exp: now + 300,
+      },
+      overrides
+    )
+  );
+}
+
+// POST body with repeated `item` keys, as a real multi-checkbox form submit produces.
+function returnEvent(session, itemIds, extraFields) {
+  const p = new URLSearchParams();
+  if (session != null) p.set("session", session);
+  for (const id of itemIds || []) p.append("item", id);
+  for (const [k, v] of Object.entries(extraFields || {})) p.append(k, v);
+  return { httpMethod: "POST", body: p.toString() };
+}
+
+test("lti-deeplink-return: non-POST -> 405", async () => {
+  const { handler } = loadFn("lti-deeplink-return");
+  const res = await handler({ httpMethod: "GET" });
+  assert.strictEqual(res.statusCode, 405);
+});
+
+test("lti-deeplink-return: tampered session JWT is rejected", async () => {
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, async () => {
+    const jwtLib = loadJwt();
+    const parts = makeSessionJwt(jwtLib).split(".");
+    // Redirect-the-response attempt: alter the return URL post-signing.
+    const claims = JSON.parse(Buffer.from(parts[1], "base64url").toString("utf8"));
+    claims.deep_link_return_url = "https://evil.example/steal";
+    parts[1] = b64url(Buffer.from(JSON.stringify(claims)));
+    const { handler } = loadFn("lti-deeplink-return");
+    const res = await handler(returnEvent(parts.join("."), ["rubric-builder"]));
+    assert.strictEqual(res.statusCode, 400);
+  });
+});
+
+test("lti-deeplink-return: expired session JWT is rejected", async () => {
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, async () => {
+    const jwtLib = loadJwt();
+    const session = makeSessionJwt(jwtLib, { exp: Math.floor(Date.now() / 1000) - 10 });
+    const { handler } = loadFn("lti-deeplink-return");
+    const res = await handler(returnEvent(session, ["rubric-builder"]));
+    assert.strictEqual(res.statusCode, 400);
+  });
+});
+
+test("lti-deeplink-return: an NTLSN-signed JWT without the picker-session purpose is rejected", async () => {
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, async () => {
+    const jwtLib = loadJwt();
+    const notASession = jwtLib.sign({ iss: "abc123", exp: Math.floor(Date.now() / 1000) + 300 });
+    const { handler } = loadFn("lti-deeplink-return");
+    const res = await handler(returnEvent(notASession, ["rubric-builder"]));
+    assert.strictEqual(res.statusCode, 400);
+  });
+});
+
+test("lti-deeplink-return: valid session + selections -> auto-submit form whose JWT is a correct LtiDeepLinkingResponse; unknown ids dropped; client-supplied url/title ignored", async () => {
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, () =>
+    withFetch({ "lti-content.json": { body: SAMPLE_CONTENT } }, async () => {
+      const jwtLib = loadJwt();
+      const session = makeSessionJwt(jwtLib);
+      const { handler } = loadFn("lti-deeplink-return");
+      // "no-such-item" must be silently dropped; the spoofed title/url fields must be ignored.
+      const res = await handler(returnEvent(session, ["rubric-builder", "no-such-item", "open-badges"], { title: "EVIL TITLE", url: "https://evil.example/phish" }));
+      assert.strictEqual(res.statusCode, 200);
+      assert.match(res.body, /<form method="post" action="https:\/\/moodle\.example\/course\/dl-return">/);
+      assert.match(res.body, /document\.forms\[0\]\.submit\(\)/);
+
+      const jwtField = res.body.match(/name="JWT" value="([^"]+)"/);
+      assert.ok(jwtField, "response must carry the signed JWT in a hidden field");
+      const payload = jwtLib.verify(jwtField[1], jwtLib.publicJwk());
+      assert.ok(payload, "response JWT must verify against NTLSN's own public key");
+      assert.strictEqual(payload["https://purl.imsglobal.org/spec/lti/claim/message_type"], "LtiDeepLinkingResponse");
+      assert.strictEqual(payload["https://purl.imsglobal.org/spec/lti/claim/version"], "1.3.0");
+      assert.strictEqual(payload.iss, "abc123", "iss is NTLSN's client_id at the platform");
+      assert.strictEqual(payload.aud, "https://moodle.example", "aud is the platform's issuer");
+      assert.strictEqual(payload["https://purl.imsglobal.org/spec/lti/claim/deployment_id"], "1");
+      assert.strictEqual(payload[DL_DATA_CLAIM], "opaque-data-123", "platform's opaque data must round-trip verbatim");
+      assert.ok(payload.nonce);
+
+      const items = payload[DL_ITEMS_CLAIM];
+      assert.strictEqual(items.length, 2, "unknown id silently dropped");
+      assert.deepStrictEqual(items.map((i) => i.type), ["link", "link"]);
+      // Registry values, registry order — nothing from the request body.
+      assert.strictEqual(items[0].title, "Rubric Builder");
+      assert.strictEqual(items[0].url, "https://www.ntlsn.com/rubric-builder.html");
+      assert.strictEqual(items[1].title, "Open Badges");
+      assert.strictEqual(items[1].url, "https://www.ntlsn.com/open-badges.html");
+      assert.deepStrictEqual(items[1].icon, { url: "https://www.ntlsn.com/badge-icon.png" });
+      assert.ok(!JSON.stringify(payload).includes("evil.example"), "client-supplied url/title must not reach the response");
+    })
+  );
+});
+
+test("lti-deeplink-return: zero selections -> empty content_items (spec-correct cancel); no data claim when platform sent none", async () => {
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, () =>
+    withFetch({ "lti-content.json": { body: SAMPLE_CONTENT } }, async () => {
+      const jwtLib = loadJwt();
+      const session = makeSessionJwt(jwtLib, { data: undefined });
+      const { handler } = loadFn("lti-deeplink-return");
+      const res = await handler(returnEvent(session, []));
+      assert.strictEqual(res.statusCode, 200);
+      const payload = jwtLib.verify(res.body.match(/name="JWT" value="([^"]+)"/)[1], jwtLib.publicJwk());
+      assert.deepStrictEqual(payload[DL_ITEMS_CLAIM], []);
+      assert.ok(!(DL_DATA_CLAIM in payload), "data claim is echoed only when the platform sent one");
+    })
+  );
+});
+
+// The full Phase B round trip in one pass: real launch -> picker session JWT out of the
+// rendered HTML -> return endpoint -> LtiDeepLinkingResponse carrying the launch's `data`.
+test("lti round trip: session JWT minted by a real launch drives a valid Deep Linking response", async () => {
+  const platform = makeTestPlatform();
+  await withEnv({ NTLSN_LTI_PRIVATE_KEY: ntlsnKeypairPem() }, () =>
+    withFetch(launchFetchMap(platform), async () => {
+      const { handler: launch } = loadFn("lti-launch");
+      const launchRes = await launch(await buildLaunchEvent({ platform, kid: platform.kid, nonce: "n7", state: "s7" }));
+      assert.strictEqual(launchRes.statusCode, 200);
+      const session = launchRes.body.match(/name="session" value="([^"]+)"/)[1];
+
+      const jwtLib = loadJwt();
+      const { handler: ret } = loadFn("lti-deeplink-return");
+      const res = await ret(returnEvent(session, ["crash-courses"]));
+      assert.strictEqual(res.statusCode, 200);
+      assert.match(res.body, /action="https:\/\/moodle\.example\/course\/dl-return"/);
+      const payload = jwtLib.verify(res.body.match(/name="JWT" value="([^"]+)"/)[1], jwtLib.publicJwk());
+      assert.strictEqual(payload[DL_DATA_CLAIM], "opaque-data-123");
+      assert.deepStrictEqual(payload[DL_ITEMS_CLAIM], [{ type: "link", url: "https://www.ntlsn.com/crash-courses.html", title: "Crash Courses", text: "Short, self-paced crash courses." }]);
+    })
+  );
 });
