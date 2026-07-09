@@ -87,7 +87,7 @@
   var opts=TYPES.map(function(t){return '<option value="'+t[0]+'">'+(t[0]||'— select type —')+'</option>';}).join('');
   var html='';
   for(var i=0;i<N;i++){
-    html+='<div class="arow"><select id="t'+i+'">'+opts+'</select><input type="number" id="w'+i+'" min="0" max="100" placeholder="0"><span class="pct">%</span></div>';
+    html+='<div class="arow"><select id="t'+i+'" aria-label="Assessment '+(i+1)+' type">'+opts+'</select><input type="number" id="w'+i+'" min="0" max="100" placeholder="0" aria-label="Assessment '+(i+1)+' weighting percent"><span class="pct">%</span></div>';
   }
   box.innerHTML=html;
   function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)||v<0?0:v;}
