@@ -26,6 +26,10 @@ const uniMap = Object.fromEntries(unis.map(u => [u.id, u]));
 const TODAY = new Date().toISOString().slice(0, 10);
 const STAMP = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
 
+// Events still current or upcoming. Shared by the ICS, RSS and JSON-LD feeds so
+// all three agree on which events are live (TASKS.md 3.2 — feeds are upcoming-only).
+const upcoming = events.filter(e => (e.endDate || e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
+
 // ---------- ICS ----------
 const icsDate = d => d.replace(/-/g, '');
 const plusOne = d => { const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10).replace(/-/g, ''); };
@@ -42,7 +46,7 @@ const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//NTLSN//Sector Events//
   fold('X-WR-CALNAME:NTLSN — Australian HE Teaching & Learning Events'),
   fold('X-WR-CALDESC:Every symposium\\, workshop & PD opportunity across all 42 Australian universities. ntlsn.com'),
   'X-WR-TIMEZONE:Australia/Brisbane', 'REFRESH-INTERVAL;VALUE=DURATION:P1D'];
-for (const e of events) {
+for (const e of upcoming) {
   const u = uniMap[e.uni] || {};
   const loc = u.name ? u.name + (u.city ? ' — ' + u.city + ', ' + u.state : '') : '';
   ics.push('BEGIN:VEVENT',
@@ -61,7 +65,6 @@ ics.push('END:VCALENDAR');
 fs.writeFileSync(path.join(OUT, 'events.ics'), ics.filter(Boolean).join('\r\n') + '\r\n');
 
 // ---------- RSS ----------
-const upcoming = events.filter(e => (e.endDate || e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
 const x = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const items = upcoming.map(e => {
   const u = uniMap[e.uni] || {};
