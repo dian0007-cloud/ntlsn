@@ -5,11 +5,16 @@
 # available and a platform default can't silently downgrade the runtime.
 
 [build]
-  command = "echo 'NTLSN is a static site — no build step'"
+  # The site is static (no build step), but run the Functions test suite as the build command so a
+  # failing test BLOCKS the deploy. GitHub Actions runs in parallel and does not gate Netlify, so
+  # without this a function regression can ship to production before CI turns red (audit v2 config).
+  command = "npm test"
   publish = "."
 
 [build.environment]
-  NODE_VERSION = "20"
+  # Node 22 LTS. (Was 20 — EOL 2026-04-30. Code uses only fetch/base64url/node:test/crypto,
+  # all supported on 22; tests run green on 22 locally.) Phase 3 #5.
+  NODE_VERSION = "22"
 
 [functions]
   directory = "netlify/functions"
@@ -17,3 +22,10 @@
   # @netlify/blobs is ESM and provided by the Functions runtime; keep it external so esbuild
   # leaves the dynamic import() in place instead of trying to inline it.
   external_node_modules = ["@netlify/blobs"]
+
+# Scheduled safety-net for the webhook's synchronous Zoom deauth wipe (Phase 3 #1). Every 5 min;
+# the handler is bounded (MAX_PER_RUN accounts) so a long tail can't stall a single run. The sync
+# wipe in netlify/functions/zoom-webhooks.js remains the GUARANTEED path — this only finishes
+# tombstones left "pending" when that wipe times out on a large account.
+[functions."zoom-deauth-sweep"]
+  schedule = "*/5 * * * *"

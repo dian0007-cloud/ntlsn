@@ -43,11 +43,18 @@ exports.handler = async (event) => {
     secret = process.env.ORCID_CLIENT_SECRET,
     redirect = process.env.ORCID_REDIRECT_URI,
     sessionSecret = process.env.NTLSN_SESSION_SECRET;
-  if (!id || !secret || !redirect || !sessionSecret)
-    return J(200, {
-      error: "Set ORCID_CLIENT_ID / ORCID_CLIENT_SECRET / ORCID_REDIRECT_URI / NTLSN_SESSION_SECRET.",
-      configured: false,
-    });
+  if (!id || !secret || !redirect || !sessionSecret) {
+    // Reached by a top-level navigation (ORCID's 302 back here after consent). Mirror the start
+    // endpoint: bounce to the page with an error flag instead of rendering raw JSON in the tab,
+    // and clear the transient cookies. (audit v2 L12 — the start endpoints were hardened to this
+    // pattern in PR #10; the callback, reached the same way, was missed.)
+    return {
+      statusCode: 302,
+      headers: { Location: "/symposium-streaming.html?auth_error=orcid_unconfigured" },
+      multiValueHeaders: { "Set-Cookie": CLEAR },
+      body: "",
+    };
+  }
 
   const base = process.env.ORCID_ENV === "production" ? "https://orcid.org" : "https://sandbox.orcid.org";
   const verifier = readCookie(cookie, "ntlsn_orcid_verifier") || "";

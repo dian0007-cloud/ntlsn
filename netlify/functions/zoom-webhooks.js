@@ -11,11 +11,13 @@
 
 const crypto = require("crypto");
 const { store } = require("../lib/store");
+const { deauthAccount, markDeauth } = require("../lib/deauth");
 const HEADERS = { "Content-Type": "application/json", "X-Content-Type-Options": "nosniff" };
 
-// Persist the verified event into durable state. Best-effort — a storage hiccup must not turn
-// into a non-200 (Zoom would retry/disable the endpoint). Meeting id + account id come from the
-// standard Zoom payload shape ({ payload: { account_id, object: { id, ... } } }).
+// applyEvent persists the verified event into durable state. Best-effort — a storage hiccup must
+// not turn into a non-200 (Zoom would retry/disable the endpoint). Deauthorization cleanup (tokens,
+// registrant PII, recordings, live state) AND its tombstone for the scheduled sweep live in
+// netlify/lib/deauth.js, shared with the zoom-deauth-sweep scheduled function (audit v2 M1/M2, Phase 3 #1).
 async function applyEvent(msg) {
   const p = (msg && msg.payload) || {};
   const obj = p.object || {};
@@ -23,9 +25,16 @@ async function applyEvent(msg) {
   try {
     switch (msg.event) {
       case "meeting.started":
-      case "webinar.started":
-        if (meeting) await (await store("zoom-live")).setJSON(meeting, { live: true, at: obj.start_time || null });
+      case "webinar.started": {
+        if (meeting) {
+          await (await store("zoom-live")).setJSON(meeting, { live: true, at: obj.start_time || null });
+          // Index the meeting under its account so app_deauthorized can also clear zoom-live
+          // (audit v2 M2 — zoom-live is otherwise keyed by meeting id with no account link).
+          const startAcct = String(p.account_id || "acct");
+          await (await store("zoom-account-meetings")).setJSON(`${startAcct}:${meeting}`, { at: obj.start_time || null });
+        }
         break;
+      }
       case "meeting.ended":
       case "webinar.ended":
         if (meeting) await (await store("zoom-live")).setJSON(meeting, { live: false, at: obj.end_time || null });
@@ -42,21 +51,26 @@ async function applyEvent(msg) {
         }
         break;
       }
-      case "recording.completed":
+      case "recording.completed": {
+        // Account-scoped key so app_deauthorized can find and delete a deauthorized tenant's
+        // recording share URLs (audit v2 M2). zoom-recordings has no reader yet, so re-keying
+        // is safe; the value shape is unchanged.
+        const recAcct = String(p.account_id || "acct");
         if (meeting)
-          await (await store("zoom-recordings")).setJSON(meeting, {
+          await (await store("zoom-recordings")).setJSON(`${recAcct}:${meeting}`, {
             share_url: obj.share_url || "", at: Math.floor(Date.now() / 1000),
           });
         break;
+      }
       case "app_deauthorized": {
-        // A university removed us: delete their tokens and every registrant PII record for that
-        // account (Zoom Marketplace data-compliance requirement).
+        // A university removed us (Zoom Marketplace data-compliance). Tombstone FIRST (it survives
+        // a timeout), then the synchronous wipe — idempotent, so the scheduled sweep finishing a
+        // timed-out large account is safe. Mark done when the sync wipe completes (Phase 3 #1).
         const acct = String(p.account_id || "");
         if (acct) {
-          await (await store("zoom-tokens")).delete(acct);
-          const reg = await store("zoom-registrants");
-          const { blobs } = await reg.list({ prefix: `${acct}:` });
-          for (const b of blobs || []) await reg.delete(b.key);
+          await markDeauth(acct, "pending");
+          await deauthAccount(acct);
+          await markDeauth(acct, "done");
         }
         break;
       }
@@ -106,10 +120,12 @@ exports.handler = async (event) => {
   const message = `v0:${ts}:${raw}`;
   const hash = crypto.createHmac("sha256", secret).update(message).digest("hex");
   const expected = `v0=${hash}`;
-  const ok =
-    typeof sig === "string" &&
-    sig.length === expected.length &&
-    crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(expected));
+  // Compare BYTE lengths, not UTF-16 code-unit lengths: a non-ASCII sig of the same character
+  // count encodes to more UTF-8 bytes, which would make timingSafeEqual throw RangeError ->
+  // an opaque 500 instead of a clean 401, trivially triggerable by any caller (audit v2 L3).
+  const sigBuf = typeof sig === "string" ? Buffer.from(sig) : null;
+  const expBuf = Buffer.from(expected);
+  const ok = !!(sigBuf && sigBuf.length === expBuf.length && crypto.timingSafeEqual(sigBuf, expBuf));
   // replay protection: reject timestamps older than 5 minutes (x-zm-request-timestamp is seconds).
   const fresh = ts && Math.abs(Date.now() / 1000 - Number(ts)) < 300;
   if (!ok || !fresh)

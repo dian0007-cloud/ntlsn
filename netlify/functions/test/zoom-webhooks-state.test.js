@@ -3,6 +3,7 @@ const { test } = require("node:test");
 const assert = require("node:assert");
 const crypto = require("crypto");
 const { store } = require("../../lib/store");
+const { getDeauth } = require("../../lib/deauth");
 
 const SECRET = "webhook-secret-test";
 function load() {
@@ -43,4 +44,37 @@ test("app_deauthorized deletes the tenant's tokens and registrant PII", async ()
   assert.strictEqual(await (await store("zoom-tokens")).get("ACCT1"), null);
   reg = await store("zoom-registrants");
   assert.strictEqual((await reg.list({ prefix: "ACCT1:" })).blobs.length, 0);
+  assert.strictEqual((await getDeauth("ACCT1")).status, "done", "deauth tombstone marked done after the synchronous wipe");
+});
+
+test("recording.completed is stored account-scoped and wiped on app_deauthorized (data-compliance)", async () => {
+  // Regression for audit v2 M2: recordings were keyed by bare meeting id with no account, so the
+  // deauth wipe (which matches by `${acct}:` prefix) could not find or delete them.
+  process.env.ZOOM_WEBHOOK_SECRET_TOKEN = SECRET;
+  const { handler } = load();
+  await post(handler, { event: "recording.completed", payload: { account_id: "ACCT2", object: { id: "77700000000", share_url: "https://zoom.us/rec/share/xyz" } } });
+  let recs = await store("zoom-recordings");
+  assert.strictEqual((await recs.list({ prefix: "ACCT2:" })).blobs.length, 1, "recording stored under an account-scoped key");
+  await post(handler, { event: "app_deauthorized", payload: { account_id: "ACCT2" } });
+  recs = await store("zoom-recordings");
+  assert.strictEqual((await recs.list({ prefix: "ACCT2:" })).blobs.length, 0, "deauthorized account's recordings are wiped");
+});
+
+test("meeting.started indexes by account; app_deauthorized clears that account's zoom-live only", async () => {
+  // Phase 3 #2 (audit v2 M2): zoom-live is keyed by meeting id with no account link, so an
+  // account->meetings index is the only way to find and clear a deauthorized account's live state.
+  process.env.ZOOM_WEBHOOK_SECRET_TOKEN = SECRET;
+  const { handler } = load();
+  await post(handler, { event: "meeting.started", payload: { account_id: "ACCT3", object: { id: "55500000001" } } });
+  await post(handler, { event: "meeting.started", payload: { account_id: "ACCT3", object: { id: "55500000002" } } });
+  await post(handler, { event: "meeting.started", payload: { account_id: "ACCT9", object: { id: "55500000099" } } });
+  let live = await store("zoom-live");
+  assert.strictEqual((await live.get("55500000001", { type: "json" })).live, true);
+  assert.strictEqual((await live.get("55500000099", { type: "json" })).live, true);
+
+  await post(handler, { event: "app_deauthorized", payload: { account_id: "ACCT3" } });
+  live = await store("zoom-live");
+  assert.strictEqual(await live.get("55500000001"), null, "ACCT3 meeting 1 cleared from zoom-live on deauth");
+  assert.strictEqual(await live.get("55500000002"), null, "ACCT3 meeting 2 cleared from zoom-live on deauth");
+  assert.ok((await live.get("55500000099", { type: "json" })).live, "a different account's live meeting is untouched");
 });

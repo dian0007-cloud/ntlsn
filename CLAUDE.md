@@ -36,7 +36,7 @@ Event `type` values in use: `conference`, `workshop`, `symposium`, `webinar`, et
 
 ## Deploy
 
-- Static host (Cloudflare Pages / Netlify style): `_headers` (CSP, HSTS, caching, content types for `.ics`/`feed.xml`), `_redirects` (SPA fallback `/* → /index.html 200`).
+- Static host (Cloudflare Pages / Netlify style): `_headers` (CSP, HSTS, caching, content types for `.ics`/`feed.xml`), `_redirects` (real-404 hygiene: known junk/bot paths and every unknown path return `/404.html 404`; `/` serves `index.html` by default). **There is NO SPA fallback** — the site is multi-page static with no client-side router, so unknown paths 404 (do not "restore" a `/* → /index.html 200` rule; it re-introduces homepage-in-disguise soft-404s).
 - `sw.js` — network-first for navigations, stale-while-revalidate for same-origin assets, cache name `ntlsn-vN` (bump `N` on breaking asset changes).
 - `manifest.webmanifest` — PWA install metadata, theme `#0A1628`.
 - Public endpoints now served: `/events.ics` (subscribable calendar), `/feed.xml` (RSS), `/data/events.json` + `/data/universities.json` (CORS-open JSON API).
@@ -61,6 +61,7 @@ Event `type` values in use: `conference`, `workshop`, `symposium`, `webinar`, et
 ```bash
 node scripts/build-feeds.mjs            # regenerate feeds into repo root
 node scripts/build-feeds.mjs --out dist # regenerate into a build dir
+npm test                                # run the Netlify Functions test suite (node --test netlify/functions/test/*.test.js)
 ```
 
 ## What "done" looks like for any task
@@ -68,4 +69,4 @@ node scripts/build-feeds.mjs --out dist # regenerate into a build dir
 1. Feeds regenerated if data changed.
 2. No regression to the LIVE/FREE/OPEN-SOURCE hero claims, Acknowledgement elements, or section order defined in `ntlsn-order`.
 3. Lighthouse a11y ≥ 95; no new console errors; CSP not loosened without explicit sign-off.
-4. Works with the SPA fallback redirect (no server-side routing assumptions).
+4. No SPA routing assumptions — the site is multi-page static; unknown paths return a real 404 (there is no `/* → /index.html` fallback). New pages are real `.html` files.

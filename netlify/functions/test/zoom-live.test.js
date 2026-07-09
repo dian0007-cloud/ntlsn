@@ -31,3 +31,21 @@ test("reports live:false by default and live:true after the store is set", async
   assert.strictEqual(body.live, true);
   assert.strictEqual(body.meetingNumber, "77712345678");
 });
+
+test("a store error degrades fail-safe to live:false AND is logged (observable)", async () => {
+  // Regression for audit v2 L14: a blob read error was swallowed into live:false with no
+  // server-side trace, conflating a Blobs outage with a genuinely-ended meeting.
+  const { handler } = load();
+  await (await store("zoom-live")).set("66612345678", "{not json"); // corrupt -> get(type:json) throws
+  const orig = console.error;
+  let logged = false;
+  console.error = () => { logged = true; };
+  try {
+    const res = await handler({ httpMethod: "GET", queryStringParameters: { meetingNumber: "66612345678" } });
+    assert.strictEqual(res.statusCode, 200);
+    assert.strictEqual(JSON.parse(res.body).live, false);
+    assert.ok(logged, "store error logged server-side");
+  } finally {
+    console.error = orig;
+  }
+});
