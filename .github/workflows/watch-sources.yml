@@ -1,0 +1,67 @@
+name: Weekly source watcher
+
+# Fetches every institution `tlUrl` (43) plus every distinct conference/organiser `url`
+# in data/events.json, fingerprints each page, and diffs against the last snapshot in
+# data/.source-snapshot.json. Changed pages are listed in a single tracking issue for
+# HUMAN TRIAGE — this watcher never adds or changes event data (CREDIBILITY RULE). At
+# the end of a successful run it commits ONLY that snapshot file (content-derived
+# metadata, no timestamps) so the next run has a fresh baseline. That direct commit is
+# a deliberate, documented exception to the always-PR rule — see the PR that added this
+# file for the reasoning and push back if you disagree.
+#
+# Step 4 (AI candidate drafting) is wired but OFF by default: it only activates when the
+# WATCH_DRAFT_AI secret == "1" AND an ANTHROPIC_API_KEY secret exists. Drafts are
+# verified:false, issue-only, never auto-merged.
+
+on:
+  schedule:
+    - cron: '23 20 * * 1'   # Mondays 20:23 UTC (~05:53 AEST); off-the-hour to spread load
+  workflow_dispatch:        # manual run from the Actions tab
+
+permissions:
+  contents: write   # commit the refreshed snapshot (metadata only)
+  issues: write     # create / update the tracking issue
+
+# Avoid two overlapping runs racing on the same snapshot.
+concurrency:
+  group: source-watcher
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    env:
+      # All optional / unset by default. With WATCH_DRAFT_AI unset (or no API key) the
+      # AI drafting path is a no-op and the run does fetch+diff+issue only.
+      WATCH_DRAFT_AI: ${{ secrets.WATCH_DRAFT_AI }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
+      ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+
+      - name: Fetch + diff sources
+        run: node scripts/watch-sources.mjs --report watch-report.json
+
+      - name: Commit refreshed snapshot (metadata only; no-op when unchanged)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ ! -f data/.source-snapshot.json ]; then
+            echo "no snapshot written (every fetch failed?) — nothing to commit"
+            exit 0
+          fi
+          if git diff --quiet -- data/.source-snapshot.json; then
+            echo "snapshot unchanged — nothing to commit"
+          else
+            git add -- data/.source-snapshot.json
+            git commit -m "chore(watcher): refresh source snapshot [skip ci]"
+            git push
+          fi
+
+      - name: Open / update tracking issue (no duplicates on repeat runs)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/watch-sources.mjs --file-issue watch-report.json
