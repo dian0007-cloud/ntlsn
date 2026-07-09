@@ -84,3 +84,32 @@ test("token response without a valid ORCID iD → 502", async () => {
     assert.strictEqual(res.statusCode, 502);
   }, { ok: true, json: async () => ({ orcid: "not-an-orcid" }) });
 });
+
+test("token-exchange network fault (fetch rejects) → 502 'unreachable'", async () => {
+  // Regression for audit v2 L16: the catch arm (vs the !r.ok arm) was untested.
+  configure();
+  const { handler } = load();
+  const orig = global.fetch;
+  global.fetch = async () => { throw new Error("ECONNRESET"); };
+  try {
+    const res = await handler({ queryStringParameters: { code: "c", state: "S" }, headers: { cookie: "ntlsn_orcid_state=S" } });
+    assert.strictEqual(res.statusCode, 502);
+    assert.match(JSON.parse(res.body).error, /unreachable/);
+  } finally {
+    global.fetch = orig;
+  }
+});
+
+test("partially unconfigured (valid state, callback env missing) → 302 to auth_error, clears cookies", async () => {
+  // Regression for audit v2 L12: the callback (reached by ORCID's top-level 302) still returned
+  // 200 JSON on a partial misconfig, unlike the start endpoint which PR #10 hardened to a 302.
+  process.env.ORCID_CLIENT_ID = "APP-XXXX";
+  process.env.ORCID_REDIRECT_URI = "https://www.ntlsn.com/.netlify/functions/orcid-callback";
+  delete process.env.ORCID_CLIENT_SECRET;
+  delete process.env.NTLSN_SESSION_SECRET;
+  const { handler } = load();
+  const res = await handler({ queryStringParameters: { code: "c", state: "S" }, headers: { cookie: "ntlsn_orcid_state=S" } });
+  assert.strictEqual(res.statusCode, 302);
+  assert.match(res.headers.Location, /auth_error=orcid_unconfigured/);
+  assert.ok(res.multiValueHeaders["Set-Cookie"].some((c) => /ntlsn_orcid_state=; .*Max-Age=0/.test(c)));
+});

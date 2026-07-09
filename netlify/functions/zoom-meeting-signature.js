@@ -12,7 +12,7 @@
 const crypto = require("crypto");
 const { readCookie } = require("../lib/cookies");
 const session = require("../lib/session");
-const { store, durable } = require("../lib/store");
+const { open: defaultOpen } = require("../lib/store");
 
 // CORS: only NTLSN origins may make a *cross-origin* request. The same-origin page needs no
 // ACAO. Disallowed cross-origins are rejected (403) rather than silently served the wrong ACAO.
@@ -37,33 +37,55 @@ function corsHeaders(origin) {
 const b64url = (o) => Buffer.from(typeof o === "string" ? o : JSON.stringify(o)).toString("base64url");
 const MEETING_RE = /^[0-9]{9,11}$/;
 
-// Rate limit: durable across instances via Blobs (fixed 60s window per signed-in user), with
-// an in-memory fallback when Blobs isn't available. Caps a single user minting a flood of join
+// Best-effort per-user throttle on the signature-minting endpoint, with an in-memory fallback
+// when durable storage isn't actually available. Caps a single user minting a flood of join
 // tokens; the session gate + allowlist remain the primary controls.
+//
+// NOT a hard guarantee: the durable counter is a non-atomic read-modify-write (Netlify Blobs
+// has no compare-and-set), so a burst of concurrent requests can all read a stale count and
+// exceed the cap (audit v2 L7). Accepted as a secondary control — an atomic guarantee needs
+// edge/CDN rate-limiting (Phase 3). `openFn` is injectable so the durable branch is unit-testable.
 const WINDOW_SECONDS = 60;
 const MAX_PER_WINDOW = 20;
+const MEM_CAP = 4096; // bound the in-memory fallback so a flood of distinct orcids can't grow it without limit
 const _mem = new Map();
-async function rateLimited(orcid) {
+async function rateLimited(orcid, openFn) {
+  const openStore = openFn || defaultOpen;
   const nowSec = Math.floor(Date.now() / 1000);
   const windowId = Math.floor(nowSec / WINDOW_SECONDS);
-  const key = `${orcid}:${windowId}`;
-  if (durable()) {
-    try {
-      const rl = await store("ratelimit");
-      const rec = await rl.get(key, { type: "json" });
-      const count = (rec && rec.n) || 0;
+
+  // Durable path: ONE record per orcid (bounded key set — audit v2 L5), overwritten each window.
+  try {
+    const { store: rl, durable } = await openStore("ratelimit");
+    if (durable) {
+      const rec = await rl.get(orcid, { type: "json" });
+      const count = rec && rec.win === windowId ? rec.n || 0 : 0;
       if (count >= MAX_PER_WINDOW) return true;
-      await rl.setJSON(key, { n: count + 1 });
+      await rl.setJSON(orcid, { win: windowId, n: count + 1 });
       return false;
-    } catch (_e) {
-      // fall through to in-memory
     }
+  } catch (_e) {
+    // fall through to in-memory
   }
+
+  // In-memory sliding window (off-Netlify, or when Blobs threw). The size cap evicts the oldest
+  // entry so _mem can't grow without bound across a warm instance when many distinct users hit
+  // the fallback (audit v2 L6).
   const arr = (_mem.get(orcid) || []).filter((t) => nowSec - t < WINDOW_SECONDS);
+  if (arr.length >= MAX_PER_WINDOW) {
+    _mem.set(orcid, arr);
+    return true;
+  }
+  if (!_mem.has(orcid) && _mem.size >= MEM_CAP) {
+    const oldest = _mem.keys().next().value;
+    if (oldest !== undefined) _mem.delete(oldest);
+  }
   arr.push(nowSec);
   _mem.set(orcid, arr);
-  return arr.length > MAX_PER_WINDOW;
+  return false;
 }
+
+exports.rateLimited = rateLimited;
 
 exports.handler = async (event) => {
   const origin = originOf(event);

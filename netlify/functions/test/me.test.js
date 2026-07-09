@@ -41,3 +41,13 @@ test("tampered cookie → signedIn:false", async () => {
   const res = await handler({ httpMethod: "GET", headers: { cookie: "ntlsn_session=forged.value" } });
   assert.strictEqual(JSON.parse(res.body).signedIn, false);
 });
+
+test("missing NTLSN_SESSION_SECRET → 503 (misconfig visible, not a silent 200)", async () => {
+  // Regression for audit v2 L11: the old 200 signedIn:false on a missing secret was
+  // indistinguishable from a normal unsigned-in request and hid the broken deploy from 5xx alerting.
+  delete process.env.NTLSN_SESSION_SECRET;
+  const { handler } = load();
+  const res = await handler({ httpMethod: "GET", headers: {} });
+  assert.strictEqual(res.statusCode, 503);
+  assert.strictEqual(JSON.parse(res.body).configured, false);
+});
