@@ -2379,7 +2379,7 @@ var F="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
 var WORKS=['ChatGPT','Claude','Gemini','Copilot'];
 var STD=['MCP','REST / JSON API','RSS','iCalendar','Open Badges'];
 var GROUNDS=[
- ['Sector events','94 events in one live feed','#events','#4ECDC4'],
+ ['Sector events','Every sector event in one live feed','#events','#4ECDC4'],
  ['The rescued archive','1,431 Learning &amp; Teaching works','#ntlsn-archive','#7C9CFF'],
  ['Frameworks &amp; benchmarks','TELAS, UDL, QM, PSF, HESF and more','#frameworks','#C57BFF'],
  ['The national map','42 universities, one open map','#map','#FFB448'],
@@ -5579,9 +5579,17 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
  if(window.__ntlsnRoadmap2027)return; window.__ntlsnRoadmap2027=1;
  var F="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif";
  var COL='255,180,72'; /* amber #FFB448 — 2027, matches the site megamenu + comingblocks */
- /* Grounded figures, verified against data/*.json on 2026-07-10: 43 institutions in
-    data/universities.json; 94 events in data/events.json. Update if the data changes.
-    Nothing here is aspirational; future items are labelled as goals below. */
+ /* Figures are fetched live from /data/*.json rather than hardcoded — the event count
+    changes as scripts/archive-events.mjs prunes past events, so a static number here
+    drifts. 43/94 are fail-soft fallbacks only, used if the fetch fails. */
+ var UNICOUNT=43, EVCOUNT=94;
+ var countsReady=Promise.all([
+   fetch('/data/universities.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),
+   fetch('/data/events.json').then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})
+ ]).then(function(res){
+   if(Array.isArray(res[0])) UNICOUNT=res[0].length;
+   if(Array.isArray(res[1])) EVCOUNT=res[1].length;
+ });
  function enhance(){
   var sec=document.getElementById('ntlsn-coming2027'); if(!sec)return;
   if(sec.getAttribute('data-roadmap'))return;
@@ -5596,9 +5604,9 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
   var hdr=document.createElement('div'); hdr.innerHTML=
    '<div style="font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:rgb('+COL+');margin:0 0 6px;">The road ahead &middot; 2027</div>'+
    '<h2 style="font:800 clamp(21px,3vw,29px)/1.2 '+F+';margin:0 0 8px;letter-spacing:-.01em;color:#e8eef5;">From a directory to infrastructure you can convene on.</h2>'+
-   '<p style="color:#9fb0c3;font:400 13.5px/1.6 '+F+';margin:0 0 14px;max-width:720px;">Today NTLSN is live, free and open-source &mdash; <b style="color:#cbd8e6;">43 institutions</b> mapped and 94 verified events on the 2026 calendar (as of July 2026), all readable through a CORS-open data API. The 2027 phase turns a navigator into something you can run things on. Several of the pieces below already work as free tools you can try now; the institutional versions are what we are building toward, and they need a backend and partner cooperation.</p>'+
+   '<p style="color:#9fb0c3;font:400 13.5px/1.6 '+F+';margin:0 0 14px;max-width:720px;">Today NTLSN is live, free and open-source &mdash; <b style="color:#cbd8e6;">'+UNICOUNT+' institutions</b> mapped and '+EVCOUNT+' verified events on the 2026 calendar (as of July 2026), all readable through a CORS-open data API. The 2027 phase turns a navigator into something you can run things on. Several of the pieces below already work as free tools you can try now; the institutional versions are what we are building toward, and they need a backend and partner cooperation.</p>'+
    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;">'+
-    '<span style="font:700 11.5px '+F+';color:#2DD4BF;background:rgba(45,212,191,.10);border:1px solid rgba(45,212,191,.32);border-radius:999px;padding:5px 11px;">43 institutions mapped</span>'+
+    '<span style="font:700 11.5px '+F+';color:#2DD4BF;background:rgba(45,212,191,.10);border:1px solid rgba(45,212,191,.32);border-radius:999px;padding:5px 11px;">'+UNICOUNT+' institutions mapped</span>'+
     '<span style="font:700 11.5px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 11px;">Free &middot; open-source &middot; live</span>'+
     '<span style="font:700 11.5px '+F+';color:#cbd8e6;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 11px;">Open data API (CORS)</span>'+
     '<span style="font:700 11.5px '+F+';color:rgb('+COL+');background:rgba('+COL+',.12);border:1px solid rgba('+COL+',.38);border-radius:999px;padding:5px 11px;">Building toward 2027 &middot; some features already live</span>'+
@@ -5606,8 +5614,10 @@ canvas.fixed.inset-0.pointer-events-none{opacity:0 !important;}
   inner.insertBefore(hdr, inner.firstChild);
   sec.setAttribute('data-roadmap','1');
  }
- enhance(); [400,1200,2500,4500,7000].forEach(function(ms){setTimeout(enhance,ms);});
- try{ new MutationObserver(enhance).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+ countsReady.then(function(){
+  enhance(); [400,1200,2500,4500,7000].forEach(function(ms){setTimeout(enhance,ms);});
+  try{ new MutationObserver(enhance).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+ });
 })();</script>
 <script id="ntlsn-coming2028-script">(function(){
  /* Roadmap header for #ntlsn-coming2028 — same pattern as the 2027 script above.
