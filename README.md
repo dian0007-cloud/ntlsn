@@ -13,7 +13,7 @@ Australia's **free, open-source** hub mapping the higher education teaching & le
 | Path | What it is |
 |---|---|
 | `index.html` | The deployable site — a single-file build (compiled React + a set of small, documented patch scripts). |
-| `data/events.json` | **Canonical event data** (94 events). The source of truth for the calendar feeds. |
+| `data/events.json` | **Canonical event data**. The source of truth for the calendar feeds. |
 | `data/universities.json` | **Canonical institution data** (43 institutions). |
 | `scripts/build-feeds.mjs` | Regenerates `events.ics`, `feed.xml`, `sitemap.xml` and the Event JSON-LD from the data files. |
 | `events.ics` · `feed.xml` | Subscribable calendar + RSS, generated from the data. |
