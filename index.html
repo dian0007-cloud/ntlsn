@@ -6624,5 +6624,52 @@ go();
   }
   build(); setTimeout(build,800); setTimeout(build,2000);
   new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
+})();</script><script id="ntlsn-hubdoors-script">(function(){
+ /* Hub door band: a four-node navigation rail just under the hero/start-grid, linking to
+    the site's four areas. Pure navigation — it never hides or moves the sections below, so
+    it can't fight the existing collapse scripts. Additive + reversible (delete this script). */
+ if(window.__ntlsnHubDoors)return; window.__ntlsnHubDoors=1;
+ var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
+ var DOORS=[
+  {t:"What's On", z:"Symposiums, conferences, webinars and grants — live across the sector.", href:'/whats-on.html'},
+  {t:'Tools & Recognition', z:'Free in-browser tools: calibration, curriculum, peer review, recognition pathways.', href:'/tools.html'},
+  {t:'Resources & Network', z:'The rescued archive, OER library, frameworks and the national map.', href:'/sotl-index.html'},
+  {t:'About & the Plan', z:'Who builds this, the principles it runs on, and the 2027–2028 roadmap.', href:'/about.html'}
+ ];
+ var css=document.createElement('style'); css.id='ntlsn-hubdoors-css';
+ css.textContent=
+  '#ntlsn-hubdoors{max-width:980px;margin:24px auto 8px;padding:0 18px;position:relative}'+
+  '#ntlsn-hubdoors .hd-rail{position:absolute;left:calc(18px + 27px);top:14px;bottom:14px;width:1px;background:linear-gradient(180deg,rgba(78,205,196,0),rgba(78,205,196,.28),rgba(78,205,196,0));pointer-events:none}'+
+  '#ntlsn-hubdoors .hd-eyebrow{font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:#4ECDC4;margin:0 0 10px;padding-left:2px}'+
+  'a.hd-door{position:relative;display:flex;align-items:center;gap:16px;width:100%;text-decoration:none;background:rgba(15,31,58,.72);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:15px 18px;margin:0 0 10px;transition:border-color .2s,background .2s,transform .12s}'+
+  'a.hd-door:hover{border-color:rgba(78,205,196,.5);background:rgba(15,31,58,.95);transform:translateX(2px)}'+
+  'a.hd-door:focus-visible{outline:2px solid #4ECDC4;outline-offset:2px}'+
+  '.hd-node{flex:none;width:15px;height:15px;border-radius:50%;border:1.5px solid rgba(78,205,196,.6);background:#0b1c33;transition:background .2s,box-shadow .2s;z-index:1}'+
+  'a.hd-door:hover .hd-node{background:#4ECDC4;box-shadow:0 0 12px rgba(78,205,196,.55)}'+
+  '.hd-body{flex:1;min-width:0}'+
+  '.hd-t{display:block;font:800 15.5px/1.25 '+F+';color:#e8eef5;letter-spacing:-.01em}'+
+  '.hd-z{display:block;font:400 12.5px/1.45 '+F+';color:#8aa0b6;margin-top:3px}'+
+  '.hd-arrow{flex:none;font:700 16px '+F+';color:#4ECDC4;transition:transform .18s}'+
+  'a.hd-door:hover .hd-arrow{transform:translateX(3px)}';
+ (document.head||document.documentElement).appendChild(css);
+
+ function build(){
+  if(document.getElementById('ntlsn-hubdoors'))return;
+  var anchor=document.getElementById('ntlsn-startgrid')||document.getElementById('hero');
+  if(!anchor||!anchor.parentNode)return;
+  var nav=document.createElement('nav'); nav.id='ntlsn-hubdoors';
+  nav.setAttribute('aria-label','Explore NTLSN by area');
+  var html='<div class="hd-rail" aria-hidden="true"></div><div class="hd-eyebrow">Explore by area</div>';
+  DOORS.forEach(function(d){
+   html+='<a class="hd-door" href="'+d.href+'">'+
+     '<span class="hd-node" aria-hidden="true"></span>'+
+     '<span class="hd-body"><span class="hd-t">'+d.t+'</span><span class="hd-z">'+d.z+'</span></span>'+
+     '<span class="hd-arrow" aria-hidden="true">&rarr;</span></a>';
+  });
+  nav.innerHTML=html;
+  anchor.parentNode.insertBefore(nav,anchor.nextSibling);
+ }
+ build(); [600,1600,3200,6000].forEach(function(ms){setTimeout(build,ms);});
+ try{ new MutationObserver(build).observe(document.body,{childList:true,subtree:true}); }catch(e){}
 })();</script></body>
 </html>
