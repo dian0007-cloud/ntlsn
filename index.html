@@ -6625,9 +6625,10 @@ go();
   build(); setTimeout(build,800); setTimeout(build,2000);
   new MutationObserver(build).observe(document.body,{childList:true,subtree:true});
 })();</script><script id="ntlsn-hubdoors-script">(function(){
- /* Hub door band: a four-node navigation rail just under the hero/start-grid, linking to
-    the site's four areas. Pure navigation — it never hides or moves the sections below, so
-    it can't fight the existing collapse scripts. Additive + reversible (delete this script). */
+ /* Hub door band: a four-node navigation rail just under the hero, linking to the site's
+    four areas. Pure navigation — never hides/moves the sections below, so it can't fight the
+    existing collapse scripts. Self-healing: if any other patch script or a React re-render
+    removes it, a MutationObserver puts it straight back. Additive + reversible. */
  if(window.__ntlsnHubDoors)return; window.__ntlsnHubDoors=1;
  var F="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
  var DOORS=[
@@ -6639,7 +6640,7 @@ go();
  var css=document.createElement('style'); css.id='ntlsn-hubdoors-css';
  css.textContent=
   '#ntlsn-hubdoors{max-width:980px;margin:24px auto 8px;padding:0 18px;position:relative}'+
-  '#ntlsn-hubdoors .hd-rail{position:absolute;left:calc(18px + 27px);top:14px;bottom:14px;width:1px;background:linear-gradient(180deg,rgba(78,205,196,0),rgba(78,205,196,.28),rgba(78,205,196,0));pointer-events:none}'+
+  '#ntlsn-hubdoors .hd-rail{position:absolute;left:45px;top:40px;bottom:14px;width:1px;background:linear-gradient(180deg,rgba(78,205,196,0),rgba(78,205,196,.28),rgba(78,205,196,0));pointer-events:none}'+
   '#ntlsn-hubdoors .hd-eyebrow{font:800 11px '+F+';letter-spacing:2px;text-transform:uppercase;color:#4ECDC4;margin:0 0 10px;padding-left:2px}'+
   'a.hd-door{position:relative;display:flex;align-items:center;gap:16px;width:100%;text-decoration:none;background:rgba(15,31,58,.72);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:15px 18px;margin:0 0 10px;transition:border-color .2s,background .2s,transform .12s}'+
   'a.hd-door:hover{border-color:rgba(78,205,196,.5);background:rgba(15,31,58,.95);transform:translateX(2px)}'+
@@ -6653,10 +6654,7 @@ go();
   'a.hd-door:hover .hd-arrow{transform:translateX(3px)}';
  (document.head||document.documentElement).appendChild(css);
 
- function build(){
-  if(document.getElementById('ntlsn-hubdoors'))return;
-  var anchor=document.getElementById('ntlsn-startgrid')||document.getElementById('hero');
-  if(!anchor||!anchor.parentNode)return;
+ function make(){
   var nav=document.createElement('nav'); nav.id='ntlsn-hubdoors';
   nav.setAttribute('aria-label','Explore NTLSN by area');
   var html='<div class="hd-rail" aria-hidden="true"></div><div class="hd-eyebrow">Explore by area</div>';
@@ -6667,9 +6665,32 @@ go();
      '<span class="hd-arrow" aria-hidden="true">&rarr;</span></a>';
   });
   nav.innerHTML=html;
-  anchor.parentNode.insertBefore(nav,anchor.nextSibling);
+  return nav;
  }
- build(); [600,1600,3200,6000].forEach(function(ms){setTimeout(build,ms);});
- try{ new MutationObserver(build).observe(document.body,{childList:true,subtree:true}); }catch(e){}
+ // Preferred slot: right after the start-grid; fall back to after the hero; last resort:
+ // as the first child of the app shell so it always lands somewhere sensible + visible.
+ function anchor(){
+  return document.getElementById('ntlsn-startgrid') || document.getElementById('hero') ||
+         document.querySelector('#root .min-h-screen') || document.querySelector('.min-h-screen');
+ }
+ function place(){
+  if(document.getElementById('ntlsn-hubdoors'))return true;   // already present
+  var a=anchor(); if(!a)return false;
+  var nav=make();
+  if(a.id==='ntlsn-startgrid'||a.id==='hero'){ if(a.parentNode) a.parentNode.insertBefore(nav,a.nextSibling); else return false; }
+  else { a.insertBefore(nav, a.firstChild); }              // top of the app shell
+  return true;
+ }
+ // Build now + on the usual milestones, and self-heal on any removal.
+ place();
+ [0,120,400,900,1800,3400,6000,9000].forEach(function(ms){setTimeout(place,ms);});
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',place);
+ var rehealing=false;
+ try{
+  new MutationObserver(function(){
+   if(rehealing)return;
+   if(!document.getElementById('ntlsn-hubdoors')){ rehealing=true; place(); rehealing=false; }
+  }).observe(document.documentElement,{childList:true,subtree:true});
+ }catch(e){}
 })();</script></body>
 </html>
