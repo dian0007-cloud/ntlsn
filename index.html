@@ -6667,29 +6667,39 @@ go();
   nav.innerHTML=html;
   return nav;
  }
- // Preferred slot: right after the start-grid; fall back to after the hero; last resort:
- // as the first child of the app shell so it always lands somewhere sensible + visible.
- function anchor(){
-  return document.getElementById('ntlsn-startgrid') || document.getElementById('hero') ||
-         document.querySelector('#root .min-h-screen') || document.querySelector('.min-h-screen');
- }
+ var startedAt=Date.now();
+ // The band belongs immediately AFTER the hero (or start-grid). We only use a top-of-shell
+ // fallback as a genuine last resort, and we RELOCATE to the real slot the moment the hero
+ // exists — otherwise an early build (before React mounts the hero) strands it at page top.
+ function heroAnchor(){ return document.getElementById('ntlsn-startgrid')||document.getElementById('hero'); }
  function place(){
-  if(document.getElementById('ntlsn-hubdoors'))return true;   // already present
-  var a=anchor(); if(!a)return false;
-  var nav=make();
-  if(a.id==='ntlsn-startgrid'||a.id==='hero'){ if(a.parentNode) a.parentNode.insertBefore(nav,a.nextSibling); else return false; }
-  else { a.insertBefore(nav, a.firstChild); }              // top of the app shell
-  return true;
+  var band=document.getElementById('ntlsn-hubdoors');
+  var a=heroAnchor();
+  if(a&&a.parentNode){
+   // Correct slot = right after the hero/start-grid. Insert or move there if not already.
+   if(!band){ band=make(); }
+   if(a.nextSibling!==band){ a.parentNode.insertBefore(band, a.nextSibling); }
+   return true;
+  }
+  // No hero yet. Show a provisional copy at the shell top only after a grace period, so a
+  // blank-page flash is avoided but the common case still lands under the hero.
+  if(!band && Date.now()-startedAt>2500){
+   var shell=document.querySelector('#root .min-h-screen')||document.querySelector('.min-h-screen')||document.body;
+   band=make(); shell.insertBefore(band, shell.firstChild);
+  }
+  return !!band;
  }
- // Build now + on the usual milestones, and self-heal on any removal.
+ // Build + relocate on the usual milestones, and self-heal on any removal.
  place();
- [0,120,400,900,1800,3400,6000,9000].forEach(function(ms){setTimeout(place,ms);});
+ [120,400,900,1800,3400,6000,9000,13000].forEach(function(ms){setTimeout(place,ms);});
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',place);
  var rehealing=false;
  try{
   new MutationObserver(function(){
-   if(rehealing)return;
-   if(!document.getElementById('ntlsn-hubdoors')){ rehealing=true; place(); rehealing=false; }
+   if(rehealing)return; rehealing=true;
+   // Re-add if removed, AND relocate if it drifted away from the hero slot.
+   try{ place(); }catch(e){}
+   rehealing=false;
   }).observe(document.documentElement,{childList:true,subtree:true});
  }catch(e){}
 })();</script></body>
