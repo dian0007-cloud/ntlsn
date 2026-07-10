@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NTLSN — Get it through your library</title>
+<meta name="description" content="Turn any DOI or paywalled article link into your own university library's access link. Pick your institution once; NTLSN rewrites links to your library's own front door. 42 of 43 Australian universities covered. Free, in your browser — no login, no credential ever touches NTLSN.">
+<meta property="og:title" content="Get it through your library — NTLSN">
+<meta property="og:description" content="Paste a DOI, get your own library's access link. Works for 42 of 43 Australian universities. Free, client-side, no credentials.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<style>
+  :root{--navy:#0A1628;--card:#0f1f3a;--teal:#4ECDC4;--gold:#C9A962;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px}
+  .wrap{max-width:860px;margin:0 auto}
+  .eyebrow{font:800 11px/1 var(--F);letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(24px,3.4vw,34px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
+  h2{font-size:17px;margin:26px 0 8px;font-weight:800}
+  .lead{color:var(--mut);font-size:15px;margin:0 0 22px;max-width:720px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 16px}
+  label{display:block;font:700 12px var(--F);text-transform:uppercase;letter-spacing:1px;color:var(--mut);margin:0 0 8px}
+  select,input[type=url],input[type=text]{width:100%;background:#0a1830;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:11px 12px;font:500 14px var(--F)}
+  select:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .go{background:var(--teal);color:var(--navy);border:0;border-radius:999px;padding:11px 22px;font:800 14px var(--F);cursor:pointer;margin-top:12px}
+  .go:hover{filter:brightness(1.08)}
+  .result{margin-top:14px;font-size:14px;word-break:break-all}
+  .result a{color:var(--teal);font-weight:700}
+  .quiet{color:var(--mut);font-size:12.5px;margin-top:10px}
+  .note{background:rgba(201,169,98,.08);border:1px solid rgba(201,169,98,.25);border-radius:10px;padding:11px 13px;font-size:12.5px;color:var(--mut)}
+  .note b{color:var(--gold)}
+  .foot{color:#7d8da0;font-size:11.5px;margin:24px 0 0;line-height:1.6;border-top:1px solid var(--line);padding-top:14px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">NTLSN · Try it now · runs in your browser</div>
+  <h1>Get it through your library</h1>
+  <p class="lead">Hit a paywall on a paper your university already subscribes to? Choose your institution once, then paste any DOI or article link — this tool rewrites it into <b>your own library's</b> access link (an OpenAthens redirector or EZproxy front door), where you sign in with your usual university account. NTLSN never sees a password: this is link-routing over your own entitlements, verified for <b>42 of 43 Australian universities</b>.</p>
+
+  <div class="panel">
+    <label for="uni-picker">Your university</label>
+    <select id="uni-picker" aria-describedby="picker-note"></select>
+    <p class="quiet" id="picker-note">Remembered in your browser only (localStorage) — change it any time. Entries marked "pattern unverified" are documented by the library but couldn't be fully confirmed from off-campus; if the link fails, your library's help desk is the fix.</p>
+  </div>
+
+  <div class="panel">
+    <label for="doi-input">DOI or article link</label>
+    <input id="doi-input" type="text" placeholder="e.g. 10.1080/07294360.2020.1712678 or https://doi.org/10.1080/…" autocomplete="off">
+    <button class="go" id="route-btn">Get the library link</button>
+    <div class="result" id="route-result" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="note"><b>How it works.</b> Australian university library access collapses to two URL shapes: the OpenAthens redirector (<code>go.openathens.net/redirector/…</code> — 23 universities) and the classic EZproxy login prefix (19 universities). The table of verified patterns is open data: <a href="/data/library-resolvers.json">library-resolvers.json</a>. Libraries migrate — if your university's link stops working, <a href="/#share">tell us</a> and check your library's own "off-campus access" page.</div>
+
+  <div class="foot">
+    Nothing is stored or sent anywhere — institution choice lives in your browser; the rewritten link goes straight to your library. Not affiliated with any publisher; access depends entirely on your own institution's subscriptions. &nbsp;·&nbsp; <a href="/sotl-index-methodology.html">SoTL Index methodology</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+  </div>
+</div>
+<script src="/library-access.js"></script>
+<script>
+(function(){
+  var picker = document.getElementById('uni-picker');
+  var input = document.getElementById('doi-input');
+  var btn = document.getElementById('route-btn');
+  var out = document.getElementById('route-result');
+
+  LibraryAccess.renderPicker(picker).catch(function(){
+    out.textContent = 'Could not load the resolver table — try reloading.';
+  });
+
+  // Accept a bare DOI ("10.xxxx/…"), a doi.org URL, or any http(s) article URL.
+  function normalise(v){
+    v = String(v || '').trim();
+    if (!v) return null;
+    if (/^10\.\d{4,}\//.test(v)) return 'https://doi.org/' + v;
+    if (/^https?:\/\//i.test(v)) return v;
+    return null;
+  }
+
+  function go(){
+    out.textContent = '';
+    var target = normalise(input.value);
+    if (!target) { out.textContent = 'Enter a DOI (starting “10.”) or a full http(s) link.'; return; }
+    if (!LibraryAccess.chosen()) { out.textContent = 'Choose your university first.'; picker.focus(); return; }
+    LibraryAccess.resolve(target).then(function(href){
+      if (!href) { out.textContent = 'Your institution has no link-rewriting pattern — contact your library for access help.'; return; }
+      out.innerHTML = '';
+      var a = document.createElement('a');
+      a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.textContent = 'Open via your library →';
+      var small = document.createElement('div');
+      small.className = 'quiet';
+      small.textContent = href;
+      out.appendChild(a); out.appendChild(small);
+    }).catch(function(){ out.textContent = 'Could not build the link — try reloading.'; });
+  }
+  btn.addEventListener('click', go);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
+})();
+</script>
+</body>
+</html>

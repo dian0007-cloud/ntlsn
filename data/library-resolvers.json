@@ -79,8 +79,8 @@
    "patternType": "openathens-redirector",
    "evidenceUrl": "https://au.libguides.com/EndNote/addedit/attachfile",
    "hostVerified": true,
-   "confidence": "medium",
-   "notes": "Adelaide University (the new merged Adelaide/UniSA entity, adelaideuni.edu.au) documents this prefix as the ISI Base URL in its own EndNote LibGuide (au.libguides.com). The legacy University of Adelaide pattern https://go.openathens.net/redirector/adelaide.edu.au?url= is still documented (Paperpile) and may work for legacy accounts. Confidence medium only because the merger means two documented redirector org-ids coexist; adelaideuni.edu.au is the one on the university's current guide. curl to the redirector returned HTTP 200 (note: the redirector answers 200 generically, so verification is of the host, not the org-id)."
+   "confidence": "high",
+   "notes": "Adelaide University (the new merged Adelaide/UniSA entity, adelaideuni.edu.au) documents this prefix as the ISI Base URL in its own EndNote LibGuide (au.libguides.com). The legacy University of Adelaide pattern https://go.openathens.net/redirector/adelaide.edu.au?url= is still documented (Paperpile) and may work for legacy accounts. Upgraded medium→high 2026-07-09: AU-vantage re-verification validated the org-id itself (both adelaideuni.edu.au and legacy adelaide.edu.au return 200 through the redirector while a bogus domain returns OpenAthens 403, so the 200 is org-id-specific, not generic). Merger duality confirmed; adelaideuni.edu.au is the primary on the university's current guide."
   },
   {
    "id": "rmit",
