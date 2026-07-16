@@ -2,12 +2,18 @@ name: CI — validate data & build feeds
 
 # Runs on every push and PR. A PR that breaks the data layer (bad date, unknown
 # uni id, duplicate id, malformed url, missing required field) fails here before
-# it can reach the live feeds.
+# it can reach the live feeds. The `e2e` and `lighthouse` jobs (below) additionally
+# guard the rendered page and Lighthouse budgets as blocking gates.
 
 on:
   push:
     branches: [main]
   pull_request:
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
@@ -36,3 +42,37 @@ jobs:
         run: npm ci
       - name: Test Netlify functions (node:test)
         run: npm test
+
+  # Playwright smoke suite (TASKS.md §4.3). Blocking gate — do NOT add
+  # continue-on-error. Serves the repo root via the webServer in
+  # playwright.config.js (python3 http.server) and drives the real rendered page.
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install deps
+        run: npm ci
+      - name: Install Playwright browser (chromium)
+        run: npx playwright install --with-deps chromium
+      - name: Run Playwright smoke suite
+        run: npx playwright test
+
+  # Lighthouse CI (TASKS.md §0.3). Blocking gate. @lhci/cli's bundled puppeteer
+  # fetches its own Chromium during `npm ci`; ubuntu-latest also ships Chrome as a
+  # fallback. Assertions live in lighthouserc.json (perf ≥ 0.8, a11y ≥ 0.95).
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install deps
+        run: npm ci
+      - name: Run Lighthouse CI
+        run: npx lhci autorun

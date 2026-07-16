@@ -10,3 +10,8 @@ node_modules/
 .env
 .env.*
 .netlify/
+
+# Playwright + Lighthouse CI artifacts (regenerated each run)
+test-results/
+.lighthouseci/
+playwright-report/
