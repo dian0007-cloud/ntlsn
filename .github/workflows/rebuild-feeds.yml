@@ -1,0 +1,65 @@
+name: Daily feed rebuild + archive
+
+# Regenerates events.ics / feed.xml / events-ld.json / sitemap.xml from
+# data/events.json every day, and first moves any now-past events into
+# data/archive-<YEAR>.json (TASKS.md 3.2 — auto-expiry + archive). Without a
+# scheduled rebuild, feeds drift stale purely from the passage of time: an event
+# whose endDate passes drops out of the upcoming set, but nothing regenerates the
+# feed files until someone edits data and re-runs build-feeds by hand.
+#
+# Like watch-sources.yml, a successful run COMMITS the regenerated files DIRECTLY
+# to main. This is a deliberate, documented exception to the always-PR rule: the
+# workflow only reformats already-reviewed data into already-reviewed feed formats
+# (and archives events whose dates have simply passed) — it invents no new content
+# and adds no new event data (the CREDIBILITY RULE still holds; surfacing new
+# events is watch-sources.yml's job, separately). It uses ONLY the default
+# GITHUB_TOKEN (no PAT, no extra secret), with job-scoped contents:write, and
+# stages ONLY the known output paths. Push back in review if you disagree with
+# direct-to-main commits.
+
+on:
+  schedule:
+    - cron: '17 1 * * *'   # daily 01:17 UTC (~11:17 AEST); off-the-hour to spread load
+  workflow_dispatch:        # manual run from the Actions tab
+
+permissions:
+  contents: write   # commit regenerated feeds + archived events back to main
+
+# Avoid two overlapping runs racing on the same files.
+concurrency:
+  group: feed-rebuild
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+
+      - name: Archive past events (TASKS.md 3.2)
+        run: node scripts/archive-events.mjs
+
+      - name: Rebuild feeds (also re-validates)
+        run: node scripts/build-feeds.mjs
+
+      - name: Stage known outputs only
+        run: |
+          # Only ever stage the files this workflow is permitted to touch — never a
+          # blanket `git add -A`, so an unattended run can't sweep up stray files.
+          git add -- events.ics feed.xml events-ld.json sitemap.xml data/events.json
+          if ls data/archive-*.json >/dev/null 2>&1; then git add -- data/archive-*.json; fi
+
+      - name: Commit and push if anything changed
+        run: |
+          if git diff --staged --quiet; then
+            echo "No feed/data changes — nothing to commit."
+            exit 0
+          fi
+          git config user.name  "ntlsn-feeds-bot"
+          git config user.email "actions@github.com"
+          # [skip ci] so this bot commit doesn't re-trigger ci.yml's push-to-main job.
+          git commit -m "chore: scheduled feed rebuild + archive [skip ci]"
+          # Fail loud on rejection (branch protection / non-fast-forward). NEVER force-push.
+          git push || { echo "Push rejected — failing loud instead of force-pushing."; exit 1; }
