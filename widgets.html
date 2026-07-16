@@ -99,6 +99,29 @@
   .foot b{color:#cbd8e6}
   .empty{grid-column:1/-1;text-align:center;padding:50px 20px;border:1px dashed var(--line);border-radius:18px;color:var(--mut)}
   @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;scroll-behavior:auto !important}.w:hover{transform:none}}
+  /* ---- embed NTLSN on your site ---- */
+  .embed{margin-top:42px;padding-top:28px;border-top:1px solid var(--line)}
+  .embed h2{font:800 clamp(22px,3.4vw,30px)/1.12 var(--sans);margin:8px 0 10px;color:#fff;letter-spacing:-.01em}
+  .embed .lede{margin-bottom:22px}
+  .embed .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.embed .grid{grid-template-columns:1fr}}
+  .embed .card{background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);border:1px solid var(--line);border-radius:16px;padding:15px 16px 14px}
+  .embed .card .tag{font:800 11px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:10px}
+  .embed .card .tag.gold{color:var(--gold)}
+  .embed pre{margin:0;position:relative}
+  .embed code{display:block;font:13px/1.6 ui-monospace,Menlo,Consolas,"SF Mono",monospace;color:#d7e3f1;background:#091828;border:1px solid var(--line);border-radius:10px;padding:12px 14px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .embed .copy{position:absolute;top:8px;right:8px;font:700 11px var(--sans);letter-spacing:.4px;text-transform:uppercase;color:#06251f;background:var(--teal);border:0;border-radius:7px;padding:5px 10px;cursor:pointer}
+  .embed .copy:active{transform:translateY(1px)}
+  .embed .attrs{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:20px 0 0;font-size:13.5px}
+  .embed .attrs dt{font:700 13px var(--sans);color:#fff}
+  .embed .attrs dt code,.embed .note code,.embed .lede code{display:inline;background:none;border:0;padding:0;color:var(--teal);font:800 12.5px ui-monospace,Menlo,Consolas,"SF Mono",monospace;white-space:normal;overflow-wrap:normal}
+  .embed .note code{color:var(--gold)}
+  .embed .attrs dd{margin:0;color:var(--mut);line-height:1.6}
+  .embed .note{margin-top:16px;font-size:13px;color:var(--mut);background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;line-height:1.65}
+  .embed .note b{color:#cbd8e6}
+  .embed .preview{margin-top:18px;border:1px dashed var(--line);border-radius:16px;padding:16px 18px 20px}
+  .embed .preview .pl{font:800 11px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+  .embed .preview>[data-ntlsn-widget]{max-width:none}
 .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:#06222a;padding:10px 16px;border-radius:0 0 10px 0;font-weight:700;z-index:99}
 .skip:focus{left:0}
 </style>
@@ -130,6 +153,38 @@
     <b>How this works.</b> Every widget draws on the live commons — the events feed updates automatically; the daily widgets rotate each day. Your selection is saved only in this browser (no account, no tracking). This is a working prototype of a personalisation layer for NTLSN: the same idea as adding skills, applied to glanceable teaching content.<br>
     <span style="color:var(--mut)">Add or remove widgets any time. Hover a card and click ✕ to remove it; use “＋ Add widgets” to bring others back.</span>
   </div>
+
+  <!-- take it with you: embed the live-events widget on any site -->
+  <section class="embed" aria-labelledby="ntlsn-embed-h">
+    <div class="eyebrow">◇ Take it with you</div>
+    <h2 id="ntlsn-embed-h">Embed NTLSN on your site.</h2>
+    <p class="lede">The widget that powers this dashboard is a single ~6&nbsp;KB script tag. Drop it on any page — staff intranet, course site, blog, LMS — and it lists the next few Australian teaching &amp; learning events, scoped to one institution or the whole sector. No build step, no API key, no dependencies.</p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="tag">One institution</span>
+        <pre><button class="copy" type="button" data-c='&lt;script src="https://ntlsn.com/widget.js" data-uni="usq" data-limit="5"&gt;&lt;/script&gt;'>Copy</button><code>&lt;script src="https://ntlsn.com/widget.js" data-uni="usq" data-limit="5"&gt;&lt;/script&gt;</code></pre>
+      </div>
+      <div class="card">
+        <span class="tag gold">Whole sector</span>
+        <pre><button class="copy" type="button" data-c='&lt;script src="https://ntlsn.com/widget.js" data-limit="5"&gt;&lt;/script&gt;'>Copy</button><code>&lt;script src="https://ntlsn.com/widget.js" data-limit="5"&gt;&lt;/script&gt;</code></pre>
+      </div>
+    </div>
+
+    <dl class="attrs">
+      <dt><code>data-uni</code></dt>
+      <dd>Optional university id — <code>usq</code>, <code>unimelb</code>, <code>curtin</code>, <code>anu</code>, … Omit it for sector-wide. An unrecognised or typo'd id quietly falls back to the sector rather than showing an empty box.</dd>
+      <dt><code>data-limit</code></dt>
+      <dd>How many events to list. Defaults to <code>5</code>; a missing, non-numeric or zero value also resolves to 5.</dd>
+    </dl>
+
+    <div class="note"><b>Isolated by design.</b> The widget renders into a shadow DOM root with <code>:host{all:initial}</code>, so it can neither inherit your page's CSS nor leak its own — your styles can't break it, and it can't restyle your page. It only reads the CORS-open <code>/data/events.json</code>, links back to NTLSN, and degrades gracefully if the fetch fails. ~6&nbsp;KB raw, ~2.7&nbsp;KB gzipped, zero dependencies.</div>
+
+    <div class="preview">
+      <div class="pl">Live preview — sector-wide, limit 4</div>
+      <script src="/widget.js" data-limit="4"></script>
+    </div>
+  </section>
 </div>
 
 <!-- gallery -->
@@ -400,6 +455,22 @@
 
   renderBoard();
 })();
+</script>
+
+<script>
+  // copy-to-clipboard for the embed code cards (scoped to this section)
+  (function () {
+    var sec = document.querySelector('.embed');
+    if (!sec) return;
+    sec.addEventListener('click', function (e) {
+      var b = e.target.closest('.copy'); if (!b) return;
+      var t = b.getAttribute('data-c') || '';
+      navigator.clipboard.writeText(t).then(function () {
+        var o = b.textContent; b.textContent = 'Copied ✓';
+        setTimeout(function () { b.textContent = o; }, 1400);
+      });
+    });
+  })();
 </script>
 </body>
 </html>
