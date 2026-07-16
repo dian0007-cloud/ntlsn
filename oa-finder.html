@@ -132,6 +132,7 @@
        var title=w.title||'(untitled)';
        var head=(isOpen&&link)?'<a href="'+link+'" target="_blank" rel="noopener">'+title+'</a>':title;
        var metaline=[authors(w),venue(w),w.publication_year].filter(Boolean).join(' &middot; ');
+       metaline+=(metaline?' &middot; ':'')+'<a href="https://doi.org/'+doi+'" target="_blank" rel="noopener" style="color:var(--mut)">doi.org/'+doi+'</a>';
        var action=(isOpen&&link)
          ? '<a class="go" href="'+link+'" target="_blank" rel="noopener">Read it free ↗</a>'
          : '<span class="closed">🔒 No open version found — try the author, your library, or an interlibrary loan.</span>';
@@ -149,6 +150,69 @@
      out.scrollIntoView({behavior:'smooth',block:'start'});
    }).catch(function(err){ go.disabled=false; out.innerHTML='<div id="summary">Couldn’t reach OpenAlex ('+err.message+'). Try again in a moment.</div>'; });
  };
+})();
+</script>
+<script id="ntlsn-libaccess">
+/* Get it through your library — entirely client-side. Fetches the public
+   resolver list once, remembers your institution pick in YOUR browser
+   (localStorage "ntlsn_library"), and adds a "via your library →" link next
+   to every DOI link in the results. Nothing is sent anywhere. */
+(function(){
+ var KEY='ntlsn_library', DOI=/^https?:\/\/(?:dx\.)?doi\.org\//i, rows=[], sel, pending=false;
+ function encodes(r){ return r.patternType==='openathens-redirector' || /[?&]qurl=$/.test(r.pattern); }
+ function libHref(r,url){ return r.pattern+(encodes(r)?encodeURIComponent(url):url); }
+ function chosen(){ if(!sel||!sel.value) return null; for(var i=0;i<rows.length;i++){ if(rows[i].id===sel.value) return rows[i]; } return null; }
+ function apply(){
+   var out=document.getElementById('out'); if(!out) return;
+   var r=chosen(), as=out.querySelectorAll('a[href]');
+   for(var i=0;i<as.length;i++){
+     var a=as[i];
+     if(a.hasAttribute('data-libaccess')||!DOI.test(a.href)) continue;
+     var next=a.nextElementSibling;
+     var lib=(next&&next.hasAttribute('data-libaccess'))?next:null;
+     if(!r){ if(lib) lib.parentNode.removeChild(lib); continue; }
+     if(!lib){
+       lib=document.createElement('a');
+       lib.setAttribute('data-libaccess','1'); lib.target='_blank'; lib.rel='noopener';
+       lib.textContent='via your library →';
+       lib.style.cssText='margin-left:9px;font:700 12.5px var(--sans);color:var(--gold);white-space:nowrap';
+       a.parentNode.insertBefore(lib,a.nextSibling);
+     }
+     lib.href=libHref(r,a.href);
+     lib.title='Open through '+r.name+' library sign-in';
+   }
+ }
+ function schedule(){ if(pending) return; pending=true; setTimeout(function(){ pending=false; apply(); },0); }
+ function ui(){
+   var out=document.getElementById('out'); if(!out||document.getElementById('ntlsn-libaccess-ui')) return;
+   var box=document.createElement('div'); box.id='ntlsn-libaccess-ui';
+   box.style.cssText='margin-top:18px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 15px';
+   var lab=document.createElement('label');
+   lab.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 13.5px var(--sans);color:var(--ink)';
+   lab.appendChild(document.createTextNode('Your library:'));
+   sel=document.createElement('select');
+   sel.style.cssText='background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:600 13.5px var(--sans);max-width:100%;cursor:pointer';
+   var o0=document.createElement('option'); o0.value=''; o0.textContent='— choose your institution —'; sel.appendChild(o0);
+   for(var i=0;i<rows.length;i++){ var o=document.createElement('option'); o.value=rows[i].id; o.textContent=rows[i].name; sel.appendChild(o); }
+   try{ var saved=localStorage.getItem(KEY)||''; if(saved){ sel.value=saved; if(sel.value!==saved) sel.value=''; } }catch(e){}
+   sel.onchange=function(){ try{ if(sel.value){ localStorage.setItem(KEY,sel.value); } else { localStorage.removeItem(KEY); } }catch(e){} apply(); };
+   lab.appendChild(sel); box.appendChild(lab);
+   var note=document.createElement('div');
+   note.style.cssText='margin-top:7px;font:400 12.5px var(--sans);color:var(--mut);line-height:1.55';
+   note.textContent='Links route through your own library’s sign-in; NTLSN never sees your credentials. No publisher partnership exists or is implied.';
+   box.appendChild(note);
+   out.parentNode.insertBefore(box,out);
+   new MutationObserver(schedule).observe(out,{childList:true,subtree:true});
+   apply();
+ }
+ function init(){
+   fetch('/data/library-resolvers.json').then(function(x){ if(!x.ok) throw new Error(x.status); return x.json(); }).then(function(d){
+     rows=(d.rows||[]).filter(function(r){ return r.pattern && (r.patternType==='openathens-redirector'||r.patternType==='ezproxy-login-url'); })
+       .sort(function(a,b){ return a.name.localeCompare(b.name); });
+     if(rows.length) ui();
+   }).catch(function(){ /* resolver list unavailable — page works as before */ });
+ }
+ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); } else { init(); }
 })();
 </script>
 </body>
