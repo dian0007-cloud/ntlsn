@@ -49,6 +49,7 @@ const EXTERNAL_NOISE = [
   /script\.googleusercontent\.com/i,
   /googleusercontent\.com/i,
   /s2\.googleusercontent\.com/i,
+  /www\.google\.com\/s2\//i,
   /youtube\.com|youtu\.be|youtube-nocookie\.com/i,
   /player\.vimeo\.com|vimeo\.com/i,
   /doaj\.org|api\.openalex\.org|pub\.orcid\.org|zoom\.us/i,
@@ -74,7 +75,10 @@ test.describe('Page health', () => {
     const pageErrors = []; // uncaught exceptions — always fail
     const consoleErrors = []; // error-level console messages
     page.on('console', (msg) => {
-      if (msg.type() === 'error') consoleErrors.push(msg.text());
+      // HTTP-level resource failures ("Failed to load resource: … status of 429")
+      // carry the URL in msg.location(), not the text — append it so the
+      // host-based noise regexes can match external origins.
+      if (msg.type() === 'error') consoleErrors.push(`${msg.text()} ${msg.location()?.url || ''}`.trim());
     });
     page.on('pageerror', (err) => pageErrors.push(err.message));
 
