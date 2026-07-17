@@ -11,6 +11,10 @@ node_modules/
 .env.*
 .netlify/
 
+# Source rebuild (TASKS.md Epic 1) build output — src/node_modules is already
+# covered by the node_modules/ rule above
+src/dist/
+
 # Playwright + Lighthouse CI artifacts (regenerated each run)
 test-results/
 .lighthouseci/
