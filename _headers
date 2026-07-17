@@ -21,6 +21,11 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 
+# Content-hashed app bundle — safe to cache forever (filename changes on rebuild)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+
 /events.ics
   Content-Type: text/calendar; charset=utf-8
   Content-Disposition: inline; filename="ntlsn-events.ics"
