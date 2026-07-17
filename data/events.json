@@ -1,16 +1,5 @@
 [
   {
-    "id": 8,
-    "title": "HERDSA Conference 2026",
-    "uni": "usyd",
-    "date": "2026-07-06",
-    "endDate": "2026-07-09",
-    "type": "conference",
-    "desc": "'Re-envisioning Higher Education for Tomorrow's Learners' - NUS Singapore.",
-    "verified": true,
-    "url": "https://conference.herdsa.org.au/2026/"
-  },
-  {
     "id": 9,
     "title": "National Education Summit - Melbourne",
     "uni": "unimelb",
@@ -419,17 +408,6 @@
     "verified": false
   },
   {
-    "id": 58,
-    "title": "ACODE Benchmarking Summit 2026",
-    "uni": "unimelb",
-    "date": "2026-07-09",
-    "endDate": "2026-07-10",
-    "type": "conference",
-    "desc": "University of Melbourne. New Accessibility benchmark.",
-    "verified": true,
-    "url": "https://acode.edu.au/activities/workshops/inter-institutional-benchmarking-summits"
-  },
-  {
     "id": 59,
     "title": "ASCILITE Spring into Excellence",
     "uni": "rmit",
@@ -461,16 +439,6 @@
     "desc": "Baltimore, USA.",
     "verified": true,
     "url": "https://podnetwork.org/annual-conference/"
-  },
-  {
-    "id": 68,
-    "title": "ASCILITE x Turnitin: Authentic Assessment",
-    "uni": "qut",
-    "date": "2026-07-14",
-    "type": "workshop",
-    "desc": "Authentic assessments at scale with AI-era tools.",
-    "verified": true,
-    "url": "https://ascilite.org/30-03-2026-bulletin/"
   },
   {
     "id": 69,

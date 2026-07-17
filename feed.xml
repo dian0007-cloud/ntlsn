@@ -6,21 +6,7 @@
   <atom:link href="https://www.ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Upcoming symposiums, workshops and PD across all 42 Australian universities.</description>
   <language>en-au</language>
-  <lastBuildDate>Fri, 10 Jul 2026 00:10:46 GMT</lastBuildDate>
-  <item>
-    <title>ACODE Benchmarking Summit 2026 (2026-07-09 – 2026-07-10)</title>
-    <link>https://acode.edu.au/activities/workshops/inter-institutional-benchmarking-summits</link>
-    <guid isPermaLink="false">ntlsn-58</guid>
-    <category>conference</category>
-    <description>UniMelb · University of Melbourne. New Accessibility benchmark.</description>
-  </item>
-  <item>
-    <title>ASCILITE x Turnitin: Authentic Assessment (2026-07-14)</title>
-    <link>https://ascilite.org/30-03-2026-bulletin/</link>
-    <guid isPermaLink="false">ntlsn-68</guid>
-    <category>workshop</category>
-    <description>QUT · Authentic assessments at scale with AI-era tools.</description>
-  </item>
+  <lastBuildDate>Fri, 17 Jul 2026 08:21:25 GMT</lastBuildDate>
   <item>
     <title>UNE L&amp;T Symposium: Student Voice &amp; Engagement (2026-07-21)</title>
     <link>https://symposium.une.edu.au/symposium-2026/student-voice-student-engagement/</link>
