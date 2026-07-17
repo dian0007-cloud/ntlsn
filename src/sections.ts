@@ -34,6 +34,13 @@ export const SECTION_ORDER: readonly string[] = [
   "international-themes",
   "ntlsn-frameworks-stage",
   "frameworks",
+  // "What the data shows" — bundle-rendered WITHOUT an id in production:
+  // ntlsn-order positions it by regex ({tag:'SECTION',head:1,
+  // re:/What the data shows/}) right here, after #frameworks, and the
+  // ntlsn-evidencefix patch stamps id="ntlsn-evidence" at runtime. The id
+  // is canonical in src from PR-C (docs/rebuild-stocktake.md: runtime-id
+  // sections gain their ids as they are ported).
+  "ntlsn-evidence",
   "ntlsn-prx",
   "ntlsn-calibrate",
   "ntlsn-pairreview",
@@ -128,6 +135,7 @@ export function sectionLabel(id: string): string {
     about: "About",
     pricing: "Pricing",
     architecture: "Architecture",
+    "ntlsn-evidence": "What the Data Shows",
     "ntlsn-oer": "OER",
     "ntlsn-mcp": "MCP",
     "ntlsn-eba": "EBA",

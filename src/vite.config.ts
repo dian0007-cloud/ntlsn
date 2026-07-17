@@ -27,10 +27,25 @@ const sotlWorkCount = (
   ) as unknown[]
 ).length;
 
+/**
+ * Same treatment for the Best Practice Guides count (#ntlsn-bestpractice —
+ * data/ltr-bestpractice.json stays out of the bundle; the component fetches
+ * it lazily and only the count is baked in).
+ */
+const bestPracticeCount = (
+  JSON.parse(
+    readFileSync(
+      new URL('../data/ltr-bestpractice.json', import.meta.url),
+      'utf8',
+    ),
+  ) as unknown[]
+).length;
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   define: {
     __NTLSN_SOTL_WORKS__: JSON.stringify(sotlWorkCount),
+    __NTLSN_BP_GUIDES__: JSON.stringify(bestPracticeCount),
   },
   server: {
     fs: {

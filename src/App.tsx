@@ -18,6 +18,16 @@ import LatestFeed from "./components/LatestFeed";
 import StartGrid from "./components/StartGrid";
 import Glance from "./components/Glance";
 import FreshToday from "./components/FreshToday";
+import SotlGrantsSection from "./components/SotlGrantsSection";
+import FrameworksSection from "./components/FrameworksSection";
+import EvidenceSection from "./components/EvidenceSection";
+import OerSection from "./components/OerSection";
+import ArchiveSection from "./components/ArchiveSection";
+import RepositorySection from "./components/RepositorySection";
+import JournalSection from "./components/JournalSection";
+import BestPracticeSection from "./components/BestPracticeSection";
+import ZoomShareSection from "./components/ZoomShareSection";
+import BenchmarksPartial from "./components/BenchmarksPartial";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
 
@@ -52,6 +62,24 @@ export default function App() {
           if (id === "ntlsn-glance") return <Glance key={id} />;
           if (id === "yearview") return <YearView key={id} />;
           if (id === "events") return <EventsSection key={id} />;
+          // PR-C "Knowledge layer" (docs/rebuild-stocktake.md): sotl-grants,
+          // frameworks (+gp-fw waypoints) and the evidence section are
+          // bundle-rendered ports; oer/archive/repository/journal/
+          // bestpractice/zoom are their patch-script injectors translated.
+          if (id === "sotl-grants") return <SotlGrantsSection key={id} />;
+          if (id === "frameworks") return <FrameworksSection key={id} />;
+          if (id === "ntlsn-evidence") return <EvidenceSection key={id} />;
+          if (id === "ntlsn-oer") return <OerSection key={id} />;
+          if (id === "ntlsn-archive") return <ArchiveSection key={id} />;
+          if (id === "ntlsn-repository") return <RepositorySection key={id} />;
+          if (id === "ntlsn-journal") return <JournalSection key={id} />;
+          if (id === "ntlsn-bestpractice") {
+            return <BestPracticeSection key={id} />;
+          }
+          // #benchmarks is a PARTIAL port: studies 4 & 5 were injected into
+          // the bundle's section by the two bench patch scripts (retired by
+          // PR-C); studies 1–3 are bundle-rendered and arrive with PR-D.
+          if (id === "benchmarks") return <BenchmarksPartial key={id} />;
           // #ntlsn-conference stays a placeholder on purpose: production
           // hides the whole section via CSS (#ntlsn-conference{display:none
           // !important}), so there is nothing live to port yet.
@@ -89,7 +117,7 @@ export default function App() {
             // by /^Due Soon/ text, not id, so it has no SECTION_ORDER row.
             return (
               <Fragment key={id}>
-                <SectionPlaceholder id={id} />
+                <ZoomShareSection />
                 <DueSoon />
               </Fragment>
             );
