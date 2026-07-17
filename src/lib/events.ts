@@ -128,6 +128,11 @@ export function daysUntil(event: NtlsnEvent, today: Date = todayLocal()): number
   return Math.round((parseDay(event.date).getTime() - today.getTime()) / 86400000);
 }
 
+/** Conferences grid: upcoming conference-type events, date-ascending. */
+export function upcomingConferences(today: Date = todayLocal()): NtlsnEvent[] {
+  return upcomingEvents(today).filter((e) => e.type === "conference");
+}
+
 /** Due Soon rail: the next `limit` events starting within `windowDays`. */
 export function dueSoonEvents(
   limit = 5,
