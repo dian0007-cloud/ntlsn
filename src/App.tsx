@@ -12,6 +12,10 @@ import PDSection from "./components/PDSection";
 import ResourceHubSection from "./components/ResourceHubSection";
 import TeachingResourcesSection from "./components/TeachingResourcesSection";
 import DueSoon from "./components/DueSoon";
+import NowBanner from "./components/NowBanner";
+import StartGrid from "./components/StartGrid";
+import Glance from "./components/Glance";
+import FreshToday from "./components/FreshToday";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
 
@@ -36,6 +40,14 @@ export default function App() {
         {SECTION_ORDER.filter((id) => id !== "hero").map((id) => {
           // Ported sections replace their placeholders one at a time
           // (TASKS.md 1.2); everything else stays a placeholder.
+          // PR-A "Front door" (docs/rebuild-stocktake.md): the four sections
+          // between the hero and the year view. StartGrid also renders the
+          // #ntlsn-hubdoors rail as its trailing sibling, exactly where the
+          // production self-healing script parked it.
+          if (id === "ntlsn-nowbanner") return <NowBanner key={id} />;
+          if (id === "ntlsn-startgrid") return <StartGrid key={id} />;
+          if (id === "ntlsn-freshtoday") return <FreshToday key={id} />;
+          if (id === "ntlsn-glance") return <Glance key={id} />;
           if (id === "yearview") return <YearView key={id} />;
           if (id === "events") return <EventsSection key={id} />;
           // #ntlsn-conference stays a placeholder on purpose: production

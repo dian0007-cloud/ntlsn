@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -14,8 +15,23 @@ import tailwindcss from '@tailwindcss/vite';
  */
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 
+/**
+ * Build-time count of the rescued SoTL archive (data/ltr.json, ~272KB).
+ * The front door only ever prints the length ("1,431 SoTL works"), so the
+ * count is baked in here rather than importing the whole dataset into the
+ * bundle (the §1.3 acceptance budget is JS < 350KB). Declared in globals.d.ts.
+ */
+const sotlWorkCount = (
+  JSON.parse(
+    readFileSync(new URL('../data/ltr.json', import.meta.url), 'utf8'),
+  ) as unknown[]
+).length;
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  define: {
+    __NTLSN_SOTL_WORKS__: JSON.stringify(sotlWorkCount),
+  },
   server: {
     fs: {
       allow: [repoRoot],

@@ -82,6 +82,48 @@ body {
   animation-iteration-count: infinite;
 }
 
+/*
+ * Front-door keyframes (PR-A): the start-grid icon bob (ntlsn-startgrid-css),
+ * the journey panel pop-in (ntlsn-journey), and the glance connector dot
+ * (ntlsn-glance-css, horizontal on wide screens / vertical when the row
+ * stacks). All decorative; all neutralised by the reduced-motion block below.
+ */
+@keyframes sg-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes journey-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes glance-dot-h {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100% - 7px);
+  }
+}
+@keyframes glance-dot-v {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: calc(100% - 7px);
+  }
+}
+
 /* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {
