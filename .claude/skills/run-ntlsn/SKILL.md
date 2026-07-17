@@ -57,7 +57,7 @@ Most PRs touch `data/events.json` / `data/universities.json` and the feed genera
 node scripts/validate-data.mjs                 # guards the data layer; exit 1 on hard errors
 ```
 
-Validates required fields, uni-id references, duplicate ids, date formats, URLs. Prints `✅ validate-data: 94 events, 43 universities valid (N warning(s))`. "Event entirely in the past" warnings are **non-fatal** (expected as the year progresses).
+Validates required fields, uni-id references, duplicate ids, date formats, URLs. Prints `✅ validate-data: N events, 43 universities valid (N warning(s))` — the event count drifts continuously as `archive-events.mjs` prunes past events, so never assert a specific number. "Event entirely in the past" warnings are **non-fatal** (expected as the year progresses).
 
 ```bash
 node scripts/build-feeds.mjs --out /tmp/build-check   # regenerates feeds; also re-validates
