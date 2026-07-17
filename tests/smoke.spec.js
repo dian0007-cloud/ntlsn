@@ -388,4 +388,25 @@ test.describe('Feeds', () => {
     expect(result.hasChannel, 'feed.xml has no rss/channel or feed root').toBeTruthy();
     expect(result.entryCount, 'feed.xml has no entries').toBeGreaterThan(0);
   });
+
+  test('(i) ?type= filter URLs restore on load and serialise on click (ntlsn-filter-url)', async ({ page }) => {
+    await page.goto(BASE + '?type=symposium', { waitUntil: 'load' });
+    await settle(page, 7000);
+    // Restore: the Symposia chip should be active (bundle's active-chip styling)
+    const restored = await page.evaluate(() => {
+      const chips = [...document.querySelectorAll('div.flex.flex-wrap button')];
+      const sym = chips.find((b) => (b.textContent || '').trim().startsWith('Symposia'));
+      return { found: !!sym, active: sym ? sym.className.includes('bg-[#4ECDC4]/10') : false };
+    });
+    expect(restored.found, 'Symposia type chip not found').toBeTruthy();
+    expect(restored.active, '?type=symposium did not activate the Symposia chip').toBeTruthy();
+    // Serialise: clicking another chip rewrites the URL param
+    await page.evaluate(() => {
+      const chips = [...document.querySelectorAll('div.flex.flex-wrap button')];
+      const w = chips.find((b) => (b.textContent || '').trim().startsWith('Workshops'));
+      if (w) w.click();
+    });
+    await page.waitForTimeout(600);
+    expect(page.url(), 'clicking Workshops chip did not serialise ?type=workshop').toContain('type=workshop');
+  });
 });

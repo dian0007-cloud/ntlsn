@@ -134,7 +134,9 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
 })();
 </script>
 <script>
-/* NTLSN share-form feedback — confirm submission in-place (no blank "nothing happened") */
+/* NTLSN share-form feedback — confirm submission in-place (no blank "nothing happened").
+   Hardened per TASKS.md 2.5: bot-field honeypot check + minimal client-side validation.
+   The Apps Script contract is unchanged: text/plain POST, JSON body, same fields. */
 (function(){
   document.addEventListener('submit',function(e){
     var fm=e.target;
@@ -143,6 +145,23 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
     var btn=fm.querySelector('button[type="submit"]')||fm.querySelector('button');
     var obj={}; new FormData(fm).forEach(function(v,k){obj[k]=v;});
     obj.title=obj.symposium||obj.title||'';
+    /* Honeypot — Netlify convention: humans never fill bot-field. Pretend success, never POST. */
+    if(String(obj['bot-field']||'').trim()){ try{fm.reset();}catch(_){} toast(); return; }
+    /* Minimal validation — safety net if the bundle's native required/url attributes are lost.
+       Fail-soft: if this validation code itself throws, fall through and submit as before. */
+    try{
+      var bad=null;
+      if(!String(obj.type||'').trim())bad='Please choose what you are sharing.';
+      else if(!String(obj.institution||'').trim())bad='Please add your institution.';
+      else if(!String(obj.symposium||'').trim())bad='Please add the symposium or event name.';
+      else if(!/^https?:\/\/\S+\.\S+/i.test(String(obj.link||'').trim()))bad='Please paste a full link starting with http:// or https://';
+      var err=fm.querySelector('.ntlsn-share-err');
+      if(bad){
+        if(!err){err=document.createElement('p');err.className='ntlsn-share-err';err.setAttribute('role','alert');err.style.cssText='margin:10px 0 0;font-size:14px;color:#FF6B6B';fm.appendChild(err);}
+        err.textContent=bad; return;
+      }
+      if(err)err.remove();
+    }catch(_){}
     if(btn)btn.disabled=true;
     function done(){ if(btn)btn.disabled=false; try{fm.reset();}catch(_){} toast(); }
     fetch('https://script.google.com/macros/s/AKfycbxPJQHPuXu06x5hFc-XyyyuE0eBU2BL-EiwhqCfhiW_nhuGWBm3dJk-c_q7qTwgcVj_/exec',{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(obj)}).then(done,done);
@@ -749,7 +768,31 @@ function syncUrl(val){clearTimeout(t);t=setTimeout(function(){var u=new URL(loca
 document.addEventListener("input",function(e){if(e.target&&e.target.matches&&e.target.matches(SEL)){syncUrl(e.target.value);}},true);
 applyFromUrl();
 new MutationObserver(applyFromUrl).observe(document.body,{childList:true,subtree:true});
-})();</script><script id="ntlsn-digest-card">(function(){
+})();</script><script id="ntlsn-filter-url" data-desc="Shareable event-type filter: serialise the type chip to ?type= and restore it on load (TASKS 2.2). Drives the bundle's own chips; literal label match; fail-soft.">(function(){try{
+var LABELS={conference:"Conferences",showcase:"Showcases",workshop:"Workshops",webinar:"Webinars",symposium:"Symposia",week:"L&T Weeks"};
+function chips(){
+ var out=[];var btns=document.querySelectorAll("div.flex.flex-wrap button");
+ for(var i=0;i<btns.length;i++){var t=(btns[i].textContent||"").trim();
+  for(var k in LABELS){if(t===LABELS[k]||t.indexOf(LABELS[k])===0){out.push({el:btns[i],value:k});break;}}
+  if(t==="All")out.push({el:btns[i],value:"all"});}
+ return out;}
+var applied=false;
+function applyFromUrl(){
+ if(applied)return;
+ var want;try{want=new URLSearchParams(location.search).get("type")||"";}catch(e){return;}
+ if(!want||!LABELS[want]){applied=true;return;}
+ var cs=chips();if(!cs.length)return;
+ for(var i=0;i<cs.length;i++){if(cs[i].value===want){applied=true;cs[i].el.click();return;}}
+}
+function syncUrl(val){try{var u=new URL(location.href);if(val&&val!=="all"){u.searchParams.set("type",val);}else{u.searchParams.delete("type");}history.replaceState(null,"",u.pathname+(u.search||"")+u.hash);}catch(e){}}
+document.addEventListener("click",function(e){try{
+ var b=e.target&&e.target.closest?e.target.closest("button"):null;if(!b)return;
+ var t=(b.textContent||"").trim();if(t==="All"&&b.parentElement&&b.parentElement.className.indexOf("flex-wrap")!==-1){syncUrl("all");return;}
+ for(var k in LABELS){if(t===LABELS[k]||t.indexOf(LABELS[k])===0){if(b.parentElement&&b.parentElement.className.indexOf("flex-wrap")!==-1)syncUrl(k);return;}}
+}catch(e){}},true);
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",applyFromUrl);else applyFromUrl();
+try{new MutationObserver(applyFromUrl).observe(document.body,{childList:true,subtree:true});}catch(e){}
+}catch(e){}})();</script><script id="ntlsn-digest-card">(function(){
 /* Set BD_USER to your Buttondown username to activate email signups (free account at buttondown.email).
    Leave "" for a graceful "coming soon" card that points at the calendar/RSS. */
 var BD_USER="";
