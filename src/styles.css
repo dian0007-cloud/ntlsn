@@ -224,6 +224,109 @@ body {
   animation: archive-spin 9s linear infinite;
 }
 
+/*
+ * Mission & pricing tail (PR-E) decorations.
+ *
+ * adv-*: the #ntlsn-advisory reveal (cards float up when the section enters
+ * the viewport — AdvisorySection adds .adv-in via IntersectionObserver),
+ * the shimmering header bar and the slow orbit rings, ported from the
+ * ntlsn-advisory-script patch's injected CSS.
+ *
+ * corner-flourish / drop-cap: the #about section's gold manuscript
+ * decorations, ported from the production bundle's stylesheet.
+ *
+ * All decorative; all neutralised by the reduced-motion block below (the
+ * .adv-card opacity is forced back to 1 so cards never stay hidden).
+ */
+@keyframes adv-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes adv-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+@keyframes adv-spin {
+  to {
+    transform: translate(-50%, -58%) rotate(360deg);
+  }
+}
+.adv-card {
+  opacity: 0;
+  animation: adv-up 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-play-state: paused;
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+.adv-in .adv-card {
+  animation-play-state: running;
+}
+.adv-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(45, 212, 191, 0.45);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.42);
+}
+.adv-ava {
+  transition: transform 0.45s ease;
+}
+.adv-card:hover .adv-ava {
+  transform: scale(1.06) rotate(-2deg);
+}
+.adv-bar {
+  background: linear-gradient(90deg, #2dd4bf, #7c9cff, #c57bff, #2dd4bf);
+  background-size: 200% 100%;
+  animation: adv-shimmer 6s linear infinite;
+}
+.adv-orbit {
+  animation: adv-spin 90s linear infinite;
+}
+
+.corner-flourish {
+  position: relative;
+}
+.corner-flourish::before,
+.corner-flourish::after {
+  content: "";
+  pointer-events: none;
+  border-style: solid;
+  border-color: rgba(201, 169, 98, 0.3);
+  width: 28px;
+  height: 28px;
+  position: absolute;
+}
+.corner-flourish::before {
+  border-width: 2px 0 0 2px;
+  top: -1px;
+  left: -1px;
+}
+.corner-flourish::after {
+  border-width: 0 2px 2px 0;
+  bottom: -1px;
+  right: -1px;
+}
+.drop-cap::first-letter {
+  float: left;
+  color: #c9a962;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 0.15rem;
+  margin-right: 0.75rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 4rem;
+  line-height: 0.8;
+}
+
 /* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -235,5 +338,10 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  /* The advisory cards animate from opacity 0 — never leave them hidden. */
+  .adv-card {
+    opacity: 1;
+    animation: none;
   }
 }

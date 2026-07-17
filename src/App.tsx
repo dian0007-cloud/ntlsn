@@ -38,7 +38,24 @@ import CapabilitiesSection from "./components/CapabilitiesSection";
 import WaysToGrowSection from "./components/WaysToGrowSection";
 import SymShowSection from "./components/SymShowSection";
 import InductionSection from "./components/InductionSection";
+import AdvisorySection from "./components/AdvisorySection";
+import RepresentationSection from "./components/RepresentationSection";
+import DistributeSection from "./components/DistributeSection";
+import ManifestoVisibility from "./components/ManifestoVisibility";
+import ManifestoSharing from "./components/ManifestoSharing";
+import ShareZoomManifesto from "./components/ShareZoomManifesto";
+import MissionSection from "./components/MissionSection";
+import ScopeSection from "./components/ScopeSection";
+import WhySection from "./components/WhySection";
+import AboutSection from "./components/AboutSection";
+import ComingSection from "./components/ComingSection";
+import PricingNav from "./components/PricingNav";
+import PricingSection from "./components/PricingSection";
+import ChoosePackageSection from "./components/ChoosePackageSection";
+import Founding10Section from "./components/Founding10Section";
+import MemberSection from "./components/MemberSection";
 import Footer from "./components/Footer";
+import { ROADMAP_2027, ROADMAP_2028 } from "./lib/roadmap";
 import { SECTION_ORDER } from "./sections";
 
 /**
@@ -138,6 +155,42 @@ export default function App() {
           // #ntlsn-latest — fail-soft Apps Script feed panel: renders the
           // section only if the feed responds (never blocks, never errors).
           if (id === "ntlsn-latest") return <LatestFeed key={id} />;
+          // PR-E "Mission & pricing tail" (docs/rebuild-stocktake.md):
+          // advisory/representation/distribute(+digest)/mission/scope/why/
+          // founding10/member are patch-injector translations; about and the
+          // three manifesto sections (ids assigned on porting — see
+          // sections.ts) are bundle ports; coming2027/28 merge the
+          // comingblocks grid with the roadmap headers (counts from data);
+          // pricingnav + pricing + choosepackage are the open-core stack.
+          if (id === "ntlsn-advisory") return <AdvisorySection key={id} />;
+          if (id === "ntlsn-representation") {
+            return <RepresentationSection key={id} />;
+          }
+          if (id === "ntlsn-distribute") return <DistributeSection key={id} />;
+          if (id === "ntlsn-manifesto-visibility") {
+            return <ManifestoVisibility key={id} />;
+          }
+          if (id === "ntlsn-manifesto-sharing") {
+            return <ManifestoSharing key={id} />;
+          }
+          if (id === "ntlsn-sharezoom") return <ShareZoomManifesto key={id} />;
+          if (id === "ntlsn-mission") return <MissionSection key={id} />;
+          if (id === "ntlsn-scope") return <ScopeSection key={id} />;
+          if (id === "ntlsn-why") return <WhySection key={id} />;
+          if (id === "about") return <AboutSection key={id} />;
+          if (id === "ntlsn-coming2027") {
+            return <ComingSection key={id} block={ROADMAP_2027} />;
+          }
+          if (id === "ntlsn-coming2028") {
+            return <ComingSection key={id} block={ROADMAP_2028} />;
+          }
+          if (id === "ntlsn-pricingnav") return <PricingNav key={id} />;
+          if (id === "pricing") return <PricingSection key={id} />;
+          if (id === "ntlsn-choosepackage") {
+            return <ChoosePackageSection key={id} />;
+          }
+          if (id === "ntlsn-founding10") return <Founding10Section key={id} />;
+          if (id === "ntlsn-member") return <MemberSection key={id} />;
           if (id === "ntlsn-zoom") {
             // The canonical order (ntlsn-order patch) slots the Due Soon
             // rail between #ntlsn-zoom and #ntlsn-archive — it matches it
