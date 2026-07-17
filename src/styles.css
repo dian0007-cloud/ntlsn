@@ -124,6 +124,44 @@ body {
   }
 }
 
+/*
+ * Talks Hub doodles (PR-B): the #sector-themes pulse rings and the
+ * #international-themes spinning globe meridian — the visual result of the
+ * production ntlsn-secanim decoration, without the script. Decorative only;
+ * neutralised by the reduced-motion block below.
+ */
+@keyframes na-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+.na-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: na-pulse 2.4s ease-out infinite;
+}
+.na-pulse-late {
+  animation-delay: 1.2s;
+}
+@keyframes na-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.na-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: na-spin 7s linear infinite;
+}
+
 /* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {
