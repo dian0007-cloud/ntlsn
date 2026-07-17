@@ -14,21 +14,28 @@ import { useState } from "react";
  * showing a broken-image glyph — production's patch leaves the broken glyph;
  * hiding is the deliberate improvement.
  */
+/**
+ * Google s2 favicon URL for an external http(s) link, or null when the URL
+ * is missing/unparseable. Shared with the PD cards' small provider favicons.
+ */
+export function faviconSrc(url: string | undefined, size = 64): string | null {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+      return null;
+    }
+    return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(parsed.hostname)}&sz=${size}`;
+  } catch {
+    // Not a parseable external URL — no favicon.
+    return null;
+  }
+}
+
 export default function FaviconBadge({ url }: { url?: string }) {
   const [failed, setFailed] = useState(false);
-
-  let host: string | null = null;
-  if (url) {
-    try {
-      const parsed = new URL(url);
-      if (parsed.protocol === "https:" || parsed.protocol === "http:") {
-        host = parsed.hostname;
-      }
-    } catch {
-      // Not a parseable external URL — no badge.
-    }
-  }
-  if (!host || failed) return null;
+  const src = faviconSrc(url);
+  if (!src || failed) return null;
 
   return (
     <span
@@ -36,7 +43,7 @@ export default function FaviconBadge({ url }: { url?: string }) {
       className="mb-2.5 flex h-[34px] w-[34px] shrink-0 items-center justify-center overflow-hidden rounded-[9px] bg-white/[0.92] shadow-[0_1px_4px_rgba(0,0,0,0.25)]"
     >
       <img
-        src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=64`}
+        src={src}
         alt=""
         loading="lazy"
         width={22}
