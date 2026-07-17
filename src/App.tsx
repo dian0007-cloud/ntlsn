@@ -13,6 +13,8 @@ import ResourceHubSection from "./components/ResourceHubSection";
 import TeachingResourcesSection from "./components/TeachingResourcesSection";
 import DueSoon from "./components/DueSoon";
 import NowBanner from "./components/NowBanner";
+import TalksHub from "./components/TalksHub";
+import LatestFeed from "./components/LatestFeed";
 import StartGrid from "./components/StartGrid";
 import Glance from "./components/Glance";
 import FreshToday from "./components/FreshToday";
@@ -64,6 +66,23 @@ export default function App() {
           if (id === "teaching-resources") {
             return <TeachingResourcesSection key={id} />;
           }
+          // PR-B "Talks Hub" (docs/rebuild-stocktake.md): #ntlsn-talkshub
+          // absorbs sector-themes / international-themes / featured-talks as
+          // tabs (as the ntlsn-talkshub-script patch did by DOM surgery).
+          // The absorbed ids live on the tabpanels INSIDE the hub, so their
+          // standalone SECTION_ORDER slots render nothing — deep links to
+          // them land in the hub, which selects the matching tab.
+          if (id === "ntlsn-talkshub") return <TalksHub key={id} />;
+          if (
+            id === "sector-themes" ||
+            id === "international-themes" ||
+            id === "featured-talks"
+          ) {
+            return null;
+          }
+          // #ntlsn-latest — fail-soft Apps Script feed panel: renders the
+          // section only if the feed responds (never blocks, never errors).
+          if (id === "ntlsn-latest") return <LatestFeed key={id} />;
           if (id === "ntlsn-zoom") {
             // The canonical order (ntlsn-order patch) slots the Due Soon
             // rail between #ntlsn-zoom and #ntlsn-archive — it matches it
