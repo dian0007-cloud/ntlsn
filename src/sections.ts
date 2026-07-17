@@ -151,6 +151,91 @@ export const SECTION_ORDER: readonly string[] = [
   "ntlsn-member",
 ];
 
+/**
+ * Contiguous slice of SECTION_ORDER, inclusive of both endpoints. The lazy
+ * band components (src/bands/*) and the LazyBand stubs in App.tsx both derive
+ * their id lists from this, so band membership can never drift from the
+ * canonical order (PR-F code-splitting — §1.3 JS budget).
+ */
+export function bandSlice(from: string, to: string): readonly string[] {
+  const a = SECTION_ORDER.indexOf(from);
+  const b = SECTION_ORDER.indexOf(to);
+  if (a === -1 || b === -1 || b < a) {
+    throw new Error(`bandSlice: bad band ${from}..${to}`);
+  }
+  return SECTION_ORDER.slice(a, b + 1);
+}
+
+/**
+ * Approximate rendered heights (px, desktop) for the LazyBand fallback stubs,
+ * so lazily-loaded bands reserve roughly the right space and don't cause CLS
+ * while their chunk loads. Measured against a local `vite preview` at
+ * 1280×720 (2026-07-17); they only need to be roughly right — chunks load
+ * ~1500px ahead of the viewport (see LazyBand), so the swap happens off
+ * screen. Ids not listed default to the small "Porting soon" placeholder
+ * height; the three talks-hub tab ids and #ntlsn-latest render nothing
+ * standalone (tabs live INSIDE #ntlsn-talkshub; Latest is fail-soft) so they
+ * reserve 0.
+ */
+const SECTION_STUB_HEIGHTS: Record<string, number> = {
+  yearview: 990,
+  events: 3900,
+  "sotl-grants": 2100,
+  conferences: 1090,
+  "ntlsn-zoom": 2030, // ZoomShareSection + the Due Soon rail fragment
+  "ntlsn-archive": 1100,
+  "ntlsn-repository": 730,
+  "ntlsn-oer": 970,
+  resources: 1270,
+  "teaching-resources": 1080,
+  "ntlsn-bestpractice": 500,
+  "ntlsn-talkshub": 2070,
+  "sector-themes": 0,
+  "featured-talks": 0,
+  "international-themes": 0,
+  "ntlsn-latest": 0,
+  frameworks: 1450,
+  "ntlsn-evidence": 2540,
+  "ntlsn-journal": 540,
+  "ntlsn-capabilities": 1020,
+  pd: 1260,
+  "ntlsn-waystogrow": 1560,
+  architecture: 1800,
+  map: 2010,
+  directory: 850,
+  "ntlsn-peakmap": 760,
+  "ntlsn-network": 1100,
+  pathways: 1560,
+  benchmarks: 1200,
+  "ntlsn-fnawards": 1200,
+  "ntlsn-trynow": 860,
+  "ntlsn-symshow": 320,
+  "ntlsn-induction": 270,
+  "ntlsn-advisory": 1240,
+  "ntlsn-representation": 880,
+  "ntlsn-distribute": 770,
+  "ntlsn-manifesto-visibility": 490,
+  "ntlsn-manifesto-sharing": 370,
+  "ntlsn-sharezoom": 640,
+  "ntlsn-mission": 410,
+  "ntlsn-scope": 570,
+  "ntlsn-why": 590,
+  about: 1070,
+  "ntlsn-coming2027": 550,
+  "ntlsn-coming2028": 510,
+  "ntlsn-pricingnav": 500,
+  pricing: 3010,
+  "ntlsn-choosepackage": 570,
+  "ntlsn-founding10": 780,
+  "ntlsn-member": 600,
+};
+
+/** Fallback-stub height for a section id (see SECTION_STUB_HEIGHTS). */
+export function approxSectionHeight(id: string): number {
+  // Unlisted ids are un-ported "Porting soon" placeholders (~90px).
+  return SECTION_STUB_HEIGHTS[id] ?? 90;
+}
+
 /** Human-readable label for a placeholder section, derived from its id. */
 export function sectionLabel(id: string): string {
   const special: Record<string, string> = {

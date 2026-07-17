@@ -3,13 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0A1628" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>NTLSN — National Teaching and Learning Sector Network</title>
     <meta
       name="description"
-      content="NTLSN — the free, open hub mapping every symposium, workshop and PD opportunity across Australian higher education."
+      content="NTLSN — Australia's free, open-source hub mapping the higher education teaching & learning sector: every symposium, workshop, and PD opportunity across all 43 universities."
     />
-    <title>NTLSN — National Teaching &amp; Learning Sector Network</title>
+    <link rel="canonical" href="https://ntlsn.com/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Icons + PWA (copied from the production head; theme #0A1628 per CLAUDE.md) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0A1628" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="NTLSN Events RSS"
+      href="/feed.xml"
+    />
+    <link
+      rel="alternate"
+      type="text/calendar"
+      title="NTLSN Events Calendar (ICS)"
+      href="/events.ics"
+    />
+
+    <!-- Open Graph / Twitter (copied from the production head, 43-universities phrasing) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NTLSN" />
+    <meta property="og:url" content="https://ntlsn.com/" />
+    <meta
+      property="og:title"
+      content="NTLSN — National Teaching and Learning Sector Network"
+    />
+    <meta
+      property="og:description"
+      content="Every symposium, workshop & PD opportunity across all 43 universities. Free, open, and shared back to the whole sector."
+    />
+    <meta property="og:image" content="https://ntlsn.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="NTLSN — National Teaching and Learning Sector Network"
+    />
+    <meta
+      name="twitter:description"
+      content="Every symposium, workshop & PD opportunity across all 43 universities. Free, open, and shared back to the whole sector."
+    />
+    <meta name="twitter:image" content="https://ntlsn.com/og-image.jpg" />
+
+    <!-- WebSite JSON-LD (copied from the production head) -->
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"WebSite","name":"NTLSN","url":"https://ntlsn.com/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://ntlsn.com/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+    </script>
+
+    <!--
+      #ntlsn-events-ld injection point — do not remove or rename.
+      The Event ItemList JSON-LD is generated from data/events.json by
+      scripts/build-feeds.mjs (it already writes the same payload to
+      /events-ld.json). Post-cutover, the feeds step rewrites the CONTENT of
+      the script tag below in the BUILT index.html, matching on
+      id="ntlsn-events-ld" — Vite copies the tag through verbatim. Until that
+      wiring lands, the tag ships with an empty ItemList (harmless to
+      crawlers; /events-ld.json stays canonical).
+    -->
+    <script type="application/ld+json" id="ntlsn-events-ld">
+      {"@context":"https://schema.org","@type":"ItemList","name":"Upcoming Australian Higher Education Teaching & Learning Events","itemListElement":[]}
+    </script>
+
+    <!-- Talks thumbnails/embeds land in a lazy chunk; warm the connections early (production parity) -->
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    <link rel="preconnect" href="https://img.youtube.com" />
+    <link rel="preconnect" href="https://www.youtube.com" />
   </head>
   <body>
     <div id="root"></div>
