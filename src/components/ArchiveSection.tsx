@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { loadLtr, searchLtr, type LtrRecord } from "../lib/ltrSearch";
+import ArchiveThemeChips from "./ArchiveThemeChips";
 import LtrResultCard from "./LtrResultCard";
 
 /** The patch caps matching at 400 and rendering at 30. */
@@ -14,6 +15,10 @@ const RENDER_CAP = 30;
  * The resource count derives from the dataset at build time
  * (__NTLSN_SOTL_WORKS__, already wired in vite.config.ts) instead of the
  * patch's hardcoded "1,431".
+ *
+ * PR-D folds in the ntlsn-archtopics satellite as <ArchiveThemeChips>:
+ * the "Browse by theme" cloud between the search box and the results,
+ * exactly where the patch parked it — picking a theme runs the search.
  */
 export default function ArchiveSection() {
   const workCount = __NTLSN_SOTL_WORKS__.toLocaleString("en-AU");
@@ -174,6 +179,13 @@ export default function ArchiveSection() {
               ? `${results.length}${results.length >= MATCH_CAP ? "+" : ""} result(s) for “${query}”`
               : idleMeta}
           </p>
+          <ArchiveThemeChips
+            onPick={(topic) => {
+              setQuery(topic);
+              clearTimeout(debounceRef.current);
+              runSearch(topic);
+            }}
+          />
           <ul className="list-none">
             {showingResults &&
               results.slice(0, RENDER_CAP).map((record) => (
