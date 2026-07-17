@@ -387,5 +387,37 @@
     "desc": "'Success by Design: The Future of Learning Now' - University of Sheffield, UK.",
     "verified": true,
     "url": "https://www.advance-he.ac.uk/Programmes-events/conferences/Teaching-Learning-2026"
+  },
+  {
+    "id": 8,
+    "title": "HERDSA Conference 2026",
+    "uni": "usyd",
+    "date": "2026-07-06",
+    "endDate": "2026-07-09",
+    "type": "conference",
+    "desc": "'Re-envisioning Higher Education for Tomorrow's Learners' - NUS Singapore.",
+    "verified": true,
+    "url": "https://conference.herdsa.org.au/2026/"
+  },
+  {
+    "id": 58,
+    "title": "ACODE Benchmarking Summit 2026",
+    "uni": "unimelb",
+    "date": "2026-07-09",
+    "endDate": "2026-07-10",
+    "type": "conference",
+    "desc": "University of Melbourne. New Accessibility benchmark.",
+    "verified": true,
+    "url": "https://acode.edu.au/activities/workshops/inter-institutional-benchmarking-summits"
+  },
+  {
+    "id": 68,
+    "title": "ASCILITE x Turnitin: Authentic Assessment",
+    "uni": "qut",
+    "date": "2026-07-14",
+    "type": "workshop",
+    "desc": "Authentic assessments at scale with AI-era tools.",
+    "verified": true,
+    "url": "https://ascilite.org/30-03-2026-bulletin/"
   }
 ]
