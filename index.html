@@ -6719,5 +6719,33 @@ go();
   try{new MutationObserver(function(){setTimeout(apply,30);}).observe(document.body,{childList:true,subtree:true});}catch(e){}
 })();
 </script>
+<script id="ntlsn-tlurl" data-desc="Rewrite stale institution T&L links the bundle still embeds (data/universities.json is canonical; the minified bundle drifts until the source rebuild). Literal href match only — retire this patch when the rebuild re-embeds current data.">
+(function(){try{
+  var MAP={
+    'https://www.sydney.edu.au/about-us/vision-and-values/learning-and-teaching.html':'https://educational-innovation.sydney.edu.au/',
+    'https://www.westernsydney.edu.au/learning_futures':'https://www.westernsydney.edu.au/learning-futures',
+    'https://www.swinburne.edu.au/about/leadership-governance/learning-teaching/':'https://www.swinburne.edu.au/about/strategy-initiatives/learning-teaching-at-swinburne/',
+    'https://www.acu.edu.au/about-acu/institutes-academies-and-centres/centre-for-education-and-innovation':'https://staff.acu.edu.au/our_university/centre-for-education-and-innovation',
+    'https://www.torrens.edu.au/about/learning-teaching':'https://www.torrens.edu.au/about',
+    'https://www.unisq.edu.au/about-unisq/about-us/learning-teaching':'https://www.unisq.edu.au/library/teaching-support',
+    'https://www.uwa.edu.au/staff/educational-enhancement-unit':'https://www.uwa.edu.au/education/educational-enhancement-unit',
+    'https://i.unisa.edu.au/students/tiu/':'https://www.adelaide.edu.au/learning/'
+  };
+  var pending=false;
+  function fix(){
+    pending=false;
+    try{
+      var as=document.querySelectorAll('a[href]');
+      for(var i=0;i<as.length;i++){
+        var h=as[i].getAttribute('href');
+        if(MAP[h])as[i].setAttribute('href',MAP[h]);
+      }
+    }catch(e){}
+  }
+  function queue(){if(!pending){pending=true;setTimeout(fix,30);}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix);else fix();
+  try{new MutationObserver(queue).observe(document.body,{childList:true,subtree:true});}catch(e){}
+}catch(e){}})();
+</script>
 </body>
 </html>
