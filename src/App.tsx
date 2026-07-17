@@ -1,7 +1,10 @@
+import { Fragment } from "react";
 import Nav from "./components/Nav";
 import Acknowledgement from "./components/Acknowledgement";
 import Hero from "./components/Hero";
 import SectionPlaceholder from "./components/SectionPlaceholder";
+import EventsSection from "./components/EventsSection";
+import DueSoon from "./components/DueSoon";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
 
@@ -23,9 +26,23 @@ export default function App() {
       <Acknowledgement />
       <main id="main-content">
         <Hero />
-        {SECTION_ORDER.filter((id) => id !== "hero").map((id) => (
-          <SectionPlaceholder key={id} id={id} />
-        ))}
+        {SECTION_ORDER.filter((id) => id !== "hero").map((id) => {
+          // Ported sections replace their placeholders one at a time
+          // (TASKS.md 1.2); everything else stays a placeholder.
+          if (id === "events") return <EventsSection key={id} />;
+          if (id === "ntlsn-zoom") {
+            // The canonical order (ntlsn-order patch) slots the Due Soon
+            // rail between #ntlsn-zoom and #ntlsn-archive — it matches it
+            // by /^Due Soon/ text, not id, so it has no SECTION_ORDER row.
+            return (
+              <Fragment key={id}>
+                <SectionPlaceholder id={id} />
+                <DueSoon />
+              </Fragment>
+            );
+          }
+          return <SectionPlaceholder key={id} id={id} />;
+        })}
       </main>
       <Footer />
     </>
