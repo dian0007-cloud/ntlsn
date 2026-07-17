@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import SectionPlaceholder from "./components/SectionPlaceholder";
 import EventsSection from "./components/EventsSection";
 import ConferencesSection from "./components/ConferencesSection";
+import YearView from "./components/YearView";
 import DueSoon from "./components/DueSoon";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
@@ -30,6 +31,7 @@ export default function App() {
         {SECTION_ORDER.filter((id) => id !== "hero").map((id) => {
           // Ported sections replace their placeholders one at a time
           // (TASKS.md 1.2); everything else stays a placeholder.
+          if (id === "yearview") return <YearView key={id} />;
           if (id === "events") return <EventsSection key={id} />;
           // #ntlsn-conference stays a placeholder on purpose: production
           // hides the whole section via CSS (#ntlsn-conference{display:none

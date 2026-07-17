@@ -147,6 +147,54 @@ export function dueSoonEvents(
     .slice(0, limit);
 }
 
+/* ── Year view (12-month at-a-glance) ───────────────────────────────────── */
+
+export interface YearViewMonth {
+  /** Bucket key, "YYYY-MM" (matches `event.date.slice(0, 7)`). */
+  key: string;
+  /** "Jul" */
+  monthLabel: string;
+  year: number;
+  /** True for the month containing `today`. */
+  isCurrent: boolean;
+  /** Upcoming events starting this month, date-ascending. */
+  events: NtlsnEvent[];
+}
+
+/**
+ * The next `count` months starting from the month containing `today`, each
+ * bucketing the upcoming events that START in it — so every upcoming event
+ * lands in exactly one month and the per-month counts sum to the upcoming
+ * total. An event already running when the window opens (started last month,
+ * `endDate` still ahead) is clamped into the first month rather than dropped.
+ */
+export function yearViewMonths(
+  count = 12,
+  today: Date = todayLocal(),
+): YearViewMonth[] {
+  const months: YearViewMonth[] = [];
+  const byKey = new Map<string, YearViewMonth>();
+  for (let i = 0; i < count; i++) {
+    const d = new Date(today.getFullYear(), today.getMonth() + i, 1);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+    const month: YearViewMonth = {
+      key,
+      monthLabel: MONTHS[d.getMonth()],
+      year: d.getFullYear(),
+      isCurrent: i === 0,
+      events: [],
+    };
+    months.push(month);
+    byKey.set(key, month);
+  }
+  for (const event of upcomingEvents(today)) {
+    let key = event.date.slice(0, 7);
+    if (key < months[0].key) key = months[0].key; // still-running event
+    byKey.get(key)?.events.push(event);
+  }
+  return months;
+}
+
 /* ── Calendar links (ported from the ntlsn-addcal patch script) ─────────── */
 
 /** All-day DTEND is exclusive: the day after the last event day, as YYYYMMDD. */
