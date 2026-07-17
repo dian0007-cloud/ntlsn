@@ -68,7 +68,17 @@ The whole point of the open data layer: **anyone can add an event with a small P
 
 ## Licence
 
-Content and data are licensed **CC BY-NC-SA 4.0** (see [LICENSE](LICENSE)) — free to share and adapt for non-commercial purposes, with attribution, under the same licence. External resources linked from NTLSN remain the property of their respective organisations.
+NTLSN is licensed in tiers (see [LICENSE](LICENSE), rationale in [docs/licensing-rationale.md](docs/licensing-rationale.md)):
+
+| Layer | Licence |
+|---|---|
+| **Code** — scripts, functions, tests, widgets, patch scripts | MIT |
+| **Data** — `data/*.json`, feeds, calendar | CC BY 4.0 (resolver table CC0 as declared) |
+| **Methodology & standards** — SoTL Index methodology, Recognition GPS crosswalk | CC BY 4.0 |
+| **Content** — page prose, crash courses, guides | CC BY-NC-SA 4.0 |
+| **First Nations ICIP** | No licence granted — authority rests with First Nations peoples |
+
+External resources linked from NTLSN remain the property of their respective organisations.
 
 ## Team
 
