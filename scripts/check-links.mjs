@@ -27,17 +27,25 @@ const ALIVE_ANYWAY = new Set([403, 405, 429, 401, 503, 999]); // bot-block / rat
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 const CHALLENGE_RE = /cdn-cgi\/challenge-platform|__CF\$cv\$params|cf-challenge|Just a moment|Attention Required|<title>[^<]*Cloudflare/i;
 
-// Re-fetch (GET) the body and look for a bot-challenge page. Used only when a
-// link is about to be declared dead, to rule out a Cloudflare-style 4xx challenge.
+// Re-fetch (GET) and decide whether the "dead" response is really a bot challenge.
+// Returns true (challenged), false (genuinely dead), or null (couldn't determine).
+// Cloudflare sets `cf-mitigated: challenge` on every challenge response — that
+// header is authoritative. Crucially, Cloudflare also injects challenge-platform
+// scripts into ordinary pages (including real 404s) on bot-managed sites, so for
+// Cloudflare-fronted responses (cf-ray present) the body regex must NOT be
+// trusted: no cf-mitigated header means no challenge, i.e. really dead. The body
+// regex remains as the fallback for non-Cloudflare bot walls only.
 async function sniffBotChallenge(url) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), SNIFF_TIMEOUT);
   try {
     const r = await fetch(url, { redirect: 'follow', signal: ctl.signal, headers: { 'User-Agent': UA }, method: 'GET' });
+    if ((r.headers.get('cf-mitigated') || '').toLowerCase() === 'challenge') return true;
+    if (r.headers.has('cf-ray')) return false;
     const text = await r.text();
     return CHALLENGE_RE.test(text);
   } catch {
-    return false;
+    return null; // sniff failed (timeout/conn) — can't rule a challenge out
   } finally {
     clearTimeout(timer);
   }
@@ -60,9 +68,10 @@ async function check(e) {
       return { id: e.id, title: e.title, url: e.url, status: r.status, dead: false, inconclusive: false };
     }
     // Not ok and not a known bot-block. Could be a real 404, or a Cloudflare-style
-    // challenge served with a 4xx status. Sniff the body before declaring it dead.
+    // challenge served with a 4xx status. Sniff before declaring it dead; a failed
+    // sniff (null) is inconclusive too — never declare dead on missing evidence.
     const challenged = await sniffBotChallenge(e.url);
-    return { id: e.id, title: e.title, url: e.url, status: r.status, dead: !challenged, inconclusive: challenged };
+    return { id: e.id, title: e.title, url: e.url, status: r.status, dead: challenged === false, inconclusive: challenged !== false };
   } catch (err) {
     clearTimeout(timer);
     const name = String(err?.name || err);

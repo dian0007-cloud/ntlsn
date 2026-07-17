@@ -16,7 +16,6 @@
  */
 import fs from 'node:fs';
 
-const root = process.cwd();
 const readJSON = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const html = fs.readFileSync('index.html', 'utf8');
 const headEnd = html.indexOf('</head>');

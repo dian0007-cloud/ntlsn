@@ -127,9 +127,10 @@ function parseArgs(argv) {
 function resolveChromium() {
   if (process.env.PLAYWRIGHT_CHROMIUM && fs.existsSync(process.env.PLAYWRIGHT_CHROMIUM)) return process.env.PLAYWRIGHT_CHROMIUM;
   const caches = [
+    process.env.PLAYWRIGHT_BROWSERS_PATH,                           // CI/cloud containers
     path.join(os.homedir(), 'Library/Caches/ms-playwright'),        // macOS
     path.join(os.homedir(), '.cache/ms-playwright'),                // Linux
-  ];
+  ].filter(Boolean);
   for (const root of caches) {
     if (!fs.existsSync(root)) continue;
     for (const dir of fs.readdirSync(root)) {
@@ -143,6 +144,9 @@ function resolveChromium() {
       if (fs.existsSync(linuxChrome)) return linuxChrome;
       const linuxShell = path.join(base, 'chrome-headless-shell-linux', 'chrome-headless-shell');
       if (fs.existsSync(linuxShell)) return linuxShell;
+      // Playwright's actual headless-shell layout (chromium_headless_shell-NNNN/chrome-linux/headless_shell)
+      const linuxShell2 = path.join(base, 'chrome-linux', 'headless_shell');
+      if (fs.existsSync(linuxShell2)) return linuxShell2;
     }
   }
   return null;
