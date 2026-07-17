@@ -8,6 +8,9 @@ import ConferencesSection from "./components/ConferencesSection";
 import YearView from "./components/YearView";
 import MapSection from "./components/MapSection";
 import DirectorySection from "./components/DirectorySection";
+import PDSection from "./components/PDSection";
+import ResourceHubSection from "./components/ResourceHubSection";
+import TeachingResourcesSection from "./components/TeachingResourcesSection";
 import DueSoon from "./components/DueSoon";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
@@ -41,6 +44,14 @@ export default function App() {
           if (id === "conferences") return <ConferencesSection key={id} />;
           if (id === "map") return <MapSection key={id} />;
           if (id === "directory") return <DirectorySection key={id} />;
+          if (id === "pd") return <PDSection key={id} />;
+          if (id === "resources") return <ResourceHubSection key={id} />;
+          // #teaching-resources is fully rendered in the bundle but hidden
+          // in production by a patch-CSS hide-list rule. Ported and shown
+          // per the 1.2e brief — see the note on TeachingResourcesSection.
+          if (id === "teaching-resources") {
+            return <TeachingResourcesSection key={id} />;
+          }
           if (id === "ntlsn-zoom") {
             // The canonical order (ntlsn-order patch) slots the Due Soon
             // rail between #ntlsn-zoom and #ntlsn-archive — it matches it
