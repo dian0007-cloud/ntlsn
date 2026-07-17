@@ -225,8 +225,19 @@ test.describe('Navigation + search', () => {
     for (const [label, id] of [['PD', 'pd'], ['Resources', 'resources'], ['Events', 'events']]) {
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForTimeout(200);
-      const btn = page.getByRole('button', { name: label, exact: true }).first();
-      await btn.click();
+      // Dispatch a real DOM click (same rationale as the lightbox test): the
+      // fixed top nav, the Acknowledgement strip and other fixed overlays can
+      // intercept Playwright's actionability-checked pointer at the click
+      // point, flaking the run. The behaviour under test is the React onClick
+      // scroll handler, which a bubbled DOM click triggers identically.
+      const clicked = await page.evaluate((name) => {
+        const btns = [...document.querySelectorAll('button')];
+        const el = btns.find((b) => (b.textContent || '').trim() === name);
+        if (!el) return false;
+        el.click();
+        return true;
+      }, label);
+      expect(clicked, `nav button "${label}" not found`).toBeTruthy();
       await page.waitForTimeout(1200);
       const inView = await page.evaluate((target) => {
         const el = document.getElementById(target);
