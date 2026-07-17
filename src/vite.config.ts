@@ -41,11 +41,56 @@ const bestPracticeCount = (
   ) as unknown[]
 ).length;
 
+/**
+ * Archive "Browse by theme" chip counts (PR-D, the ntlsn-archtopics patch):
+ * production fetched all of ltr.json up-front just to size 20 chips. Here
+ * the counts are computed at build time with the patch's exact matcher
+ * (every whitespace-split term a substring of title+authors), so the chips
+ * are right at first paint and the 272KB dataset still stays out of the
+ * bundle until the user searches.
+ */
+const ARCHIVE_TOPICS = [
+  'Assessment',
+  'Feedback',
+  'Curriculum',
+  'Students as Partners',
+  'Work-integrated learning',
+  'Academic integrity',
+  'First year',
+  'Indigenous',
+  'Online learning',
+  'Blended learning',
+  'Peer review',
+  'Employability',
+  'Inclusive education',
+  'Internationalisation',
+  'Leadership',
+  'Academic development',
+  'Reflective practice',
+  'Evaluation',
+  'Graduate outcomes',
+  'Threshold concepts',
+];
+const ltrRecords = JSON.parse(
+  readFileSync(new URL('../data/ltr.json', import.meta.url), 'utf8'),
+) as Array<{ t: string; a: string }>;
+const archiveTopicCounts = Object.fromEntries(
+  ARCHIVE_TOPICS.map((topic) => {
+    const terms = topic.toLowerCase().split(/\s+/);
+    const count = ltrRecords.filter((record) => {
+      const hay = `${record.t} ${record.a}`.toLowerCase();
+      return terms.every((term) => hay.includes(term));
+    }).length;
+    return [topic, count];
+  }),
+);
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   define: {
     __NTLSN_SOTL_WORKS__: JSON.stringify(sotlWorkCount),
     __NTLSN_BP_GUIDES__: JSON.stringify(bestPracticeCount),
+    __NTLSN_ARCH_TOPIC_COUNTS__: JSON.stringify(archiveTopicCounts),
   },
   server: {
     fs: {

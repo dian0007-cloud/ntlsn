@@ -27,7 +27,17 @@ import RepositorySection from "./components/RepositorySection";
 import JournalSection from "./components/JournalSection";
 import BestPracticeSection from "./components/BestPracticeSection";
 import ZoomShareSection from "./components/ZoomShareSection";
-import BenchmarksPartial from "./components/BenchmarksPartial";
+import NetworkSection from "./components/NetworkSection";
+import PeakMapSection from "./components/PeakMapSection";
+import ArchitectureSection from "./components/ArchitectureSection";
+import PathwaysSection from "./components/PathwaysSection";
+import BenchmarksSection from "./components/BenchmarksSection";
+import FnAwardsSection from "./components/FnAwardsSection";
+import TryNowSection from "./components/TryNowSection";
+import CapabilitiesSection from "./components/CapabilitiesSection";
+import WaysToGrowSection from "./components/WaysToGrowSection";
+import SymShowSection from "./components/SymShowSection";
+import InductionSection from "./components/InductionSection";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
 
@@ -76,10 +86,27 @@ export default function App() {
           if (id === "ntlsn-bestpractice") {
             return <BestPracticeSection key={id} />;
           }
-          // #benchmarks is a PARTIAL port: studies 4 & 5 were injected into
-          // the bundle's section by the two bench patch scripts (retired by
-          // PR-C); studies 1–3 are bundle-rendered and arrive with PR-D.
-          if (id === "benchmarks") return <BenchmarksPartial key={id} />;
+          // PR-D "Sector fabric" (docs/rebuild-stocktake.md): the network
+          // and peak-body visualisations, the bundle-rendered architecture /
+          // pathways / benchmarks sections, the First Nations awards
+          // benchmark (cultural care — see lib/fnawards.ts), the free-tools
+          // directory (+folded toolsearch/todaycard satellites), the
+          // capabilities roadmap, ways-to-grow, the symposium showcase and
+          // the induction pointer card. #benchmarks is now COMPLETE:
+          // studies 1–3 (bundle) join 4–5 (PR-C's patch-injected cards).
+          if (id === "ntlsn-network") return <NetworkSection key={id} />;
+          if (id === "ntlsn-peakmap") return <PeakMapSection key={id} />;
+          if (id === "architecture") return <ArchitectureSection key={id} />;
+          if (id === "pathways") return <PathwaysSection key={id} />;
+          if (id === "benchmarks") return <BenchmarksSection key={id} />;
+          if (id === "ntlsn-fnawards") return <FnAwardsSection key={id} />;
+          if (id === "ntlsn-trynow") return <TryNowSection key={id} />;
+          if (id === "ntlsn-capabilities") {
+            return <CapabilitiesSection key={id} />;
+          }
+          if (id === "ntlsn-waystogrow") return <WaysToGrowSection key={id} />;
+          if (id === "ntlsn-symshow") return <SymShowSection key={id} />;
+          if (id === "ntlsn-induction") return <InductionSection key={id} />;
           // #ntlsn-conference stays a placeholder on purpose: production
           // hides the whole section via CSS (#ntlsn-conference{display:none
           // !important}), so there is nothing live to port yet.
