@@ -6,6 +6,8 @@ import SectionPlaceholder from "./components/SectionPlaceholder";
 import EventsSection from "./components/EventsSection";
 import ConferencesSection from "./components/ConferencesSection";
 import YearView from "./components/YearView";
+import MapSection from "./components/MapSection";
+import DirectorySection from "./components/DirectorySection";
 import DueSoon from "./components/DueSoon";
 import Footer from "./components/Footer";
 import { SECTION_ORDER } from "./sections";
@@ -37,6 +39,8 @@ export default function App() {
           // hides the whole section via CSS (#ntlsn-conference{display:none
           // !important}), so there is nothing live to port yet.
           if (id === "conferences") return <ConferencesSection key={id} />;
+          if (id === "map") return <MapSection key={id} />;
+          if (id === "directory") return <DirectorySection key={id} />;
           if (id === "ntlsn-zoom") {
             // The canonical order (ntlsn-order patch) slots the Due Soon
             // rail between #ntlsn-zoom and #ntlsn-archive — it matches it

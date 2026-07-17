@@ -62,6 +62,26 @@ body {
   transform: translateY(0);
 }
 
+/*
+ * Map pulse rings (#map) — gentle opacity pulse standing in for the bundle's
+ * dot-pulse keyframes. Decorative only; neutralised by the reduced-motion
+ * block below.
+ */
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.map-pulse {
+  animation-name: dot-pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
 /* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {
