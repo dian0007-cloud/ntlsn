@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import {
   filterPd,
   PD_LENSES,
@@ -7,6 +7,7 @@ import {
   type PdOpportunity,
 } from "../lib/pd";
 import SearchField from "./SearchField";
+import StepLabel from "./StepLabel";
 import ViewAllToggle from "./ViewAllToggle";
 import { faviconSrc } from "./FaviconBadge";
 
@@ -200,24 +201,5 @@ function PdCard({ opportunity: o }: { opportunity: PdOpportunity }) {
         </a>
       </div>
     </li>
-  );
-}
-
-/**
- * Guided-path step waypoint — the `ntlsn-gp-label` treatment from the
- * production patch CSS (uppercase tracked label with a 22px numbered ring).
- * The ring numeral duplicates the visible "Step N" text, so it is decorative.
- */
-function StepLabel({ n, children }: { n: number; children: ReactNode }) {
-  return (
-    <p className="mx-auto mb-3 flex max-w-3xl items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.22em] text-white/40 uppercase">
-      <span
-        aria-hidden="true"
-        className="inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full border border-white/20 text-[11px] font-bold tracking-normal text-white/50"
-      >
-        {n}
-      </span>
-      <span>{children}</span>
-    </p>
   );
 }

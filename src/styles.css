@@ -162,6 +162,68 @@ body {
   animation: na-spin 7s linear infinite;
 }
 
+/*
+ * Knowledge-layer doodles (PR-C): the #sotl-grants rising bubbles and the
+ * #frameworks stacked bars (the ntlsn-secanim treatments), plus the
+ * #ntlsn-archive spinning wheel (the patch used SMIL animateTransform,
+ * which ignores prefers-reduced-motion — a CSS animation here so the
+ * reduced-motion block below neutralises it). All decorative only.
+ */
+@keyframes na-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-18px);
+    opacity: 0;
+  }
+}
+.na-rise {
+  transform-box: fill-box;
+  animation: na-rise 2.6s ease-out infinite;
+}
+.na-rise-d1 {
+  animation-delay: 0.6s;
+}
+.na-rise-d2 {
+  animation-delay: 1.3s;
+}
+@keyframes na-seq {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.na-seq {
+  animation: na-seq 2.4s ease-in-out infinite;
+}
+.na-seq-d1 {
+  animation-delay: 0.4s;
+}
+.na-seq-d2 {
+  animation-delay: 0.8s;
+}
+@keyframes archive-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.archive-wheel g {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: archive-spin 9s linear infinite;
+}
+
 /* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {
