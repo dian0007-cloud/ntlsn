@@ -32,7 +32,10 @@ export const SECTION_ORDER: readonly string[] = [
   "featured-talks",
   "ntlsn-latest",
   "international-themes",
-  "ntlsn-frameworks-stage",
+  // "ntlsn-frameworks-stage" was listed here in the production ntlsn-order
+  // array but DELETED in PR-E: it is one of the stocktake's three SKIP-DEAD
+  // ids — no script ever created an element with that id, so it never
+  // rendered in production and nothing can link to it.
   "frameworks",
   // "What the data shows" — bundle-rendered WITHOUT an id in production:
   // ntlsn-order positions it by regex ({tag:'SECTION',head:1,
@@ -87,7 +90,10 @@ export const SECTION_ORDER: readonly string[] = [
   "ntlsn-scrollconnect",
   "benchmarks",
   "ntlsn-fnawards",
-  "ntlsn-oep",
+  // "ntlsn-oep" was listed here in production's ntlsn-order but DELETED in
+  // PR-E (stocktake SKIP-DEAD): no element with that id was ever created —
+  // the OEP story lives in the "Sharing is caring" manifesto and #pricing's
+  // $0-forever card instead.
   "ntlsn-whatsavailable",
   "ntlsn-trynow",
   "ntlsn-symshow",
@@ -96,18 +102,45 @@ export const SECTION_ORDER: readonly string[] = [
   "ntlsn-litmus",
   "ntlsn-challenges",
   "ntlsn-induction",
-  "ntlsn-positionality",
+  // "ntlsn-positionality" was listed here in production's ntlsn-order but
+  // DELETED in PR-E (stocktake SKIP-DEAD): no script ever rendered it. The
+  // founder-positionality story is told by #ntlsn-advisory and #about.
   "ntlsn-advisory",
   "ntlsn-representation",
   "ntlsn-aim",
   "ntlsn-rebalance",
   "ntlsn-together",
   "ntlsn-distribute",
+  // ── The manifesto tail (PR-E) ──────────────────────────────────────────
+  // Three ANONYMOUS bundle-rendered sections travel here in production —
+  // ntlsn-order positions them by regex, not id ({tag:'SECTION',head:1,...}
+  // matchers, in this exact sequence after #ntlsn-distribute). They gain
+  // stable ids on porting (docs/rebuild-stocktake.md: "assign ids; update
+  // SECTION_ORDER + prod ntlsn-order for anchor parity").
+  // Matcher /sector works better when we can see it all/ →
+  "ntlsn-manifesto-visibility",
+  // Matcher /Sharing is caring/ →
+  "ntlsn-manifesto-sharing",
+  // Matcher /Share your Zoom/ → prose band only; the share FORM it carried
+  // in production lives in #ntlsn-zoom (PR-C's ZoomShareSection).
+  "ntlsn-sharezoom",
+  // Production's fourth matcher here, /University of Southern Queensland/,
+  // is one of the stocktake's two DEAD matchers — no section with that
+  // heading exists in the hydrated DOM (verified 2026-07-17), so it has no
+  // row.
   "ntlsn-mission",
   "ntlsn-scope",
+  // #ntlsn-why has NO row in production's ntlsn-order — its patch script
+  // positioned it by inserting the section directly before #about. Its slot
+  // here mirrors that insertion point.
+  "ntlsn-why",
   "about",
   "ntlsn-coming2027",
   "ntlsn-coming2028",
+  // #ntlsn-pricingnav also has NO row in production's ntlsn-order — its
+  // patch script kept re-inserting the slide deck directly before #pricing.
+  // Its slot here mirrors that insertion point.
+  "ntlsn-pricingnav",
   "pricing",
   "ntlsn-choosepackage",
   "ntlsn-allinone",
@@ -141,7 +174,6 @@ export function sectionLabel(id: string): string {
     "ntlsn-eba": "EBA",
     "ntlsn-aaut": "AAUT",
     "ntlsn-sap": "Students as Partners",
-    "ntlsn-oep": "Open Educational Practice",
   };
   if (special[id]) return special[id];
   return id
