@@ -457,7 +457,8 @@
     "date": "2026-08-27",
     "type": "webinar",
     "verified": false,
-    "desc": "Details to be announced."
+    "desc": "Details to be announced.",
+    "url": "https://herdsa.org.au/herdsa-webinar-series"
   },
   {
     "id": 78,
@@ -466,7 +467,8 @@
     "date": "2026-09-24",
     "type": "webinar",
     "verified": false,
-    "desc": "Details to be announced."
+    "desc": "Details to be announced.",
+    "url": "https://herdsa.org.au/herdsa-webinar-series"
   },
   {
     "id": 81,
@@ -475,7 +477,8 @@
     "date": "2026-08-20",
     "type": "webinar",
     "verified": false,
-    "desc": "Citation recipient. Details to be announced."
+    "desc": "Citation recipient. Details to be announced.",
+    "url": "https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/"
   },
   {
     "id": 82,
@@ -484,7 +487,8 @@
     "date": "2026-09-17",
     "type": "webinar",
     "verified": false,
-    "desc": "Teaching Excellence Award recipients. Details to be announced."
+    "desc": "Teaching Excellence Award recipients. Details to be announced.",
+    "url": "https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/"
   },
   {
     "id": 83,
@@ -493,7 +497,8 @@
     "date": "2026-10-15",
     "type": "webinar",
     "verified": false,
-    "desc": "Citation recipient. Details to be announced."
+    "desc": "Citation recipient. Details to be announced.",
+    "url": "https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/"
   },
   {
     "id": 92,
@@ -504,5 +509,16 @@
     "verified": true,
     "desc": "Perspectives from diverse leaders on distributed leadership that supports academic integrity in higher education.",
     "url": "https://www.caullt.edu.au/distributed-leadership-that-supports-academic-integrity-in-higher-education-perspectives-from-diverse-leaders-2/"
+  },
+  {
+    "id": 98,
+    "title": "UniSQ PL-Connect 2026 Professional Learning Series",
+    "uni": "usq",
+    "date": "2026-07-20",
+    "endDate": "2026-11-27",
+    "type": "webinar",
+    "verified": false,
+    "desc": "UniSQ School of Education's expanded online PD series — 33 short practical sessions across 11 topics (AI integration, literacy, First Nations education, educator wellbeing and more); live and recorded. Individual session dates TBC — series runs across late 2026.",
+    "url": "https://www.unisq.edu.au/news/2026/05/pl-connect-2026"
   }
 ]

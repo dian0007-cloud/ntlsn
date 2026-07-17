@@ -6,7 +6,14 @@
   <atom:link href="https://www.ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Upcoming symposiums, workshops and PD across all 42 Australian universities.</description>
   <language>en-au</language>
-  <lastBuildDate>Fri, 17 Jul 2026 08:38:13 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 17 Jul 2026 09:12:01 GMT</lastBuildDate>
+  <item>
+    <title>UniSQ PL-Connect 2026 Professional Learning Series (2026-07-20 – 2026-11-27)</title>
+    <link>https://www.unisq.edu.au/news/2026/05/pl-connect-2026</link>
+    <guid isPermaLink="false">ntlsn-98</guid>
+    <category>webinar</category>
+    <description>UniSQ · UniSQ School of Education's expanded online PD series — 33 short practical sessions across 11 topics (AI integration, literacy, First Nations education, educator wellbeing and more); live and recorded. Individual session dates TBC — series runs across late 2026.</description>
+  </item>
   <item>
     <title>UNE L&amp;T Symposium: Student Voice &amp; Engagement (2026-07-21)</title>
     <link>https://symposium.une.edu.au/symposium-2026/student-voice-student-engagement/</link>
@@ -37,7 +44,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Dr Miao Li (CSU) (2026-08-20)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/</link>
     <guid isPermaLink="false">ntlsn-81</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipient. Details to be announced.</description>
@@ -58,7 +65,7 @@
   </item>
   <item>
     <title>AAUT &amp; HERDSA Webinar Session 4 (2026-08-27)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://herdsa.org.au/herdsa-webinar-series</link>
     <guid isPermaLink="false">ntlsn-77</guid>
     <category>webinar</category>
     <description>Details to be announced.</description>
@@ -114,7 +121,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Spencer &amp; Jones (RMIT) (2026-09-17)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/</link>
     <guid isPermaLink="false">ntlsn-82</guid>
     <category>webinar</category>
     <description>Adelaide · Teaching Excellence Award recipients. Details to be announced.</description>
@@ -128,7 +135,7 @@
   </item>
   <item>
     <title>AAUT &amp; HERDSA Webinar Session 5 (2026-09-24)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://herdsa.org.au/herdsa-webinar-series</link>
     <guid isPermaLink="false">ntlsn-78</guid>
     <category>webinar</category>
     <description>Details to be announced.</description>
@@ -212,7 +219,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Dr Amanda Gigliotti (UOW) (2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/</link>
     <guid isPermaLink="false">ntlsn-83</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipient. Details to be announced.</description>
