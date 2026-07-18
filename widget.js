@@ -2,9 +2,9 @@
  * NTLSN embed widget — drop-in "upcoming sector events" list for any site.
  * Usage:  <script src="https://ntlsn.com/widget.js" data-limit="5" data-uni="usq"></script>
  *   data-limit : how many events to show (default 5)
- *   data-uni   : optional university id (e.g. usq, unimelb, curtin) — omit for sector-wide
+ *   data-uni   : optional university id (e.g. usq, unimelb, curtin) — omit (or use an unknown id) for sector-wide
  * Renders into a scoped shadow root so it never clashes with the host page's CSS.
- * Reads the CORS-open /data/events.json. ~5KB, no dependencies. Links back to NTLSN.
+ * Reads the CORS-open /data/events.json. ~6KB, no dependencies. Links back to NTLSN.
  */
 (function () {
   var s = document.currentScript;
@@ -68,8 +68,12 @@
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (events) {
       var today = new Date().toISOString().slice(0, 10);
-      var list = events.filter(function (e) { return (e.endDate || e.date) >= today; });
-      if (uni) list = list.filter(function (e) { return (e.uni || '').toLowerCase() === uni; });
+      var future = events.filter(function (e) { return (e.endDate || e.date) >= today; });
+      // Only filter to one institution if its id is actually known in the data. An unrecognised
+      // or typo'd data-uni falls back to sector-wide — "that institution's (or the sector's)
+      // next N events". A known id that simply has nothing upcoming keeps its own empty state.
+      var showUni = !!uni && events.some(function (e) { return (e.uni || '').toLowerCase() === uni; });
+      var list = showUni ? future.filter(function (e) { return (e.uni || '').toLowerCase() === uni; }) : future;
       list.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
       list = list.slice(0, limit);
 
@@ -77,7 +81,7 @@
       var hd = el('div', 'hd');
       hd.appendChild(el('span', 'dot'));
       hd.appendChild(el('b', null, 'NTLSN · What’s On'));
-      hd.appendChild(el('span', null, uni ? uni.toUpperCase() : 'Sector'));
+      hd.appendChild(el('span', null, showUni ? uni.toUpperCase() : 'Sector'));
       w.appendChild(hd);
 
       if (!list.length) {
@@ -91,7 +95,7 @@
           var m = el('div', 'm');
           m.appendChild(el('span', null, fmt(e.date, e.endDate)));
           if (e.type) m.appendChild(el('span', 'pill', cap(e.type)));
-          if (e.uni && !uni) m.appendChild(el('span', null, e.uni.toUpperCase()));
+          if (e.uni && !showUni) m.appendChild(el('span', null, e.uni.toUpperCase()));
           a.appendChild(m);
           w.appendChild(a);
         });

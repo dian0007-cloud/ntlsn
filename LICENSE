@@ -1,11 +1,66 @@
-NTLSN content is licensed under the Creative Commons
-Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+NTLSN — Licensing
+=================
 
-You are free to share and adapt the material for non-commercial purposes, with
-attribution, under the same license.
+NTLSN is a governed commons, not a public-domain dump and not a proprietary
+asset. Different layers of the project carry the licence that keeps that
+layer honest (rationale: docs/licensing-rationale.md):
 
-Full text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
-Summary:   https://creativecommons.org/licenses/by-nc-sa/4.0/
+1. CODE — MIT
+   Everything that makes the site run: scripts/, netlify/, tests/, widget.js,
+   library-access.js, country-widget.js, the inline patch scripts in the HTML
+   pages, and build/CI configuration. Full MIT text below.
+
+2. DATA — CC BY 4.0
+   The open datasets and feeds: data/*.json, events.ics, feed.xml,
+   events-ld.json, sitemap.xml. Use them anywhere, including commercially,
+   with attribution to NTLSN (ntlsn.com). Exception: data/library-resolvers.json
+   is released CC0 1.0 (public domain dedication) as stated in that file's
+   provenance.
+   https://creativecommons.org/licenses/by/4.0/
+
+3. METHODOLOGY & STANDARDS — CC BY 4.0
+   The SoTL Index methodology, the Recognition GPS crosswalk, and any other
+   published standard or methodology. Standards only work when anyone —
+   including commercial implementers — can adopt, inspect and improve them.
+   https://creativecommons.org/licenses/by/4.0/
+
+4. CONTENT — CC BY-NC-SA 4.0
+   The written commons: page prose, crash courses, guides, long-form
+   resources and site copy. Free to share and adapt for non-commercial
+   purposes, with attribution, under the same licence. ShareAlike keeps
+   derivatives open; NonCommercial blocks direct resale of the commons.
+   https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+FIRST NATIONS CULTURAL AND INTELLECTUAL PROPERTY
+   No licence above extends to First Nations cultural and intellectual
+   property (ICIP). Much First Nations knowledge is collectively held and
+   governed by customary law; NTLSN does not hold, and does not assert, the
+   authority to license it. Traditional-country information is presented as
+   acknowledgement, not as licensable content. On every question concerning
+   ICIP, authority rests with First Nations peoples.
 
 External resources, logos and linked materials remain the property of their
 respective organisations.
+
+----------------------------------------------------------------------
+MIT License (applies to the CODE layer above)
+
+Copyright (c) 2026 Seb Dianati and NTLSN contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

@@ -17,6 +17,8 @@
 <link rel="canonical" href="https://ntlsn.com/recognition-gps.html">
 <link rel="preconnect" href="https://api.openalex.org">
 <style>
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:var(--navy);padding:8px 14px;border-radius:0 0 8px 0;font-weight:700;z-index:99;text-decoration:none}
+  .skip:focus{left:0}
   :root{
     --navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;
     --teal:#4ECDC4;--purple:#C57BFF;--amber:#FFB448;--blue:#7C9CFF;
@@ -141,13 +143,14 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
   <header class="top">
     <div class="brand"><span class="logo" aria-hidden="true">N</span> NTLSN<span style="color:var(--teal)">.com</span></div>
     <a class="back" href="/">&larr; Back to the commons</a>
   </header>
 
-  <main>
+  <main id="main">
     <p class="eyebrow">◇ Recognition · in your browser · nothing stored</p>
     <h1><span class="grad">Recognition GPS.</span></h1>
     <p class="lead">See where your scholarship already speaks to recognition criteria — and export the evidence draft. Runs in your browser; nothing stored or sold.</p>

@@ -1,0 +1,450 @@
+@import "tailwindcss";
+
+/*
+ * NTLSN design tokens — exact values from CLAUDE.md ("Conventions").
+ * Tailwind v4 CSS-first config: these become utilities like bg-navy,
+ * text-teal, border-purple/20, etc.
+ */
+@theme {
+  --color-navy: #0a1628;
+  --color-teal: #4ecdc4;
+  --color-purple: #c57bff;
+  --color-amber: #ffb448;
+  --color-coral: #ff6b6b;
+
+  /* System sans stack, matching the production bundle. */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  /* Serif-ish brand mark for "NTLSN.com". */
+  --font-brand: Georgia, "Times New Roman", Times, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchored sections shouldn't disappear under the sticky nav. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--color-navy);
+  color: #fff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * A11y from birth (WCAG 2.2 AA floor — CLAUDE.md): visible focus indicator
+ * everywhere, no reliance on the runtime a11y patch scripts.
+ */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip link: visually hidden until focused (WCAG 2.4.1 Bypass Blocks). */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-300%);
+  background: var(--color-teal);
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/*
+ * Map pulse rings (#map) — gentle opacity pulse standing in for the bundle's
+ * dot-pulse keyframes. Decorative only; neutralised by the reduced-motion
+ * block below.
+ */
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.map-pulse {
+  animation-name: dot-pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/*
+ * Front-door keyframes (PR-A): the start-grid icon bob (ntlsn-startgrid-css),
+ * the journey panel pop-in (ntlsn-journey), and the glance connector dot
+ * (ntlsn-glance-css, horizontal on wide screens / vertical when the row
+ * stacks). All decorative; all neutralised by the reduced-motion block below.
+ */
+@keyframes sg-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes journey-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes glance-dot-h {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100% - 7px);
+  }
+}
+@keyframes glance-dot-v {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: calc(100% - 7px);
+  }
+}
+
+/*
+ * Talks Hub doodles (PR-B): the #sector-themes pulse rings and the
+ * #international-themes spinning globe meridian — the visual result of the
+ * production ntlsn-secanim decoration, without the script. Decorative only;
+ * neutralised by the reduced-motion block below.
+ */
+@keyframes na-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+.na-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: na-pulse 2.4s ease-out infinite;
+}
+.na-pulse-late {
+  animation-delay: 1.2s;
+}
+@keyframes na-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.na-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: na-spin 7s linear infinite;
+}
+
+/*
+ * Knowledge-layer doodles (PR-C): the #sotl-grants rising bubbles and the
+ * #frameworks stacked bars (the ntlsn-secanim treatments), plus the
+ * #ntlsn-archive spinning wheel (the patch used SMIL animateTransform,
+ * which ignores prefers-reduced-motion — a CSS animation here so the
+ * reduced-motion block below neutralises it). All decorative only.
+ */
+@keyframes na-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-18px);
+    opacity: 0;
+  }
+}
+.na-rise {
+  transform-box: fill-box;
+  animation: na-rise 2.6s ease-out infinite;
+}
+.na-rise-d1 {
+  animation-delay: 0.6s;
+}
+.na-rise-d2 {
+  animation-delay: 1.3s;
+}
+@keyframes na-seq {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.na-seq {
+  animation: na-seq 2.4s ease-in-out infinite;
+}
+.na-seq-d1 {
+  animation-delay: 0.4s;
+}
+.na-seq-d2 {
+  animation-delay: 0.8s;
+}
+@keyframes archive-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.archive-wheel g {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: archive-spin 9s linear infinite;
+}
+
+/*
+ * Mission & pricing tail (PR-E) decorations.
+ *
+ * adv-*: the #ntlsn-advisory reveal (cards float up when the section enters
+ * the viewport — AdvisorySection adds .adv-in via IntersectionObserver),
+ * the shimmering header bar and the slow orbit rings, ported from the
+ * ntlsn-advisory-script patch's injected CSS.
+ *
+ * corner-flourish / drop-cap: the #about section's gold manuscript
+ * decorations, ported from the production bundle's stylesheet.
+ *
+ * All decorative; all neutralised by the reduced-motion block below (the
+ * .adv-card opacity is forced back to 1 so cards never stay hidden).
+ */
+@keyframes adv-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes adv-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+@keyframes adv-spin {
+  to {
+    transform: translate(-50%, -58%) rotate(360deg);
+  }
+}
+.adv-card {
+  opacity: 0;
+  animation: adv-up 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-play-state: paused;
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+.adv-in .adv-card {
+  animation-play-state: running;
+}
+.adv-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(45, 212, 191, 0.45);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.42);
+}
+.adv-ava {
+  transition: transform 0.45s ease;
+}
+.adv-card:hover .adv-ava {
+  transform: scale(1.06) rotate(-2deg);
+}
+.adv-bar {
+  background: linear-gradient(90deg, #2dd4bf, #7c9cff, #c57bff, #2dd4bf);
+  background-size: 200% 100%;
+  animation: adv-shimmer 6s linear infinite;
+}
+.adv-orbit {
+  animation: adv-spin 90s linear infinite;
+}
+
+.corner-flourish {
+  position: relative;
+}
+.corner-flourish::before,
+.corner-flourish::after {
+  content: "";
+  pointer-events: none;
+  border-style: solid;
+  border-color: rgba(201, 169, 98, 0.3);
+  width: 28px;
+  height: 28px;
+  position: absolute;
+}
+.corner-flourish::before {
+  border-width: 2px 0 0 2px;
+  top: -1px;
+  left: -1px;
+}
+.corner-flourish::after {
+  border-width: 0 2px 2px 0;
+  bottom: -1px;
+  right: -1px;
+}
+.drop-cap::first-letter {
+  float: left;
+  color: #c9a962;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 0.15rem;
+  margin-right: 0.75rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 4rem;
+  line-height: 0.8;
+}
+
+/*
+ * CollapsibleSection (PR-G, the cfold hybrid): grid-row collapse so the open/
+ * close animates height smoothly without measuring content. While closed or
+ * animating the inner is overflow:hidden; once the open transition settles
+ * (.cfold-settled) overflow returns to visible so position:sticky content
+ * inside (the litmus scrollytelling) can stick. .cfold-instant disables the
+ * transition for hash deep-link auto-opens. The reduced-motion block below
+ * zeroes the transition, making every toggle instant.
+ */
+.cfold-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cfold-panel.cfold-open {
+  grid-template-rows: 1fr;
+}
+.cfold-panel.cfold-instant {
+  transition: none;
+}
+.cfold-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.cfold-panel.cfold-open.cfold-settled .cfold-inner {
+  overflow: visible;
+}
+
+/*
+ * #ntlsn-rebalance (PR-G port of the manifesto band): the research/teaching
+ * weighting bar, verbatim from the production ntlsn-rebalance-style patch —
+ * including its own reduced-motion override (a static 60/40 split).
+ */
+#ntlsn-rebalance .rbar {
+  display: flex;
+  height: 58px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+#ntlsn-rebalance .rseg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font:
+    800 13px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#ntlsn-rebalance .rseg-r {
+  flex: 0 0 74%;
+  background: linear-gradient(135deg, #56657a, #808fa3);
+  color: #eef2f6;
+  animation: ntlsnRebalR 7s ease-in-out infinite;
+}
+#ntlsn-rebalance .rseg-t {
+  flex: 0 0 26%;
+  background: linear-gradient(135deg, #17a294, #2dd4bf);
+  color: #06243a;
+  animation: ntlsnRebalT 7s ease-in-out infinite;
+}
+@keyframes ntlsnRebalR {
+  0%,
+  14% {
+    flex-basis: 74%;
+  }
+  50%,
+  64% {
+    flex-basis: 52%;
+  }
+  100% {
+    flex-basis: 74%;
+  }
+}
+@keyframes ntlsnRebalT {
+  0%,
+  14% {
+    flex-basis: 26%;
+  }
+  50%,
+  64% {
+    flex-basis: 48%;
+  }
+  100% {
+    flex-basis: 26%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #ntlsn-rebalance .rseg-r {
+    flex-basis: 60%;
+    animation: none;
+  }
+  #ntlsn-rebalance .rseg-t {
+    flex-basis: 40%;
+    animation: none;
+  }
+}
+
+/* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  /* The advisory cards animate from opacity 0 — never leave them hidden. */
+  .adv-card {
+    opacity: 1;
+    animation: none;
+  }
+}

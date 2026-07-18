@@ -53,7 +53,10 @@ jobs:
             echo "no snapshot written (every fetch failed?) — nothing to commit"
             exit 0
           fi
-          if git diff --quiet -- data/.source-snapshot.json; then
+          # `git diff --quiet` only sees TRACKED files, so it would miss the brand-new
+          # (untracked) snapshot on the first run and never seed it. `git status --porcelain`
+          # reports untracked AND modified, so it catches both the seed and later changes.
+          if [ -z "$(git status --porcelain -- data/.source-snapshot.json)" ]; then
             echo "snapshot unchanged — nothing to commit"
           else
             git add -- data/.source-snapshot.json

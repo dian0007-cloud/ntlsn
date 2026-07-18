@@ -55,37 +55,23 @@
   <h1>Evidence Cross-Walk</h1>
   <p class="lead">You probably already hold more recognition evidence than you think — and the same piece often counts in several places at once. Tick what you have, and see how it maps across <b>four pathways together</b>: the <b>PSF 2023</b>, the <b>AAUT</b>, a <b>promotion case</b>, and <b>SoTL</b>. <b>Illustrative — NTLSN's own reading of public frameworks, not an official equivalence.</b></p>
   <div class="grid">
-    <div class="panel"><div class="h">What evidence do you already hold?</div><div id="form"></div></div>
+    <div class="panel"><div class="h">What evidence do you already hold?</div><div id="form"><p class="placeholder">Loading…</p></div></div>
     <div class="panel res" id="res"><p class="placeholder">Tick the evidence you hold — your cross-walk appears here →</p></div>
   </div>
   <div class="foot">
-    <b>A map, not a determination.</b> The cross-walk is an illustrative guide to where your existing evidence could count — it is not an official equivalence endorsed by Advance HE, Universities Australia or your institution, and ticking a box is self-asserted. Use it to see what you already have and where to aim next. Runs entirely in your browser; nothing is stored or sent. &nbsp;·&nbsp; <a href="/recognition-navigator.html">Recognition Navigator</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
+    <b>A map, not a determination.</b> The cross-walk is an illustrative guide to where your existing evidence could count — it is not an official equivalence endorsed by Advance HE, Universities Australia or your institution, and ticking a box is self-asserted. Use it to see what you already have and where to aim next. Runs entirely in your browser; nothing is stored or sent. Data: <a href="/data/recognition-crosswalk.json">open JSON, CC-BY-4.0</a>. &nbsp;·&nbsp; <a href="/recognition-navigator.html">Recognition Navigator</a> &nbsp;·&nbsp; <a href="/">← Back to NTLSN</a>
   </div>
 </div>
 <script>
 (function(){
-  var FW=[
-    {key:'PSF', name:'PSF 2023 — fellowship', tool:'/fellowship-mapper.html', tl:'Fellowship Category Mapper', cells:[['A','Areas of Activity'],['K','Core Knowledge'],['V','Professional Values']]},
-    {key:'AAUT', name:'AAUT — national awards', tool:'/aaut-readiness.html', tl:'AAUT Award-Readiness', cells:[['cite','Citations'],['prog','Programs'],['excel','Teaching Excellence']]},
-    {key:'PROMO', name:'Promotion case', tool:'/recognition-points.html', tl:'Recognition Points', cells:[['teach','Teaching quality'],['lead','Educational leadership'],['schol','Scholarship / SoTL'],['engage','Engagement & service']]},
-    {key:'SOTL', name:'Scholarship of T&L', tool:'/sotl-placement.html', tl:'SoTL Self-Placement', cells:[['evid','Evidence-gathering'],['diss','Dissemination'],['impact','Impact']]}
-  ];
-  var ART=[
-    {n:'Student evaluation / feedback data (SET, SELT)', m:{PSF:['A','V'],AAUT:['cite'],PROMO:['teach'],SOTL:['evid']}},
-    {n:'Peer review or observation of your teaching', m:{PSF:['A','K'],AAUT:['cite'],PROMO:['teach'],SOTL:['evid']}},
-    {n:'A teaching award or nomination', m:{AAUT:['cite','excel'],PROMO:['teach','lead']}},
-    {n:'SoTL publications, chapters or conference papers', m:{PSF:['K','V'],AAUT:['excel'],PROMO:['schol'],SOTL:['diss','impact']}},
-    {n:'Curriculum or unit design documents', m:{PSF:['A','K'],AAUT:['prog'],PROMO:['teach','lead'],SOTL:['evid']}},
-    {n:'Assessment or rubric design you created', m:{PSF:['A','K'],AAUT:['cite'],PROMO:['teach'],SOTL:['evid']}},
-    {n:'Mentoring or HDR / colleague supervision records', m:{PSF:['A','V'],AAUT:['excel'],PROMO:['lead'],SOTL:['impact']}},
-    {n:'Completed professional development or a fellowship', m:{PSF:['K','V'],PROMO:['teach'],SOTL:['evid']}},
-    {n:'Leadership or committee roles in teaching & learning', m:{PSF:['V'],AAUT:['prog','excel'],PROMO:['lead','engage'],SOTL:['impact']}},
-    {n:'A teaching innovation (new approach, tool or method)', m:{PSF:['A','K'],AAUT:['cite','prog'],PROMO:['teach'],SOTL:['diss']}},
-    {n:'Student outcome data (grades, progression, completion)', m:{PSF:['A'],AAUT:['cite','prog'],PROMO:['teach'],SOTL:['impact']}},
-    {n:'Community, industry or WIL engagement in teaching', m:{PSF:['A','V'],AAUT:['prog'],PROMO:['engage'],SOTL:['impact']}}
-  ];
-  var state=ART.map(function(){return false;});
   var form=document.getElementById('form');
+  fetch('/data/recognition-crosswalk.json').then(function(r){return r.json();}).then(init).catch(function(){
+    form.innerHTML='<p class="placeholder">Could not load the cross-walk data. Try reloading.</p>';
+  });
+  function init(data){
+  var FW=data.frameworks.map(function(f){return {key:f.key, name:f.name, tool:f.tool, tl:f.toolLabel, cells:f.cells.map(function(c){return [c.key, c.label];})};});
+  var ART=data.evidence.map(function(e){return {n:e.name, m:e.maps};});
+  var state=ART.map(function(){return false;});
   function render(){
     form.innerHTML=ART.map(function(a,i){
       return '<div class="ci'+(state[i]?' on':'')+'" role="button" tabindex="0" aria-pressed="'+(state[i]?'true':'false')+'" data-i="'+i+'"><span class="box">'+(state[i]?'✓':'')+'</span><span class="tx">'+a.n+'</span></div>';
@@ -125,6 +111,7 @@
   form.addEventListener('click',function(e){ var c=e.target.closest('.ci'); if(!c) return; toggle(+c.getAttribute('data-i')); });
   form.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ var c=e.target.closest('.ci'); if(c){ e.preventDefault(); toggle(+c.getAttribute('data-i')); } } });
   render(); compute();
+  }
 })();
 </script>
 </body>

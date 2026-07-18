@@ -1,8 +1,13 @@
-name: Weekly link check
+name: Weekly site health check
 
-# Pings every event URL in data/events.json each Monday. Goes RED (and writes a
-# table to the run summary) if any link is confirmed dead (404/410/DNS failure).
-# Bot-blocks (403/405/429) and timeouts are treated as alive to avoid false alarms.
+# Weekly quality sweep, Mondays 19:00 UTC. Goes RED (and writes to the run summary)
+# on either:
+#   - a confirmed-dead event link (404/410/DNS), or
+#   - count drift: a displayed total in the static <head> that disagrees with the
+#     canonical data files (e.g. hero "all 42 universities" while universities.json
+#     has 43).
+# Link bot-blocks (403/405/429) and Cloudflare-style challenges are treated as
+# alive / inconclusive to avoid false alarms.
 
 on:
   schedule:
@@ -18,3 +23,5 @@ jobs:
         with: { node-version: '20' }
       - name: Check event links
         run: node scripts/check-links.mjs
+      - name: Check count drift
+        run: node scripts/check-counts.mjs

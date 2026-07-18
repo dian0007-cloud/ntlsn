@@ -1,0 +1,423 @@
+[
+  {
+    "id": 56,
+    "title": "USyd AI in Higher Education Symposium",
+    "uni": "usyd",
+    "date": "2026-02-03",
+    "type": "symposium",
+    "desc": "Creative uses of GenAI in T&L.",
+    "verified": true,
+    "url": "https://educational-innovation.sydney.edu.au/teaching@sydney/2026-ai-in-higher-education-symposium-resources/"
+  },
+  {
+    "id": 94,
+    "title": "WA Teaching & Learning Forum (WATLF)",
+    "uni": "curtin",
+    "date": "2026-02-05",
+    "endDate": "2026-02-06",
+    "type": "conference",
+    "desc": "35th annual cross-institutional WA forum, hosted at Curtin — theme \"Co-creating the Future\". Three streams per day.",
+    "url": "https://www.wateachingandlearningforum.org/",
+    "verified": true
+  },
+  {
+    "id": 12,
+    "title": "UQ Ready to Teach Week (Sem 1)",
+    "uni": "uq",
+    "date": "2026-02-09",
+    "endDate": "2026-02-13",
+    "type": "week",
+    "desc": "ITaLI-run preparation week for Semester 1 teaching.",
+    "verified": true,
+    "url": "https://itali.uq.edu.au/event/11813/ready-teach-week-sem-1-2026"
+  },
+  {
+    "id": 85,
+    "title": "CAULLT CAUT MOOC",
+    "uni": "national",
+    "date": "2026-02-16",
+    "type": "workshop",
+    "verified": true,
+    "desc": "Free MOOC with 24 modules across 4 pathways. Digital badges. 800-1000 enrolments per semester.",
+    "url": "https://www.caullt.edu.au/professionallearning/contemporary-approaches-to-university-teaching/"
+  },
+  {
+    "id": 1,
+    "title": "Universities Australia Solutions Summit",
+    "uni": "anu",
+    "date": "2026-02-24",
+    "endDate": "2026-02-26",
+    "type": "conference",
+    "desc": "National summit at the National Convention Centre, Canberra. AAUT awards announced 24 Feb.",
+    "verified": true,
+    "url": "https://events.uniaus.edu.au/2026solutionssummit/home"
+  },
+  {
+    "id": 2,
+    "title": "AAUT National Teaching Awards",
+    "uni": "anu",
+    "date": "2026-02-24",
+    "type": "showcase",
+    "desc": "Australian Awards for University Teaching announced at UA Solutions Summit.",
+    "verified": true,
+    "url": "https://universitiesaustralia.edu.au/event/2026-universities-australia-solutions-summit/"
+  },
+  {
+    "id": 86,
+    "title": "CRADLE Seminar Series 2026",
+    "uni": "deakin",
+    "date": "2026-03-01",
+    "type": "webinar",
+    "verified": true,
+    "desc": "World-leading free monthly series on assessment and digital learning. AI and feedback, preparing graduates for AI.",
+    "url": "https://www.deakin.edu.au/cradle"
+  },
+  {
+    "id": 89,
+    "title": "CGHE Webinar Series: AI in Higher Education",
+    "uni": "national",
+    "date": "2026-03-01",
+    "type": "webinar",
+    "verified": true,
+    "desc": "Centre for Global Higher Education (Oxford). AI products, policy, knowledge production, governance."
+  },
+  {
+    "id": 3,
+    "title": "CAULLT Grant Information Webinar",
+    "uni": "usq",
+    "date": "2026-03-13",
+    "type": "workshop",
+    "desc": "Online webinar on the 2026 round of CAULLT grants.",
+    "verified": true,
+    "url": "https://www.caullt.edu.au/grants/"
+  },
+  {
+    "id": 75,
+    "title": "AAUT & HERDSA: Indigenous Knowledges in Action",
+    "uni": "national",
+    "date": "2026-03-26",
+    "type": "webinar",
+    "verified": true,
+    "desc": "Recording available. 200+ attendees. Moving beyond including Indigenous content toward systemic transformation."
+  },
+  {
+    "id": 71,
+    "title": "Advance HE Elevate: AI-Enabled Assessment",
+    "uni": "usq",
+    "date": "2026-04-15",
+    "type": "workshop",
+    "desc": "Advance HE Australasia Spotlight Series.",
+    "verified": true,
+    "url": "https://advance-he.org/australasia"
+  },
+  {
+    "id": 60,
+    "title": "NTLSN Open Forum: Democratic Student Partnership",
+    "uni": "usq",
+    "date": "2026-04-16",
+    "type": "workshop",
+    "desc": "Open online workshop exploring democratic student partnership.",
+    "verified": false
+  },
+  {
+    "id": 4,
+    "title": "CAULLT Annual General Meeting",
+    "uni": "usq",
+    "date": "2026-04-17",
+    "type": "conference",
+    "desc": "Virtual AGM via Zoom, 11am-12pm AEST.",
+    "verified": true,
+    "url": "https://www.caullt.edu.au/events-and-learning/"
+  },
+  {
+    "id": 70,
+    "title": "TEFAN Cross-Border Conversation",
+    "uni": "usq",
+    "date": "2026-04-21",
+    "type": "workshop",
+    "desc": "Developing national and international profile. Free.",
+    "verified": true,
+    "url": "https://events.humanitix.com/acrossborders"
+  },
+  {
+    "id": 65,
+    "title": "AAUT/AU T&L Breakfast: GenAI Simulations",
+    "uni": "adelaide",
+    "date": "2026-04-23",
+    "type": "workshop",
+    "desc": "Enhancing Situated Learning with GenAI Simulations.",
+    "verified": true
+  },
+  {
+    "id": 73,
+    "title": "Advance HE Pathway: Inclusive Learning",
+    "uni": "usq",
+    "date": "2026-04-23",
+    "type": "workshop",
+    "desc": "Advance HE Australasia Elevate Pathways.",
+    "verified": true,
+    "url": "https://advance-he.org/australasia"
+  },
+  {
+    "id": 66,
+    "title": "CAULLT Webinar: Inclusive Curricula",
+    "uni": "usq",
+    "date": "2026-04-24",
+    "type": "workshop",
+    "desc": "Drawing on National Student Ombudsman data.",
+    "verified": true,
+    "url": "https://www.caullt.edu.au/events-and-learning/"
+  },
+  {
+    "id": 91,
+    "title": "HERDSA Academic Development SIG Meetup #2",
+    "uni": "national",
+    "date": "2026-04-24",
+    "type": "workshop",
+    "verified": true,
+    "desc": "Second 2026 meetup for academic developers. Practical outcomes from networking and collaborative discussions.",
+    "url": "https://www.caullt.edu.au/join-the-second-herdsa-academic-development-sig-meetup-of-2026/"
+  },
+  {
+    "id": 64,
+    "title": "AAUT & HERDSA: WIL Partnerships Webinar",
+    "uni": "usq",
+    "date": "2026-04-30",
+    "type": "workshop",
+    "desc": "Building Sustainable Collaborative WIL Partnerships.",
+    "verified": true,
+    "url": "https://tinyurl.com/bdhfwcde"
+  },
+  {
+    "id": 87,
+    "title": "ICAI Summer Intensive Webinar Series",
+    "uni": "national",
+    "date": "2026-05-01",
+    "type": "workshop",
+    "verified": true,
+    "desc": "5-session biweekly series on AI-based challenges and human durable skills. Free for ICAI members."
+  },
+  {
+    "id": 93,
+    "title": "ACSES Insights Report: Disability in Higher Education",
+    "uni": "national",
+    "date": "2026-05-01",
+    "type": "conference",
+    "verified": true,
+    "desc": "First in a series of ACSES Insights Reports on disability in higher education from the Australian Centre for Student Equity and Success.",
+    "url": "https://www.caullt.edu.au/2026-qilt-symposium-using-student-feedback-to-strengthen-teaching-curriculum-2/"
+  },
+  {
+    "id": 67,
+    "title": "ASCILITE x Turnitin: Transparent Writing",
+    "uni": "qut",
+    "date": "2026-05-05",
+    "type": "workshop",
+    "desc": "Transparent writing processes and academic integrity.",
+    "verified": true,
+    "url": "https://ascilite.org/30-03-2026-bulletin/"
+  },
+  {
+    "id": 72,
+    "title": "Advance HE Elevate: Student Success",
+    "uni": "usq",
+    "date": "2026-05-12",
+    "type": "workshop",
+    "desc": "Advance HE Australasia Spotlight Series.",
+    "verified": true,
+    "url": "https://advance-he.org/australasia"
+  },
+  {
+    "id": 13,
+    "title": "Monash TransformED Conference",
+    "uni": "monash",
+    "date": "2026-05-15",
+    "type": "conference",
+    "desc": "Monash University Malaysia's L&T Conference.",
+    "verified": true,
+    "url": "https://www.monash.edu.my/education-excellence/transformed"
+  },
+  {
+    "id": 90,
+    "title": "2026 QILT Symposium — Using Student Feedback to Strengthen Teaching & Curriculum",
+    "uni": "national",
+    "date": "2026-05-19",
+    "type": "conference",
+    "verified": true,
+    "desc": "Explores how national student survey data can inform teaching quality, curriculum design, and institutional strategy.",
+    "url": "https://www.caullt.edu.au/2026-qilt-symposium-using-student-feedback-to-strengthen-teaching-curriculum/"
+  },
+  {
+    "id": 79,
+    "title": "AU & AAUT Breakfast: Cultural Advocacy in Health Education",
+    "uni": "adelaide",
+    "date": "2026-05-21",
+    "type": "webinar",
+    "verified": true,
+    "desc": "Presented by Ms Ellie White (UoM). Neville Bonner Award recipient on culturally responsive care."
+  },
+  {
+    "id": 21,
+    "title": "UniSQ L&T Showcase",
+    "uni": "usq",
+    "date": "2026-05-27",
+    "endDate": "2026-05-28",
+    "type": "showcase",
+    "desc": "Featuring LIFT Fellows, SoTL projects, and regional teaching innovation.",
+    "verified": false
+  },
+  {
+    "id": 74,
+    "title": "Advance HE Pathway: ESD",
+    "uni": "usq",
+    "date": "2026-05-28",
+    "type": "workshop",
+    "desc": "Education for Sustainable Development.",
+    "verified": true,
+    "url": "https://advance-he.org/australasia"
+  },
+  {
+    "id": 76,
+    "title": "AAUT & HERDSA: Designing Inclusive Student Experiences",
+    "uni": "national",
+    "date": "2026-05-28",
+    "type": "webinar",
+    "verified": true,
+    "desc": "Approaches to designing curriculum, assessment, and co-curricular experiences that foster belonging and equity."
+  },
+  {
+    "id": 57,
+    "title": "AIATSIS Summit 2026",
+    "uni": "griffith",
+    "date": "2026-06-01",
+    "endDate": "2026-06-05",
+    "type": "conference",
+    "desc": "Gold Coast. GLAM, Research and Indigenous streams.",
+    "verified": true,
+    "url": "https://aiatsis.gov.au/whats-new/events/aiatsis-summit-2026"
+  },
+  {
+    "id": 84,
+    "title": "CAULLT Enhancing Program Leadership",
+    "uni": "national",
+    "date": "2026-06-01",
+    "type": "workshop",
+    "verified": true,
+    "desc": "Online 4-module program for Program Directors. PSF 2023 aligned. Delivered by Advance HE.",
+    "url": "https://www.caullt.edu.au/professionallearning/contemporary-approaches-to-university-teaching/"
+  },
+  {
+    "id": 88,
+    "title": "TEQSA: Gen AI and Tomorrow's Professionals",
+    "uni": "national",
+    "date": "2026-06-01",
+    "type": "webinar",
+    "verified": true,
+    "desc": "Joint webinar with National AI Centre and Jobs and Skills Australia on AI impacts on education."
+  },
+  {
+    "id": 5,
+    "title": "EDUtech Australia 2026",
+    "uni": "uts",
+    "date": "2026-06-03",
+    "endDate": "2026-06-04",
+    "type": "conference",
+    "desc": "Australia's largest education conference at ICC Sydney.",
+    "verified": true,
+    "url": "https://www.terrapinn.com/exhibition/edutech-australia/index.stm"
+  },
+  {
+    "id": 99,
+    "title": "JANZSSA: Ethics for Writing About Your Practice",
+    "uni": "national",
+    "date": "2026-06-18",
+    "type": "webinar",
+    "desc": "Free JANZSSA webinar with Dr Abbe Winter (SFHEA) on when ethics approval is needed when publishing program data — for student services professionals.",
+    "verified": true,
+    "url": "https://janzssa.scholasticahq.com/post/3920"
+  },
+  {
+    "id": 98,
+    "title": "Engaging ALL Students through Employability (Deakin)",
+    "uni": "deakin",
+    "date": "2026-06-23",
+    "type": "webinar",
+    "desc": "Dr Michael Healy (Swinburne) & David Eckstein (Deakin) on integrating employability & career development for all students, including equity cohorts. Online; recording available.",
+    "verified": true,
+    "url": "https://www.eventbrite.com.au/e/1989352795764"
+  },
+  {
+    "id": 61,
+    "title": "ICED 2026 Conference",
+    "uni": "usyd",
+    "date": "2026-06-24",
+    "endDate": "2026-06-26",
+    "type": "conference",
+    "desc": "University of Salamanca, Spain.",
+    "verified": true,
+    "url": "https://iced26.es/"
+  },
+  {
+    "id": 80,
+    "title": "AU & AAUT Breakfast: Pearson, Le Busque & Richardson",
+    "uni": "adelaide",
+    "date": "2026-06-25",
+    "type": "webinar",
+    "verified": false,
+    "desc": "Citation recipients. Details to be announced."
+  },
+  {
+    "id": 6,
+    "title": "STARS Student Success Conference",
+    "uni": "usc",
+    "date": "2026-06-29",
+    "endDate": "2026-07-01",
+    "type": "conference",
+    "desc": "In-person conference at Novotel Sunshine Coast.",
+    "verified": true,
+    "url": "https://unistars.org/"
+  },
+  {
+    "id": 7,
+    "title": "Advance HE Teaching & Learning Conference",
+    "uni": "usyd",
+    "date": "2026-06-30",
+    "endDate": "2026-07-02",
+    "type": "conference",
+    "desc": "'Success by Design: The Future of Learning Now' - University of Sheffield, UK.",
+    "verified": true,
+    "url": "https://www.advance-he.ac.uk/Programmes-events/conferences/Teaching-Learning-2026"
+  },
+  {
+    "id": 8,
+    "title": "HERDSA Conference 2026",
+    "uni": "usyd",
+    "date": "2026-07-06",
+    "endDate": "2026-07-09",
+    "type": "conference",
+    "desc": "'Re-envisioning Higher Education for Tomorrow's Learners' - NUS Singapore.",
+    "verified": true,
+    "url": "https://conference.herdsa.org.au/2026/"
+  },
+  {
+    "id": 58,
+    "title": "ACODE Benchmarking Summit 2026",
+    "uni": "unimelb",
+    "date": "2026-07-09",
+    "endDate": "2026-07-10",
+    "type": "conference",
+    "desc": "University of Melbourne. New Accessibility benchmark.",
+    "verified": true,
+    "url": "https://acode.edu.au/activities/workshops/inter-institutional-benchmarking-summits"
+  },
+  {
+    "id": 68,
+    "title": "ASCILITE x Turnitin: Authentic Assessment",
+    "uni": "qut",
+    "date": "2026-07-14",
+    "type": "workshop",
+    "desc": "Authentic assessments at scale with AI-era tools.",
+    "verified": true,
+    "url": "https://ascilite.org/30-03-2026-bulletin/"
+  }
+]

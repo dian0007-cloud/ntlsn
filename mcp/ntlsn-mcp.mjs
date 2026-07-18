@@ -9,7 +9,8 @@
  *   node mcp/ntlsn-mcp.mjs            # uses live www.ntlsn.com data
  *   NTLSN_ORIGIN=http://localhost:8899 node mcp/ntlsn-mcp.mjs   # local testing
  *
- * Tools: search_events, upcoming_events, list_universities, whose_country
+ * Tools: search_events, upcoming_events, list_universities, whose_country,
+ *        recognition_crosswalk
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -63,6 +64,13 @@ const TOOLS = [
     inputSchema: { type: 'object', properties: {
       university: { type: 'string', description: 'e.g. usq, UniSQ, Melbourne' }
     }, required: ['university'] }
+  },
+  {
+    name: 'recognition_crosswalk',
+    description: 'Illustrative cross-walk of teaching-recognition evidence (e.g. student feedback data, a teaching award, SoTL publications) against four Australian HE recognition pathways — PSF 2023 fellowship, AAUT national awards, a promotion case, and Scholarship of T&L. Not an official equivalence. Pass a keyword to match one evidence type, or omit to list every evidence type and its mapping.',
+    inputSchema: { type: 'object', properties: {
+      evidence: { type: 'string', description: 'Keyword matched against evidence names, e.g. "teaching award", "SoTL", "mentoring". Omit to list all.' }
+    } }
   }
 ];
 
@@ -72,6 +80,23 @@ const fmtEvent = (e, uniMap) => {
 };
 
 async function call(name, args = {}) {
+  if (name === 'recognition_crosswalk') {
+    const cw = await data('recognition-crosswalk');
+    const fwByKey = Object.fromEntries(cw.frameworks.map(f => [f.key, f]));
+    let rows = cw.evidence;
+    if (args.evidence) {
+      const q = args.evidence.toLowerCase();
+      rows = rows.filter(e => e.name.toLowerCase().includes(q));
+    }
+    if (!rows.length) return `No evidence type matched "${args.evidence}".`;
+    const fmt = e => `- ${e.name}\n` + Object.entries(e.maps).map(([fk, cells]) => {
+      const f = fwByKey[fk] || {};
+      const cellByKey = Object.fromEntries((f.cells || []).map(c => [c.key, c.label]));
+      return `  ${f.name || fk}: ` + cells.map(c => cellByKey[c] || c).join(', ');
+    }).join('\n');
+    return `${rows.length} evidence type(s) mapped across ${cw.frameworks.length} pathways (${cw.disclaimer}):\n` + rows.map(fmt).join('\n');
+  }
+
   const [events, unis] = await Promise.all([data('events'), data('universities')]);
   const uniMap = Object.fromEntries(unis.map(u => [u.id, u]));
   const today = new Date().toISOString().slice(0, 10);

@@ -14,6 +14,8 @@
 <link rel="canonical" href="https://ntlsn.com/about.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:var(--navy);padding:8px 14px;border-radius:0 0 8px 0;font-weight:700;z-index:99;text-decoration:none}
+  .skip:focus{left:0}
   :root{--navy:#0A1628;--card:#0f1f3a;--card2:#0c1a2e;--teal:#4ECDC4;--gold:#C9A962;--blue:#7C9CFF;--purple:#C57BFF;--ink:#e8eef5;--mut:#9fb0c3;--line:rgba(255,255,255,.10);--F:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10243c 0%,var(--navy) 55%);color:var(--ink);font-family:var(--F);line-height:1.55;padding:28px 18px;min-height:100vh}
@@ -67,7 +69,8 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<a class="skip" href="#main">Skip to main content</a>
+<div class="wrap" id="main" role="main">
   <div class="eyebrow">About NTLSN · Our story</div>
   <h1>Built from the edges — for the whole sector.</h1>
   <p class="lead">National Teaching &amp; Learning Sector Network — the open home for connecting university teaching in Australia. Free, independent, open-source. <b style="color:#fff">NTLSN, everywhere you work.</b></p>
@@ -82,7 +85,7 @@
 
   <h2 class="sec">The founder</h2>
   <div class="founder">
-    <div class="ph"><img src="/seb-dianati.jpg" alt="Associate Professor Seb Dianati" onerror="this.style.display='none';this.parentNode.textContent='SD';"></div>
+    <div class="ph"><img src="/seb-dianati.jpg" alt="Associate Professor Seb Dianati" loading="lazy" width="512" height="512" onerror="this.style.display='none';this.parentNode.textContent='SD';"></div>
     <div class="fb">
       <div class="fn">Associate Professor Seb Dianati</div>
       <div class="fr">Founder, NTLSN</div>
@@ -95,7 +98,7 @@
 
   <h2 class="sec">Chair</h2>
   <div class="founder">
-    <div class="ph"><img src="/kashmira-dave.jpg" alt="Dr Kashmira Davé" onerror="this.style.display='none';this.parentNode.textContent='KD';"></div>
+    <div class="ph"><img src="/kashmira-dave.jpg" alt="Dr Kashmira Davé" loading="lazy" width="480" height="480" onerror="this.style.display='none';this.parentNode.textContent='KD';"></div>
     <div class="fb">
       <div class="fn">Dr Kashmira Davé</div>
       <div class="fr">Chair and CALD Lead, NTLSN</div>
@@ -129,6 +132,37 @@
     <div class="st"><div class="sn">0</div><div class="sl">Data points stored</div></div>
   </div>
   <p class="evnote">Every number here is verifiable in the open: the whole commons is browsable now, nothing is behind a login, and nothing you do is stored, shared or sold.</p>
+
+  <h2 class="sec">The plan — 2027 and 2028</h2>
+  <p style="font-size:14px;color:#cbd8e6;max-width:760px;margin:0 0 16px">From a directory to infrastructure the sector can convene on. Several pieces already work as free tools you can try today; the institutional versions need a backend and partner cooperation — we only claim them as they land. The live counts (institutions mapped, verified events) are always on the <a href="/" style="color:var(--teal)">home page</a>, straight from the open data.</p>
+
+  <div style="border:1px solid var(--line);border-left:3px solid #FFB448;border-radius:0 14px 14px 0;padding:18px 22px;margin:0 0 14px;background:var(--card2)">
+    <div style="font:800 11px var(--F);letter-spacing:2px;text-transform:uppercase;color:#FFB448;margin:0 0 6px">2027 · Symposiums &amp; convening</div>
+    <p style="font-size:13.5px;color:var(--mut);margin:0 0 12px">The bigger build — running things on the navigator, not just finding them.</p>
+    <ul style="list-style:none;padding:0;margin:0;display:grid;gap:7px;font-size:13.5px;color:#cbd8e6">
+      <li><b style="color:#e8eef5">Symposium &amp; abstract engine</b> — registration, abstracts and programme. <a href="/symposium-streaming.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Peer-Review Exchange</b> — review one, get one reviewed; a national registry. <a href="/peer-review-exchange.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Pair Review</b> — a focused two-person developmental review of teaching. <a href="/peer-observation.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Calibration Suite</b> — shared rubrics and cross-marker moderation. <a href="/calibration-suite.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Curriculum Auditor</b> — programme → course → unit outcomes, TELAS-aligned. <a href="/programme-map.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Ecosystem APIs &amp; LMS</b> — LTI 1.3 for Moodle, Canvas, Blackboard and D2L, plus an open API. <a href="/developers.html" style="color:var(--teal)">Developers →</a></li>
+      <li><b style="color:#e8eef5">Single sign-on (AAF)</b> — national sign-on via the Australian Access Federation.</li>
+    </ul>
+  </div>
+
+  <div style="border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:0 14px 14px 0;padding:18px 22px;margin:0 0 8px;background:var(--card2)">
+    <div style="font:800 11px var(--F);letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin:0 0 6px">2028 · Recognition &amp; sector interoperability</div>
+    <p style="font-size:13.5px;color:var(--mut);margin:0 0 12px">Portable recognition and the connective tissue between institutions — on open standards, no lock-in.</p>
+    <ul style="list-style:none;padding:0;margin:0;display:grid;gap:7px;font-size:13.5px;color:#cbd8e6">
+      <li><b style="color:#e8eef5">Teaching Recognition Passport</b> — a portable record of your teaching, via My eQuals. <a href="/trp.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">National recognition framework</b> — awards, citations and certification. <a href="/recognition-framework.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Students-as-Partners Registry</b> — student-partnership work on the national map. <a href="/student-partnership.html" style="color:var(--teal)">Try it now →</a></li>
+      <li><b style="color:#e8eef5">Sector interoperability (MCP)</b> — an open machine interface so any system can read the commons. <a href="/mcp.html" style="color:var(--teal)">Live now →</a></li>
+      <li><b style="color:#e8eef5">CRM &amp; student-system integration</b> — PeopleSoft, CourseLoop and the wider stack.</li>
+      <li><b style="color:#e8eef5">WCAG 2.2 AA / VPAT</b> — accessibility conformance for procurement.</li>
+      <li><b style="color:#e8eef5">AI-assisted alignment</b> — optional, model-agnostic curriculum suggestions; you decide.</li>
+    </ul>
+  </div>
 
   <h2 class="sec">Steering committee</h2>
   <div class="grid">

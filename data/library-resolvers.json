@@ -79,8 +79,8 @@
    "patternType": "openathens-redirector",
    "evidenceUrl": "https://au.libguides.com/EndNote/addedit/attachfile",
    "hostVerified": true,
-   "confidence": "medium",
-   "notes": "Adelaide University (the new merged Adelaide/UniSA entity, adelaideuni.edu.au) documents this prefix as the ISI Base URL in its own EndNote LibGuide (au.libguides.com). The legacy University of Adelaide pattern https://go.openathens.net/redirector/adelaide.edu.au?url= is still documented (Paperpile) and may work for legacy accounts. Confidence medium only because the merger means two documented redirector org-ids coexist; adelaideuni.edu.au is the one on the university's current guide. curl to the redirector returned HTTP 200 (note: the redirector answers 200 generically, so verification is of the host, not the org-id)."
+   "confidence": "high",
+   "notes": "Adelaide University (the new merged Adelaide/UniSA entity, adelaideuni.edu.au) documents this prefix as the ISI Base URL in its own EndNote LibGuide (au.libguides.com). The legacy University of Adelaide pattern https://go.openathens.net/redirector/adelaide.edu.au?url= is still documented (Paperpile) and may work for legacy accounts. Upgraded medium→high 2026-07-09: AU-vantage re-verification validated the org-id itself (both adelaideuni.edu.au and legacy adelaide.edu.au return 200 through the redirector while a bogus domain returns OpenAthens 403, so the 200 is org-id-specific, not generic). Merger duality confirmed; adelaideuni.edu.au is the primary on the university's current guide."
   },
   {
    "id": "rmit",
@@ -255,12 +255,12 @@
   {
    "id": "une",
    "name": "University of New England",
-   "pattern": "https://ezproxy.une.edu.au/login?url=",
-   "patternType": "ezproxy-login-url",
-   "evidenceUrl": "https://www.une.edu.au/library/teaching-staff/durable-linking-with-dois/rewriting-ezproxy-links",
-   "hostVerified": false,
-   "confidence": "medium",
-   "notes": "Prefix documented on UNE's own library page (search-indexed examples: https://ezproxy.une.edu.au/login?url=https://doi.org/10.1080/09687760701673568). Host DNS-resolves (129.180.1.217) and accepts TCP:443, but the TLS handshake never completes from a US vantage point (likely geo-restricted or WAF-filtered), so hostVerified=false per the rules. CAUTION: une.idm.oclc.org/login?url= is the US University of New England (Maine) — its login POSTs to une.okta.com and is documented at library.une.edu — do NOT use it for the Australian UNE."
+   "pattern": "https://go.openathens.net/redirector/une.edu.au?url=",
+   "patternType": "openathens-redirector",
+   "evidenceUrl": "https://www.une.edu.au/library/researchers/openathens-faq",
+   "hostVerified": true,
+   "confidence": "high",
+   "notes": "Corrected 2026-07-09: UNE migrated off EZproxy to OpenAthens SSO (2-hour session; standard UNE credentials). Redirector prefix confirmed against UNE's own OpenAthens FAQ. The prior EZproxy pattern (ezproxy.une.edu.au/login?url=) is stale and should not be used. CAUTION unchanged: une.idm.oclc.org/login?url= is the US University of New England (Maine) — not this UNE."
   },
   {
    "id": "usq",

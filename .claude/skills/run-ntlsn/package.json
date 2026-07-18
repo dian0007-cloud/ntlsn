@@ -1,0 +1,10 @@
+{
+  "name": "run-ntlsn-driver",
+  "private": true,
+  "description": "Browser harness for the run-ntlsn skill. Install here so driver.mjs can require playwright-core without polluting the repo root: cd .claude/skills/run-ntlsn && npm install",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "playwright-core": "^1.61.1"
+  }
+}

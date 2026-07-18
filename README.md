@@ -13,7 +13,7 @@ Australia's **free, open-source** hub mapping the higher education teaching & le
 | Path | What it is |
 |---|---|
 | `index.html` | The deployable site — a single-file build (compiled React + a set of small, documented patch scripts). |
-| `data/events.json` | **Canonical event data** (94 events). The source of truth for the calendar feeds. |
+| `data/events.json` | **Canonical event data**. The source of truth for the calendar feeds. |
 | `data/universities.json` | **Canonical institution data** (43 institutions). |
 | `scripts/build-feeds.mjs` | Regenerates `events.ics`, `feed.xml`, `sitemap.xml` and the Event JSON-LD from the data files. |
 | `events.ics` · `feed.xml` | Subscribable calendar + RSS, generated from the data. |
@@ -68,7 +68,17 @@ The whole point of the open data layer: **anyone can add an event with a small P
 
 ## Licence
 
-Content and data are licensed **CC BY-NC-SA 4.0** (see [LICENSE](LICENSE)) — free to share and adapt for non-commercial purposes, with attribution, under the same licence. External resources linked from NTLSN remain the property of their respective organisations.
+NTLSN is licensed in tiers (see [LICENSE](LICENSE), rationale in [docs/licensing-rationale.md](docs/licensing-rationale.md)):
+
+| Layer | Licence |
+|---|---|
+| **Code** — scripts, functions, tests, widgets, patch scripts | MIT |
+| **Data** — `data/*.json`, feeds, calendar | CC BY 4.0 (resolver table CC0 as declared) |
+| **Methodology & standards** — SoTL Index methodology, Recognition GPS crosswalk | CC BY 4.0 |
+| **Content** — page prose, crash courses, guides | CC BY-NC-SA 4.0 |
+| **First Nations ICIP** | No licence granted — authority rests with First Nations peoples |
+
+External resources linked from NTLSN remain the property of their respective organisations.
 
 ## Team
 

@@ -1,0 +1,66 @@
+{
+ "generated": "2026-07-09",
+ "license": "CC-BY-4.0",
+ "disclaimer": "Illustrative — NTLSN's own reading of public frameworks, not an official equivalence endorsed by Advance HE, Universities Australia or any institution.",
+ "frameworks": [
+  {
+   "key": "PSF",
+   "name": "PSF 2023 — fellowship",
+   "tool": "/fellowship-mapper.html",
+   "toolLabel": "Fellowship Category Mapper",
+   "cells": [
+    { "key": "A", "label": "Areas of Activity" },
+    { "key": "K", "label": "Core Knowledge" },
+    { "key": "V", "label": "Professional Values" }
+   ]
+  },
+  {
+   "key": "AAUT",
+   "name": "AAUT — national awards",
+   "tool": "/aaut-readiness.html",
+   "toolLabel": "AAUT Award-Readiness",
+   "cells": [
+    { "key": "cite", "label": "Citations" },
+    { "key": "prog", "label": "Programs" },
+    { "key": "excel", "label": "Teaching Excellence" }
+   ]
+  },
+  {
+   "key": "PROMO",
+   "name": "Promotion case",
+   "tool": "/recognition-points.html",
+   "toolLabel": "Recognition Points",
+   "cells": [
+    { "key": "teach", "label": "Teaching quality" },
+    { "key": "lead", "label": "Educational leadership" },
+    { "key": "schol", "label": "Scholarship / SoTL" },
+    { "key": "engage", "label": "Engagement & service" }
+   ]
+  },
+  {
+   "key": "SOTL",
+   "name": "Scholarship of T&L",
+   "tool": "/sotl-placement.html",
+   "toolLabel": "SoTL Self-Placement",
+   "cells": [
+    { "key": "evid", "label": "Evidence-gathering" },
+    { "key": "diss", "label": "Dissemination" },
+    { "key": "impact", "label": "Impact" }
+   ]
+  }
+ ],
+ "evidence": [
+  { "id": "set-selt", "name": "Student evaluation / feedback data (SET, SELT)", "maps": { "PSF": ["A", "V"], "AAUT": ["cite"], "PROMO": ["teach"], "SOTL": ["evid"] } },
+  { "id": "peer-review", "name": "Peer review or observation of your teaching", "maps": { "PSF": ["A", "K"], "AAUT": ["cite"], "PROMO": ["teach"], "SOTL": ["evid"] } },
+  { "id": "teaching-award", "name": "A teaching award or nomination", "maps": { "AAUT": ["cite", "excel"], "PROMO": ["teach", "lead"] } },
+  { "id": "sotl-publications", "name": "SoTL publications, chapters or conference papers", "maps": { "PSF": ["K", "V"], "AAUT": ["excel"], "PROMO": ["schol"], "SOTL": ["diss", "impact"] } },
+  { "id": "curriculum-design", "name": "Curriculum or unit design documents", "maps": { "PSF": ["A", "K"], "AAUT": ["prog"], "PROMO": ["teach", "lead"], "SOTL": ["evid"] } },
+  { "id": "assessment-design", "name": "Assessment or rubric design you created", "maps": { "PSF": ["A", "K"], "AAUT": ["cite"], "PROMO": ["teach"], "SOTL": ["evid"] } },
+  { "id": "mentoring", "name": "Mentoring or HDR / colleague supervision records", "maps": { "PSF": ["A", "V"], "AAUT": ["excel"], "PROMO": ["lead"], "SOTL": ["impact"] } },
+  { "id": "pd-fellowship", "name": "Completed professional development or a fellowship", "maps": { "PSF": ["K", "V"], "PROMO": ["teach"], "SOTL": ["evid"] } },
+  { "id": "leadership-roles", "name": "Leadership or committee roles in teaching & learning", "maps": { "PSF": ["V"], "AAUT": ["prog", "excel"], "PROMO": ["lead", "engage"], "SOTL": ["impact"] } },
+  { "id": "teaching-innovation", "name": "A teaching innovation (new approach, tool or method)", "maps": { "PSF": ["A", "K"], "AAUT": ["cite", "prog"], "PROMO": ["teach"], "SOTL": ["diss"] } },
+  { "id": "student-outcomes", "name": "Student outcome data (grades, progression, completion)", "maps": { "PSF": ["A"], "AAUT": ["cite", "prog"], "PROMO": ["teach"], "SOTL": ["impact"] } },
+  { "id": "engagement-wil", "name": "Community, industry or WIL engagement in teaching", "maps": { "PSF": ["A", "V"], "AAUT": ["prog"], "PROMO": ["engage"], "SOTL": ["impact"] } }
+ ]
+}

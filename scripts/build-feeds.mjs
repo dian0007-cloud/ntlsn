@@ -26,6 +26,10 @@ const uniMap = Object.fromEntries(unis.map(u => [u.id, u]));
 const TODAY = new Date().toISOString().slice(0, 10);
 const STAMP = new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
 
+// Events still current or upcoming. Shared by the ICS, RSS and JSON-LD feeds so
+// all three agree on which events are live (TASKS.md 3.2 — feeds are upcoming-only).
+const upcoming = events.filter(e => (e.endDate || e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
+
 // ---------- ICS ----------
 const icsDate = d => d.replace(/-/g, '');
 const plusOne = d => { const t = new Date(d + 'T00:00:00Z'); t.setUTCDate(t.getUTCDate() + 1); return t.toISOString().slice(0, 10).replace(/-/g, ''); };
@@ -40,9 +44,9 @@ function fold(line) {
 }
 const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//NTLSN//Sector Events//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
   fold('X-WR-CALNAME:NTLSN — Australian HE Teaching & Learning Events'),
-  fold('X-WR-CALDESC:Every symposium\\, workshop & PD opportunity across all 42 Australian universities. ntlsn.com'),
+  fold('X-WR-CALDESC:Every symposium\\, workshop & PD opportunity across all 43 Australian universities. ntlsn.com'),
   'X-WR-TIMEZONE:Australia/Brisbane', 'REFRESH-INTERVAL;VALUE=DURATION:P1D'];
-for (const e of events) {
+for (const e of upcoming) {
   const u = uniMap[e.uni] || {};
   const loc = u.name ? u.name + (u.city ? ' — ' + u.city + ', ' + u.state : '') : '';
   ics.push('BEGIN:VEVENT',
@@ -61,7 +65,6 @@ ics.push('END:VCALENDAR');
 fs.writeFileSync(path.join(OUT, 'events.ics'), ics.filter(Boolean).join('\r\n') + '\r\n');
 
 // ---------- RSS ----------
-const upcoming = events.filter(e => (e.endDate || e.date) >= TODAY).sort((a, b) => a.date.localeCompare(b.date));
 const x = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const items = upcoming.map(e => {
   const u = uniMap[e.uni] || {};
@@ -75,7 +78,7 @@ fs.writeFileSync(path.join(OUT, 'feed.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n' +
   '  <title>NTLSN — Australian HE Teaching &amp; Learning Events</title>\n  <link>https://www.ntlsn.com/</link>\n' +
   '  <atom:link href="https://www.ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>\n' +
-  '  <description>Upcoming symposiums, workshops and PD across all 42 Australian universities.</description>\n' +
+  '  <description>Upcoming symposiums, workshops and PD across all 43 Australian universities.</description>\n' +
   '  <language>en-au</language>\n  <lastBuildDate>' + new Date().toUTCString() + '</lastBuildDate>\n' + items + '\n</channel>\n</rss>\n');
 
 // ---------- JSON-LD ----------
@@ -95,6 +98,21 @@ const ld = {
   })
 };
 fs.writeFileSync(path.join(OUT, 'events-ld.json'), JSON.stringify(ld));
+
+// Also refresh the inline <script id="ntlsn-events-ld"> blocks so the on-page
+// Event schema never drifts from the canonical data (it had — archived events
+// were still in production's head). Applies to the production page and the
+// rebuild's injection point; skips silently if a file/tag is absent.
+for (const page of ['index.html', 'src/index.html']) {
+  try {
+    const p = path.join(process.cwd(), page);
+    const html = fs.readFileSync(p, 'utf8');
+    const re = /(<script type="application\/ld\+json" id="ntlsn-events-ld">)[\s\S]*?(<\/script>)/;
+    if (!re.test(html)) continue;
+    fs.writeFileSync(p, html.replace(re, `$1${JSON.stringify(ld)}$2`));
+    console.log(`build-feeds: refreshed inline ntlsn-events-ld in ${page}`);
+  } catch { /* page absent in this checkout — fine */ }
+}
 
 // ---------- Sitemap ----------
 // Merge-generate: scan the repo's standalone pages, keep each page's existing

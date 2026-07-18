@@ -4,29 +4,15 @@
   <title>NTLSN — Australian HE Teaching &amp; Learning Events</title>
   <link>https://www.ntlsn.com/</link>
   <atom:link href="https://www.ntlsn.com/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Upcoming symposiums, workshops and PD across all 42 Australian universities.</description>
+  <description>Upcoming symposiums, workshops and PD across all 43 Australian universities.</description>
   <language>en-au</language>
-  <lastBuildDate>Thu, 09 Jul 2026 10:58:09 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 18 Jul 2026 03:01:57 GMT</lastBuildDate>
   <item>
-    <title>HERDSA Conference 2026 (2026-07-06 – 2026-07-09)</title>
-    <link>https://conference.herdsa.org.au/2026/</link>
-    <guid isPermaLink="false">ntlsn-8</guid>
-    <category>conference</category>
-    <description>USyd · 'Re-envisioning Higher Education for Tomorrow's Learners' - NUS Singapore.</description>
-  </item>
-  <item>
-    <title>ACODE Benchmarking Summit 2026 (2026-07-09 – 2026-07-10)</title>
-    <link>https://acode.edu.au/activities/workshops/inter-institutional-benchmarking-summits</link>
-    <guid isPermaLink="false">ntlsn-58</guid>
-    <category>conference</category>
-    <description>UniMelb · University of Melbourne. New Accessibility benchmark.</description>
-  </item>
-  <item>
-    <title>ASCILITE x Turnitin: Authentic Assessment (2026-07-14)</title>
-    <link>https://ascilite.org/30-03-2026-bulletin/</link>
-    <guid isPermaLink="false">ntlsn-68</guid>
-    <category>workshop</category>
-    <description>QUT · Authentic assessments at scale with AI-era tools.</description>
+    <title>UniSQ PL-Connect 2026 Professional Learning Series (2026-07-20 – 2026-11-27)</title>
+    <link>https://www.unisq.edu.au/news/2026/05/pl-connect-2026</link>
+    <guid isPermaLink="false">ntlsn-98</guid>
+    <category>webinar</category>
+    <description>UniSQ · UniSQ School of Education's expanded online PD series — 33 short practical sessions across 11 topics (AI integration, literacy, First Nations education, educator wellbeing and more); live and recorded. Individual session dates TBC — series runs across late 2026.</description>
   </item>
   <item>
     <title>UNE L&amp;T Symposium: Student Voice &amp; Engagement (2026-07-21)</title>
@@ -58,7 +44,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Dr Miao Li (CSU) (2026-08-20)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/</link>
     <guid isPermaLink="false">ntlsn-81</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipient. Details to be announced.</description>
@@ -79,7 +65,7 @@
   </item>
   <item>
     <title>AAUT &amp; HERDSA Webinar Session 4 (2026-08-27)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://herdsa.org.au/herdsa-webinar-series</link>
     <guid isPermaLink="false">ntlsn-77</guid>
     <category>webinar</category>
     <description>Details to be announced.</description>
@@ -135,7 +121,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Spencer &amp; Jones (RMIT) (2026-09-17)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/</link>
     <guid isPermaLink="false">ntlsn-82</guid>
     <category>webinar</category>
     <description>Adelaide · Teaching Excellence Award recipients. Details to be announced.</description>
@@ -149,7 +135,7 @@
   </item>
   <item>
     <title>AAUT &amp; HERDSA Webinar Session 5 (2026-09-24)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://herdsa.org.au/herdsa-webinar-series</link>
     <guid isPermaLink="false">ntlsn-78</guid>
     <category>webinar</category>
     <description>Details to be announced.</description>
@@ -233,7 +219,7 @@
   </item>
   <item>
     <title>AU &amp; AAUT Breakfast: Dr Amanda Gigliotti (UOW) (2026-10-15)</title>
-    <link>https://www.ntlsn.com/</link>
+    <link>https://aautn.org/2026-adelaide-university-aaut-teaching-and-learning-breakfast-series/</link>
     <guid isPermaLink="false">ntlsn-83</guid>
     <category>webinar</category>
     <description>Adelaide · Citation recipient. Details to be announced.</description>
@@ -296,10 +282,10 @@
   </item>
   <item>
     <title>UTS Learning &amp; Teaching Forum (2026-11-04 – 2026-11-05)</title>
-    <link>https://www.uts.edu.au/about/uts-vision/teaching/scholarship-and-research/learning-and-teaching-events/uts-teaching-and-learning-forum</link>
+    <link>https://educationexpress.uts.edu.au/events/</link>
     <guid isPermaLink="false">ntlsn-31</guid>
     <category>conference</category>
-    <description>UTS · UTS's whole-of-university forum — blended learning, authentic assessment; closes with the VC's L&amp;T Awards. Date TBC.</description>
+    <description>UTS · UTS's whole-of-university forum — blended learning, authentic assessment; closes with the VC's L&amp;T Awards. 2026 date TBC; listed on Education Express when open.</description>
   </item>
   <item>
     <title>CSU Regional Education Showcase (2026-11-04)</title>

@@ -9,9 +9,17 @@
   },
   "scripts": {
     "test": "node --test netlify/functions/test/*.test.js",
-    "build": "echo 'NTLSN is a static site — no build step'"
+    "build": "echo 'NTLSN is a static site — no build step'",
+    "test:e2e": "playwright test",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@netlify/blobs": "^8.2.0"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.13.0",
+    "@playwright/test": "^1.61.1",
+    "axe-core": "^4.12.1",
+    "playwright": "^1.61.1"
   }
 }
