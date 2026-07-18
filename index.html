@@ -6720,5 +6720,284 @@ go();
   try{new MutationObserver(queue).observe(document.body,{childList:true,subtree:true});}catch(e){}
 }catch(e){}})();
 </script>
-</body>
+<script id="ntlsn-events-filter">/* NTLSN events search + shareable filters — patch script (id: ntlsn-events-filter)
+ * Adds a self-contained "Explore events" panel to the #events section: full-text
+ * search (title + description + university) plus filters for type, state, network
+ * group and month, combined with AND logic. Filter state is serialised to URL
+ * query params (?q= &type= &state= &group= &month=) via history.replaceState and
+ * restored on load, so any filter combination is a shareable link.
+ *
+ * Why a dedicated panel (not a show/hide overlay on the bundle's cards): the
+ * bundle renders #events as a React month-calendar (search + type + month nav,
+ * held in internal React state) and #conferences as static hand-coded JSX — there
+ * is no flat, data-driven event-card list in the bundle to overlay. So, per the
+ * documented patch-script architecture and the widget.js precedent, this fetches
+ * the canonical /data/events.json + /data/universities.json and renders its own
+ * list. It does NOT touch the minified bundle and does NOT depend on any SPA
+ * fallback (the site is multi-page static; this is just query params on index.html).
+ */
+(function () {
+  if (window.__ntlsnEF) return;
+  window.__ntlsnEF = 1;
+
+  var WRAP_ID = 'ntlsn-ef-wrap';
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var PSEUDO = ['national'];
+  // Palette per CLAUDE.md; type → accent colour (best-effort, fallback teal).
+  var TYPE_COLOR = {
+    conference: '#4ECDC4', symposium: '#C57BFF', workshop: '#FFB448', webinar: '#FF6B6B',
+    showcase: '#4ECDC4', week: '#FFB448', seminar: '#C57BFF', forum: '#4ECDC4',
+    summit: '#FF6B6B', masterclass: '#FFB448', roundtable: '#C57BFF'
+  };
+  var GROUP_ORDER = ['Go8', 'ATN', 'IRU', 'RUN', 'Unaligned'];
+  var STATE_ORDER = ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'ACT', 'TAS', 'NT'];
+  var PARAMS = ['q', 'type', 'state', 'group', 'month'];
+
+  var DATA = null;
+  var S = { q: '', type: '', state: '', group: '', month: '' };
+  var WIRED = false;
+
+  function uniq(a) { var o = {}, r = []; for (var i = 0; i < a.length; i++) { var v = a[i]; if (v && !o[v]) { o[v] = 1; r.push(v); } } return r; }
+  function norm(u) { return (u || '').replace(/\/+$/, '').toLowerCase(); }
+  function cap(x) { return x ? x.charAt(0).toUpperCase() + x.slice(1) : ''; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function safeUrl(u) { if (!u) return ''; var s = String(u).trim(); if (/^(https?:|\/\/|\/|#|\.\/|\.\.\/)/i.test(s)) return s; if (/^[a-z][a-z0-9+.\-]*:/i.test(s)) return ''; return s; }
+  function fmt(d, end) {
+    var a = d.split('-'), m = +a[1], day = +a[2];
+    if (end && end !== d) { var b = end.split('-'), m2 = +b[1], d2 = +b[2]; return (m === m2 ? (day + '–' + d2 + ' ' + MON[m - 1]) : (day + ' ' + MON[m - 1] + ' – ' + d2 + ' ' + MON[m2 - 1])) + ' ' + a[0]; }
+    return day + ' ' + MON[m - 1] + ' ' + a[0];
+  }
+  function monthLabel(ym) { return MON[(+ym.slice(5, 7)) - 1] + ' ' + ym.slice(0, 4); }
+  function ordered(values, preferred) {
+    var present = {}, out = [];
+    values.forEach(function (v) { if (v) present[v] = true; });
+    preferred.forEach(function (v) { if (present[v]) { out.push(v); delete present[v]; } });
+    Object.keys(present).sort().forEach(function (v) { out.push(v); });
+    return out;
+  }
+
+  var LOADING = null;
+  function loadData(cb) {
+    if (DATA) { cb(); return; }
+    if (LOADING) { LOADING.push(cb); return; }
+    LOADING = [cb];
+    Promise.all([
+      fetch('/data/events.json', { cache: 'no-store' }).then(function (r) { return r.json(); }),
+      fetch('/data/universities.json', { cache: 'no-store' }).then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      var events = res[0] || [], unis = res[1] || [];
+      var uniMap = {}; unis.forEach(function (u) { uniMap[u.id] = u; });
+      var enriched = events.map(function (e) {
+        var u = uniMap[e.uni] || {};
+        var uniName = u.name || (PSEUDO.indexOf(e.uni) >= 0 ? 'National / sector-wide' : e.uni);
+        return {
+          id: e.id, title: e.title || '', desc: e.desc || '', type: e.type || '',
+          date: e.date, endDate: e.endDate, url: e.url || '', uni: e.uni,
+          uniName: uniName, abbr: u.abbr || '', state: u.state || '', group: u.group || '',
+          month: (e.date || '').slice(0, 7),
+          search: (e.title + ' ' + (e.desc || '') + ' ' + uniName + ' ' + (u.abbr || '')).toLowerCase()
+        };
+      }).sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+      DATA = {
+        events: enriched,
+        types: ordered(enriched.map(function (e) { return e.type; }), ['conference', 'symposium', 'workshop', 'webinar', 'showcase', 'week']),
+        states: ordered(unis.map(function (u) { return u.state; }), STATE_ORDER),
+        groups: ordered(unis.map(function (u) { return u.group; }), GROUP_ORDER),
+        months: uniq(enriched.map(function (e) { return e.month; })).sort()
+      };
+      var q = LOADING; LOADING = null; q.forEach(function (fn) { try { fn(); } catch (e) {} });
+    }).catch(function () { DATA = null; LOADING = null; var el = document.getElementById('ntlsn-ef-status'); if (el) el.textContent = 'Couldn’t load events right now — please retry later.'; });
+  }
+
+  function readUrl() {
+    try {
+      var p = new URLSearchParams(location.search);
+      PARAMS.forEach(function (k) { S[k] = (p.get(k) || '').trim(); });
+    } catch (e) {}
+  }
+  function syncUrl() {
+    try {
+      var u = new URL(location.href);
+      PARAMS.forEach(function (k) { if (S[k]) u.searchParams.set(k, S[k]); else u.searchParams.delete(k); });
+      history.replaceState(null, '', u.pathname + (u.search || '') + (u.hash || ''));
+    } catch (e) {}
+  }
+
+  function matches(e) {
+    if (S.type && e.type !== S.type) return false;
+    if (S.state && e.state !== S.state) return false;
+    if (S.group && e.group !== S.group) return false;
+    if (S.month && e.month !== S.month) return false;
+    if (S.q) { var q = S.q.toLowerCase().trim(); if (q && e.search.indexOf(q) < 0) return false; }
+    return true;
+  }
+
+  function cardHTML(e) {
+    var color = TYPE_COLOR[e.type] || '#4ECDC4';
+    var loc = e.state ? (e.uniName + ' · ' + e.state) : e.uniName;
+    var dateTxt = fmt(e.date, e.endDate);
+    var href = safeUrl(e.url);
+    var inner =
+      '<div class="ntef-top">' +
+        '<span class="ntef-pill" style="color:' + color + ';background:' + color + '1a;border-color:' + color + '59">' + esc(cap(e.type || 'event')) + '</span>' +
+        '<span class="ntef-date">' + esc(dateTxt) + '</span>' +
+      '</div>' +
+      '<div class="ntef-title">' + esc(e.title) + '</div>' +
+      '<div class="ntef-meta">' + esc(loc) + '</div>' +
+      (e.desc ? '<div class="ntef-desc">' + esc(e.desc) + '</div>' : '');
+    if (href) {
+      return '<a class="ntef-card" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + inner + '</a>';
+    }
+    return '<div class="ntef-card ntef-card-nolink" title="Link pending verification">' + inner + '</div>';
+  }
+
+  function renderList() {
+    var box = document.getElementById('ntlsn-ef-results');
+    var countEl = document.getElementById('ntlsn-ef-count');
+    if (!DATA || !box) return;
+    var out = [];
+    for (var i = 0; i < DATA.events.length; i++) {
+      if (matches(DATA.events[i])) out.push(DATA.events[i]);
+    }
+    if (countEl) countEl.textContent = 'Showing ' + out.length + ' of ' + DATA.events.length + ' events';
+    if (!out.length) {
+      box.innerHTML = '<div class="ntef-empty"><p><strong>No events match your filters.</strong></p>' +
+        '<p>Try clearing a filter or searching for something broader.</p>' +
+        '<button type="button" class="ntef-clear" data-ntef-clear="1">Clear all filters</button></div>';
+      return;
+    }
+    var html = '';
+    for (var j = 0; j < out.length; j++) html += cardHTML(out[j]);
+    box.innerHTML = html;
+  }
+
+  function opt(val, label, sel) { return '<option value="' + esc(val) + '"' + (sel ? ' selected' : '') + '>' + esc(label) + '</option>'; }
+  function selectHTML(kind, label, values, fmtLabel) {
+    var sel = S[kind];
+    var opts = '<option value=""' + (!sel ? ' selected' : '') + '>All ' + label + '</option>';
+    for (var i = 0; i < values.length; i++) opts += opt(values[i], fmtLabel ? fmtLabel(values[i]) : values[i], values[i] === sel);
+    return '<label class="ntef-field"><span class="ntef-label">' + label + '</span>' +
+      '<select data-ntef="' + kind + '" class="ntef-select">' + opts + '</select></label>';
+  }
+
+  function panelMarkup() {
+    var d = DATA;
+    var controls = '<div class="ntef-controls">' +
+      '<label class="ntef-field ntef-search" for="ntlsn-ef-q"><span class="ntef-label">Search</span>' +
+        '<input id="ntlsn-ef-q" type="search" placeholder="Search by title, description or university…" value="' + esc(S.q) + '" autocomplete="off">' +
+      '</label>' +
+      '<div class="ntef-filters">' +
+        (d ? selectHTML('type', 'type', d.types, function (v) { return cap(v); }) : '') +
+        (d ? selectHTML('state', 'state', d.states) : '') +
+        (d ? selectHTML('group', 'network', d.groups) : '') +
+        (d ? selectHTML('month', 'month', d.months, monthLabel) : '') +
+      '</div></div>' +
+      '<div class="ntef-bar">' +
+        '<p id="ntlsn-ef-count" class="ntef-count" role="status" aria-live="polite">' + (d ? 'Showing ' + d.events.length + ' of ' + d.events.length + ' events' : 'Loading…') + '</p>' +
+        '<div class="ntef-actions">' +
+          '<button type="button" class="ntef-clear" data-ntef-clear="1">Clear filters</button> ' +
+          '<button type="button" class="ntef-copy" data-ntef-copy="1">Copy shareable link</button>' +
+        '</div>' +
+      '</div>';
+    return '<div class="ntef">' +
+      '<div class="ntef-head"><h3 class="ntef-h">Find an event</h3>' +
+        '<p class="ntef-sub">Search and filter every sector event. Filter combinations are shareable — the URL updates as you go.</p></div>' +
+      controls +
+      '<p id="ntlsn-ef-status" class="ntef-status" role="status" aria-live="polite"></p>' +
+      '<div id="ntlsn-ef-results" class="ntef-results">' + (d ? '' : '<div class="ntef-loading">Loading events…</div>') + '</div>' +
+    '</div>';
+  }
+
+  var STYLE = '[id^="ntlsn-ef-wrap"]{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}' +
+    '.ntef{max-width:1150px;margin:0 auto 28px;padding:20px;border:1px solid rgba(78,205,196,.16);border-radius:20px;background:linear-gradient(180deg,rgba(15,29,50,.85),rgba(10,22,40,.6))}' +
+    '.ntef-head{margin-bottom:14px}.ntef-h{margin:0 0 4px;font-size:1.35rem;font-weight:700;color:#fff;letter-spacing:.2px}.ntef-sub{margin:0;color:rgba(255,255,255,.5);font-size:.86rem;line-height:1.45}' +
+    '.ntef-controls{display:flex;flex-direction:column;gap:12px}' +
+    '.ntef-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}' +
+    '.ntef-field{display:flex;flex-direction:column;gap:4px}.ntef-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4)}' +
+    '.ntef-search input,.ntef-select{width:100%;box-sizing:border-box;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:11px;color:#fff;padding:11px 13px;font-size:.95rem;outline:none}' +
+    '.ntef-search input::placeholder{color:rgba(255,255,255,.3)}.ntef-search input:focus,.ntef-select:focus{border-color:rgba(78,205,196,.6);box-shadow:0 0 0 3px rgba(78,205,196,.16);background:rgba(255,255,255,.09)}' +
+    '.ntef-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%239fb3c8\' stroke-width=\'3\' stroke-linecap=\'round\'%3E%3Cpath d=\'M6 9l6 6 6-6\'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}' +
+    '.ntef-select option{color:#0A1628;background:#0f1d32}' +
+    '.ntef-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:14px}.ntef-count{margin:0;color:rgba(255,255,255,.55);font-size:.82rem;font-weight:600}.ntef-actions{display:flex;gap:8px;flex-wrap:wrap}' +
+    '.ntef-clear,.ntef-copy{cursor:pointer;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:rgba(255,255,255,.8);border-radius:9px;padding:8px 13px;font-size:.82rem;font-weight:600}.ntef-clear:hover,.ntef-copy:hover{border-color:rgba(78,205,196,.5);color:#fff;background:rgba(78,205,196,.1)}' +
+    '.ntef-status{margin:8px 0 0;color:#FF6B6B;font-size:.82rem;min-height:1em}' +
+    '.ntef-results{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px}' +
+    '.ntef-card{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:inherit;padding:15px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.03);transition:border-color .2s,transform .2s,background .2s}.ntef-card:hover{border-color:rgba(78,205,196,.45);background:rgba(78,205,196,.06);transform:translateY(-2px)}.ntef-card-nolink{cursor:default}.ntef-card-nolink:hover{transform:none}' +
+    '.ntef-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.ntef-pill{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border:1px solid;border-radius:6px;padding:2px 7px}.ntef-date{font-size:.72rem;color:rgba(255,255,255,.45);white-space:nowrap}' +
+    '.ntef-title{font-size:.98rem;font-weight:700;color:#fff;line-height:1.3}.ntef-meta{font-size:.74rem;color:rgba(127,170,200,.85)}.ntef-desc{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.4}' +
+    '.ntef-loading,.ntef-empty{grid-column:1/-1;padding:26px;text-align:center;color:rgba(255,255,255,.55);border:1px dashed rgba(255,255,255,.14);border-radius:14px}.ntef-empty p{margin:0 0 4px}.ntef-empty .ntef-clear{margin-top:10px}' +
+    '@media (max-width:560px){.ntef{padding:16px}.ntef-bar{flex-direction:column;align-items:flex-start}}';
+
+  function ensureStyle() {
+    if (document.getElementById('ntlsn-ef-style')) return;
+    var st = document.createElement('style'); st.id = 'ntlsn-ef-style'; st.textContent = STYLE; document.head.appendChild(st);
+  }
+
+  function setControls() {
+    var q = document.getElementById('ntlsn-ef-q'); if (q && q.value !== S.q) q.value = S.q;
+    document.querySelectorAll('[data-ntef]').forEach(function (sel) {
+      var k = sel.getAttribute('data-ntef'); if (S[k] !== undefined && sel.value !== S[k]) sel.value = S[k];
+    });
+  }
+
+  function wire() {
+    if (WIRED) return; WIRED = true;
+    var applyT = null, syncT = null;
+    function soon() { clearTimeout(applyT); applyT = setTimeout(renderList, 120); }
+    function sync() { clearTimeout(syncT); syncT = setTimeout(syncUrl, 380); }
+    document.addEventListener('input', function (e) {
+      var t = e.target; if (t && t.id === 'ntlsn-ef-q') { S.q = t.value; soon(); sync(); }
+    }, true);
+    document.addEventListener('change', function (e) {
+      var t = e.target; if (!t || !t.dataset || !t.dataset.ntef) return;
+      S[t.dataset.ntef] = t.value; renderList(); sync();
+    }, true);
+    document.addEventListener('click', function (e) {
+      var clr = e.target.closest && e.target.closest('[data-ntef-clear]');
+      if (clr) { PARAMS.forEach(function (k) { S[k] = ''; }); setControls(); renderList(); syncUrl(); return; }
+      var cp = e.target.closest && e.target.closest('[data-ntef-copy]');
+      if (cp) {
+        var done = function () { cp.textContent = 'Link copied ✓'; setTimeout(function () { cp.textContent = 'Copy shareable link'; }, 1600); };
+        try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(location.href).then(done, done); } else { done(); } } catch (ex) { done(); }
+      }
+    }, true);
+    window.addEventListener('popstate', function () { readUrl(); setControls(); renderList(); });
+  }
+
+  function inject() {
+    var sec = document.getElementById('events'); if (!sec) return;
+    if (document.getElementById(WRAP_ID)) return; // already inserted
+    var wrap = document.createElement('div'); wrap.id = WRAP_ID;
+    // Place right after the "What's On" heading if findable, else at the top of the section content.
+    var placed = false;
+    var h2s = sec.querySelectorAll('h2');
+    for (var i = 0; i < h2s.length; i++) { if (/What.s On/i.test(h2s[i].textContent || '')) { var c = h2s[i].closest('div'); if (c && c.parentNode) { c.parentNode.insertBefore(wrap, c.nextSibling); placed = true; } break; } }
+    if (!placed) { var inner = sec.querySelector('.max-w-6xl') || sec; inner.insertBefore(wrap, inner.firstChild); }
+    wrap.innerHTML = panelMarkup();
+  }
+
+  function build() {
+    ensureStyle();
+    inject();
+    loadData(function () {
+      // (Re)render the panel now that DATA/options exist, preserving the live wrapper.
+      var wrap = document.getElementById(WRAP_ID);
+      if (wrap) {
+        var focusActive = document.activeElement && document.activeElement.id === 'ntlsn-ef-q';
+        wrap.innerHTML = panelMarkup();
+        setControls();
+        renderList();
+        if (focusActive) { var q = document.getElementById('ntlsn-ef-q'); if (q) try { q.focus(); } catch (e) {} }
+      }
+    });
+  }
+
+  readUrl();
+  wire();
+  build();
+  setTimeout(build, 1200);
+  setTimeout(build, 3000);
+  new MutationObserver(function () { if (!document.getElementById(WRAP_ID)) build(); }).observe(document.body, { childList: true, subtree: true });
+})();
+</script></body>
 </html>
