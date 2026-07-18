@@ -170,8 +170,7 @@ export default function ResourceHubSection() {
           confirmed live April 2026. Others are authoritatively known to exist
           but URLs should be re-checked before citation. Compiled by Dr Seb
           Dianati with sector-expert synthesis · experience design with thanks
-          to Dr Kashmira Davé. A 60–90 minute URL-verification sweep is
-          recommended before go-live.
+          to Dr Kashmira Davé.
         </p>
       </div>
     </section>

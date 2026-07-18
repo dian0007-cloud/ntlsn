@@ -30,7 +30,7 @@ export interface CapabilityGroup {
 
 export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
   {
-    "label": "Open Educational Practice — live now · silent launch at HERDSA 2026",
+    "label": "Open Educational Practice — live now · launched quietly at HERDSA 2026",
     "sub": "The free commons, open to everyone today",
     "c": "#4ECDC4",
     "badge": "2026",
@@ -38,7 +38,7 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
     "items": [
       {
         "n": "National T&L map",
-        "d": "All 42 Australian universities, one open map."
+        "d": "All 43 Australian universities, one open map."
       },
       {
         "n": "SoTL archive",
