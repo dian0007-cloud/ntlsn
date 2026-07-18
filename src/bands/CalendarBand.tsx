@@ -5,6 +5,7 @@ import SotlGrantsSection from "../components/SotlGrantsSection";
 import ConferencesSection from "../components/ConferencesSection";
 import ZoomShareSection from "../components/ZoomShareSection";
 import DueSoon from "../components/DueSoon";
+import CollapsibleSection from "../components/CollapsibleSection";
 import SectionPlaceholder from "../components/SectionPlaceholder";
 import { bandSlice } from "../sections";
 
@@ -30,9 +31,17 @@ export default function CalendarBand() {
           // The canonical order (ntlsn-order patch) slots the Due Soon rail
           // between #ntlsn-zoom and #ntlsn-archive — it matches it by
           // /^Due Soon/ text, not id, so it has no SECTION_ORDER row.
+          // Collapse hybrid (PR-G): the Zoom share form is tail — collapsed;
+          // Due Soon is core journey — expanded, outside the wrapper.
           return (
             <Fragment key={id}>
-              <ZoomShareSection />
+              <CollapsibleSection
+                ids={[id]}
+                title="Share a live session. The whole sector’s invited."
+                teaser="Share your Zoom or Teams link — or just your registration form — and it goes out to the whole sector."
+              >
+                <ZoomShareSection />
+              </CollapsibleSection>
               <DueSoon />
             </Fragment>
           );

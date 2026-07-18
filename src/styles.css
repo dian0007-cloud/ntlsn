@@ -327,6 +327,109 @@ body {
   line-height: 0.8;
 }
 
+/*
+ * CollapsibleSection (PR-G, the cfold hybrid): grid-row collapse so the open/
+ * close animates height smoothly without measuring content. While closed or
+ * animating the inner is overflow:hidden; once the open transition settles
+ * (.cfold-settled) overflow returns to visible so position:sticky content
+ * inside (the litmus scrollytelling) can stick. .cfold-instant disables the
+ * transition for hash deep-link auto-opens. The reduced-motion block below
+ * zeroes the transition, making every toggle instant.
+ */
+.cfold-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cfold-panel.cfold-open {
+  grid-template-rows: 1fr;
+}
+.cfold-panel.cfold-instant {
+  transition: none;
+}
+.cfold-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.cfold-panel.cfold-open.cfold-settled .cfold-inner {
+  overflow: visible;
+}
+
+/*
+ * #ntlsn-rebalance (PR-G port of the manifesto band): the research/teaching
+ * weighting bar, verbatim from the production ntlsn-rebalance-style patch —
+ * including its own reduced-motion override (a static 60/40 split).
+ */
+#ntlsn-rebalance .rbar {
+  display: flex;
+  height: 58px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+#ntlsn-rebalance .rseg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font:
+    800 13px -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#ntlsn-rebalance .rseg-r {
+  flex: 0 0 74%;
+  background: linear-gradient(135deg, #56657a, #808fa3);
+  color: #eef2f6;
+  animation: ntlsnRebalR 7s ease-in-out infinite;
+}
+#ntlsn-rebalance .rseg-t {
+  flex: 0 0 26%;
+  background: linear-gradient(135deg, #17a294, #2dd4bf);
+  color: #06243a;
+  animation: ntlsnRebalT 7s ease-in-out infinite;
+}
+@keyframes ntlsnRebalR {
+  0%,
+  14% {
+    flex-basis: 74%;
+  }
+  50%,
+  64% {
+    flex-basis: 52%;
+  }
+  100% {
+    flex-basis: 74%;
+  }
+}
+@keyframes ntlsnRebalT {
+  0%,
+  14% {
+    flex-basis: 26%;
+  }
+  50%,
+  64% {
+    flex-basis: 48%;
+  }
+  100% {
+    flex-basis: 26%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #ntlsn-rebalance .rseg-r {
+    flex-basis: 60%;
+    animation: none;
+  }
+  #ntlsn-rebalance .rseg-t {
+    flex-basis: 40%;
+    animation: none;
+  }
+}
+
 /* Honour prefers-reduced-motion: kill animations, transitions and smooth scroll. */
 @media (prefers-reduced-motion: reduce) {
   html {

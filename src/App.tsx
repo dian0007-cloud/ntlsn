@@ -12,7 +12,7 @@ import { bandSlice } from "./sections";
 
 /**
  * Code-splitting (PR-F, §1.3 budget: initial JS < 350KB): the page below the
- * front door is cut into six lazy band chunks, each a contiguous slice of
+ * front door is cut into seven lazy band chunks, each a contiguous slice of
  * SECTION_ORDER rendered by a component in src/bands/. The heavy data
  * modules (talks/frameworks/resourceHub/teachingResources/pathways/pd/
  * pricing/tools/…) are reachable ONLY through their band's dynamic import,
@@ -42,9 +42,17 @@ const BANDS = [
     load: () => import("./bands/TalksBand"),
   },
   {
-    ids: bandSlice("frameworks", "ntlsn-rpcalc"),
+    ids: bandSlice("frameworks", "ntlsn-guided"),
     band: lazy(() => import("./bands/FrameworksBand")),
     load: () => import("./bands/FrameworksBand"),
+  },
+  {
+    // PR-G: the 13-section recognition band (all collapsed) is its own
+    // chunk, split out of FrameworksBand so the ports never touch the
+    // initial budget.
+    ids: bandSlice("ntlsn-recognition", "ntlsn-rpcalc"),
+    band: lazy(() => import("./bands/RecognitionBand")),
+    load: () => import("./bands/RecognitionBand"),
   },
   {
     ids: bandSlice("architecture", "ntlsn-induction"),
@@ -83,7 +91,7 @@ export default function App() {
         <StartGrid />
         <FreshToday />
         <Glance />
-        {/* Lazy: the remaining 94 canonical slots, in six band chunks. */}
+        {/* Lazy: the remaining 94 canonical slots, in seven band chunks. */}
         {BANDS.map((b) => (
           <LazyBand key={b.ids[0]} ids={b.ids} band={b.band} load={b.load} />
         ))}
