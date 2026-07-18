@@ -5,7 +5,7 @@ import { upcomingConferences } from "../lib/events";
  * #conferences — "SoTL Sector Conferences" (TASKS.md 1.2, second ported
  * section).
  *
- * Header treatment is production's: gold "The Calendar" kicker (#C9A962 —
+ * Header treatment is production's: gold "The Calendar" kicker (#c9a962 —
  * production-exact, no token exists for it), h2 with the teal "Updated
  * weekly" fresh-badge pill (ntlsn-freshbadge patch, componentised, using the
  * teal token), muted subtitle, then the "The full calendar" mini-label above
@@ -29,7 +29,7 @@ export default function ConferencesSection() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             The Calendar
           </p>
           <h2

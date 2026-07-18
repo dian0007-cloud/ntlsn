@@ -121,7 +121,7 @@ export default function CollapsibleSection({
           aria-expanded={open}
           aria-controls={panelId}
           onClick={toggle}
-          className="group flex w-full items-center gap-4 rounded-[14px] border border-white/[0.08] bg-[#0f1f3a] px-5 py-4 text-left transition-colors hover:border-teal/40"
+          className="group flex w-full items-center gap-4 rounded-[14px] border border-white/[0.08] bg-[#2a2218] px-5 py-4 text-left transition-colors hover:border-teal/40"
         >
           <span
             aria-hidden="true"
@@ -135,11 +135,11 @@ export default function CollapsibleSection({
             <span className="block text-[15px] leading-snug font-extrabold text-white">
               {title}
             </span>
-            <span className="mt-0.5 block truncate text-[12.5px] leading-normal font-normal text-[#8AA0B6]">
+            <span className="mt-0.5 block truncate text-[12.5px] leading-normal font-normal text-[#a0907a]">
               {teaser}
             </span>
           </span>
-          <span className="flex-none text-[10.5px] font-extrabold tracking-[1.2px] text-[#8AA0B6] uppercase group-hover:text-teal">
+          <span className="flex-none text-[10.5px] font-extrabold tracking-[1.2px] text-[#a0907a] uppercase group-hover:text-teal">
             {open ? "Close" : "Open"}
           </span>
         </button>

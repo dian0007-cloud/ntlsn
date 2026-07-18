@@ -26,7 +26,7 @@ const GROUPS: ReadonlyArray<{
 }> = [
   {
     head: "Available now · the free commons",
-    colour: "#4ECDC4",
+    colour: "#8fb081",
     items: [
       ["Home", "hero"],
       ["Free tools & search", "ntlsn-trynow"],
@@ -45,7 +45,7 @@ const GROUPS: ReadonlyArray<{
   },
   {
     head: "Available now · learn & explore",
-    colour: "#4ECDC4",
+    colour: "#8fb081",
     items: [
       ["At a glance", "ntlsn-glance"],
       ["Academic Induction", "ntlsn-induction"],
@@ -58,7 +58,7 @@ const GROUPS: ReadonlyArray<{
   },
   {
     head: "Coming 2027 · symposiums",
-    colour: "#FFB448",
+    colour: "#e6a33c",
     items: [
       ["The Portal (preview)", "ntlsn-symshow"],
       ["Symposium engine", "ntlsn-coming2027"],
@@ -69,7 +69,7 @@ const GROUPS: ReadonlyArray<{
   },
   {
     head: "Coming 2028 · recognition",
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     items: [
       ["Recognition passport", "ntlsn-coming2028"],
       ["Awards & citations", "ntlsn-coming2028"],
@@ -79,7 +79,7 @@ const GROUPS: ReadonlyArray<{
   },
   {
     head: "About & join",
-    colour: "#9fb0c3",
+    colour: "#b3a48c",
     items: [
       ["About", "about"],
       ["Pricing", "pricing"],
@@ -225,7 +225,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
               onClick={onClose}
               className={
                 cta.primary
-                  ? "inline-block rounded-[11px] bg-[#2DD4BF] px-[22px] py-[11px] text-sm font-extrabold text-[#06243a] no-underline"
+                  ? "inline-block rounded-[11px] bg-[#8fb081] px-[22px] py-[11px] text-sm font-extrabold text-[#1f1810] no-underline"
                   : "inline-block rounded-[11px] border border-white/20 bg-transparent px-[22px] py-[11px] text-sm font-extrabold text-white no-underline"
               }
             >

@@ -13,11 +13,11 @@ export default function AboutSection() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#0f1d32]/70 px-4 py-24"
+      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#271f16]/70 px-4 py-24"
     >
       <div className="mx-auto max-w-4xl">
         <div className="mb-16 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume XIII
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -41,7 +41,7 @@ export default function AboutSection() {
             <div className="mb-3 flex items-center gap-4">
               <div
                 aria-hidden="true"
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal via-[#7C9CFF] to-purple text-lg font-bold text-white"
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal via-[#c66c3f] to-purple text-lg font-bold text-white"
               >
                 SD
               </div>
@@ -70,7 +70,7 @@ export default function AboutSection() {
             <div className="mb-3 flex items-center gap-4">
               <div
                 aria-hidden="true"
-                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal via-[#7C9CFF] to-purple text-lg font-bold text-white"
+                className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal via-[#c66c3f] to-purple text-lg font-bold text-white"
               >
                 KD
               </div>
@@ -168,7 +168,7 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-teal/20 bg-gradient-to-br from-teal/5 to-[#7C9CFF]/5 p-6">
+        <div className="rounded-xl border border-teal/20 bg-gradient-to-br from-teal/5 to-[#c66c3f]/5 p-6">
           <h3 className="mb-4 text-lg font-bold text-white">Get Involved</h3>
           <div className="flex flex-wrap gap-4">
             <a

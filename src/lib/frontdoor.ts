@@ -401,7 +401,7 @@ export interface GlanceStage {
  */
 export const GLANCE_STAGES: readonly GlanceStage[] = [
   {
-    color: "#2DD4BF",
+    color: "#8fb081",
     title: "The free commons",
     sub: "Free forever · no login",
     items: [
@@ -416,7 +416,7 @@ export const GLANCE_STAGES: readonly GlanceStage[] = [
     ],
   },
   {
-    color: "#7C9CFF",
+    color: "#c66c3f",
     title: "Run your own",
     sub: "On infrastructure you don’t build",
     items: [
@@ -431,7 +431,7 @@ export const GLANCE_STAGES: readonly GlanceStage[] = [
     ],
   },
   {
-    color: "#FFB448",
+    color: "#e6a33c",
     title: "Recognition",
     sub: "Work that finally counts",
     items: [
@@ -446,7 +446,7 @@ export const GLANCE_STAGES: readonly GlanceStage[] = [
     ],
   },
   {
-    color: "#C57BFF",
+    color: "#a8737f",
     title: "On campus & connected",
     sub: "The human face + the whole sector",
     items: [

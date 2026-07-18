@@ -31,7 +31,7 @@ export default function ConfRecognitionSection() {
     >
       <div className="mx-auto max-w-[900px]">
         <div className="mx-auto mb-6 max-w-[740px] text-center">
-          <div className="mb-[13px] inline-block rounded-full border border-[rgba(255,180,72,.4)] px-3 py-1 text-[10.5px] font-extrabold tracking-[1.4px] text-amber uppercase">
+          <div className="mb-[13px] inline-block rounded-full border border-[rgba(230,163,60,.4)] px-3 py-1 text-[10.5px] font-extrabold tracking-[1.4px] text-amber uppercase">
             Recognition · in design · 2027
           </div>
           <h2
@@ -40,7 +40,7 @@ export default function ConfRecognitionSection() {
           >
             Don’t just attend. Get recognised for the whole arc.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#cbd8e6]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#d9cdb6]">
             A conference is more than the days in the room. The preparation
             before, and the reflection after, are where it changes your
             teaching. NTLSN recognises all of it: attending or presenting, at
@@ -51,12 +51,12 @@ export default function ConfRecognitionSection() {
           {STEPS.map(([n, title, body]) => (
             <div
               key={n}
-              className="min-w-[210px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#0f1f3a] px-5 py-[18px]"
+              className="min-w-[210px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#2a2218] px-5 py-[18px]"
             >
               <div className="mb-2 flex items-center gap-2.5">
                 <span
                   aria-hidden="true"
-                  className="flex h-[26px] w-[26px] items-center justify-center rounded-full border border-[rgba(45,212,191,.5)] bg-[rgba(45,212,191,.16)] text-[13px] font-extrabold text-[#2DD4BF]"
+                  className="flex h-[26px] w-[26px] items-center justify-center rounded-full border border-[rgba(143,176,129,.5)] bg-[rgba(143,176,129,.16)] text-[13px] font-extrabold text-[#8fb081]"
                 >
                   {n}
                 </span>
@@ -64,27 +64,27 @@ export default function ConfRecognitionSection() {
                   {title}
                 </span>
               </div>
-              <div className="text-[13.5px] leading-[1.55] text-[#9fb3c8]">
+              <div className="text-[13.5px] leading-[1.55] text-[#b3a48c]">
                 {body}
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-4 rounded-[14px] border border-[rgba(45,212,191,.22)] bg-[rgba(45,212,191,.07)] px-5 py-4 text-center text-[14px] leading-[1.6] text-[#cbd8e6]">
+        <div className="mt-4 rounded-[14px] border border-[rgba(143,176,129,.22)] bg-[rgba(143,176,129,.07)] px-5 py-4 text-center text-[14px] leading-[1.6] text-[#d9cdb6]">
           Presenting at your own institution’s symposium counts as much as a
           keynote overseas. The invisible work, the prep and the reflection,
           finally counts. It all becomes portable recognition: a verified
           My&nbsp;eQuals badge you carry as{" "}
           <a
             href="/recognition-navigator.html"
-            className="text-[#2DD4BF] no-underline"
+            className="text-[#8fb081] no-underline"
           >
             RPL between universities
           </a>
           .
         </div>
-        <p className="mx-auto mt-4 max-w-[680px] text-center text-[12px] text-[#8aa0b6]">
-          <a href="/recognition-points.html" className="text-[#9fb3c8]">
+        <p className="mx-auto mt-4 max-w-[680px] text-center text-[12px] text-[#a0907a]">
+          <a href="/recognition-points.html" className="text-[#b3a48c]">
             See how hours become points →
           </a>{" "}
           · The recognition engine and My&nbsp;eQuals issuance ship in 2027;

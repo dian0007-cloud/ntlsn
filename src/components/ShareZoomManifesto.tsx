@@ -23,7 +23,7 @@ export default function ShareZoomManifesto() {
       }}
     >
       <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+        <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
           The Invitation
         </p>
         <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">

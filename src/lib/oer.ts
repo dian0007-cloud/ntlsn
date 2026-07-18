@@ -36,25 +36,25 @@ export const OER_BROWSE: readonly OerBrowseCard[] = [
     name: "OER Library",
     desc: "50,000+ openly-licensed resources",
     url: "https://oercommons.org/oer",
-    colour: "#4ECDC4",
+    colour: "#8fb081",
   },
   {
     name: "Curated Collections",
     desc: "Hand-picked sets by theme",
     url: "https://oercommons.org/curated-collections",
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
   },
   {
     name: "Providers",
     desc: "Browse by contributing institution",
     url: "https://oercommons.org/oer/providers",
-    colour: "#C57BFF",
+    colour: "#a8737f",
   },
   {
     name: "Hubs",
     desc: "Branded institutional collections",
     url: "https://oercommons.org/hubs/",
-    colour: "#FFB448",
+    colour: "#e6a33c",
   },
 ];
 
@@ -75,7 +75,7 @@ export interface OerDirectoryCategory {
 export const OER_DIRECTORY: readonly OerDirectoryCategory[] = [
   {
     name: "Open textbooks",
-    colour: "#4ECDC4",
+    colour: "#8fb081",
     items: [
       {
         name: "UniSQ Open Textbooks",
@@ -129,7 +129,7 @@ export const OER_DIRECTORY: readonly OerDirectoryCategory[] = [
   },
   {
     name: "Open journals & articles",
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     items: [
       {
         name: "DOAJ",
@@ -177,7 +177,7 @@ export const OER_DIRECTORY: readonly OerDirectoryCategory[] = [
   },
   {
     name: "Images & media",
-    colour: "#C57BFF",
+    colour: "#a8737f",
     items: [
       {
         name: "Openverse",
@@ -231,7 +231,7 @@ export const OER_DIRECTORY: readonly OerDirectoryCategory[] = [
   },
   {
     name: "Audio",
-    colour: "#FFB448",
+    colour: "#e6a33c",
     items: [
       {
         name: "Free Music Archive",
@@ -273,7 +273,7 @@ export const OER_DIRECTORY: readonly OerDirectoryCategory[] = [
   },
   {
     name: "Software & tools",
-    colour: "#2DD4BF",
+    colour: "#8fb081",
     items: [
       {
         name: "R and RStudio",

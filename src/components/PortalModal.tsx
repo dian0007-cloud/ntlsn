@@ -31,7 +31,7 @@ interface PortalModalProps {
 const FIELD =
   "w-full rounded-[10px] border border-white/[0.18] bg-navy px-3 py-2.5 text-[15px] text-white outline-none placeholder:text-white/35 focus:border-teal/60";
 const LABEL =
-  "mb-[5px] block text-xs font-bold tracking-[0.5px] text-[#9FB3C8] uppercase";
+  "mb-[5px] block text-xs font-bold tracking-[0.5px] text-[#b3a48c] uppercase";
 
 export default function PortalModal({
   open,
@@ -96,7 +96,7 @@ export default function PortalModal({
             >
               Submission portal
             </h2>
-            <p className="text-[13px] text-[#9FB3C8]">
+            <p className="text-[13px] text-[#b3a48c]">
               {uni || "Your symposium"} · add talks &amp; upload files
             </p>
           </div>
@@ -108,7 +108,7 @@ export default function PortalModal({
             type="button"
             aria-label="Close the submission portal preview"
             onClick={onClose}
-            className="ml-1.5 cursor-pointer border-0 bg-transparent text-[26px] leading-none text-[#9FB3C8]"
+            className="ml-1.5 cursor-pointer border-0 bg-transparent text-[26px] leading-none text-[#b3a48c]"
           >
             ×
           </button>
@@ -194,9 +194,9 @@ export default function PortalModal({
                 files ? Array.from(files).map((f) => f.name) : [],
               );
             }}
-            className="mb-1 w-full text-sm text-[#9FB3C8]"
+            className="mb-1 w-full text-sm text-[#b3a48c]"
           />
-          <p className="mb-3.5 text-[13px] text-[#8AA0B6]">
+          <p className="mb-3.5 text-[13px] text-[#a0907a]">
             {fileNames.length
               ? `${fileNames.length} file(s): ${fileNames.join(", ")} (demo)`
               : ""}
@@ -211,25 +211,25 @@ export default function PortalModal({
 
           <div className="mt-4">
             {talks.length === 0 ? (
-              <p className="py-1.5 text-sm text-[#8AA0B6]">
+              <p className="py-1.5 text-sm text-[#a0907a]">
                 No talks added yet — add your first above.
               </p>
             ) : (
               <>
-                <p className="mt-4 mb-2 text-xs font-bold tracking-[1px] text-[#8AA0B6] uppercase">
+                <p className="mt-4 mb-2 text-xs font-bold tracking-[1px] text-[#a0907a] uppercase">
                   Your programme ({talks.length})
                 </p>
                 <ul className="list-none">
                   {talks.map((talk, i) => (
                     <li
                       key={`${talk.title}-${i}`}
-                      className="mb-1.5 flex justify-between gap-2.5 rounded-[10px] border border-white/[0.08] bg-[#0f1f38] px-3 py-2.5"
+                      className="mb-1.5 flex justify-between gap-2.5 rounded-[10px] border border-white/[0.08] bg-[#2a2218] px-3 py-2.5"
                     >
                       <div>
                         <p className="text-sm font-semibold text-white">
                           {talk.title || "Untitled talk"}
                         </p>
-                        <p className="text-[13px] text-[#9FB3C8]">
+                        <p className="text-[13px] text-[#b3a48c]">
                           {talk.track} · {talk.format}
                           {talk.presenter ? ` · ${talk.presenter}` : ""}
                           {talk.files ? ` · ${talk.files} file(s)` : ""}
@@ -239,7 +239,7 @@ export default function PortalModal({
                         type="button"
                         aria-label={`Remove ${talk.title || "untitled talk"} from the programme`}
                         onClick={() => onRemoveTalk(i)}
-                        className="cursor-pointer border-0 bg-transparent text-xl leading-none text-[#8AA0B6]"
+                        className="cursor-pointer border-0 bg-transparent text-xl leading-none text-[#a0907a]"
                       >
                         ×
                       </button>
@@ -250,7 +250,7 @@ export default function PortalModal({
             )}
           </div>
 
-          <p className="mt-[18px] border-t border-white/[0.08] pt-3.5 text-[13px] leading-relaxed text-[#8AA0B6]">
+          <p className="mt-[18px] border-t border-white/[0.08] pt-3.5 text-[13px] leading-relaxed text-[#a0907a]">
             Concept preview — nothing is stored and files aren&rsquo;t
             uploaded. The real Portal opens to founding institutions in 2027.{" "}
             <a

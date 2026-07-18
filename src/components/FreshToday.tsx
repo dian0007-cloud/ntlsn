@@ -67,7 +67,7 @@ export default function FreshToday() {
                 <span className="block text-[15.5px] font-extrabold leading-[1.3] text-white">
                   {nextUp.title}
                 </span>
-                <span className="mt-[3px] block text-[13px] text-[#9fb0c3]">
+                <span className="mt-[3px] block text-[13px] text-[#b3a48c]">
                   {formatDay(parseDay(nextUp.date))} · {uniAbbr(nextUp)}
                 </span>
                 <span className="mt-[9px] block text-[12.5px] font-bold text-teal group-hover:underline">
@@ -86,7 +86,7 @@ export default function FreshToday() {
               <span className="block text-base font-extrabold text-white">
                 <span aria-hidden="true">{tool.icon}</span> {tool.title}
               </span>
-              <span className="mt-[3px] block text-[13px] text-[#9fb0c3]">
+              <span className="mt-[3px] block text-[13px] text-[#b3a48c]">
                 {tool.desc}
               </span>
               <span className="mt-[9px] block text-[12.5px] font-bold text-teal group-hover:underline">
@@ -96,7 +96,7 @@ export default function FreshToday() {
           </FreshCard>
 
           <FreshCard label="💡 Today’s prompt">
-            <p className="text-[14.5px] font-medium leading-normal text-[#cbd8e6]">
+            <p className="text-[14.5px] font-medium leading-normal text-[#d9cdb6]">
               {prompt}
             </p>
           </FreshCard>

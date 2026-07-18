@@ -7,10 +7,10 @@
  * hydrated DOM.
  */
 const SHARING_CHIPS: ReadonlyArray<{ label: string; colour: string }> = [
-  { label: "Free", colour: "#4ECDC4" },
-  { label: "Open", colour: "#7C9CFF" },
-  { label: "OEP", colour: "#C57BFF" },
-  { label: "OER", colour: "#C9A962" },
+  { label: "Free", colour: "#8fb081" },
+  { label: "Open", colour: "#c66c3f" },
+  { label: "OEP", colour: "#a8737f" },
+  { label: "OER", colour: "#c9a962" },
 ];
 
 export default function ManifestoSharing() {

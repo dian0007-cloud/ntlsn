@@ -30,7 +30,7 @@ export default function Glance() {
       className="mx-auto max-w-[92rem] scroll-mt-20 px-6 py-16"
     >
       <div className="mx-auto mb-8 max-w-[760px] text-center">
-        <p className="mb-[11px] text-[13px] font-bold uppercase tracking-[2px] text-[#2DD4BF]">
+        <p className="mb-[11px] text-[13px] font-bold uppercase tracking-[2px] text-[#8fb081]">
           NTLSN at a glance
         </p>
         <h2
@@ -39,16 +39,16 @@ export default function Glance() {
         >
           One connected system.
         </h2>
-        <p className="text-[clamp(15px,1.8vw,18px)] leading-relaxed text-[#aebfce]">
+        <p className="text-[clamp(15px,1.8vw,18px)] leading-relaxed text-[#bca98f]">
           A free commons holds the sector together; tools let you run your
           own; recognition makes the work count; and it all connects, on
           campus and across the country.
         </p>
-        <p className="mt-3.5 text-sm font-semibold leading-normal text-[#cbd8e6]">
+        <p className="mt-3.5 text-sm font-semibold leading-normal text-[#d9cdb6]">
           New here?{" "}
           <a
             href="/find-your-path.html"
-            className="font-extrabold text-[#2DD4BF] hover:underline"
+            className="font-extrabold text-[#8fb081] hover:underline"
           >
             Find your path
           </a>{" "}
@@ -62,7 +62,7 @@ export default function Glance() {
           return (
             <Fragment key={stageData.title}>
               <div
-                className="flex min-w-0 flex-1 flex-col rounded-[14px] border border-white/[0.08] bg-[#0f1f3a] px-4 py-[18px]"
+                className="flex min-w-0 flex-1 flex-col rounded-[14px] border border-white/[0.08] bg-[#2a2218] px-4 py-[18px]"
                 style={{ borderTop: `3px solid ${stageData.color}` }}
               >
                 <p
@@ -80,7 +80,7 @@ export default function Glance() {
                     <li key={item.label} className="mb-[7px]">
                       <a
                         href={item.href}
-                        className="block rounded-[7px] border border-white/[0.08] bg-white/[0.04] px-2.5 py-[7px] text-[12.5px] font-medium leading-[1.3] text-[#cbd8e6] transition-colors hover:border-l-teal hover:bg-teal/[0.12] hover:text-white motion-reduce:transition-none"
+                        className="block rounded-[7px] border border-white/[0.08] bg-white/[0.04] px-2.5 py-[7px] text-[12.5px] font-medium leading-[1.3] text-[#d9cdb6] transition-colors hover:border-l-teal hover:bg-teal/[0.12] hover:text-white motion-reduce:transition-none"
                         style={{ borderLeft: `2px solid ${stageData.color}` }}
                       >
                         {item.label}
@@ -116,18 +116,18 @@ export default function Glance() {
         })}
       </div>
 
-      <p className="mx-auto mt-[26px] max-w-[700px] text-center text-[13px] italic text-[#8aa0b6]">
+      <p className="mx-auto mt-[26px] max-w-[700px] text-center text-[13px] italic text-[#a0907a]">
         Free at the front, sustainable at the back — the commons stays open
         forever; the paid layer funds it, never gates it.
       </p>
 
       {/* ntlsn-trust-script badge for this section */}
       <p className="mt-6 flex justify-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/[0.07] px-4 py-2 text-[13px] text-[#cbd8e6]">
+        <span className="inline-flex items-center gap-2 rounded-full border border-teal/30 bg-teal/[0.07] px-4 py-2 text-[13px] text-[#d9cdb6]">
           <svg
             aria-hidden="true"
             viewBox="0 0 24 24"
-            className="h-3.5 w-3.5 stroke-[#2DD4BF]"
+            className="h-3.5 w-3.5 stroke-[#8fb081]"
             fill="none"
             strokeWidth="2.4"
             strokeLinecap="round"

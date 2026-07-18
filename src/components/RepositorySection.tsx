@@ -10,13 +10,13 @@ const STEPS: ReadonlyArray<{
   {
     n: "1",
     title: "Submit",
-    colour: "#2DD4BF",
+    colour: "#8fb081",
     body: "To the conference, a symposium, or the Peer-Review Exchange.",
   },
   {
     n: "2",
     title: "Peer-reviewed",
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     body: "Double-blind review by the sector, not a single gatekeeper.",
   },
   {
@@ -28,7 +28,7 @@ const STEPS: ReadonlyArray<{
   {
     n: "4",
     title: "Open & indexed",
-    colour: "#FFB448",
+    colour: "#e6a33c",
     body: "Archived under Creative Commons, harvestable via OAI-PMH, discoverable in CORE, BASE and beyond.",
   },
 ];
@@ -58,7 +58,7 @@ export default function RepositorySection() {
           >
             Present at your own symposium. Get recognised for it.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#CBD8E6]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#d9cdb6]">
             A symposium talk usually disappears when the event ends. Here it
             doesn&rsquo;t: your talk, poster or workshop is peer-reviewed,
             then earns a DOI — the same permanent, citable link a journal
@@ -72,13 +72,13 @@ export default function RepositorySection() {
               {i > 0 && (
                 <span
                   aria-hidden="true"
-                  className="flex items-center px-0.5 text-lg text-[#8AA0B6]"
+                  className="flex items-center px-0.5 text-lg text-[#a0907a]"
                 >
                   →
                 </span>
               )}
               <div
-                className="min-w-[180px] flex-1 rounded-[13px] border border-white/[0.08] bg-[#0f1f3a] px-[17px] py-4"
+                className="min-w-[180px] flex-1 rounded-[13px] border border-white/[0.08] bg-[#2a2218] px-[17px] py-4"
                 style={{ borderTop: `3px solid ${step.colour}` }}
               >
                 <p className="mb-[7px] flex items-center gap-[9px]">
@@ -96,7 +96,7 @@ export default function RepositorySection() {
                     {step.title}
                   </span>
                 </p>
-                <p className="text-[12.5px] leading-normal text-[#9FB3C8]">
+                <p className="text-[12.5px] leading-normal text-[#b3a48c]">
                   {step.body}
                 </p>
               </div>
@@ -105,20 +105,20 @@ export default function RepositorySection() {
         </div>
 
         <div className="mt-[18px] text-center">
-          <p className="inline-flex max-w-full flex-wrap items-center justify-center gap-2.5 rounded-xl border border-[#2DD4BF]/[0.35] bg-navy px-[18px] py-[13px]">
-            <span className="text-[10px] font-extrabold tracking-[1.2px] whitespace-nowrap text-[#8AA0B6] uppercase">
+          <p className="inline-flex max-w-full flex-wrap items-center justify-center gap-2.5 rounded-xl border border-[#8fb081]/[0.35] bg-navy px-[18px] py-[13px]">
+            <span className="text-[10px] font-extrabold tracking-[1.2px] whitespace-nowrap text-[#a0907a] uppercase">
               Your DOI · example
             </span>
-            <span className="font-mono text-[clamp(12.5px,2.6vw,15px)] leading-snug font-semibold break-all text-[#2DD4BF]">
+            <span className="font-mono text-[clamp(12.5px,2.6vw,15px)] leading-snug font-semibold break-all text-[#8fb081]">
               doi.org/10.5xxxx/ntlsn.2027.0042
             </span>
-            <span className="rounded-full bg-[#2DD4BF] px-2.5 py-1 text-[10.5px] font-extrabold whitespace-nowrap text-[#06243A]">
+            <span className="rounded-full bg-[#8fb081] px-2.5 py-1 text-[10.5px] font-extrabold whitespace-nowrap text-[#1f1810]">
               ✓ Citable
             </span>
           </p>
         </div>
 
-        <div className="mt-[18px] rounded-[14px] border border-[#7C9CFF]/[0.22] bg-[#7C9CFF]/[0.07] px-5 py-4 text-center text-sm leading-relaxed font-medium text-[#CBD8E6]">
+        <div className="mt-[18px] rounded-[14px] border border-[#c66c3f]/[0.22] bg-[#c66c3f]/[0.07] px-5 py-4 text-center text-sm leading-relaxed font-medium text-[#d9cdb6]">
           From grey literature to scholarship. The invisible work of teaching,
           and the student-partnership conferences that hold it, made{" "}
           <b className="text-white">official, open, and owned by no single vendor</b>
@@ -126,8 +126,8 @@ export default function RepositorySection() {
           same way.
         </div>
 
-        <p className="mx-auto mt-4 max-w-[700px] text-center text-xs leading-normal text-[#8AA0B6]">
-          <a href="#events" className="text-[#9FB3C8] underline">
+        <p className="mx-auto mt-4 max-w-[700px] text-center text-xs leading-normal text-[#a0907a]">
+          <a href="#events" className="text-[#b3a48c] underline">
             Submit to the conference →
           </a>{" "}
           · In design for 2027. DOIs are minted through a registration agency

@@ -13,7 +13,7 @@ const CARDS: ReadonlyArray<{
 }> = [
   {
     tag: "40-in-1",
-    accent: "#FFB448",
+    accent: "#e6a33c",
     body: (
       <>
         One symposium = <b className="text-white">40 recognised hours</b>. 8
@@ -24,7 +24,7 @@ const CARDS: ReadonlyArray<{
   },
   {
     tag: "Showcase Streams",
-    accent: "#2DD4BF",
+    accent: "#8fb081",
     body: (
       <>
         The 32 hours are <b className="text-white">yours to design</b> — choose
@@ -35,7 +35,7 @@ const CARDS: ReadonlyArray<{
   },
   {
     tag: "My eQuals credential",
-    accent: "#C57BFF",
+    accent: "#a8737f",
     body: (
       <>
         A <b className="text-white">verifiable, portable</b> digital credential
@@ -54,7 +54,7 @@ export default function ShowcaseSection() {
       className="mx-auto max-w-[92rem] scroll-mt-20 px-6 py-16"
     >
       <div className="mx-auto mb-3.5 max-w-[780px] text-center">
-        <div className="mb-[15px] inline-block rounded-full border border-[rgba(255,180,72,.4)] px-[13px] py-[5px] text-[11px] font-extrabold tracking-[2px] text-amber uppercase">
+        <div className="mb-[15px] inline-block rounded-full border border-[rgba(230,163,60,.4)] px-[13px] py-[5px] text-[11px] font-extrabold tracking-[2px] text-amber uppercase">
           Showcase · In design · 2027
         </div>
         <h2
@@ -63,7 +63,7 @@ export default function ShowcaseSection() {
         >
           Don’t just attend. Walk away credentialed.
         </h2>
-        <p className="text-[clamp(15px,1.8vw,18px)] leading-[1.6] text-[#aebfce]">
+        <p className="text-[clamp(15px,1.8vw,18px)] leading-[1.6] text-[#bca98f]">
           Communities of practice were the conversation.{" "}
           <b className="text-white">Showcase is the recognition</b> — your work
           seen, your hours counted, your credential portable.
@@ -71,17 +71,17 @@ export default function ShowcaseSection() {
       </div>
       <div className="my-6 mb-8 text-center text-[clamp(19px,2.8vw,28px)] leading-[1.5] font-extrabold">
         <span className="text-amber">8</span>{" "}
-        <span className="text-[.7em] font-normal text-[#8aa0b6]">
+        <span className="text-[.7em] font-normal text-[#a0907a]">
           in the room
         </span>{" "}
-        <span className="text-[#8aa0b6]">+</span>{" "}
-        <span className="text-[#2DD4BF]">32</span>{" "}
-        <span className="text-[.7em] font-normal text-[#8aa0b6]">
+        <span className="text-[#a0907a]">+</span>{" "}
+        <span className="text-[#8fb081]">32</span>{" "}
+        <span className="text-[.7em] font-normal text-[#a0907a]">
           your streams
         </span>{" "}
-        <span className="text-[#8aa0b6]">=</span>{" "}
+        <span className="text-[#a0907a]">=</span>{" "}
         <span className="text-purple">40</span>{" "}
-        <span className="text-[.7em] font-normal text-[#8aa0b6]">
+        <span className="text-[.7em] font-normal text-[#a0907a]">
           recognised hours
         </span>
       </div>
@@ -89,7 +89,7 @@ export default function ShowcaseSection() {
         {CARDS.map((card) => (
           <div
             key={card.tag}
-            className="min-w-[250px] max-w-[380px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#0f1f3a] px-6 py-[22px]"
+            className="min-w-[250px] max-w-[380px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#2a2218] px-6 py-[22px]"
             style={{ borderTop: `3px solid ${card.accent}` }}
           >
             <div
@@ -98,13 +98,13 @@ export default function ShowcaseSection() {
             >
               {card.tag}
             </div>
-            <div className="text-[15px] leading-[1.62] text-[#aebfce]">
+            <div className="text-[15px] leading-[1.62] text-[#bca98f]">
               {card.body}
             </div>
           </div>
         ))}
       </div>
-      <p className="mx-auto mt-7 max-w-[720px] text-center text-[13px] italic text-[#8aa0b6]">
+      <p className="mx-auto mt-7 max-w-[720px] text-center text-[13px] italic text-[#a0907a]">
         In design — the My eQuals credential integration is on the 2027
         roadmap. NTLSN issues the verifiable record of structured PD;
         recognition grows as institutions and bodies adopt it.

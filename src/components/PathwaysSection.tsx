@@ -75,7 +75,7 @@ export default function PathwaysSection() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume X
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -93,12 +93,12 @@ export default function PathwaysSection() {
               <path
                 d="M12,46 Q32,10 52,46"
                 fill="none"
-                stroke="#4ECDC4"
+                stroke="#8fb081"
                 strokeWidth="2.6"
                 strokeLinecap="round"
               />
-              <circle cx="12" cy="46" r="3.4" fill="#C9A962" />
-              <circle cx="52" cy="46" r="3.4" fill="#C57BFF" />
+              <circle cx="12" cy="46" r="3.4" fill="#c9a962" />
+              <circle cx="52" cy="46" r="3.4" fill="#a8737f" />
             </svg>
           </div>
           <p className="mx-auto max-w-3xl text-lg text-white/50">

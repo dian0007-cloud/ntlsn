@@ -112,11 +112,11 @@ export default function InternationalThemesPanel({
       role="tabpanel"
       aria-labelledby={labelledBy}
       hidden={hidden}
-      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#0f1d32]/70 px-4 py-24"
+      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#271f16]/70 px-4 py-24"
     >
       <div id="reveal-intl-themes" className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume IX
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -133,7 +133,7 @@ export default function InternationalThemesPanel({
                 cy="32"
                 r="17"
                 fill="none"
-                stroke="#4ECDC4"
+                stroke="#8fb081"
                 strokeWidth="1.6"
                 opacity=".55"
               />
@@ -142,7 +142,7 @@ export default function InternationalThemesPanel({
                 y1="32"
                 x2="49"
                 y2="32"
-                stroke="#4ECDC4"
+                stroke="#8fb081"
                 strokeWidth="1.3"
                 opacity=".4"
               />
@@ -153,7 +153,7 @@ export default function InternationalThemesPanel({
                 rx="7"
                 ry="17"
                 fill="none"
-                stroke="#4ECDC4"
+                stroke="#8fb081"
                 strokeWidth="1.4"
                 opacity=".65"
               />

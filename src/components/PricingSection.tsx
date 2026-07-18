@@ -68,16 +68,16 @@ function StatusBadge({ inDesign }: { inDesign: boolean }) {
 function TierCard({ tier, pulsed }: { tier: PricingTier; pulsed: boolean }) {
   return (
     <div
-      className="rounded-[14px] border border-white/[0.08] bg-[#0f1f38] p-5 transition-shadow duration-300"
+      className="rounded-[14px] border border-white/[0.08] bg-[#2a2218] p-5 transition-shadow duration-300"
       style={{
         borderTop: `3px solid ${tier.colour}`,
         boxShadow: pulsed
-          ? "0 0 0 2px #4ECDC4, 0 18px 40px -12px rgba(78,205,196,0.45)"
+          ? "0 0 0 2px #8fb081, 0 18px 40px -12px rgba(78,205,196,0.45)"
           : undefined,
       }}
     >
       <h4 className="text-[19px] font-extrabold text-white">{tier.name}</h4>
-      <p className="mb-2 text-[13px] text-[#8AA0B6]">{tier.blurb}</p>
+      <p className="mb-2 text-[13px] text-[#a0907a]">{tier.blurb}</p>
       <p
         className="mb-2.5 inline-block rounded-full px-[9px] py-[3px] text-[11px] font-bold tracking-[0.5px]"
         style={{
@@ -90,15 +90,15 @@ function TierCard({ tier, pulsed }: { tier: PricingTier; pulsed: boolean }) {
       </p>
       <p className="text-[28px] font-extrabold" style={{ color: tier.colour }}>
         {tier.price}
-        <span className="text-sm font-normal text-[#8AA0B6]"> /yr</span>
+        <span className="text-sm font-normal text-[#a0907a]"> /yr</span>
       </p>
-      <p className="mt-1 text-[12.5px] font-bold text-[#9FB3C8]">
+      <p className="mt-1 text-[12.5px] font-bold text-[#b3a48c]">
         or <b className="text-white">3 years for the price of 2</b>{" "}
         <span className="text-teal">
           · save ${tier.priceK}k — third year free
         </span>
       </p>
-      <p className="mt-1.5 mb-3 text-[10px] font-bold tracking-[1px] text-[#8AA0B6] uppercase">
+      <p className="mt-1.5 mb-3 text-[10px] font-bold tracking-[1px] text-[#a0907a] uppercase">
         Founding · 2026–27 pilot
       </p>
       <ul className="flex list-none flex-col gap-2">
@@ -110,10 +110,10 @@ function TierCard({ tier, pulsed }: { tier: PricingTier; pulsed: boolean }) {
                 className="py-px pl-2.5"
                 style={{ borderLeft: `2px solid ${tier.colour}` }}
               >
-                <span className="text-sm font-bold text-[#E8F0F7]">
+                <span className="text-sm font-bold text-[#ece5d6]">
                   {feature.title}
                 </span>
-                <p className="mt-px text-xs leading-[1.45] text-[#8499AD]">
+                <p className="mt-px text-xs leading-[1.45] text-[#97876f]">
                   {feature.desc}
                 </p>
               </li>
@@ -133,7 +133,7 @@ function TierCard({ tier, pulsed }: { tier: PricingTier; pulsed: boolean }) {
                 className="block rounded-r-md py-0.5 pl-2.5 no-underline"
                 style={{ borderLeft: `2px solid ${tier.colour}` }}
               >
-                <span className="text-sm font-bold text-[#E8F0F7]">
+                <span className="text-sm font-bold text-[#ece5d6]">
                   {feature.title}
                 </span>
                 <StatusBadge inDesign={inDesign} />{" "}
@@ -144,7 +144,7 @@ function TierCard({ tier, pulsed }: { tier: PricingTier; pulsed: boolean }) {
                 >
                   →
                 </span>
-                <p className="mt-px text-xs leading-[1.45] text-[#8499AD]">
+                <p className="mt-px text-xs leading-[1.45] text-[#97876f]">
                   {feature.desc}
                 </p>
               </a>
@@ -237,10 +237,10 @@ export default function PricingSection() {
         NTLSN is free for every educator, forever. Institutions can go
         further.
       </h2>
-      <p className="mx-auto mb-[30px] max-w-[740px] text-center text-[17px] leading-relaxed text-[#9FB3C8]">
+      <p className="mx-auto mb-[30px] max-w-[740px] text-center text-[17px] leading-relaxed text-[#b3a48c]">
         The whole navigator — every event, the map, 2,000+ resources, the
         sector archive — is{" "}
-        <b className="text-[#CFE9E5]">free, forever, no login</b>, as Open
+        <b className="text-[#d8e0cc]">free, forever, no login</b>, as Open
         Educational Practice. No individual educator will ever be asked to
         pay — that guarantee is the point. Schools, institutions and
         associations partner with NTLSN to <i>run their own</i>: embedded
@@ -255,8 +255,8 @@ export default function PricingSection() {
               ◆
             </span>
             <div>
-              <p className="text-sm font-bold text-[#E8F0F7]">{head}</p>
-              <p className="text-[12.5px] leading-[1.45] text-[#8499AD]">
+              <p className="text-sm font-bold text-[#ece5d6]">{head}</p>
+              <p className="text-[12.5px] leading-[1.45] text-[#97876f]">
                 {body}
               </p>
             </div>
@@ -269,7 +269,7 @@ export default function PricingSection() {
         <p className="mb-2 text-xs font-bold tracking-[2px] text-[#8FA7FF] uppercase">
           ◎ Where would you like to start?
         </p>
-        <p className="mb-4 text-[15px] text-[#9FB3C8]">
+        <p className="mb-4 text-[15px] text-[#b3a48c]">
           Tell us who you are — we&rsquo;ll take you to the right place.
           Everything stays free unless you run your own.
         </p>
@@ -285,7 +285,7 @@ export default function PricingSection() {
                 className={`cursor-pointer rounded-full border px-[19px] py-[11px] text-[15px] font-bold transition-all duration-200 ${
                   on
                     ? "border-teal bg-teal/[0.14] text-white"
-                    : "border-white/15 bg-white/[0.03] text-[#CBD8E6] hover:border-white/30"
+                    : "border-white/15 bg-white/[0.03] text-[#d9cdb6] hover:border-white/30"
                 }`}
               >
                 <span aria-hidden="true">{role.icon}</span> {role.label}
@@ -302,7 +302,7 @@ export default function PricingSection() {
         className="mb-[34px] rounded-[18px] border border-teal/[0.32] px-7 py-[34px] text-center"
         style={{
           background:
-            "linear-gradient(135deg, rgba(78,205,196,0.12), rgba(124,156,255,0.05))",
+            "linear-gradient(135deg, rgba(78,205,196,0.12), rgba(198,108,63,0.05))",
         }}
       >
         <p className="mb-2.5 text-xs font-bold tracking-[2px] text-teal uppercase">
@@ -310,11 +310,11 @@ export default function PricingSection() {
         </p>
         <p className="mb-1.5 text-[clamp(36px,7vw,56px)] leading-none font-extrabold text-white">
           $0{" "}
-          <span className="text-[0.4em] font-semibold text-[#9FB3C8]">
+          <span className="text-[0.4em] font-semibold text-[#b3a48c]">
             forever
           </span>
         </p>
-        <p className="mb-[18px] text-[17px] font-semibold text-[#CFE9E5]">
+        <p className="mb-[18px] text-[17px] font-semibold text-[#d8e0cc]">
           Everything on this site — for everyone, no account. Open by
           default, CC&nbsp;BY-NC-SA.
         </p>
@@ -328,7 +328,7 @@ export default function PricingSection() {
                 {group.items.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/5 px-[15px] py-2 text-[15px] font-bold text-[#CBD8E6]"
+                    className="rounded-full border border-white/10 bg-white/5 px-[15px] py-2 text-[15px] font-bold text-[#d9cdb6]"
                   >
                     {item}
                   </span>
@@ -337,7 +337,7 @@ export default function PricingSection() {
             </div>
           ))}
         </div>
-        <p className="text-sm font-semibold text-[#8AA0B6]">
+        <p className="text-sm font-semibold text-[#a0907a]">
           No paywall. No login. The commons stays free — always.{" "}
           <a href="#ntlsn-why" className="text-teal no-underline">
             Why OEP →
@@ -371,7 +371,7 @@ export default function PricingSection() {
               className={`cursor-pointer rounded-full border px-[22px] py-2.5 text-[15px] font-bold transition-all duration-200 ${
                 on
                   ? "border-teal bg-teal/[0.16] text-white"
-                  : "border-white/15 bg-transparent text-[#9FB3C8] hover:border-white/30"
+                  : "border-white/15 bg-transparent text-[#b3a48c] hover:border-white/30"
               }`}
             >
               {tab.label}
@@ -397,59 +397,59 @@ export default function PricingSection() {
           ))}
         </div>
         <div className="mt-[18px] mb-1 flex flex-wrap gap-3.5">
-          <div className="min-w-[240px] flex-1 rounded-[14px] border border-[#FF8A6B]/30 bg-[#0f1f38] p-[18px]">
-            <p className="text-xl font-extrabold text-[#FF8A6B]">50% off</p>
+          <div className="min-w-[240px] flex-1 rounded-[14px] border border-[#d96650]/30 bg-[#2a2218] p-[18px]">
+            <p className="text-xl font-extrabold text-[#d96650]">50% off</p>
             <p className="mt-0.5 mb-1 text-[15px] font-bold text-white">
               First 10 universities
             </p>
-            <p className="text-[13px] leading-normal text-[#9FB3C8]">
+            <p className="text-[13px] leading-normal text-[#b3a48c]">
               Held for the life of membership ·{" "}
-              <b className="text-[#CBD8E6]">representative by design</b>:
+              <b className="text-[#d9cdb6]">representative by design</b>:
               capped at three per network (Go8 · ATN · IRU · RUN), every state
               and territory represented, and no single faculty, role or group
               exceeding half the cohort.
             </p>
           </div>
-          <div className="min-w-[240px] flex-1 rounded-[14px] border border-[#C9A962]/[0.28] bg-[#0f1f38] p-[18px]">
-            <p className="text-xl font-extrabold text-[#C9A962]">Save 33%</p>
+          <div className="min-w-[240px] flex-1 rounded-[14px] border border-[#c9a962]/[0.28] bg-[#2a2218] p-[18px]">
+            <p className="text-xl font-extrabold text-[#c9a962]">Save 33%</p>
             <p className="mt-0.5 mb-1 text-[15px] font-bold text-white">
               3-year contract
             </p>
-            <p className="text-[13px] leading-normal text-[#9FB3C8]">
+            <p className="text-[13px] leading-normal text-[#b3a48c]">
               Equivalent to your third year at no charge, on a three-year
               agreement (standard pricing). Founding-cohort members retain
               their 50% rate; the offers are not combined.
             </p>
           </div>
         </div>
-        <p className="mx-auto mt-3 max-w-[790px] text-center text-[13px] leading-[1.7] text-[#8AA0B6]">
+        <p className="mx-auto mt-3 max-w-[790px] text-center text-[13px] leading-[1.7] text-[#a0907a]">
           Every paid tier also includes: white-label styling · an analytics
           dashboard · priority support · early access to new tools · priority
           listing in the national calendar · a co-design voice in the
           roadmap.
         </p>
         <div
-          className="mt-[18px] rounded-2xl border border-[#C9A962]/30 p-6"
+          className="mt-[18px] rounded-2xl border border-[#c9a962]/30 p-6"
           style={{
             background:
-              "linear-gradient(135deg, rgba(201,169,98,0.1), rgba(124,156,255,0.04))",
+              "linear-gradient(135deg, rgba(201,169,98,0.1), rgba(198,108,63,0.04))",
           }}
         >
-          <p className="mb-1.5 text-[11px] font-bold tracking-[1px] text-[#C9A962] uppercase">
+          <p className="mb-1.5 text-[11px] font-bold tracking-[1px] text-[#c9a962] uppercase">
             ◆ NTLSN on campus — the teaching, learning &amp; research day
           </p>
           <p className="mb-1.5 text-lg font-extrabold text-white">
-            We come to you. <span className="text-[#C9A962]">$30k</span> —
+            We come to you. <span className="text-[#c9a962]">$30k</span> —
             all-inclusive, no hidden fees.
           </p>
-          <p className="max-w-[700px] text-sm leading-relaxed text-[#9FB3C8]">
+          <p className="max-w-[700px] text-sm leading-relaxed text-[#b3a48c]">
             For a new Head of School building a culture of teaching, learning
             and research — especially after a restructure. A full day,
             MC&rsquo;d and run end-to-end by the founder: guided facilitation
             of your strategic plans, fully branded to your school, captured
             on video and audio for your team to keep. Everything from
             registration and abstract submission through to the day itself —{" "}
-            <b className="text-[#CBD8E6]">fully catered, all included</b>.
+            <b className="text-[#d9cdb6]">fully catered, all included</b>.
             You keep full IT control; we cover the rest.
           </p>
         </div>
@@ -465,13 +465,13 @@ export default function PricingSection() {
         <p className="mb-1 text-lg font-extrabold text-white">
           Run it yourself — or we run it
         </p>
-        <p className="mb-3.5 text-sm leading-relaxed text-[#9FB3C8]">
+        <p className="mb-3.5 text-sm leading-relaxed text-[#b3a48c]">
           Registration and submission are{" "}
-          <b className="text-[#CBD8E6]">
+          <b className="text-[#d9cdb6]">
             included in every School and Institution plan
           </b>{" "}
           — flat annual, unlimited events (organisers elsewhere pay ~
-          <b className="text-[#CBD8E6]">$1.5k–8k per event</b>). Want us on
+          <b className="text-[#d9cdb6]">$1.5k–8k per event</b>). Want us on
           the ground? Facilitation comes in three catered tiers. Or share a
           one-off symposium with the sector,{" "}
           <a href="#architecture" className="text-teal">
@@ -486,11 +486,11 @@ export default function PricingSection() {
               className="rounded-[14px] p-[18px]"
               style={{
                 background: pkg.premium
-                  ? "linear-gradient(135deg, rgba(201,169,98,0.12), rgba(124,156,255,0.04))"
-                  : "#0f1f38",
+                  ? "linear-gradient(135deg, rgba(201,169,98,0.12), rgba(198,108,63,0.04))"
+                  : "#2a2218",
                 border: pkg.premium
                   ? "1px solid rgba(201,169,98,0.4)"
-                  : "1px solid rgba(124,156,255,0.25)",
+                  : "1px solid rgba(198,108,63,0.25)",
               }}
             >
               <p
@@ -502,25 +502,25 @@ export default function PricingSection() {
               <p className="mb-1.5 text-base font-extrabold text-white">
                 {pkg.price}
               </p>
-              <p className="text-[13px] leading-[1.55] text-[#9FB3C8]">
+              <p className="text-[13px] leading-[1.55] text-[#b3a48c]">
                 {pkg.desc}
               </p>
             </div>
           ))}
           <div className="rounded-[14px] border border-white/[0.08] bg-navy px-5 py-[18px] text-left sm:col-span-2 lg:col-span-3">
-            <p className="mb-3 text-[11px] font-bold tracking-[0.6px] text-[#C9A962] uppercase">
+            <p className="mb-3 text-[11px] font-bold tracking-[0.6px] text-[#c9a962] uppercase">
               Take part, in three steps
             </p>
             <div className="flex flex-wrap gap-3">
               {SYMP_STEPS.map(([n, head, body]) => (
                 <div
                   key={n}
-                  className="min-w-[168px] flex-1 rounded-[11px] border border-white/[0.08] bg-[#0f1f38] px-[15px] py-3.5"
+                  className="min-w-[168px] flex-1 rounded-[11px] border border-white/[0.08] bg-[#2a2218] px-[15px] py-3.5"
                 >
                   <p className="mb-1.5 flex items-center gap-[9px]">
                     <span
                       aria-hidden="true"
-                      className="flex h-6 w-6 flex-none items-center justify-center rounded-full border border-[#C9A962]/50 bg-[#C9A962]/[0.18] text-xs font-extrabold text-[#C9A962]"
+                      className="flex h-6 w-6 flex-none items-center justify-center rounded-full border border-[#c9a962]/50 bg-[#c9a962]/[0.18] text-xs font-extrabold text-[#c9a962]"
                     >
                       {n}
                     </span>
@@ -528,18 +528,18 @@ export default function PricingSection() {
                       {head}
                     </span>
                   </p>
-                  <p className="text-[12.5px] leading-[1.45] text-[#9FB3C8]">
+                  <p className="text-[12.5px] leading-[1.45] text-[#b3a48c]">
                     {body}
                   </p>
                 </div>
               ))}
             </div>
-            <p className="mt-[13px] text-[12.5px] leading-normal text-[#9FB3C8]">
+            <p className="mt-[13px] text-[12.5px] leading-normal text-[#b3a48c]">
               Your interest is collected through a secure Microsoft Form and
               flows into the national{" "}
               <a
                 href="#ntlsn-coming2027"
-                className="text-[#2DD4BF] no-underline"
+                className="text-[#8fb081] no-underline"
               >
                 Peer-Review Exchange
               </a>
@@ -548,11 +548,11 @@ export default function PricingSection() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-white/[0.08] bg-[#0f1f38] p-7">
+        <div className="rounded-2xl border border-white/[0.08] bg-[#2a2218] p-7">
           <p className="mb-1 text-[22px] font-extrabold text-white">
             Run your symposium on NTLSN
           </p>
-          <p className="mb-[18px] max-w-[640px] text-[15px] leading-relaxed text-[#9FB3C8]">
+          <p className="mb-[18px] max-w-[640px] text-[15px] leading-relaxed text-[#b3a48c]">
             We map all {universities.length} universities and link each to
             its Learning &amp; Teaching team. Pick yours to reach its team
             now, and preview how the Portal — abstract submission,
@@ -589,14 +589,14 @@ export default function PricingSection() {
               Preview the 2027 Portal →
             </button>
           </div>
-          <p className="mt-2.5 text-[13px] text-[#8AA0B6]">
+          <p className="mt-2.5 text-[13px] text-[#a0907a]">
             Preview — the Portal opens to founding institutions in 2027.
           </p>
           {ctaVisible ? (
             <div className="mt-4 rounded-xl border border-teal/25 bg-teal/[0.08] p-[18px]">
               {selectedUni ? (
                 <>
-                  <p className="mb-1 text-xs tracking-[0.12em] text-[#8AA0B6] uppercase">
+                  <p className="mb-1 text-xs tracking-[0.12em] text-[#a0907a] uppercase">
                     Your Learning &amp; Teaching team
                   </p>
                   <p className="mb-3 text-lg font-bold text-white">{who}</p>
@@ -610,7 +610,7 @@ export default function PricingSection() {
                       Visit the team →
                     </a>
                   ) : (
-                    <p className="text-[15px] text-[#9FB3C8]">
+                    <p className="text-[15px] text-[#b3a48c]">
                       Confirming this team&rsquo;s page —{" "}
                       <a href="#ntlsn-network" className="text-teal">
                         browse the national network →
@@ -623,10 +623,10 @@ export default function PricingSection() {
                   Pick your university above to personalise this.
                 </p>
               )}
-              <p className="mt-3.5 mb-3.5 text-sm leading-relaxed text-[#9FB3C8]">
+              <p className="mt-3.5 mb-3.5 text-sm leading-relaxed text-[#b3a48c]">
                 Submit abstracts · register attendees · run {who}&rsquo;s own
                 Teaching &amp; Learning Week — all in one place.{" "}
-                <span className="text-[#8AA0B6]">
+                <span className="text-[#a0907a]">
                   (Coming 2027 — founding institutions first.)
                 </span>
               </p>
@@ -648,27 +648,27 @@ export default function PricingSection() {
         aria-labelledby="tab-pt-assoc"
         hidden={activeTab !== "pt-assoc"}
       >
-        <div className="mb-4 rounded-2xl border border-teal/[0.28] bg-[#0f1f38] p-[22px]">
+        <div className="mb-4 rounded-2xl border border-teal/[0.28] bg-[#2a2218] p-[22px]">
           <p className="text-lg font-extrabold text-teal">
             Free{" "}
-            <span className="font-medium text-[#9FB3C8]">year 1</span>, then
+            <span className="font-medium text-[#b3a48c]">year 1</span>, then
             $5k/yr
           </p>
           <p className="mt-0.5 mb-1.5 text-[15px] font-bold text-white">
             Peak bodies, scholarly associations &amp; regulators
           </p>
-          <p className="text-[13px] leading-relaxed text-[#9FB3C8]">
+          <p className="text-[13px] leading-relaxed text-[#b3a48c]">
             Free in year one (no obligation), then{" "}
-            <b className="text-[#CBD8E6]">$5k/yr</b> under a standard MoU —
+            <b className="text-[#d9cdb6]">$5k/yr</b> under a standard MoU —
             each body co-designs{" "}
-            <b className="text-[#CBD8E6]">its own tailored package</b> below.
-            A <b className="text-[#CBD8E6]">complement</b> to the
+            <b className="text-[#d9cdb6]">its own tailored package</b> below.
+            A <b className="text-[#d9cdb6]">complement</b> to the
             sector&rsquo;s peak bodies, never a competitor.{" "}
             <a href="#architecture" className="text-teal">
               See where they sit →
             </a>
           </p>
-          <p className="mt-3 border-t border-white/[0.08] pt-2.5 text-[13px] leading-relaxed text-[#CBD8E6]">
+          <p className="mt-3 border-t border-white/[0.08] pt-2.5 text-[13px] leading-relaxed text-[#d9cdb6]">
             ◆ Every package can add a{" "}
             <b className="text-white">
               founder-facilitated General Meeting or symposium
@@ -687,24 +687,24 @@ export default function PricingSection() {
                 {...(external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="block rounded-[14px] border border-[#7C9CFF]/[0.22] bg-[#0f1f38] p-[15px] no-underline transition-colors hover:border-[#7C9CFF]/50"
+                className="block rounded-[14px] border border-[#c66c3f]/[0.22] bg-[#2a2218] p-[15px] no-underline transition-colors hover:border-[#c66c3f]/50"
               >
                 <span className="mb-[3px] flex items-baseline justify-between gap-2">
                   <span className="text-[15px] font-extrabold text-white">
                     {pkg.name}
                   </span>
-                  <span className="text-[13px] font-extrabold whitespace-nowrap text-[#7C9CFF]">
+                  <span className="text-[13px] font-extrabold whitespace-nowrap text-[#c66c3f]">
                     $5k/yr
                   </span>
                 </span>
-                <span className="block text-xs leading-normal text-[#9FB3C8]">
+                <span className="block text-xs leading-normal text-[#b3a48c]">
                   {pkg.benefit}{" "}
                   {pkg.tag === "live" ? (
                     <span className="ml-1 rounded-full border border-teal/45 px-1.5 py-px text-[9px] font-bold tracking-[0.5px] text-teal">
                       LIVE
                     </span>
                   ) : pkg.tag === "2028" ? (
-                    <span className="ml-1 rounded-full border border-[#C9A962]/45 px-1.5 py-px text-[9px] font-bold tracking-[0.5px] text-[#C9A962]">
+                    <span className="ml-1 rounded-full border border-[#c9a962]/45 px-1.5 py-px text-[9px] font-bold tracking-[0.5px] text-[#c9a962]">
                       2028
                     </span>
                   ) : (
@@ -724,7 +724,7 @@ export default function PricingSection() {
         </p>
       </div>
 
-      <p className="mx-auto mt-[18px] max-w-[680px] text-center text-[13px] text-[#8AA0B6]">
+      <p className="mx-auto mt-[18px] max-w-[680px] text-center text-[13px] text-[#a0907a]">
         Prices are founding-cohort rates for the 2026–27 pilots — we&rsquo;re
         inviting founding partners now, not charging yet.{" "}
         <a href="#ntlsn-coming2028" className="text-teal">

@@ -18,15 +18,15 @@ export interface GroupMeta {
 export const GROUP_ORDER = ["Go8", "ATN", "IRU", "RUN", "Unaligned"] as const;
 
 const GROUP_META: Record<string, GroupMeta> = {
-  Go8: { color: "#FFD700", label: "Group of Eight" },
-  ATN: { color: "#FF6B6B", label: "Australian Technology Network" },
-  IRU: { color: "#C57BFF", label: "Innovative Research Universities" },
+  Go8: { color: "#c9a962", label: "Group of Eight" },
+  ATN: { color: "#d96650", label: "Australian Technology Network" },
+  IRU: { color: "#a8737f", label: "Innovative Research Universities" },
   RUN: { color: "#4ADE80", label: "Regional Universities Network" },
-  Unaligned: { color: "#4ECDC4", label: "Independent" },
+  Unaligned: { color: "#8fb081", label: "Independent" },
 };
 
 export function groupMeta(group: string): GroupMeta {
-  return GROUP_META[group] ?? { color: "#8AA0B6", label: group };
+  return GROUP_META[group] ?? { color: "#a0907a", label: group };
 }
 
 /** State filter order — lifted from the production #directory pill row. */

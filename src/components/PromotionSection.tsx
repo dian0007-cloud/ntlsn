@@ -80,9 +80,9 @@ const DOMAINS: ReadonlyArray<{
 type Rating = "" | "gap" | "building" | "strong";
 
 const RATING_META: Record<Exclude<Rating, "">, { label: string; rgb: string; hex: string }> = {
-  gap: { label: "Gap", rgb: "159,179,200", hex: "#cbd8e6" },
-  building: { label: "Building", rgb: "255,180,72", hex: "#FFB448" },
-  strong: { label: "Strong", rgb: "45,212,191", hex: "#2DD4BF" },
+  gap: { label: "Gap", rgb: "159,179,200", hex: "#d9cdb6" },
+  building: { label: "Building", rgb: "255,180,72", hex: "#e6a33c" },
+  strong: { label: "Strong", rgb: "45,212,191", hex: "#8fb081" },
 };
 
 export default function PromotionSection() {
@@ -114,10 +114,10 @@ export default function PromotionSection() {
       <div className="mx-auto max-w-[960px]">
         <div className="mx-auto mb-6 max-w-[740px] text-center">
           <div className="mb-3.5 inline-flex flex-wrap items-center justify-center gap-2">
-            <span className="rounded-full border border-[rgba(124,156,255,.45)] px-3 py-1 text-[11px] font-extrabold tracking-[1.4px] text-[#7C9CFF] uppercase">
+            <span className="rounded-full border border-[rgba(198,108,63,.45)] px-3 py-1 text-[11px] font-extrabold tracking-[1.4px] text-[#c66c3f] uppercase">
               For institutions
             </span>
-            <span className="rounded-full border border-[rgba(255,180,72,.4)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-amber uppercase">
+            <span className="rounded-full border border-[rgba(230,163,60,.4)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-amber uppercase">
               Preview · in design · 2028
             </span>
           </div>
@@ -127,7 +127,7 @@ export default function PromotionSection() {
           >
             Your promotion case, mapped.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#aebfce]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#bca98f]">
             Performance, probation and promotion ask for the same four domains
             at a higher bar each time. Pick your level and your purpose, see
             what is expected, and rate your evidence. Every NTLSN record feeds
@@ -147,13 +147,13 @@ export default function PromotionSection() {
                 style={
                   on
                     ? {
-                        background: "#7C9CFF",
-                        color: "#06243a",
-                        border: "1px solid #7C9CFF",
+                        background: "#c66c3f",
+                        color: "#1f1810",
+                        border: "1px solid #c66c3f",
                       }
                     : {
                         background: "rgba(255,255,255,.06)",
-                        color: "#cbd8e6",
+                        color: "#d9cdb6",
                         border: "1px solid rgba(255,255,255,.14)",
                       }
                 }
@@ -163,10 +163,10 @@ export default function PromotionSection() {
             );
           })}
         </div>
-        <div className="mb-4 text-center text-[12.5px] font-semibold text-[#8aa0b6]">
+        <div className="mb-4 text-center text-[12.5px] font-semibold text-[#a0907a]">
           {modeMeta?.[2]}
         </div>
-        <div className="mb-[9px] text-center text-[10.5px] font-bold tracking-[0.5px] text-[#8aa0b6] uppercase">
+        <div className="mb-[9px] text-center text-[10.5px] font-bold tracking-[0.5px] text-[#a0907a] uppercase">
           Your academic level
         </div>
         <div className="mb-5 flex gap-[7px]">
@@ -183,13 +183,13 @@ export default function PromotionSection() {
                 style={
                   on
                     ? {
-                        background: "#2DD4BF",
-                        color: "#06243a",
-                        border: "1px solid #2DD4BF",
+                        background: "#8fb081",
+                        color: "#1f1810",
+                        border: "1px solid #8fb081",
                       }
                     : {
                         background: "rgba(255,255,255,.05)",
-                        color: "#cbd8e6",
+                        color: "#d9cdb6",
                         border: "1px solid rgba(255,255,255,.14)",
                       }
                 }
@@ -206,17 +206,17 @@ export default function PromotionSection() {
           {DOMAINS.map((d) => (
             <div
               key={d.key}
-              className="rounded-[13px] border border-white/[0.08] bg-[#0f1f3a] p-[17px]"
+              className="rounded-[13px] border border-white/[0.08] bg-[#2a2218] p-[17px]"
             >
               <div className="mb-1 text-[15px] font-extrabold text-white">
                 {d.name}
               </div>
-              <div className="min-h-[60px] text-[13px] leading-[1.55] text-[#aebfce]">
+              <div className="min-h-[60px] text-[13px] leading-[1.55] text-[#bca98f]">
                 {d.L[curLvl]}
               </div>
-              <div className="mt-2.5 mb-[11px] text-[10.5px] leading-[1.4] font-semibold text-[#2DD4BF]">
+              <div className="mt-2.5 mb-[11px] text-[10.5px] leading-[1.4] font-semibold text-[#8fb081]">
                 NTLSN feeds this:{" "}
-                <span className="font-medium text-[#8aa0b6]">{d.feeds}</span>
+                <span className="font-medium text-[#a0907a]">{d.feeds}</span>
               </div>
               <div className="flex gap-1.5">
                 {(Object.keys(RATING_META) as Array<Exclude<Rating, "">>).map(
@@ -242,7 +242,7 @@ export default function PromotionSection() {
                             : {
                                 background: "rgba(255,255,255,.05)",
                                 border: "1px solid rgba(255,255,255,.14)",
-                                color: "#9fb3c8",
+                                color: "#b3a48c",
                               }
                         }
                       >
@@ -256,14 +256,14 @@ export default function PromotionSection() {
           ))}
         </div>
         <div
-          className="mt-[18px] rounded-[11px] border border-[rgba(45,212,191,.22)] bg-[rgba(45,212,191,.08)] px-4 py-3.5 text-center text-[14px] leading-[1.55] font-semibold text-[#cbd8e6]"
+          className="mt-[18px] rounded-[11px] border border-[rgba(143,176,129,.22)] bg-[rgba(143,176,129,.08)] px-4 py-3.5 text-center text-[14px] leading-[1.55] font-semibold text-[#d9cdb6]"
           role="status"
         >
           {!rated ? (
             "Rate your evidence in each domain to see your readiness."
           ) : (
             <>
-              <b className="text-[#2DD4BF]">{strong} of 4</b> domains rated
+              <b className="text-[#8fb081]">{strong} of 4</b> domains rated
               strong for{" "}
               <b className="text-white">
                 Level {LEVELS[curLvl][0]} · {LEVELS[curLvl][1]}
@@ -272,7 +272,7 @@ export default function PromotionSection() {
             </>
           )}
         </div>
-        <p className="mx-auto mt-4 max-w-[700px] text-center text-[12px] leading-[1.55] text-[#8aa0b6]">
+        <p className="mx-auto mt-4 max-w-[700px] text-center text-[12px] leading-[1.55] text-[#a0907a]">
           A teaching aid mapped to a generic, configurable four-domain
           framework (Levels A to E). Your institution configures its own
           criteria, sets the bar, and makes every decision; NTLSN supplies the

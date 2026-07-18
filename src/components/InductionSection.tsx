@@ -10,7 +10,7 @@ export default function InductionSection() {
       aria-labelledby="ntlsn-induction-heading"
       className="relative scroll-mt-20 px-6 py-[34px]"
     >
-      <div className="mx-auto max-w-[760px] rounded-2xl border border-white/10 bg-[#0F1F3A] px-[26px] py-[22px] text-center">
+      <div className="mx-auto max-w-[760px] rounded-2xl border border-white/10 bg-[#2a2218] px-[26px] py-[22px] text-center">
         <p className="mb-2 text-[11px] font-extrabold tracking-[2px] text-amber uppercase">
           Academic induction · part of the School package
         </p>
@@ -21,7 +21,7 @@ export default function InductionSection() {
           Induct your new, casual and sessional staff — before the cracks
           appear.
         </h2>
-        <p className="mb-3.5 text-[13.5px] leading-relaxed text-[#9FB3C8]">
+        <p className="mb-3.5 text-[13.5px] leading-relaxed text-[#b3a48c]">
           A contextualised induction grounded in SoTL and Felten&rsquo;s five
           principles — new to marking, new to teaching, new to academia.
           Details live in the School package below.

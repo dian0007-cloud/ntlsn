@@ -59,7 +59,7 @@ function MonthBlock({ month }: { month: YearViewMonth }) {
       {month.events.length > 0 ? (
         <>
           <p className="mb-2 text-2xl font-bold">
-            <span className="bg-gradient-to-r from-teal via-[#7C9CFF] to-purple bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-teal via-[#c66c3f] to-purple bg-clip-text text-transparent">
               {month.events.length}
             </span>{" "}
             <span className="text-xs font-semibold text-white/40">
@@ -117,7 +117,7 @@ function MonthBlock({ month }: { month: YearViewMonth }) {
 /**
  * #yearview — "at a Glance" (TASKS.md 1.2, third ported section).
  *
- * Header treatment is production's: gold "Volume IV" kicker (#C9A962,
+ * Header treatment is production's: gold "Volume IV" kicker (#c9a962,
  * production-exact — no token), teal "Year View" badge pill, "<year> at a
  * Glance" h2. Month blocks keep production's visual language — month label,
  * big gradient count, up to six truncated event chips with type-coloured
@@ -151,7 +151,7 @@ export default function YearView() {
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume IV
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">

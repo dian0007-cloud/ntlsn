@@ -18,7 +18,7 @@ export default function ManifestoVisibility() {
       className="relative scroll-mt-20 px-4 py-24"
     >
       <div className="mx-auto max-w-3xl text-center">
-        <p className="mb-4 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+        <p className="mb-4 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
           Join the Network
         </p>
         <h2
@@ -42,7 +42,7 @@ export default function ManifestoVisibility() {
             href="https://github.com/dian0007-cloud/ntlsn"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-[#C9A962]/30 px-8 py-3 font-medium text-[#C9A962] no-underline transition-colors hover:bg-[#C9A962]/10"
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-[#c9a962]/30 px-8 py-3 font-medium text-[#c9a962] no-underline transition-colors hover:bg-[#c9a962]/10"
           >
             Contribute on GitHub
           </a>

@@ -125,10 +125,10 @@ export default function NetworkSection() {
         >
           A sector that finally connects.
         </h2>
-        <p className="mx-auto mb-5 max-w-[620px] text-[clamp(14.5px,1.7vw,17px)] leading-relaxed text-[#AEBFCE]">
+        <p className="mx-auto mb-5 max-w-[620px] text-[clamp(14.5px,1.7vw,17px)] leading-relaxed text-[#bca98f]">
           Teaching, recognition, partnership and the open commons have long
           sat in silos. NTLSN is the connective layer between them.{" "}
-          <b className="text-[#CFE9E5]">
+          <b className="text-[#d8e0cc]">
             Hover a node to trace its connections; select one to open it.
           </b>
         </p>
@@ -195,7 +195,7 @@ export default function NetworkSection() {
                   cx={x.toFixed(1)}
                   cy={y.toFixed(1)}
                   r={n.r}
-                  fill={n.hub ? "#0B2B3F" : "#0F1F3A"}
+                  fill={n.hub ? "#0B2B3F" : "#2a2218"}
                   stroke={colour}
                   strokeWidth={n.hub ? 2.6 : 1.8}
                 />
@@ -218,7 +218,7 @@ export default function NetworkSection() {
                     textAnchor="middle"
                     fontSize={n.ring === "out" ? 9.5 : 11.5}
                     fontWeight={700}
-                    fill="#CFE9E5"
+                    fill="#d8e0cc"
                   >
                     {n.label}
                   </text>
@@ -230,7 +230,7 @@ export default function NetworkSection() {
 
         {/* <700px fallback: the same destinations as accessible link chips. */}
         <div className="mt-1 min-[700px]:hidden">
-          <p className="mb-3 text-xs font-bold tracking-[1px] text-[#9FB3C8] uppercase">
+          <p className="mb-3 text-xs font-bold tracking-[1px] text-[#b3a48c] uppercase">
             NTLSN connects across the sector
           </p>
           <ul className="flex list-none flex-wrap justify-center gap-2">
@@ -240,7 +240,7 @@ export default function NetworkSection() {
                 <li key={n.id}>
                   <a
                     href={n.a}
-                    className="inline-flex items-center rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-[13px] font-semibold text-[#CBD8E6] no-underline"
+                    className="inline-flex items-center rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-[13px] font-semibold text-[#d9cdb6] no-underline"
                     style={{ borderLeft: `3px solid ${NET_COLOURS[n.g]}` }}
                   >
                     {n.label}
@@ -252,7 +252,7 @@ export default function NetworkSection() {
 
         <p
           aria-live="polite"
-          className="mt-4 min-h-[18px] text-[13px] font-semibold text-[#8AA0B6]"
+          className="mt-4 min-h-[18px] text-[13px] font-semibold text-[#a0907a]"
         >
           {hint}
         </p>

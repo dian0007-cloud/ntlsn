@@ -33,10 +33,10 @@ export const LATEST_TYPE_ICONS: Readonly<Record<string, string>> = {
 
 /** Per-type accent colour — the patch's COL map (teal fallback). */
 export const LATEST_TYPE_COLOURS: Readonly<Record<string, string>> = {
-  video: "#C57BFF",
-  blog: "#4ECDC4",
-  news: "#FFB448",
-  journal: "#FF6B6B",
+  video: "#a8737f",
+  blog: "#8fb081",
+  news: "#e6a33c",
+  journal: "#d96650",
   podcast: "#8b9cff",
 };
 

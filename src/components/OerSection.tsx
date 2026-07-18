@@ -36,10 +36,10 @@ export default function OerSection() {
           >
             Search the world&rsquo;s open library of teaching resources.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-relaxed text-[#AEBFCE]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-relaxed text-[#bca98f]">
             OER Commons is the open commons of teaching &amp; learning
             materials —{" "}
-            <b className="text-[#CFE9E5]">50,000+ openly-licensed resources</b>{" "}
+            <b className="text-[#d8e0cc]">50,000+ openly-licensed resources</b>{" "}
             you can use, adapt and share. Search it from here, or browse by
             collection, provider or hub.
           </p>
@@ -62,7 +62,7 @@ export default function OerSection() {
           />
           <button
             type="submit"
-            className="flex-none cursor-pointer rounded-[10px] bg-teal px-5 text-sm font-extrabold text-[#06243A]"
+            className="flex-none cursor-pointer rounded-[10px] bg-teal px-5 text-sm font-extrabold text-[#1f1810]"
           >
             Search →
           </button>
@@ -79,14 +79,14 @@ export default function OerSection() {
               type="button"
               onClick={() => openOerSearch(topic)}
               aria-label={`Search OER Commons for ${topic} (opens in a new tab)`}
-              className="cursor-pointer rounded-full border border-white/[0.13] bg-white/5 px-[13px] py-1.5 text-xs font-semibold text-[#CBD8E6] transition-all hover:border-teal/50 hover:text-white"
+              className="cursor-pointer rounded-full border border-white/[0.13] bg-white/5 px-[13px] py-1.5 text-xs font-semibold text-[#d9cdb6] transition-all hover:border-teal/50 hover:text-white"
             >
               {topic}
             </button>
           ))}
         </div>
 
-        <p className="mb-[11px] text-center text-[10.5px] font-bold tracking-[0.6px] text-[#8AA0B6] uppercase">
+        <p className="mb-[11px] text-center text-[10.5px] font-bold tracking-[0.6px] text-[#a0907a] uppercase">
           Browse the commons
         </p>
         <ul className="grid list-none grid-cols-1 gap-[11px] sm:grid-cols-2 lg:grid-cols-4">
@@ -96,7 +96,7 @@ export default function OerSection() {
                 href={card.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block rounded-xl border border-white/[0.08] bg-[#0f1f3a] p-4 no-underline"
+                className="block rounded-xl border border-white/[0.08] bg-[#2a2218] p-4 no-underline"
                 style={{ borderLeft: `3px solid ${card.colour}` }}
               >
                 <span className="mb-1 block text-[14.5px] font-extrabold text-white">
@@ -109,14 +109,14 @@ export default function OerSection() {
                     ↗
                   </span>
                 </span>
-                <span className="block text-[12.5px] leading-normal text-[#9FB3C8]">
+                <span className="block text-[12.5px] leading-normal text-[#b3a48c]">
                   {card.desc}
                 </span>
               </a>
             </li>
           ))}
         </ul>
-        <p className="mx-auto mt-[18px] max-w-[680px] text-center text-xs leading-normal text-[#8AA0B6]">
+        <p className="mx-auto mt-[18px] max-w-[680px] text-center text-xs leading-normal text-[#a0907a]">
           OER Commons is an independent open library run by the nonprofit
           ISKME. NTLSN links you straight to it — every result is free and
           openly licensed. Searches and links open on oercommons.org.
@@ -124,13 +124,13 @@ export default function OerSection() {
 
         <div className="mx-auto mt-9">
           <div className="mx-auto mb-[22px] max-w-[680px] text-center">
-            <p className="mb-2 text-[10.5px] font-bold tracking-[0.7px] text-[#8AA0B6] uppercase">
+            <p className="mb-2 text-[10.5px] font-bold tracking-[0.7px] text-[#a0907a] uppercase">
               A curated open directory
             </p>
             <h3 className="mb-2 text-[clamp(20px,2.6vw,28px)] leading-tight font-extrabold text-white">
               Find, reuse and adapt — by resource type.
             </h3>
-            <p className="text-[13.5px] leading-relaxed text-[#AEBFCE]">
+            <p className="text-[13.5px] leading-relaxed text-[#bca98f]">
               Openly-licensed sources across six categories. Each opens the
               original — always check the licence on the resource before you
               reuse it.
@@ -140,7 +140,7 @@ export default function OerSection() {
             {OER_DIRECTORY.map((category) => (
               <details
                 key={category.name}
-                className="rounded-[13px] border border-white/[0.06] bg-[#0f1f3a] px-[18px] py-3.5"
+                className="rounded-[13px] border border-white/[0.06] bg-[#2a2218] px-[18px] py-3.5"
                 style={{ borderLeft: `3px solid ${category.colour}` }}
               >
                 <summary
@@ -148,7 +148,7 @@ export default function OerSection() {
                   style={{ color: category.colour }}
                 >
                   {category.name}{" "}
-                  <span className="text-[11px] font-normal text-[#8AA0B6]">
+                  <span className="text-[11px] font-normal text-[#a0907a]">
                     ({category.items.length} sources)
                   </span>
                 </summary>
@@ -159,17 +159,17 @@ export default function OerSection() {
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[13px] font-bold text-[#CFE9E5] no-underline hover:underline"
+                        className="text-[13px] font-bold text-[#d8e0cc] no-underline hover:underline"
                       >
                         {item.name}
                       </a>
                       <span
-                        className="ml-[7px] rounded-[5px] px-1.5 py-px text-[9px] font-semibold whitespace-nowrap text-[#06243A]"
+                        className="ml-[7px] rounded-[5px] px-1.5 py-px text-[9px] font-semibold whitespace-nowrap text-[#1f1810]"
                         style={{ background: category.colour }}
                       >
                         {item.licence}
                       </span>
-                      <span className="mt-0.5 block text-[11.5px] leading-normal text-[#8AA0B6]">
+                      <span className="mt-0.5 block text-[11.5px] leading-normal text-[#a0907a]">
                         {item.desc}
                       </span>
                     </li>

@@ -36,7 +36,7 @@ export default function FnAwardsSection() {
         <p className="mb-1.5 text-base leading-normal font-semibold text-white">
           Indigenising the curriculum, across the sector.
         </p>
-        <p className="text-sm leading-relaxed text-[#9FB3C8]">
+        <p className="text-sm leading-relaxed text-[#b3a48c]">
           Every university here stands on unceded Country — and many are
           embedding First Nations knowledges and pedagogies into how they
           teach. The benchmark below maps how the sector recognises that
@@ -45,7 +45,7 @@ export default function FnAwardsSection() {
       </div>
 
       <div className="mx-auto mb-3.5 max-w-[840px] text-center">
-        <p className="mb-[13px] inline-block text-[11px] font-extrabold tracking-[2px] text-[#2DD4BF] uppercase">
+        <p className="mb-[13px] inline-block text-[11px] font-extrabold tracking-[2px] text-[#8fb081] uppercase">
           Sector benchmark · Research
         </p>
         <h2
@@ -54,7 +54,7 @@ export default function FnAwardsSection() {
         >
           First Nations teaching excellence: who recognises it?
         </h2>
-        <p className="text-[clamp(15px,1.8vw,18px)] leading-relaxed text-[#AEBFCE]">
+        <p className="text-[clamp(15px,1.8vw,18px)] leading-relaxed text-[#bca98f]">
           An audit of all 43 Australian universities — how the sector
           formally recognises First Nations teaching and learning. The
           national anchor is the{" "}
@@ -77,7 +77,7 @@ export default function FnAwardsSection() {
         {FN_STATS.map(([value, caption, colour]) => (
           <li
             key={caption}
-            className="min-w-[175px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#0F1F3A] px-[18px] py-5 text-center"
+            className="min-w-[175px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#2a2218] px-[18px] py-5 text-center"
             style={{ borderTop: `3px solid ${colour}` }}
           >
             <p
@@ -86,7 +86,7 @@ export default function FnAwardsSection() {
             >
               {value}
             </p>
-            <p className="mt-[9px] text-[12.5px] leading-snug font-medium text-[#AEBFCE]">
+            <p className="mt-[9px] text-[12.5px] leading-snug font-medium text-[#bca98f]">
               {caption}
             </p>
           </li>
@@ -102,7 +102,7 @@ export default function FnAwardsSection() {
           <div key={colour} style={{ width, background: colour }} />
         ))}
       </div>
-      <p className="mx-auto max-w-[760px] text-center text-[13px] font-medium text-[#8AA0B6]">
+      <p className="mx-auto max-w-[760px] text-center text-[13px] font-medium text-[#a0907a]">
         Of 43 universities: 17 dedicated · 5 partial ·{" "}
         <b className="text-[#E0894A]">
           21 with no dedicated First Nations teaching award
@@ -110,11 +110,11 @@ export default function FnAwardsSection() {
         — more than half the sector.
       </p>
 
-      <div className="mx-auto mt-[30px] max-w-[780px] rounded-r-[14px] border border-white/[0.08] bg-[#0F1F3A] px-6 py-5 [border-left:3px_solid_#FFB448]">
+      <div className="mx-auto mt-[30px] max-w-[780px] rounded-r-[14px] border border-white/[0.08] bg-[#2a2218] px-6 py-5 [border-left:3px_solid_#e6a33c]">
         <p className="mb-2 text-xs font-extrabold tracking-[1px] text-amber uppercase">
           The gap
         </p>
-        <p className="text-[14.5px] leading-relaxed text-[#CBD8E6]">
+        <p className="text-[14.5px] leading-relaxed text-[#d9cdb6]">
           Almost half the sector has no dedicated way to recognise First
           Nations teaching. And across all 43 universities, none publicly
           mandates First Nations representation on its award assessment
@@ -124,19 +124,19 @@ export default function FnAwardsSection() {
       </div>
 
       <div className="mx-auto mt-[30px] max-w-[840px] text-center">
-        <p className="mb-3 text-xs font-bold tracking-[1.5px] text-[#9FB3C8] uppercase">
+        <p className="mb-3 text-xs font-bold tracking-[1.5px] text-[#b3a48c] uppercase">
           Five ways the sector frames the award
         </p>
         <ul className="flex list-none flex-wrap justify-center gap-[9px]">
           {FN_FRAMINGS.map((framing) => (
             <li key={framing}>
-              <span className="rounded-[999px] border border-white/10 bg-white/[0.04] px-3.5 py-[7px] text-[12.5px] font-semibold text-[#CBD8E6]">
+              <span className="rounded-[999px] border border-white/10 bg-white/[0.04] px-3.5 py-[7px] text-[12.5px] font-semibold text-[#d9cdb6]">
                 {framing}
               </span>
             </li>
           ))}
         </ul>
-        <p className="mx-auto mt-[18px] max-w-[710px] text-[13px] leading-relaxed text-[#8AA0B6]">
+        <p className="mx-auto mt-[18px] max-w-[710px] text-[13px] leading-relaxed text-[#a0907a]">
           Eligibility runs three ways — exclusive to First Nations staff,
           open on First Nations contribution, or a dual track. Assessment
           centres four things general awards miss: sustained impact, Elder

@@ -73,11 +73,11 @@ export default function TeachingResourcesSection() {
     <section
       id="teaching-resources"
       aria-labelledby="teaching-resources-heading"
-      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#0f1d32]/70 px-4 py-24"
+      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#271f16]/70 px-4 py-24"
     >
       <div id="reveal-teaching" className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume VII-B
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">

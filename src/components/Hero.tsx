@@ -43,28 +43,28 @@ export default function Hero() {
           className="mx-auto mb-6 text-balance text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
         >
           National Teaching &amp; Learning{" "}
-          <span className="bg-gradient-to-r from-purple via-[#7C9CFF] to-teal bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-purple via-[#c66c3f] to-teal bg-clip-text text-transparent">
             Sector Network
           </span>
         </h1>
 
-        <p className="mx-auto mb-4 max-w-2xl text-lg leading-relaxed text-[#aebfce] sm:text-xl">
+        <p className="mx-auto mb-4 max-w-2xl text-lg leading-relaxed text-[#bca98f] sm:text-xl">
           Every symposium, workshop and PD opportunity across all{" "}
           {universityCount} universities — one page, one portal.
         </p>
 
-        <p className="mx-auto mb-10 max-w-2xl text-sm leading-relaxed text-[#8aa0b6]">
+        <p className="mx-auto mb-10 max-w-2xl text-sm leading-relaxed text-[#a0907a]">
           Free for every educator. No logins, no paywalls. Open-source, owned
           by no one.
         </p>
 
         {/* Live proof — counts read from data/events.json + data/universities.json */}
         <ul className="flex flex-wrap items-center justify-center gap-3" role="list">
-          <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#cbd8e6]">
+          <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#d9cdb6]">
             <span className="text-teal">{universityCount}</span> institutions
             mapped
           </li>
-          <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#cbd8e6]">
+          <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#d9cdb6]">
             <span className="text-amber">{eventCount}</span> events on the
             sector calendar
           </li>

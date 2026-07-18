@@ -109,7 +109,7 @@ export default function SymShowSection() {
         className="absolute inset-0 z-[1]"
         style={{
           background:
-            "linear-gradient(180deg,#0A1628 0%,rgba(10,22,40,0) 14%,rgba(10,22,40,0) 86%,#0A1628 100%),radial-gradient(140% 85% at 50% 12%,rgba(255,180,72,.16),transparent 55%),linear-gradient(180deg,rgba(44,28,46,.32) 0%,rgba(50,32,54,.5) 48%,rgba(26,17,32,.76) 100%)",
+            "linear-gradient(180deg,#211b14 0%,rgba(10,22,40,0) 14%,rgba(10,22,40,0) 86%,#211b14 100%),radial-gradient(140% 85% at 50% 12%,rgba(230,163,60,.16),transparent 55%),linear-gradient(180deg,rgba(44,28,46,.32) 0%,rgba(50,32,54,.5) 48%,rgba(26,17,32,.76) 100%)",
         }}
       />
 
@@ -136,7 +136,7 @@ export default function SymShowSection() {
       ))}
 
       <div className="absolute top-3.5 right-0 left-0 z-[4] text-center">
-        <span className="inline-block rounded-[999px] bg-amber px-[15px] py-[5px] text-xs font-extrabold tracking-[2px] text-[#06121F] uppercase shadow-[0_4px_18px_rgba(255,180,72,0.45)]">
+        <span className="inline-block rounded-[999px] bg-amber px-[15px] py-[5px] text-xs font-extrabold tracking-[2px] text-[#19130d] uppercase shadow-[0_4px_18px_rgba(230,163,60,0.45)]">
           Coming soon · 2027
         </span>
       </div>

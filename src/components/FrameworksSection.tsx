@@ -68,7 +68,7 @@ export default function FrameworksSection() {
                 width="32"
                 height="5"
                 rx="2.5"
-                fill="#4ECDC4"
+                fill="#8fb081"
               />
               <rect
                 className="na-seq na-seq-d1"
@@ -77,7 +77,7 @@ export default function FrameworksSection() {
                 width="32"
                 height="5"
                 rx="2.5"
-                fill="#C9A962"
+                fill="#c9a962"
               />
               <rect
                 className="na-seq na-seq-d2"
@@ -86,7 +86,7 @@ export default function FrameworksSection() {
                 width="32"
                 height="5"
                 rx="2.5"
-                fill="#C57BFF"
+                fill="#a8737f"
               />
             </svg>
           </div>

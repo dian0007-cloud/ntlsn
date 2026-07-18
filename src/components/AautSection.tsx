@@ -147,10 +147,10 @@ export default function AautSection() {
       const n = c[4].filter((k) => low.indexOf(k) > -1).length;
       if (n >= 3) {
         strong++;
-        return { crit: c, status: "Addressed" as const, colour: "#2DD4BF" };
+        return { crit: c, status: "Addressed" as const, colour: "#8fb081" };
       }
-      if (n >= 1) return { crit: c, status: "Light" as const, colour: "#FFB448" };
-      return { crit: c, status: "Not yet" as const, colour: "#9fb3c8" };
+      if (n >= 1) return { crit: c, status: "Light" as const, colour: "#e6a33c" };
+      return { crit: c, status: "Not yet" as const, colour: "#b3a48c" };
     });
     const rgrade =
       grade <= 12
@@ -174,10 +174,10 @@ export default function AautSection() {
       <div className="mx-auto max-w-[1000px]">
         <div className="mx-auto mb-[18px] max-w-[780px] text-center">
           <div className="mb-3.5 inline-flex flex-wrap items-center justify-center gap-2">
-            <span className="rounded-full bg-[#2DD4BF] px-3 py-1 text-[11px] font-extrabold tracking-[1.5px] text-[#06243a] uppercase">
+            <span className="rounded-full bg-[#8fb081] px-3 py-1 text-[11px] font-extrabold tracking-[1.5px] text-[#1f1810] uppercase">
               ▶ Try it
             </span>
-            <span className="rounded-full border border-[rgba(124,156,255,.45)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-[#7C9CFF] uppercase">
+            <span className="rounded-full border border-[rgba(198,108,63,.45)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-[#c66c3f] uppercase">
               Runs in your browser
             </span>
           </div>
@@ -187,7 +187,7 @@ export default function AautSection() {
           >
             Ready for an AAUT Citation?
           </h2>
-          <p className="mb-3 text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#aebfce]">
+          <p className="mb-3 text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#bca98f]">
             Pick your subcategory to see the exact four questions assessors
             ask, paste a draft, and get a report: criteria coverage, your
             25-word citation against the limit, and a plain-English read.
@@ -200,12 +200,12 @@ export default function AautSection() {
                 style={
                   i === 0
                     ? {
-                        color: "#06243a",
-                        background: "#2DD4BF",
-                        border: "1px solid #2DD4BF",
+                        color: "#1f1810",
+                        background: "#8fb081",
+                        border: "1px solid #8fb081",
                       }
                     : {
-                        color: "#9fb3c8",
+                        color: "#b3a48c",
                         background: "rgba(255,255,255,.05)",
                         border: "1px solid rgba(255,255,255,.12)",
                       }
@@ -231,13 +231,13 @@ export default function AautSection() {
                 style={
                   on
                     ? {
-                        background: "#2DD4BF",
-                        color: "#06243a",
-                        border: "1px solid #2DD4BF",
+                        background: "#8fb081",
+                        color: "#1f1810",
+                        border: "1px solid #8fb081",
                       }
                     : {
                         background: "rgba(255,255,255,.06)",
-                        color: "#cbd8e6",
+                        color: "#d9cdb6",
                         border: "1px solid rgba(255,255,255,.14)",
                       }
                 }
@@ -247,22 +247,22 @@ export default function AautSection() {
             );
           })}
         </div>
-        <div className="mb-[18px] rounded-[13px] border border-[rgba(45,212,191,.2)] bg-[#0c1c34] px-[18px] py-4">
-          <div className="mb-2 text-[10.5px] font-bold tracking-[0.5px] text-[#2DD4BF] uppercase">
+        <div className="mb-[18px] rounded-[13px] border border-[rgba(143,176,129,.2)] bg-[#251e15] px-[18px] py-4">
+          <div className="mb-2 text-[10.5px] font-bold tracking-[0.5px] text-[#8fb081] uppercase">
             Your four questions for {SC[curSC][0]}, address all, weighted
             evenly
           </div>
           {(["A", "B", "C", "D"] as const).map((letter, k) => (
             <div
               key={letter}
-              className="border-b border-white/[0.06] py-1.5 text-[12.5px] leading-[1.5] text-[#cbd8e6]"
+              className="border-b border-white/[0.06] py-1.5 text-[12.5px] leading-[1.5] text-[#d9cdb6]"
             >
-              <b className="text-[#2DD4BF]">Criterion {letter}.</b> How, and to
+              <b className="text-[#8fb081]">Criterion {letter}.</b> How, and to
               what extent, {verb} {subject} {TAIL[k]}?
             </div>
           ))}
-          <div className="mt-[9px] text-[11.5px] leading-[1.5] text-[#8aa0b6]">
-            <b className="text-[#9fb3c8]">{SC[curSC][0]} may include:</b>{" "}
+          <div className="mt-[9px] text-[11.5px] leading-[1.5] text-[#a0907a]">
+            <b className="text-[#b3a48c]">{SC[curSC][0]} may include:</b>{" "}
             {MAY[curSC]}
           </div>
         </div>
@@ -270,11 +270,11 @@ export default function AautSection() {
           <div className="grid min-w-full flex-1 gap-[11px]">
             <div>
               <label
-                className="mb-[5px] block text-[11.5px] font-semibold text-[#9fb3c8]"
+                className="mb-[5px] block text-[11.5px] font-semibold text-[#b3a48c]"
                 htmlFor="aa-cit"
               >
                 Proposed citation{" "}
-                <span className="text-[#8aa0b6]">(max 25 words, third person)</span>
+                <span className="text-[#a0907a]">(max 25 words, third person)</span>
               </label>
               <input
                 id="aa-cit"
@@ -288,10 +288,10 @@ export default function AautSection() {
                 style={{
                   color:
                     citWords > 25
-                      ? "#FFB448"
+                      ? "#e6a33c"
                       : citWords > 0
-                        ? "#2DD4BF"
-                        : "#8aa0b6",
+                        ? "#8fb081"
+                        : "#a0907a",
                 }}
               >
                 {citWords} / 25 words
@@ -299,11 +299,11 @@ export default function AautSection() {
             </div>
             <div>
               <label
-                className="mb-[5px] block text-[11.5px] font-semibold text-[#9fb3c8]"
+                className="mb-[5px] block text-[11.5px] font-semibold text-[#b3a48c]"
                 htmlFor="aa-draft"
               >
                 Your draft{" "}
-                <span className="text-[#8aa0b6]">
+                <span className="text-[#a0907a]">
                   (your claims, or your first 500 words)
                 </span>
               </label>
@@ -318,44 +318,44 @@ export default function AautSection() {
             </div>
           </div>
           <div className="min-w-full flex-1">
-            <div className="min-h-[240px] rounded-[14px] border border-white/[0.08] bg-[#0f1f3a] p-5">
+            <div className="min-h-[240px] rounded-[14px] border border-white/[0.08] bg-[#2a2218] p-5">
               {!report ? (
-                <div className="px-1.5 py-[30px] text-center text-[14px] leading-[1.6] font-semibold text-[#9fb3c8]">
+                <div className="px-1.5 py-[30px] text-center text-[14px] leading-[1.6] font-semibold text-[#b3a48c]">
                   Paste your draft to get your report: criteria coverage,
                   readability, and what to strengthen.
                 </div>
               ) : (
                 <>
-                  <div className="mb-2.5 text-[10.5px] font-bold tracking-[0.6px] text-[#2DD4BF] uppercase">
+                  <div className="mb-2.5 text-[10.5px] font-bold tracking-[0.6px] text-[#8fb081] uppercase">
                     Report · focused on {SC[curSC][0]}
                   </div>
                   <div className="mb-3.5 flex flex-wrap gap-3.5">
                     <div>
-                      <div className="text-[22px] leading-none font-extrabold text-[#f0f4f8]">
+                      <div className="text-[22px] leading-none font-extrabold text-[#f4efe4]">
                         {report.wc}
                       </div>
-                      <div className="text-[11px] font-medium text-[#9fb3c8]">
+                      <div className="text-[11px] font-medium text-[#b3a48c]">
                         words
                       </div>
                     </div>
                     <div>
-                      <div className="text-[22px] leading-none font-extrabold text-[#f0f4f8]">
+                      <div className="text-[22px] leading-none font-extrabold text-[#f4efe4]">
                         {report.strong}/4
                       </div>
-                      <div className="text-[11px] font-medium text-[#9fb3c8]">
+                      <div className="text-[11px] font-medium text-[#b3a48c]">
                         criteria addressed
                       </div>
                     </div>
                     <div>
-                      <div className="text-[22px] leading-none font-extrabold text-[#f0f4f8]">
+                      <div className="text-[22px] leading-none font-extrabold text-[#f4efe4]">
                         ~{report.grade}
                       </div>
-                      <div className="text-[11px] font-medium text-[#9fb3c8]">
+                      <div className="text-[11px] font-medium text-[#b3a48c]">
                         reading grade
                       </div>
                     </div>
                   </div>
-                  <div className="mb-3 text-[12px] leading-[1.5] text-[#8aa0b6]">
+                  <div className="mb-3 text-[12px] leading-[1.5] text-[#a0907a]">
                     Reading ease: {report.rgrade}.
                   </div>
                   {report.rows.map(({ crit, status, colour }) => (
@@ -376,16 +376,16 @@ export default function AautSection() {
                         </span>
                       </div>
                       {status !== "Addressed" && (
-                        <div className="mt-[5px] text-[12px] leading-[1.45] text-[#9fb3c8]">
+                        <div className="mt-[5px] text-[12px] leading-[1.45] text-[#b3a48c]">
                           {crit[3]}
                         </div>
                       )}
                     </div>
                   ))}
                   {citTrim && (
-                    <div className="mt-3 border-t border-white/[0.08] pt-[11px] text-[12.5px] leading-[1.5] font-medium text-[#cbd8e6]">
+                    <div className="mt-3 border-t border-white/[0.08] pt-[11px] text-[12.5px] leading-[1.5] font-medium text-[#d9cdb6]">
                       Citation line:{" "}
-                      <b style={{ color: citWords > 25 ? "#FFB448" : "#2DD4BF" }}>
+                      <b style={{ color: citWords > 25 ? "#e6a33c" : "#8fb081" }}>
                         {citWords}/25 words
                       </b>
                       {citWords > 25 ? " (trim it)." : "."}
@@ -403,7 +403,7 @@ export default function AautSection() {
           </div>
         </div>
         <div className="mt-[22px]">
-          <div className="mb-[11px] text-center text-[10.5px] font-bold tracking-[0.6px] text-[#8aa0b6] uppercase">
+          <div className="mb-[11px] text-center text-[10.5px] font-bold tracking-[0.6px] text-[#a0907a] uppercase">
             What assessors look for
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-[11px]">
@@ -415,14 +415,14 @@ export default function AautSection() {
                 <div className="mb-[3px] text-[12px] font-bold text-[#e6eef6]">
                   {title}
                 </div>
-                <div className="text-[12px] leading-[1.45] text-[#9fb3c8]">
+                <div className="text-[12px] leading-[1.45] text-[#b3a48c]">
                   {body}
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <p className="mx-auto mt-[18px] max-w-[760px] text-center text-[12px] leading-[1.55] text-[#8aa0b6]">
+        <p className="mx-auto mt-[18px] max-w-[760px] text-center text-[12px] leading-[1.55] text-[#a0907a]">
           Five AAUT award types, run by Universities Australia and the AAUTN.
           This self-check covers <b>Citations</b>; Program, Teaching, Teacher
           of the Year and Career Achievement have their own criteria. It runs
@@ -432,7 +432,7 @@ export default function AautSection() {
             href="https://aautn.org/resources/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#2DD4BF]"
+            className="text-[#8fb081]"
           >
             guidelines, matrix and writing tips
           </a>{" "}
@@ -441,7 +441,7 @@ export default function AautSection() {
             href="https://universitiesaustralia.edu.au/policy-submissions/teaching-learning-funding/australian-awards-for-university-teaching/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#2DD4BF]"
+            className="text-[#8fb081]"
           >
             Universities Australia AAUT
           </a>

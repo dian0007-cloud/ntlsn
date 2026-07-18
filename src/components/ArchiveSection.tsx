@@ -52,13 +52,13 @@ export default function ArchiveSection() {
         >
           The Sector Archive
         </h2>
-        <p className="mb-0 text-center text-[14.5px] leading-normal font-semibold text-[#9FB3C8]">
+        <p className="mb-0 text-center text-[14.5px] leading-normal font-semibold text-[#b3a48c]">
           Three decades of sector-funded work — resurfaced from the vault.
           <br />
           31 years · {workCount} resources · ALTC &amp; OLT-funded · all
           resurfaced.
         </p>
-        <p className="mt-0.5 mb-4 text-center text-[13.5px] font-semibold text-[#9FB3C8]">
+        <p className="mt-0.5 mb-4 text-center text-[13.5px] font-semibold text-[#b3a48c]">
           Search your discipline, say nursing, law, engineering or education,
           to see what the sector has already funded and built for it.
         </p>
@@ -74,9 +74,9 @@ export default function ArchiveSection() {
           >
             <defs>
               <linearGradient id="ntlswheel" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#4ECDC4" />
-                <stop offset=".5" stopColor="#7C9CFF" />
-                <stop offset="1" stopColor="#C9A962" />
+                <stop offset="0" stopColor="#8fb081" />
+                <stop offset=".5" stopColor="#c66c3f" />
+                <stop offset="1" stopColor="#c9a962" />
               </linearGradient>
             </defs>
             <g>
@@ -127,26 +127,26 @@ export default function ArchiveSection() {
               <circle cx="50" cy="50" r="8" fill="url(#ntlswheel)" />
             </g>
           </svg>
-          <p className="text-[13px] font-semibold text-[#8AA0B6]">
+          <p className="text-[13px] font-semibold text-[#a0907a]">
             Why reinvent the wheel? The sector already built it.
           </p>
         </div>
 
-        <p className="mx-auto mb-2 max-w-[680px] text-center text-[17px] leading-relaxed text-[#9FB3C8]">
+        <p className="mx-auto mb-2 max-w-[680px] text-center text-[17px] leading-relaxed text-[#b3a48c]">
           Every ALTC and OLT grant, every JUTLP paper, every fellowship
           project — buried in a repository no one could find. Now searchable,
           and live.{" "}
-          <b className="text-[#CFE9E5]">
+          <b className="text-[#d8e0cc]">
             {workCount} resources, 1994–2025, indexed here.
           </b>
         </p>
-        <p className="mx-auto mb-[30px] max-w-[620px] text-center text-[13px] leading-relaxed text-[#8AA0B6]">
+        <p className="mx-auto mb-[30px] max-w-[620px] text-center text-[13px] leading-relaxed text-[#a0907a]">
           Source:{" "}
           <a
             href="https://ltr.edu.au"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#9FB3C8] underline"
+            className="text-[#b3a48c] underline"
           >
             Learning &amp; Teaching Repository
           </a>
@@ -173,7 +173,7 @@ export default function ArchiveSection() {
           />
           <p
             aria-live="polite"
-            className="mx-0.5 my-2.5 text-[13px] leading-snug font-semibold text-[#8AA0B6]"
+            className="mx-0.5 my-2.5 text-[13px] leading-snug font-semibold text-[#a0907a]"
           >
             {showingResults
               ? `${results.length}${results.length >= MATCH_CAP ? "+" : ""} result(s) for “${query}”`
@@ -192,13 +192,13 @@ export default function ArchiveSection() {
                 <LtrResultCard
                   key={record.u + record.t}
                   record={record}
-                  accent="#FFB448"
+                  accent="#e6a33c"
                   borderClass="border-amber/[0.16]"
                 />
               ))}
           </ul>
           {showingResults && results.length > RENDER_CAP && (
-            <p className="p-2 text-center text-[13px] text-[#8AA0B6]">
+            <p className="p-2 text-center text-[13px] text-[#a0907a]">
               Showing {RENDER_CAP} of {results.length} — refine your search
             </p>
           )}

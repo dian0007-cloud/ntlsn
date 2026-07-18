@@ -30,12 +30,12 @@ export default function CapabilitiesSection() {
       >
         Everything NTLSN does — now, and over three years.
       </h2>
-      <p className="mx-auto mb-2 max-w-[740px] text-center text-[17px] leading-relaxed text-[#9FB3C8]">
-        The free commons is <b className="text-[#CFE9E5]">live today.</b> The
+      <p className="mx-auto mb-2 max-w-[740px] text-center text-[17px] leading-relaxed text-[#b3a48c]">
+        The free commons is <b className="text-[#d8e0cc]">live today.</b> The
         paid tools and integrations build across the next three years. Here
         is the whole map — every status honest.
       </p>
-      <p className="mx-auto mb-10 max-w-[660px] text-center text-[13px] leading-relaxed text-[#8AA0B6]">
+      <p className="mx-auto mb-10 max-w-[660px] text-center text-[13px] leading-relaxed text-[#a0907a]">
         “Live” means usable today (some tools are early prototypes).
         2027–2029 is the build roadmap; sequencing follows the sector and
         founding partners.
@@ -49,7 +49,7 @@ export default function CapabilitiesSection() {
             className="absolute top-2 right-[11%] left-[11%] h-0.5 opacity-45"
             style={{
               background:
-                "linear-gradient(90deg,#4ECDC4,#FFB448,#7C9CFF,#C57BFF)",
+                "linear-gradient(90deg,#8fb081,#e6a33c,#c66c3f,#a8737f)",
             }}
           />
           {CAPABILITY_MILESTONES.map(([year, label, colour, live]) => (
@@ -62,7 +62,7 @@ export default function CapabilitiesSection() {
                 className="mx-auto mb-[9px] h-[18px] w-[18px] rounded-full"
                 style={{
                   background: colour,
-                  boxShadow: `0 0 0 4px #0C1C34, 0 0 14px ${colour}88`,
+                  boxShadow: `0 0 0 4px #251e15, 0 0 14px ${colour}88`,
                 }}
               />
               <p className="text-[17px] font-extrabold text-white">
@@ -70,13 +70,13 @@ export default function CapabilitiesSection() {
                 {live && (
                   <span
                     className="ml-1 rounded px-[5px] py-px align-middle text-[8px] font-extrabold tracking-[1px]"
-                    style={{ background: colour, color: "#06121F" }}
+                    style={{ background: colour, color: "#19130d" }}
                   >
                     LIVE
                   </span>
                 )}
               </p>
-              <p className="mt-[3px] text-[11.5px] leading-snug font-semibold text-[#9FB3C8]">
+              <p className="mt-[3px] text-[11.5px] leading-snug font-semibold text-[#b3a48c]">
                 {label}
               </p>
             </div>
@@ -128,7 +128,7 @@ function GroupHeading({ group }: { group: CapabilityGroup }) {
     <>
       <span
         className="rounded-[999px] px-[11px] py-1 text-[13px] font-extrabold tracking-[1px]"
-        style={{ background: group.c, color: "#06121F" }}
+        style={{ background: group.c, color: "#19130d" }}
       >
         {group.badge}
       </span>
@@ -144,13 +144,13 @@ function GroupGrid({ group }: { group: CapabilityGroup }) {
       {group.items.map((item) => (
         <div
           key={item.n}
-          className="rounded-xl border border-white/[0.07] bg-[#0F1F38] px-[15px] py-3.5"
+          className="rounded-xl border border-white/[0.07] bg-[#2a2218] px-[15px] py-3.5"
           style={{ borderLeft: `3px solid ${group.c}` }}
         >
           <p className="mb-1 text-[15px] font-extrabold text-white">
             {item.n}
           </p>
-          <p className="text-[13px] leading-normal text-[#9FB3C8]">
+          <p className="text-[13px] leading-normal text-[#b3a48c]">
             {itemDescription(item)}
           </p>
           {item.t && (
@@ -158,7 +158,7 @@ function GroupGrid({ group }: { group: CapabilityGroup }) {
               href={`/${item.t}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block rounded-[999px] bg-teal px-[18px] py-2 text-[13px] font-extrabold tracking-[0.2px] text-[#06121F] no-underline shadow-[0_4px_14px_rgba(78,205,196,0.28)]"
+              className="mt-3 inline-block rounded-[999px] bg-teal px-[18px] py-2 text-[13px] font-extrabold tracking-[0.2px] text-[#19130d] no-underline shadow-[0_4px_14px_rgba(78,205,196,0.28)]"
             >
               Try it →
             </a>
@@ -166,7 +166,7 @@ function GroupGrid({ group }: { group: CapabilityGroup }) {
           {item.j && !item.t && (
             <a
               href={item.j}
-              className="mt-2 inline-block text-xs font-bold text-[#9FB3C8] no-underline hover:text-white"
+              className="mt-2 inline-block text-xs font-bold text-[#b3a48c] no-underline hover:text-white"
             >
               View on page →
             </a>

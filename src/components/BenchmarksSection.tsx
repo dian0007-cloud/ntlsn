@@ -54,7 +54,7 @@ export default function BenchmarksSection() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume XII
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -256,26 +256,26 @@ function StudyHeading({
 const TONE_CARD: Record<string, string> = {
   muted: "border-white/10 bg-white/[0.02]",
   amber: "border-amber-500/20 bg-amber-500/[0.03]",
-  blue: "border-[#7C9CFF]/20 bg-[#7C9CFF]/[0.03]",
-  teal: "border-[#4ECDC4]/30 bg-[#4ECDC4]/[0.04]",
+  blue: "border-[#c66c3f]/20 bg-[#c66c3f]/[0.03]",
+  teal: "border-[#8fb081]/30 bg-[#8fb081]/[0.04]",
 };
 const TONE_DOT: Record<string, string> = {
   muted: "bg-white/20",
   amber: "bg-amber-400/60",
-  blue: "bg-[#7C9CFF]/60",
-  teal: "bg-[#4ECDC4]/70",
+  blue: "bg-[#c66c3f]/60",
+  teal: "bg-[#8fb081]/70",
 };
 const TONE_TITLE: Record<string, string> = {
   muted: "text-white/50",
   amber: "text-amber-300/80",
-  blue: "text-[#7C9CFF]/80",
-  teal: "text-[#4ECDC4]/90",
+  blue: "text-[#c66c3f]/80",
+  teal: "text-[#8fb081]/90",
 };
 const TONE_CHIP: Record<string, string> = {
   muted: "border-white/20 text-white/50",
   amber: "border-amber-400/20 text-amber-300/60",
-  blue: "border-[#7C9CFF]/30 text-[#7C9CFF]/70",
-  teal: "border-[#4ECDC4]/30 text-[#4ECDC4]/80 font-semibold",
+  blue: "border-[#c66c3f]/30 text-[#c66c3f]/70",
+  teal: "border-[#8fb081]/30 text-[#8fb081]/80 font-semibold",
 };
 
 function SapStudy() {
@@ -374,20 +374,20 @@ function SapStudy() {
 /* ── Study 2 — Indigenising the Curriculum ──────────────────────────────── */
 
 const LEVEL_PCT: Record<string, string> = {
-  teal: "text-[#4ECDC4]",
-  blue: "text-[#7C9CFF]",
+  teal: "text-[#8fb081]",
+  blue: "text-[#c66c3f]",
   amber: "text-amber-400",
   muted: "text-white/30",
 };
 const LEVEL_LABEL: Record<string, string> = {
-  teal: "text-[#4ECDC4]/70",
-  blue: "text-[#7C9CFF]/70",
+  teal: "text-[#8fb081]/70",
+  blue: "text-[#c66c3f]/70",
   amber: "text-amber-400/70",
   muted: "text-white/30",
 };
 const LEVEL_CHIP: Record<string, string> = {
-  teal: "border-[#4ECDC4]/20 text-[#4ECDC4]/60",
-  blue: "border-[#7C9CFF]/20 text-[#7C9CFF]/50",
+  teal: "border-[#8fb081]/20 text-[#8fb081]/60",
+  blue: "border-[#c66c3f]/20 text-[#c66c3f]/50",
   amber: "border-amber-400/20 text-amber-400/50",
   muted: "border-white/10 text-white/30",
 };
@@ -542,7 +542,7 @@ function PrtStudy() {
           className="mb-4 h-1.5 rounded-full"
           style={{
             background:
-              "linear-gradient(90deg, rgba(251,191,36,0.5), rgba(124,156,255,0.5), rgba(78,205,196,0.6))",
+              "linear-gradient(90deg, rgba(251,191,36,0.5), rgba(198,108,63,0.5), rgba(78,205,196,0.6))",
           }}
         />
         <PrtCardGrid cards={PRT_SPECTRUM} />
@@ -606,7 +606,7 @@ function BenchCard({
   const [open, setOpen] = useState(false);
   return (
     <div
-      className={`mx-auto mt-7 max-w-5xl rounded-[20px] border bg-[#0f1f38] p-8 ${borderClass}`}
+      className={`mx-auto mt-7 max-w-5xl rounded-[20px] border bg-[#2a2218] p-8 ${borderClass}`}
     >
       <div className="mb-1 flex items-center gap-3">
         <span
@@ -656,11 +656,11 @@ function GradCertBench() {
   return (
     <BenchCard
       number="4"
-      colour="#4ECDC4"
+      colour="#8fb081"
       borderClass="border-teal/[0.18]"
       title="Graduate Certificate in Higher Education"
       intro={
-        <p className="mb-5 text-[15px] text-[#9FB3C8]">
+        <p className="mb-5 text-[15px] text-[#b3a48c]">
           Availability audit across {total} Australian universities — who
           offers a dedicated Grad Cert in Higher Education / University
           Learning &amp; Teaching.
@@ -669,11 +669,11 @@ function GradCertBench() {
     >
       <div className="mb-1.5 flex flex-wrap items-center gap-7">
         <div>
-          <p className="text-[50px] leading-none font-extrabold text-[#34D399]">
+          <p className="text-[50px] leading-none font-extrabold text-[#7fa66a]">
             {offering}
-            <span className="text-[22px] text-[#8AA0B6]">/{total}</span>
+            <span className="text-[22px] text-[#a0907a]">/{total}</span>
           </p>
-          <p className="mt-1.5 text-[13px] font-semibold text-[#9FB3C8]">
+          <p className="mt-1.5 text-[13px] font-semibold text-[#b3a48c]">
             offer a Grad Cert ({pct}%) · {suspended} suspended
           </p>
         </div>
@@ -683,25 +683,25 @@ function GradCertBench() {
             aria-label={`${pctOf("y").toFixed(0)}% offer, ${pctOf("s").toFixed(0)}% suspended, ${pctOf("n").toFixed(0)}% not yet listed`}
             className="my-2.5 mb-1.5 flex h-3.5 overflow-hidden rounded-lg"
           >
-            <div style={{ width: `${pctOf("y")}%`, background: "#34D399" }} />
-            <div style={{ width: `${pctOf("s")}%`, background: "#FFB448" }} />
-            <div style={{ width: `${pctOf("n")}%`, background: "#FF6B6B" }} />
+            <div style={{ width: `${pctOf("y")}%`, background: "#7fa66a" }} />
+            <div style={{ width: `${pctOf("s")}%`, background: "#e6a33c" }} />
+            <div style={{ width: `${pctOf("n")}%`, background: "#d96650" }} />
           </div>
-          <p className="flex gap-4 text-xs font-semibold text-[#9FB3C8]">
+          <p className="flex gap-4 text-xs font-semibold text-[#b3a48c]">
             <span>
-              <span aria-hidden="true" style={{ color: "#34D399" }}>
+              <span aria-hidden="true" style={{ color: "#7fa66a" }}>
                 ●
               </span>{" "}
               Offers
             </span>
             <span>
-              <span aria-hidden="true" style={{ color: "#FFB448" }}>
+              <span aria-hidden="true" style={{ color: "#e6a33c" }}>
                 ●
               </span>{" "}
               Suspended
             </span>
             <span>
-              <span aria-hidden="true" style={{ color: "#9FB3C8" }}>
+              <span aria-hidden="true" style={{ color: "#b3a48c" }}>
                 ●
               </span>{" "}
               Not yet listed
@@ -740,7 +740,7 @@ function GradCertBench() {
             <h4 className="mb-1.5 text-sm font-bold text-white">
               {insight.title}
             </h4>
-            <p className="text-[13px] leading-normal text-[#9FB3C8]">
+            <p className="text-[13px] leading-normal text-[#b3a48c]">
               {insight.body}
               {i === GRADCERT_INSIGHTS.length - 1 && (
                 <>
@@ -757,7 +757,7 @@ function GradCertBench() {
           </div>
         ))}
       </div>
-      <p className="mt-4 text-xs text-[#8AA0B6]">
+      <p className="mt-4 text-xs text-[#a0907a]">
         Hover a university for its model. Source: NTLSN sector availability
         audit, 2026.
       </p>
@@ -774,11 +774,11 @@ function SotlMetricsBench() {
   return (
     <BenchCard
       number="5"
-      colour="#C57BFF"
+      colour="#a8737f"
       borderClass="border-purple/[0.18]"
       title="SoTL Metrics & Performance Frameworks"
       intro={
-        <p className="mb-[18px] text-[15px] text-[#9FB3C8]">
+        <p className="mb-[18px] text-[15px] text-[#b3a48c]">
           How leading Australian universities measure and reward teaching
           quality — moving beyond student-satisfaction surveys toward named
           quality cycles, equity-disaggregated analytics and evidence
@@ -798,7 +798,7 @@ function SotlMetricsBench() {
             <span className="rounded-md border border-purple/[0.27] bg-purple/[0.12] px-2 py-[3px] text-[11px] font-semibold whitespace-nowrap text-purple">
               {framework}
             </span>
-            <span className="min-w-[220px] flex-1 text-[13px] leading-normal text-[#9FB3C8]">
+            <span className="min-w-[220px] flex-1 text-[13px] leading-normal text-[#b3a48c]">
               {detail}
             </span>
           </li>
@@ -816,13 +816,13 @@ function SotlMetricsBench() {
             <h4 className="mb-1.5 text-sm font-bold text-white">
               {item.title}
             </h4>
-            <p className="text-[13px] leading-normal text-[#9FB3C8]">
+            <p className="text-[13px] leading-normal text-[#b3a48c]">
               {item.body}
             </p>
           </div>
         ))}
       </div>
-      <p className="mt-4 text-xs text-[#8AA0B6]">
+      <p className="mt-4 text-xs text-[#a0907a]">
         Synthesised from sector benchmarking of academic-performance
         frameworks across Australian universities. NTLSN, 2026.
       </p>

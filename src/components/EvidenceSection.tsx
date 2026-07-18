@@ -31,7 +31,7 @@ export default function EvidenceSection() {
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             The Evidence
           </p>
           <h2
@@ -90,7 +90,7 @@ export default function EvidenceSection() {
                     style={{ width: `${bar.yes}%` }}
                   />
                   <div
-                    className="h-full bg-[#95D5B2]"
+                    className="h-full bg-[#b8cfa0]"
                     style={{ width: `${bar.partial}%` }}
                   />
                 </div>
@@ -114,7 +114,7 @@ export default function EvidenceSection() {
             <span className="flex items-center gap-1.5">
               <span
                 aria-hidden="true"
-                className="h-3 w-3 rounded-sm bg-[#95D5B2]"
+                className="h-3 w-3 rounded-sm bg-[#b8cfa0]"
               />{" "}
               Partial
             </span>
@@ -160,7 +160,7 @@ export default function EvidenceSection() {
                     </th>
                     <th
                       scope="col"
-                      className="w-16 p-3 text-center font-semibold text-[#95D5B2]"
+                      className="w-16 p-3 text-center font-semibold text-[#b8cfa0]"
                     >
                       Partial
                     </th>
@@ -186,11 +186,11 @@ export default function EvidenceSection() {
                     >
                       <td className="p-3 text-white/70">{indicator}</td>
                       <td className="p-3 text-center text-teal">{yes}</td>
-                      <td className="p-3 text-center text-[#95D5B2]">
+                      <td className="p-3 text-center text-[#b8cfa0]">
                         {partial}
                       </td>
                       {/* "No" counts neutral, not red — the noredstat repaint. */}
-                      <td className="p-3 text-center text-[#DBE4EE]">{no}</td>
+                      <td className="p-3 text-center text-[#ddd5c4]">{no}</td>
                       <td
                         className="p-3 text-center font-mono font-bold"
                         style={{ color: rateColour(parseInt(rate, 10)) }}
@@ -205,13 +205,13 @@ export default function EvidenceSection() {
           </details>
         </div>
 
-        <div className="mb-16 rounded-2xl border border-[#C9A962]/30 bg-[#C9A962]/[0.04] p-8">
+        <div className="mb-16 rounded-2xl border border-[#c9a962]/30 bg-[#c9a962]/[0.04] p-8">
           <div className="flex items-start gap-4">
             <p aria-hidden="true" className="shrink-0 text-3xl">
               ⚖️
             </p>
             <div>
-              <h3 className="mb-3 text-lg font-bold text-[#C9A962]">
+              <h3 className="mb-3 text-lg font-bold text-[#c9a962]">
                 The Accord demands connected infrastructure
               </h3>
               <p className="mb-4 text-sm leading-relaxed text-white/60">
@@ -304,7 +304,7 @@ function LitmusDonut() {
             cy="100"
             r={r}
             fill="none"
-            stroke="#95D5B2"
+            stroke="#b8cfa0"
             strokeWidth="24"
             strokeDasharray={`${partialLen.toFixed(1)} ${(circumference - partialLen).toFixed(1)}`}
             strokeDashoffset={-(confirmedLen - circumference / 4)}

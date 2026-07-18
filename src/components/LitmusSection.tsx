@@ -25,7 +25,7 @@ const STATES = [
   },
   {
     eyebrow: "What NTLSN changes",
-    eyebrowColour: "#2DD4BF",
+    eyebrowColour: "#8fb081",
     head: "One connected sector.",
     sub: "A shared commons, open and free — the whole sector, finally a network.",
   },
@@ -122,7 +122,7 @@ export default function LitmusSection() {
               const dy = a.y - b.y;
               const d = Math.sqrt(dx * dx + dy * dy);
               if (d < maxD) {
-                ctx.strokeStyle = `rgba(45,212,191,${(
+                ctx.strokeStyle = `rgba(143,176,129,${(
                   ea *
                   0.45 *
                   (1 - d / maxD)
@@ -227,7 +227,7 @@ export default function LitmusSection() {
           >
             {state.head}
           </h2>
-          <p className="mx-auto max-w-[560px] text-[clamp(15px,1.8vw,18px)] leading-[1.55] text-[#aebfce]">
+          <p className="mx-auto max-w-[560px] text-[clamp(15px,1.8vw,18px)] leading-[1.55] text-[#bca98f]">
             {state.sub}
           </p>
           {!reduceMotion && (

@@ -16,7 +16,7 @@ const LANES: ReadonlyArray<{
     eyebrow: "Past",
     title: "Recognition of prior learning",
     body: "Years of teaching, service and leadership that never got formally counted. Surface it, evidence it, and turn it into a portable record.",
-    colour: "#4ECDC4",
+    colour: "#8fb081",
     links: [
       ["See what counts", "/psf-evidence-audit.html"],
       ["Count it", "/recognition-points.html"],
@@ -26,7 +26,7 @@ const LANES: ReadonlyArray<{
     eyebrow: "Present",
     title: "Your current practice",
     body: "Your portfolio now — peer review, calibration, course quality, and your promotion case, all in one place.",
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     links: [
       ["Peer review", "#ntlsn-coming2027"],
       ["Map to your level", "/recognition-navigator.html"],
@@ -36,7 +36,7 @@ const LANES: ReadonlyArray<{
     eyebrow: "Emerging",
     title: "The skills the sector is racing to recognise",
     body: "AI in teaching, micro-credentials and new pedagogies — recognised as they appear, not years late.",
-    colour: "#C57BFF",
+    colour: "#a8737f",
     links: [
       ["Course quality", "/course-quality.html"],
       ["Open standards", "#ntlsn-coming2028"],
@@ -62,7 +62,7 @@ export default function PathfinderSection() {
     >
       <div className="mx-auto max-w-[1000px]">
         <div className="mx-auto mb-[26px] max-w-[720px] text-center">
-          <div className="mb-[11px] inline-block text-[11px] font-extrabold tracking-[1.6px] text-[#2DD4BF] uppercase">
+          <div className="mb-[11px] inline-block text-[11px] font-extrabold tracking-[1.6px] text-[#8fb081] uppercase">
             Recognition Pathfinder
           </div>
           <h2
@@ -71,10 +71,10 @@ export default function PathfinderSection() {
           >
             Recognise your skills — past, present and emerging.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#aebfce]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#bca98f]">
             Tell us what you are recognising, and we will point you to the
             right tool.{" "}
-            <b className="text-[#cfe9e5]">
+            <b className="text-[#d8e0cc]">
               Free for staff, forever, no paywall
             </b>{" "}
             — your record is yours, on open standards.
@@ -84,7 +84,7 @@ export default function PathfinderSection() {
           {LANES.map((lane) => (
             <div
               key={lane.eyebrow}
-              className="min-w-[240px] flex-1 rounded-[15px] border border-white/[0.08] bg-[#0f1f3a] px-[21px] py-5"
+              className="min-w-[240px] flex-1 rounded-[15px] border border-white/[0.08] bg-[#2a2218] px-[21px] py-5"
               style={{ borderTop: `3px solid ${lane.colour}` }}
             >
               <div
@@ -96,7 +96,7 @@ export default function PathfinderSection() {
               <div className="mb-[7px] text-[16px] leading-[1.25] font-extrabold text-white">
                 {lane.title}
               </div>
-              <div className="mb-3.5 text-[13px] leading-[1.55] text-[#9fb3c8]">
+              <div className="mb-3.5 text-[13px] leading-[1.55] text-[#b3a48c]">
                 {lane.body}
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -118,14 +118,14 @@ export default function PathfinderSection() {
             </div>
           ))}
         </div>
-        <div className="rounded-[18px] border border-[rgba(124,156,255,.28)] bg-[radial-gradient(120%_140%_at_50%_0%,rgba(124,156,255,.12),rgba(12,28,52,0)_70%),#0c1c34] px-[26px] py-6 text-center">
-          <div className="mb-[13px] inline-block rounded-full border border-[rgba(255,180,72,.4)] px-3 py-1 text-[10px] font-extrabold tracking-[1.4px] text-amber uppercase">
+        <div className="rounded-[18px] border border-[rgba(198,108,63,.28)] bg-[radial-gradient(120%_140%_at_50%_0%,rgba(198,108,63,.12),rgba(37,30,21,0)_70%),#251e15] px-[26px] py-6 text-center">
+          <div className="mb-[13px] inline-block rounded-full border border-[rgba(230,163,60,.4)] px-3 py-1 text-[10px] font-extrabold tracking-[1.4px] text-amber uppercase">
             Global Academic RPL · in design · 2029
           </div>
           <h3 className="mb-2.5 text-[clamp(19px,2.2vw,26px)] leading-[1.18] font-extrabold text-white">
             Recognition that travels.
           </h3>
-          <p className="mx-auto mb-3.5 max-w-[720px] text-[clamp(13.5px,1.6vw,16px)] leading-[1.62] text-[#cbd8e6]">
+          <p className="mx-auto mb-3.5 max-w-[720px] text-[clamp(13.5px,1.6vw,16px)] leading-[1.62] text-[#d9cdb6]">
             By 2029, the goal is teaching recognition that crosses borders:
             assessed once against the{" "}
             <b className="text-white">
@@ -145,13 +145,13 @@ export default function PathfinderSection() {
             {STANDARD_CHIPS.map((chip) => (
               <span
                 key={chip}
-                className="rounded-full border border-white/[0.12] bg-white/[0.05] px-[11px] py-1 text-[11px] font-semibold text-[#9fb3c8]"
+                className="rounded-full border border-white/[0.12] bg-white/[0.05] px-[11px] py-1 text-[11px] font-semibold text-[#b3a48c]"
               >
                 {chip}
               </span>
             ))}
           </div>
-          <p className="mt-3.5 text-[11px] text-[#8aa0b6]">
+          <p className="mt-3.5 text-[11px] text-[#a0907a]">
             A roadmap track, not a live feature — aligned with the principles
             of the UNESCO Global Convention and the Tokyo Convention for the
             teaching domain they leave uncovered.

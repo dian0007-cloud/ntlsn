@@ -29,15 +29,15 @@ export type IndicatorRow = readonly [string, number, number, number, string];
 
 /** The four headline stat tiles — colour + value + label, verbatim.
  * The 47% tile carries production's data-noredstat neutral colour (the
- * ntlsn-noredstat patch repaints "deficit red" stats #DBE4EE). */
+ * ntlsn-noredstat patch repaints "deficit red" stats #ddd5c4). */
 export const EVIDENCE_STATS: ReadonlyArray<{
   value: string;
   label: string;
   colour: string;
 }> = [
-  { value: "42", label: "Universities Audited", colour: "#4ECDC4" },
-  { value: "25", label: "SoTL Indicators", colour: "#7C9CFF" },
-  { value: "47%", label: "Adoption Gap", colour: "#DBE4EE" },
+  { value: "42", label: "Universities Audited", colour: "#8fb081" },
+  { value: "25", label: "SoTL Indicators", colour: "#c66c3f" },
+  { value: "47%", label: "Adoption Gap", colour: "#ddd5c4" },
   { value: "36%", label: "Lack Portfolio Support", colour: "#FFB347" },
 ];
 
@@ -375,12 +375,12 @@ export const EVIDENCE_TABLE: readonly IndicatorRow[] = [
 
 /**
  * Rate colour — production's thresholds after the ntlsn-noredstat patch:
- * teal ≥ 67%, amber 50–66%, and the red band repainted neutral #DBE4EE.
+ * teal ≥ 67%, amber 50–66%, and the red band repainted neutral #ddd5c4.
  */
 export function rateColour(pct: number): string {
-  if (pct >= 67) return "#4ECDC4";
+  if (pct >= 67) return "#8fb081";
   if (pct >= 50) return "#FBBF24";
-  return "#DBE4EE";
+  return "#ddd5c4";
 }
 
 /** L&T Weeks litmus — the donut's exact figures and legend copy. */
@@ -389,7 +389,7 @@ export const LITMUS = {
   legend: [
     { colour: "#2D6A4F", text: "26 universities run dedicated L&T events" },
     {
-      colour: "#95D5B2",
+      colour: "#b8cfa0",
       text: "7 partial (e.g. WATLF collective, discontinued)",
     },
     { colour: "rgba(255,255,255,0.1)", text: "9 universities have no L&T week" },

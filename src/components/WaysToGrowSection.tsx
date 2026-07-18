@@ -28,7 +28,7 @@ export default function WaysToGrowSection() {
     >
       <div className="mx-auto max-w-[1040px]">
         <div className="mx-auto mb-[22px] max-w-[740px] text-center">
-          <p className="mb-3 text-[11px] font-extrabold tracking-[2px] text-[#2DD4BF] uppercase">
+          <p className="mb-3 text-[11px] font-extrabold tracking-[2px] text-[#8fb081] uppercase">
             Grow · Connect · Lead
           </p>
           <h2
@@ -37,7 +37,7 @@ export default function WaysToGrowSection() {
           >
             Not just PD. Ways to grow.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-relaxed text-[#AEBFCE]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-relaxed text-[#bca98f]">
             Teaching can isolate you — from the pedagogical shifts, from
             colleagues solving the same problem, from the recognition your
             work deserves. Communities of practice, fellowships, mentoring,
@@ -62,8 +62,8 @@ export default function WaysToGrowSection() {
                 onClick={() => setFilter(key)}
                 className={`cursor-pointer rounded-[999px] border px-3.5 py-[7px] text-[12.5px] font-bold transition-colors ${
                   active
-                    ? "border-[#2DD4BF] bg-[#2DD4BF] text-[#06243A]"
-                    : "border-white/[0.14] bg-white/[0.06] text-[#CBD8E6] hover:border-[#2DD4BF]/60"
+                    ? "border-[#8fb081] bg-[#8fb081] text-[#1f1810]"
+                    : "border-white/[0.14] bg-white/[0.06] text-[#d9cdb6] hover:border-[#8fb081]/60"
                 }`}
               >
                 {label}
@@ -73,7 +73,7 @@ export default function WaysToGrowSection() {
         </div>
         <p
           aria-live="polite"
-          className="mb-4 text-center text-[12.5px] font-semibold text-[#8AA0B6]"
+          className="mb-4 text-center text-[12.5px] font-semibold text-[#a0907a]"
         >
           {visible.length}
           {visible.length === 1 ? " way to grow" : " ways to grow"}
@@ -87,28 +87,28 @@ export default function WaysToGrowSection() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-1 flex-col rounded-[13px] border border-white/[0.08] bg-[#0F1F3A] px-[17px] py-4 no-underline transition-[border-color,transform] duration-150 hover:-translate-y-[2px] hover:border-[#2DD4BF]/50"
+                className="flex flex-1 flex-col rounded-[13px] border border-white/[0.08] bg-[#2a2218] px-[17px] py-4 no-underline transition-[border-color,transform] duration-150 hover:-translate-y-[2px] hover:border-[#8fb081]/50"
               >
                 <span className="mb-2 flex items-center justify-between gap-2">
-                  <span className="text-[9.5px] font-bold tracking-[0.5px] text-[#8AA0B6] uppercase">
+                  <span className="text-[9.5px] font-bold tracking-[0.5px] text-[#a0907a] uppercase">
                     {orgKind}
                   </span>
-                  <span className="rounded-[999px] bg-[#2DD4BF]/[0.12] px-2 py-0.5 text-[9px] font-bold tracking-[0.4px] whitespace-nowrap text-[#2DD4BF] uppercase">
+                  <span className="rounded-[999px] bg-[#8fb081]/[0.12] px-2 py-0.5 text-[9px] font-bold tracking-[0.4px] whitespace-nowrap text-[#8fb081] uppercase">
                     {GROW_TYPE_LABELS[type as GrowType]}
                   </span>
                 </span>
                 <span className="mb-1.5 text-base leading-tight font-extrabold text-white">
                   {name}
                 </span>
-                <span className="flex-1 text-[13px] leading-normal text-[#AEBFCE]">
+                <span className="flex-1 text-[13px] leading-normal text-[#bca98f]">
                   {desc}
                 </span>
                 <span className="mt-3 flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#7C9CFF]">
+                  <span className="text-xs font-bold text-[#c66c3f]">
                     Visit ↗
                   </span>
                   {licence && (
-                    <span className="rounded-[5px] border border-white/[0.12] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#8AA0B6]">
+                    <span className="rounded-[5px] border border-white/[0.12] px-1.5 py-0.5 text-[9.5px] font-semibold text-[#a0907a]">
                       {licence}
                     </span>
                   )}
@@ -118,15 +118,15 @@ export default function WaysToGrowSection() {
           ))}
         </ul>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3 rounded-xl border border-[#2DD4BF]/[0.22] bg-[#2DD4BF]/[0.08] px-4 py-3.5">
+        <div className="mt-5 flex flex-wrap items-center gap-3 rounded-xl border border-[#8fb081]/[0.22] bg-[#8fb081]/[0.08] px-4 py-3.5">
           <span className="rounded-[999px] border border-amber/40 px-2.5 py-1 text-[10px] font-extrabold tracking-[1.2px] whitespace-nowrap text-amber uppercase">
             Recognition · in design · 2027
           </span>
-          <p className="min-w-[240px] flex-1 text-[13.5px] leading-relaxed font-medium text-[#CBD8E6]">
+          <p className="min-w-[240px] flex-1 text-[13.5px] leading-relaxed font-medium text-[#d9cdb6]">
             Complete one,{" "}
             <a
               href="/recognition-points.html"
-              className="text-[#2DD4BF] no-underline hover:underline"
+              className="text-[#8fb081] no-underline hover:underline"
             >
               log it
             </a>
@@ -135,7 +135,7 @@ export default function WaysToGrowSection() {
           </p>
         </div>
 
-        <p className="mx-auto mt-4 max-w-[720px] text-center text-xs leading-relaxed text-[#8AA0B6]">
+        <p className="mx-auto mt-4 max-w-[720px] text-center text-xs leading-relaxed text-[#a0907a]">
           An open, growing directory of independent professional learning
           from across the sector. Links are provided for the community;
           listing here is not affiliation with or endorsement by NTLSN, and

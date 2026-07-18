@@ -17,7 +17,7 @@ import {
  * The "Located on <traditionalCountry> Country." panel is Acknowledgement
  * data (CLAUDE.md hard rule): it is rendered verbatim from
  * data/universities.json with production's exact respect treatment (gold
- * #C9A962 panel) and must never be dropped, abbreviated or reordered.
+ * #c9a962 panel) and must never be dropped, abbreviated or reordered.
  *
  * The T&L link reads `tlUrl` straight from the canonical data — the rebuild
  * is why the stale-embedded-URL class of bug (e.g. ACU's old 404) dies.
@@ -53,7 +53,7 @@ export default function InstitutionModal({
         // Click on the ::backdrop (i.e. the dialog element itself) closes.
         if (e.target === ref.current) ref.current?.close();
       }}
-      className="m-auto max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg border border-white/10 bg-[#0f1d32] p-6 text-white shadow-lg backdrop:bg-black/60"
+      className="m-auto max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg border border-white/10 bg-[#271f16] p-6 text-white shadow-lg backdrop:bg-black/60"
     >
       <div className="flex items-start justify-between gap-3">
         <h3
@@ -92,10 +92,10 @@ export default function InstitutionModal({
       <p className="mt-1 text-sm text-white/50">
         {uni.city}, {uni.state}
       </p>
-      <div className="mt-3 rounded-lg border border-[#C9A962]/15 bg-[#C9A962]/5 p-3">
-        <p className="text-xs leading-relaxed text-[#C9A962]/70">
+      <div className="mt-3 rounded-lg border border-[#c9a962]/15 bg-[#c9a962]/5 p-3">
+        <p className="text-xs leading-relaxed text-[#c9a962]/70">
           Located on{" "}
-          <span className="font-semibold text-[#C9A962]">
+          <span className="font-semibold text-[#c9a962]">
             {uni.traditionalCountry}
           </span>{" "}
           Country.
