@@ -26,8 +26,8 @@ export default function FnAwardsSection() {
         className="mx-auto mb-[30px] max-w-[760px] rounded-[14px] border px-[22px] py-[18px] text-center"
         style={{
           background:
-            "linear-gradient(90deg, rgba(255,196,0,.07), rgba(78,205,196,.05))",
-          borderColor: "rgba(255,196,0,.22)",
+            "linear-gradient(90deg, rgba(201, 169, 98,.07), rgba(143, 176, 129,.05))",
+          borderColor: "rgba(201, 169, 98,.22)",
         }}
       >
         <p className="mb-2 text-xs leading-none font-bold tracking-[1.5px] text-[#FFC400] uppercase">

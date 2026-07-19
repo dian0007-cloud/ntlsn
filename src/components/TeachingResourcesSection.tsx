@@ -159,7 +159,7 @@ function ThemeCard({
   const toolLink = THEME_TOOL_LINKS[t.theme];
   return (
     <li
-      className={`rounded-xl border transition-all hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(78,205,196,0.1)] ${
+      className={`rounded-xl border transition-all hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(143, 176, 129,0.1)] ${
         open
           ? "border-teal/30 bg-teal/5 ring-1 ring-teal/20"
           : "border-white/5 bg-white/[0.03] hover:border-white/10 hover:bg-white/[0.05]"
@@ -258,7 +258,7 @@ function ThemePanel({
               href={r.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-teal/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_rgba(78,205,196,0.1)]"
+              className="group block rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-teal/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_rgba(143, 176, 129,0.1)]"
             >
               <span className="mb-2 flex items-start justify-between gap-3">
                 <span className="flex-1 text-sm leading-tight font-semibold text-white/80 transition-colors group-hover:text-teal">

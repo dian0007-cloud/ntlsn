@@ -248,7 +248,7 @@ function DirectoryCard({
   onOpen: () => void;
 }) {
   return (
-    <li className="group flex flex-col rounded-xl border border-white/5 bg-white/[0.03] p-3 transition-all hover:border-white/10 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(78,205,196,0.1)]">
+    <li className="group flex flex-col rounded-xl border border-white/5 bg-white/[0.03] p-3 transition-all hover:border-white/10 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(143, 176, 129,0.1)]">
       <button
         type="button"
         onClick={onOpen}

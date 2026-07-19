@@ -141,7 +141,7 @@ export default function TryNowSection() {
         className="mx-auto mb-4 max-w-[760px] rounded-[13px] px-[18px] py-3.5"
         style={{
           background:
-            "linear-gradient(135deg, rgba(201,169,98,.1), rgba(78,205,196,.05))",
+            "linear-gradient(135deg, rgba(201,169,98,.1), rgba(143, 176, 129,.05))",
           border: "1px solid rgba(201,169,98,.25)",
         }}
       >

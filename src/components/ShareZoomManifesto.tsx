@@ -19,7 +19,7 @@ export default function ShareZoomManifesto() {
       className="relative scroll-mt-20 px-4 py-20"
       style={{
         background:
-          "linear-gradient(rgb(6,13,28) 0%, rgb(10,22,40) 50%, rgb(6,13,28) 100%)",
+          "linear-gradient(rgb(25, 20, 14) 0%, rgb(33, 27, 20) 50%, rgb(25, 20, 14) 100%)",
       }}
     >
       <div className="mx-auto max-w-3xl text-center">

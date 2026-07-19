@@ -542,7 +542,7 @@ function PrtStudy() {
           className="mb-4 h-1.5 rounded-full"
           style={{
             background:
-              "linear-gradient(90deg, rgba(251,191,36,0.5), rgba(198,108,63,0.5), rgba(78,205,196,0.6))",
+              "linear-gradient(90deg, rgba(230, 163, 60,0.5), rgba(198,108,63,0.5), rgba(143, 176, 129,0.6))",
           }}
         />
         <PrtCardGrid cards={PRT_SPECTRUM} />

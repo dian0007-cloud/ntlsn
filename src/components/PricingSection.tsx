@@ -72,7 +72,7 @@ function TierCard({ tier, pulsed }: { tier: PricingTier; pulsed: boolean }) {
       style={{
         borderTop: `3px solid ${tier.colour}`,
         boxShadow: pulsed
-          ? "0 0 0 2px #8fb081, 0 18px 40px -12px rgba(78,205,196,0.45)"
+          ? "0 0 0 2px #8fb081, 0 18px 40px -12px rgba(143, 176, 129,0.45)"
           : undefined,
       }}
     >
@@ -302,7 +302,7 @@ export default function PricingSection() {
         className="mb-[34px] rounded-[18px] border border-teal/[0.32] px-7 py-[34px] text-center"
         style={{
           background:
-            "linear-gradient(135deg, rgba(78,205,196,0.12), rgba(198,108,63,0.05))",
+            "linear-gradient(135deg, rgba(143, 176, 129,0.12), rgba(198,108,63,0.05))",
         }}
       >
         <p className="mb-2.5 text-xs font-bold tracking-[2px] text-teal uppercase">

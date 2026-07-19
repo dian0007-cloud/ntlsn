@@ -77,9 +77,9 @@ export default function PeakMapSection() {
                 height={58}
                 rx={13}
                 fill={
-                  hot === p ? "rgba(78,205,196,.22)" : "rgba(78,205,196,.10)"
+                  hot === p ? "rgba(143, 176, 129,.22)" : "rgba(143, 176, 129,.10)"
                 }
-                stroke="rgba(78,205,196,.45)"
+                stroke="rgba(143, 176, 129,.45)"
               />
               <text
                 x={142}

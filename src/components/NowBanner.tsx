@@ -80,7 +80,7 @@ export default function NowBanner() {
           const dy = a.y - b.y;
           const d = Math.sqrt(dx * dx + dy * dy);
           if (d < maxD) {
-            ctx.strokeStyle = `rgba(78,205,196,${(0.3 * (1 - d / maxD)).toFixed(3)})`;
+            ctx.strokeStyle = `rgba(143, 176, 129,${(0.3 * (1 - d / maxD)).toFixed(3)})`;
             ctx.lineWidth = DPR;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -88,7 +88,7 @@ export default function NowBanner() {
             ctx.stroke();
           }
         }
-        ctx.fillStyle = "rgba(120,220,205,0.8)";
+        ctx.fillStyle = "rgba(143, 176, 129,0.8)";
         ctx.beginPath();
         ctx.arc(a.x, a.y, 2 * DPR, 0, 6.2832);
         ctx.fill();

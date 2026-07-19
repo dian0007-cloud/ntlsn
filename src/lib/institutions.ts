@@ -2,9 +2,9 @@
  * Institution helpers for the Directory + Map sections (TASKS.md 1.2).
  *
  * Network-group colours and long names are production's exact values (read
- * from the live #map filter pills and legend: Go8 rgb(255,215,0), ATN
- * rgb(255,107,107), IRU rgb(197,123,255), RUN rgb(74,222,128), Unaligned
- * rgb(78,205,196) shown as "Independent"). State pill order is the live
+ * from the live #map filter pills and legend: Go8 rgb(201, 169, 98), ATN
+ * rgb(217, 102, 80), IRU rgb(168, 115, 127), RUN rgb(143, 176, 129), Unaligned
+ * rgb(143, 176, 129) shown as "Independent"). State pill order is the live
  * #directory filter row.
  */
 import { events, universities, type NtlsnEvent, type University } from "../data";

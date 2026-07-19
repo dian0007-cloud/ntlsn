@@ -146,7 +146,7 @@ export default function ArchitectureSection() {
                     href={card.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all hover:scale-[1.02] hover:border-teal/20 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(78,205,196,0.12)]"
+                    className="group rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all hover:scale-[1.02] hover:border-teal/20 hover:bg-white/[0.05] hover:shadow-[0_0_30px_rgba(143, 176, 129,0.12)]"
                   >
                     <div className="mb-1 flex items-center gap-2">
                       <div className="flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded bg-white/90">

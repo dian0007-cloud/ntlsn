@@ -73,7 +73,7 @@ export default function Hero() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#events"
-            className="rounded-full bg-teal px-6 py-3 text-sm font-extrabold text-navy shadow-[0_4px_14px_rgba(78,205,196,0.28)] transition-transform motion-safe:hover:-translate-y-0.5"
+            className="rounded-full bg-teal px-6 py-3 text-sm font-extrabold text-navy shadow-[0_4px_14px_rgba(143, 176, 129,0.28)] transition-transform motion-safe:hover:-translate-y-0.5"
           >
             Explore events →
           </a>

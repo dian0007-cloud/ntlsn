@@ -12,9 +12,9 @@ import { events, universities, type NtlsnEvent, type University } from "../data"
 
 /* ── Type metadata ─────────────────────────────────────────────────────────
  * Colours are production's exact per-type dot/pill colours (read from the
- * live #events filter row: conferences rgb(78,205,196), showcases
- * rgb(255,215,0), workshops rgb(255,107,107), webinars rgb(255,159,67),
- * symposia rgb(197,123,255), L&T weeks rgb(124,156,255)). */
+ * live #events filter row: conferences rgb(143, 176, 129), showcases
+ * rgb(201, 169, 98), workshops rgb(217, 102, 80), webinars rgb(230, 163, 60),
+ * symposia rgb(168, 115, 127), L&T weeks rgb(198, 108, 63)). */
 export interface TypeMeta {
   color: string;
   label: string;
