@@ -38,7 +38,7 @@ Event `type` values in use: `conference`, `workshop`, `symposium`, `webinar`, et
 
 - Static host (Cloudflare Pages / Netlify style): `_headers` (CSP, HSTS, caching, content types for `.ics`/`feed.xml`), `_redirects` (real-404 hygiene: known junk/bot paths and every unknown path return `/404.html 404`; `/` serves `index.html` by default). **There is NO SPA fallback** — the site is multi-page static with no client-side router, so unknown paths 404 (do not "restore" a `/* → /index.html 200` rule; it re-introduces homepage-in-disguise soft-404s).
 - `sw.js` — network-first for navigations, stale-while-revalidate for same-origin assets, cache name `ntlsn-vN` (bump `N` on breaking asset changes).
-- `manifest.webmanifest` — PWA install metadata, theme `#0A1628`.
+- `manifest.webmanifest` — PWA install metadata, theme `#211B14`.
 - Public endpoints now served: `/events.ics` (subscribable calendar), `/feed.xml` (RSS), `/data/events.json` + `/data/universities.json` (CORS-open JSON API).
 
 ## External dependencies
@@ -52,7 +52,7 @@ Event `type` values in use: `conference`, `workshop`, `symposium`, `webinar`, et
 
 - Australian English throughout (organise, programme where appropriate, no "Fall semester").
 - Acknowledgement of Country and traditional-country data are not decorative — never strip, abbreviate or reorder them for layout convenience.
-- Dark navy palette: bg `#0A1628`, teal `#4ECDC4`, purple `#C57BFF`, amber `#FFB448`, coral `#FF6B6B`. Aboriginal flag accent (black/red/yellow) is used only in the Unceded Lands element.
+- Earthy "Eucalyptus & Clay" palette: bg espresso `#211B14`, sage `#8FB081`, terracotta `#C66C3F`, dusty plum `#A8737F`, gold `#C9A962`, amber `#E6A33C`, coral `#D96650` (de-neoned 2026-07-19 via PRs #71–#74; previously navy/teal/purple). Aboriginal flag accent (black/red/yellow) is used only in the Unceded Lands element.
 - All new features must work with JS patch-script architecture OR the rebuilt source — do not create a third pattern.
 - Accessibility floor: WCAG 2.2 AA. New code must not rely on the runtime a11y patch scripts.
 - Every event added to `data/events.json` needs `verified: true` only after a human (Seb) confirms the URL resolves and dates match the organiser's page.
