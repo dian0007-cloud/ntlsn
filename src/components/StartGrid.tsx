@@ -238,7 +238,7 @@ function HubDoorRail() {
         >
           <span
             aria-hidden="true"
-            className="z-[1] h-[15px] w-[15px] flex-none rounded-full border-[1.5px] border-teal/60 bg-[#0b1c33] transition-colors group-hover:bg-teal group-hover:shadow-[0_0_12px_rgba(78,205,196,0.55)] motion-reduce:transition-none"
+            className="z-[1] h-[15px] w-[15px] flex-none rounded-full border-[1.5px] border-teal/60 bg-[#0b1c33] transition-colors group-hover:bg-teal group-hover:shadow-[0_0_12px_rgba(143, 176, 129,0.55)] motion-reduce:transition-none"
           />
           <span className="min-w-0 flex-1">
             <span className="block text-[15.5px] font-extrabold leading-tight tracking-[-0.01em] text-[#ece5d6]">

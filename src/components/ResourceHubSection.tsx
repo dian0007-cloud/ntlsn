@@ -190,7 +190,7 @@ function CollectionCard({
   const toolLink = COLLECTION_TOOL_LINKS[c.id];
   return (
     <li
-      className={`rounded-xl border transition-all hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(78,205,196,0.1)] ${
+      className={`rounded-xl border transition-all hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(143, 176, 129,0.1)] ${
         open
           ? "border-teal/30 bg-teal/5"
           : "border-white/5 bg-white/[0.03] hover:border-white/10 hover:bg-white/[0.05]"
@@ -301,7 +301,7 @@ function CollectionPanel({
 function ResourceRow({ resource: r }: { resource: HubResource }) {
   const tint = accessColor(r.access);
   return (
-    <li className="group rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-teal/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_rgba(78,205,196,0.1)]">
+    <li className="group rounded-xl border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-teal/30 hover:bg-white/[0.04] hover:shadow-[0_0_30px_rgba(143, 176, 129,0.1)]">
       <div className="mb-2 flex items-start justify-between gap-3">
         <a
           href={r.url}

@@ -175,7 +175,7 @@ export default function SectorThemesPanel({
             {visible.map((v) => (
               <li
                 key={v.title + v.url}
-                className={`group rounded-xl border p-5 transition-all hover:shadow-[0_0_30px_rgba(78,205,196,0.08)] ${
+                className={`group rounded-xl border p-5 transition-all hover:shadow-[0_0_30px_rgba(143, 176, 129,0.08)] ${
                   watched.has(v.url)
                     ? "border-teal/10 bg-teal/[0.03]"
                     : "border-white/5 bg-white/[0.03] hover:border-teal/30 hover:bg-white/[0.06]"

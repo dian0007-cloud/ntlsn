@@ -52,7 +52,7 @@ export default function ChallengesSection() {
         {STATS.map((stat) => (
           <div
             key={stat.l}
-            className="min-w-[150px] flex-1 rounded-[14px] border border-[rgba(255,138,107,.22)] bg-[#2a2218] px-[18px] py-5 text-center"
+            className="min-w-[150px] flex-1 rounded-[14px] border border-[rgba(217, 102, 80,.22)] bg-[#2a2218] px-[18px] py-5 text-center"
           >
             <div className="text-[clamp(26px,3.4vw,38px)] leading-none font-extrabold text-[#f4efe4]">
               {stat.n}

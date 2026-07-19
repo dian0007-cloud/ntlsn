@@ -170,7 +170,7 @@ export default function MegaMenu({ onClose }: { onClose: () => void }) {
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
-      className="fixed inset-0 z-[99999] overflow-y-auto bg-[rgba(6,12,22,0.975)] backdrop-blur-lg"
+      className="fixed inset-0 z-[99999] overflow-y-auto bg-[rgba(25, 20, 14,0.975)] backdrop-blur-lg"
     >
       <button
         ref={closeRef}

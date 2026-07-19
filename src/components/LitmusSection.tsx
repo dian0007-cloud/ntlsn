@@ -140,7 +140,7 @@ export default function LitmusSection() {
           ctx.fillStyle =
             p < 0.5
               ? `rgba(130,150,168,${(0.45 + p * 0.4).toFixed(2)})`
-              : `rgba(78,205,196,${(0.55 + p * 0.35).toFixed(2)})`;
+              : `rgba(143, 176, 129,${(0.55 + p * 0.35).toFixed(2)})`;
           ctx.beginPath();
           ctx.arc(n.x, n.y, (2.4 + p * 1.6) * DPR, 0, 6.2832);
           ctx.fill();

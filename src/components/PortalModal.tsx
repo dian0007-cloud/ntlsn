@@ -77,7 +77,7 @@ export default function PortalModal({
 
   return (
     <div
-      className="fixed inset-0 z-[99999] flex items-start justify-center overflow-auto bg-[rgba(5,12,24,0.78)] px-3.5 py-7"
+      className="fixed inset-0 z-[99999] flex items-start justify-center overflow-auto bg-[rgba(25, 20, 14,0.78)] px-3.5 py-7"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

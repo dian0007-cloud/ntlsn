@@ -39,7 +39,7 @@ export default function Nav() {
           </span>
           <span
             aria-hidden="true"
-            className="mt-1 inline-block h-2 w-2 rounded-full bg-teal transition-shadow group-hover:shadow-[0_0_10px_rgba(78,205,196,0.65)]"
+            className="mt-1 inline-block h-2 w-2 rounded-full bg-teal transition-shadow group-hover:shadow-[0_0_10px_rgba(143, 176, 129,0.65)]"
           />
         </a>
         <div className="flex items-center gap-1">

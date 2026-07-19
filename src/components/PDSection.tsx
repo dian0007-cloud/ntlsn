@@ -155,7 +155,7 @@ export default function PDSection() {
 function PdCard({ opportunity: o }: { opportunity: PdOpportunity }) {
   const favicon = faviconSrc(o.url);
   return (
-    <li className="relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all hover:scale-[1.02] hover:border-teal/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(78,205,196,0.15)]">
+    <li className="relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all hover:scale-[1.02] hover:border-teal/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(143, 176, 129,0.15)]">
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 left-0 h-[2px] bg-gradient-to-r from-teal via-[#c66c3f] to-purple opacity-40"

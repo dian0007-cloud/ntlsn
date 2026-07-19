@@ -109,7 +109,7 @@ export default function SymShowSection() {
         className="absolute inset-0 z-[1]"
         style={{
           background:
-            "linear-gradient(180deg,#211b14 0%,rgba(10,22,40,0) 14%,rgba(10,22,40,0) 86%,#211b14 100%),radial-gradient(140% 85% at 50% 12%,rgba(230,163,60,.16),transparent 55%),linear-gradient(180deg,rgba(44,28,46,.32) 0%,rgba(50,32,54,.5) 48%,rgba(26,17,32,.76) 100%)",
+            "linear-gradient(180deg,#211b14 0%,rgba(33, 27, 20,0) 14%,rgba(33, 27, 20,0) 86%,#211b14 100%),radial-gradient(140% 85% at 50% 12%,rgba(230,163,60,.16),transparent 55%),linear-gradient(180deg,rgba(44,28,46,.32) 0%,rgba(50,32,54,.5) 48%,rgba(26,17,32,.76) 100%)",
         }}
       />
 

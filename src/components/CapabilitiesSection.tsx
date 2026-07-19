@@ -158,7 +158,7 @@ function GroupGrid({ group }: { group: CapabilityGroup }) {
               href={`/${item.t}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block rounded-[999px] bg-teal px-[18px] py-2 text-[13px] font-extrabold tracking-[0.2px] text-[#19130d] no-underline shadow-[0_4px_14px_rgba(78,205,196,0.28)]"
+              className="mt-3 inline-block rounded-[999px] bg-teal px-[18px] py-2 text-[13px] font-extrabold tracking-[0.2px] text-[#19130d] no-underline shadow-[0_4px_14px_rgba(143, 176, 129,0.28)]"
             >
               Try it →
             </a>
