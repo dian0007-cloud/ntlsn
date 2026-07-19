@@ -15,7 +15,7 @@ const DATA: readonly Domain[] = [
   [
     "teach",
     "Teaching",
-    "#2DD4BF",
+    "#8fb081",
     [
       ["Redesigned a unit or assessment", "curriculum design", 15, "a Teaching badge", ""],
       ["Mentored sessional or casual staff", "developing others", 10, "a PD badge", ""],
@@ -27,7 +27,7 @@ const DATA: readonly Domain[] = [
   [
     "sotl",
     "SoTL",
-    "#7C9CFF",
+    "#c66c3f",
     [
       ["Presented at a symposium", "scholarly dissemination", 20, "a DOI and a My eQuals badge", "#events"],
       ["Published a peer-reviewed SoTL article", "scholarly output", 40, "a citable output with a DOI", ""],
@@ -39,7 +39,7 @@ const DATA: readonly Domain[] = [
   [
     "research",
     "Research",
-    "#C57BFF",
+    "#a8737f",
     [
       ["Published a peer-reviewed article", "research output", 40, "a citable output", ""],
       ["Secured a competitive grant", "research funding", 60, "a funding record", ""],
@@ -51,7 +51,7 @@ const DATA: readonly Domain[] = [
   [
     "service",
     "Service",
-    "#FFB448",
+    "#e6a33c",
     [
       ["Convened a community of practice or SIG", "community leadership", 15, "a community badge", "#network"],
       ["Chaired a committee", "governance service", 20, "a service record", ""],
@@ -63,7 +63,7 @@ const DATA: readonly Domain[] = [
   [
     "lead",
     "Leadership",
-    "#4ECDC4",
+    "#8fb081",
     [
       ["Held a formal leadership role", "role leadership", 100, "a leadership record", ""],
       ["Coached colleagues through promotion", "developing leaders", 15, "a leadership record", ""],
@@ -103,10 +103,10 @@ export default function RpCalcSection() {
     >
       <div className="mx-auto mb-[26px] max-w-[760px] text-center">
         <div className="mb-3.5 inline-flex flex-wrap items-center justify-center gap-2">
-          <span className="rounded-full bg-[#2DD4BF] px-3 py-1 text-[11px] font-extrabold tracking-[1.5px] text-[#06243a] uppercase">
+          <span className="rounded-full bg-[#8fb081] px-3 py-1 text-[11px] font-extrabold tracking-[1.5px] text-[#1f1810] uppercase">
             ▶ Try it
           </span>
-          <span className="rounded-full border border-[rgba(255,180,72,.4)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-amber uppercase">
+          <span className="rounded-full border border-[rgba(230,163,60,.4)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-amber uppercase">
             Preview · in design · 2027
           </span>
         </div>
@@ -116,22 +116,22 @@ export default function RpCalcSection() {
         >
           Recognition-points calculator
         </h2>
-        <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#aebfce]">
+        <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#bca98f]">
           Pick from 30 things academics actually do — presenting at a
           symposium, convening a SIG, mentoring, peer review, leadership — and
           build your profile. Each move shows what{" "}
-          <b className="text-[#cfe9e5]">domain</b> it sits in and how many
+          <b className="text-[#d8e0cc]">domain</b> it sits in and how many
           hours it earns toward a{" "}
-          <b className="text-[#cfe9e5]">My&nbsp;eQuals badge</b>—a verified,
+          <b className="text-[#d8e0cc]">My&nbsp;eQuals badge</b>—a verified,
           portable record. A working preview; the engine and issuance ship in
           2027.
         </p>
       </div>
       <div
         id="ntlsn-rpcalc-body"
-        className="mx-auto max-w-[640px] rounded-2xl border border-white/[0.08] border-t-[3px] border-t-[#2DD4BF] bg-[#0f1f3a] px-[26px] py-6"
+        className="mx-auto max-w-[640px] rounded-2xl border border-white/[0.08] border-t-[3px] border-t-[#8fb081] bg-[#2a2218] px-[26px] py-6"
       >
-        <div className="mb-[9px] text-[11px] font-bold tracking-[0.6px] text-[#8aa0b6] uppercase">
+        <div className="mb-[9px] text-[11px] font-bold tracking-[0.6px] text-[#a0907a] uppercase">
           Build your recognition profile
         </div>
         <select
@@ -157,7 +157,7 @@ export default function RpCalcSection() {
             </optgroup>
           ))}
         </select>
-        <div className="mx-0.5 mt-[11px] min-h-[18px] text-[12.5px] leading-[1.5] font-medium text-[#9fb3c8]">
+        <div className="mx-0.5 mt-[11px] min-h-[18px] text-[12.5px] leading-[1.5] font-medium text-[#b3a48c]">
           {lastPick ? (
             (() => {
               const g = DATA[lastPick.gi];
@@ -169,7 +169,7 @@ export default function RpCalcSection() {
                   {o[4] && (
                     <>
                       {" "}
-                      <a href={o[4]} className="text-[#2DD4BF] no-underline">
+                      <a href={o[4]} className="text-[#8fb081] no-underline">
                         where →
                       </a>
                     </>
@@ -195,7 +195,7 @@ export default function RpCalcSection() {
                 style={{ borderLeft: `3px solid ${g[2]}` }}
               >
                 <span className="flex-1">
-                  <span className="text-[13px] font-bold text-[#e8f0f7]">
+                  <span className="text-[13px] font-bold text-[#ece5d6]">
                     {o[0]}
                   </span>
                   <span
@@ -211,7 +211,7 @@ export default function RpCalcSection() {
                   onClick={() =>
                     setPicks((prev) => prev.filter((_, i) => i !== idx))
                   }
-                  className="flex-none cursor-pointer border-0 bg-transparent px-0.5 text-[17px] leading-none font-bold text-[#8aa0b6]"
+                  className="flex-none cursor-pointer border-0 bg-transparent px-0.5 text-[17px] leading-none font-bold text-[#a0907a]"
                 >
                   ×
                 </button>
@@ -219,28 +219,28 @@ export default function RpCalcSection() {
             );
           })}
         </div>
-        <div className="mt-4 rounded-[12px] border border-[rgba(45,212,191,.18)] bg-[rgba(45,212,191,.05)] p-4 text-center">
+        <div className="mt-4 rounded-[12px] border border-[rgba(143,176,129,.18)] bg-[rgba(143,176,129,.05)] p-4 text-center">
           {!picks.length ? (
-            <div className="text-[12px] italic text-[#8aa0b6]">
+            <div className="text-[12px] italic text-[#a0907a]">
               Add what you have done to build your recognition profile.
             </div>
           ) : (
             <>
-              <div className="text-[26px] font-extrabold text-[#2DD4BF]">
+              <div className="text-[26px] font-extrabold text-[#8fb081]">
                 {hrs}{" "}
-                <span className="text-[13px] font-semibold text-[#9fb3c8]">
+                <span className="text-[13px] font-semibold text-[#b3a48c]">
                   hours toward RPL
                 </span>
               </div>
-              <div className="mt-[5px] text-[13px] font-semibold text-[#cbd8e6]">
+              <div className="mt-[5px] text-[13px] font-semibold text-[#d9cdb6]">
                 {picks.length} recognition record
                 {picks.length === 1 ? "" : "s"} across {domainNames.length}{" "}
                 domain{domainNames.length === 1 ? "" : "s"}
               </div>
-              <div className="mt-1.5 text-[11.5px] font-medium text-[#8aa0b6]">
+              <div className="mt-1.5 text-[11.5px] font-medium text-[#a0907a]">
                 {domainNames.join(" · ")}
               </div>
-              <div className="mt-2 text-[11px] text-[#8aa0b6]">
+              <div className="mt-2 text-[11px] text-[#a0907a]">
                 A portable My&nbsp;eQuals record · RPL between universities ·
                 illustrative preview
               </div>
@@ -249,7 +249,7 @@ export default function RpCalcSection() {
         </div>
       </div>
       <div className="mx-auto mt-4 max-w-[640px] text-center">
-        <p className="text-[12px] leading-[1.6] text-[#8aa0b6]">
+        <p className="text-[12px] leading-[1.6] text-[#a0907a]">
           Each move is tagged to a recognition domain and to the RPL hours
           behind it. A 500-word reflection turns a symposium or course into
           RPL-transferable evidence. NTLSN issues the verified My&nbsp;eQuals
@@ -257,7 +257,7 @@ export default function RpCalcSection() {
           illustrative, in design for 2027.{" "}
           <a
             href="/psf-evidence-audit.html"
-            className="text-[#2DD4BF] no-underline"
+            className="text-[#8fb081] no-underline"
           >
             See all 180 ways your work counts →
           </a>

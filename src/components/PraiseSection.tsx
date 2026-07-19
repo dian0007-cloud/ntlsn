@@ -20,7 +20,7 @@ const CATS: readonly string[] = [
 const INPUT_CLASS =
   "w-full rounded-[9px] border border-white/[0.14] bg-navy px-3 py-2.5 text-[14px] text-white";
 const LABEL_CLASS =
-  "mb-[5px] block text-[11.5px] font-semibold text-[#9fb3c8]";
+  "mb-[5px] block text-[11.5px] font-semibold text-[#b3a48c]";
 
 export default function PraiseSection() {
   const [to, setTo] = useState("");
@@ -53,13 +53,13 @@ export default function PraiseSection() {
       <div className="mx-auto max-w-[980px]">
         <div className="mx-auto mb-[26px] max-w-[740px] text-center">
           <div className="mb-3.5 inline-flex flex-wrap items-center justify-center gap-2">
-            <span className="rounded-full bg-[#2DD4BF] px-3 py-1 text-[11px] font-extrabold tracking-[1.5px] text-[#06243a] uppercase">
+            <span className="rounded-full bg-[#8fb081] px-3 py-1 text-[11px] font-extrabold tracking-[1.5px] text-[#1f1810] uppercase">
               ▶ Try it
             </span>
-            <span className="rounded-full border border-[rgba(124,156,255,.45)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-[#7C9CFF] uppercase">
+            <span className="rounded-full border border-[rgba(198,108,63,.45)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-[#c66c3f] uppercase">
               Cross-sector
             </span>
-            <span className="rounded-full border border-[rgba(255,180,72,.4)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-amber uppercase">
+            <span className="rounded-full border border-[rgba(230,163,60,.4)] px-[11px] py-1 text-[10.5px] font-extrabold tracking-[1.2px] text-amber uppercase">
               Preview · in design · 2027
             </span>
           </div>
@@ -69,7 +69,7 @@ export default function PraiseSection() {
           >
             Praise that crosses the sector.
           </h2>
-          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#aebfce]">
+          <p className="text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#bca98f]">
             Partnership work—teaching redesign, student mentoring, assessment
             co-design, curriculum innovation—happens across universities yet is
             rarely seen beyond the home institution. Recognise a partner at
@@ -79,7 +79,7 @@ export default function PraiseSection() {
             schemes;{" "}
             <a
               href="#ntlsn-coming2028"
-              className="font-semibold text-[#2DD4BF] no-underline"
+              className="font-semibold text-[#8fb081] no-underline"
             >
               NTLSN’s partnership registry
             </a>{" "}
@@ -128,14 +128,14 @@ export default function PraiseSection() {
                       style={
                         on
                           ? {
-                              background: "rgba(45,212,191,.16)",
-                              border: "1px solid rgba(45,212,191,.5)",
+                              background: "rgba(143,176,129,.16)",
+                              border: "1px solid rgba(143,176,129,.5)",
                               color: "#eafffb",
                             }
                           : {
                               background: "rgba(255,255,255,.06)",
                               border: "1px solid rgba(255,255,255,.14)",
-                              color: "#cbd8e6",
+                              color: "#d9cdb6",
                             }
                       }
                     >
@@ -172,25 +172,25 @@ export default function PraiseSection() {
             </div>
           </div>
           <div className="min-w-[290px] flex-1">
-            <div className="rounded-[18px] bg-[linear-gradient(135deg,#2DD4BF,#7C9CFF,#C57BFF)] p-[1.5px]">
-              <div className="rounded-[16.5px] bg-[#0c1c34] p-5">
+            <div className="rounded-[18px] bg-[linear-gradient(135deg,#8fb081,#c66c3f,#a8737f)] p-[1.5px]">
+              <div className="rounded-[16.5px] bg-[#251e15] p-5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-extrabold tracking-[1.4px] text-[#2DD4BF] uppercase">
+                  <span className="text-[10px] font-extrabold tracking-[1.4px] text-[#8fb081] uppercase">
                     Cross-sector praise
                   </span>
-                  <span aria-hidden="true" className="text-[16px] text-[#7C9CFF]">
+                  <span aria-hidden="true" className="text-[16px] text-[#c66c3f]">
                     ◈
                   </span>
                 </div>
                 <div className="mt-3.5 mb-0.5">
-                  <span className="text-[12px] font-semibold text-[#8aa0b6]">
+                  <span className="text-[12px] font-semibold text-[#a0907a]">
                     To
                   </span>{" "}
                   <span className="text-[17px] font-extrabold text-white">
                     {toT || "a colleague"}
                   </span>
                 </div>
-                <div className="text-[12.5px] font-semibold text-[#9fb3c8]">
+                <div className="text-[12.5px] font-semibold text-[#b3a48c]">
                   {uniT || "their university"}
                 </div>
                 <div className="my-3">
@@ -198,13 +198,13 @@ export default function PraiseSection() {
                     picked.map((cat) => (
                       <span
                         key={cat}
-                        className="mr-[5px] mb-[5px] inline-block rounded-full bg-[#2DD4BF] px-[9px] py-[3px] text-[10.5px] font-bold text-[#06243a]"
+                        className="mr-[5px] mb-[5px] inline-block rounded-full bg-[#8fb081] px-[9px] py-[3px] text-[10.5px] font-bold text-[#1f1810]"
                       >
                         {cat}
                       </span>
                     ))
                   ) : (
-                    <span className="text-[11px] font-medium text-[#8aa0b6]">
+                    <span className="text-[11px] font-medium text-[#a0907a]">
                       Pick what they did well
                     </span>
                   )}
@@ -213,7 +213,7 @@ export default function PraiseSection() {
                   <div className="text-[14px] leading-[1.55] text-[#eaf2fb]">
                     “{msgT}”
                     {fromT && (
-                      <div className="mt-2 text-[12px] font-semibold not-italic text-[#9fb3c8]">
+                      <div className="mt-2 text-[12px] font-semibold not-italic text-[#b3a48c]">
                         — {fromT}
                       </div>
                     )}
@@ -223,19 +223,19 @@ export default function PraiseSection() {
                     Your words of recognition will appear here.
                   </div>
                 )}
-                <div className="mt-3.5 border-t border-white/[0.08] pt-3 text-[11.5px] leading-[1.7] font-semibold text-[#8aa0b6]">
+                <div className="mt-3.5 border-t border-white/[0.08] pt-3 text-[11.5px] leading-[1.7] font-semibold text-[#a0907a]">
                   <div>→ Shared with {toT || "your colleague"}</div>
                   <div>→ Noted to their manager, with consent</div>
                   <div>→ Added to their external-esteem record</div>
                 </div>
-                <div className="mt-2.5 text-[10.5px] font-medium text-[#8aa0b6]">
+                <div className="mt-2.5 text-[10.5px] font-medium text-[#a0907a]">
                   Sample preview. Nothing is sent from here. Sharing in 2027.
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <p className="mx-auto mt-[22px] max-w-[640px] text-center text-[13.5px] font-semibold text-[#2DD4BF]">
+        <p className="mx-auto mt-[22px] max-w-[640px] text-center text-[13.5px] font-semibold text-[#8fb081]">
           Most promotion frameworks ask for evidence of esteem and influence
           beyond your own institution. Praise, finally captured.
         </p>
@@ -244,12 +244,12 @@ export default function PraiseSection() {
             href="/cert.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[13px] font-semibold text-[#7C9CFF] no-underline"
+            className="text-[13px] font-semibold text-[#c66c3f] no-underline"
           >
             Working with student partners? Generate a partnership certificate →
           </a>
         </p>
-        <p className="mx-auto mt-2 max-w-[680px] text-center text-[12px] leading-[1.55] text-[#8aa0b6]">
+        <p className="mx-auto mt-2 max-w-[680px] text-center text-[12px] leading-[1.55] text-[#a0907a]">
           NTLSN shares your praise with the colleague and, with their consent,
           their manager, then files it as portable evidence of external
           recognition. A preview of a 2027 feature; nothing is sent from this

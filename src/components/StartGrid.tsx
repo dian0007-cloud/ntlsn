@@ -234,17 +234,17 @@ function HubDoorRail() {
         <a
           key={door.href}
           href={door.href}
-          className="group relative mb-2.5 flex w-full items-center gap-4 rounded-[14px] border border-white/10 bg-[#0f1f3a]/[0.72] px-[18px] py-[15px] transition-[border-color,background-color,transform] duration-200 hover:translate-x-0.5 hover:border-teal/50 hover:bg-[#0f1f3a]/95 motion-reduce:transition-none motion-reduce:hover:transform-none"
+          className="group relative mb-2.5 flex w-full items-center gap-4 rounded-[14px] border border-white/10 bg-[#2a2218]/[0.72] px-[18px] py-[15px] transition-[border-color,background-color,transform] duration-200 hover:translate-x-0.5 hover:border-teal/50 hover:bg-[#2a2218]/95 motion-reduce:transition-none motion-reduce:hover:transform-none"
         >
           <span
             aria-hidden="true"
             className="z-[1] h-[15px] w-[15px] flex-none rounded-full border-[1.5px] border-teal/60 bg-[#0b1c33] transition-colors group-hover:bg-teal group-hover:shadow-[0_0_12px_rgba(78,205,196,0.55)] motion-reduce:transition-none"
           />
           <span className="min-w-0 flex-1">
-            <span className="block text-[15.5px] font-extrabold leading-tight tracking-[-0.01em] text-[#e8eef5]">
+            <span className="block text-[15.5px] font-extrabold leading-tight tracking-[-0.01em] text-[#ece5d6]">
               {door.title}
             </span>
-            <span className="mt-[3px] block text-[12.5px] leading-[1.45] text-[#8aa0b6]">
+            <span className="mt-[3px] block text-[12.5px] leading-[1.45] text-[#a0907a]">
               {door.desc}
             </span>
           </span>

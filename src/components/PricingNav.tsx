@@ -34,7 +34,7 @@ export default function PricingNav() {
   }, [paused, count]);
 
   const slide = PRICINGNAV_SLIDES[current];
-  const accent = slide.main ? "#4ECDC4" : "#7C9CFF";
+  const accent = slide.main ? "#8fb081" : "#c66c3f";
 
   return (
     <section
@@ -86,7 +86,7 @@ export default function PricingNav() {
           <span className="mb-2 block text-[clamp(20px,2.6vw,26px)] font-extrabold text-white">
             {slide.title}
           </span>
-          <span className="mx-auto block max-w-[48ch] text-[14.5px] leading-relaxed text-[#AEBFCE]">
+          <span className="mx-auto block max-w-[48ch] text-[14.5px] leading-relaxed text-[#bca98f]">
             {slide.desc}
           </span>
           <span
@@ -103,7 +103,7 @@ export default function PricingNav() {
           type="button"
           aria-label="Previous slide"
           onClick={() => go(current - 1)}
-          className="h-[38px] w-[38px] cursor-pointer rounded-full border border-white/[0.12] bg-[#0f1f3a] text-lg text-[#9FB0C3]"
+          className="h-[38px] w-[38px] cursor-pointer rounded-full border border-white/[0.12] bg-[#2a2218] text-lg text-[#b3a48c]"
         >
           ‹
         </button>
@@ -121,8 +121,8 @@ export default function PricingNav() {
                 background:
                   i === current
                     ? s.main
-                      ? "#4ECDC4"
-                      : "#7C9CFF"
+                      ? "#8fb081"
+                      : "#c66c3f"
                     : "rgba(255,255,255,0.22)",
               }}
             />
@@ -132,7 +132,7 @@ export default function PricingNav() {
           type="button"
           aria-label="Next slide"
           onClick={() => go(current + 1)}
-          className="h-[38px] w-[38px] cursor-pointer rounded-full border border-white/[0.12] bg-[#0f1f3a] text-lg text-[#9FB0C3]"
+          className="h-[38px] w-[38px] cursor-pointer rounded-full border border-white/[0.12] bg-[#2a2218] text-lg text-[#b3a48c]"
         >
           ›
         </button>

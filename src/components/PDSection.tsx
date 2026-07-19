@@ -52,7 +52,7 @@ export default function PDSection() {
     >
       <div id="reveal-pd" className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume III
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -86,8 +86,8 @@ export default function PDSection() {
                 onClick={() => setSelected(active ? "All" : type)}
                 className={`rounded-full border px-3 py-1.5 text-xs transition-all ${
                   active
-                    ? "border-[#7C9CFF]/40 bg-[#7C9CFF]/15 text-[#7C9CFF]"
-                    : "border-[#7C9CFF]/15 text-white/45 hover:border-[#7C9CFF]/30 hover:text-white/75"
+                    ? "border-[#c66c3f]/40 bg-[#c66c3f]/15 text-[#c66c3f]"
+                    : "border-[#c66c3f]/15 text-white/45 hover:border-[#c66c3f]/30 hover:text-white/75"
                 }`}
               >
                 {label}
@@ -158,7 +158,7 @@ function PdCard({ opportunity: o }: { opportunity: PdOpportunity }) {
     <li className="relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all hover:scale-[1.02] hover:border-teal/30 hover:bg-white/[0.05] hover:shadow-[0_0_40px_rgba(78,205,196,0.15)]">
       <div
         aria-hidden="true"
-        className="absolute top-0 right-0 left-0 h-[2px] bg-gradient-to-r from-teal via-[#7C9CFF] to-purple opacity-40"
+        className="absolute top-0 right-0 left-0 h-[2px] bg-gradient-to-r from-teal via-[#c66c3f] to-purple opacity-40"
       />
       <div className="mb-2 flex items-start justify-between">
         <span className="inline-flex items-center rounded-md border border-white/10 px-2.5 py-0.5 text-[10px] font-semibold">

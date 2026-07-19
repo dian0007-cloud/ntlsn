@@ -16,8 +16,8 @@ export default function NatCertSection() {
       aria-labelledby="ntlsn-natcert-heading"
       className="mx-auto max-w-[92rem] scroll-mt-20 px-6 py-[60px]"
     >
-      <div className="mx-auto max-w-[880px] rounded-[18px] border border-white/[0.09] border-t-[3px] border-t-[#2DD4BF] bg-[#0f1f3a] px-[30px] py-[34px] text-center">
-        <div className="mb-4 inline-block rounded-full border border-[rgba(255,180,72,.4)] px-[13px] py-[5px] text-[10.5px] font-extrabold tracking-[1.6px] text-amber uppercase">
+      <div className="mx-auto max-w-[880px] rounded-[18px] border border-white/[0.09] border-t-[3px] border-t-[#8fb081] bg-[#2a2218] px-[30px] py-[34px] text-center">
+        <div className="mb-4 inline-block rounded-full border border-[rgba(230,163,60,.4)] px-[13px] py-[5px] text-[10.5px] font-extrabold tracking-[1.6px] text-amber uppercase">
           A national qualification · proposed · in design
         </div>
         <h2
@@ -26,7 +26,7 @@ export default function NatCertSection() {
         >
           One module each. A Graduate Certificate the whole sector owns.
         </h2>
-        <p className="mx-auto mb-[22px] max-w-[680px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#cbd8e6]">
+        <p className="mx-auto mb-[22px] max-w-[680px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#d9cdb6]">
           Right now, micro-learning rarely travels. A module done at one
           university is seldom recognised at another. The idea is simple: every
           university contributes one module, and together the sector holds a
@@ -37,22 +37,22 @@ export default function NatCertSection() {
           {["Module", "Module", "Module", "Module"].map((m, i) => (
             <span key={i} className="contents">
               {i > 0 && (
-                <span aria-hidden="true" className="font-extrabold text-[#8aa0b6]">
+                <span aria-hidden="true" className="font-extrabold text-[#a0907a]">
                   +
                 </span>
               )}
-              <span className="rounded-lg border border-white/[0.14] bg-white/[0.05] px-[13px] py-[7px] text-[12px] font-bold text-[#cbd8e6]">
+              <span className="rounded-lg border border-white/[0.14] bg-white/[0.05] px-[13px] py-[7px] text-[12px] font-bold text-[#d9cdb6]">
                 {m}
               </span>
             </span>
           ))}
           <span
             aria-hidden="true"
-            className="mx-1 text-[18px] font-extrabold text-[#8aa0b6]"
+            className="mx-1 text-[18px] font-extrabold text-[#a0907a]"
           >
             →
           </span>
-          <span className="rounded-lg bg-[#2DD4BF] px-[15px] py-2 text-[13px] font-extrabold text-[#06243a]">
+          <span className="rounded-lg bg-[#8fb081] px-[15px] py-2 text-[13px] font-extrabold text-[#1f1810]">
             Graduate Certificate
           </span>
         </div>
@@ -60,13 +60,13 @@ export default function NatCertSection() {
           {CHIPS.map((chip) => (
             <span
               key={chip}
-              className="rounded-full border border-[rgba(45,212,191,.3)] bg-[rgba(45,212,191,.10)] px-3.5 py-1.5 text-[12.5px] font-semibold text-[#cbd8e6]"
+              className="rounded-full border border-[rgba(143,176,129,.3)] bg-[rgba(143,176,129,.10)] px-3.5 py-1.5 text-[12.5px] font-semibold text-[#d9cdb6]"
             >
               {chip}
             </span>
           ))}
         </div>
-        <p className="mx-auto mt-5 max-w-[680px] text-[12px] leading-[1.5] text-[#8aa0b6]">
+        <p className="mx-auto mt-5 max-w-[680px] text-[12px] leading-[1.5] text-[#a0907a]">
           A proposed model, not yet an accredited award. Accreditation and
           credit recognition would be designed with the institutions and the
           regulator. The sector audit above shows no provider yet offers a

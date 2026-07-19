@@ -22,7 +22,7 @@ const PRINCIPLES: ReadonlyArray<{
         Exchange, Calibration, and a 1,431-work scholarship archive.
       </>
     ),
-    colour: "#2DD4BF",
+    colour: "#8fb081",
     link: "#ntlsn-coming2027",
     linkText: "Peer-Review Exchange",
   },
@@ -36,7 +36,7 @@ const PRINCIPLES: ReadonlyArray<{
         institution’s and Country’s context.
       </>
     ),
-    colour: "#FFB448",
+    colour: "#e6a33c",
     link: "#ntlsn-capabilities",
     linkText: "Capabilities",
   },
@@ -49,7 +49,7 @@ const PRINCIPLES: ReadonlyArray<{
         &amp; exemplar libraries — rigour by default, not by afterthought.
       </>
     ),
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     link: "#ntlsn-coming2027",
     linkText: "Calibration Suite",
   },
@@ -62,7 +62,7 @@ const PRINCIPLES: ReadonlyArray<{
         work — as partners, not just as data.
       </>
     ),
-    colour: "#C57BFF",
+    colour: "#a8737f",
     link: "#ntlsn-coming2028",
     linkText: "SaP Registry",
   },
@@ -75,7 +75,7 @@ const PRINCIPLES: ReadonlyArray<{
         no paywall, in perpetuity. SoTL made genuinely public.
       </>
     ),
-    colour: "#4FD1A5",
+    colour: "#9cbb8c",
     link: "#ntlsn-archive",
     linkText: "The open archive",
   },
@@ -89,7 +89,7 @@ export default function PrinciplesSection() {
       className="mx-auto max-w-[92rem] scroll-mt-20 px-6 py-16"
     >
       <div className="mx-auto mb-[34px] max-w-[780px] text-center">
-        <div className="mb-[11px] text-[13px] font-bold tracking-[2px] text-[#2DD4BF] uppercase">
+        <div className="mb-[11px] text-[13px] font-bold tracking-[2px] text-[#8fb081] uppercase">
           Grounded in the scholarship
         </div>
         <h2
@@ -98,7 +98,7 @@ export default function PrinciplesSection() {
         >
           Built on the five principles of good SoTL practice
         </h2>
-        <p className="text-[clamp(15px,1.8vw,18px)] leading-[1.6] text-[#aebfce]">
+        <p className="text-[clamp(15px,1.8vw,18px)] leading-[1.6] text-[#bca98f]">
           NTLSN isn’t a tool bolted onto teaching. By design, the commons
           embodies all five principles of good practice in the Scholarship of
           Teaching and Learning —{" "}
@@ -109,7 +109,7 @@ export default function PrinciplesSection() {
         {PRINCIPLES.map((p) => (
           <div
             key={p.n}
-            className="min-w-[240px] max-w-[340px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#0f1f3a] px-[22px] py-5"
+            className="min-w-[240px] max-w-[340px] flex-1 rounded-[14px] border border-white/[0.08] bg-[#2a2218] px-[22px] py-5"
             style={{ borderTop: `3px solid ${p.colour}` }}
           >
             <div className="mb-[9px] flex items-center gap-[11px]">
@@ -128,7 +128,7 @@ export default function PrinciplesSection() {
                 {p.title}
               </span>
             </div>
-            <div className="text-[14px] leading-[1.6] text-[#aebfce]">
+            <div className="text-[14px] leading-[1.6] text-[#bca98f]">
               {p.body}
             </div>
             <a
@@ -141,7 +141,7 @@ export default function PrinciplesSection() {
           </div>
         ))}
       </div>
-      <p className="mx-auto mt-7 max-w-[740px] text-center text-[12.5px] italic text-[#8aa0b6]">
+      <p className="mx-auto mt-7 max-w-[740px] text-center text-[12.5px] italic text-[#a0907a]">
         After Felten, P. (2013). Principles of Good Practice in SoTL.{" "}
         <i>Teaching &amp; Learning Inquiry: The ISSOTL Journal</i>, 1(1),
         121–125.

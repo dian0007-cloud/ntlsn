@@ -142,7 +142,7 @@ export const PRICING_TIERS: readonly PricingTier[] = [
     blurb: "DVCA portfolio · whole-of-institution",
     price: "$50k",
     priceK: 50,
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     multiplier: "Assurance & sector visibility",
     features: [
       {
@@ -347,31 +347,31 @@ export interface SympPackage {
 
 export const SYMP_PACKAGES: readonly SympPackage[] = [
   {
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     label: "Registration",
     price: "Included in any plan",
     desc: "Attendee registration, ticketing and check-in for your event.",
   },
   {
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
     label: "Submission",
     price: "Included in any plan",
     desc: "Abstract and paper submission, peer review and programme builder.",
   },
   {
-    colour: "#C9A962",
+    colour: "#c9a962",
     label: "◆ Morning tea",
     price: "$10k",
     desc: "A catered morning symposium — we open, host and facilitate a half-morning of teaching & learning exchange. Fully catered, no hidden fees.",
   },
   {
-    colour: "#C9A962",
+    colour: "#c9a962",
     label: "◆ School full day",
     price: "$15k",
     desc: "A facilitated full-day symposium for your school — sessions, introductions and a fully catered break (morning tea included). We run it; you keep full IT control.",
   },
   {
-    colour: "#C9A962",
+    colour: "#c9a962",
     label: "◆ University-wide · we run it",
     price: "$30k",
     desc: "The founder chairs your whole event end-to-end — opening, between-session facilitation, T&L awards and speeches. Full day, university-wide, morning tea and full catering included. No hidden fees.",

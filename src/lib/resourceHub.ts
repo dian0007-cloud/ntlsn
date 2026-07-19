@@ -50,10 +50,10 @@ export const HUB_ACCESS_FILTERS: readonly ("All" | ResourceAccess)[] = [
 /** Badge tint per access level — production's exact ternary. */
 export function accessColor(access: ResourceAccess): string {
   return access === "open" || access === "free"
-    ? "#4ECDC4"
+    ? "#8fb081"
     : access === "paywall"
-      ? "#FF6B6B"
-      : "#7C9CFF";
+      ? "#d96650"
+      : "#c66c3f";
 }
 
 export const HUB_COLLECTIONS: readonly HubCollection[] = [

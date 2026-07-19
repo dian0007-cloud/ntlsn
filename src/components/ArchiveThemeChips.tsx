@@ -43,7 +43,7 @@ export default function ArchiveThemeChips({
 
   return (
     <div className="mx-auto my-3.5 max-w-[760px]">
-      <p className="mb-2 text-center text-[11px] font-bold tracking-[1.5px] text-[#8AA0B6] uppercase">
+      <p className="mb-2 text-center text-[11px] font-bold tracking-[1.5px] text-[#a0907a] uppercase">
         Browse by theme
       </p>
       <div
@@ -60,12 +60,12 @@ export default function ArchiveThemeChips({
               type="button"
               onClick={() => onPick(topic)}
               aria-label={`Search the archive for ${topic} (${n} matches)`}
-              className="cursor-pointer rounded-[999px] font-bold whitespace-nowrap text-[#CBD8E6] transition-colors hover:text-white"
+              className="cursor-pointer rounded-[999px] font-bold whitespace-nowrap text-[#d9cdb6] transition-colors hover:text-white"
               style={{
                 fontSize: `${(13 + 12 * r).toFixed(1)}px`,
                 padding: `${(7 + 7 * r).toFixed(0)}px ${(13 + 13 * r).toFixed(0)}px`,
-                border: `1px solid rgba(124,156,255,${(0.22 + 0.55 * r).toFixed(2)})`,
-                background: `rgba(124,156,255,${(0.05 + 0.13 * r).toFixed(2)})`,
+                border: `1px solid rgba(198,108,63,${(0.22 + 0.55 * r).toFixed(2)})`,
+                background: `rgba(198,108,63,${(0.05 + 0.13 * r).toFixed(2)})`,
               }}
             >
               {topic}

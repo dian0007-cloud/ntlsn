@@ -111,7 +111,7 @@ export default function FeaturedTalksPanel({
                     <span className="absolute inset-0 flex items-center justify-center">
                       <span
                         aria-hidden="true"
-                        className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-[#0A1628]/60 text-base text-white transition-colors group-hover:bg-teal/80 group-hover:text-navy"
+                        className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-[#211b14]/60 text-base text-white transition-colors group-hover:bg-teal/80 group-hover:text-navy"
                       >
                         ▶
                       </span>

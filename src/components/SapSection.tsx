@@ -20,22 +20,22 @@ const TYPES: ReadonlyArray<[string, string, string]> = [
   [
     "Inclusion",
     "Students belong and are represented; their voice is designed in.",
-    "#8aa0b6",
+    "#a0907a",
   ],
   [
     "Consultation",
     "Students advise, and their feedback genuinely shapes decisions.",
-    "#4ECDC4",
+    "#8fb081",
   ],
   [
     "Collaboration",
     "Students and staff work side by side on a shared task.",
-    "#7C9CFF",
+    "#c66c3f",
   ],
   [
     "Co-design",
     "Students help design curriculum, assessment and resources.",
-    "#C57BFF",
+    "#a8737f",
   ],
   [
     "Co-inquiry",
@@ -45,7 +45,7 @@ const TYPES: ReadonlyArray<[string, string, string]> = [
   [
     "Student-led action",
     "Students lead and hold shared power; student-led change.",
-    "#FFB448",
+    "#e6a33c",
   ],
 ];
 
@@ -98,14 +98,14 @@ export default function SapSection() {
       >
         Put your student partnership on the map.
       </h2>
-      <p className="mx-auto mb-[30px] max-w-[640px] text-center text-[17px] leading-[1.6] text-[#9fb3c8]">
+      <p className="mx-auto mb-[30px] max-w-[640px] text-center text-[17px] leading-[1.6] text-[#b3a48c]">
         Every university’s Students-as-Partners work is invisible to every
         other university. Register yours so it is visible across the sector —
         and so the students and staff who do the work can both be recognised
         for it.
       </p>
       <div className="mx-auto mb-6 max-w-[880px]">
-        <div className="mx-auto mb-4 max-w-[680px] text-center text-[13.5px] leading-[1.6] font-semibold text-[#cbd8e6]">
+        <div className="mx-auto mb-4 max-w-[680px] text-center text-[13.5px] leading-[1.6] font-semibold text-[#d9cdb6]">
           Partnership is a repertoire, not a ladder — six ways it shows up,
           from inclusion to student-led action. Each is legitimate; the right
           one depends on your context.
@@ -114,7 +114,7 @@ export default function SapSection() {
           {TYPES.map(([title, body, colour], i) => (
             <div
               key={title}
-              className="rounded-[14px] bg-[#0f1f38] px-4 py-[15px]"
+              className="rounded-[14px] bg-[#2a2218] px-4 py-[15px]"
               style={{
                 border: `1px solid ${colour}33`,
                 borderTop: `3px solid ${colour}`,
@@ -132,7 +132,7 @@ export default function SapSection() {
                   {title}
                 </span>
               </div>
-              <div className="text-[12.5px] leading-[1.5] text-[#9fb3c8]">
+              <div className="text-[12.5px] leading-[1.5] text-[#b3a48c]">
                 {body}
               </div>
             </div>
@@ -140,24 +140,24 @@ export default function SapSection() {
         </div>
       </div>
       <div className="mx-auto mb-[18px] max-w-[880px]">
-        <div className="mb-[11px] text-center text-[11px] font-bold tracking-[0.6px] text-[#8aa0b6] uppercase">
+        <div className="mb-[11px] text-center text-[11px] font-bold tracking-[0.6px] text-[#a0907a] uppercase">
           What registering earns you
         </div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-[11px] text-center">
-          <div className="rounded-[12px] border border-[rgba(45,212,191,.22)] border-l-[3px] border-l-[#2DD4BF] bg-[rgba(45,212,191,.07)] p-4">
-            <div className="mb-[7px] text-[12.5px] font-bold text-[#2DD4BF]">
+          <div className="rounded-[12px] border border-[rgba(143,176,129,.22)] border-l-[3px] border-l-[#8fb081] bg-[rgba(143,176,129,.07)] p-4">
+            <div className="mb-[7px] text-[12.5px] font-bold text-[#8fb081]">
               Visibility
             </div>
-            <div className="text-[12.5px] leading-[1.5] text-[#cbd8e6]">
+            <div className="text-[12.5px] leading-[1.5] text-[#d9cdb6]">
               Your partnership appears on the national registry. Peers across
               42 universities see what you are doing — and may reach out.
             </div>
           </div>
-          <div className="rounded-[12px] border border-[rgba(197,123,255,.22)] border-l-[3px] border-l-purple bg-[rgba(197,123,255,.07)] p-4">
+          <div className="rounded-[12px] border border-[rgba(168,115,127,.22)] border-l-[3px] border-l-purple bg-[rgba(168,115,127,.07)] p-4">
             <div className="mb-[7px] text-[12.5px] font-bold text-purple">
               Portable evidence
             </div>
-            <div className="text-[12.5px] leading-[1.5] text-[#cbd8e6]">
+            <div className="text-[12.5px] leading-[1.5] text-[#d9cdb6]">
               Partnership work counts for promotion and teaching recognition.
               Add it to a{" "}
               <a
@@ -169,11 +169,11 @@ export default function SapSection() {
               that travels.
             </div>
           </div>
-          <div className="rounded-[12px] border border-[rgba(255,180,72,.22)] border-l-[3px] border-l-amber bg-[rgba(255,180,72,.07)] p-4">
+          <div className="rounded-[12px] border border-[rgba(230,163,60,.22)] border-l-[3px] border-l-amber bg-[rgba(230,163,60,.07)] p-4">
             <div className="mb-[7px] text-[12.5px] font-bold text-amber">
               Recognised hours
             </div>
-            <div className="text-[12.5px] leading-[1.5] text-[#cbd8e6]">
+            <div className="text-[12.5px] leading-[1.5] text-[#d9cdb6]">
               Mentoring, co-design and assessing count toward the{" "}
               <a
                 href="/recognition-navigator.html"
@@ -186,7 +186,7 @@ export default function SapSection() {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-[880px] rounded-[18px] border border-[rgba(197,123,255,.18)] bg-[#0f1f38] p-[26px]">
+      <div className="mx-auto max-w-[880px] rounded-[18px] border border-[rgba(168,115,127,.18)] bg-[#2a2218] p-[26px]">
         <div className="mb-3 text-[17px] leading-[1.2] font-bold text-white">
           Register your program
         </div>
@@ -267,7 +267,7 @@ export default function SapSection() {
             </button>
             <span
               className="text-[14px]"
-              style={{ color: status === "sent" ? "#34d399" : "#9fb3c8" }}
+              style={{ color: status === "sent" ? "#7fa66a" : "#b3a48c" }}
               role="status"
             >
               {status === "idle" && "Register yours, see everyone’s."}

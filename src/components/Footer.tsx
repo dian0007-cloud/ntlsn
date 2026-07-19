@@ -63,14 +63,14 @@ export default function Footer() {
                 : null)}
               className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 no-underline hover:border-white/30"
             >
-              <span className="text-[11px] font-extrabold tracking-[0.5px] text-[#cfe9e5]">
+              <span className="text-[11px] font-extrabold tracking-[0.5px] text-[#d8e0cc]">
                 {tier.badge}
               </span>
-              <span className="text-[11px] text-[#8aa0b6]">{tier.label}</span>
+              <span className="text-[11px] text-[#a0907a]">{tier.label}</span>
             </a>
           ))}
         </div>
-        <div className="mx-auto max-w-[700px] text-xs leading-[1.7] text-[#8aa0b6]">
+        <div className="mx-auto max-w-[700px] text-xs leading-[1.7] text-[#a0907a]">
           NTLSN is a tiered commons (
           <a
             href="/LICENSE"

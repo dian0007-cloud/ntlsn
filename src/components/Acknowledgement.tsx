@@ -13,7 +13,7 @@ export default function Acknowledgement() {
       id="ntlsn-ack-strip"
       role="note"
       aria-label="Acknowledgement of Country"
-      className="border-b border-[#d8965a]/40 bg-gradient-to-r from-[#13243f] to-[#0f1f3a] px-5 py-3 text-center text-[12.7px] leading-relaxed tracking-[0.1px] text-[#d3dde8]"
+      className="border-b border-[#d8965a]/40 bg-gradient-to-r from-[#13243f] to-[#2a2218] px-5 py-3 text-center text-[12.7px] leading-relaxed tracking-[0.1px] text-[#d3dde8]"
     >
       <span aria-hidden="true" className="text-[#d8965a]">
         ◇

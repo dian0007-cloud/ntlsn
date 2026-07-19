@@ -68,7 +68,7 @@ export default function SectorThemesPanel({
     >
       <div id="reveal-themes" className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume VIII
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -80,14 +80,14 @@ export default function SectorThemesPanel({
           {/* The ntlsn-secanim pulse doodle — decorative, reduced-motion safe. */}
           <div aria-hidden="true" className="mb-2 flex justify-center">
             <svg width="56" height="56" viewBox="0 0 64 64">
-              <circle cx="32" cy="32" r="5" fill="#4ECDC4" />
+              <circle cx="32" cy="32" r="5" fill="#8fb081" />
               <circle
                 className="na-pulse"
                 cx="32"
                 cy="32"
                 r="5"
                 fill="none"
-                stroke="#4ECDC4"
+                stroke="#8fb081"
                 strokeWidth="2"
               />
               <circle
@@ -96,7 +96,7 @@ export default function SectorThemesPanel({
                 cy="32"
                 r="5"
                 fill="none"
-                stroke="#4ECDC4"
+                stroke="#8fb081"
                 strokeWidth="2"
               />
             </svg>
@@ -141,7 +141,7 @@ export default function SectorThemesPanel({
         />
 
         <div>
-          <div className="mb-8 rounded-2xl border border-white/10 bg-gradient-to-br from-teal/10 via-[#7C9CFF]/10 to-purple/10 p-6">
+          <div className="mb-8 rounded-2xl border border-white/10 bg-gradient-to-br from-teal/10 via-[#c66c3f]/10 to-purple/10 p-6">
             <div className="flex items-start gap-4">
               <span aria-hidden="true" className="text-4xl">
                 {theme.icon}
@@ -209,7 +209,7 @@ export default function SectorThemesPanel({
                       onClick={() => toggle(watched, setWatched, v.url)}
                       className={`rounded-full px-2 py-0.5 text-[10px] transition-all ${
                         watched.has(v.url)
-                          ? "bg-[#7C9CFF]/20 text-[#7C9CFF]"
+                          ? "bg-[#c66c3f]/20 text-[#c66c3f]"
                           : "bg-white/5 text-white/20 hover:text-white/40"
                       }`}
                     >

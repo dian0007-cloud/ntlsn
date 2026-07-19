@@ -37,7 +37,7 @@ function ScopeList({
           >
             {mark}
           </span>
-          <span className="text-[13.5px] leading-normal text-[#CBD8E6]">
+          <span className="text-[13.5px] leading-normal text-[#d9cdb6]">
             {text}
           </span>
         </li>
@@ -53,9 +53,9 @@ export default function ScopeSection() {
       aria-labelledby="ntlsn-scope-heading"
       className="relative mx-auto max-w-[92rem] scroll-mt-20 px-6 py-12"
     >
-      <div className="mx-auto max-w-[760px] rounded-[18px] border border-white/[0.08] bg-[#0f1f3a] px-[30px] pt-[30px] pb-[26px]">
+      <div className="mx-auto max-w-[760px] rounded-[18px] border border-white/[0.08] bg-[#2a2218] px-[30px] pt-[30px] pb-[26px]">
         <div className="mx-auto mb-[22px] max-w-[560px] text-center">
-          <p className="mb-2.5 text-[11px] font-extrabold tracking-[1.6px] text-[#8AA0B6] uppercase">
+          <p className="mb-2.5 text-[11px] font-extrabold tracking-[1.6px] text-[#a0907a] uppercase">
             Clear on scope
           </p>
           <h2
@@ -64,26 +64,26 @@ export default function ScopeSection() {
           >
             A navigator and a connector — not a system of record.
           </h2>
-          <p className="text-sm leading-relaxed text-[#AEBFCE]">
+          <p className="text-sm leading-relaxed text-[#bca98f]">
             So you know exactly what you are adopting. NTLSN complements the
             systems you already run; it never replaces them.
           </p>
         </div>
         <div className="flex flex-wrap gap-6">
           <div className="min-w-[240px] flex-1">
-            <h3 className="mb-2 text-[11px] font-extrabold tracking-[0.6px] text-[#2DD4BF] uppercase">
+            <h3 className="mb-2 text-[11px] font-extrabold tracking-[0.6px] text-[#8fb081] uppercase">
               What NTLSN does
             </h3>
-            <ScopeList items={SCOPE_DOES} colour="#2DD4BF" mark="✓" />
+            <ScopeList items={SCOPE_DOES} colour="#8fb081" mark="✓" />
           </div>
           <div className="min-w-[240px] flex-1">
-            <h3 className="mb-2 text-[11px] font-extrabold tracking-[0.6px] text-[#8AA0B6] uppercase">
+            <h3 className="mb-2 text-[11px] font-extrabold tracking-[0.6px] text-[#a0907a] uppercase">
               What NTLSN is not
             </h3>
-            <ScopeList items={SCOPE_NOT} colour="#8AA0B6" mark="×" />
+            <ScopeList items={SCOPE_NOT} colour="#a0907a" mark="×" />
           </div>
         </div>
-        <p className="mx-auto mt-5 max-w-[600px] border-t border-white/[0.07] pt-4 text-center text-[12.5px] leading-normal font-semibold text-[#8AA0B6]">
+        <p className="mx-auto mt-5 max-w-[600px] border-t border-white/[0.07] pt-4 text-center text-[12.5px] leading-normal font-semibold text-[#a0907a]">
           It does not store, sell or own your data — personalisation lives in
           your browser. Your work stays yours, on open standards, with no
           lock-in.

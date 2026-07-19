@@ -67,7 +67,7 @@ export default function ResourceHubSection() {
     >
       <div id="reveal-resources" className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume VII
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -125,7 +125,7 @@ export default function ResourceHubSection() {
             onClick={() => setEssentialOnly(!essentialOnly)}
             className={`shrink-0 rounded-full border px-3 py-1.5 text-sm transition-all ${
               essentialOnly
-                ? "border-[#FFD700]/30 bg-[#FFD700]/10 text-[#FFD700]"
+                ? "border-[#c9a962]/30 bg-[#c9a962]/10 text-[#c9a962]"
                 : "border-white/10 text-white/40 hover:text-white/70"
             }`}
           >
@@ -313,7 +313,7 @@ function ResourceRow({ resource: r }: { resource: HubResource }) {
         </a>
         <div className="flex shrink-0 items-center gap-2">
           {r.essential && (
-            <span className="text-[10px] text-[#FFD700]">
+            <span className="text-[10px] text-[#c9a962]">
               <span aria-hidden="true">⭐</span>
               <span className="sr-only">Essential</span>
             </span>

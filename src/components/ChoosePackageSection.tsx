@@ -16,7 +16,7 @@ export default function ChoosePackageSection() {
       className="relative z-10 mx-auto max-w-[92rem] scroll-mt-20 px-6 py-14"
     >
       <div className="mx-auto mb-[30px] max-w-[760px] text-center">
-        <p className="mb-2.5 text-[11px] font-extrabold tracking-[2.5px] text-[#C9A962] uppercase">
+        <p className="mb-2.5 text-[11px] font-extrabold tracking-[2.5px] text-[#c9a962] uppercase">
           ◆ Run your own · founding 2026–27
         </p>
         <h2
@@ -25,7 +25,7 @@ export default function ChoosePackageSection() {
         >
           Bringing it to your school or institution?
         </h2>
-        <p className="text-[clamp(15px,1.8vw,17px)] leading-relaxed text-[#AEBFCE]">
+        <p className="text-[clamp(15px,1.8vw,17px)] leading-relaxed text-[#bca98f]">
           The commons stays free forever. When you&rsquo;re ready to{" "}
           <b className="text-white">run your own</b> — tell us who you are,
           and we&rsquo;ll take you to the right package.
@@ -39,7 +39,7 @@ export default function ChoosePackageSection() {
             onClick={() => {
               if (card.role) requestPricingRole(card.role);
             }}
-            className="relative flex flex-col rounded-[15px] border border-white/[0.08] bg-[#0f1f3a] px-[22px] pt-[22px] pb-5 no-underline transition-[transform,border-color] duration-200 [border-top:3px_solid_#C9A962] hover:-translate-y-[3px] hover:border-[#C9A962]/55"
+            className="relative flex flex-col rounded-[15px] border border-white/[0.08] bg-[#2a2218] px-[22px] pt-[22px] pb-5 no-underline transition-[transform,border-color] duration-200 [border-top:3px_solid_#c9a962] hover:-translate-y-[3px] hover:border-[#c9a962]/55"
           >
             <span aria-hidden="true" className="mb-[11px] text-[26px] leading-none">
               {card.icon}
@@ -47,11 +47,11 @@ export default function ChoosePackageSection() {
             <span className="mb-1.5 text-[17px] font-extrabold text-white">
               {card.title}
             </span>
-            <span className="mb-3.5 flex-1 text-[13px] leading-[1.55] text-[#9FB0C3]">
+            <span className="mb-3.5 flex-1 text-[13px] leading-[1.55] text-[#b3a48c]">
               {card.desc}
             </span>
             <span className="flex items-center justify-between gap-2">
-              <span className="text-[12.5px] font-extrabold text-[#C9A962]">
+              <span className="text-[12.5px] font-extrabold text-[#c9a962]">
                 {card.tier} · {card.price}
               </span>
               <span className="text-[12.5px] font-bold text-teal">

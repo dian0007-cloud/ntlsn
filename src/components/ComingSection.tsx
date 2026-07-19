@@ -17,12 +17,12 @@ export default function ComingSection({ block }: { block: RoadmapBlock }) {
       border: `1px solid rgba(${block.colour},0.38)`,
     },
     teal: {
-      color: "#2DD4BF",
-      background: "rgba(45,212,191,0.10)",
-      border: "1px solid rgba(45,212,191,0.32)",
+      color: "#8fb081",
+      background: "rgba(143,176,129,0.10)",
+      border: "1px solid rgba(143,176,129,0.32)",
     },
     neutral: {
-      color: "#CBD8E6",
+      color: "#d9cdb6",
       background: "rgba(255,255,255,0.05)",
       border: "1px solid rgba(255,255,255,0.12)",
     },
@@ -43,15 +43,15 @@ export default function ComingSection({ block }: { block: RoadmapBlock }) {
         </p>
         <h2
           id={`${block.id}-heading`}
-          className="mb-2 text-[clamp(21px,3vw,29px)] leading-[1.2] font-extrabold tracking-[-0.01em] text-[#E8EEF5]"
+          className="mb-2 text-[clamp(21px,3vw,29px)] leading-[1.2] font-extrabold tracking-[-0.01em] text-[#ece5d6]"
         >
           {block.heading}
         </h2>
-        <p className="mb-3.5 max-w-[720px] text-[13.5px] leading-relaxed text-[#9FB0C3]">
+        <p className="mb-3.5 max-w-[720px] text-[13.5px] leading-relaxed text-[#b3a48c]">
           {block.lede}
           {block.ledeBold ? (
             <>
-              <b className="text-[#CBD8E6]">{block.ledeBold}</b>
+              <b className="text-[#d9cdb6]">{block.ledeBold}</b>
               {block.ledeRest}
             </>
           ) : null}
@@ -71,10 +71,10 @@ export default function ComingSection({ block }: { block: RoadmapBlock }) {
           {block.cards.map((card) => (
             <li
               key={card.title}
-              className="rounded-xl border border-white/10 bg-[#0f1f3a] px-3.5 py-[13px]"
+              className="rounded-xl border border-white/10 bg-[#2a2218] px-3.5 py-[13px]"
             >
               <div className="mb-[5px] flex items-start justify-between gap-2">
-                <h3 className="text-[13px] leading-[1.3] font-extrabold text-[#E8EEF5]">
+                <h3 className="text-[13px] leading-[1.3] font-extrabold text-[#ece5d6]">
                   {card.title}
                 </h3>
                 <span
@@ -88,7 +88,7 @@ export default function ComingSection({ block }: { block: RoadmapBlock }) {
                   {block.year}
                 </span>
               </div>
-              <p className="text-xs leading-normal text-[#9FB0C3]">
+              <p className="text-xs leading-normal text-[#b3a48c]">
                 {card.desc}
               </p>
               {card.href ? (

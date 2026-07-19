@@ -48,7 +48,7 @@ export const PATHWAYS: readonly Pathway[] = [
     "subtitle": "Navigate precarious academic work with confidence",
     "description": "Rapid onboarding, building a teaching portfolio with limited time, and understanding the governance structures that shape your work. Designed for casuals, sessionals, and adjuncts who often feel disconnected from institutional support.",
     "icon": "🧭",
-    "colour": "#4ECDC4",
+    "colour": "#8fb081",
     "target": "Casuals, sessionals, adjuncts, and new teaching staff",
     "modules": [
       {
@@ -273,7 +273,7 @@ export const PATHWAYS: readonly Pathway[] = [
     "subtitle": "Demystify grading, calibration, and feedback",
     "description": "From understanding assessment philosophy to writing feedback that students actually read. Everything a new marker, PhD student, or early career academic needs to grade fairly and efficiently — especially when GenAI is in the mix.",
     "icon": "✏️",
-    "colour": "#7C9CFF",
+    "colour": "#c66c3f",
     "target": "New markers, PhD students, early career academics, tutors",
     "modules": [
       {
@@ -498,7 +498,7 @@ export const PATHWAYS: readonly Pathway[] = [
     "subtitle": "From classroom curiosity to published research",
     "description": "Bridging the gap between \"I had a good idea in class\" and \"I am publishing this in a Q1 educational journal.\" A structured on-ramp for academics transitioning from disciplinary research into pedagogical scholarship.",
     "icon": "🔬",
-    "colour": "#C57BFF",
+    "colour": "#a8737f",
     "target": "Academics new to SoTL, disciplinary researchers turning to pedagogy",
     "modules": [
       {
@@ -723,7 +723,7 @@ export const PATHWAYS: readonly Pathway[] = [
     "subtitle": "Challenge the status quo and push institutional boundaries",
     "description": "Moving beyond standard constructive alignment to explore power, equity, and the systemic structures of higher education. Emancipatory models, decolonial methodologies, and the political economy of EdTech.",
     "icon": "🔥",
-    "colour": "#FF6B6B",
+    "colour": "#d96650",
     "target": "Experienced educators, academic developers, curriculum designers, critical scholars",
     "modules": [
       {
@@ -905,7 +905,7 @@ export const PATHWAYS: readonly Pathway[] = [
     "subtitle": "The architecture of quality teaching in Australian HE",
     "description": "A comprehensive guide to the frameworks, standards, and quality assurance systems that underpin teaching excellence in Australian higher education. From HESF compliance to Advance HE Fellowships and UDL 3.0.",
     "icon": "🏗️",
-    "colour": "#C9A962",
+    "colour": "#c9a962",
     "target": "All teaching staff, academic developers, quality assurance teams, program directors",
     "modules": [
       {

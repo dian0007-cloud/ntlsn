@@ -21,21 +21,21 @@ export default function EthosSection() {
         >
           “Who doesn’t get to partner?”
         </h2>
-        <p className="mx-auto mb-[18px] max-w-[660px] text-[17px] leading-[1.65] font-semibold text-[#cbd8e6]">
+        <p className="mx-auto mb-[18px] max-w-[660px] text-[17px] leading-[1.65] font-semibold text-[#d9cdb6]">
           Everything on this site says <i>open to everyone</i>. This is the
           question that tests whether that is true — and the one that keeps
           the whole project honest.
         </p>
-        <p className="mx-auto mb-4 max-w-[680px] text-[16px] leading-[1.75] text-[#9fb3c8]">
+        <p className="mx-auto mb-4 max-w-[680px] text-[16px] leading-[1.75] text-[#b3a48c]">
           NTLSN grows out of A/Prof Seb Dianati’s scholarship on{" "}
-          <b className="text-[#cbd8e6]">Students as Partners</b>. Partnership
+          <b className="text-[#d9cdb6]">Students as Partners</b>. Partnership
           promises shared authorship of teaching and learning; in practice the
           invitation is uneven. It reaches some students and not others, and
           too rarely the casualised teacher, the regional or under-resourced
           institution, or those whose identities intersect at the margins of
           who universities were built for.
         </p>
-        <p className="mx-auto mb-[22px] max-w-[680px] text-[16px] leading-[1.75] text-[#9fb3c8]">
+        <p className="mx-auto mb-[22px] max-w-[680px] text-[16px] leading-[1.75] text-[#b3a48c]">
           A free, open commons is one answer. When the sector’s knowledge,
           events and evidence are rationed by neither budget nor status, the
           threshold to take part drops for everyone — which is why the commons
@@ -50,7 +50,7 @@ export default function EthosSection() {
         >
           See the national partnership work →
         </a>
-        <div className="mx-auto max-w-[540px] border-t border-white/10 pt-4 text-[14px] leading-[1.6] text-[#8aa0b6]">
+        <div className="mx-auto max-w-[540px] border-t border-white/10 pt-4 text-[14px] leading-[1.6] text-[#a0907a]">
           Founded by A/Prof Seb Dianati · independent of any single institution
           · grounded in Students as Partners pedagogy and scholarship.
         </div>

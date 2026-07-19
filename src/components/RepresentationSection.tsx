@@ -17,31 +17,31 @@ const SEAT_ROWS: readonly SeatRow[] = [
     name: "Regional Universities Network (RUN)",
     seats: 3,
     desc: "Regional and teaching-intensive, often hit hardest",
-    colour: "#2DD4BF",
+    colour: "#8fb081",
   },
   {
     name: "Australian Technology Network (ATN)",
     seats: 2,
     desc: "Industry-engaged, practice-focused",
-    colour: "#7C9CFF",
+    colour: "#c66c3f",
   },
   {
     name: "Innovative Research Universities (IRU)",
     seats: 1,
     desc: "Comprehensive and community-minded",
-    colour: "#4FD1A5",
+    colour: "#9cbb8c",
   },
   {
     name: "Group of Eight (Go8)",
     seats: 2,
     desc: "Research-intensive",
-    colour: "#C57BFF",
+    colour: "#a8737f",
   },
   {
     name: "Independent / unaligned",
     seats: 1,
     desc: "Outside the formal groupings",
-    colour: "#FFB448",
+    colour: "#e6a33c",
   },
   {
     name: "Private and NUHEP",
@@ -60,7 +60,7 @@ export default function RepresentationSection() {
     >
       <div className="mx-auto max-w-[780px]">
         <div className="mb-6 text-center">
-          <p className="mb-3 text-[11px] font-extrabold tracking-[2px] text-[#2DD4BF] uppercase">
+          <p className="mb-3 text-[11px] font-extrabold tracking-[2px] text-[#8fb081] uppercase">
             Governed in balance
           </p>
           <h2
@@ -69,7 +69,7 @@ export default function RepresentationSection() {
           >
             No single bloc runs it.
           </h2>
-          <p className="mx-auto max-w-[640px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#CBD8E6]">
+          <p className="mx-auto max-w-[640px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#d9cdb6]">
             If a national commons is to belong to the whole sector, no one
             grouping can dominate it. Representation is allocated across the
             university groupings, weighted so the regional and
@@ -77,7 +77,7 @@ export default function RepresentationSection() {
             bloc.
           </p>
         </div>
-        <div className="rounded-2xl border border-white/[0.09] bg-[#0f1f3a] px-6 pt-2 pb-4">
+        <div className="rounded-2xl border border-white/[0.09] bg-[#2a2218] px-6 pt-2 pb-4">
           <ul className="list-none">
             {SEAT_ROWS.map((row) => (
               <li
@@ -88,7 +88,7 @@ export default function RepresentationSection() {
                   <p className="text-[14.5px] font-bold text-white">
                     {row.name}
                   </p>
-                  <p className="text-[12.5px] text-[#8AA0B6]">{row.desc}</p>
+                  <p className="text-[12.5px] text-[#a0907a]">{row.desc}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span aria-hidden="true" className="whitespace-nowrap">
@@ -112,10 +112,10 @@ export default function RepresentationSection() {
           </ul>
           <p className="flex items-center justify-between pt-3.5 text-sm font-extrabold text-white">
             <span>Total</span>
-            <span className="text-[#2DD4BF]">10 seats</span>
+            <span className="text-[#8fb081]">10 seats</span>
           </p>
         </div>
-        <p className="mx-auto mt-5 max-w-[640px] text-center text-[12.5px] text-[#8AA0B6] italic">
+        <p className="mx-auto mt-5 max-w-[640px] text-center text-[12.5px] text-[#a0907a] italic">
           A governance model in design, not yet ratified. Seat allocations by
           grouping are proposed to keep the commons balanced, not weighted by
           funding. Confirmation of institutions and final terms are pending

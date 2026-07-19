@@ -39,14 +39,14 @@ export default function WhySection() {
         >
           The sector works alone. It doesn&rsquo;t have to.
         </h2>
-        <p className="mx-auto mb-[13px] max-w-[680px] text-[clamp(15px,1.8vw,18px)] leading-[1.65] text-[#AEBFCE]">
+        <p className="mx-auto mb-[13px] max-w-[680px] text-[clamp(15px,1.8vw,18px)] leading-[1.65] text-[#bca98f]">
           Australian university teaching is world-class — and almost entirely
           siloed. Every institution solves the same problems behind its own
           walls, while the work that holds learning together carries less
           weight than research and is the first thing cut when budgets
           tighten.
         </p>
-        <p className="mx-auto mb-[30px] max-w-[680px] text-[clamp(15px,1.8vw,18px)] leading-[1.65] text-[#CBD8E6]">
+        <p className="mx-auto mb-[30px] max-w-[680px] text-[clamp(15px,1.8vw,18px)] leading-[1.65] text-[#d9cdb6]">
           <b className="text-white">NTLSN is the affordable response</b> — a
           free, open commons that connects the fringes: one place to find,
           share and recognise teaching across all {universityCount}{" "}
@@ -57,12 +57,12 @@ export default function WhySection() {
           {WHY_CARDS.map(([head, body]) => (
             <li
               key={head}
-              className="rounded-[13px] border border-white/[0.09] bg-[#0f1f3a] px-[17px] py-4 [border-top:2px_solid_#4ECDC4]"
+              className="rounded-[13px] border border-white/[0.09] bg-[#2a2218] px-[17px] py-4 [border-top:2px_solid_#8fb081]"
             >
               <h3 className="mb-[5px] text-sm font-extrabold text-white">
                 {head}
               </h3>
-              <p className="text-[12.5px] leading-[1.55] text-[#9FB0C3]">
+              <p className="text-[12.5px] leading-[1.55] text-[#b3a48c]">
                 {body}
               </p>
             </li>

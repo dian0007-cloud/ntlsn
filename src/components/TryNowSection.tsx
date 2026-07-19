@@ -87,7 +87,7 @@ export default function TryNowSection() {
         >
           The toolkit for academics.
         </h2>
-        <p className="mb-[18px] text-[clamp(15px,1.8vw,17px)] leading-normal text-[#AEBFCE]">
+        <p className="mb-[18px] text-[clamp(15px,1.8vw,17px)] leading-normal text-[#bca98f]">
           {TRYNOW_TOOLS.length} free tools, no login — pick what you&rsquo;re
           working on, or search. Nothing leaves your browser.
         </p>
@@ -98,7 +98,7 @@ export default function TryNowSection() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={`Search ${TRYNOW_TOOLS.length} tools — try “rubric”, “AI”, “feedback”, “fellowship”…`}
           aria-label={`Search ${TRYNOW_TOOLS.length} free tools`}
-          className="w-full max-w-[580px] rounded-xl border border-white/[0.14] bg-[#0C1A2E] px-[18px] py-3.5 text-[15px] text-[#E8EEF5] outline-none placeholder:text-white/30 focus:border-teal"
+          className="w-full max-w-[580px] rounded-xl border border-white/[0.14] bg-[#0C1A2E] px-[18px] py-3.5 text-[15px] text-[#ece5d6] outline-none placeholder:text-white/30 focus:border-teal"
         />
       </div>
 
@@ -120,8 +120,8 @@ export default function TryNowSection() {
               }}
               className={`inline-flex cursor-pointer items-center gap-1.5 rounded-[999px] border px-[15px] py-2 text-[13px] font-bold whitespace-nowrap transition-colors ${
                 active
-                  ? "border-teal bg-teal text-[#06121F]"
-                  : "border-white/[0.12] bg-white/[0.03] text-[#CBD8E6] hover:border-teal/55 hover:text-white"
+                  ? "border-teal bg-teal text-[#19130d]"
+                  : "border-white/[0.12] bg-white/[0.03] text-[#d9cdb6] hover:border-teal/55 hover:text-white"
               }`}
             >
               <span aria-hidden="true" className="text-sm">
@@ -145,7 +145,7 @@ export default function TryNowSection() {
           border: "1px solid rgba(201,169,98,.25)",
         }}
       >
-        <p className="mb-1.5 text-[10px] font-extrabold tracking-[1.4px] text-[#C9A962] uppercase">
+        <p className="mb-1.5 text-[10px] font-extrabold tracking-[1.4px] text-[#c9a962] uppercase">
           ◆ Today in teaching &amp; learning
         </p>
         <p
@@ -174,7 +174,7 @@ export default function TryNowSection() {
               <ToolGrid tools={searchHits} />
             </>
           ) : (
-            <p className="p-[34px] text-center text-[15px] text-[#9FB0C3]">
+            <p className="p-[34px] text-center text-[15px] text-[#b3a48c]">
               No tools match “{query}” — try “rubric”, “AI”, “fellowship”…
             </p>
           )
@@ -227,14 +227,14 @@ function ToolGrid({ tools }: { tools: readonly Tool[] }) {
             href={tool.u}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex flex-1 flex-col rounded-xl border border-white/[0.08] bg-[#0F1F3A] px-3.5 py-[13px] no-underline transition-[transform,border-color] duration-150 hover:-translate-y-[3px] hover:border-teal/50"
+            className="relative flex flex-1 flex-col rounded-xl border border-white/[0.08] bg-[#2a2218] px-3.5 py-[13px] no-underline transition-[transform,border-color] duration-150 hover:-translate-y-[3px] hover:border-teal/50"
           >
             {tool.t && (
               <span
                 className={`absolute top-3.5 right-3.5 rounded-[5px] px-[7px] py-[3px] text-[9.5px] font-extrabold tracking-[0.5px] uppercase ${
                   tool.t === "New"
                     ? "bg-teal text-navy"
-                    : "bg-white/[0.06] text-[#9FB0C3]"
+                    : "bg-white/[0.06] text-[#b3a48c]"
                 }`}
               >
                 {tool.t}
@@ -251,7 +251,7 @@ function ToolGrid({ tools }: { tools: readonly Tool[] }) {
                 {tool.n}
               </span>
             </span>
-            <span className="line-clamp-2 flex-1 text-[11.5px] leading-normal text-[#9FB0C3]">
+            <span className="line-clamp-2 flex-1 text-[11.5px] leading-normal text-[#b3a48c]">
               {tool.d}
             </span>
             <span className="mt-2 text-[11px] font-bold text-teal">

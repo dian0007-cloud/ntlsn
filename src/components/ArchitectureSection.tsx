@@ -12,11 +12,11 @@ export default function ArchitectureSection() {
     <section
       id="architecture"
       aria-labelledby="architecture-heading"
-      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#0F1D32]/70 px-4 py-24"
+      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#271f16]/70 px-4 py-24"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume VI
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -38,7 +38,7 @@ export default function ArchitectureSection() {
                 width="32"
                 height="5"
                 rx="2.5"
-                fill="#4ECDC4"
+                fill="#8fb081"
               />
               <rect
                 className="na-seq na-seq-d1"
@@ -47,7 +47,7 @@ export default function ArchitectureSection() {
                 width="32"
                 height="5"
                 rx="2.5"
-                fill="#C9A962"
+                fill="#c9a962"
               />
               <rect
                 className="na-seq na-seq-d2"
@@ -56,7 +56,7 @@ export default function ArchitectureSection() {
                 width="32"
                 height="5"
                 rx="2.5"
-                fill="#C57BFF"
+                fill="#a8737f"
               />
             </svg>
           </div>
@@ -68,7 +68,7 @@ export default function ArchitectureSection() {
         </div>
 
         {/* ATEC feature card */}
-        <div className="mb-12 rounded-2xl border border-teal/20 bg-gradient-to-br from-teal/5 to-[#7C9CFF]/5 p-6 md:p-8">
+        <div className="mb-12 rounded-2xl border border-teal/20 bg-gradient-to-br from-teal/5 to-[#c66c3f]/5 p-6 md:p-8">
           <div className="mb-4 flex items-center gap-3">
             <div
               aria-hidden="true"
@@ -86,7 +86,7 @@ export default function ArchitectureSection() {
             </div>
           </div>
           <div className="mt-6 rounded-xl border border-white/5 bg-white/[0.02] p-4">
-            <h4 className="mb-3 text-sm font-semibold text-[#C9A962]">
+            <h4 className="mb-3 text-sm font-semibold text-[#c9a962]">
               Interim Statement of Strategic Priorities (May 2026)
             </h4>
             <p className="mb-3 text-xs text-white/40">
@@ -126,7 +126,7 @@ export default function ArchitectureSection() {
               href="https://www.atec.gov.au/strategy/strategic-priorities-workplan"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#C9A962] hover:underline"
+              className="text-sm text-[#c9a962] hover:underline"
             >
               Interim SSP (PDF) →
             </a>

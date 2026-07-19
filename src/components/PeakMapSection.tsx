@@ -52,7 +52,7 @@ export default function PeakMapSection() {
                   key={`${p}-${c}`}
                   d={`M250,${PEAK_Y[p]} C430,${PEAK_Y[p]} 460,${CAT_Y[c]} 640,${CAT_Y[c]}`}
                   fill="none"
-                  stroke="#4ECDC4"
+                  stroke="#8fb081"
                   strokeOpacity={on ? 0.85 : dim ? 0.06 : 0.18}
                   strokeWidth={on ? 2.4 : dim ? 1.4 : 1.6}
                 />
@@ -96,7 +96,7 @@ export default function PeakMapSection() {
                 y={PEAK_Y[p] + 15}
                 textAnchor="middle"
                 fontSize={11}
-                fill="#9FB0C3"
+                fill="#b3a48c"
               >
                 {role}
               </text>
@@ -110,8 +110,8 @@ export default function PeakMapSection() {
                 width={206}
                 height={58}
                 rx={13}
-                fill="rgba(255,180,72,.10)"
-                stroke="rgba(255,180,72,.4)"
+                fill="rgba(230,163,60,.10)"
+                stroke="rgba(230,163,60,.4)"
               />
               <text x={664} y={CAT_Y[c] + 6} fontSize={22} aria-hidden="true">
                 {emoji}

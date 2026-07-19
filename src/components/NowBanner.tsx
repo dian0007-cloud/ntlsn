@@ -143,13 +143,13 @@ export default function NowBanner() {
         <div className="flex flex-wrap justify-center gap-2.5">
           <a
             href="#ntlsn-trynow"
-            className="rounded-full bg-teal px-[18px] py-2.5 text-[13px] font-extrabold text-[#06121f]"
+            className="rounded-full bg-teal px-[18px] py-2.5 text-[13px] font-extrabold text-[#19130d]"
           >
             Free search &amp; tools →
           </a>
           <a
             href="#ntlsn-archive"
-            className="rounded-full border border-white/20 px-[18px] py-2.5 text-[13px] font-bold text-[#e8eef5]"
+            className="rounded-full border border-white/20 px-[18px] py-2.5 text-[13px] font-bold text-[#ece5d6]"
           >
             Browse the archive →
           </a>

@@ -20,7 +20,7 @@ export interface RoadmapCard {
 
 export interface RoadmapChip {
   text: string;
-  /** "accent" renders in the block colour; "teal" in #2DD4BF; rest neutral. */
+  /** "accent" renders in the block colour; "teal" in #8fb081; rest neutral. */
   tone: "accent" | "teal" | "neutral";
 }
 

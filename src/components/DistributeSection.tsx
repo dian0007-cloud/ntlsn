@@ -18,9 +18,9 @@ const EMBED_SNIPPET = '<script src="https://ntlsn.com/widget.js" data-limit="5">
 const BTN =
   "inline-flex cursor-pointer items-center gap-1.5 rounded-[9px] bg-teal px-3.5 py-2.5 text-sm font-semibold text-navy no-underline";
 const GHOST =
-  "inline-flex items-center gap-1.5 rounded-[9px] border border-teal/35 px-[13px] py-[9px] text-sm font-semibold text-[#CFE9E5] no-underline";
+  "inline-flex items-center gap-1.5 rounded-[9px] border border-teal/35 px-[13px] py-[9px] text-sm font-semibold text-[#d8e0cc] no-underline";
 const CARD =
-  "rounded-[18px] border border-teal/[0.18] bg-[#0f1f38] p-7";
+  "rounded-[18px] border border-teal/[0.18] bg-[#2a2218] p-7";
 
 export default function DistributeSection() {
   const [copied, setCopied] = useState(false);
@@ -53,7 +53,7 @@ export default function DistributeSection() {
       >
         NTLSN, everywhere you work.
       </h2>
-      <p className="mx-auto mb-10 max-w-[640px] text-center text-[17px] leading-relaxed text-[#9FB3C8]">
+      <p className="mx-auto mb-10 max-w-[640px] text-center text-[17px] leading-relaxed text-[#b3a48c]">
         Subscribe to the sector calendar so new events land in your diary
         automatically — or embed the live &ldquo;what&rsquo;s on&rdquo; list
         on your own L&amp;T page.
@@ -63,7 +63,7 @@ export default function DistributeSection() {
           <h3 className="mb-1.5 text-xl leading-[1.2] font-bold text-white">
             📅 Subscribe to the sector calendar
           </h3>
-          <p className="mb-[18px] text-[15px] leading-[1.55] text-[#9FB3C8]">
+          <p className="mb-[18px] text-[15px] leading-[1.55] text-[#b3a48c]">
             The sector calendar, auto-updating daily. Add once — new
             symposiums and events appear as they are listed.
           </p>
@@ -97,10 +97,10 @@ export default function DistributeSection() {
           <h3 className="mb-1.5 text-xl leading-[1.2] font-bold text-white">
             🔌 Embed NTLSN on your site
           </h3>
-          <p className="mb-3.5 text-[15px] leading-[1.55] text-[#9FB3C8]">
+          <p className="mb-3.5 text-[15px] leading-[1.55] text-[#b3a48c]">
             Drop this on any university L&amp;T page to show the
             sector&rsquo;s next events. Add{" "}
-            <code className="text-[#CFE9E5]">data-uni=&quot;usq&quot;</code>{" "}
+            <code className="text-[#d8e0cc]">data-uni=&quot;usq&quot;</code>{" "}
             to filter to your institution.
           </p>
           <pre className="mb-3 overflow-auto rounded-[10px] border border-white/[0.08] bg-navy p-3.5 font-mono text-[13px] leading-normal font-medium wrap-break-word whitespace-pre-wrap text-[#9FE6DD]">
@@ -109,9 +109,9 @@ export default function DistributeSection() {
           <button type="button" onClick={copyEmbed} className={BTN}>
             {copied ? "✓ Copied" : "Copy code"}
           </button>
-          <p className="mt-3.5 text-[13px] leading-normal text-[#9FB3C8]">
+          <p className="mt-3.5 text-[13px] leading-normal text-[#b3a48c]">
             Also available: an{" "}
-            <b className="text-[#CFE9E5]">Acknowledgement of Country</b>{" "}
+            <b className="text-[#d8e0cc]">Acknowledgement of Country</b>{" "}
             widget for your campus —{" "}
             <code className="text-[#9FE6DD] break-all">
               &lt;script src=&quot;https://ntlsn.com/country-widget.js&quot;
@@ -125,14 +125,14 @@ export default function DistributeSection() {
           <h3 className="mb-1.5 text-xl leading-[1.2] font-bold text-white">
             📬 Weekly email digest
           </h3>
-          <p className="mb-4 text-[15px] leading-[1.55] text-[#9FB3C8]">
+          <p className="mb-4 text-[15px] leading-[1.55] text-[#b3a48c]">
             A short Monday email — what&rsquo;s on across the sector this
             fortnight, grouped by state.
           </p>
-          <p className="mb-3 text-sm leading-normal font-semibold text-[#CFE9E5]">
+          <p className="mb-3 text-sm leading-normal font-semibold text-[#d8e0cc]">
             Launching soon.
           </p>
-          <p className="mb-3.5 text-sm leading-normal text-[#9FB3C8]">
+          <p className="mb-3.5 text-sm leading-normal text-[#b3a48c]">
             In the meantime, the same updates are already live — add the
             calendar or follow the RSS above and you&rsquo;ll never miss an
             event.

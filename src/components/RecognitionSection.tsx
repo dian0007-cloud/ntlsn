@@ -30,7 +30,7 @@ export default function RecognitionSection() {
       className="mx-auto max-w-[92rem] scroll-mt-20 px-6 py-16"
     >
       <div className="mx-auto mb-[34px] max-w-[820px] text-center">
-        <div className="mb-[15px] inline-block rounded-full border border-[rgba(255,180,72,.4)] px-[13px] py-[5px] text-[11px] font-extrabold tracking-[2px] text-amber uppercase">
+        <div className="mb-[15px] inline-block rounded-full border border-[rgba(230,163,60,.4)] px-[13px] py-[5px] text-[11px] font-extrabold tracking-[2px] text-amber uppercase">
           Recognition benchmark · In design · 2027
         </div>
         <h2
@@ -39,7 +39,7 @@ export default function RecognitionSection() {
         >
           Recognise the work that counts for nothing.
         </h2>
-        <p className="text-[clamp(15px,1.8vw,18px)] leading-[1.6] text-[#aebfce]">
+        <p className="text-[clamp(15px,1.8vw,18px)] leading-[1.6] text-[#bca98f]">
           Mentoring, assessing, training the next mentor, reviewing a peer —
           the labour that sustains the sector, and almost none of it formally
           recognised. NTLSN sets a <b className="text-white">national benchmark</b>:
@@ -49,24 +49,24 @@ export default function RecognitionSection() {
           demonstrated effort, not attendance.
         </p>
       </div>
-      <div className="mx-auto mb-[22px] max-w-[760px] rounded-[13px] border border-[rgba(124,156,255,.22)] bg-[rgba(124,156,255,.06)] px-5 py-[13px] text-center">
-        <span className="mb-[5px] block text-[10px] font-extrabold tracking-[1.5px] text-[#7C9CFF] uppercase">
+      <div className="mx-auto mb-[22px] max-w-[760px] rounded-[13px] border border-[rgba(198,108,63,.22)] bg-[rgba(198,108,63,.06)] px-5 py-[13px] text-center">
+        <span className="mb-[5px] block text-[10px] font-extrabold tracking-[1.5px] text-[#c66c3f] uppercase">
           Built for the national shift
         </span>
-        <span className="text-[13.5px] leading-[1.55] text-[#aebfce]">
+        <span className="text-[13.5px] leading-[1.55] text-[#bca98f]">
           Recognition is going national:{" "}
-          <b className="text-[#cfe9e5]">ATEC</b>, the new Australian Tertiary
+          <b className="text-[#d8e0cc]">ATEC</b>, the new Australian Tertiary
           Education Commission, is driving recognition and RPL that travel
           across the sector. NTLSN is built on{" "}
-          <b className="text-[#cfe9e5]">My eQuals and Open Badges</b> — the
+          <b className="text-[#d8e0cc]">My eQuals and Open Badges</b> — the
           standards universities already trust — so a record earned here is
           portable and ready for it.
         </span>
       </div>
       <div className="flex flex-wrap items-start justify-center gap-[18px]">
         {/* Worked example ledger */}
-        <div className="min-w-[300px] max-w-[460px] flex-1 rounded-[14px] border border-white/[0.08] border-t-[3px] border-t-[#2DD4BF] bg-[#0f1f3a] px-6 py-[22px]">
-          <div className="mb-1 text-[12px] font-extrabold tracking-[1px] text-[#2DD4BF] uppercase">
+        <div className="min-w-[300px] max-w-[460px] flex-1 rounded-[14px] border border-white/[0.08] border-t-[3px] border-t-[#8fb081] bg-[#2a2218] px-6 py-[22px]">
+          <div className="mb-1 text-[12px] font-extrabold tracking-[1px] text-[#8fb081] uppercase">
             Worked example
           </div>
           <div className="mb-1.5 text-[18px] font-extrabold text-white">
@@ -82,7 +82,7 @@ export default function RecognitionSection() {
               <span
                 className={
                   row.sub
-                    ? "text-[13px] text-[#9fb3c8]"
+                    ? "text-[13px] text-[#b3a48c]"
                     : "text-[14.5px] font-semibold text-white"
                 }
               >
@@ -91,23 +91,23 @@ export default function RecognitionSection() {
               </span>
               <span
                 className={`whitespace-nowrap font-extrabold ${
-                  row.sub ? "text-[13px] text-[#9fb3c8]" : "text-[15px] text-amber"
+                  row.sub ? "text-[13px] text-[#b3a48c]" : "text-[15px] text-amber"
                 }`}
               >
                 {row.hrs}
               </span>
             </div>
           ))}
-          <div className="mt-1 flex items-baseline justify-between border-t-[1.5px] border-t-[rgba(45,212,191,.4)] pt-[11px]">
+          <div className="mt-1 flex items-baseline justify-between border-t-[1.5px] border-t-[rgba(143,176,129,.4)] pt-[11px]">
             <span className="text-[15px] font-extrabold text-white">
               Recognised hours
             </span>
-            <span className="text-[19px] font-extrabold text-[#2DD4BF]">15</span>
+            <span className="text-[19px] font-extrabold text-[#8fb081]">15</span>
           </div>
-          <div className="mt-2.5 text-[12.5px] italic text-[#FF8A6B]">
+          <div className="mt-2.5 text-[12.5px] italic text-[#d96650]">
             Today: recognised nowhere.
           </div>
-          <div className="mt-[3px] text-[12.5px] italic text-[#2DD4BF]">
+          <div className="mt-[3px] text-[12.5px] italic text-[#8fb081]">
             NTLSN standard: a portable mentor badge every 4–8 hrs.
           </div>
         </div>
@@ -119,15 +119,15 @@ export default function RecognitionSection() {
           {GROWS.map(([label, value]) => (
             <div
               key={label}
-              className="mb-[9px] flex items-center justify-between rounded-[11px] border border-white/[0.08] bg-[#0f1f3a] px-4 py-[13px]"
+              className="mb-[9px] flex items-center justify-between rounded-[11px] border border-white/[0.08] bg-[#2a2218] px-4 py-[13px]"
             >
-              <span className="text-sm font-semibold text-[#cbd8e6]">
+              <span className="text-sm font-semibold text-[#d9cdb6]">
                 {label}
               </span>
               <span className="text-[13px] font-bold text-purple">{value}</span>
             </div>
           ))}
-          <div className="mt-1.5 text-[13px] leading-[1.55] text-[#9fb3c8]">
+          <div className="mt-1.5 text-[13px] leading-[1.55] text-[#b3a48c]">
             Every hour attended is matched by a recognised hour of{" "}
             <b className="text-white">associated work</b> — the reviewing,
             synthesising and applying that makes it stick. One shared standard
@@ -136,24 +136,24 @@ export default function RecognitionSection() {
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-[22px] flex max-w-[940px] flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 rounded-[14px] border border-[rgba(124,156,255,.25)] bg-[linear-gradient(120deg,rgba(45,212,191,.10),rgba(197,123,255,.08))] px-6 py-[18px] text-center">
+      <div className="mx-auto mt-[22px] flex max-w-[940px] flex-wrap items-center justify-center gap-x-[18px] gap-y-2.5 rounded-[14px] border border-[rgba(198,108,63,.25)] bg-[linear-gradient(120deg,rgba(143,176,129,.10),rgba(168,115,127,.08))] px-6 py-[18px] text-center">
         <span className="text-[15px] font-bold text-white">
           Hours accumulate
         </span>
-        <span aria-hidden="true" className="text-[#8aa0b6]">
+        <span aria-hidden="true" className="text-[#a0907a]">
           →
         </span>
         <span className="text-[15px] font-bold text-purple">
           verified My eQuals badge
         </span>
-        <span aria-hidden="true" className="text-[#8aa0b6]">
+        <span aria-hidden="true" className="text-[#a0907a]">
           →
         </span>
-        <span className="text-[15px] font-bold text-[#2DD4BF]">
+        <span className="text-[15px] font-bold text-[#8fb081]">
           RPL at participating universities
         </span>
       </div>
-      <p className="mx-auto mt-6 max-w-[740px] text-center text-[12.5px] italic text-[#8aa0b6]">
+      <p className="mx-auto mt-6 max-w-[740px] text-center text-[12.5px] italic text-[#a0907a]">
         In design — the My eQuals integration is on the 2027 roadmap. NTLSN
         issues the verified record of demonstrated effort; RPL recognition
         grows as universities and bodies (including Advance HE) adopt the

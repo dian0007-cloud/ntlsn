@@ -143,13 +143,13 @@ export const SAP_BAR: ReadonlyArray<{
     width: "14%",
     title: "Targeted: 5",
     label: "Targeted (14%)",
-    className: "bg-[#7C9CFF]/60",
+    className: "bg-[#c66c3f]/60",
   },
   {
     width: "11%",
     title: "Emancipatory: 3",
     label: "Emancipatory (8%)",
-    className: "bg-[#4ECDC4]/70",
+    className: "bg-[#8fb081]/70",
   },
 ];
 
@@ -202,8 +202,8 @@ export const INDIGENISING_BAR: ReadonlyArray<{
   title: string;
   className: string;
 }> = [
-  { width: "21%", title: "Yes: 21%", className: "bg-[#4ECDC4]/60" },
-  { width: "52%", title: "Yes, but: 52%", className: "bg-[#7C9CFF]/50" },
+  { width: "21%", title: "Yes: 21%", className: "bg-[#8fb081]/60" },
+  { width: "52%", title: "Yes, but: 52%", className: "bg-[#c66c3f]/50" },
   { width: "16%", title: "No, but: 16%", className: "bg-amber-400/50" },
   { width: "11%", title: "No: 11%", className: "bg-white/15" },
 ];

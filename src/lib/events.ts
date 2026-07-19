@@ -21,16 +21,16 @@ export interface TypeMeta {
 }
 
 const TYPE_META: Record<string, TypeMeta> = {
-  conference: { color: "#4ECDC4", label: "conference" },
-  showcase: { color: "#FFD700", label: "showcase" },
-  workshop: { color: "#FF6B6B", label: "workshop" },
+  conference: { color: "#8fb081", label: "conference" },
+  showcase: { color: "#c9a962", label: "showcase" },
+  workshop: { color: "#d96650", label: "workshop" },
   webinar: { color: "#FF9F43", label: "webinar" },
-  symposium: { color: "#C57BFF", label: "symposium" },
-  week: { color: "#7C9CFF", label: "L&T week" },
+  symposium: { color: "#a8737f", label: "symposium" },
+  week: { color: "#c66c3f", label: "L&T week" },
 };
 
 export function typeMeta(type: string): TypeMeta {
-  return TYPE_META[type] ?? { color: "#8AA0B6", label: type };
+  return TYPE_META[type] ?? { color: "#a0907a", label: type };
 }
 
 /* ── University resolution ──────────────────────────────────────────────── */

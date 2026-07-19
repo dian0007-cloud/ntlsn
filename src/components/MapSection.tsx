@@ -70,7 +70,7 @@ export default function MapSection() {
     >
       <div id="reveal-map" className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume I
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -86,7 +86,7 @@ export default function MapSection() {
             teaching and learning across the sector — click any dot to
             explore.
           </p>
-          <p className="mt-3 text-xs text-[#C9A962]/60 italic">
+          <p className="mt-3 text-xs text-[#c9a962]/60 italic">
             National Reconciliation Week 2026 — All In
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function MapSection() {
             onClick={() => setShowCountry((v) => !v)}
             className={`flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-all ${
               showCountry
-                ? "border-[#C9A962]/40 bg-[#C9A962]/20 text-[#C9A962] shadow-lg shadow-[#C9A962]/10"
+                ? "border-[#c9a962]/40 bg-[#c9a962]/20 text-[#c9a962] shadow-lg shadow-[#c9a962]/10"
                 : "border-white/10 bg-white/5 text-white/50 hover:text-white/70"
             }`}
           >
@@ -169,33 +169,33 @@ export default function MapSection() {
                 height="60"
                 patternUnits="userSpaceOnUse"
               >
-                <circle cx="30" cy="30" r="4" fill="none" stroke="#4ECDC4" strokeWidth="0.3" strokeOpacity="0.06" />
-                <circle cx="30" cy="30" r="10" fill="none" stroke="#4ECDC4" strokeWidth="0.2" strokeOpacity="0.04" />
-                <circle cx="30" cy="30" r="18" fill="none" stroke="#C9A962" strokeWidth="0.2" strokeOpacity="0.03" />
-                <circle cx="30" cy="30" r="26" fill="none" stroke="#4ECDC4" strokeWidth="0.15" strokeOpacity="0.02" />
+                <circle cx="30" cy="30" r="4" fill="none" stroke="#8fb081" strokeWidth="0.3" strokeOpacity="0.06" />
+                <circle cx="30" cy="30" r="10" fill="none" stroke="#8fb081" strokeWidth="0.2" strokeOpacity="0.04" />
+                <circle cx="30" cy="30" r="18" fill="none" stroke="#c9a962" strokeWidth="0.2" strokeOpacity="0.03" />
+                <circle cx="30" cy="30" r="26" fill="none" stroke="#8fb081" strokeWidth="0.15" strokeOpacity="0.02" />
               </pattern>
               <clipPath id="land-clip">
                 <path d={MAINLAND_PATH} />
                 <path d={TASMANIA_PATH} />
               </clipPath>
               <radialGradient id="country-warm" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#C9A962" stopOpacity="0.12" />
-                <stop offset="100%" stopColor="#C9A962" stopOpacity="0" />
+                <stop offset="0%" stopColor="#c9a962" stopOpacity="0.12" />
+                <stop offset="100%" stopColor="#c9a962" stopOpacity="0" />
               </radialGradient>
             </defs>
 
             {/* Landmass — production's exact coastline */}
             <path
               d={MAINLAND_PATH}
-              fill="#0f1d32"
-              stroke="#4ECDC4"
+              fill="#271f16"
+              stroke="#8fb081"
               strokeWidth="1"
               strokeOpacity="0.3"
             />
             <path
               d={TASMANIA_PATH}
-              fill="#0f1d32"
-              stroke="#4ECDC4"
+              fill="#271f16"
+              stroke="#8fb081"
               strokeWidth="1"
               strokeOpacity="0.3"
             />
@@ -205,9 +205,9 @@ export default function MapSection() {
               <rect x="0" y="0" width="900" height="750" fill="url(#water-ripples)" />
               {PULSE_CLUSTERS.map(([cx, cy], i) => (
                 <g key={i}>
-                  <circle cx={cx} cy={cy} r="30" fill="none" stroke="#C9A962" strokeWidth="0.4" strokeOpacity="0.08" className="map-pulse" style={{ animationDuration: "6s", animationDelay: `${i * 0.8}s` }} />
-                  <circle cx={cx} cy={cy} r="50" fill="none" stroke="#4ECDC4" strokeWidth="0.3" strokeOpacity="0.05" className="map-pulse" style={{ animationDuration: "8s", animationDelay: `${i * 0.8 + 1}s` }} />
-                  <circle cx={cx} cy={cy} r="75" fill="none" stroke="#C9A962" strokeWidth="0.2" strokeOpacity="0.03" className="map-pulse" style={{ animationDuration: "10s", animationDelay: `${i * 0.8 + 2}s` }} />
+                  <circle cx={cx} cy={cy} r="30" fill="none" stroke="#c9a962" strokeWidth="0.4" strokeOpacity="0.08" className="map-pulse" style={{ animationDuration: "6s", animationDelay: `${i * 0.8}s` }} />
+                  <circle cx={cx} cy={cy} r="50" fill="none" stroke="#8fb081" strokeWidth="0.3" strokeOpacity="0.05" className="map-pulse" style={{ animationDuration: "8s", animationDelay: `${i * 0.8 + 1}s` }} />
+                  <circle cx={cx} cy={cy} r="75" fill="none" stroke="#c9a962" strokeWidth="0.2" strokeOpacity="0.03" className="map-pulse" style={{ animationDuration: "10s", animationDelay: `${i * 0.8 + 2}s` }} />
                 </g>
               ))}
             </g>
@@ -239,7 +239,7 @@ export default function MapSection() {
                         x={lx}
                         y={y - 2}
                         textAnchor={anchor}
-                        fill="#C9A962"
+                        fill="#c9a962"
                         style={{
                           fontSize: 7,
                           fontWeight: 700,
@@ -253,7 +253,7 @@ export default function MapSection() {
                         x={lx}
                         y={y + 6}
                         textAnchor={anchor}
-                        fill="#C9A962"
+                        fill="#c9a962"
                         style={{
                           fontSize: 3.5,
                           fontWeight: 400,
@@ -326,18 +326,18 @@ export default function MapSection() {
         </ul>
 
         <div className="mx-auto mt-10 max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A962]/10 bg-[#C9A962]/5 px-4 py-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#c9a962]/10 bg-[#c9a962]/5 px-4 py-2">
             <span className="text-sm" aria-hidden="true">
               🌊
             </span>
-            <p className="text-[11px] text-[#C9A962]/60">
+            <p className="text-[11px] text-[#c9a962]/60">
               Traditional Country data sourced from university
               Acknowledgements of Country. Map inspired by the{" "}
               <a
                 href="https://aiatsis.gov.au/explore/map-indigenous-australia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C9A962]/80 underline underline-offset-2 transition-colors hover:text-[#C9A962]"
+                className="text-[#c9a962]/80 underline underline-offset-2 transition-colors hover:text-[#c9a962]"
               >
                 AIATSIS Map of Indigenous Australia
               </a>{" "}
@@ -348,13 +348,13 @@ export default function MapSection() {
             Aboriginal and Torres Strait Islander peoples should be aware that
             this website may contain names and images of deceased persons.
           </p>
-          <p className="mt-2 text-[10px] text-[#C9A962]/40">
+          <p className="mt-2 text-[10px] text-[#c9a962]/40">
             Traditional Country attributions reflect each university’s own
             published Acknowledgement of Country. If an attribution requires
             correction, please{" "}
             <a
               href="mailto:dian0007@gmail.com?subject=NTLSN%20Country%20Attribution%20Correction"
-              className="underline underline-offset-2 transition-colors hover:text-[#C9A962]/70"
+              className="underline underline-offset-2 transition-colors hover:text-[#c9a962]/70"
             >
               contact us
             </a>

@@ -31,10 +31,10 @@ export default function Founding10Section() {
       className="relative mx-auto max-w-[92rem] scroll-mt-20 px-6 py-[60px]"
     >
       <div
-        className="mx-auto max-w-[920px] rounded-[20px] border border-[#2DD4BF]/[0.28] px-[30px] py-[38px]"
+        className="mx-auto max-w-[920px] rounded-[20px] border border-[#8fb081]/[0.28] px-[30px] py-[38px]"
         style={{
           background:
-            "radial-gradient(120% 140% at 50% 0%, rgba(45,212,191,0.12), rgba(12,28,52,0) 70%), #0C1C34",
+            "radial-gradient(120% 140% at 50% 0%, rgba(143,176,129,0.12), rgba(37,30,21,0) 70%), #251e15",
         }}
       >
         <div className="text-center">
@@ -47,7 +47,7 @@ export default function Founding10Section() {
           >
             Be one of the first 10. Half price, for life.
           </h2>
-          <p className="mx-auto mb-6 max-w-[660px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#CBD8E6]">
+          <p className="mx-auto mb-6 max-w-[660px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.65] text-[#d9cdb6]">
             The first ten universities to join shape the build and lock in{" "}
             <b className="text-white">
               50% off every connector, every year, for as long as they stay
@@ -56,7 +56,7 @@ export default function Founding10Section() {
             sector adopts.
           </p>
         </div>
-        <p className="mb-3 text-center text-xs font-bold tracking-[0.4px] text-[#8AA0B6] uppercase">
+        <p className="mb-3 text-center text-xs font-bold tracking-[0.4px] text-[#a0907a] uppercase">
           What your IT team will ask, answered
         </p>
         <ul className="mb-[22px] grid list-none grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,7 +66,7 @@ export default function Founding10Section() {
               className="rounded-xl border border-white/[0.08] bg-navy px-[18px] py-4"
             >
               <h3 className="mb-1.5 text-sm font-bold text-teal">{head}</h3>
-              <p className="text-[13.5px] leading-[1.55] text-[#9FB3C8]">
+              <p className="text-[13.5px] leading-[1.55] text-[#b3a48c]">
                 {body}
               </p>
             </li>
@@ -81,11 +81,11 @@ export default function Founding10Section() {
         <div className="text-center">
           <a
             href="#ntlsn-network"
-            className="inline-block rounded-xl bg-[#2DD4BF] px-7 py-[13px] text-sm font-extrabold text-[#06243A] no-underline shadow-[0_8px_26px_rgba(45,212,191,0.28)]"
+            className="inline-block rounded-xl bg-[#8fb081] px-7 py-[13px] text-sm font-extrabold text-[#1f1810] no-underline shadow-[0_8px_26px_rgba(143,176,129,0.28)]"
           >
             Be one of the first 10 →
           </a>
-          <p className="mt-2.5 text-[11.5px] text-[#8AA0B6]">
+          <p className="mt-2.5 text-[11.5px] text-[#a0907a]">
             Founding terms are indicative and confirmed on signing.
           </p>
         </div>

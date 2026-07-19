@@ -22,12 +22,12 @@ export default function LtrResultCard({
         href={record.u}
         target="_blank"
         rel="noopener noreferrer"
-        className={`mb-2 block rounded-xl border bg-[#0f1f38] px-4 py-3.5 no-underline ${borderClass}`}
+        className={`mb-2 block rounded-xl border bg-[#2a2218] px-4 py-3.5 no-underline ${borderClass}`}
       >
         <span className="block text-[15px] leading-snug font-semibold text-white">
           {record.t}
         </span>
-        <span className="mt-1 block text-[13px] leading-snug text-[#9FB3C8]">
+        <span className="mt-1 block text-[13px] leading-snug text-[#b3a48c]">
           {record.a}
           {record.a && record.y ? " · " : ""}
           {record.y}{" "}

@@ -57,11 +57,11 @@ export default function SotlGrantsSection() {
     <section
       id="sotl-grants"
       aria-labelledby="sotl-grants-heading"
-      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#0f1d32]/70 px-4 py-24"
+      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#271f16]/70 px-4 py-24"
     >
       <div id="reveal-sotl-grants" className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#C9A962] uppercase">
+          <p className="mb-2 text-[10px] tracking-[0.3em] text-[#c9a962] uppercase">
             Volume XI
           </p>
           <p className="mb-4 inline-flex items-center rounded-md border border-teal/30 px-2.5 py-0.5 text-xs font-semibold text-teal">
@@ -76,20 +76,20 @@ export default function SotlGrantsSection() {
           {/* Decorative rising-bubbles doodle — the ntlsn-secanim treatment. */}
           <div aria-hidden="true" className="mb-4 flex justify-center">
             <svg width="56" height="56" viewBox="0 0 64 64">
-              <circle className="na-rise" cx="32" cy="40" r="5" fill="#4ECDC4" />
+              <circle className="na-rise" cx="32" cy="40" r="5" fill="#8fb081" />
               <circle
                 className="na-rise na-rise-d1"
                 cx="20"
                 cy="40"
                 r="4"
-                fill="#C9A962"
+                fill="#c9a962"
               />
               <circle
                 className="na-rise na-rise-d2"
                 cx="44"
                 cy="40"
                 r="4"
-                fill="#C57BFF"
+                fill="#a8737f"
               />
             </svg>
           </div>
@@ -141,7 +141,7 @@ export default function SotlGrantsSection() {
           aria-label="Browse by who funds it"
           className="mx-auto mb-1 flex max-w-[880px] flex-wrap justify-center gap-2"
         >
-          <p className="mb-0.5 w-full text-center text-[11px] font-bold tracking-[1.5px] text-[#8AA0B6] uppercase">
+          <p className="mb-0.5 w-full text-center text-[11px] font-bold tracking-[1.5px] text-[#a0907a] uppercase">
             Browse by who funds it
           </p>
           {GRANT_FUNDERS.map(({ label, query: funderQuery }) => {
@@ -158,7 +158,7 @@ export default function SotlGrantsSection() {
                 className={`rounded-full border px-[17px] py-[9px] text-sm font-bold whitespace-nowrap transition-colors ${
                   active
                     ? "border-teal bg-teal/[0.18] text-white"
-                    : "border-white/[0.16] bg-white/[0.04] text-[#CBD8E6] hover:border-teal/60 hover:bg-teal/[0.12] hover:text-white"
+                    : "border-white/[0.16] bg-white/[0.04] text-[#d9cdb6] hover:border-teal/60 hover:bg-teal/[0.12] hover:text-white"
                 }`}
               >
                 {label}

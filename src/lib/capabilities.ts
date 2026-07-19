@@ -32,7 +32,7 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
   {
     "label": "Open Educational Practice — live now · launched quietly at HERDSA 2026",
     "sub": "The free commons, open to everyone today",
-    "c": "#4ECDC4",
+    "c": "#8fb081",
     "badge": "2026",
     "open": true,
     "items": [
@@ -64,7 +64,7 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
   {
     "label": "2027 — Symposiums & the build",
     "sub": "Run your own symposia and conferences; the back-end build and readiness tools",
-    "c": "#FFB448",
+    "c": "#e6a33c",
     "badge": "2027",
     "items": [
       {
@@ -121,7 +121,7 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
   {
     "label": "2028 — connected & enterprise-ready",
     "sub": "CRMs, student systems and procurement-grade compliance",
-    "c": "#7C9CFF",
+    "c": "#c66c3f",
     "badge": "2028",
     "items": [
       {
@@ -146,7 +146,7 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
   {
     "label": "2029 — the national mesh",
     "sub": "The whole sector, connected",
-    "c": "#C57BFF",
+    "c": "#a8737f",
     "badge": "2029",
     "items": [
       {
@@ -165,8 +165,8 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
 export const CAPABILITY_MILESTONES: ReadonlyArray<
   readonly [string, string, string, boolean]
 > = [
-  ["2026", "Open Educational Practice", "#4ECDC4", true],
-  ["2027", "Symposiums & recognition", "#FFB448", false],
-  ["2028", "Tools, quality & integration", "#7C9CFF", false],
-  ["2029", "The national mesh", "#C57BFF", false],
+  ["2026", "Open Educational Practice", "#8fb081", true],
+  ["2027", "Symposiums & recognition", "#e6a33c", false],
+  ["2028", "Tools, quality & integration", "#c66c3f", false],
+  ["2029", "The national mesh", "#a8737f", false],
 ];

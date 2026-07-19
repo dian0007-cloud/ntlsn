@@ -10,10 +10,10 @@ export type NetGroup = "hub" | "core" | "people" | "open" | "sector" | "body";
 
 export const NET_COLOURS: Record<NetGroup, string> = {
   hub: "#ffffff",
-  core: "#2DD4BF",
-  people: "#7C9CFF",
-  open: "#C57BFF",
-  sector: "#FFB448",
+  core: "#8fb081",
+  people: "#c66c3f",
+  open: "#a8737f",
+  sector: "#e6a33c",
   body: "#FFC36B",
 };
 

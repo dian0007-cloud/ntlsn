@@ -54,7 +54,7 @@ export default function LatestFeed() {
         </div>
         <ul className="grid list-none grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4">
           {items.map((item) => {
-            const colour = LATEST_TYPE_COLOURS[item.type] ?? "#4ECDC4";
+            const colour = LATEST_TYPE_COLOURS[item.type] ?? "#8fb081";
             const icon = LATEST_TYPE_ICONS[item.type] ?? "🔗";
             const summary = cleanSummary(item.summary);
             return (

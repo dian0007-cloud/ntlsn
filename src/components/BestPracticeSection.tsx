@@ -36,7 +36,7 @@ export default function BestPracticeSection() {
       className="relative scroll-mt-20 px-4 py-16"
     >
       <div className="mx-auto max-w-[1100px]">
-        <p className="mb-2.5 text-center text-[13px] font-bold tracking-[2px] text-[#4FD1A5] uppercase">
+        <p className="mb-2.5 text-center text-[13px] font-bold tracking-[2px] text-[#9cbb8c] uppercase">
           ◎ Good Practice Reports, resurfaced
         </p>
         <h2
@@ -45,22 +45,22 @@ export default function BestPracticeSection() {
         >
           Best Practice Guides
         </h2>
-        <p className="mx-auto mb-3.5 max-w-[600px] text-center text-[15px] leading-normal font-medium text-[#CFE9E5]">
+        <p className="mx-auto mb-3.5 max-w-[600px] text-center text-[15px] leading-normal font-medium text-[#d8e0cc]">
           In plain terms: short, evidence-based guides on how to do one
           teaching thing well, written by the teams the sector funded to work
           it out.
         </p>
-        <p className="mx-auto mb-2 max-w-[680px] text-center text-[17px] leading-relaxed text-[#9FB3C8]">
+        <p className="mx-auto mb-2 max-w-[680px] text-center text-[17px] leading-relaxed text-[#b3a48c]">
           Good Practice Reports from the teams the sector funded — integrity,
           work-integrated learning, assessment, curriculum, transition and
           more.{" "}
-          <b className="text-[#CFE9E5]">
+          <b className="text-[#d8e0cc]">
             {guideCount} curated guides, 2006–2024, searchable here.
           </b>
         </p>
-        <p className="mx-auto mb-[30px] max-w-[620px] text-center text-[13px] leading-relaxed text-[#8AA0B6]">
+        <p className="mx-auto mb-[30px] max-w-[620px] text-center text-[13px] leading-relaxed text-[#a0907a]">
           A curated lens on the{" "}
-          <a href="#ntlsn-archive" className="text-[#9FB3C8] underline">
+          <a href="#ntlsn-archive" className="text-[#b3a48c] underline">
             Sector Archive
           </a>{" "}
           — everything tagged <i>“best practice”</i> in the{" "}
@@ -68,7 +68,7 @@ export default function BestPracticeSection() {
             href="https://ltr.edu.au"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#9FB3C8] underline"
+            className="text-[#b3a48c] underline"
           >
             Learning &amp; Teaching Repository
           </a>
@@ -85,7 +85,7 @@ export default function BestPracticeSection() {
             setOpen(next);
             if (next) runSearch(query);
           }}
-          className="mx-auto mb-4 block cursor-pointer rounded-[10px] bg-[#4FD1A5] px-5 py-[11px] text-sm font-bold text-navy"
+          className="mx-auto mb-4 block cursor-pointer rounded-[10px] bg-[#9cbb8c] px-5 py-[11px] text-sm font-bold text-navy"
         >
           {open ? "Hide the guides ▴" : `Browse the ${guideCount} guides ▾`}
         </button>
@@ -105,11 +105,11 @@ export default function BestPracticeSection() {
                 clearTimeout(debounceRef.current);
                 debounceRef.current = setTimeout(() => runSearch(value), 200);
               }}
-              className="w-full rounded-xl border border-white/[0.14] bg-navy px-4 py-3.5 text-[17px] text-white outline-none placeholder:text-white/30 focus:border-[#4FD1A5]/50"
+              className="w-full rounded-xl border border-white/[0.14] bg-navy px-4 py-3.5 text-[17px] text-white outline-none placeholder:text-white/30 focus:border-[#9cbb8c]/50"
             />
             <p
               aria-live="polite"
-              className="mx-0.5 my-2.5 text-[13px] leading-snug font-semibold text-[#8AA0B6]"
+              className="mx-0.5 my-2.5 text-[13px] leading-snug font-semibold text-[#a0907a]"
             >
               {searching && results !== null
                 ? `${results.length} result(s) for “${query}”`
@@ -120,22 +120,22 @@ export default function BestPracticeSection() {
                 <LtrResultCard
                   key={record.u + record.t}
                   record={record}
-                  accent="#4FD1A5"
-                  borderClass="border-[#4FD1A5]/[0.18]"
+                  accent="#9cbb8c"
+                  borderClass="border-[#9cbb8c]/[0.18]"
                 />
               ))}
             </ul>
             {results !== null && results.length > RENDER_CAP && (
-              <p className="p-2 text-center text-[13px] text-[#8AA0B6]">
+              <p className="p-2 text-center text-[13px] text-[#a0907a]">
                 Showing {RENDER_CAP} of {results.length} —{" "}
                 {searching ? "refine your search" : "search to narrow"}
               </p>
             )}
             {searching && results !== null && results.length === 0 && (
-              <p className="p-4 text-center text-[15px] text-[#8AA0B6]">
+              <p className="p-4 text-center text-[15px] text-[#a0907a]">
                 No guides match “{query}” — try a broader term, or search the
                 full{" "}
-                <a href="#ntlsn-archive" className="text-[#4FD1A5]">
+                <a href="#ntlsn-archive" className="text-[#9cbb8c]">
                   Sector Archive
                 </a>
                 .

@@ -5,7 +5,7 @@ import { upcomingEvents } from "../lib/events";
  * #events — "What's On" (TASKS.md 1.2, first ported section).
  *
  * Header treatment (badge pill, h2, muted subtitle) and the section's
- * navy-tint band (#0f1d32/70 with hairline borders) are lifted from the
+ * navy-tint band (#271f16/70 with hairline borders) are lifted from the
  * production #events section. The body diverges deliberately: production
  * renders a month-calendar widget; the rebuild's first increment is the
  * canonical grid of upcoming event cards, date-ascending, straight from
@@ -18,7 +18,7 @@ export default function EventsSection() {
     <section
       id="events"
       aria-labelledby="events-heading"
-      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#0f1d32]/70 px-4 py-24"
+      className="relative scroll-mt-20 border-y border-white/[0.04] bg-[#271f16]/70 px-4 py-24"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">

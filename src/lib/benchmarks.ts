@@ -14,9 +14,9 @@
 export type GradCertRow = readonly [string, "y" | "s" | "n", string];
 
 export const GRADCERT_STATUS_COLOURS = {
-  y: "#34D399",
-  s: "#FFB448",
-  n: "#FF6B6B",
+  y: "#7fa66a",
+  s: "#e6a33c",
+  n: "#d96650",
 } as const;
 
 export const GRADCERT_UNIS: readonly GradCertRow[] = [

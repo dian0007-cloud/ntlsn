@@ -65,7 +65,7 @@ const STAGES: ReadonlyArray<[string, string, string]> = [
   ],
 ];
 
-const STAGE_COLOURS = ["#2DD4BF", "#7C9CFF", "#C57BFF", "#FFB448"] as const;
+const STAGE_COLOURS = ["#8fb081", "#c66c3f", "#a8737f", "#e6a33c"] as const;
 
 const JOIN: ReadonlyArray<[string, string]> = [
   ["Adopt the open framework", "Free, open, and yours to localise."],
@@ -95,12 +95,12 @@ export default function ConsortiumSection() {
         >
           From a national commons to an international consortium.
         </h2>
-        <p className="mx-auto mb-2 max-w-[660px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#aebfce]">
+        <p className="mx-auto mb-2 max-w-[660px] text-[clamp(14.5px,1.7vw,17px)] leading-[1.6] text-[#bca98f]">
           NTLSN starts in Australia, but the architecture was built to travel.
           Each country runs its own nationally-governed node, connected through
           open standards into a federated global commons — one node at a time.
         </p>
-        <p className="mx-auto mb-6 max-w-[560px] text-[13px] leading-[1.5] text-[#8aa0b6]">
+        <p className="mx-auto mb-6 max-w-[560px] text-[13px] leading-[1.5] text-[#a0907a]">
           The model is the international consortium — shared infrastructure,
           local sovereignty, no central owner.
         </p>
@@ -127,14 +127,14 @@ export default function ConsortiumSection() {
             );
           })}
           {NODES.map((n) => {
-            const col = n.f ? "#2DD4BF" : "#7C9CFF";
+            const col = n.f ? "#8fb081" : "#c66c3f";
             return (
               <g key={n.id}>
                 <circle
                   cx={n.x}
                   cy={n.y}
                   r={n.r}
-                  fill={n.f ? "#0b2b3f" : "#0f1f3a"}
+                  fill={n.f ? "#0b2b3f" : "#2a2218"}
                   stroke={col}
                   strokeWidth={n.f ? 2.4 : 1.6}
                 />
@@ -166,14 +166,14 @@ export default function ConsortiumSection() {
             );
           })}
         </svg>
-        <div className="mt-[30px] mb-3 text-[10.5px] font-bold tracking-[0.7px] text-[#8aa0b6] uppercase">
+        <div className="mt-[30px] mb-3 text-[10.5px] font-bold tracking-[0.7px] text-[#a0907a] uppercase">
           One node at a time
         </div>
         <div className="flex flex-wrap gap-[11px] text-left">
           {STAGES.map(([year, title, body], i) => (
             <div
               key={year}
-              className="min-w-[200px] flex-1 rounded-b-[12px] bg-[#0f1f3a] px-4 py-3.5"
+              className="min-w-[200px] flex-1 rounded-b-[12px] bg-[#2a2218] px-4 py-3.5"
               style={{ borderTop: `3px solid ${STAGE_COLOURS[i]}` }}
             >
               <div
@@ -185,13 +185,13 @@ export default function ConsortiumSection() {
               <div className="mt-[3px] mb-[5px] text-[13px] font-bold text-white">
                 {title}
               </div>
-              <div className="text-[12px] leading-[1.5] text-[#8aa0b6]">
+              <div className="text-[12px] leading-[1.5] text-[#a0907a]">
                 {body}
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-[30px] mb-3 text-[10.5px] font-bold tracking-[0.7px] text-[#8aa0b6] uppercase">
+        <div className="mt-[30px] mb-3 text-[10.5px] font-bold tracking-[0.7px] text-[#a0907a] uppercase">
           How a node joins
         </div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-[11px] text-left">
@@ -200,10 +200,10 @@ export default function ConsortiumSection() {
               key={title}
               className="rounded-[10px] border border-white/[0.07] border-l-[3px] border-l-teal bg-white/[0.03] px-[15px] py-[13px]"
             >
-              <div className="mb-[3px] text-[13px] font-bold text-[#cfe9e5]">
+              <div className="mb-[3px] text-[13px] font-bold text-[#d8e0cc]">
                 {title}
               </div>
-              <div className="text-[12px] leading-[1.5] text-[#8aa0b6]">
+              <div className="text-[12px] leading-[1.5] text-[#a0907a]">
                 {body}
               </div>
             </div>

@@ -15,12 +15,12 @@ export interface SymShowSlide {
 
 export const SYMSHOW_SLIDES: readonly SymShowSlide[] = [
   {
-    "bg": "radial-gradient(circle at 28% 32%,rgba(78,205,196,.28),transparent 58%),linear-gradient(120deg,#0a1f3a,#0e2e4f 60%,#0a1628)",
+    "bg": "radial-gradient(circle at 28% 32%,rgba(78,205,196,.28),transparent 58%),linear-gradient(120deg,#0a1f3a,#0e2e4f 60%,#211b14)",
     "h": "Forty-two universities. One sector.",
     "s": "Every teaching & learning conference, showcase and symposium — gathered in one open place."
   },
   {
-    "bg": "radial-gradient(circle at 72% 38%,rgba(124,156,255,.24),transparent 55%),linear-gradient(120deg,#0a1628,#13243f)",
+    "bg": "radial-gradient(circle at 72% 38%,rgba(198,108,63,.24),transparent 55%),linear-gradient(120deg,#211b14,#13243f)",
     "h": "Teaching can feel isolating.",
     "s": "More so after a restructure. You are not the only one rebuilding — and you are not rebuilding alone."
   },
@@ -30,7 +30,7 @@ export const SYMSHOW_SLIDES: readonly SymShowSlide[] = [
     "s": "Belonging, inclusion and connection — a sector that finally sees its own work, free and open to all."
   },
   {
-    "bg": "radial-gradient(circle at 60% 42%,rgba(78,205,196,.32),transparent 55%),linear-gradient(120deg,#0a1628,#0e3b3a)",
+    "bg": "radial-gradient(circle at 60% 42%,rgba(78,205,196,.32),transparent 55%),linear-gradient(120deg,#211b14,#0e3b3a)",
     "h": "Your people deserve a day for teaching, learning and research.",
     "s": "We come to you — and we make it happen."
   }
