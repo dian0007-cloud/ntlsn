@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { universityCount, eventCount } from "../data";
+import HeroConstellation from "./HeroConstellation";
 
 /**
  * Count-up animation: 0 → target over `duration` ms on mount, easeOutExpo for a
@@ -56,6 +57,9 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative overflow-hidden px-4 pb-20 pt-16 text-center sm:pt-24"
     >
+      {/* Animated 43-node constellation — "a sector that finally connects",
+          live. Decorative; reduced-motion renders a static frame. */}
+      <HeroConstellation />
       {/* soft background glows, decorative only */}
       <div
         aria-hidden="true"
