@@ -11,7 +11,7 @@
   # Run the Functions test suite (a failure BLOCKS the deploy — GitHub Actions runs in
   # parallel and does not gate Netlify), then build the /src rebuild and place it at the
   # repo root via scripts/build-src.sh. publish="." serves the result as-is.
-  command = "npm test"  # ROLLBACK 2026-07-19: cutover reverted — see PR; legacy homepage serves again
+  command = "npm test && bash scripts/build-src.sh"
   publish = "."
 
 [build.environment]
