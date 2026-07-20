@@ -22,6 +22,22 @@ export const RECOGNITION_BAND_IDS = bandSlice(
 );
 
 /**
+ * The interactive "Try it" tools — rendered EXPANDED by default (launch:
+ * these are the live-demo moments an L&T audience runs on their phones). The
+ * remaining recognition sections are "in design" aspirational content and
+ * stay collapsed.
+ */
+const TOOL_IDS = new Set([
+  "ntlsn-aaut", // AAUT Citation self-check
+  "ntlsn-passport", // Teaching Recognition Passport
+  "ntlsn-pathfinder", // Recognition Pathfinder
+  "ntlsn-sap", // Students-as-Partners registry
+  "ntlsn-service", // Service tracker
+  "ntlsn-promotion", // Promotion case mapper
+  "ntlsn-rpcalc", // Recognition-points calculator
+]);
+
+/**
  * Lazy band (PR-G): the Recognition band — the 13 PORT-HIDDEN recognition
  * sections Seb kept (stocktake decision 1), ported from their production
  * injector scripts and ALL rendered collapsed inside CollapsibleSection.
@@ -140,7 +156,13 @@ export default function RecognitionBand() {
         if (!entry) return <SectionPlaceholder key={id} id={id} />;
         const { title, teaser, Body } = entry;
         return (
-          <CollapsibleSection key={id} ids={[id]} title={title} teaser={teaser}>
+          <CollapsibleSection
+            key={id}
+            ids={[id]}
+            title={title}
+            teaser={teaser}
+            defaultOpen={TOOL_IDS.has(id)}
+          >
             <Body />
           </CollapsibleSection>
         );

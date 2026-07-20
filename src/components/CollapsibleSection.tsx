@@ -42,6 +42,7 @@ export default function CollapsibleSection({
   title,
   teaser,
   children,
+  defaultOpen = false,
 }: {
   /** Canonical section id(s) wrapped inside — hash targets that auto-open. */
   ids: readonly string[];
@@ -50,8 +51,10 @@ export default function CollapsibleSection({
   /** One-line teaser shown under the heading in the summary row. */
   teaser: string;
   children: ReactNode;
+  /** Render expanded on first paint (e.g. interactive demo tools). */
+  defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   // Overflow can only go visible once the opening transition has settled.
   const [settled, setSettled] = useState(false);
   // Instant (transition-less) open, used for hash deep-links.
