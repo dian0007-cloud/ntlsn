@@ -12,6 +12,20 @@
   --color-amber: #e6a33c;
   --color-coral: #d96650;
 
+  /* hero accent gradient shimmer (launch polish) */
+  --animate-hero-shimmer: hero-shimmer 6s ease-in-out infinite;
+  @keyframes hero-shimmer {
+    0%,
+    100% {
+      background-position: 0% 50%;
+      filter: brightness(1);
+    }
+    50% {
+      background-position: 100% 50%;
+      filter: brightness(1.18);
+    }
+  }
+
   /* System sans stack, matching the production bundle. */
   --font-sans:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
