@@ -138,7 +138,7 @@ export default function NetworkSection() {
           width="100%"
           role="img"
           aria-label="Network map of the teaching and learning sector with NTLSN at the centre"
-          className="mx-auto hidden max-w-[920px] overflow-visible min-[700px]:block"
+          className="mx-auto hidden max-w-[1180px] overflow-visible min-[700px]:block"
         >
           {NET_EDGES.map(([a, b]) => {
             const na = byId.get(a)!;
