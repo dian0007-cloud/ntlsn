@@ -1,18 +1,65 @@
+import { useEffect, useRef, useState } from "react";
 import { universityCount, eventCount } from "../data";
+import HeroConstellation from "./HeroConstellation";
 
 /**
- * Hero — matches production's dark-navy hero: pulsing status pill with the
+ * Count-up animation: 0 → target over `duration` ms on mount, easeOutExpo for a
+ * lively settle. Instant (no rAF) under prefers-reduced-motion so the final
+ * number shows immediately — the a11y-correct way to animate numbers.
+ */
+function useCountUp(target: number, duration = 1500): number {
+  const [value, setValue] = useState(0);
+  const raf = useRef<number | null>(null);
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || target <= 0) {
+      setValue(target);
+      return;
+    }
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t); // easeOutExpo
+      setValue(Math.round(eased * target));
+      if (t < 1) raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => {
+      if (raf.current) cancelAnimationFrame(raf.current);
+    };
+  }, [target, duration]);
+  return value;
+}
+
+const fmt = (n: number) => n.toLocaleString("en-AU");
+
+/**
+ * Hero — matches production's dark hero: pulsing status pill with the
  * credibility-critical "Live · Free · Open-source" badge (verbatim — asserted
  * in tests/smoke.spec.js test (b)), gradient headline, and live counts
  * derived from data/*.json rather than hardcoded copy (CLAUDE.md).
+ *
+ * Launch polish (UNE 2026): the headline accent ("Sector Network") uses a
+ * vivid amber→coral→sage gradient with a slow shimmer, and the three proof
+ * counts count up from 0 on load (reduced-motion: instant). The SoTL works
+ * count is the build-time baked total (vite.config.ts), the credibility flex.
  */
 export default function Hero() {
+  const unis = useCountUp(universityCount);
+  const events = useCountUp(eventCount);
+  const sotlWorks = useCountUp(__NTLSN_SOTL_WORKS__);
+
   return (
     <section
       id="hero"
       aria-labelledby="hero-heading"
       className="relative overflow-hidden px-4 pb-20 pt-16 text-center sm:pt-24"
     >
+      {/* Animated 43-node constellation — "a sector that finally connects",
+          live. Decorative; reduced-motion renders a static frame. */}
+      <HeroConstellation />
       {/* soft background glows, decorative only */}
       <div
         aria-hidden="true"
@@ -43,7 +90,7 @@ export default function Hero() {
           className="mx-auto mb-6 text-balance text-5xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
         >
           National Teaching &amp; Learning{" "}
-          <span className="bg-gradient-to-r from-purple via-[#c66c3f] to-teal bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-amber via-coral to-teal bg-clip-text bg-[length:200%_auto] text-transparent animate-hero-shimmer">
             Sector Network
           </span>
         </h1>
@@ -58,22 +105,27 @@ export default function Hero() {
           by no one.
         </p>
 
-        {/* Live proof — counts read from data/events.json + data/universities.json */}
+        {/* Live proof — counts read from data/events.json + data/universities.json,
+            animated 0 → total on load (reduced-motion: instant). */}
         <ul className="flex flex-wrap items-center justify-center gap-3" role="list">
           <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#d9cdb6]">
-            <span className="text-teal">{universityCount}</span> institutions
-            mapped
+            <span className="text-teal tabular-nums">{fmt(unis)}</span>{" "}
+            universities mapped
           </li>
           <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#d9cdb6]">
-            <span className="text-amber">{eventCount}</span> events on the
-            sector calendar
+            <span className="text-amber tabular-nums">{fmt(events)}</span> live
+            sector events
+          </li>
+          <li className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-[#d9cdb6]">
+            <span className="tabular-nums text-[#c9a962]">{fmt(sotlWorks)}</span>{" "}
+            indexed SoTL works
           </li>
         </ul>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#events"
-            className="rounded-full bg-teal px-6 py-3 text-sm font-extrabold text-navy shadow-[0_4px_14px_rgba(143, 176, 129,0.28)] transition-transform motion-safe:hover:-translate-y-0.5"
+            className="rounded-full bg-teal px-6 py-3 text-sm font-extrabold text-navy shadow-[0_4px_14px_rgba(143,176,129,0.28)] transition-transform motion-safe:hover:-translate-y-0.5"
           >
             Explore events →
           </a>
