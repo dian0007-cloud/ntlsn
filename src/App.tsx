@@ -6,6 +6,7 @@ import NowBanner from "./components/NowBanner";
 import StartGrid from "./components/StartGrid";
 import FreshToday from "./components/FreshToday";
 import Glance from "./components/Glance";
+import NetworkSection from "./components/NetworkSection";
 import LazyBand from "./components/LazyBand";
 import Footer from "./components/Footer";
 import { bandSlice } from "./sections";
@@ -55,7 +56,9 @@ const BANDS = [
     load: () => import("./bands/RecognitionBand"),
   },
   {
-    ids: bandSlice("architecture", "ntlsn-induction"),
+    ids: bandSlice("architecture", "ntlsn-induction").filter(
+      (id) => id !== "ntlsn-network",
+    ),
     band: lazy(() => import("./bands/FabricBand")),
     load: () => import("./bands/FabricBand"),
   },
@@ -91,6 +94,8 @@ export default function App() {
         <StartGrid />
         <FreshToday />
         <Glance />
+        {/* Launch: the interactive network graph — promoted to the front of the landing. */}
+        <NetworkSection />
         {/* Lazy: the remaining 94 canonical slots, in seven band chunks. */}
         {BANDS.map((b) => (
           <LazyBand key={b.ids[0]} ids={b.ids} band={b.band} load={b.load} />

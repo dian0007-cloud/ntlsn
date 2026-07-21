@@ -2,7 +2,6 @@ import ArchitectureSection from "../components/ArchitectureSection";
 import MapSection from "../components/MapSection";
 import DirectorySection from "../components/DirectorySection";
 import PeakMapSection from "../components/PeakMapSection";
-import NetworkSection from "../components/NetworkSection";
 import PathwaysSection from "../components/PathwaysSection";
 import BenchmarksSection from "../components/BenchmarksSection";
 import FnAwardsSection from "../components/FnAwardsSection";
@@ -17,7 +16,12 @@ import CollapsibleSection from "../components/CollapsibleSection";
 import SectionPlaceholder from "../components/SectionPlaceholder";
 import { bandSlice } from "../sections";
 
-export const FABRIC_BAND_IDS = bandSlice("architecture", "ntlsn-induction");
+// ntlsn-network is rendered EAGERLY at the front of the landing (App.tsx), so
+// exclude it from this lazy band's slice — otherwise LazyBand reserves a
+// placeholder with the same id and we'd render a duplicate #ntlsn-network.
+export const FABRIC_BAND_IDS = bandSlice("architecture", "ntlsn-induction").filter(
+  (id) => id !== "ntlsn-network",
+);
 
 /**
  * Lazy band (PR-F code-splitting): the sector fabric — architecture, the
@@ -61,18 +65,9 @@ export default function FabricBand() {
             </CollapsibleSection>
           );
         }
-        if (id === "ntlsn-network") {
-          return (
-            <CollapsibleSection
-              key={id}
-              ids={[id]}
-              title="A sector that finally connects."
-              teaser="Special-interest groups and communities of practice, joined up across universities."
-            >
-              <NetworkSection />
-            </CollapsibleSection>
-          );
-        }
+        // ntlsn-network is rendered eagerly at the front of the landing (App.tsx)
+        // — skip here to avoid a duplicate id. It keeps its canonical slot for anchor parity.
+        if (id === "ntlsn-network") return null;
         if (id === "pathways") {
           return (
             <CollapsibleSection
