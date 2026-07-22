@@ -30,7 +30,7 @@ export default function FnAwardsSection() {
           borderColor: "rgba(201, 169, 98,.22)",
         }}
       >
-        <p className="mb-2 text-xs leading-none font-bold tracking-[1.5px] text-[#FFC400] uppercase">
+        <p className="mb-2 text-xs leading-none font-bold tracking-[1.5px] text-[#e6a33c] uppercase">
           Beyond acknowledgement
         </p>
         <p className="mb-1.5 text-base leading-normal font-semibold text-white">
@@ -104,7 +104,7 @@ export default function FnAwardsSection() {
       </div>
       <p className="mx-auto max-w-[760px] text-center text-[13px] font-medium text-[#a0907a]">
         Of 43 universities: 17 dedicated · 5 partial ·{" "}
-        <b className="text-[#E0894A]">
+        <b className="text-[#c66c3f]">
           21 with no dedicated First Nations teaching award
         </b>{" "}
         — more than half the sector.
@@ -145,14 +145,14 @@ export default function FnAwardsSection() {
         </p>
       </div>
 
-      <p className="mx-auto mt-[26px] max-w-[760px] text-center text-xs text-[#7E93A8] italic">
+      <p className="mx-auto mt-[26px] max-w-[760px] text-center text-xs text-[#a0907a] italic">
         Audited from publicly available award information across 43
         institutions, and grounded in peer-reviewed sector research:{" "}
         <a
           href={FN_SOURCE.doi}
           target="_blank"
           rel="noopener noreferrer"
-          className="border-b border-[#7FE0D2]/40 text-[#7FE0D2] no-underline"
+          className="border-b border-[#9cbb8c]/40 text-[#9cbb8c] no-underline"
         >
           Dianati &amp; Bolt (2025), The Australian Journal of Indigenous
           Education

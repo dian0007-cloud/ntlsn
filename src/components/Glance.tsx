@@ -74,7 +74,7 @@ export default function Glance() {
                 <h3 className="mb-0.5 mt-1 text-[17px] font-extrabold leading-tight text-white">
                   {stageData.title}
                 </h3>
-                <p className="mb-[13px] text-xs text-[#7e93a8]">{stageData.sub}</p>
+                <p className="mb-[13px] text-xs text-[#a0907a]">{stageData.sub}</p>
                 <ul role="list" className="list-none">
                   {stageData.items.map((item) => (
                     <li key={item.label} className="mb-[7px]">

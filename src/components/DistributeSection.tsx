@@ -103,7 +103,7 @@ export default function DistributeSection() {
             <code className="text-[#d8e0cc]">data-uni=&quot;usq&quot;</code>{" "}
             to filter to your institution.
           </p>
-          <pre className="mb-3 overflow-auto rounded-[10px] border border-white/[0.08] bg-navy p-3.5 font-mono text-[13px] leading-normal font-medium wrap-break-word whitespace-pre-wrap text-[#9FE6DD]">
+          <pre className="mb-3 overflow-auto rounded-[10px] border border-white/[0.08] bg-navy p-3.5 font-mono text-[13px] leading-normal font-medium wrap-break-word whitespace-pre-wrap text-[#b8cfa0]">
             {EMBED_SNIPPET}
           </pre>
           <button type="button" onClick={copyEmbed} className={BTN}>
@@ -113,7 +113,7 @@ export default function DistributeSection() {
             Also available: an{" "}
             <b className="text-[#d8e0cc]">Acknowledgement of Country</b>{" "}
             widget for your campus —{" "}
-            <code className="text-[#9FE6DD] break-all">
+            <code className="text-[#b8cfa0] break-all">
               &lt;script src=&quot;https://ntlsn.com/country-widget.js&quot;
               data-uni=&quot;usq&quot;&gt;&lt;/script&gt;
             </code>

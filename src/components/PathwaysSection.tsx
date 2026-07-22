@@ -27,7 +27,7 @@ const TYPE_META: Record<
   read: {
     emoji: "📖",
     badgeClass: "bg-emerald-500/10 text-emerald-400",
-    statColour: "#4ADE80",
+    statColour: "#8fb081",
     statLabel: "Readings",
   },
   watch: {
@@ -39,7 +39,7 @@ const TYPE_META: Record<
   act: {
     emoji: "🎯",
     badgeClass: "bg-amber-500/10 text-amber-400",
-    statColour: "#FBBF24",
+    statColour: "#e6a33c",
     statLabel: "Activities",
   },
 };

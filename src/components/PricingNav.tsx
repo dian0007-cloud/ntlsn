@@ -69,9 +69,9 @@ export default function PricingNav() {
           className="block rounded-[18px] px-6 py-[26px] text-center no-underline shadow-[0_14px_40px_rgba(0,0,0,0.3)] transition-all duration-200"
           style={{
             background: slide.main
-              ? "linear-gradient(180deg,#10362F,#0F2138)"
-              : "linear-gradient(180deg,#13294A,#0F2138)",
-            border: `1px solid ${slide.main ? "#3A7A6F" : "#2C4A63"}`,
+              ? "linear-gradient(180deg,#10362F,#1f1810)"
+              : "linear-gradient(180deg,#1f1810,#1f1810)",
+            border: `1px solid ${slide.main ? "#3A7A6F" : "#2a2218"}`,
             borderTop: `3px solid ${accent}`,
           }}
         >

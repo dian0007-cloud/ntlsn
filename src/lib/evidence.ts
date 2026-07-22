@@ -379,7 +379,7 @@ export const EVIDENCE_TABLE: readonly IndicatorRow[] = [
  */
 export function rateColour(pct: number): string {
   if (pct >= 67) return "#8fb081";
-  if (pct >= 50) return "#FBBF24";
+  if (pct >= 50) return "#e6a33c";
   return "#ddd5c4";
 }
 
@@ -387,7 +387,7 @@ export function rateColour(pct: number): string {
 export const LITMUS = {
   pct: 79,
   legend: [
-    { colour: "#2D6A4F", text: "26 universities run dedicated L&T events" },
+    { colour: "#5e7d5a", text: "26 universities run dedicated L&T events" },
     {
       colour: "#b8cfa0",
       text: "7 partial (e.g. WATLF collective, discontinued)",

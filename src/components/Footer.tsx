@@ -108,7 +108,7 @@ export default function Footer() {
           </a>
           .
         </div>
-        <div className="mt-[15px] text-[11.5px] text-[#6b7e90]">
+        <div className="mt-[15px] text-[11.5px] text-[#97876f]">
           &copy; 2026 NTLSN &mdash; National Teaching and Learning Sector
           Network.
         </div>

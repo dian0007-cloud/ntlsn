@@ -117,7 +117,7 @@ export default function NowBanner() {
       ref={sectionRef}
       id="ntlsn-nowbanner"
       aria-labelledby="nowbanner-heading"
-      className="relative scroll-mt-20 overflow-hidden border-y border-white/[0.06] bg-[#0a1830] px-6 py-[42px]"
+      className="relative scroll-mt-20 overflow-hidden border-y border-white/[0.06] bg-[#19130d] px-6 py-[42px]"
     >
       <canvas
         ref={canvasRef}
@@ -134,7 +134,7 @@ export default function NowBanner() {
         >
           Everything here is live today — free, open, no logins.
         </h2>
-        <p className="mx-auto mb-4 max-w-[690px] text-[15px] leading-[1.55] text-[#c3d2e6]">
+        <p className="mx-auto mb-4 max-w-[690px] text-[15px] leading-[1.55] text-[#d9cdb6]">
           A free national commons: search <b>{formatCount(SOTL_WORK_COUNT)}</b>{" "}
           SoTL works, <b>30+ teaching tools</b> you can use right now, every
           sector event, the open T&amp;L map, OER, grants and frameworks. No
@@ -154,7 +154,7 @@ export default function NowBanner() {
             Browse the archive →
           </a>
         </div>
-        <p className="mt-3.5 text-[11.5px] text-[#7d8da0]">
+        <p className="mt-3.5 text-[11.5px] text-[#97876f]">
           Symposiums arrive 2027 · recognition &amp; interoperability 2028 —
           clearly dated below.
         </p>

@@ -89,7 +89,7 @@ export default function ZoomShareSection() {
           ).map(([step, title, body]) => (
             <div
               key={step}
-              className="rounded-xl border border-white/[0.07] bg-[#0e1c33] px-[13px] py-3 text-center"
+              className="rounded-xl border border-white/[0.07] bg-[#19130d] px-[13px] py-3 text-center"
             >
               <p className="mb-[5px] text-[10.5px] font-extrabold tracking-[0.6px] text-teal">
                 {step}

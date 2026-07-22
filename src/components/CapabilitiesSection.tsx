@@ -133,7 +133,7 @@ function GroupHeading({ group }: { group: CapabilityGroup }) {
         {group.badge}
       </span>
       <span className="text-xl font-extrabold text-white">{group.label}</span>
-      <span className="text-sm text-[#7E93A8]">{group.sub}</span>
+      <span className="text-sm text-[#a0907a]">{group.sub}</span>
     </>
   );
 }

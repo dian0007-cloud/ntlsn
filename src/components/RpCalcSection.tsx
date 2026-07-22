@@ -75,7 +75,7 @@ const DATA: readonly Domain[] = [
   [
     "impact",
     "Impact",
-    "#FF8FA3",
+    "#a8737f",
     [
       ["Had your work adopted by another institution", "reach", 12, "an adoption record", ""],
       ["Informed policy or professional standards", "significance", 15, "an esteem record", ""],

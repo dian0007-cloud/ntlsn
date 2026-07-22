@@ -190,7 +190,7 @@ export default function AdvisorySection() {
                 (chip) => (
                   <span
                     key={chip}
-                    className="rounded-full border border-white/10 bg-white/[0.06] px-[11px] py-1 text-[11px] font-bold text-[#AAB8C8]"
+                    className="rounded-full border border-white/10 bg-white/[0.06] px-[11px] py-1 text-[11px] font-bold text-[#b3a48c]"
                   >
                     {chip}
                   </span>

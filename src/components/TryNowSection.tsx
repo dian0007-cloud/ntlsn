@@ -98,7 +98,7 @@ export default function TryNowSection() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={`Search ${TRYNOW_TOOLS.length} tools — try “rubric”, “AI”, “feedback”, “fellowship”…`}
           aria-label={`Search ${TRYNOW_TOOLS.length} free tools`}
-          className="w-full max-w-[580px] rounded-xl border border-white/[0.14] bg-[#0C1A2E] px-[18px] py-3.5 text-[15px] text-[#ece5d6] outline-none placeholder:text-white/30 focus:border-teal"
+          className="w-full max-w-[580px] rounded-xl border border-white/[0.14] bg-[#19130d] px-[18px] py-3.5 text-[15px] text-[#ece5d6] outline-none placeholder:text-white/30 focus:border-teal"
         />
       </div>
 
@@ -167,7 +167,7 @@ export default function TryNowSection() {
         {searchHits !== null ? (
           searchHits.length > 0 ? (
             <>
-              <p className="mb-3.5 text-center text-[12.5px] font-semibold text-[#738499]">
+              <p className="mb-3.5 text-center text-[12.5px] font-semibold text-[#97876f]">
                 {searchHits.length} tool{searchHits.length === 1 ? "" : "s"}{" "}
                 match “{query}”
               </p>
@@ -190,7 +190,7 @@ export default function TryNowSection() {
                       {c.e}
                     </span>
                     <span>{c.label}</span>
-                    <span className="text-[11.5px] font-semibold tracking-normal normal-case text-[#738499]">
+                    <span className="text-[11.5px] font-semibold tracking-normal normal-case text-[#97876f]">
                       {tools.length}
                     </span>
                   </h3>

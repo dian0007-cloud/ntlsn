@@ -19,7 +19,7 @@ import { useEffect, useRef, useState } from "react";
 const STATES = [
   {
     eyebrow: "The litmus test",
-    eyebrowColour: "#FF8FA3",
+    eyebrowColour: "#a8737f",
     head: "Today, the sector works alone.",
     sub: "Every university runs its own forms, its own events, its own recognition. Many run none. Nothing connects to anything else.",
   },
@@ -234,7 +234,7 @@ export default function LitmusSection() {
             <div
               ref={hintRef}
               aria-hidden="true"
-              className="mt-[22px] text-[12px] font-semibold text-[#6b7e90] transition-opacity duration-[400ms]"
+              className="mt-[22px] text-[12px] font-semibold text-[#97876f] transition-opacity duration-[400ms]"
             >
               Scroll ↓
             </div>

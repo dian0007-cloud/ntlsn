@@ -397,7 +397,7 @@ body {
 }
 #ntlsn-rebalance .rseg-r {
   flex: 0 0 74%;
-  background: linear-gradient(135deg, #56657a, #808fa3);
+  background: linear-gradient(135deg, #97876f, #97876f);
   color: #eef2f6;
   animation: ntlsnRebalR 7s ease-in-out infinite;
 }

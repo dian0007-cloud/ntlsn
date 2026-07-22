@@ -17,9 +17,9 @@
 /** [big number, caption, accent colour] — the four audit stat cards. */
 export const FN_STATS: ReadonlyArray<readonly [string, string, string]> = [
   ["43", "universities audited", "#8fb081"],
-  ["17", "have a dedicated First Nations teaching award", "#5DCAA5"],
+  ["17", "have a dedicated First Nations teaching award", "#9cbb8c"],
   ["5", "partial or proxy recognition only", "#e6a33c"],
-  ["21", "no dedicated recognition at all", "#E0894A"],
+  ["21", "no dedicated recognition at all", "#c66c3f"],
 ];
 
 /**
@@ -27,9 +27,9 @@ export const FN_STATS: ReadonlyArray<readonly [string, string, string]> = [
  * / 58.2%) and colours for dedicated / partial / none.
  */
 export const FN_BAR_SEGMENTS: ReadonlyArray<readonly [string, string]> = [
-  ["30.2%", "#5DCAA5"],
+  ["30.2%", "#9cbb8c"],
   ["11.6%", "#e6a33c"],
-  ["58.2%", "#E0894A"],
+  ["58.2%", "#c66c3f"],
 ];
 
 /** "Five ways the sector frames the award" — verbatim chips. */

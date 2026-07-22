@@ -22,7 +22,7 @@ const STEPS: ReadonlyArray<{
   {
     n: "3",
     title: "DOI minted",
-    colour: "#C9A6FF",
+    colour: "#a8737f",
     body: "A permanent, citable identifier. Now it is official.",
   },
   {

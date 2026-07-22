@@ -195,7 +195,7 @@ export default function PromotionSection() {
                 }
               >
                 {code}
-                <span className="mt-[3px] block text-[8.5px] font-semibold tracking-[0.3px] text-[#7e92a6] uppercase">
+                <span className="mt-[3px] block text-[8.5px] font-semibold tracking-[0.3px] text-[#a0907a] uppercase">
                   {label.split(" ")[0]}
                 </span>
               </button>

@@ -102,10 +102,10 @@ export interface SharedItem {
 
 /** Network badge colours — the shared-feed patch's map (teal fallback). */
 export const SHARED_NETWORK_COLOURS: Readonly<Record<string, string>> = {
-  Go8: "#FFD166",
+  Go8: "#c9a962",
   ATN: "#d96650",
-  IRU: "#C77DFF",
-  RUN: "#5BD98A",
+  IRU: "#a8737f",
+  RUN: "#8fb081",
   Independent: "#8fb081",
 };
 

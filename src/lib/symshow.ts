@@ -15,17 +15,17 @@ export interface SymShowSlide {
 
 export const SYMSHOW_SLIDES: readonly SymShowSlide[] = [
   {
-    "bg": "radial-gradient(circle at 28% 32%,rgba(143, 176, 129,.28),transparent 58%),linear-gradient(120deg,#0a1f3a,#0e2e4f 60%,#211b14)",
+    "bg": "radial-gradient(circle at 28% 32%,rgba(143, 176, 129,.28),transparent 58%),linear-gradient(120deg,#1f1810,#1f1810 60%,#211b14)",
     "h": "Forty-two universities. One sector.",
     "s": "Every teaching & learning conference, showcase and symposium — gathered in one open place."
   },
   {
-    "bg": "radial-gradient(circle at 72% 38%,rgba(198,108,63,.24),transparent 55%),linear-gradient(120deg,#211b14,#13243f)",
+    "bg": "radial-gradient(circle at 72% 38%,rgba(198,108,63,.24),transparent 55%),linear-gradient(120deg,#211b14,#1f1810)",
     "h": "Teaching can feel isolating.",
     "s": "More so after a restructure. You are not the only one rebuilding — and you are not rebuilding alone."
   },
   {
-    "bg": "radial-gradient(circle at 40% 60%,rgba(201,169,98,.24),transparent 55%),linear-gradient(120deg,#1a1530,#0e2236)",
+    "bg": "radial-gradient(circle at 40% 60%,rgba(201,169,98,.24),transparent 55%),linear-gradient(120deg,#1a1530,#1f1810)",
     "h": "Share your symposium. See everyone’s.",
     "s": "Belonging, inclusion and connection — a sector that finally sees its own work, free and open to all."
   },

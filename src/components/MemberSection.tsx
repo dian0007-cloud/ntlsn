@@ -47,9 +47,9 @@ export default function MemberSection() {
         {MEMBER_CARDS.map(([head, body]) => (
           <li
             key={head}
-            className="min-w-[240px] flex-1 rounded-2xl border border-white/[0.08] bg-[#2a2218] px-[22px] py-6 text-left [border-top:3px_solid_#5DCAA5]"
+            className="min-w-[240px] flex-1 rounded-2xl border border-white/[0.08] bg-[#2a2218] px-[22px] py-6 text-left [border-top:3px_solid_#9cbb8c]"
           >
-            <h3 className="mb-[9px] text-xs font-extrabold tracking-[1px] text-[#5DCAA5] uppercase">
+            <h3 className="mb-[9px] text-xs font-extrabold tracking-[1px] text-[#9cbb8c] uppercase">
               {head}
             </h3>
             <p className="text-sm leading-relaxed text-[#bca98f]">{body}</p>

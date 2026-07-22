@@ -21,7 +21,7 @@ const GROUP_META: Record<string, GroupMeta> = {
   Go8: { color: "#c9a962", label: "Group of Eight" },
   ATN: { color: "#d96650", label: "Australian Technology Network" },
   IRU: { color: "#a8737f", label: "Innovative Research Universities" },
-  RUN: { color: "#4ADE80", label: "Regional Universities Network" },
+  RUN: { color: "#8fb081", label: "Regional Universities Network" },
   Unaligned: { color: "#8fb081", label: "Independent" },
 };
 
