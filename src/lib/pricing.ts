@@ -95,7 +95,7 @@ export const PRICING_TIERS: readonly PricingTier[] = [
     blurb: "Head of School — ideal for small schools (<15 academics)",
     price: "$30k",
     priceK: 30,
-    colour: "#378ADD",
+    colour: "#c66c3f",
     multiplier: "Embedded practice support",
     features: [
       {

@@ -40,7 +40,7 @@ const TYPES: ReadonlyArray<[string, string, string]> = [
   [
     "Co-inquiry",
     "Students and staff research and evaluate teaching together.",
-    "#C9A6FF",
+    "#a8737f",
   ],
   [
     "Student-led action",

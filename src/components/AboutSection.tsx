@@ -49,7 +49,7 @@ export default function AboutSection() {
                 <h3 className="text-lg font-bold text-white">
                   A/Prof Dr Seb Dianati
                 </h3>
-                <p className="mt-1 text-xs tracking-[0.2em] text-[#A78BFA]/70 uppercase">
+                <p className="mt-1 text-xs tracking-[0.2em] text-[#a8737f]/70 uppercase">
                   NTLSN Founder
                 </p>
               </div>
@@ -78,7 +78,7 @@ export default function AboutSection() {
                 <h3 className="text-lg font-bold text-white">
                   Dr Kashmira Davé
                 </h3>
-                <p className="mt-1 text-xs tracking-[0.2em] text-[#A78BFA]/70 uppercase">
+                <p className="mt-1 text-xs tracking-[0.2em] text-[#a8737f]/70 uppercase">
                   NTLSN Co-Chair
                 </p>
               </div>

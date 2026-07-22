@@ -34,14 +34,14 @@ export default function UncededCaption() {
       >
         <span style={{ flex: 1, background: "#111" }} />
         <span style={{ flex: 1, background: "#C8102E" }} />
-        <span style={{ flex: 1, background: "#FFC400" }} />
+        <span style={{ flex: 1, background: "#e6a33c" }} />
       </div>
       <div
         style={{
           fontSize: 11,
           letterSpacing: ".34em",
           textTransform: "uppercase",
-          color: "#FFC400",
+          color: "#e6a33c",
           fontWeight: 700,
         }}
       >

@@ -37,7 +37,7 @@ export const LATEST_TYPE_COLOURS: Readonly<Record<string, string>> = {
   blog: "#8fb081",
   news: "#e6a33c",
   journal: "#d96650",
-  podcast: "#8b9cff",
+  podcast: "#a8737f",
 };
 
 /** Strip feed-scraper artefacts from a summary — the patch's clean(). */

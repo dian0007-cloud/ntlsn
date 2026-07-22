@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import ConstellationBg from "./components/ConstellationBg";
 import Nav from "./components/Nav";
 import Acknowledgement from "./components/Acknowledgement";
 import Hero from "./components/Hero";
@@ -82,6 +83,7 @@ const BANDS = [
 export default function App() {
   return (
     <>
+      <ConstellationBg />
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>

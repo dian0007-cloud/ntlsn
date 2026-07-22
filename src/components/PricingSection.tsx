@@ -266,7 +266,7 @@ export default function PricingSection() {
 
       {/* Role router */}
       <div className="mb-[30px] text-center">
-        <p className="mb-2 text-xs font-bold tracking-[2px] text-[#8FA7FF] uppercase">
+        <p className="mb-2 text-xs font-bold tracking-[2px] text-[#c9a962] uppercase">
           ◎ Where would you like to start?
         </p>
         <p className="mb-4 text-[15px] text-[#b3a48c]">
@@ -605,7 +605,7 @@ export default function PricingSection() {
                       href={selected.tlUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block rounded-[10px] bg-teal px-5 py-3 text-base font-extrabold text-[#08131F] no-underline"
+                      className="inline-block rounded-[10px] bg-teal px-5 py-3 text-base font-extrabold text-[#19130d] no-underline"
                     >
                       Visit the team →
                     </a>
@@ -632,7 +632,7 @@ export default function PricingSection() {
               </p>
               <a
                 href="#ntlsn-coming2028"
-                className="inline-block rounded-[10px] bg-teal px-[18px] py-[11px] text-[15px] font-extrabold text-[#08131F] no-underline"
+                className="inline-block rounded-[10px] bg-teal px-[18px] py-[11px] text-[15px] font-extrabold text-[#19130d] no-underline"
               >
                 Register {who}&rsquo;s interest →
               </a>
@@ -717,7 +717,7 @@ export default function PricingSection() {
             );
           })}
         </div>
-        <p className="mt-3.5 max-w-[680px] text-xs leading-relaxed text-[#7D92A8]">
+        <p className="mt-3.5 max-w-[680px] text-xs leading-relaxed text-[#a0907a]">
           Proposed packages for co-design. Naming a peak body does not imply
           endorsement or an existing agreement — LIVE badges refer to the
           NTLSN tool, not a partnership.

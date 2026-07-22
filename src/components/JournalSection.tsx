@@ -35,7 +35,7 @@ export default function JournalSection() {
           The recognition every other partnership journal leaves implicit —
           made explicit.
         </p>
-        <p className="mx-auto mb-4 max-w-[560px] text-[12.5px] text-[#8DA1B5]">
+        <p className="mx-auto mb-4 max-w-[560px] text-[12.5px] text-[#a0907a]">
           Name, editorial board and partner still to be confirmed.
         </p>
         <a

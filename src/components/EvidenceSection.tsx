@@ -27,7 +27,7 @@ export default function EvidenceSection() {
     <section
       id="ntlsn-evidence"
       aria-labelledby="ntlsn-evidence-heading"
-      className="relative scroll-mt-20 bg-gradient-to-b from-[#060D1C] via-navy to-[#060D1C] px-4 py-24"
+      className="relative scroll-mt-20 bg-gradient-to-b from-[#19130d] via-navy to-[#19130d] px-4 py-24"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
@@ -86,7 +86,7 @@ export default function EvidenceSection() {
                   className="flex h-5 flex-1 overflow-hidden rounded-full bg-white/[0.04]"
                 >
                   <div
-                    className="h-full rounded-l-full bg-[#2D6A4F]"
+                    className="h-full rounded-l-full bg-[#5e7d5a]"
                     style={{ width: `${bar.yes}%` }}
                   />
                   <div
@@ -107,7 +107,7 @@ export default function EvidenceSection() {
             <span className="flex items-center gap-1.5">
               <span
                 aria-hidden="true"
-                className="h-3 w-3 rounded-sm bg-[#2D6A4F]"
+                className="h-3 w-3 rounded-sm bg-[#5e7d5a]"
               />{" "}
               Confirmed
             </span>
@@ -293,7 +293,7 @@ function LitmusDonut() {
             cy="100"
             r={r}
             fill="none"
-            stroke="#2D6A4F"
+            stroke="#5e7d5a"
             strokeWidth="24"
             strokeDasharray={`${confirmedLen.toFixed(1)} ${(circumference - confirmedLen).toFixed(1)}`}
             strokeDashoffset={circumference / 4}

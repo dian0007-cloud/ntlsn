@@ -86,7 +86,7 @@ export default function PortalModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="np-portal-heading"
-        className="w-full max-w-[640px] rounded-2xl border border-white/[0.12] bg-[#0b1a30]"
+        className="w-full max-w-[640px] rounded-2xl border border-white/[0.12] bg-[#19130d]"
       >
         <div className="flex items-center gap-2.5 border-b border-white/[0.08] px-[22px] py-[18px]">
           <div className="flex-1">
@@ -204,7 +204,7 @@ export default function PortalModal({
           <button
             type="button"
             onClick={addTalk}
-            className="cursor-pointer rounded-[10px] border-0 bg-teal px-[18px] py-[11px] text-[15px] font-extrabold text-[#08131F]"
+            className="cursor-pointer rounded-[10px] border-0 bg-teal px-[18px] py-[11px] text-[15px] font-extrabold text-[#19130d]"
           >
             + Add talk to programme
           </button>

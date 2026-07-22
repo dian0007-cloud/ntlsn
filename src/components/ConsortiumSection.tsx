@@ -121,7 +121,7 @@ export default function ConsortiumSection() {
                 y1={na.y}
                 x2={nb.x}
                 y2={nb.y}
-                stroke="#2a3f57"
+                stroke="#2a2218"
                 strokeWidth={1.2}
               />
             );
@@ -134,7 +134,7 @@ export default function ConsortiumSection() {
                   cx={n.x}
                   cy={n.y}
                   r={n.r}
-                  fill={n.f ? "#0b2b3f" : "#2a2218"}
+                  fill={n.f ? "#1f1810" : "#2a2218"}
                   stroke={col}
                   strokeWidth={n.f ? 2.4 : 1.6}
                 />
@@ -209,7 +209,7 @@ export default function ConsortiumSection() {
             </div>
           ))}
         </div>
-        <p className="mx-auto mt-6 max-w-[680px] text-[12px] leading-[1.6] text-[#6b7e90]">
+        <p className="mx-auto mt-6 max-w-[680px] text-[12px] leading-[1.6] text-[#97876f]">
           A roadmap, not a claim. Built on open standards — no crypto, no
           lock-in. Every node governs its own content, including Indigenous
           knowledges, locally and under community custodianship. Aligned with

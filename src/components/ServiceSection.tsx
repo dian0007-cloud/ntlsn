@@ -134,7 +134,7 @@ export default function ServiceSection() {
                           ? {
                               background: "rgba(143,176,129,.16)",
                               border: "1px solid rgba(143,176,129,.5)",
-                              color: "#eafffb",
+                              color: "#ece5d6",
                             }
                           : {
                               background: "rgba(255,255,255,.06)",

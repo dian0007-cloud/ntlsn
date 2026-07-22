@@ -61,7 +61,7 @@ export default function ChoosePackageSection() {
           </a>
         ))}
       </div>
-      <p className="mt-[18px] text-center text-xs text-[#7D8DA0]">
+      <p className="mt-[18px] text-center text-xs text-[#97876f]">
         Founding-cohort rates for the 2026–27 pilots · the free commons needs
         none of it.
       </p>

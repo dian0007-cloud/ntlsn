@@ -53,7 +53,7 @@ export default function StaticNav() {
       aria-label="Site pages"
       className="mx-auto max-w-[1100px] px-6 py-[18px] text-left text-[12.5px] leading-[1.9]"
     >
-      <div className="mb-2 text-[10.5px] font-bold tracking-[1px] text-[#5c7186] uppercase">
+      <div className="mb-2 text-[10.5px] font-bold tracking-[1px] text-[#97876f] uppercase">
         Explore NTLSN
       </div>
       {PAGES.map(([label, href, blank]) => (
@@ -63,7 +63,7 @@ export default function StaticNav() {
           {...(blank
             ? { target: "_blank", rel: "noopener noreferrer" }
             : null)}
-          className="mr-3.5 mb-2 inline-block text-[#7d92a8] underline hover:text-white/80"
+          className="mr-3.5 mb-2 inline-block text-[#a0907a] underline hover:text-white/80"
         >
           {label}
         </a>

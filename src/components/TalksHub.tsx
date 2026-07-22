@@ -139,14 +139,14 @@ export default function TalksHub() {
         <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2.5">
           <a
             href="/learning-modules.html"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-teal to-[#c66c3f] px-5 py-2.5 text-[13.5px] font-extrabold text-[#06251f] no-underline"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-teal to-[#c66c3f] px-5 py-2.5 text-[13.5px] font-extrabold text-[#1a2418] no-underline"
           >
             <span aria-hidden="true">🎬</span> Turn these into learning
             modules →
           </a>
           <a
             href="/missed-it.html"
-            className="inline-flex items-center gap-[7px] rounded-full border border-white/15 bg-[#0f2034] px-[18px] py-2.5 text-[13.5px] font-extrabold text-[#d9cdb6] no-underline"
+            className="inline-flex items-center gap-[7px] rounded-full border border-white/15 bg-[#1f1810] px-[18px] py-2.5 text-[13.5px] font-extrabold text-[#d9cdb6] no-underline"
           >
             <span aria-hidden="true">⏪</span> Catch up on a recent event →
           </a>
@@ -175,7 +175,7 @@ export default function TalksHub() {
                 onClick={() => setActive(tab.id)}
                 className={`rounded-full border px-4 py-2 text-[13px] font-bold transition-colors ${
                   selected
-                    ? "border-teal bg-teal text-[#06251f]"
+                    ? "border-teal bg-teal text-[#1a2418]"
                     : "border-white/15 bg-transparent text-[#d9cdb6] hover:border-white/30"
                 }`}
               >

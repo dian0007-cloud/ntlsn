@@ -28,7 +28,7 @@ export default function InductionSection() {
         </p>
         <a
           href="#pricing"
-          className="inline-block rounded-[10px] bg-teal px-5 py-2.5 text-[13px] font-extrabold text-[#06251F] no-underline"
+          className="inline-block rounded-[10px] bg-teal px-5 py-2.5 text-[13px] font-extrabold text-[#1a2418] no-underline"
         >
           See the School package →
         </a>

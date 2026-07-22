@@ -87,7 +87,7 @@ export default function VideoLightbox({
       role="dialog"
       aria-modal="true"
       aria-label={`Video: ${title}`}
-      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#060d1c]/95 px-[4vw] py-[6vh] backdrop-blur-md"
+      className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#19130d]/95 px-[4vw] py-[6vh] backdrop-blur-md"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

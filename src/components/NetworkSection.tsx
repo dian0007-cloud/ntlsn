@@ -101,7 +101,7 @@ export default function NetworkSection() {
   }, [focusId, adjacency]);
 
   const focusNode = focusId ? byId.get(focusId) : undefined;
-  const focusColour = focusNode ? NET_COLOURS[focusNode.g] : "#3A5F7A";
+  const focusColour = focusNode ? NET_COLOURS[focusNode.g] : "#5e7d5a";
   const hint = focusNode
     ? focusNode.hub
       ? "NTLSN connects every part of the sector."
@@ -153,7 +153,7 @@ export default function NetworkSection() {
                 y1={ey(na.y).toFixed(1)}
                 x2={ex(nb.x).toFixed(1)}
                 y2={ey(nb.y).toFixed(1)}
-                stroke={active ? focusColour : dimmed ? "#1E2D40" : "#3A5F7A"}
+                stroke={active ? focusColour : dimmed ? "#2a2218" : "#5e7d5a"}
                 strokeWidth={active ? 2.3 : dimmed ? 1 : 1.3}
                 opacity={
                   focusId !== null
@@ -195,7 +195,7 @@ export default function NetworkSection() {
                   cx={x.toFixed(1)}
                   cy={y.toFixed(1)}
                   r={n.r}
-                  fill={n.hub ? "#0B2B3F" : "#2a2218"}
+                  fill={n.hub ? "#1f1810" : "#2a2218"}
                   stroke={colour}
                   strokeWidth={n.hub ? 2.6 : 1.8}
                 />
