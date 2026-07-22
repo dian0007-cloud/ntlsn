@@ -52,6 +52,13 @@
   .foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
   .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .legend span{font-size:11.5px;color:var(--mut)}
+  .lib-box{margin-top:18px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 15px}
+  .lib-label{display:block;font:700 13px var(--sans);color:var(--ink);margin-bottom:7px}
+  .lib-select{width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:600 13.5px var(--sans);cursor:pointer}
+  .lib-select:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .lib-note{margin-top:8px;font:400 12.5px var(--sans);color:var(--mut);line-height:1.5}
+  .ntlsn-library-link{font:700 12.5px var(--sans);color:var(--gold);white-space:nowrap}
+  .ntlsn-library-link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -73,6 +80,12 @@
   <div class="row">
     <button class="btn" id="go" type="button">Find open versions →</button>
     <span class="hint">DOIs are auto-extracted — paste raw references if you like (up to 50).</span>
+  </div>
+
+  <div class="lib-box">
+    <label class="lib-label" for="lib-inst">Get it through your library</label>
+    <select id="lib-inst" class="lib-select" aria-label="Your university library"><option value="">Choose your university…</option></select>
+    <div class="lib-note">Set once, remembered in your browser. DOI links in the results below get a route through your own library's sign-in; NTLSN never sees your credentials. No publisher partnership is implied.</div>
   </div>
 
   <div id="out"></div>
@@ -147,73 +160,13 @@
      var summary='<div id="summary"><b>'+openCount+'</b> of <b>'+found+'</b> resolved paper'+(found===1?'':'s')+' '+(openCount===1?'is':'are')+' freely available'+(found<dois.length?' &middot; '+(dois.length-found)+' not indexed':'')+'.</div>';
      var um = unmatched.length ? '<div class="unmatched">Not found in OpenAlex (check the DOI, or it may be too new): '+unmatched.map(function(x){return '<code>'+x+'</code>';}).join(', ')+'</div>' : '';
      out.innerHTML=summary+cards+um;
+     if(window.LibraryAccess) LibraryAccess.decorate(out);
      out.scrollIntoView({behavior:'smooth',block:'start'});
    }).catch(function(err){ go.disabled=false; out.innerHTML='<div id="summary">Couldn’t reach OpenAlex ('+err.message+'). Try again in a moment.</div>'; });
  };
 })();
 </script>
-<script id="ntlsn-libaccess">
-/* Get it through your library — entirely client-side. Fetches the public
-   resolver list once, remembers your institution pick in YOUR browser
-   (localStorage "ntlsn_library"), and adds a "via your library →" link next
-   to every DOI link in the results. Nothing is sent anywhere. */
-(function(){
- var KEY='ntlsn_library', DOI=/^https?:\/\/(?:dx\.)?doi\.org\//i, rows=[], sel, pending=false;
- function encodes(r){ return r.patternType==='openathens-redirector' || /[?&]qurl=$/.test(r.pattern); }
- function libHref(r,url){ return r.pattern+(encodes(r)?encodeURIComponent(url):url); }
- function chosen(){ if(!sel||!sel.value) return null; for(var i=0;i<rows.length;i++){ if(rows[i].id===sel.value) return rows[i]; } return null; }
- function apply(){
-   var out=document.getElementById('out'); if(!out) return;
-   var r=chosen(), as=out.querySelectorAll('a[href]');
-   for(var i=0;i<as.length;i++){
-     var a=as[i];
-     if(a.hasAttribute('data-libaccess')||!DOI.test(a.href)) continue;
-     var next=a.nextElementSibling;
-     var lib=(next&&next.hasAttribute('data-libaccess'))?next:null;
-     if(!r){ if(lib) lib.parentNode.removeChild(lib); continue; }
-     if(!lib){
-       lib=document.createElement('a');
-       lib.setAttribute('data-libaccess','1'); lib.target='_blank'; lib.rel='noopener';
-       lib.textContent='via your library →';
-       lib.style.cssText='margin-left:9px;font:700 12.5px var(--sans);color:var(--gold);white-space:nowrap';
-       a.parentNode.insertBefore(lib,a.nextSibling);
-     }
-     lib.href=libHref(r,a.href);
-     lib.title='Open through '+r.name+' library sign-in';
-   }
- }
- function schedule(){ if(pending) return; pending=true; setTimeout(function(){ pending=false; apply(); },0); }
- function ui(){
-   var out=document.getElementById('out'); if(!out||document.getElementById('ntlsn-libaccess-ui')) return;
-   var box=document.createElement('div'); box.id='ntlsn-libaccess-ui';
-   box.style.cssText='margin-top:18px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 15px';
-   var lab=document.createElement('label');
-   lab.style.cssText='display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 13.5px var(--sans);color:var(--ink)';
-   lab.appendChild(document.createTextNode('Your library:'));
-   sel=document.createElement('select');
-   sel.style.cssText='background:var(--navy);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:600 13.5px var(--sans);max-width:100%;cursor:pointer';
-   var o0=document.createElement('option'); o0.value=''; o0.textContent='— choose your institution —'; sel.appendChild(o0);
-   for(var i=0;i<rows.length;i++){ var o=document.createElement('option'); o.value=rows[i].id; o.textContent=rows[i].name; sel.appendChild(o); }
-   try{ var saved=localStorage.getItem(KEY)||''; if(saved){ sel.value=saved; if(sel.value!==saved) sel.value=''; } }catch(e){}
-   sel.onchange=function(){ try{ if(sel.value){ localStorage.setItem(KEY,sel.value); } else { localStorage.removeItem(KEY); } }catch(e){} apply(); };
-   lab.appendChild(sel); box.appendChild(lab);
-   var note=document.createElement('div');
-   note.style.cssText='margin-top:7px;font:400 12.5px var(--sans);color:var(--mut);line-height:1.55';
-   note.textContent='Links route through your own library’s sign-in; NTLSN never sees your credentials. No publisher partnership exists or is implied.';
-   box.appendChild(note);
-   out.parentNode.insertBefore(box,out);
-   new MutationObserver(schedule).observe(out,{childList:true,subtree:true});
-   apply();
- }
- function init(){
-   fetch('/data/library-resolvers.json').then(function(x){ if(!x.ok) throw new Error(x.status); return x.json(); }).then(function(d){
-     rows=(d.rows||[]).filter(function(r){ return r.pattern && (r.patternType==='openathens-redirector'||r.patternType==='ezproxy-login-url'); })
-       .sort(function(a,b){ return a.name.localeCompare(b.name); });
-     if(rows.length) ui();
-   }).catch(function(){ /* resolver list unavailable — page works as before */ });
- }
- if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); } else { init(); }
-})();
-</script>
+<script src="/library-access.js"></script>
+<script>if(window.LibraryAccess) LibraryAccess.renderPicker(document.getElementById('lib-inst'));</script>
 </body>
 </html>
