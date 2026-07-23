@@ -1,12 +1,11 @@
 /*
   # ── Security Headers ──
-  X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://source.zoom.us; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://doaj.org https://script.google.com https://script.googleusercontent.com https://pub.orcid.org https://api.openalex.org https://api.openai.com https://doi.org https://player.vimeo.com https://www.youtube.com https://www.youtube-nocookie.com https://zoom.us https://api.zoom.us https://*.zoom.us wss://*.zoom.us; frame-src 'self' https://www.youtube.com https://youtu.be https://player.vimeo.com https://*.zoom.us; media-src 'self' https:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://source.zoom.us; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://doaj.org https://script.google.com https://script.googleusercontent.com https://pub.orcid.org https://api.openalex.org https://api.openai.com https://doi.org https://player.vimeo.com https://www.youtube.com https://www.youtube-nocookie.com https://zoom.us https://api.zoom.us https://*.zoom.us wss://*.zoom.us; frame-src 'self' https://www.youtube.com https://youtu.be https://player.vimeo.com https://*.zoom.us; media-src 'self' https:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'self';
 
   # ── Caching ──
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
@@ -18,6 +17,13 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# ── SharePoint embed ──
+# Lets this one page be framed by SharePoint Online. Overrides the global CSP
+# above (Netlify: most-specific rule wins for a same-named header).
+/peer-observation-crash-course.html
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://source.zoom.us; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://doaj.org https://script.google.com https://script.googleusercontent.com https://pub.orcid.org https://api.openalex.org https://api.openai.com https://doi.org https://player.vimeo.com https://www.youtube.com https://www.youtube-nocookie.com https://zoom.us https://api.zoom.us https://*.zoom.us wss://*.zoom.us; frame-src 'self' https://www.youtube.com https://youtu.be https://player.vimeo.com https://*.zoom.us; media-src 'self' https:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'self' https://*.sharepoint.com https://*.sharepoint.us;
   Cache-Control: public, max-age=0, must-revalidate
 
 
