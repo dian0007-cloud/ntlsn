@@ -134,7 +134,7 @@ export const CAPABILITY_GROUPS: readonly CapabilityGroup[] = [
       },
       {
         "n": "Teaching Recognition Passport",
-        "d": "A portable teaching record across all 42 universities — credentialed via My eQuals.",
+        "d": "A portable teaching record across all 43 universities — credentialed via My eQuals.",
         "t": "trp.html"
       },
       {

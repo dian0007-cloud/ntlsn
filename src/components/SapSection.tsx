@@ -150,7 +150,7 @@ export default function SapSection() {
             </div>
             <div className="text-[12.5px] leading-[1.5] text-[#d9cdb6]">
               Your partnership appears on the national registry. Peers across
-              42 universities see what you are doing — and may reach out.
+              43 universities see what you are doing — and may reach out.
             </div>
           </div>
           <div className="rounded-[12px] border border-[rgba(168,115,127,.22)] border-l-[3px] border-l-purple bg-[rgba(168,115,127,.07)] p-4">
