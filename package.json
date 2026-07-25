@@ -10,6 +10,8 @@
   "scripts": {
     "test": "node --test netlify/functions/test/*.test.js",
     "build": "echo 'NTLSN is a static site — no build step'",
+    "build:src": "npm --prefix src run build",
+    "dev:src": "npm --prefix src run dev",
     "test:e2e": "playwright test",
     "lhci": "lhci autorun"
   },
