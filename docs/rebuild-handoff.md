@@ -87,3 +87,40 @@ sure". Do not flip anything without his explicit go.**
 Buttondown account + `BUTTONDOWN_API_KEY` secret (digest sending) · Search
 Console sitemap submission · one real-LMS LTI launch · production tlUrl
 eyeball · branch-protection required checks.
+
+---
+
+## Reconciliation — fleet backlog & jammed sessions vs. live main (2026-07-22)
+
+The GLM fleet kept queuing Seb for decisions on work already merged. This maps
+its internal P1–P8 backlog and the "awaiting input" sessions to ground truth on
+`origin/main`. **Verify before re-opening any of these.**
+
+### Backlog P1–P8
+| Item | State | Evidence on main |
+|---|---|---|
+| P1, P2, P4, P5, P6 | ✅ shipped | per fleet log (ICS/archive #28, widget #37, watcher #23/#36, links #40–42, etc.) |
+| P3 "port 3 sections as a PoC" | ✅ superseded | the *entire* rebuild shipped and is the live homepage (#76/#78/#80) — a 3-section PoC is moot |
+| P7 "sort the licence" | ✅ shipped | tiered LICENSE (MIT · CC BY · CC BY-NC-SA) + `docs/licensing-rationale.md` + live `icip.html` (#51/#52) |
+| P8 | ⚠️ unverified here | P8's identity lives in the fleet's own backlog note, not the repo — the ONLY item that may be genuinely open. Confirm against that note before acting. |
+
+### Jammed "awaiting input" sessions — dispositions
+- **glmtaskbacklog analysis / processing** → close: backlog complete (P7 shipped, P3 superseded).
+- **Prepare agents for deployment #45** ("which 3 sections first?") → close: all sections ported.
+- **Restore session context** ("P3/P7/P8 or #79?") → #79 is now MERGED (`c87474e`); P3/P7 done.
+- **glm-task-backlog push** → safe to delete all merged `epic1/*` and `hotfix/*` branches.
+- **/loop** (approve `gh pr list`) → read-only, approve.
+- **xcode license acceptance / openglen confidentiality** → `sudo xcodebuild -license accept` (Mac password) clears all four Xcode-gated sessions.
+- **Remove white box / teleport flag ×2** → dismiss: white box was a preview-only artifact (never on prod); teleport sessions are dead session-plumbing.
+
+### PR #79 — MERGED
+"Get it through your library" wired into research-search + oa-finder; fixed the
+institution split-brain (two localStorage keys → one). Was the only genuinely
+open PR. Follow-up noted in its body: optional `institution_id` param on the MCP
+`search_archive` tools + the OpenAlex API key (Seb's task).
+
+### Structural fix that prevents recurrence
+Branch protection on `main` (require CI + 1 review). The cutover flip-flop
+(#68 merged while on hold → emergency rollback #75 → deliberate re-cut) and the
+pile-up of "awaiting input" sessions share one root cause: nothing gates a merge
+or reconciles the tracker against `main`. This is the highest-value 2-minute fix.
