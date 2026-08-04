@@ -181,8 +181,17 @@ export function bandSlice(from: string, to: string): readonly string[] {
  * Collapsed summary-row height (PR-G): every id wrapped in a
  * CollapsibleSection renders as a ~92px card row until opened, so its stub
  * reserves that instead of the old full-section height. Ids folded INSIDE
- * a multi-id group (the pricing band) reserve 0 — the group's first id
- * carries the row.
+ * a multi-id group (the pricing run, and Collapse v2's Recognition /
+ * Mission & governance / Roadmap CollapsibleGroups) reserve 0 — the group's
+ * first id carries the one row.
+ *
+ * Known, accepted mismatch (Collapse v2 persistence): these are compile-time
+ * estimates for the DEFAULT states. A stored "open" group/fold renders
+ * taller than its stub reserved; the swap still happens ≥1500px off-screen
+ * (LazyBand's IO margin) and native scroll anchoring absorbs above-viewport
+ * growth, so the drift is not user-visible. (Grouping actually made the
+ * recognition stubs MORE accurate: the seven defaultOpen tools previously
+ * under-reserved at 92px each.)
  */
 const CFOLD_ROW = 92;
 
@@ -209,20 +218,22 @@ const SECTION_STUB_HEIGHTS: Record<string, number> = {
   "ntlsn-capabilities": CFOLD_ROW,
   pd: 1260,
   "ntlsn-waystogrow": CFOLD_ROW,
-  // PR-G recognition band — all 13 collapsed.
+  // Collapse v2: the recognition band folds behind ONE CollapsibleGroup row
+  // ("Recognition", closed by default) — the first id carries the row, the
+  // other 12 reserve 0 (their sections render inside the group panel).
   "ntlsn-recognition": CFOLD_ROW,
-  "ntlsn-showcase": CFOLD_ROW,
-  "ntlsn-aaut": CFOLD_ROW,
-  "ntlsn-natcert": CFOLD_ROW,
-  "ntlsn-confrecognition": CFOLD_ROW,
-  "ntlsn-passport": CFOLD_ROW,
-  "ntlsn-pathfinder": CFOLD_ROW,
-  "ntlsn-consortium": CFOLD_ROW,
-  "ntlsn-sap": CFOLD_ROW,
-  "ntlsn-service": CFOLD_ROW,
-  "ntlsn-praise": CFOLD_ROW,
-  "ntlsn-promotion": CFOLD_ROW,
-  "ntlsn-rpcalc": CFOLD_ROW,
+  "ntlsn-showcase": 0,
+  "ntlsn-aaut": 0,
+  "ntlsn-natcert": 0,
+  "ntlsn-confrecognition": 0,
+  "ntlsn-passport": 0,
+  "ntlsn-pathfinder": 0,
+  "ntlsn-consortium": 0,
+  "ntlsn-sap": 0,
+  "ntlsn-service": 0,
+  "ntlsn-praise": 0,
+  "ntlsn-promotion": 0,
+  "ntlsn-rpcalc": 0,
   architecture: CFOLD_ROW,
   map: 2010,
   directory: 850,
@@ -239,12 +250,14 @@ const SECTION_STUB_HEIGHTS: Record<string, number> = {
   "ntlsn-litmus": CFOLD_ROW,
   "ntlsn-challenges": CFOLD_ROW,
   "ntlsn-induction": CFOLD_ROW,
+  // Collapse v2: the mission cluster (advisory … distribute) folds behind
+  // ONE "Mission & governance" CollapsibleGroup row — first id carries it.
   "ntlsn-advisory": CFOLD_ROW,
-  "ntlsn-representation": CFOLD_ROW,
-  "ntlsn-aim": CFOLD_ROW,
-  "ntlsn-rebalance": CFOLD_ROW,
-  "ntlsn-together": CFOLD_ROW,
-  "ntlsn-distribute": CFOLD_ROW,
+  "ntlsn-representation": 0,
+  "ntlsn-aim": 0,
+  "ntlsn-rebalance": 0,
+  "ntlsn-together": 0,
+  "ntlsn-distribute": 0,
   "ntlsn-manifesto-visibility": 490,
   "ntlsn-manifesto-sharing": CFOLD_ROW,
   "ntlsn-sharezoom": CFOLD_ROW,
@@ -252,8 +265,9 @@ const SECTION_STUB_HEIGHTS: Record<string, number> = {
   "ntlsn-scope": CFOLD_ROW,
   "ntlsn-why": CFOLD_ROW,
   about: 1070,
+  // Collapse v2: the roadmap pair folds behind ONE "Roadmap" group row.
   "ntlsn-coming2027": CFOLD_ROW,
-  "ntlsn-coming2028": CFOLD_ROW,
+  "ntlsn-coming2028": 0,
   // The pricing group: one collapsed row at its first id; the ids folded
   // inside it reserve 0 (their sections render inside the group panel).
   "ntlsn-pricingnav": CFOLD_ROW,

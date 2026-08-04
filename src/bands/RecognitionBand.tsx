@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import CollapsibleGroup from "../components/CollapsibleGroup";
 import CollapsibleSection from "../components/CollapsibleSection";
 import RecognitionSection from "../components/RecognitionSection";
 import ShowcaseSection from "../components/ShowcaseSection";
@@ -147,10 +148,20 @@ const SECTIONS: ReadonlyArray<{
 ];
 
 export default function RecognitionBand() {
+  // Collapse v2: the 13 rows fold behind ONE group shell ("Recognition").
+  // The group defaults CLOSED; the seven "Try it" tools stay defaultOpen
+  // INSIDE it. storageKey is namespaced ("g:…") because the group's first
+  // member id (ntlsn-recognition) is ALSO an inner fold's id — sharing the
+  // key would cross-restore group and fold (see lib/cfoldState.ts).
   // Render by the canonical slice so band membership can never drift from
   // SECTION_ORDER (same invariant as every other band).
   return (
-    <>
+    <CollapsibleGroup
+      ids={RECOGNITION_BAND_IDS}
+      storageKey="g:ntlsn-recognition"
+      title="Recognition"
+      teaser="Recognition tools you can try now — and the portable, sector-wide recognition layer in design for 2027–2028."
+    >
       {RECOGNITION_BAND_IDS.map((id) => {
         const entry = SECTIONS.find((s) => s.id === id);
         if (!entry) return <SectionPlaceholder key={id} id={id} />;
@@ -167,6 +178,6 @@ export default function RecognitionBand() {
           </CollapsibleSection>
         );
       })}
-    </>
+    </CollapsibleGroup>
   );
 }
