@@ -1,0 +1,24 @@
+{
+  "title": "NTLSN — National Teaching and Learning Sector Network",
+  "description": "A free, open national commons mapping the Australian higher-education teaching and learning sector: events, symposia and professional development across all 43 universities; the rescued ALTC/OLT archive of 1,431 funded works; the SoTL Index and its DORA-aligned, describe-don't-rank methodology; a national library remote-access map; and CORS-open datasets, calendar and RSS feeds, and a machine-readable endpoint. Free at the point of use.",
+  "creators": [
+    {
+      "name": "Dianati, Seb",
+      "affiliation": "University of Southern Queensland"
+    }
+  ],
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": [
+    "scholarship of teaching and learning",
+    "SoTL",
+    "higher education",
+    "Australia",
+    "academic development",
+    "open educational resources",
+    "open infrastructure",
+    "teaching recognition"
+  ],
+  "notes": "The MIT licence covers the source code. Data and methodology are CC BY 4.0 and written content CC BY-NC-SA 4.0, with First Nations Indigenous Cultural and Intellectual Property excluded from every licence grant — see LICENSE, icip.html and docs/licensing-rationale.md."
+}
