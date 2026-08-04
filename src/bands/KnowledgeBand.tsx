@@ -6,6 +6,7 @@ import TeachingResourcesSection from "../components/TeachingResourcesSection";
 import BestPracticeSection from "../components/BestPracticeSection";
 import CollapsibleSection from "../components/CollapsibleSection";
 import SectionPlaceholder from "../components/SectionPlaceholder";
+import { TEACHING_RESOURCES } from "../lib/teachingResources";
 import { bandSlice } from "../sections";
 
 export const KNOWLEDGE_BAND_IDS = bandSlice("ntlsn-archive", "ntlsn-bestpractice");
@@ -71,7 +72,7 @@ export default function KnowledgeBand() {
               key={id}
               ids={[id]}
               title="Teaching Resources from Across the Sector"
-              teaser="Openly licensed guides and toolkits from universities across the country."
+              teaser={`${TEACHING_RESOURCES.length} openly licensed guides and toolkits from universities across the country.`}
             >
               <TeachingResourcesSection />
             </CollapsibleSection>

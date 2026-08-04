@@ -14,6 +14,9 @@ import LitmusSection from "../components/LitmusSection";
 import ChallengesSection from "../components/ChallengesSection";
 import CollapsibleSection from "../components/CollapsibleSection";
 import SectionPlaceholder from "../components/SectionPlaceholder";
+import { PATHWAYS } from "../lib/pathways";
+import { PEAK_BODIES } from "../lib/peakmap";
+import { TRYNOW_TOOLS } from "../lib/tools";
 import { bandSlice } from "../sections";
 
 // ntlsn-network is rendered EAGERLY at the front of the landing (App.tsx), so
@@ -59,7 +62,7 @@ export default function FabricBand() {
               key={id}
               ids={[id]}
               title="How the peak bodies thread the sector together."
-              teaser="ASCILITE, HERDSA, CAULLT, ACODE and more — who convenes what, mapped."
+              teaser={`${PEAK_BODIES.length} peak bodies — ASCILITE, HERDSA, CAULLT, ACODE and more — who convenes what, mapped.`}
             >
               <PeakMapSection />
             </CollapsibleSection>
@@ -74,7 +77,7 @@ export default function FabricBand() {
               key={id}
               ids={[id]}
               title="Guided Learning Pathways"
-              teaser="Step-by-step routes through the commons — from first steps to leading change."
+              teaser={`${PATHWAYS.length} step-by-step routes through the commons — from first steps to leading change.`}
             >
               <PathwaysSection />
             </CollapsibleSection>
@@ -110,7 +113,7 @@ export default function FabricBand() {
               key={id}
               ids={[id]}
               title="The toolkit for academics."
-              teaser="Free tools you can run right now — no logins, everything in your browser."
+              teaser={`${TRYNOW_TOOLS.length} free tools you can run right now — no logins, everything in your browser.`}
             >
               <TryNowSection />
             </CollapsibleSection>
