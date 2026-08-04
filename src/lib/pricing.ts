@@ -15,7 +15,9 @@
 import { eventCount, universityCount } from "../data";
 import { formatCount, SOTL_WORK_COUNT } from "./frontdoor";
 import { FRAMEWORKS } from "./frameworks";
+import { GRANTS } from "./grants";
 import { PATHWAY_RESOURCE_COUNT } from "./pathways";
+import { PD_OPPORTUNITIES } from "./pd";
 import { INTERNATIONAL_VIDEO_COUNT, SECTOR_VIDEO_COUNT } from "./talks";
 import { TEACHING_RESOURCES } from "./teachingResources";
 
@@ -229,14 +231,26 @@ export const PRICING_BENEFITS: ReadonlyArray<readonly [string, string]> = [
 ];
 
 /* ── $0-forever OEP chip groups ─────────────────────────────────────────────
- * Counts with a canonical dataset in src are derived (universities, events,
- * sector videos = sector + international curated talks, frameworks,
- * university resources, career pathways, best-practice guides, the archive).
- * The rest keep production's literal figures: their sources ("320 SoTL
- * resources", "59 PD opportunities", "43 grants & fellowships", "23
- * conferences", "25 benchmarks", "41 UDL resources", "78 international
- * SoTL") counted production datasets that don't map 1:1 onto a src export —
- * re-derive them when their owning sections settle the numbers. */
+ * Counts with a canonical dataset in src are DERIVED: universities, events,
+ * sector videos (sector + international curated talks), frameworks, university
+ * resources, career pathways, best-practice guides, the archive, and now also
+ * grants & fellowships (GRANTS.length = 39) and PD opportunities
+ * (PD_OPPORTUNITIES.length = 73). Copy re-derivation sweep 2026-07-25.
+ *
+ * The literals below KEEP production's figures because no src export produces
+ * them (audited 2026-07-25 against src/lib):
+ *   "320 SoTL resources"  — no SoTL-resources dataset; TEACHING_RESOURCES is
+ *                           the "university resources" chip (already derived).
+ *   "25 benchmarks"       — the benchmarks section holds 5 studies + 18 SoTL
+ *                           metric rows (12 frameworks + 6 frontier); "25"
+ *                           matches neither unit. Re-derive when Seb picks a
+ *                           public count (5 studies vs 18 metrics vs keep 25).
+ *   "41 UDL resources"    — no UDL-tagged dataset; TEACHING_RESOURCES has no
+ *                           UDL theme.
+ *   "78 international SoTL"— INTERNATIONAL_THEMES backs the "sector videos"
+ *                           chip, not a SoTL-resources count.
+ *   "23 conferences"      — GRANT_CONFERENCES has 6; upcomingConferences() is
+ *                           dynamic. No stable "23" export. */
 
 const BP_GUIDE_COUNT = __NTLSN_BP_GUIDES__;
 
@@ -292,8 +306,8 @@ export const OEP_CHIP_GROUPS: readonly OepChipGroup[] = [
       `${eventCount} sector events`,
       "23 conferences",
       "Watch sector conference recordings",
-      "59 PD opportunities",
-      "43 grants & fellowships",
+      `${PD_OPPORTUNITIES.length} PD opportunities`,
+      `${GRANTS.length} grants & fellowships`,
       `${PATHWAY_RESOURCE_COUNT} career pathways`,
       "3-year capability roadmap",
     ],

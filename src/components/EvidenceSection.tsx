@@ -41,7 +41,7 @@ export default function EvidenceSection() {
             What the data shows
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-white/50">
-            Original benchmarking across 42 universities and 25 SoTL
+            Original benchmarking across 43 universities and 25 SoTL
             indicators — where the sector leads, and where the gaps still
             are.
           </p>
