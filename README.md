@@ -1,6 +1,8 @@
 # NTLSN — National Teaching & Learning Sector Navigator
 
-Australia's **free, open-source** hub mapping the higher education teaching & learning sector — every symposium, workshop, PD opportunity, framework, grant and conference across all 42 universities. One page, one portal.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21815413.svg)](https://doi.org/10.5281/zenodo.21815413)
+
+Australia's **free, open-source** hub mapping the higher education teaching & learning sector — every symposium, workshop, PD opportunity, framework, grant and conference across all 43 universities. One page, one portal.
 
 🔗 **Live:** https://www.ntlsn.com
 
@@ -63,6 +65,28 @@ The whole point of the open data layer: **anyone can add an event with a small P
 - **Quick:** drag this folder onto your site's **Deploys** tab in Netlify.
 - **Continuous:** connect this repo to Netlify/Cloudflare Pages for auto-deploy on push.
 - After any data edit, regenerate the feeds: `node scripts/build-feeds.mjs`
+
+---
+
+## Cite this work
+
+NTLSN is archived on Zenodo and has a DOI, so it can be cited as a research output.
+
+> Dianati, S. (2026). *NTLSN — National Teaching and Learning Sector Network* (Version 1.0.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.21815413
+
+```bibtex
+@software{dianati_ntlsn_2026,
+  author    = {Dianati, Seb},
+  title     = {NTLSN --- National Teaching and Learning Sector Network},
+  version   = {1.0.0},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21815413},
+  url       = {https://ntlsn.com}
+}
+```
+
+GitHub also renders a "Cite this repository" button from [`CITATION.cff`](CITATION.cff).
 
 ---
 
