@@ -7,8 +7,25 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: Homepage serves the journey
-        run: curl -sf --compressed https://ntlsn.com/ | grep -q 'id="ntlsn-journey"'
+      # The homepage is now the /src rebuild (Vite SPA shell placed at the repo
+      # root by scripts/build-src.sh), so the served HTML is a shell — curl sees
+      # no rendered section ids. The pre-cutover check grepped for the legacy
+      # <script id="ntlsn-journey"> tag, which no longer exists: those doors were
+      # folded into StartGrid. Assert the shell AND the entry bundle instead.
+      - name: Homepage serves the app shell
+        run: curl -sf --compressed https://ntlsn.com/ | grep -q '<div id="root">'
+      - name: Entry bundle is reachable and carries the front door
+        run: |
+          asset=$(curl -sf --compressed https://ntlsn.com/ \
+            | grep -oE '/assets/index-[A-Za-z0-9_-]+\.js' | head -1)
+          if [ -z "$asset" ]; then
+            echo "::error::homepage references no /assets/index-*.js entry bundle"
+            exit 1
+          fi
+          echo "entry bundle: $asset"
+          curl -sf --compressed "https://ntlsn.com$asset" | grep -q 'ntlsn-startgrid'
+      - name: Legacy homepage is retained as a rollback target
+        run: curl -sf -o /dev/null --compressed https://ntlsn.com/legacy.html
       - name: Start Here is itself (not a soft-404)
         run: curl -sf --compressed https://ntlsn.com/start-here.html | grep -q 'Start here'
       - name: ORCID front door is itself

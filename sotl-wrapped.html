@@ -99,12 +99,12 @@
       <button class="btn" id="go">Wrap it →</button>
     </div>
     <button class="demo" id="demo">Don't have it handy? Try a live demo</button>
-    <div class="err" id="err"></div>
+    <div class="err" id="err" role="alert"></div>
   </div>
 </section>
 
 <!-- STORY -->
-<section id="story" role="main">
+<section id="story">
   <div class="dots" id="dots" aria-hidden="true"></div>
   <div class="slides" id="slides"></div>
 </section>
@@ -112,22 +112,45 @@
 <script>
 (function(){
   "use strict";
-  var orcidIn=document.getElementById("orcid"),goBtn=document.getElementById("go"),demoBtn=document.getElementById("demo"),errEl=document.getElementById("err");
   var gate=document.getElementById("gate"),story=document.getElementById("story"),slidesEl=document.getElementById("slides"),dotsEl=document.getElementById("dots");
+  var gateCard=gate.querySelector(".card"), GATE_HTML=gateCard.innerHTML;
+  var orcidIn,goBtn,demoBtn,errEl;
   var DEMO="0000-0002-1428-2921";
+
+  // The gate card's innerHTML is swapped out for the loading spinner, which detaches
+  // #orcid/#go/#demo/#err. Anything that needs them again must re-render and re-query,
+  // never hold on to the pre-spinner nodes.
+  function wireGate(){
+    orcidIn=document.getElementById("orcid"); goBtn=document.getElementById("go");
+    demoBtn=document.getElementById("demo"); errEl=document.getElementById("err");
+    goBtn.addEventListener("click",function(){ run(orcidIn.value); });
+    orcidIn.addEventListener("keydown",function(e){ if(e.key==="Enter") run(orcidIn.value); });
+    demoBtn.addEventListener("click",function(){ orcidIn.value=DEMO; run(DEMO); });
+  }
+  function restoreGate(){
+    var typed = orcidIn ? orcidIn.value : "";
+    gateCard.innerHTML=GATE_HTML;
+    wireGate();
+    orcidIn.value=typed;
+  }
 
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function normaliseOrcid(v){v=String(v||"").trim();var m=v.match(/(\d{4}-\d{4}-\d{4}-\d{3}[\dxX])/);return m?m[1].toUpperCase():"";}
   var SOTL_RE=/teach|learn|pedagog|curricul|assessment|student|education|scholarship of teaching|higher education|classroom|academic (development|practice)|feedback|supervis|graduate attribute|employab/i;
 
-  function fail(msg){ errEl.textContent=msg; goBtn.disabled=false; goBtn.textContent="Wrap it →"; gate.style.display="flex"; story.className=""; }
+  function fail(msg){
+    restoreGate();
+    errEl.textContent=msg; goBtn.disabled=false; goBtn.textContent="Wrap it →";
+    gate.style.display="flex"; story.className="";
+    try{ orcidIn.focus(); }catch(e){}
+  }
 
   function run(raw){
     errEl.textContent="";
     var id=normaliseOrcid(raw);
     if(!id){ fail("That doesn't look like an ORCID iD — it should look like 0000-0002-1825-0097."); return; }
     goBtn.disabled=true; goBtn.textContent="Reading…";
-    gate.querySelector(".card").innerHTML='<div class="loading"><span class="spin"></span><span>Reading your public record &amp; writing your story…</span></div>';
+    gateCard.innerHTML='<div class="loading"><span class="spin"></span><span>Reading your public record &amp; writing your story…</span></div>';
     var sel="id,title,publication_year,cited_by_count,topics,keywords,authorships,open_access,primary_location";
     var url="https://api.openalex.org/works?filter=author.orcid:"+id+"&per-page=200&sort=publication_year:desc&select="+sel;
     fetch(url,{headers:{Accept:"application/json"}})
@@ -211,8 +234,9 @@
     if(s.cover){
       return '<div class="inner"><div class="kicker" style="color:var(--teal)">NTLSN · The commons, distilled</div>'+
         '<p class="big" style="background:linear-gradient(110deg,var(--teal),var(--blue) 45%,var(--purple));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Your SoTL,<br>Wrapped.</p>'+
-        '<p class="sub" id="coverhi"></p><p class="ntlsn-emdash-gag" style="font:italic 400 12px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#7d8da0;margin:18px auto 0;max-width:64ch"><span style="color:#4ECDC4;font-style:normal;font-weight:700">◇ AI field guide</span> — your year, wrapped — and wrapped in em-dashes (—). AI adores them. One tell, unwrapped.</p>
-  <p class="foot">Scroll to begin. Everything here runs in your browser; nothing is stored or sent to us.</p></div>'+
+        '<p class="sub" id="coverhi"></p>'+
+        '<p class="ntlsn-emdash-gag" style="font:italic 400 12px/1.6 -apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;color:#7d8da0;margin:18px auto 0;max-width:64ch"><span style="color:#4ECDC4;font-style:normal;font-weight:700">◇ AI field guide</span> — your year, wrapped — and wrapped in em-dashes (—). AI adores them. One tell, unwrapped.</p>'+
+        '<p class="foot">Scroll to begin. Everything here runs in your browser; nothing is stored or sent to us.</p></div>'+
         '<div class="hint">scroll ↓</div>';
     }
     if(s.summary){
@@ -294,9 +318,7 @@
     el.textContent="0"+suffix; requestAnimationFrame(step);
   }
 
-  goBtn.addEventListener("click",function(){ run(orcidIn.value); });
-  orcidIn.addEventListener("keydown",function(e){ if(e.key==="Enter") run(orcidIn.value); });
-  demoBtn.addEventListener("click",function(){ orcidIn.value=DEMO; run(DEMO); });
+  wireGate();
   // deep-link: ?orcid=...
   var q=(location.search.match(/[?&]orcid=([^&]+)/)||[])[1];
   if(q) run(decodeURIComponent(q));
