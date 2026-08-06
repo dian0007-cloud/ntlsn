@@ -24,6 +24,11 @@ jobs:
         with: { node-version: '20' }
       - name: Validate data
         run: node scripts/validate-data.mjs
+      # Guards the defect classes the August 2026 browser audit found live:
+      # an inline script that failed to parse (a whole page inert for a month),
+      # mouse-only accordions on 24 crash courses, and dead /# fragment links.
+      - name: Validate pages
+        run: node scripts/check-pages.mjs
       - name: Build feeds (also re-validates)
         run: node scripts/build-feeds.mjs --out /tmp/build-check
       - name: Confirm feeds generated
