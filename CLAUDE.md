@@ -78,7 +78,7 @@ Cloud containers cannot see Seb's Desktop. Everything you need for repo work is 
 - **data/library-resolvers.json** — verified library remote-access patterns for 42/43 AU
   universities (public info; web-documented + curl-verified 2026-07-07). Powers the
   "Get it through your library" build: institution picker + client-side DOI link-rewriter
-  (2 patterns: openathens-redirector ×23, ezproxy-login-url ×19). BEFORE building,
+  (2 patterns: openathens-redirector ×24, ezproxy-login-url ×18; 1 none-found). BEFORE building,
   manually re-verify the UNE, VU, Batchelor and Adelaide rows (flagged in their notes).
 - **Post-freeze order (after 9 Jul, with Seb's confirm):** merge PR #18 (open-badges) and
   PR #19 (build-feeds) → wire badges (link from recognition-gps.html, one start-grid card,
