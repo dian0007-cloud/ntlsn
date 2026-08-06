@@ -81,20 +81,34 @@
   var VAGUE=['understand','know','learn','appreciate','comprehend','grasp','be aware','be familiar','become familiar','gain knowledge','have knowledge','realise','realize'];
   var t=document.getElementById('t'), out=document.getElementById('out');
   var SAMPLE="Understand the key theories of student engagement\nExplain the principles of constructive alignment\nApply a quality framework to a unit of study\nCritically evaluate an assessment task for inclusivity\nDesign a programmatic assessment plan\nKnow the relevant regulatory standards";
+  // Verbs that are also everyday nouns in a T&L outcome ("competing models", "the
+  // assessment plan", "diagnostic tests"). Their bare plural is never an action verb,
+  // so don't match it — otherwise the noun is reported as the outcome's action verb.
+  var NOUNY=['model','plan','design','test','review','report','practise','practice','match','label','name','state','conduct','compile','rank'];
   function classify(line){
     var low=' '+line.toLowerCase().replace(/[^a-z\s]/g,' ').replace(/\s+/g,' ')+' ';
-    var best=-1, verb=null;
+    // Take the EARLIEST verb in the line, not the highest Bloom level found anywhere
+    // in it: an outcome's action verb leads the sentence, and scanning for the peak
+    // level lets a later Bloom word used as a noun outrank the real verb.
+    var best=-1, verb=null, at=-1;
     for(var i=0;i<LEVELS.length;i++){
       for(var j=0;j<LEVELS[i].v.length;j++){
         var p=LEVELS[i].v[j];
-        if(low.indexOf(' '+p+' ')>-1 || low.indexOf(' '+p+'s ')>-1 || low.indexOf(' '+p.replace(/e$/,'ing')+' ')>-1){
-          if(i>best){best=i;verb=p;}
+        var forms=[' '+p+' ', ' '+p.replace(/e$/,'ing')+' '];
+        if(NOUNY.indexOf(p)<0) forms.push(' '+p+'s ');
+        for(var f=0;f<forms.length;f++){
+          var pos=low.indexOf(forms[f]);
+          if(pos<0) continue;
+          // earlier wins; at the same position the longer (more specific) phrase wins
+          if(at<0 || pos<at || (pos===at && p.length>verb.length)){ at=pos; best=i; verb=p; }
         }
       }
     }
-    var vague=null;
-    for(var k=0;k<VAGUE.length;k++){ if(low.indexOf(' '+VAGUE[k]+' ')>-1){vague=VAGUE[k];break;} }
-    if(best>=0) return {level:LEVELS[best].k, c:LEVELS[best].c, idx:best, verb:verb, vague:vague};
+    var vague=null, vat=-1;
+    for(var k=0;k<VAGUE.length;k++){ var vp=low.indexOf(' '+VAGUE[k]+' '); if(vp>-1 && (vat<0||vp<vat)){vague=VAGUE[k];vat=vp;} }
+    // A vague opener ("Understand the design of …") is not rescued by a measurable
+    // verb appearing later in the sentence — keep the not-measurable flag.
+    if(best>=0 && !(vat>-1 && vat<at)) return {level:LEVELS[best].k, c:LEVELS[best].c, idx:best, verb:verb, vague:vague};
     if(vague) return {level:'Not measurable', c:'#FF8A8A', idx:-1, vague:vague};
     return {level:'No clear verb', c:'#7d8da0', idx:-2};
   }

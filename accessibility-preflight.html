@@ -44,6 +44,7 @@
 
   .item{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.13s}
   .item:hover{border-color:#2c4a63}
+  .item:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .item.done{border-color:#2c5b45;background:#0f2419}
   .box{flex:none;width:24px;height:24px;border:2px solid var(--line);border-radius:7px;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--green);transition:.13s}
   .item.done .box{border-color:var(--green);background:#11321f}
@@ -103,6 +104,7 @@
       bar=document.getElementById('barfill'), lbl=document.getElementById('lbl'), doneMsg=document.getElementById('doneMsg');
   ITEMS.forEach(function(it,i){
     var d=document.createElement('div'); d.className='item'; d.setAttribute('data-i',i);
+    d.setAttribute('role','checkbox'); d.setAttribute('tabindex','0'); d.setAttribute('aria-checked','false');
     d.innerHTML='<div class="box">✓</div><div><p class="it-b">'+it[0]+'</p><p class="it-d">'+it[1]+'</p></div>';
     list.appendChild(d);
   });
@@ -114,10 +116,16 @@
     big.style.color= done===n?'var(--green)':(done>=n*0.6?'var(--teal)':'var(--ink)');
     doneMsg.className='done-msg'+(done===n?' on':'');
   }
+  function toggleItem(it){ it.setAttribute('aria-checked', it.classList.toggle('done')?'true':'false'); update(); }
   list.addEventListener('click',function(e){
     var it=e.target.closest('.item'); if(!it)return;
     if(e.target.closest('a'))return; // let links work
-    it.classList.toggle('done'); update();
+    toggleItem(it);
+  });
+  list.addEventListener('keydown',function(e){
+    var it=e.target.closest&&e.target.closest('.item'); if(!it)return;
+    if(e.target.closest('a'))return; // let links work
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleItem(it); }
   });
   update();
 })();
