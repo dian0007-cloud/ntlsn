@@ -32,6 +32,7 @@
   textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #4ecdc426}
   .models{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
   .md{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;transition:.13s}
+  .md:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .md.on{border-color:var(--teal);background:#11293f;box-shadow:0 0 0 2px #4ecdc426}
   .md .n{font:800 13.5px var(--sans);color:var(--ink)}.md .d{font:400 11.5px/1.4 var(--sans);color:var(--mut)}
   .out{background:#0c1a2e;border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px;display:none}.out.on{display:block}
@@ -52,10 +53,10 @@
   <p class="lede">Something happened in your teaching — a moment that stuck. Name it, pick a reflective model, and get a structured set of prompts to <b style="color:var(--ink)">write against</b>. Good for CPD, fellowship evidence, and the start of a SoTL study.</p>
 
   <div class="field"><label>The teaching moment</label><textarea id="moment" placeholder="e.g. a class discussion fell completely flat, and I couldn't tell why"></textarea></div>
-  <div class="field"><label>Reflective model</label><div class="models" id="models">
-    <div class="md on" data-k="rolfe"><div class="n">What · So what · Now what</div><div class="d">Rolfe — quick &amp; powerful</div></div>
-    <div class="md" data-k="gibbs"><div class="n">Gibbs' cycle</div><div class="d">Six stages, feelings included</div></div>
-    <div class="md" data-k="brook"><div class="n">Brookfield's lenses</div><div class="d">Four critical viewpoints</div></div>
+  <div class="field"><label id="modelsLbl">Reflective model</label><div class="models" id="models" role="radiogroup" aria-labelledby="modelsLbl">
+    <div class="md on" role="radio" tabindex="0" aria-checked="true" data-k="rolfe"><div class="n">What · So what · Now what</div><div class="d">Rolfe — quick &amp; powerful</div></div>
+    <div class="md" role="radio" tabindex="0" aria-checked="false" data-k="gibbs"><div class="n">Gibbs' cycle</div><div class="d">Six stages, feelings included</div></div>
+    <div class="md" role="radio" tabindex="0" aria-checked="false" data-k="brook"><div class="n">Brookfield's lenses</div><div class="d">Four critical viewpoints</div></div>
   </div></div>
 
   <div class="out" id="out"><h3>Write against these</h3><div id="steps"></div><button class="btn" id="copy" type="button">Copy prompts</button></div>
@@ -82,7 +83,10 @@
            ['Theory &amp; literature','What does the scholarship of teaching say about this — and does it confirm or unsettle your view?']]
   };
   moment.addEventListener('input',build);
-  document.getElementById('models').addEventListener('click',function(e){var m=e.target.closest('.md');if(!m)return;[].forEach.call(this.children,function(x){x.classList.remove('on');});m.classList.add('on');model=m.getAttribute('data-k');build();});
+  var models=document.getElementById('models');
+  function pickModel(m){[].forEach.call(models.children,function(x){x.classList.remove('on');x.setAttribute('aria-checked','false');});m.classList.add('on');m.setAttribute('aria-checked','true');model=m.getAttribute('data-k');build();}
+  models.addEventListener('click',function(e){var m=e.target.closest('.md');if(!m)return;pickModel(m);});
+  models.addEventListener('keydown',function(e){var m=e.target.closest&&e.target.closest('.md');if(!m)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();pickModel(m);}});
   function build(){
     var mo=(moment.value||'').trim();
     var ref=mo?('“'+mo+'”'):'your moment';

@@ -27,6 +27,7 @@
   h2.sec{font:800 12px var(--F);text-transform:uppercase;letter-spacing:1.3px;color:var(--mut);margin:26px 0 12px}
   .lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:0 0 12px;overflow:hidden}
   .lhead{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+  .lhead:focus-visible,.ci:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .lhead:hover{background:rgba(255,255,255,.02)}
   .lnum{width:30px;height:30px;border-radius:9px;background:rgba(78,205,196,.12);color:var(--teal);font:800 14px var(--F);display:flex;align-items:center;justify-content:center;flex:none}
   .ltitle{flex:1;font:700 16px var(--F)}
@@ -79,9 +80,22 @@
 </div>
 <script>
 (function(){
-  document.querySelectorAll('.lhead').forEach(function(h){h.addEventListener('click',function(){h.parentNode.classList.toggle('open');});});
-  var first=document.querySelector('.lesson'); if(first) first.classList.add('open');
-  var ck=document.getElementById('check'); if(ck) ck.addEventListener('click',function(e){var ci=e.target.closest('.ci'); if(ci) ci.classList.toggle('on');});
+  // Accordions — keyboard operable, with aria-expanded state
+  document.querySelectorAll('.lhead').forEach(function(h){
+    h.setAttribute('role','button');h.setAttribute('tabindex','0');h.setAttribute('aria-expanded','false');
+    function toggle(){var open=h.parentNode.classList.toggle('open');h.setAttribute('aria-expanded',open?'true':'false');}
+    h.addEventListener('click',toggle);
+    h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
+  var first=document.querySelector('.lesson');
+  if(first){first.classList.add('open');var fh=first.querySelector('.lhead');if(fh)fh.setAttribute('aria-expanded','true');}
+  // Self-check — keyboard operable checkboxes, with aria-checked state
+  document.querySelectorAll('.check .ci').forEach(function(ci){
+    ci.setAttribute('role','checkbox');ci.setAttribute('tabindex','0');ci.setAttribute('aria-checked','false');
+    function toggle(){var on=ci.classList.toggle('on');ci.setAttribute('aria-checked',on?'true':'false');}
+    ci.addEventListener('click',toggle);
+    ci.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+  });
 })();
 </script>
 <div id="ntlsn-next-course" style="max-width:760px;margin:40px auto 30px;padding:18px 22px;background:rgba(78,205,196,.06);border:1px solid rgba(78,205,196,.25);border-radius:14px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif"><div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#4ECDC4;margin-bottom:6px">Keep going</div><a href="/peer-observation-crash-course.html" style="color:#fff;font-weight:800;font-size:16px;text-decoration:none">Next course: Peer observation of teaching →</a><div style="margin-top:6px"><a href="/crash-courses.html" style="color:#7d92a8;font-size:12.5px">or browse all crash courses</a></div></div>

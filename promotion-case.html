@@ -37,6 +37,7 @@
   .ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
   .evc{font:600 11px var(--sans);padding:4px 9px;border-radius:14px;border:1px solid var(--line);background:var(--navy);color:var(--mut);cursor:pointer;user-select:none}
   .evc.on{border-color:var(--teal);background:#11293f;color:var(--teal)}
+  .evc:focus-visible,.lvb:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .panel{position:sticky;top:16px;align-self:start}
   .doc{background:#f7f5ef;color:#1a2433;border-radius:12px;padding:22px 24px;font:400 13px/1.55 Georgia,serif;max-height:74vh;overflow:auto}
   .doc h2{font:700 16px Georgia,serif;margin:0 0 3px;color:#0A1628}.doc .meta{font:400 11.5px var(--sans);color:#5a6b7d;margin:0 0 14px}
@@ -59,9 +60,9 @@
   <h1>Teaching promotion case builder.</h1>
   <p class="lede">A promotion case isn't a CV — it's an <b style="color:var(--ink)">argument</b>, organised by criteria and carried by evidence. Put your strongest claim and evidence against each of the seven teaching criteria, and a structured draft assembles on the right. Pairs with the AUTC self-check.</p>
 
-  <div class="lvls" id="lvls">
-    <span class="lvb" data-l="Lecturer (A)">A</span><span class="lvb" data-l="Lecturer (B)">B</span>
-    <span class="lvb on" data-l="Senior Lecturer (C)">C</span><span class="lvb" data-l="Associate Professor (D)">D</span><span class="lvb" data-l="Professor (E)">E</span>
+  <div class="lvls" id="lvls" role="radiogroup" aria-label="Level you're applying for">
+    <span class="lvb" role="radio" tabindex="0" aria-checked="false" data-l="Lecturer (A)">A</span><span class="lvb" role="radio" tabindex="0" aria-checked="false" data-l="Lecturer (B)">B</span>
+    <span class="lvb on" role="radio" tabindex="0" aria-checked="true" data-l="Senior Lecturer (C)">C</span><span class="lvb" role="radio" tabindex="0" aria-checked="false" data-l="Associate Professor (D)">D</span><span class="lvb" role="radio" tabindex="0" aria-checked="false" data-l="Professor (E)">E</span>
     <span style="font-size:12px;color:var(--mut);align-self:center;margin-left:4px">← level you're applying for</span>
   </div>
 
@@ -90,15 +91,20 @@
   ];
   var EV=['Student data','Peer review','Reflection','Outputs/awards'];
   var level='Senior Lecturer (C)', data=CRIT.map(function(){return {text:'',ev:{}};});
-  document.getElementById('lvls').addEventListener('click',function(e){var b=e.target.closest('.lvb');if(!b)return;[].forEach.call(this.querySelectorAll('.lvb'),function(x){x.classList.remove('on');});b.classList.add('on');level=b.getAttribute('data-l');render();});
+  var lvls=document.getElementById('lvls');
+  function pickLevel(b){[].forEach.call(lvls.querySelectorAll('.lvb'),function(x){x.classList.remove('on');x.setAttribute('aria-checked','false');});b.classList.add('on');b.setAttribute('aria-checked','true');level=b.getAttribute('data-l');render();}
+  lvls.addEventListener('click',function(e){var b=e.target.closest('.lvb');if(!b)return;pickLevel(b);});
+  lvls.addEventListener('keydown',function(e){var b=e.target.closest&&e.target.closest('.lvb');if(!b)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();pickLevel(b);}});
   var crits=document.getElementById('crits');
   crits.innerHTML=CRIT.map(function(c,i){
     return '<div class="cr"><div class="h"><div class="n">'+(i+1)+'</div><div class="t">'+c+'</div></div>'
       +'<textarea data-i="'+i+'" placeholder="Your strongest claim + the evidence for it…"></textarea>'
-      +'<div class="ev">'+EV.map(function(e){return '<span class="evc" data-i="'+i+'" data-e="'+e+'">'+e+'</span>';}).join('')+'</div></div>';
+      +'<div class="ev">'+EV.map(function(e){return '<span class="evc" role="checkbox" tabindex="0" aria-checked="false" data-i="'+i+'" data-e="'+e+'">'+e+'</span>';}).join('')+'</div></div>';
   }).join('');
   crits.addEventListener('input',function(e){if(e.target.tagName==='TEXTAREA'){data[e.target.getAttribute('data-i')].text=e.target.value;render();}});
-  crits.addEventListener('click',function(e){var c=e.target.closest('.evc');if(!c)return;var i=c.getAttribute('data-i'),k=c.getAttribute('data-e');data[i].ev[k]=!data[i].ev[k];c.classList.toggle('on');render();});
+  function toggleEv(c){var i=c.getAttribute('data-i'),k=c.getAttribute('data-e');data[i].ev[k]=!data[i].ev[k];c.classList.toggle('on');c.setAttribute('aria-checked',data[i].ev[k]?'true':'false');render();}
+  crits.addEventListener('click',function(e){var c=e.target.closest('.evc');if(!c)return;toggleEv(c);});
+  crits.addEventListener('keydown',function(e){var c=e.target.closest&&e.target.closest('.evc');if(!c)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleEv(c);}});
   function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
   function render(){
     var filled=data.filter(function(d){return d.text.trim();}).length;
@@ -107,7 +113,8 @@
     var h='<h2>Case for promotion to '+esc(level)+'</h2><div class="meta">Teaching — organised by the seven criteria</div>';
     if(!filled){h+='<p class="empty">Fill a criterion on the left and your case assembles here. Start with the ones where your evidence is strongest.</p>';doc.innerHTML=h;return;}
     var allEv={};data.forEach(function(d){Object.keys(d.ev).forEach(function(k){if(d.ev[k])allEv[k]=1;});});
-    h+='<p><b>Summary.</b> This case presents evidence of sustained, scholarly teaching across '+filled+' of seven criteria, triangulated through '+Object.keys(allEv).join(', ').toLowerCase()+'.</p>';
+    var evNames=Object.keys(allEv);
+    h+='<p><b>Summary.</b> This case presents evidence of sustained, scholarly teaching across '+filled+' of seven criteria'+(evNames.length?', triangulated through '+evNames.join(', ').toLowerCase():'')+'.</p>';
     data.forEach(function(d,i){
       if(!d.text.trim())return;
       var evs=Object.keys(d.ev).filter(function(k){return d.ev[k];});

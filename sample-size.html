@@ -29,6 +29,7 @@
   .lede{font-size:17px;color:var(--mut);max-width:60ch;margin:0 0 24px}
   .tabs{display:flex;gap:8px;margin-bottom:20px}
   .tab{font:700 13px var(--sans);color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 15px;cursor:pointer}
+  .tab:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .tab.on{background:#11293f;border-color:var(--teal);color:var(--ink)}
   .field{margin-bottom:15px}.field label{display:block;font:700 13px var(--sans);margin-bottom:7px}
   .field .h{font:400 12px var(--sans);color:var(--mut);margin:-4px 0 7px}
@@ -54,7 +55,7 @@
   <h1>Survey sample-size calculator.</h1>
   <p class="lede">How many responses do you need for a credible result — or, how much can you trust the responses you already have? For SoTL studies and unit evaluations. Nothing stored.</p>
 
-  <div class="tabs"><div class="tab on" data-m="need">How many do I need?</div><div class="tab" data-m="got">What's my margin of error?</div></div>
+  <div class="tabs"><button type="button" class="tab on" aria-pressed="true" data-m="need">How many do I need?</button><button type="button" class="tab" aria-pressed="false" data-m="got">What's my margin of error?</button></div>
 
   <div class="field"><label for="N">Population size</label><div class="h">How many people could respond (e.g. students in the cohort)?</div><input type="number" id="N" value="200" min="1"></div>
 
@@ -81,7 +82,7 @@
   seg('conf','data-z',function(v){Z=v;}); seg('moe','data-e',function(v){E=v;}); seg('conf2','data-z',function(v){Z2=v;});
   [N,n].forEach(function(el){el.addEventListener('input',calc);});
   document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){
-    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});this.classList.add('on');mode=this.getAttribute('data-m');
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');x.setAttribute('aria-pressed','false');});this.classList.add('on');this.setAttribute('aria-pressed','true');mode=this.getAttribute('data-m');
     document.getElementById('needBox').style.display=mode==='need'?'':'none';
     document.getElementById('gotBox').style.display=mode==='got'?'':'none';calc();});});
   function calc(){
