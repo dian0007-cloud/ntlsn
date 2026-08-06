@@ -146,7 +146,7 @@
        .sort(function(a,b){ if(b.score!==a.score)return b.score-a.score; return (a.e.date||'').localeCompare(b.e.date||''); });
 
      if(!scored.length){
-       out.innerHTML='<div class="narr">No upcoming event matched all three answers. Try <b>"Open to anything"</b> or <b>"Any time"</b>, or <a href="/#events">browse the full calendar</a> — 90+ events across the sector.</div>';
+       out.innerHTML='<div class="narr">No upcoming event matched all three answers. Try <b>"Open to anything"</b> or <b>"Any time"</b>, or <a href="/#events">browse the full calendar</a> — every upcoming event we hold.</div>';
        return;
      }
      var top=scored.slice(0,4);
