@@ -21,6 +21,15 @@ authors:
     affiliation: "University of Southern Queensland"
 repository-code: "https://github.com/dian0007-cloud/ntlsn"
 url: "https://ntlsn.com"
+version: 1.0.0
+date-released: 2026-08-05
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21815413
+    description: >-
+      Zenodo archive of NTLSN v1.0.0. Zenodo also mints a concept DOI that
+      always resolves to the latest version; cite that one when you mean
+      "NTLSN" rather than this specific release.
 keywords:
   - scholarship of teaching and learning
   - SoTL
