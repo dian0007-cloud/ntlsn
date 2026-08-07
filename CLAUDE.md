@@ -37,7 +37,7 @@ Event `type` values in use: `conference`, `workshop`, `symposium`, `webinar`, et
 ## Deploy
 
 - Static host (Cloudflare Pages / Netlify style): `_headers` (CSP, HSTS, caching, content types for `.ics`/`feed.xml`), `_redirects` (real-404 hygiene: known junk/bot paths and every unknown path return `/404.html 404`; `/` serves `index.html` by default). **There is NO SPA fallback** — the site is multi-page static with no client-side router, so unknown paths 404 (do not "restore" a `/* → /index.html 200` rule; it re-introduces homepage-in-disguise soft-404s).
-- `sw.js` — network-first for navigations, stale-while-revalidate for same-origin assets, cache name `ntlsn-vN` (bump `N` on breaking asset changes).
+- `sw.js` — **not present in this repo.** The service worker described in earlier notes was never committed; `scripts/build-src.sh` records the same finding. If one is reintroduced: network-first for navigations, stale-while-revalidate for same-origin assets, cache name `ntlsn-vN` (bump `N` on breaking asset changes).
 - `manifest.webmanifest` — PWA install metadata, theme `#211B14`.
 - Public endpoints now served: `/events.ics` (subscribable calendar), `/feed.xml` (RSS), `/data/events.json` + `/data/universities.json` (CORS-open JSON API).
 

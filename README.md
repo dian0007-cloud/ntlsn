@@ -20,7 +20,7 @@ Australia's **free, open-source** hub mapping the higher education teaching & le
 | `scripts/build-feeds.mjs` | Regenerates `events.ics`, `feed.xml`, `sitemap.xml` and the Event JSON-LD from the data files. |
 | `events.ics` · `feed.xml` | Subscribable calendar + RSS, generated from the data. |
 | `widget.js` | Embeddable "what's on" widget any institution can drop on its own site (see below). |
-| `_headers` · `_redirects` | Security/CSP headers + SPA fallback. Applied automatically by the host. |
+| `_headers` · `_redirects` | Security/CSP headers + real-404 routing (**no** SPA fallback — unknown paths must 404). Applied automatically by the host. |
 | `CLAUDE.md` · `TASKS.md` | Architecture notes and the maintenance backlog. |
 
 ---

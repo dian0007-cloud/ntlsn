@@ -10,7 +10,7 @@ An array of event objects.
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `id` | number | ✅ | Unique. There are 94 events; the highest current id is 99 — use `100` or higher for new entries. |
+| `id` | number | ✅ | Unique. Read the current highest id from `data/events.json` before adding — the file is pruned as events pass, so any number quoted here goes stale. At the time of writing it holds 53 events with a highest id of 98. |
 | `title` | string | ✅ | The event's public name. Australian English. |
 | `uni` | string | ✅ | Host institution `id` — **must exist** in `universities.json` (e.g. `usq`, `unimelb`, `curtin`). For sector-wide events with no single host, use the special value `national`. |
 | `date` | string | ✅ | Start date, `YYYY-MM-DD`. |
