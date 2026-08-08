@@ -107,7 +107,7 @@
   <div class="code"><button class="copy" type="button" aria-label="Copy the tools/list command to the clipboard">Copy</button><pre><code>curl -s -X POST https://ntlsn.com/.netlify/functions/mcp \
   -H 'Content-Type: application/json' \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/list"}'</code></pre></div>
-  <p class="cap">Returns the three tools documented below, with their full input schemas.</p>
+  <p class="cap">Returns all nine tools documented below, with their full input schemas.</p>
 
   <h3 class="step">3. Call a tool — the next two sector events</h3>
   <div class="code"><button class="copy" type="button" aria-label="Copy the tools/call command to the clipboard">Copy</button><pre><code>curl -s -X POST https://ntlsn.com/.netlify/functions/mcp \
@@ -152,7 +152,7 @@
   <p>Any client that supports remote MCP servers over HTTP can use the endpoint URL as-is. The server implements <code>initialize</code>, <code>tools/list</code>, <code>tools/call</code>, and <code>ping</code>, accepts standard MCP notifications, and returns conventional JSON-RPC errors for anything else.</p>
 
   <h2>What the server offers</h2>
-  <p>Three read-only tools, each drawing on data openly published on this site.</p>
+  <p>Nine read-only tools, each drawing on data openly published on this site.</p>
 
   <h3 class="mono">upcoming_events</h3>
   <p>Upcoming Australian higher-education teaching-and-learning events — conferences, showcases, workshops and webinars — from NTLSN's curated events dataset (each record carries a verified flag).</p>
@@ -167,11 +167,49 @@
     </table>
   </div>
 
+  <h3 class="mono">events_by_type</h3>
+  <p>Upcoming events of a single kind, returned chronologically &mdash; useful when you want only conferences, or only webinars, rather than everything at once.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the events_by_type tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>type</td><td>string</td><td>yes</td><td>One of: conference, workshop, webinar, symposium, showcase</td></tr>
+        <tr><td>limit</td><td>integer</td><td>no</td><td>Maximum results; default 10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mono">event_detail</h3>
+  <p>One event by its numeric id, returned as a Schema.org <code>Event</code> in JSON-LD &mdash; name, dates, description, organising institution and place. The same shape the site publishes in <code>events-ld.json</code>, so an agent gets structured data rather than prose. Call <code>upcoming_events</code> or <code>events_by_type</code> first to find ids.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the event_detail tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td>integer</td><td>yes</td><td>The event&#39;s numeric id</td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <h3 class="mono">search_archive</h3>
   <p>Searches the rescued archive of 1,431 ALTC- and OLT-funded teaching-scholarship works (1994–2025) by title or author. This is the national grant-funded teaching-scholarship record that NTLSN preserves and republishes as open data.</p>
   <div class="tblwrap">
     <table>
       <caption>Arguments accepted by the search_archive tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>query</td><td>string</td><td>yes</td><td>Title or author search terms</td></tr>
+        <tr><td>limit</td><td>integer</td><td>no</td><td>Maximum results; default 15</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mono">best_practice</h3>
+  <p>Searches 80 curated higher-education learning-and-teaching best-practice works &mdash; the LTR best-practice collection &mdash; by title or author. Narrower and more curated than <code>search_archive</code>.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the best_practice tool</caption>
       <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
       <tbody>
         <tr><td>query</td><td>string</td><td>yes</td><td>Title or author search terms</td></tr>
@@ -192,11 +230,51 @@
     </table>
   </div>
 
+  <h3 class="mono">recognition_framework</h3>
+  <p>The NTLSN Recognition Credit Framework v1.0 &mdash; recognition tiers, point thresholds and domains for teaching-and-learning scholarship. <b>An editorial draft: evidence-informed, but not a sector-ratified standard.</b> Treat it as one considered proposal, not an authority.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the recognition_framework tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>No arguments</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mono">recognition_crosswalk</h3>
+  <p>An illustrative cross-walk of teaching-recognition evidence &mdash; student feedback data, a teaching award, SoTL publications and so on &mdash; against four Australian pathways: PSF 2023 fellowship, AAUT national awards, a promotion case, and Scholarship of Teaching &amp; Learning. <b>Not an official equivalence</b>, and no institution is bound by it. Omit the argument to get every evidence type against both frameworks.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the recognition_crosswalk tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>evidence</td><td>string</td><td>no</td><td>Keyword matched against evidence names; omit for everything</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="mono">scholarly_lookup</h3>
+  <p>Looks up one scholarly entity through its public API: an ORCID iD (researcher profile), a DOI (Crossref work record) or a ROR id (research institution). Pass exactly one. Cached and rate-limited, and it reads public records only &mdash; nothing is stored and no institutional system is touched.</p>
+  <div class="tblwrap">
+    <table>
+      <caption>Arguments accepted by the scholarly_lookup tool</caption>
+      <thead><tr><th scope="col">Argument</th><th scope="col">Type</th><th scope="col">Required</th><th scope="col">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>orcid</td><td>string</td><td>no</td><td>An ORCID iD, e.g. 0000-0002-1825-0097</td></tr>
+        <tr><td>doi</td><td>string</td><td>no</td><td>A DOI, with or without the https://doi.org/ prefix</td></tr>
+        <tr><td>ror</td><td>string</td><td>no</td><td>A ROR id for an institution</td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <h3>Things worth asking, once connected</h3>
   <ul class="ask">
     <li>"What teaching and learning conferences are coming up in Australia in the next two months?"</li>
     <li>"Search the ALTC/OLT archive for work on peer review of teaching."</li>
     <li>"Which universities' Learning &amp; Teaching teams should I look at, and where are their pages?"</li>
+    <li>"List only the upcoming symposiums, then give me the full detail for the third one."</li>
+    <li>"What does the Recognition Credit Framework say a teaching award counts toward, and how does that map to PSF 2023?"</li>
   </ul>
 
   <div class="honesty">
